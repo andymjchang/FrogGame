@@ -1,0 +1,21 @@
+# Unreal Engine ignored folders
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+.vs/
+*.opensdf
+*.sdf
+*.VC.db
+*.suo
+*.log
+*.user
+*.userprefs
+
+# Ignore build files
+*.sln
+*.xcodeproj
+*.xcworkspace
+*.csproj
+*.pidb
+*.unityproj
