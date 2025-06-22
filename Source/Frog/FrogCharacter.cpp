@@ -11,13 +11,13 @@
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
 
-DEFINE_LOG_CATEGORY(LogTemplateCharacter);
-
 //////////////////////////////////////////////////////////////////////////
 // AFrogCharacter
 
 AFrogCharacter::AFrogCharacter()
 {
+	PrimaryActorTick.bCanEverTick = true;
+	
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 		
@@ -50,8 +50,37 @@ AFrogCharacter::AFrogCharacter()
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
 	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
+	// Setup Grapple
+	Tongue = CreateDefaultSubobject<UCableComponent>(TEXT("Tongue"));
+	Tongue->SetupAttachment(GetRootComponent());
+	CameraGrappleLength = 3000.f;
+	GrappleStrength = 250000.f;
+
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
+}
+
+void AFrogCharacter::PostInitializeComponents()
+{
+	Super::PostInitializeComponents();
+}
+
+void AFrogCharacter::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+
+	// Grapple
+	if (bIsGrapple)
+	{
+		ApplyGrappleForce(DeltaSeconds);
+	}
+}
+
+void AFrogCharacter::ApplyGrappleForce(float DeltaSeconds)
+{
+	FVector GrappleDirection = (GrapplePoint - GetActorLocation()).GetSafeNormal();
+	GetCharacterMovement()->AddForce(GrappleDirection * GrappleStrength);
+	Tongue->EndLocation = GetActorTransform().InverseTransformPosition(GrapplePoint);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -79,16 +108,13 @@ void AFrogCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 		// Jumping
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ACharacter::Jump);
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
-
 		// Moving
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AFrogCharacter::Move);
-
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AFrogCharacter::Look);
-	}
-	else
-	{
-		UE_LOG(LogTemplateCharacter, Error, TEXT("'%s' Failed to find an Enhanced Input component! This template is built to use the Enhanced Input system. If you intend to use the legacy system, then you will need to update this C++ file."), *GetNameSafe(this));
+		// Grapple
+		EnhancedInputComponent->BindAction(GrappleAction, ETriggerEvent::Started, this, &AFrogCharacter::Grapple);
+		EnhancedInputComponent->BindAction(GrappleAction, ETriggerEvent::Completed, this, &AFrogCharacter::StopGrapple);
 	}
 }
 
@@ -126,4 +152,72 @@ void AFrogCharacter::Look(const FInputActionValue& Value)
 		AddControllerYawInput(LookAxisVector.X);
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
+}
+
+void AFrogCharacter::Grapple(const FInputActionValue& Value)
+{
+	if (bool ValidHit = GetGrapplePoint())
+	{
+		bIsGrapple = true;
+		GetCharacterMovement()->SetMovementMode(MOVE_Flying);
+		if (Tongue)
+		{
+			Tongue->SetVisibility(true);
+		}
+	}
+}
+
+void AFrogCharacter::StopGrapple(const FInputActionValue& Value)
+{
+	bIsGrapple = false;
+	GetCharacterMovement()->SetMovementMode(MOVE_Falling);
+	if (Tongue) Tongue->SetVisibility(false);
+}
+
+bool AFrogCharacter::GetGrapplePoint()
+{
+	if (!FollowCamera) return false;
+	
+	// Get camera look at point
+	FVector CameraWorldLocation = FollowCamera->GetComponentLocation();
+	FVector CameraForward = FollowCamera->GetForwardVector();
+	FVector CameraLookPoint = CameraWorldLocation + CameraForward * CameraGrappleLength;
+	float CameraDistance = (FollowCamera->GetComponentLocation() - GetActorLocation()).Size();
+	FVector CameraOffsetLocation = CameraWorldLocation + CameraForward * CameraDistance;
+	FVector CameraImpactPoint;
+	
+	// Line trace from camera to look point
+	FCollisionQueryParams Params;
+	Params.AddIgnoredActor(this);
+	FHitResult HitResult;
+	bool bHit = GetWorld()->LineTraceSingleByChannel(
+		HitResult,
+		CameraOffsetLocation,
+		CameraLookPoint,
+		ECC_Visibility, // Trace channel
+		Params
+	);
+	if (bHit)
+	{
+		CameraImpactPoint = HitResult.ImpactPoint;
+	}
+	else { return false; }
+
+	// Line trace from player to impact point
+	FVector PlayerToCameraPoint = CameraImpactPoint - GetActorLocation();
+	PlayerToCameraPoint.Normalize();
+	FVector PlayerLookPoint = GetActorLocation() + PlayerToCameraPoint * CameraGrappleLength;
+	FHitResult HitResult2;
+	bool bHit2 = GetWorld()->LineTraceSingleByChannel(
+		HitResult2,
+		GetActorLocation(),
+		PlayerLookPoint,
+		ECC_Visibility, // Trace channel
+		Params
+	);
+	if (bHit2)
+	{
+		GrapplePoint = HitResult.ImpactPoint;
+	}
+	return bHit2;
 }
