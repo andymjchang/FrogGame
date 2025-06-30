@@ -12,6 +12,8 @@
 #include "InputActionValue.h"
 #include "FrogAbilitySystem.h"
 #include "FrogAbilityJump.h"
+#include "FrogTongue.h"
+#include "Net/UnrealNetwork.h"
 #include "UObject/TopLevelAssetPath.h"
 
 //////////////////////////////////////////////////////////////////////////
@@ -25,7 +27,7 @@ AFrogCharacter::AFrogCharacter()
 	PrimaryActorTick.bCanEverTick = true;
 	
 	// Set size for collision capsule
-	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
+	GetCapsuleComponent()->InitCapsuleSize(42.f, 42.0f);
 		
 	// Don't rotate when the controller rotates. Let that just affect the camera.
 	bUseControllerRotationPitch = false;
@@ -34,7 +36,7 @@ AFrogCharacter::AFrogCharacter()
 
 	// Configure character movement
 	GetCharacterMovement()->bOrientRotationToMovement = true; // Character moves in the direction of input...	
-	GetCharacterMovement()->RotationRate = FRotator(0.0f, 500.0f, 0.0f); // ...at this rotation rate
+	GetCharacterMovement()->RotationRate = FRotator(0.0f, 1800.0f, 0.0f); // ...at this rotation rate
 
 	// Note: For faster iteration times these variables, and many more, can be tweaked in the Character Blueprint
 	// instead of recompiling to adjust them
@@ -44,6 +46,13 @@ AFrogCharacter::AFrogCharacter()
 	GetCharacterMovement()->MinAnalogWalkSpeed = 20.f;
 	GetCharacterMovement()->BrakingDecelerationWalking = 2000.f;
 	GetCharacterMovement()->BrakingDecelerationFalling = 1500.0f;
+	GetCharacterMovement()->MaxWalkSpeed = 500.f;
+	GetCharacterMovement()->GravityScale = 1.75f;
+	GetCharacterMovement()->MaxAcceleration = 1500.0f;
+	GetCharacterMovement()->AirControl = 1.f;
+	GetCharacterMovement()->GroundFriction = 1.f;
+	GetCharacterMovement()->BrakingFriction = 8.f;
+	GetCharacterMovement()->MaxFlySpeed = 1500.f;
 
 	// Create a camera boom (pulls in towards the player if there is a collision)
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
@@ -57,7 +66,7 @@ AFrogCharacter::AFrogCharacter()
 	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
 	// Setup Grapple
-	Tongue = CreateDefaultSubobject<UCableComponent>(TEXT("Tongue"));
+	Tongue = CreateDefaultSubobject<UFrogTongue>(TEXT("TongueComponent"));
 	Tongue->SetupAttachment(GetRootComponent());
 	CameraGrappleLength = 3000.f;
 	GrappleStrength = 250000.f;
@@ -67,6 +76,14 @@ AFrogCharacter::AFrogCharacter()
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
+}
+
+void AFrogCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME(AFrogCharacter, GrapplePoint);
+	DOREPLIFETIME(AFrogCharacter, bIsGrapple);
 }
 
 void AFrogCharacter::PostInitializeComponents()
@@ -104,6 +121,8 @@ void AFrogCharacter::Tick(float DeltaSeconds)
 void AFrogCharacter::ApplyGrappleForce(float DeltaSeconds)
 {
 	FVector GrappleDirection = (GrapplePoint - GetActorLocation()).GetSafeNormal();
+	SetActorRotation(GrappleDirection.Rotation());
+	SetActorRelativeRotation(GetActorRotation() + FRotator(-30, 0, 0));
 	GetCharacterMovement()->AddForce(GrappleDirection * GrappleStrength);
 	Tongue->EndLocation = GetActorTransform().InverseTransformPosition(GrapplePoint);
 }
@@ -213,8 +232,10 @@ void AFrogCharacter::HandleStopGrapple_Implementation(const FInputActionValue& V
 	bIsGrapple = false;
 	GetCharacterMovement()->SetMovementMode(MOVE_Falling);
 	if (Tongue) Tongue->SetVisibility(false);
+	SetActorRelativeRotation(FRotator(0, 0, 0));
 }
 
+// Returns grapple point (world position)
 bool AFrogCharacter::GetGrapplePoint()
 {
 	if (!FollowCamera) return false;

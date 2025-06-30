@@ -5,10 +5,10 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
-#include "Net/UnrealNetwork.h"
-#include "CableComponent.h"
 #include "FrogCharacter.generated.h"
 
+// Forward declarations
+class UFrogTongue;
 class USpringArmComponent;
 class UCameraComponent;
 class UInputMappingContext;
@@ -37,8 +37,8 @@ protected:
 	USpringArmComponent* CameraBoom;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	UCameraComponent* FollowCamera;
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
-	UCableComponent* Tongue;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Grapple, meta = (AllowPrivateAccess = "true"))
+	UFrogTongue* Tongue;
 
 	// Ability System
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ability System", meta = (AllowPrivateAccess = "true"))
@@ -61,9 +61,9 @@ protected:
 	UInputAction* GrappleAction;
 	
 	// Grapple
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Grapple, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = Grapple, meta = (AllowPrivateAccess = "true"))
 	FVector GrapplePoint;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Grapple, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = Grapple, meta = (AllowPrivateAccess = "true"))
 	bool bIsGrapple;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Grapple, meta = (AllowPrivateAccess = "true"))
 	float CameraGrappleLength;
@@ -74,7 +74,7 @@ protected:
 
 public:
 	AFrogCharacter();
-	
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 protected:
 	virtual void PostInitializeComponents() override;
@@ -109,6 +109,6 @@ public:
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 	// Tongue cable object
-	FORCEINLINE class UCableComponent* GetTongue() const { return Tongue; }
+	FORCEINLINE class UFrogTongue* GetTongue() const { return Tongue; }
 };
 
