@@ -10,12 +10,18 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
+#include "FrogAbilitySystem.h"
+#include "FrogAbilityJump.h"
+#include "UObject/TopLevelAssetPath.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AFrogCharacter
 
 AFrogCharacter::AFrogCharacter()
 {
+	// Networking
+	bReplicates = true;
+	
 	PrimaryActorTick.bCanEverTick = true;
 	
 	// Set size for collision capsule
@@ -56,6 +62,9 @@ AFrogCharacter::AFrogCharacter()
 	CameraGrappleLength = 3000.f;
 	GrappleStrength = 250000.f;
 
+	// Frog Ability System
+	AbilitySystemComponent = CreateDefaultSubobject<UFrogAbilitySystem>(TEXT("AbilitySystem"));
+
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
 }
@@ -63,6 +72,22 @@ AFrogCharacter::AFrogCharacter()
 void AFrogCharacter::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
+}
+
+void AFrogCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+
+	if (AbilitySystemComponent)
+	{
+		for (TSubclassOf<UGameplayAbility>& Ability : DefaultAbilities)
+		{
+			if (Ability)
+			{
+				AbilitySystemComponent->GiveAbility(FGameplayAbilitySpec(Ability, 1, static_cast<int32>(EAbilityInputID::Confirm), this));
+			}
+		}
+	}
 }
 
 void AFrogCharacter::Tick(float DeltaSeconds)
@@ -115,6 +140,11 @@ void AFrogCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 		// Grapple
 		EnhancedInputComponent->BindAction(GrappleAction, ETriggerEvent::Started, this, &AFrogCharacter::Grapple);
 		EnhancedInputComponent->BindAction(GrappleAction, ETriggerEvent::Completed, this, &AFrogCharacter::StopGrapple);
+
+		// Bind Input actions to Enum entries
+		const FTopLevelAssetPath EnumName("/Script/Frog.EAbilityInputID");
+		FGameplayAbilityInputBinds Binds("Confirm", "Cancel", EnumName);
+		AbilitySystemComponent->BindAbilityActivationToInputComponent(PlayerInputComponent, Binds);
 	}
 }
 
@@ -156,18 +186,29 @@ void AFrogCharacter::Look(const FInputActionValue& Value)
 
 void AFrogCharacter::Grapple(const FInputActionValue& Value)
 {
+	HandleGrapple(Value);
+}
+
+void AFrogCharacter::HandleGrapple_Implementation(const FInputActionValue& Value)
+{
 	if (bool ValidHit = GetGrapplePoint())
 	{
 		bIsGrapple = true;
-		GetCharacterMovement()->SetMovementMode(MOVE_Flying);
+		GetCharacterMovement()->SetMovementMode(MOVE_Flying); 
 		if (Tongue)
 		{
 			Tongue->SetVisibility(true);
+			// Tongue->EndLocation = FVector(0, 0, 0);
 		}
 	}
 }
 
 void AFrogCharacter::StopGrapple(const FInputActionValue& Value)
+{
+	HandleStopGrapple(Value);
+}
+
+void AFrogCharacter::HandleStopGrapple_Implementation(const FInputActionValue& Value)
 {
 	bIsGrapple = false;
 	GetCharacterMovement()->SetMovementMode(MOVE_Falling);
@@ -221,3 +262,4 @@ bool AFrogCharacter::GetGrapplePoint()
 	}
 	return bHit2;
 }
+

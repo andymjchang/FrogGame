@@ -14,6 +14,17 @@ class UCameraComponent;
 class UInputMappingContext;
 class UInputAction;
 struct FInputActionValue;
+class UFrogAbilitySystem;
+
+UENUM(BlueprintType)
+enum class EAbilityInputID : uint8
+{
+	None        UMETA(DisplayName = "None"),
+	Confirm     UMETA(DisplayName = "Confirm"),
+	Cancel      UMETA(DisplayName = "Cancel"),
+	Fire        UMETA(DisplayName = "Fire"),
+	// Add more if needed
+};
 
 UCLASS(config=Game)
 class AFrogCharacter : public ACharacter
@@ -28,6 +39,12 @@ protected:
 	UCameraComponent* FollowCamera;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	UCableComponent* Tongue;
+
+	// Ability System
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ability System", meta = (AllowPrivateAccess = "true"))
+	UFrogAbilitySystem* AbilitySystemComponent;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability System", meta = (AllowPrivateAccess = "true"))
+	TArray<TSubclassOf<class UGameplayAbility>> DefaultAbilities;
 	
 	/** MappingContext */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
@@ -60,9 +77,10 @@ public:
 	
 
 protected:
+	virtual void PostInitializeComponents() override;
+	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaSeconds) override;
 	void ApplyGrappleForce(float DeltaSeconds);
-	virtual void PostInitializeComponents() override;
 	
 	/** Called for movement input */
 	void Move(const FInputActionValue& Value);
@@ -74,6 +92,10 @@ protected:
 
 	// Grapple functions
 	bool GetGrapplePoint();
+	UFUNCTION(Server, Reliable)
+	void HandleGrapple(const FInputActionValue& Value);
+	UFUNCTION(Server, Reliable)
+	void HandleStopGrapple(const FInputActionValue& Value);
 
 protected:
 
@@ -88,6 +110,5 @@ public:
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 	// Tongue cable object
 	FORCEINLINE class UCableComponent* GetTongue() const { return Tongue; }
-	
 };
 
