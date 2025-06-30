@@ -18,11 +18,6 @@ public:
 	UFrogTongue();
 	void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
-	UPROPERTY(ReplicatedUsing = OnRep_EndLocation)
-	FVector RepEndLocation;
-	UFUNCTION()
-	void OnRep_EndLocation();
-
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
