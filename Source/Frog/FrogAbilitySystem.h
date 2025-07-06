@@ -6,6 +6,17 @@
 #include "AbilitySystemComponent.h"
 #include "FrogAbilitySystem.generated.h"
 
+UENUM(BlueprintType)
+enum class EAbilityInputID : uint8
+{
+	None = 0 UMETA(Hidden),
+	Jump = 1,
+	Dive = 2,
+	Grapple = 3,
+	Primary = 4,
+	Secondary = 5,
+	Utility = 6
+};
 /**
  * 
  */

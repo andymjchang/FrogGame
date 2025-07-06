@@ -3,9 +3,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AbilitySet.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
 #include "AbilitySystemInterface.h"
+#include "UnitAttributeSet.h"
+#include "GameplayAbilitySet.h"
 #include "FrogCharacter.generated.h"
 
 // Forward declarations
@@ -17,14 +20,25 @@ class UInputAction;
 struct FInputActionValue;
 class UFrogAbilitySystem;
 
-UENUM(BlueprintType)
-enum class EAbilityInputID : uint8
+USTRUCT()
+struct FAbilityInputToInputActionBinding
 {
-	None        UMETA(DisplayName = "None"),
-	Confirm     UMETA(DisplayName = "Confirm"),
-	Cancel      UMETA(DisplayName = "Cancel"),
-	Fire        UMETA(DisplayName = "Fire"),
-	// Add more if needed
+	GENERATED_BODY()
+
+	UPROPERTY(EditDefaultsOnly)
+	UInputAction* InputAction;
+
+	UPROPERTY(EditDefaultsOnly)
+	EAbilityInputID AbilityInputID;
+};
+
+USTRUCT()
+struct FAbilityInputBindings
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditDefaultsOnly, Category="Input")
+	TArray<FAbilityInputToInputActionBinding> Bindings;
 };
 
 UCLASS(config=Game)
@@ -32,7 +46,7 @@ class AFrogCharacter : public ACharacter, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 	
-protected:
+protected: // Members NO FUNCTIONS HERE
 	// Components
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	USpringArmComponent* CameraBoom;
@@ -46,10 +60,20 @@ protected:
 	UFrogAbilitySystem* AbilitySystemComponent;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability System", meta = (AllowPrivateAccess = "true"))
 	TArray<TSubclassOf<class UGameplayAbility>> DefaultAbilities;
+	UPROPERTY(VisibleAnywhere, Category = "Ability System", meta = (AllowPrivateAccess = "true"))
+	UUnitAttributeSet* UnitAttributes;
+	UPROPERTY(EditAnywhere, Category = "Ability System", meta = (AllowPrivateAccess = "true"))
+	UAbilitySet* AbilitySet;
+	UPROPERTY(EditAnywhere, Category = "Ability System", meta = (AllowPrivateAccess = "true"))
+	TSubclassOf<UGameplayEffect> InitialGameplayEffect;
 	
 	/** MappingContext */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputMappingContext* DefaultMappingContext;
+	UPROPERTY(EditDefaultsOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	FAbilityInputBindings AbilityInputBindings;
+	UPROPERTY(Transient)
+	TArray<FGameplayAbilitySpecHandle> InitialAbilitySpecHandles;
 
 	// Input Actions
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
@@ -78,11 +102,10 @@ public:
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
-protected:
+protected: // Functions
 	virtual void PostInitializeComponents() override;
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaSeconds) override;
-	void ApplyGrappleForce(float DeltaSeconds);
 	
 	/** Called for movement input */
 	void Move(const FInputActionValue& Value);
@@ -91,6 +114,13 @@ protected:
 	void Look(const FInputActionValue& Value);
 	void Grapple(const FInputActionValue& Value);
 	void StopGrapple(const FInputActionValue& Value);
+	
+	// Connecting Ability Inputs to GAS
+	void AbilityInputBindingPressedHandler(EAbilityInputID AbilityInputID);
+	void AbilityInputBindingReleasedHandler(EAbilityInputID AbilityInputID);
+	
+	virtual void NotifyControllerChanged() override;
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	// Grapple functions
 	bool GetGrapplePoint();
@@ -98,14 +128,13 @@ protected:
 	void HandleGrapple(const FInputActionValue& Value);
 	UFUNCTION(Server, Reliable)
 	void HandleStopGrapple(const FInputActionValue& Value);
+	void ApplyGrappleForce(float DeltaSeconds);
 
-protected:
+	// Abilities
+	void SetupAbilities();
 
-	virtual void NotifyControllerChanged() override;
 
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
-public:
+public: // Inline Functions
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/

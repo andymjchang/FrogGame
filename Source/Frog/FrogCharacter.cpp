@@ -73,6 +73,7 @@ AFrogCharacter::AFrogCharacter()
 
 	// Frog Ability System
 	AbilitySystemComponent = CreateDefaultSubobject<UFrogAbilitySystem>(TEXT("AbilitySystem"));
+	UnitAttributes = CreateDefaultSubobject<UUnitAttributeSet>(TEXT("UnitAttributes"));
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
@@ -95,15 +96,19 @@ void AFrogCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	if (AbilitySystemComponent)
+	// if (AbilitySystemComponent)
+	// {
+	// 	for (TSubclassOf<UGameplayAbility>& Ability : DefaultAbilities)
+	// 	{
+	// 		if (Ability)
+	// 		{
+	// 			AbilitySystemComponent->GiveAbility(FGameplayAbilitySpec(Ability, 1, static_cast<int32>(EAbilityInputID::Confirm), this));
+	// 		}
+	// 	}
+	// }
+	if (HasAuthority())
 	{
-		for (TSubclassOf<UGameplayAbility>& Ability : DefaultAbilities)
-		{
-			if (Ability)
-			{
-				AbilitySystemComponent->GiveAbility(FGameplayAbilitySpec(Ability, 1, static_cast<int32>(EAbilityInputID::Confirm), this));
-			}
-		}
+		SetupAbilities();
 	}
 }
 
@@ -121,6 +126,23 @@ void AFrogCharacter::Tick(float DeltaSeconds)
 UAbilitySystemComponent* AFrogCharacter::GetAbilitySystemComponent() const
 {
 	return AbilitySystemComponent;
+}
+
+void AFrogCharacter::SetupAbilities()
+{
+	if (!IsValid(AbilitySystemComponent) || !IsValid(UnitAttributes)) return;
+	if (IsValid(AbilitySet))
+	{
+		InitialAbilitySpecHandles.Append(AbilitySet->GrantAbilitiesToAbilitySystem(AbilitySystemComponent));
+	}
+
+	// Apply initial stats
+	if (IsValid(InitialGameplayEffect))
+	{
+		AbilitySystemComponent->ApplyGameplayEffectToSelf(InitialGameplayEffect->GetDefaultObject<UGameplayEffect>(), 0.f, AbilitySystemComponent->MakeEffectContext());
+	}
+	
+	// AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(UUnitAttributeSet::GetHealthAttribute()).AddUObject(this, &AFrogCharacter::OnHealthAttributeChanged);
 }
 
 void AFrogCharacter::ApplyGrappleForce(float DeltaSeconds)
@@ -165,10 +187,15 @@ void AFrogCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 		EnhancedInputComponent->BindAction(GrappleAction, ETriggerEvent::Started, this, &AFrogCharacter::Grapple);
 		EnhancedInputComponent->BindAction(GrappleAction, ETriggerEvent::Completed, this, &AFrogCharacter::StopGrapple);
 
+		for (const FAbilityInputToInputActionBinding binding : AbilityInputBindings.Bindings)
+		{
+			EnhancedInputComponent->BindAction(binding.InputAction, ETriggerEvent::Triggered, this, &AFrogCharacter::AbilityInputBindingPressedHandler, binding.AbilityInputID);
+			EnhancedInputComponent->BindAction(binding.InputAction, ETriggerEvent::Completed, this, &AFrogCharacter::AbilityInputBindingPressedHandler, binding.AbilityInputID);
+		}
 		// Bind Input actions to Enum entries
-		const FTopLevelAssetPath EnumName("/Script/Frog.EAbilityInputID");
-		FGameplayAbilityInputBinds Binds("Confirm", "Cancel", EnumName);
-		AbilitySystemComponent->BindAbilityActivationToInputComponent(PlayerInputComponent, Binds);
+		// const FTopLevelAssetPath EnumName("/Script/Frog.EAbilityInputID");
+		// FGameplayAbilityInputBinds Binds("Confirm", "Cancel", EnumName);
+		// AbilitySystemComponent->BindAbilityActivationToInputComponent(PlayerInputComponent, Binds);
 	}
 }
 
@@ -206,6 +233,16 @@ void AFrogCharacter::Look(const FInputActionValue& Value)
 		AddControllerYawInput(LookAxisVector.X);
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
+}
+
+void AFrogCharacter::AbilityInputBindingPressedHandler(EAbilityInputID AbilityInputID)
+{
+	AbilitySystemComponent->AbilityLocalInputPressed(static_cast<uint32>(AbilityInputID));
+}
+
+void AFrogCharacter::AbilityInputBindingReleasedHandler(EAbilityInputID AbilityInputID)
+{
+	AbilitySystemComponent->AbilityLocalInputReleased(static_cast<uint32>(AbilityInputID));
 }
 
 void AFrogCharacter::Grapple(const FInputActionValue& Value)
