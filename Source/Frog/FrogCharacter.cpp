@@ -118,6 +118,11 @@ void AFrogCharacter::Tick(float DeltaSeconds)
 	}
 }
 
+UAbilitySystemComponent* AFrogCharacter::GetAbilitySystemComponent() const
+{
+	return AbilitySystemComponent;
+}
+
 void AFrogCharacter::ApplyGrappleForce(float DeltaSeconds)
 {
 	FVector GrappleDirection = (GrapplePoint - GetActorLocation()).GetSafeNormal();

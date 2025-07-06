@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
+#include "AbilitySystemInterface.h"
 #include "FrogCharacter.generated.h"
 
 // Forward declarations
@@ -27,7 +28,7 @@ enum class EAbilityInputID : uint8
 };
 
 UCLASS(config=Game)
-class AFrogCharacter : public ACharacter
+class AFrogCharacter : public ACharacter, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 	
@@ -75,6 +76,7 @@ protected:
 public:
 	AFrogCharacter();
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
 protected:
 	virtual void PostInitializeComponents() override;
