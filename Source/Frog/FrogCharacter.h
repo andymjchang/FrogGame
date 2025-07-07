@@ -102,6 +102,12 @@ public:
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
+	// Gameplay Ability System
+	UFUNCTION(Server, Reliable)
+	void HandleGrapple();
+	UFUNCTION(Server, Reliable)
+	void HandleStopGrapple();
+
 protected: // Functions
 	virtual void PostInitializeComponents() override;
 	virtual void BeginPlay() override;
@@ -124,10 +130,6 @@ protected: // Functions
 
 	// Grapple functions
 	bool GetGrapplePoint();
-	UFUNCTION(Server, Reliable)
-	void HandleGrapple(const FInputActionValue& Value);
-	UFUNCTION(Server, Reliable)
-	void HandleStopGrapple(const FInputActionValue& Value);
 	void ApplyGrappleForce(float DeltaSeconds);
 
 	// Abilities

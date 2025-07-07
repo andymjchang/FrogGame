@@ -190,7 +190,7 @@ void AFrogCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 		for (const FAbilityInputToInputActionBinding binding : AbilityInputBindings.Bindings)
 		{
 			EnhancedInputComponent->BindAction(binding.InputAction, ETriggerEvent::Triggered, this, &AFrogCharacter::AbilityInputBindingPressedHandler, binding.AbilityInputID);
-			EnhancedInputComponent->BindAction(binding.InputAction, ETriggerEvent::Completed, this, &AFrogCharacter::AbilityInputBindingPressedHandler, binding.AbilityInputID);
+			EnhancedInputComponent->BindAction(binding.InputAction, ETriggerEvent::Completed, this, &AFrogCharacter::AbilityInputBindingReleasedHandler, binding.AbilityInputID);
 		}
 		// Bind Input actions to Enum entries
 		// const FTopLevelAssetPath EnumName("/Script/Frog.EAbilityInputID");
@@ -247,10 +247,10 @@ void AFrogCharacter::AbilityInputBindingReleasedHandler(EAbilityInputID AbilityI
 
 void AFrogCharacter::Grapple(const FInputActionValue& Value)
 {
-	HandleGrapple(Value);
+	HandleGrapple();
 }
 
-void AFrogCharacter::HandleGrapple_Implementation(const FInputActionValue& Value)
+void AFrogCharacter::HandleGrapple_Implementation()
 {
 	if (bool ValidHit = GetGrapplePoint())
 	{
@@ -266,10 +266,10 @@ void AFrogCharacter::HandleGrapple_Implementation(const FInputActionValue& Value
 
 void AFrogCharacter::StopGrapple(const FInputActionValue& Value)
 {
-	HandleStopGrapple(Value);
+	HandleStopGrapple();
 }
 
-void AFrogCharacter::HandleStopGrapple_Implementation(const FInputActionValue& Value)
+void AFrogCharacter::HandleStopGrapple_Implementation()
 {
 	bIsGrapple = false;
 	GetCharacterMovement()->SetMovementMode(MOVE_Falling);
