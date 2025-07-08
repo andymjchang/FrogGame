@@ -13,7 +13,7 @@ void UFrogAbilityGrapple::ActivateAbility(const FGameplayAbilitySpecHandle Handl
 
 	if (AFrogCharacter* Character = Cast<AFrogCharacter>(ActorInfo->AvatarActor.Get()))
 	{
-		Character->HandleGrapple();
+		Character->ServerGrapple();
 	}
 
 	
@@ -26,7 +26,7 @@ void UFrogAbilityGrapple::InputReleased(const FGameplayAbilitySpecHandle Handle,
 	
 	if (AFrogCharacter* Character = Cast<AFrogCharacter>(ActorInfo->AvatarActor.Get()))
 	{
-		Character->HandleStopGrapple();
+		Character->ServerStopGrapple();
 	}
 	
 	EndAbility(Handle, ActorInfo, ActivationInfo, true, false);

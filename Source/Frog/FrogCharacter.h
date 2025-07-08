@@ -104,9 +104,9 @@ public:
 
 	// Gameplay Ability System
 	UFUNCTION(Server, Reliable)
-	void HandleGrapple();
+	void ServerGrapple();
 	UFUNCTION(Server, Reliable)
-	void HandleStopGrapple();
+	void ServerStopGrapple();
 
 protected: // Functions
 	virtual void PostInitializeComponents() override;

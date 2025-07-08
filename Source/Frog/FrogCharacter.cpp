@@ -112,17 +112,6 @@ void AFrogCharacter::BeginPlay()
 	}
 }
 
-void AFrogCharacter::Tick(float DeltaSeconds)
-{
-	Super::Tick(DeltaSeconds);
-
-	// Grapple
-	if (bIsGrapple)
-	{
-		ApplyGrappleForce(DeltaSeconds);
-	}
-}
-
 UAbilitySystemComponent* AFrogCharacter::GetAbilitySystemComponent() const
 {
 	return AbilitySystemComponent;
@@ -145,12 +134,23 @@ void AFrogCharacter::SetupAbilities()
 	// AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(UUnitAttributeSet::GetHealthAttribute()).AddUObject(this, &AFrogCharacter::OnHealthAttributeChanged);
 }
 
+void AFrogCharacter::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+
+	// Grapple
+	if (bIsGrapple)
+	{
+		ApplyGrappleForce(DeltaSeconds);
+	}
+}
+
 void AFrogCharacter::ApplyGrappleForce(float DeltaSeconds)
 {
 	FVector GrappleDirection = (GrapplePoint - GetActorLocation()).GetSafeNormal();
 	SetActorRotation(GrappleDirection.Rotation());
 	SetActorRelativeRotation(GetActorRotation() + FRotator(-30, 0, 0));
-	GetCharacterMovement()->AddForce(GrappleDirection * GrappleStrength);
+	if (HasAuthority()) GetCharacterMovement()->AddForce(GrappleDirection * GrappleStrength); // Only apply force on server
 	Tongue->EndLocation = GetActorTransform().InverseTransformPosition(GrapplePoint);
 }
 
@@ -247,10 +247,10 @@ void AFrogCharacter::AbilityInputBindingReleasedHandler(EAbilityInputID AbilityI
 
 void AFrogCharacter::Grapple(const FInputActionValue& Value)
 {
-	HandleGrapple();
+	ServerGrapple();
 }
 
-void AFrogCharacter::HandleGrapple_Implementation()
+void AFrogCharacter::ServerGrapple_Implementation()
 {
 	if (bool ValidHit = GetGrapplePoint())
 	{
@@ -266,10 +266,10 @@ void AFrogCharacter::HandleGrapple_Implementation()
 
 void AFrogCharacter::StopGrapple(const FInputActionValue& Value)
 {
-	HandleStopGrapple();
+	ServerStopGrapple();
 }
 
-void AFrogCharacter::HandleStopGrapple_Implementation()
+void AFrogCharacter::ServerStopGrapple_Implementation()
 {
 	bIsGrapple = false;
 	GetCharacterMovement()->SetMovementMode(MOVE_Falling);

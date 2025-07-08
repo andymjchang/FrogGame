@@ -7,6 +7,7 @@
 #include "Components/ActorComponent.h"
 #include "FrogTongue.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnTongueEndReached);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class FROG_API UFrogTongue : public UCableComponent
@@ -25,6 +26,9 @@ protected:
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+	
+	UPROPERTY()
+	FOnTongueEndReached OnTongueEndReached;
 
 		
 };
