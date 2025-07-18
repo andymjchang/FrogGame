@@ -180,7 +180,7 @@ void AFrogCharacter::OnRep_GrappleRotation()
 	}
 }
 
-void AFrogCharacter::ToggleClientAuthoritativeMovement(bool Value)
+void AFrogCharacter::SetClientAuthoritativeMovement(const bool Value)
 {
 	GetCharacterMovement()->bIgnoreClientMovementErrorChecksAndCorrection = Value;
 	GetCharacterMovement()->bServerAcceptClientAuthoritativePosition = Value;
@@ -279,16 +279,14 @@ void AFrogCharacter::AbilityInputBindingReleasedHandler(EAbilityInputID AbilityI
 
 void AFrogCharacter::Grapple(const FInputActionValue& Value)
 {
-	if (TraceGrapplePoint())
-	{
-		bIsGrapple = true;
-		GetCharacterMovement()->SetMovementMode(MOVE_Custom, static_cast<uint8>(ECustomMovementMode::CMOVE_Grapple));
-	}
-	if (!HasAuthority())
-	{
-		ServerGrapple(GrapplePoint);
-	}
+	if (!TraceGrapplePoint() || !IsLocallyControlled()) return;
 	
+	bIsGrapple = true;
+	GetCharacterMovement()->SetMovementMode(MOVE_Custom, static_cast<uint8>(ECustomMovementMode::CMOVE_Grapple));
+	if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Green, "pressed");
+	// SetClientAuthoritativeMovement(true);
+	ServerGrapple(GrapplePoint);
+
 }
 
 
@@ -307,12 +305,15 @@ void AFrogCharacter::ServerGrapple_Implementation(const FVector NewGrapplePoint)
 	bIsGrapple = true;
 	GetCharacterMovement()->SetMovementMode(MOVE_Custom, static_cast<uint8>(ECustomMovementMode::CMOVE_Grapple));
 	GrapplePoint = NewGrapplePoint;
+	// SetClientAuthoritativeMovement(false);
 }
 
 void AFrogCharacter::StopGrapple(const FInputActionValue& Value)
 {
-	if (!HasAuthority())
+	if (IsLocallyControlled())
 	{
+		if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, "released");
+		// SetClientAuthoritativeMovement(false);
 		ServerStopGrapple();
 	}
 	bIsGrapple = false;
@@ -323,6 +324,7 @@ void AFrogCharacter::ServerStopGrapple_Implementation()
 {
 	bIsGrapple = false;
 	GetCharacterMovement()->SetMovementMode(MOVE_Falling);
+	// SetClientAuthoritativeMovement(false);
 	// if (IsValid(Tongue)) Tongue->SetVisibility(false);
 	// SetActorRelativeRotation(FRotator(0, 0, 0));
 }
@@ -330,49 +332,103 @@ void AFrogCharacter::ServerStopGrapple_Implementation()
 // Returns grapple point (world position)
 bool AFrogCharacter::TraceGrapplePoint()
 {
-	if (!IsValid(FollowCamera)) return false;
-	
-	// Get camera look at point
-	FVector CameraWorldLocation = FollowCamera->GetComponentLocation();
-	FVector CameraForward = FollowCamera->GetForwardVector();
-	FVector CameraLookPoint = CameraWorldLocation + CameraForward * CameraGrappleLength;
-	float CameraDistance = (FollowCamera->GetComponentLocation() - GetActorLocation()).Size();
-	FVector CameraOffsetLocation = CameraWorldLocation + CameraForward * CameraDistance;
-	FVector CameraImpactPoint;
-	
-	// Line trace from camera to look point
-	FCollisionQueryParams Params;
-	Params.AddIgnoredActor(this);
-	FHitResult HitResult;
-	bool bHit = GetWorld()->LineTraceSingleByChannel(
-		HitResult,
-		CameraOffsetLocation,
-		CameraLookPoint,
-		ECC_Visibility, // Trace channel
-		Params
-	);
-	if (bHit)
-	{
-		CameraImpactPoint = HitResult.ImpactPoint;
-	}
-	else { return false; }
+    if (!IsValid(FollowCamera)) return false;
+    
+    // Get camera look at point
+    FVector CameraWorldLocation = FollowCamera->GetComponentLocation();
+    FVector CameraForward = FollowCamera->GetForwardVector();
+    FVector CameraLookPoint = CameraWorldLocation + CameraForward * CameraGrappleLength;
+    float CameraDistance = (FollowCamera->GetComponentLocation() - GetActorLocation()).Size();
+    FVector CameraOffsetLocation = CameraWorldLocation + CameraForward * CameraDistance;
+    FVector CameraImpactPoint;
+    
+    // Line trace from camera to look point
+    FCollisionQueryParams Params;
+    Params.AddIgnoredActor(this);
+    FHitResult CameraHitResult;
+    bool bHit = GetWorld()->LineTraceSingleByChannel(
+       CameraHitResult,
+       CameraOffsetLocation,
+       CameraLookPoint,
+       ECC_Visibility,
+       Params
+    );
+    
+    // Debug line for camera trace
+    FColor CameraTraceColor = bHit ? FColor::Red : FColor::Yellow;
+    DrawDebugLine(
+        GetWorld(),
+        CameraOffsetLocation,
+        bHit ? CameraHitResult.ImpactPoint : CameraLookPoint,
+        CameraTraceColor,
+        false, // Persistent lines
+        2.0f,  // Lifetime in seconds
+        0,     // Depth priority
+        2.0f   // Line thickness
+    );
+    
+    if (bHit)
+    {
+       CameraImpactPoint = CameraHitResult.ImpactPoint;
+       
+       // Debug sphere at camera impact point
+       DrawDebugSphere(
+           GetWorld(),
+           CameraImpactPoint,
+           10.0f,
+           12,
+           FColor::Red,
+           false,
+           2.0f
+       );
+    }
+    else 
+    { 
+        return false; 
+    }
 
-	// Line trace from player to impact point
-	FVector PlayerToCameraPoint = CameraImpactPoint - GetActorLocation();
-	PlayerToCameraPoint.Normalize();
-	FVector PlayerLookPoint = GetActorLocation() + PlayerToCameraPoint * CameraGrappleLength;
-	FHitResult HitResult2;
-	bool bHit2 = GetWorld()->LineTraceSingleByChannel(
-		HitResult2,
-		GetActorLocation(),
-		PlayerLookPoint,
-		ECC_Visibility, // Trace channel
-		Params
-	);
-	if (bHit2)
-	{
-		GrapplePoint = HitResult.ImpactPoint;
-	}
-	return bHit2;
+    // Line trace from player to camera's impact point
+    FVector PlayerToCameraPoint = CameraImpactPoint - GetActorLocation();
+    PlayerToCameraPoint.Normalize();
+    FVector PlayerLookPoint = GetActorLocation() + PlayerToCameraPoint * CameraGrappleLength;
+    FHitResult PlayerHitResult;
+    bool bHit2 = GetWorld()->LineTraceSingleByChannel(
+       PlayerHitResult,
+       GetActorLocation(),
+       PlayerLookPoint,
+       ECC_Visibility,
+       Params
+    );
+    
+    // Debug line for player trace
+    FColor PlayerTraceColor = bHit2 ? FColor::Green : FColor::Orange;
+    DrawDebugLine(
+        GetWorld(),
+        GetActorLocation(),
+        bHit2 ? PlayerHitResult.ImpactPoint : PlayerLookPoint,
+        PlayerTraceColor,
+        false,
+        2.0f,
+        0,
+        2.0f
+    );
+    
+    if (bHit2)
+    {
+       GrapplePoint = PlayerHitResult.ImpactPoint;
+       
+       // Debug sphere at grapple point
+       DrawDebugSphere(
+           GetWorld(),
+           GrapplePoint,
+           15.0f,
+           12,
+           FColor::Green,
+           false,
+           2.0f
+       );
+    }
+    
+    return bHit2;
 }
 

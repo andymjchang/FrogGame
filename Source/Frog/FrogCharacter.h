@@ -138,7 +138,7 @@ protected: /* Protected Functions */
 	void ApplyGrappleForce(float DeltaSeconds);
 	UFUNCTION()
 	void OnRep_GrappleRotation();
-	void ToggleClientAuthoritativeMovement(bool Value);
+	void SetClientAuthoritativeMovement(bool Value);
 
 	// Abilities
 	void SetupAbilities();

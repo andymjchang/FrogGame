@@ -28,10 +28,11 @@ void UFrogMovementComponent::PhysGrapple(float DeltaTime, int32 Iterations)
 	const FVector GrappleDirection = GrappleVector.GetSafeNormal();
 	const float GrappleDistance = GrappleVector.Size();
 
-	const FVector GrappleVelocity = GrappleDirection * Frog->GetGrappleStrength();
-	const FVector NewLocation = CharacterOwner->GetActorLocation() + GrappleVelocity * DeltaTime;
-
-	const FVector Adjusted = NewLocation - CharacterOwner->GetActorLocation();
+	// Set the velocity to move toward the grapple point
+	Velocity = GrappleDirection * Frog->GetGrappleStrength();
+	
+	const FVector Delta = Velocity * DeltaTime;
+	
 	FHitResult Hit;
-	SafeMoveUpdatedComponent(Adjusted, UpdatedComponent->GetComponentQuat(), true, Hit);
+	SafeMoveUpdatedComponent(Delta, UpdatedComponent->GetComponentQuat(), true, Hit);
 }
