@@ -17,11 +17,11 @@ class FROG_API UFrogTongue : public UCableComponent
 public:	
 	// Sets default values for this component's properties
 	UFrogTongue();
-	void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 protected:
-	// Called when the game starts
-	virtual void BeginPlay() override;
+	UPROPERTY(ReplicatedUsing = OnRep_ReplicatedEndLocation)
+	FVector ReplicatedEndLocation;
 
 public:	
 	// Called every frame
@@ -29,6 +29,11 @@ public:
 	
 	UPROPERTY()
 	FOnTongueEndReached OnTongueEndReached;
+	
+	UFUNCTION()
+	void OnRep_ReplicatedEndLocation();
+	UFUNCTION()
+	void SetEndLocationReplicated(const FVector& NewEndLocation);
 
 		
 };

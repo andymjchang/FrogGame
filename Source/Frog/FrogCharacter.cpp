@@ -1,6 +1,7 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "FrogCharacter.h"
+
 #include "Engine/LocalPlayer.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
@@ -15,16 +16,18 @@
 #include "FrogTongue.h"
 #include "Net/UnrealNetwork.h"
 #include "UObject/TopLevelAssetPath.h"
+#include "FrogMovementComponent.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AFrogCharacter
 
-AFrogCharacter::AFrogCharacter()
+AFrogCharacter::AFrogCharacter(const FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer.SetDefaultSubobjectClass<UFrogMovementComponent>(AFrogCharacter::CharacterMovementComponentName))
 {
+	PrimaryActorTick.bCanEverTick = true;
+	
 	// Networking
 	bReplicates = true;
-	
-	PrimaryActorTick.bCanEverTick = true;
 	
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 42.0f);
@@ -35,11 +38,12 @@ AFrogCharacter::AFrogCharacter()
 	bUseControllerRotationRoll = false;
 
 	// Configure character movement
-	GetCharacterMovement()->bOrientRotationToMovement = true; // Character moves in the direction of input...	
-	GetCharacterMovement()->RotationRate = FRotator(0.0f, 1800.0f, 0.0f); // ...at this rotation rate
+	GetCharacterMovement()->bOrientRotationToMovement = true; 	
+	GetCharacterMovement()->RotationRate = FRotator(0.0f, 1800.0f, 0.0f); 
 
-	// Note: For faster iteration times these variables, and many more, can be tweaked in the Character Blueprint
-	// instead of recompiling to adjust them
+	// Default CMC Values
+	GetCharacterMovement()->bIgnoreClientMovementErrorChecksAndCorrection = false;
+	GetCharacterMovement()->bServerAcceptClientAuthoritativePosition = false;
 	GetCharacterMovement()->JumpZVelocity = 700.f;
 	GetCharacterMovement()->AirControl = 0.35f;
 	GetCharacterMovement()->MaxWalkSpeed = 500.f;
@@ -83,8 +87,10 @@ void AFrogCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLi
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
+	// Grapple
 	DOREPLIFETIME(AFrogCharacter, GrapplePoint);
 	DOREPLIFETIME(AFrogCharacter, bIsGrapple);
+	DOREPLIFETIME(AFrogCharacter, GrappleRotation);
 }
 
 void AFrogCharacter::PostInitializeComponents()
@@ -141,17 +147,43 @@ void AFrogCharacter::Tick(float DeltaSeconds)
 	// Grapple
 	if (bIsGrapple)
 	{
-		ApplyGrappleForce(DeltaSeconds);
+		// ApplyGrappleForce(DeltaSeconds);
 	}
 }
 
 void AFrogCharacter::ApplyGrappleForce(float DeltaSeconds)
 {
+	if (!HasAuthority() && !IsLocallyControlled()) return;
 	FVector GrappleDirection = (GrapplePoint - GetActorLocation()).GetSafeNormal();
-	SetActorRotation(GrappleDirection.Rotation());
-	SetActorRelativeRotation(GetActorRotation() + FRotator(-30, 0, 0));
-	if (HasAuthority()) GetCharacterMovement()->AddForce(GrappleDirection * GrappleStrength); // Only apply force on server
-	Tongue->EndLocation = GetActorTransform().InverseTransformPosition(GrapplePoint);
+	FRotator NewGrappleRotation = GrappleDirection.Rotation() + FRotator(-30, 0, 0);
+	// if (HasAuthority())
+	// {
+	// 	GrappleRotation = NewGrappleRotation;
+	// }
+	if (IsLocallyControlled())
+	{
+		GrappleRotation = NewGrappleRotation;
+		SetActorRotation(NewGrappleRotation);
+	}
+	LaunchCharacter(GrappleDirection * GrappleStrength, false, false);
+	if (IsValid(Tongue))
+	{
+		Tongue->SetEndLocationReplicated(GetActorTransform().InverseTransformPosition(GrapplePoint));
+	}
+}
+
+void AFrogCharacter::OnRep_GrappleRotation()
+{
+	if (!IsLocallyControlled())
+	{
+		SetActorRotation(GrappleRotation);
+	}
+}
+
+void AFrogCharacter::ToggleClientAuthoritativeMovement(bool Value)
+{
+	GetCharacterMovement()->bIgnoreClientMovementErrorChecksAndCorrection = Value;
+	GetCharacterMovement()->bServerAcceptClientAuthoritativePosition = Value;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -189,7 +221,7 @@ void AFrogCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 		for (const FAbilityInputToInputActionBinding binding : AbilityInputBindings.Bindings)
 		{
-			EnhancedInputComponent->BindAction(binding.InputAction, ETriggerEvent::Triggered, this, &AFrogCharacter::AbilityInputBindingPressedHandler, binding.AbilityInputID);
+			EnhancedInputComponent->BindAction(binding.InputAction, ETriggerEvent::Started, this, &AFrogCharacter::AbilityInputBindingPressedHandler, binding.AbilityInputID);
 			EnhancedInputComponent->BindAction(binding.InputAction, ETriggerEvent::Completed, this, &AFrogCharacter::AbilityInputBindingReleasedHandler, binding.AbilityInputID);
 		}
 		// Bind Input actions to Enum entries
@@ -227,7 +259,7 @@ void AFrogCharacter::Look(const FInputActionValue& Value)
 	// input is a Vector2D
 	FVector2D LookAxisVector = Value.Get<FVector2D>();
 
-	if (Controller != nullptr)
+	if (IsValid(Controller))
 	{
 		// add yaw and pitch input to controller
 		AddControllerYawInput(LookAxisVector.X);
@@ -247,40 +279,58 @@ void AFrogCharacter::AbilityInputBindingReleasedHandler(EAbilityInputID AbilityI
 
 void AFrogCharacter::Grapple(const FInputActionValue& Value)
 {
-	ServerGrapple();
-}
-
-void AFrogCharacter::ServerGrapple_Implementation()
-{
-	if (bool ValidHit = GetGrapplePoint())
+	if (TraceGrapplePoint())
 	{
 		bIsGrapple = true;
-		GetCharacterMovement()->SetMovementMode(MOVE_Flying); 
-		if (Tongue)
-		{
-			Tongue->SetVisibility(true);
-			// Tongue->EndLocation = FVector(0, 0, 0);
-		}
+		GetCharacterMovement()->SetMovementMode(MOVE_Custom, static_cast<uint8>(ECustomMovementMode::CMOVE_Grapple));
 	}
+	if (!HasAuthority())
+	{
+		ServerGrapple(GrapplePoint);
+	}
+	
+}
+
+
+void AFrogCharacter::ServerGrapple_Implementation(const FVector NewGrapplePoint)
+{
+	// if (TraceGrapplePoint())
+	// {
+	// 	bIsGrapple = true;
+	// 	// GetCharacterMovement()->SetMovementMode(MOVE_Flying);
+	// 	GetCharacterMovement()->SetMovementMode(MOVE_Custom, static_cast<uint8>(ECustomMovementMode::CMOVE_Grapple));
+	// 	if (IsValid(Tongue))
+	// 	{
+	// 		Tongue->SetVisibility(true);
+	// 	}
+	// }
+	bIsGrapple = true;
+	GetCharacterMovement()->SetMovementMode(MOVE_Custom, static_cast<uint8>(ECustomMovementMode::CMOVE_Grapple));
+	GrapplePoint = NewGrapplePoint;
 }
 
 void AFrogCharacter::StopGrapple(const FInputActionValue& Value)
 {
-	ServerStopGrapple();
+	if (!HasAuthority())
+	{
+		ServerStopGrapple();
+	}
+	bIsGrapple = false;
+	GetCharacterMovement()->SetMovementMode(MOVE_Falling);
 }
 
 void AFrogCharacter::ServerStopGrapple_Implementation()
 {
 	bIsGrapple = false;
 	GetCharacterMovement()->SetMovementMode(MOVE_Falling);
-	if (Tongue) Tongue->SetVisibility(false);
-	SetActorRelativeRotation(FRotator(0, 0, 0));
+	// if (IsValid(Tongue)) Tongue->SetVisibility(false);
+	// SetActorRelativeRotation(FRotator(0, 0, 0));
 }
 
 // Returns grapple point (world position)
-bool AFrogCharacter::GetGrapplePoint()
+bool AFrogCharacter::TraceGrapplePoint()
 {
-	if (!FollowCamera) return false;
+	if (!IsValid(FollowCamera)) return false;
 	
 	// Get camera look at point
 	FVector CameraWorldLocation = FollowCamera->GetComponentLocation();

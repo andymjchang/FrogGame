@@ -19,23 +19,23 @@ UFrogTongue::UFrogTongue()
 void UFrogTongue::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME(UFrogTongue, ReplicatedEndLocation);
 }
 
-// Called when the game starts
-void UFrogTongue::BeginPlay()
-{
-	Super::BeginPlay();
-
-	// ...
-	
-}
-
-
-// Called every frame
 void UFrogTongue::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+}
 
-	// ...
+void UFrogTongue::OnRep_ReplicatedEndLocation()
+{
+	EndLocation = ReplicatedEndLocation;
+}
+
+void UFrogTongue::SetEndLocationReplicated(const FVector& NewEndLocation)
+{
+	ReplicatedEndLocation = NewEndLocation;
+	EndLocation = NewEndLocation;
 }
 

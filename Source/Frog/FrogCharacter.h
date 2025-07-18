@@ -46,69 +46,74 @@ class AFrogCharacter : public ACharacter, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 	
-protected: // Members NO FUNCTIONS HERE
+protected: /* Members NO FUNCTIONS HERE */
 	// Components
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
 	USpringArmComponent* CameraBoom;
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
 	UCameraComponent* FollowCamera;
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Grapple, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Grapple)
 	UFrogTongue* Tongue;
 
 	// Ability System
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ability System", meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ability System")
 	UFrogAbilitySystem* AbilitySystemComponent;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability System", meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability System")
 	TArray<TSubclassOf<class UGameplayAbility>> DefaultAbilities;
-	UPROPERTY(VisibleAnywhere, Category = "Ability System", meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(VisibleAnywhere, Category = "Ability System")
 	UUnitAttributeSet* UnitAttributes;
-	UPROPERTY(EditAnywhere, Category = "Ability System", meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, Category = "Ability System")
 	UAbilitySet* AbilitySet;
-	UPROPERTY(EditAnywhere, Category = "Ability System", meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, Category = "Ability System")
 	TSubclassOf<UGameplayEffect> InitialGameplayEffect;
 	
 	/** MappingContext */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	UInputMappingContext* DefaultMappingContext;
-	UPROPERTY(EditDefaultsOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditDefaultsOnly, Category = Input)
 	FAbilityInputBindings AbilityInputBindings;
 	UPROPERTY(Transient)
 	TArray<FGameplayAbilitySpecHandle> InitialAbilitySpecHandles;
 
 	// Input Actions
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	UInputAction* JumpAction;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	UInputAction* MoveAction;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	UInputAction* LookAction;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	UInputAction* GrappleAction;
+
+	// Networking
+	FTimerHandle ClientAuthoritativeTimerHandle;
 	
 	// Grapple
-	UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = Grapple, meta = (AllowPrivateAccess = "true"))
-	FVector GrapplePoint;
-	UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = Grapple, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = Grapple)
 	bool bIsGrapple;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Grapple, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = Grapple)
+	FVector GrapplePoint;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Grapple)
 	float CameraGrappleLength;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Grapple, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Grapple)
 	float GrappleStrength;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Grapple, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Grapple)
 	float CameraOffset;
+	UPROPERTY(ReplicatedUsing = OnRep_GrappleRotation, EditAnywhere, BlueprintReadWrite, Category = Grapple)
+	FRotator GrappleRotation;
 
-public:
-	AFrogCharacter();
+public: /* Public Functions */
+	AFrogCharacter(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
 	// Gameplay Ability System
 	UFUNCTION(Server, Reliable)
-	void ServerGrapple();
+	void ServerGrapple(const FVector NewGrapplePoint);
 	UFUNCTION(Server, Reliable)
 	void ServerStopGrapple();
 
-protected: // Functions
+protected: /* Protected Functions */
 	virtual void PostInitializeComponents() override;
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaSeconds) override;
@@ -129,19 +134,26 @@ protected: // Functions
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	// Grapple functions
-	bool GetGrapplePoint();
+	bool TraceGrapplePoint();
 	void ApplyGrappleForce(float DeltaSeconds);
+	UFUNCTION()
+	void OnRep_GrappleRotation();
+	void ToggleClientAuthoritativeMovement(bool Value);
 
 	// Abilities
 	void SetupAbilities();
 
 
-public: // Inline Functions
-	/** Returns CameraBoom subobject **/
+public: /* Public Members and Getters */
+	/** Getters **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
-	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
-	// Tongue cable object
 	FORCEINLINE class UFrogTongue* GetTongue() const { return Tongue; }
+	FORCEINLINE bool GetIsGrapple() const { return bIsGrapple; }
+	FORCEINLINE void SetIsGrapple(bool bNewIsGrapple) { bIsGrapple = bNewIsGrapple; }
+	FORCEINLINE float GetGrappleStrength() { return GrappleStrength; }
+	FORCEINLINE FVector GetGrapplePoint() const { return GrapplePoint; }
+	
+	// Public Members
 };
 
