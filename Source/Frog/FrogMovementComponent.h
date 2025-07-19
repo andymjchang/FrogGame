@@ -22,6 +22,8 @@ class FROG_API UFrogMovementComponent : public UCharacterMovementComponent
 	GENERATED_BODY()
 protected:
 	void PhysGrapple(float DeltaTime, int32 Iterations);
+	virtual void OnMovementModeChanged(EMovementMode PreviousMovementMode, uint8 PreviousCustomMode) override;
+
 public:
 	virtual void PhysCustom(float DeltaTime, int32 Iterations) override;
 	

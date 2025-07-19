@@ -113,6 +113,9 @@ public: /* Public Functions */
 	UFUNCTION(Server, Reliable)
 	void ServerStopGrapple();
 
+	void SetTongueEndPosition();
+	void SetTongueVisibility(bool Value);
+
 protected: /* Protected Functions */
 	virtual void PostInitializeComponents() override;
 	virtual void BeginPlay() override;

@@ -283,8 +283,6 @@ void AFrogCharacter::Grapple(const FInputActionValue& Value)
 	
 	bIsGrapple = true;
 	GetCharacterMovement()->SetMovementMode(MOVE_Custom, static_cast<uint8>(ECustomMovementMode::CMOVE_Grapple));
-	if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Green, "pressed");
-	// SetClientAuthoritativeMovement(true);
 	ServerGrapple(GrapplePoint);
 
 }
@@ -292,16 +290,10 @@ void AFrogCharacter::Grapple(const FInputActionValue& Value)
 
 void AFrogCharacter::ServerGrapple_Implementation(const FVector NewGrapplePoint)
 {
-	// if (TraceGrapplePoint())
-	// {
-	// 	bIsGrapple = true;
-	// 	// GetCharacterMovement()->SetMovementMode(MOVE_Flying);
-	// 	GetCharacterMovement()->SetMovementMode(MOVE_Custom, static_cast<uint8>(ECustomMovementMode::CMOVE_Grapple));
-	// 	if (IsValid(Tongue))
-	// 	{
-	// 		Tongue->SetVisibility(true);
-	// 	}
-	// }
+	if (IsValid(Tongue))
+	{
+		Tongue->SetVisibility(true);
+	}
 	bIsGrapple = true;
 	GetCharacterMovement()->SetMovementMode(MOVE_Custom, static_cast<uint8>(ECustomMovementMode::CMOVE_Grapple));
 	GrapplePoint = NewGrapplePoint;
@@ -312,7 +304,7 @@ void AFrogCharacter::StopGrapple(const FInputActionValue& Value)
 {
 	if (IsLocallyControlled())
 	{
-		if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, "released");
+		// if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, "released");
 		// SetClientAuthoritativeMovement(false);
 		ServerStopGrapple();
 	}
@@ -430,5 +422,15 @@ bool AFrogCharacter::TraceGrapplePoint()
     }
     
     return bHit2;
+}
+
+void AFrogCharacter::SetTongueEndPosition()
+{
+	if (IsValid(Tongue)) Tongue->SetEndLocationReplicated(GetActorTransform().InverseTransformPosition(GrapplePoint));
+}
+
+void AFrogCharacter::SetTongueVisibility(const bool Value)
+{
+	if (IsValid(Tongue)) Tongue->SetVisibility(Value);
 }
 
