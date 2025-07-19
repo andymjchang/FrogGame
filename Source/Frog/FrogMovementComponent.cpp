@@ -27,21 +27,32 @@ void UFrogMovementComponent::PhysGrapple(float DeltaTime, int32 Iterations)
 	const FVector GrappleVector = (Frog->GetGrapplePoint() - Frog->GetActorLocation());
 	const FVector GrappleDirection = GrappleVector.GetSafeNormal();
     
-	// Apply gravity (like Flying mode does)
-	// Velocity.Z += GetGravityZ() * DeltaTime;
-    
-	// Apply grapple acceleration (similar to LaunchCharacter effect)
+	// Apply grapple acceleration
 	const FVector GrappleAcceleration = GrappleDirection * Frog->GetGrappleStrength();
 	Velocity += GrappleAcceleration * DeltaTime;
     
-	// Apply air resistance/drag if desired (Flying mode has this)
-	// Velocity *= FMath::Max(0.f, 1.f - BrakingDecelerationFlying * DeltaTime / FMath::Max(1.f, Velocity.Size()));
+	// Get player input
+	const FVector InputVector = ConsumeInputVector();
+	if (!InputVector.IsZero())
+	{
+		const float HorizontalInfluence = 1000.0f;
+		FVector HorizontalInput = FVector(InputVector.X, InputVector.Y, 0.0f);
+		Velocity += HorizontalInput * DeltaTime;
+	}
+	
+	if (Velocity.Size() > GetMaxSpeed()) Velocity = Velocity.GetSafeNormal() * GetMaxSpeed();
+	Velocity.Z += GetGravityZ() * DeltaTime; // Gravity added after ms cap
     
-	// Move the character
+	// Move with sliding collision
 	const FVector Delta = Velocity * DeltaTime;
 	FHitResult Hit;
-	SafeMoveUpdatedComponent(Delta, UpdatedComponent->GetComponentQuat(), true, Hit);
-
+	MoveUpdatedComponent(Delta, UpdatedComponent->GetComponentQuat(), true, &Hit);
+    
+	if (Hit.bBlockingHit)
+	{
+		SlideAlongSurface(Delta, 1.f - Hit.Time, Hit.Normal, Hit, false);
+	}
+    
 	// Tongue Visuals
 	FRotator NewGrappleRotation = GrappleDirection.Rotation() + FRotator(-30, 0, 0);
 	Frog->SetActorRotation(NewGrappleRotation);
