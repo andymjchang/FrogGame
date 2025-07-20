@@ -33,15 +33,28 @@ void UFrogMovementComponent::PhysGrapple(float DeltaTime, int32 Iterations)
     
 	// Get player input
 	const FVector InputVector = ConsumeInputVector();
-	if (!InputVector.IsZero())
+	// if (!InputVector.IsZero())
+	// {
+	// 	const float HorizontalInfluence = 1000.0f;
+	// 	FVector HorizontalInput = FVector(InputVector.X, InputVector.Y, 0.0f);
+	// 	Velocity += HorizontalInput * DeltaTime;
+	// }
+
+	// Clamp speed 
+	const FVector GrappleGravityDirection = GetGravityDirection();
+	const float DotProduct = FVector::DotProduct(Velocity.GetSafeNormal(), GrappleGravityDirection);
+	bool bMovingTowardsGravity = DotProduct > 0.0f;
+	float SpeedLimit;
+	if (bMovingTowardsGravity)
 	{
-		const float HorizontalInfluence = 1000.0f;
-		FVector HorizontalInput = FVector(InputVector.X, InputVector.Y, 0.0f);
-		Velocity += HorizontalInput * DeltaTime;
+		SpeedLimit = 4000.f; // Default physics terminal velocity
 	}
-	
-	if (Velocity.Size() > GetMaxSpeed()) Velocity = Velocity.GetSafeNormal() * GetMaxSpeed();
-	Velocity.Z += GetGravityZ() * DeltaTime; // Gravity added after ms cap
+	else
+	{
+		SpeedLimit = GetMaxSpeed();
+	}
+	Velocity = NewFallVelocity(Velocity, -GetGravityDirection() * GetGravityZ(), DeltaTime); 
+	if (Velocity.Size() > SpeedLimit) Velocity = Velocity.GetSafeNormal() * GetMaxSpeed();
     
 	// Move with sliding collision
 	const FVector Delta = Velocity * DeltaTime;
