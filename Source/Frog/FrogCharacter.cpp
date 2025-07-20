@@ -90,7 +90,6 @@ void AFrogCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLi
 	// Grapple
 	DOREPLIFETIME(AFrogCharacter, GrapplePoint);
 	DOREPLIFETIME(AFrogCharacter, bIsGrapple);
-	DOREPLIFETIME(AFrogCharacter, GrappleRotation);
 }
 
 void AFrogCharacter::PostInitializeComponents()
@@ -101,17 +100,7 @@ void AFrogCharacter::PostInitializeComponents()
 void AFrogCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-
-	// if (AbilitySystemComponent)
-	// {
-	// 	for (TSubclassOf<UGameplayAbility>& Ability : DefaultAbilities)
-	// 	{
-	// 		if (Ability)
-	// 		{
-	// 			AbilitySystemComponent->GiveAbility(FGameplayAbilitySpec(Ability, 1, static_cast<int32>(EAbilityInputID::Confirm), this));
-	// 		}
-	// 	}
-	// }
+	
 	if (HasAuthority())
 	{
 		SetupAbilities();
@@ -143,40 +132,11 @@ void AFrogCharacter::SetupAbilities()
 void AFrogCharacter::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
-
+	
 	// Grapple
 	if (bIsGrapple)
 	{
-		// ApplyGrappleForce(DeltaSeconds);
-	}
-}
-
-void AFrogCharacter::ApplyGrappleForce(float DeltaSeconds)
-{
-	if (!HasAuthority() && !IsLocallyControlled()) return;
-	FVector GrappleDirection = (GrapplePoint - GetActorLocation()).GetSafeNormal();
-	FRotator NewGrappleRotation = GrappleDirection.Rotation() + FRotator(-30, 0, 0);
-	// if (HasAuthority())
-	// {
-	// 	GrappleRotation = NewGrappleRotation;
-	// }
-	if (IsLocallyControlled())
-	{
-		GrappleRotation = NewGrappleRotation;
-		SetActorRotation(NewGrappleRotation);
-	}
-	LaunchCharacter(GrappleDirection * GrappleStrength, false, false);
-	if (IsValid(Tongue))
-	{
-		Tongue->SetEndLocationReplicated(GetActorTransform().InverseTransformPosition(GrapplePoint));
-	}
-}
-
-void AFrogCharacter::OnRep_GrappleRotation()
-{
-	if (!IsLocallyControlled())
-	{
-		SetActorRotation(GrappleRotation);
+		RedrawTongueLocation(DeltaSeconds);
 	}
 }
 
@@ -286,7 +246,6 @@ void AFrogCharacter::Grapple(const FInputActionValue& Value)
 	ServerGrapple(GrapplePoint);
 
 }
-
 
 void AFrogCharacter::ServerGrapple_Implementation(const FVector NewGrapplePoint)
 {
@@ -424,13 +383,17 @@ bool AFrogCharacter::TraceGrapplePoint()
     return bHit2;
 }
 
-void AFrogCharacter::SetTongueEndPosition()
-{
-	if (IsValid(Tongue)) Tongue->SetEndLocationReplicated(GetActorTransform().InverseTransformPosition(GrapplePoint));
-}
-
 void AFrogCharacter::SetTongueVisibility(const bool Value)
 {
 	if (IsValid(Tongue)) Tongue->SetVisibility(Value);
+}
+
+void AFrogCharacter::RedrawTongueLocation(float DeltaSeconds)
+{
+	if (IsValid(Tongue))
+	{
+		// Tongue->SetEndLocationReplicated(GetActorTransform().InverseTransformPosition(GrapplePoint));
+		Tongue->EndLocation = GetActorTransform().InverseTransformPosition(GrapplePoint);
+	}
 }
 

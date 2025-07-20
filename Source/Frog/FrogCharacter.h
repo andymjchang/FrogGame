@@ -99,8 +99,6 @@ protected: /* Members NO FUNCTIONS HERE */
 	float GrappleStrength;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Grapple)
 	float CameraOffset;
-	UPROPERTY(ReplicatedUsing = OnRep_GrappleRotation, EditAnywhere, BlueprintReadWrite, Category = Grapple)
-	FRotator GrappleRotation;
 
 public: /* Public Functions */
 	AFrogCharacter(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
@@ -112,8 +110,6 @@ public: /* Public Functions */
 	void ServerGrapple(const FVector NewGrapplePoint);
 	UFUNCTION(Server, Reliable)
 	void ServerStopGrapple();
-
-	void SetTongueEndPosition();
 	void SetTongueVisibility(bool Value);
 
 protected: /* Protected Functions */
@@ -138,9 +134,7 @@ protected: /* Protected Functions */
 
 	// Grapple functions
 	bool TraceGrapplePoint();
-	void ApplyGrappleForce(float DeltaSeconds);
-	UFUNCTION()
-	void OnRep_GrappleRotation();
+	void RedrawTongueLocation(float DeltaSeconds);
 	void SetClientAuthoritativeMovement(bool Value);
 
 	// Abilities
@@ -154,7 +148,7 @@ public: /* Public Members and Getters */
 	FORCEINLINE class UFrogTongue* GetTongue() const { return Tongue; }
 	FORCEINLINE bool GetIsGrapple() const { return bIsGrapple; }
 	FORCEINLINE void SetIsGrapple(bool bNewIsGrapple) { bIsGrapple = bNewIsGrapple; }
-	FORCEINLINE float GetGrappleStrength() { return GrappleStrength; }
+	FORCEINLINE float GetGrappleStrength() const { return GrappleStrength; }
 	FORCEINLINE FVector GetGrapplePoint() const { return GrapplePoint; }
 	
 	// Public Members

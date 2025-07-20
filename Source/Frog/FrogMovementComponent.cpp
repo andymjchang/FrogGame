@@ -23,17 +23,16 @@ void UFrogMovementComponent::PhysGrapple(float DeltaTime, int32 Iterations)
 
 	AFrogCharacter* Frog = Cast<AFrogCharacter>(CharacterOwner);
 	if (!Frog || !Frog->GetIsGrapple()) return;
-
-	const FVector GrappleVector = (Frog->GetGrapplePoint() - Frog->GetActorLocation());
-	const FVector GrappleDirection = GrappleVector.GetSafeNormal();
+	
+	const FVector GrappleDirection = (Frog->GetGrapplePoint() - Frog->GetActorLocation()).GetSafeNormal();
     
 	// Apply grapple acceleration
 	const FVector GrappleAcceleration = GrappleDirection * Frog->GetGrappleStrength();
 	Velocity += GrappleAcceleration * DeltaTime;
     
 	// Get player input
-	const FVector InputVector = ConsumeInputVector();
-	// if (!InputVector.IsZero())
+	// const FVector InputVector = ConsumeInputVector();
+	// if (!InputVector.IsZero()) 
 	// {
 	// 	const float HorizontalInfluence = 1000.0f;
 	// 	FVector HorizontalInput = FVector(InputVector.X, InputVector.Y, 0.0f);
@@ -69,7 +68,6 @@ void UFrogMovementComponent::PhysGrapple(float DeltaTime, int32 Iterations)
 	// Tongue Visuals
 	FRotator NewGrappleRotation = GrappleDirection.Rotation() + FRotator(-30, 0, 0);
 	Frog->SetActorRotation(NewGrappleRotation);
-	Frog->SetTongueEndPosition();
 }
 
 void UFrogMovementComponent::OnMovementModeChanged(EMovementMode PreviousMovementMode, uint8 PreviousCustomMode)

@@ -20,20 +20,12 @@ public:
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 protected:
-	UPROPERTY(ReplicatedUsing = OnRep_ReplicatedEndLocation)
-	FVector ReplicatedEndLocation;
-
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	
 	UPROPERTY()
 	FOnTongueEndReached OnTongueEndReached;
-	
-	UFUNCTION()
-	void OnRep_ReplicatedEndLocation();
-	UFUNCTION()
-	void SetEndLocationReplicated(const FVector& NewEndLocation);
 
 		
 };
