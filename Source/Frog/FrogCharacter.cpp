@@ -210,4 +210,3 @@ void AFrogCharacter::RedrawTongueLocation(float DeltaSeconds) const
 		Tongue->EndLocation = GetActorTransform().InverseTransformPosition(GrapplePoint);
 	}
 }
-
