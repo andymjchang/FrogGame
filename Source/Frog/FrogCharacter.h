@@ -135,7 +135,6 @@ protected: /* Protected Functions */
 	// Grapple functions
 	bool TraceGrapplePoint();
 	void RedrawTongueLocation(float DeltaSeconds);
-	void SetClientAuthoritativeMovement(bool Value);
 
 	// Abilities
 	void SetupAbilities();
