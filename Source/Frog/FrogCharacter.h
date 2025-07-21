@@ -20,6 +20,9 @@ class UInputAction;
 struct FInputActionValue;
 class UFrogAbilitySystem;
 
+/**
+ * Struct that ties enhanced input actions to GAS ability inputs
+ */
 USTRUCT()
 struct FAbilityInputToInputActionBinding
 {
@@ -32,6 +35,9 @@ struct FAbilityInputToInputActionBinding
 	EAbilityInputID AbilityInputID;
 };
 
+/**
+ * Contains array of ability inputs for a GAS character
+ */
 USTRUCT()
 struct FAbilityInputBindings
 {
@@ -46,7 +52,7 @@ class AFrogCharacter : public ACharacter, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 	
-protected: /* Members NO FUNCTIONS HERE */
+protected: /* Members */
 	// Components
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
 	USpringArmComponent* CameraBoom;
@@ -67,7 +73,7 @@ protected: /* Members NO FUNCTIONS HERE */
 	UPROPERTY(EditAnywhere, Category = "Ability System")
 	TSubclassOf<UGameplayEffect> InitialGameplayEffect;
 	
-	/** MappingContext */
+	// Mapping Context
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	UInputMappingContext* DefaultMappingContext;
 	UPROPERTY(EditDefaultsOnly, Category = Input)
@@ -77,79 +83,56 @@ protected: /* Members NO FUNCTIONS HERE */
 
 	// Input Actions
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
-	UInputAction* JumpAction;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	UInputAction* MoveAction;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	UInputAction* LookAction;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
-	UInputAction* GrappleAction;
-
-	// Networking
-	FTimerHandle ClientAuthoritativeTimerHandle;
 	
-	// Grapple
+	// Grapple 
 	UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = Grapple)
 	bool bIsGrapple;
 	UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = Grapple)
 	FVector GrapplePoint;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Grapple)
-	float CameraGrappleLength;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Grapple)
+
 	float GrappleStrength;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Grapple)
-	float CameraOffset;
 
 public: /* Public Functions */
 	AFrogCharacter(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
-
-	// Gameplay Ability System
-	UFUNCTION(Server, Reliable)
-	void ServerGrapple(const FVector NewGrapplePoint);
-	UFUNCTION(Server, Reliable)
-	void ServerStopGrapple();
-	void SetTongueVisibility(bool Value);
+	
+	void SetTongueVisibility(bool Value) const;
 
 protected: /* Protected Functions */
 	virtual void PostInitializeComponents() override;
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaSeconds) override;
 	
-	/** Called for movement input */
-	void Move(const FInputActionValue& Value);
-
-	/** Called for looking input */
-	void Look(const FInputActionValue& Value);
-	void Grapple(const FInputActionValue& Value);
-	void StopGrapple(const FInputActionValue& Value);
-	
-	// Connecting Ability Inputs to GAS
-	void AbilityInputBindingPressedHandler(EAbilityInputID AbilityInputID);
-	void AbilityInputBindingReleasedHandler(EAbilityInputID AbilityInputID);
-	
 	virtual void NotifyControllerChanged() override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	// Grapple functions
-	bool TraceGrapplePoint();
-	void RedrawTongueLocation(float DeltaSeconds);
-
-	// Abilities
+	// GAS
+	void AbilityInputBindingPressedHandler(EAbilityInputID AbilityInputID);
+	void AbilityInputBindingReleasedHandler(EAbilityInputID AbilityInputID);
 	void SetupAbilities();
+	
+	void Move(const FInputActionValue& Value);
+	void Look(const FInputActionValue& Value);
 
+	// Grapple functions 
+	void RedrawTongueLocation(float DeltaSeconds) const;
 
 public: /* Public Members and Getters */
-	/** Getters **/
+	// Getters 
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 	FORCEINLINE class UFrogTongue* GetTongue() const { return Tongue; }
 	FORCEINLINE bool GetIsGrapple() const { return bIsGrapple; }
-	FORCEINLINE void SetIsGrapple(bool bNewIsGrapple) { bIsGrapple = bNewIsGrapple; }
+	FORCEINLINE void SetIsGrapple(const bool bNewIsGrapple) { bIsGrapple = bNewIsGrapple; }
 	FORCEINLINE float GetGrappleStrength() const { return GrappleStrength; }
+	FORCEINLINE void SetGrappleStrength(const float NewGrappleStrength) { GrappleStrength = NewGrappleStrength; }
 	FORCEINLINE FVector GetGrapplePoint() const { return GrapplePoint; }
+	FORCEINLINE void SetGrapplePoint(const FVector& NewGrapplePoint) { GrapplePoint = NewGrapplePoint; }
 	
-	// Public Members
+	// Public Members 
 };
 

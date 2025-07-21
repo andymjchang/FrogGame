@@ -29,15 +29,6 @@ void UFrogMovementComponent::PhysGrapple(float DeltaTime, int32 Iterations)
 	// Apply grapple acceleration
 	const FVector GrappleAcceleration = GrappleDirection * Frog->GetGrappleStrength();
 	Velocity += GrappleAcceleration * DeltaTime;
-    
-	// Get player input
-	// const FVector InputVector = ConsumeInputVector();
-	// if (!InputVector.IsZero()) 
-	// {
-	// 	const float HorizontalInfluence = 1000.0f;
-	// 	FVector HorizontalInput = FVector(InputVector.X, InputVector.Y, 0.0f);
-	// 	Velocity += HorizontalInput * DeltaTime;
-	// }
 
 	// Clamp speed 
 	const FVector GrappleGravityDirection = GetGravityDirection();
@@ -66,7 +57,7 @@ void UFrogMovementComponent::PhysGrapple(float DeltaTime, int32 Iterations)
 	}
     
 	// Tongue Visuals
-	FRotator NewGrappleRotation = GrappleDirection.Rotation() + FRotator(-30, 0, 0);
+	const FRotator NewGrappleRotation = GrappleDirection.Rotation() + FRotator(-30, 0, 0);
 	Frog->SetActorRotation(NewGrappleRotation);
 }
 
