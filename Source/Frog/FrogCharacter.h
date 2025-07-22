@@ -66,8 +66,8 @@ protected: /* Members */
 	UFrogAbilitySystem* AbilitySystemComponent;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability System")
 	TArray<TSubclassOf<class UGameplayAbility>> DefaultAbilities;
-	UPROPERTY(VisibleAnywhere, Category = "Ability System")
-	UUnitAttributeSet* UnitAttributes;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Ability System")
+	const UUnitAttributeSet* UnitAttributeSet;
 	UPROPERTY(EditAnywhere, Category = "Ability System")
 	UAbilitySet* AbilitySet;
 	UPROPERTY(EditAnywhere, Category = "Ability System")
@@ -101,6 +101,9 @@ public: /* Public Functions */
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	
 	void SetTongueVisibility(bool Value) const;
+
+	UFUNCTION(BlueprintCallable)
+	void PrintAbilitySystemAttributes();
 
 protected: /* Protected Functions */
 	virtual void PostInitializeComponents() override;

@@ -70,7 +70,7 @@ AFrogCharacter::AFrogCharacter(const FObjectInitializer& ObjectInitializer)
 
 	// Frog Ability System
 	AbilitySystemComponent = CreateDefaultSubobject<UFrogAbilitySystem>(TEXT("AbilitySystem"));
-	UnitAttributes = CreateDefaultSubobject<UUnitAttributeSet>(TEXT("UnitAttributes"));
+	UnitAttributeSet = CreateDefaultSubobject<UUnitAttributeSet>(TEXT("UnitAttributes"));
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
@@ -104,7 +104,7 @@ UAbilitySystemComponent* AFrogCharacter::GetAbilitySystemComponent() const
 
 void AFrogCharacter::SetupAbilities()
 {
-	if (!IsValid(AbilitySystemComponent) || !IsValid(UnitAttributes)) return;
+	if (!IsValid(AbilitySystemComponent) || !IsValid(UnitAttributeSet)) return;
 	if (IsValid(AbilitySet))
 	{
 		InitialAbilitySpecHandles.Append(AbilitySet->GrantAbilitiesToAbilitySystem(AbilitySystemComponent));
@@ -124,7 +124,7 @@ void AFrogCharacter::NotifyControllerChanged()
 	Super::NotifyControllerChanged();
 
 	// Add Input Mapping Context
-	if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
+	if (const APlayerController* PlayerController = Cast<APlayerController>(Controller))
 	{
 		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
 		{
@@ -144,10 +144,10 @@ void AFrogCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AFrogCharacter::Look);
 
 		// GAS
-		for (const FAbilityInputToInputActionBinding binding : AbilityInputBindings.Bindings)
+		for (const auto [InputAction, AbilityInputID] : AbilityInputBindings.Bindings)
 		{
-			EnhancedInputComponent->BindAction(binding.InputAction, ETriggerEvent::Started, this, &AFrogCharacter::AbilityInputBindingPressedHandler, binding.AbilityInputID);
-			EnhancedInputComponent->BindAction(binding.InputAction, ETriggerEvent::Completed, this, &AFrogCharacter::AbilityInputBindingReleasedHandler, binding.AbilityInputID);
+			EnhancedInputComponent->BindAction(InputAction, ETriggerEvent::Started, this, &AFrogCharacter::AbilityInputBindingPressedHandler, AbilityInputID);
+			EnhancedInputComponent->BindAction(InputAction, ETriggerEvent::Completed, this, &AFrogCharacter::AbilityInputBindingReleasedHandler, AbilityInputID);
 		}
 	}
 }
@@ -205,8 +205,22 @@ void AFrogCharacter::SetTongueVisibility(const bool Value) const
 
 void AFrogCharacter::RedrawTongueLocation(float DeltaSeconds) const
 {
-	if (IsValid(Tongue))
+	if (IsValid(Tongue)) Tongue->EndLocation = GetActorTransform().InverseTransformPosition(GrapplePoint);
+}
+
+void AFrogCharacter::PrintAbilitySystemAttributes()
+{
+	if (!IsValid(AbilitySystemComponent) || !IsValid(UnitAttributeSet))
+		return;
+	
+	// Method 2: Using GetNumericAttribute (safer, handles missing attributes)
+	float Health = AbilitySystemComponent->GetNumericAttribute(UUnitAttributeSet::GetHealthAttribute());
+	float MaxHealth = AbilitySystemComponent->GetNumericAttribute(UUnitAttributeSet::GetMaxHealthAttribute());
+    
+	// Print to screen
+	if (GEngine)
 	{
-		Tongue->EndLocation = GetActorTransform().InverseTransformPosition(GrapplePoint);
+		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, 
+			FString::Printf(TEXT("Health: %.1f / %.1f"), Health, MaxHealth));
 	}
 }
