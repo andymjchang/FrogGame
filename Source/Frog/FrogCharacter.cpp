@@ -71,6 +71,7 @@ AFrogCharacter::AFrogCharacter(const FObjectInitializer& ObjectInitializer)
 	// Frog Ability System
 	AbilitySystemComponent = CreateDefaultSubobject<UFrogAbilitySystem>(TEXT("AbilitySystem"));
 	UnitAttributeSet = CreateDefaultSubobject<UUnitAttributeSet>(TEXT("UnitAttributes"));
+	AbilitySystemComponent->AddAttributeSetSubobject(UnitAttributeSet);
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
@@ -111,9 +112,9 @@ void AFrogCharacter::SetupAbilities()
 	}
 
 	// Apply initial stats
-	if (IsValid(InitialGameplayEffect))
+	if (IsValid(DefaultAttributes))
 	{
-		AbilitySystemComponent->ApplyGameplayEffectToSelf(InitialGameplayEffect->GetDefaultObject<UGameplayEffect>(), 0.f, AbilitySystemComponent->MakeEffectContext());
+		AbilitySystemComponent->ApplyGameplayEffectToSelf(DefaultAttributes->GetDefaultObject<UGameplayEffect>(), 0.f, AbilitySystemComponent->MakeEffectContext());
 	}
 	
 	// AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(UUnitAttributeSet::GetHealthAttribute()).AddUObject(this, &AFrogCharacter::OnHealthAttributeChanged);

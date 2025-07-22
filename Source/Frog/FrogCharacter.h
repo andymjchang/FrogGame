@@ -67,11 +67,11 @@ protected: /* Members */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability System")
 	TArray<TSubclassOf<class UGameplayAbility>> DefaultAbilities;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Ability System")
-	const UUnitAttributeSet* UnitAttributeSet;
+	UUnitAttributeSet* UnitAttributeSet;
 	UPROPERTY(EditAnywhere, Category = "Ability System")
 	UAbilitySet* AbilitySet;
 	UPROPERTY(EditAnywhere, Category = "Ability System")
-	TSubclassOf<UGameplayEffect> InitialGameplayEffect;
+	TSubclassOf<UGameplayEffect> DefaultAttributes;
 	
 	// Mapping Context
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
