@@ -61,16 +61,16 @@ protected: /* Members */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Grapple)
 	UFrogTongue* Tongue;
 
-	// Ability System
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ability System")
+	// Gameplay Ability System
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "GAS")
 	UFrogAbilitySystem* AbilitySystemComponent;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability System")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GAS")
 	TArray<TSubclassOf<class UGameplayAbility>> DefaultAbilities;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Ability System")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GAS")
 	UUnitAttributeSet* UnitAttributeSet;
-	UPROPERTY(EditAnywhere, Category = "Ability System")
+	UPROPERTY(EditAnywhere, Category = "GAS")
 	UAbilitySet* AbilitySet;
-	UPROPERTY(EditAnywhere, Category = "Ability System")
+	UPROPERTY(EditAnywhere, Category = "GAS")
 	TSubclassOf<UGameplayEffect> DefaultAttributes;
 	
 	// Mapping Context
@@ -135,7 +135,5 @@ public: /* Public Members and Getters */
 	FORCEINLINE void SetGrappleStrength(const float NewGrappleStrength) { GrappleStrength = NewGrappleStrength; }
 	FORCEINLINE FVector GetGrapplePoint() const { return GrapplePoint; }
 	FORCEINLINE void SetGrapplePoint(const FVector& NewGrapplePoint) { GrapplePoint = NewGrapplePoint; }
-	
-	// Public Members 
 };
 
