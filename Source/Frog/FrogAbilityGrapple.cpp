@@ -9,9 +9,6 @@
 
 UFrogAbilityGrapple::UFrogAbilityGrapple()
 {
-    NetExecutionPolicy = EGameplayAbilityNetExecutionPolicy::LocalPredicted;
-    InstancingPolicy = EGameplayAbilityInstancingPolicy::InstancedPerActor;
-
     GrappleRange = 3000.0f;
     GrappleStrength = 4000.f;
 }
@@ -21,13 +18,12 @@ void UFrogAbilityGrapple::ActivateAbility(const FGameplayAbilitySpecHandle Handl
                                           const FGameplayAbilityActivationInfo ActivationInfo,
                                           const FGameplayEventData* TriggerEventData)
 {
-    // Commit the ability (costs, cooldowns, etc.) - this is predicted automatically
-    if (!CommitAbility(Handle, ActorInfo, ActivationInfo))
+    if (!CommitAbilityCost(Handle, ActorInfo, ActivationInfo))
     {
         EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
         return;
     }
-
+    
     Super::ActivateAbility(Handle, ActorInfo, ActivationInfo, TriggerEventData);
 
     AFrogCharacter* Character = Cast<AFrogCharacter>(ActorInfo->AvatarActor.Get());
@@ -46,11 +42,7 @@ void UFrogAbilityGrapple::ActivateAbility(const FGameplayAbilitySpecHandle Handl
         EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
         return;
     }
-
-    // This single function call is predicted automatically!
-    // - Runs immediately on client for responsiveness
-    // - Server validates and potentially corrects
-    // - Other clients get the replicated result
+    
     PerformGrapple(Character, GrapplePoint);
 }
 
@@ -75,6 +67,7 @@ void UFrogAbilityGrapple::EndAbility(const FGameplayAbilitySpecHandle Handle,
                                     bool bReplicateEndAbility,
                                     bool bWasCancelled)
 {
+    CommitAbilityCooldown(Handle, ActorInfo, ActivationInfo, false);
     // Clean up when ability ends
     if (AFrogCharacter* Character = Cast<AFrogCharacter>(ActorInfo->AvatarActor.Get()))
     {

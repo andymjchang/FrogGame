@@ -12,10 +12,8 @@
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
 #include "FrogAbilitySystem.h"
-#include "FrogAbilityJump.h"
 #include "FrogTongue.h"
 #include "Net/UnrealNetwork.h"
-#include "UObject/TopLevelAssetPath.h"
 #include "FrogMovementComponent.h"
 
 //////////////////////////////////////////////////////////////////////////

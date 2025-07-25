@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "FrogGameplayAbility.h"
 #include "Abilities/GameplayAbility.h"
 #include "FrogAbilityJump.generated.h"
 
@@ -10,7 +11,7 @@
  * 
  */
 UCLASS()
-class FROG_API UFrogAbilityJump : public UGameplayAbility
+class FROG_API UFrogAbilityJump : public UFrogGameplayAbility
 {
 	GENERATED_BODY()
 
