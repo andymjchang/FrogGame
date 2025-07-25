@@ -3,16 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Abilities/GameplayAbility.h"
-#include "Engine/World.h"
-#include "DrawDebugHelpers.h"
+#include "FrogGameplayAbility.h"
 #include "FrogAbilityGrapple.generated.h"
 
 class AFrogCharacter;
 class UCameraComponent;
 
 UCLASS()
-class FROG_API UFrogAbilityGrapple : public UGameplayAbility
+class FROG_API UFrogAbilityGrapple : public UFrogGameplayAbility
 {
     GENERATED_BODY()
 
