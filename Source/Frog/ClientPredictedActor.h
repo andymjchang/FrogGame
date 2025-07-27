@@ -17,6 +17,7 @@ public:
 protected:
 	virtual void BeginPlay() override;
 	bool bIsPredictedCopy;
+	UPROPERTY(Replicated)
 	uint32 ClientActorID;
 
 	UPROPERTY()

@@ -13,6 +13,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
 #include "FrogAbilitySystem.h"
+#include "FrogController.h"
 #include "FrogTongue.h"
 #include "Net/UnrealNetwork.h"
 #include "FrogMovementComponent.h"
@@ -229,7 +230,7 @@ void AFrogCharacter::SpawnProjectile(TSubclassOf<AClientPredictedActor> ActorCla
 {
 	// Generate ID once during "pre-fire" phase
 	uint32 ClientID = AClientPredictedActor::GenerateClientID(this);
-    
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, FString::Printf(TEXT("SpawnProjectile: %u"), ClientID));
 	// Send server RPC immediately (but with the client ID)
 	ServerSpawnPredictedProjectile(ActorClass, Location, Rotation, ClientID);
     
@@ -246,21 +247,30 @@ void AFrogCharacter::ServerSpawnPredictedProjectile_Implementation(TSubclassOf<A
 {
 	// Apply fast-forward based on client lag (as mentioned in article)
 	// FVector AdjustedLocation = CalculateFastForwardLocation(Location, ...);
-    
 	SpawnPredictedProjectileInternal(ActorClass, Location, Rotation, ClientID, false);
 }
 
 void AFrogCharacter::SpawnPredictedProjectileInternal(TSubclassOf<AClientPredictedActor> ActorClass,
 	const FVector& Location, const FRotator& Rotation, uint32 ClientID, bool bIsPredicted)
 {
+	if (bIsPredicted)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("SERVER %u"), ClientID));	
+	}
 	FActorSpawnParameters Params;
 	Params.Owner = Params.Instigator = this;
-	Params.CustomPreSpawnInitalization = [ClientID, bIsPredicted](AActor* Actor)
+	Params.CustomPreSpawnInitalization = [ClientID, bIsPredicted,this](AActor* Actor)
 	{
 		if (auto ClientPredictedActor = Cast<AClientPredictedActor>(Actor))
 		{
+			//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Server ID: %u"), ClientID));
 			ClientPredictedActor->SetIdentifier(ClientID);
 			ClientPredictedActor->SetIsPredictedCopy(bIsPredicted);
+			if (bIsPredicted)
+			{
+				Cast<AFrogController>(GetController())->SetPredictedActor(ClientID, ClientPredictedActor);
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("PREDICTED ACTOR SET %u"), ClientID));
+			}
 		}
 	};
     

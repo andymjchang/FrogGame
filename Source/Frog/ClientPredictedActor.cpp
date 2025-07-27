@@ -4,10 +4,19 @@
 #include "ClientPredictedActor.h"
 
 #include "FrogController.h"
+#include "Net/UnrealNetwork.h"
 
 AClientPredictedActor::AClientPredictedActor(): bIsPredictedCopy(false), ClientActorID(0), FollowedServerActor(nullptr)
 {
 	PrimaryActorTick.bCanEverTick = true;
+}
+
+void AClientPredictedActor::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	// ActorID
+	DOREPLIFETIME(AClientPredictedActor, ClientActorID);
 }
 
 void AClientPredictedActor::BeginPlay()
@@ -78,10 +87,12 @@ void AClientPredictedActor::LinkReplicatedWithPredicted(
 	// We're the server copy, having been replicated back to the owning client
 	// The client predicted version will be our visual
 	// Hide ourselves
-	SetActorHiddenInGame(true);
+	//SetActorHiddenInGame(true);
+	PredictedActor->SetActorScale3D(FVector(1.5, 1.5, 1.5));
 	// Also set the client version to not collide or react in any way, server will do this
 	PredictedActor->SetActorEnableCollision(false);
-	PredictedActor->FollowReplicatedActor(this);
+	//PredictedActor->FollowReplicatedActor(this);
+	FollowReplicatedActor(PredictedActor);
 }
 
 void AClientPredictedActor::UpdateFromFollowedActor(AClientPredictedActor* FollowedActor, float DeltaTime)
@@ -129,6 +140,7 @@ void AClientPredictedActor::BeginDestroy()
 
 void AClientPredictedActor::SetIdentifier(const uint32 ID)
 {
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("SETID %u"), ID));
 	ClientActorID = ID;
 }
 
