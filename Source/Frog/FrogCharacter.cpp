@@ -2,6 +2,7 @@
 
 #include "FrogCharacter.h"
 
+#include "ClientPredictedActor.h"
 #include "Engine/LocalPlayer.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
@@ -222,4 +223,46 @@ void AFrogCharacter::PrintAbilitySystemAttributes()
 		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, 
 			FString::Printf(TEXT("Health: %.1f / %.1f"), Health, MaxHealth));
 	}
+}
+
+void AFrogCharacter::SpawnProjectile(TSubclassOf<AClientPredictedActor> ActorClass, const FVector& Location, const FRotator& Rotation)
+{
+	// Generate ID once during "pre-fire" phase
+	uint32 ClientID = AClientPredictedActor::GenerateClientID(this);
+    
+	// Send server RPC immediately (but with the client ID)
+	ServerSpawnPredictedProjectile(ActorClass, Location, Rotation, ClientID);
+    
+	// Only spawn predicted version on owning client (with delay as mentioned in article)
+	if (IsLocallyControlled() && GetWorld()->GetNetMode() == NM_Client)
+	{
+		// In the article, this would be delayed by some amount
+		SpawnPredictedProjectileInternal(ActorClass, Location, Rotation, ClientID, true);
+	}
+}
+
+void AFrogCharacter::ServerSpawnPredictedProjectile_Implementation(TSubclassOf<AClientPredictedActor> ActorClass,
+	const FVector& Location, const FRotator& Rotation, uint32 ClientID)
+{
+	// Apply fast-forward based on client lag (as mentioned in article)
+	// FVector AdjustedLocation = CalculateFastForwardLocation(Location, ...);
+    
+	SpawnPredictedProjectileInternal(ActorClass, Location, Rotation, ClientID, false);
+}
+
+void AFrogCharacter::SpawnPredictedProjectileInternal(TSubclassOf<AClientPredictedActor> ActorClass,
+	const FVector& Location, const FRotator& Rotation, uint32 ClientID, bool bIsPredicted)
+{
+	FActorSpawnParameters Params;
+	Params.Owner = Params.Instigator = this;
+	Params.CustomPreSpawnInitalization = [ClientID, bIsPredicted](AActor* Actor)
+	{
+		if (auto ClientPredictedActor = Cast<AClientPredictedActor>(Actor))
+		{
+			ClientPredictedActor->SetIdentifier(ClientID);
+			ClientPredictedActor->SetIsPredictedCopy(bIsPredicted);
+		}
+	};
+    
+	GetWorld()->SpawnActor<AClientPredictedActor>(ActorClass, Location, Rotation, Params);
 }

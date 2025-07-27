@@ -12,15 +12,29 @@ class FROG_API AClientPredictedActor : public AActor
 	GENERATED_BODY()
 	
 public:	
-	// Sets default values for this actor's properties
 	AClientPredictedActor();
 
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	bool bIsPredictedCopy;
+	uint32 ClientActorID;
+
+	UPROPERTY()
+	AClientPredictedActor* FollowedServerActor;
 
 public:	
-	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	static uint32 GenerateClientID(const UObject* WorldContext);
+	bool IsLocallyOwned() const;
+	void LinkReplicatedWithPredicted(AClientPredictedActor* PredictedActor);
+	void UpdateFromFollowedActor(AClientPredictedActor* FollowedActor, float DeltaTime);
+	
+	void FollowReplicatedActor(AClientPredictedActor* ReplicatedActor);
 
+	UFUNCTION()
+	void OnReplicatedActorDestroyed(AActor* DestroyedActor);
+	
+	virtual void BeginDestroy() override;
+	void SetIdentifier(uint32 ID);
+	void SetIsPredictedCopy(bool Value);
 };

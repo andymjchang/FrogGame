@@ -7,6 +7,7 @@
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
 #include "AbilitySystemInterface.h"
+#include "ClientPredictedActor.h"
 #include "UnitAttributeSet.h"
 #include "GameplayAbilitySet.h"
 #include "FrogCharacter.generated.h"
@@ -104,6 +105,9 @@ public: /* Public Functions */
 
 	UFUNCTION(BlueprintCallable)
 	void PrintAbilitySystemAttributes();
+	
+	UFUNCTION(BlueprintCallable)
+	void SpawnProjectile(TSubclassOf<AClientPredictedActor> ActorClass, const FVector& Location, const FRotator& Rotation);
 
 protected: /* Protected Functions */
 	virtual void PostInitializeComponents() override;
@@ -123,6 +127,14 @@ protected: /* Protected Functions */
 
 	// Grapple functions 
 	void RedrawTongueLocation(float DeltaSeconds) const;
+
+	// Spawn Projectile Functions
+	void SpawnPredictedProjectileInternal(TSubclassOf<AClientPredictedActor> ActorClass, 
+		const FVector& Location, const FRotator& Rotation, uint32 ClientID, bool bIsPredicted);
+
+	UFUNCTION(Server, Reliable)
+	void ServerSpawnPredictedProjectile(TSubclassOf<AClientPredictedActor> ActorClass, 
+		const FVector& Location, const FRotator& Rotation, uint32 ClientID);
 
 public: /* Public Members and Getters */
 	// Getters 
