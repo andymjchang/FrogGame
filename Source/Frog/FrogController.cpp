@@ -47,12 +47,9 @@ void AFrogController::FindClientActorToFollow(const uint32 ID, AClientPredictedA
 {
 	if (const auto ClientActorInfo = FindActorInfo(ID))
 	{
-		ensure(!ClientActorInfo->ServerActor.IsValid());
-		ClientActorInfo->ServerActor = ServerActor;
-		
-		if (ClientActorInfo->ClientActor.IsValid() && ClientActorInfo->ServerActor.IsValid())
+		if (ClientActorInfo->ClientActor.IsValid())
 		{
-			ClientActorInfo->ServerActor->LinkServerToClientActor(ClientActorInfo->ClientActor.Get());
+			ServerActor->LinkServerToClientActor(ClientActorInfo->ClientActor.Get());
 		}
 	}
 }

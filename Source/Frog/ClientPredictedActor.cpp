@@ -74,8 +74,7 @@ bool AClientPredictedActor::IsLocallyOwned() const
 void AClientPredictedActor::LinkServerToClientActor(
 	AClientPredictedActor* ClientActor)
 {
-	SetActorHiddenInGame(false);
-	SetActorScale3D(FVector(1.5, 1.f, 1.f));
+	SetActorHiddenInGame(true);
 	ClientActor->SetActorEnableCollision(false);
 	FollowedClientActor = ClientActor;
 
