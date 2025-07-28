@@ -102,9 +102,6 @@ public: /* Public Functions */
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	
 	void SetTongueVisibility(bool Value) const;
-
-	UFUNCTION(BlueprintCallable)
-	void PrintAbilitySystemAttributes();
 	
 	UFUNCTION(BlueprintCallable)
 	void SpawnProjectile(TSubclassOf<AClientPredictedActor> ActorClass, const FVector& Location, const FRotator& Rotation);
@@ -129,8 +126,8 @@ protected: /* Protected Functions */
 	void RedrawTongueLocation(float DeltaSeconds) const;
 
 	// Spawn Projectile Functions
-	void SpawnPredictedProjectileInternal(TSubclassOf<AClientPredictedActor> ActorClass, 
-		const FVector& Location, const FRotator& Rotation, uint32 ClientID, bool bIsPredicted);
+	void SpawnPredictedProjectileInternal(const TSubclassOf<AClientPredictedActor>& ActorClass, 
+		const FVector& Location, const FRotator& Rotation, uint32 ClientID, bool bIsClientCopy);
 
 	UFUNCTION(Server, Reliable)
 	void ServerSpawnPredictedProjectile(TSubclassOf<AClientPredictedActor> ActorClass, 

@@ -10,16 +10,9 @@ class AClientPredictedActor;
 
 struct FPredictedActorInfo
 {
-	/// The identifier. This is separate from the actor because we can create the ID first,
-	/// then delay creating the client actor, so we need to know the *intended* ID
 	uint32 ClientActorID = 0;
-
-	/// The client predicted actor. Hopefully should be created before the server one replicates
-	/// back to us, but in the case of a mis-prediction of lag, the server might send us the actor first
-	TWeakObjectPtr<AClientPredictedActor> PredictedActor;
-
-	/// The server replicated actor. 
-	TWeakObjectPtr<AClientPredictedActor> ReplicatedActor;
+	TWeakObjectPtr<AClientPredictedActor> ClientActor;
+	TWeakObjectPtr<AClientPredictedActor> ServerActor;
 };
 /**
  * 
@@ -30,12 +23,17 @@ class FROG_API AFrogController : public APlayerController
 	GENERATED_BODY()
 
 protected:
-	uint32 NextPredictedActorID = 0;
+	static constexpr int32 Max_Predicted_Actors = 32;
+	uint32 NextPredictedActorID = 1;
+    
+	/// Client actors are stored in a hash map for O(1) lookup + a circular buffer for memory management
+	TMap<uint32, int32> IDToSlotMap; 
+	FPredictedActorInfo ClientActors[Max_Predicted_Actors];
+	int32 NextSlotIndex = 0;
 	
-	/// Client predicted actors that are owned locally, waiting for the server copy to match up with
-	TArray<FPredictedActorInfo> PredictedActors;
 public:
-	uint32 RequestPredictedActorID();
-	void SetPredictedActor(uint32 ID, AClientPredictedActor* PredictedActor);
-	void SetPredictedActorReplicatedActor(uint32 ID, AClientPredictedActor* ReplicatedActor);
+	uint32 GetClientActorID();
+	FPredictedActorInfo* FindActorInfo(uint32 ID);
+	void RegisterClientActor(uint32 ID, AClientPredictedActor* ClientActor);
+	void FindClientActorToFollow(uint32 ID, AClientPredictedActor* ServerActor);
 };

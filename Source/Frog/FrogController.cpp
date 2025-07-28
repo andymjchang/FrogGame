@@ -5,53 +5,54 @@
 
 #include "ClientPredictedActor.h"
 
-uint32 AFrogController::RequestPredictedActorID()
+uint32 AFrogController::GetClientActorID()
 {
-	const uint32 NewID = NextPredictedActorID++;
-	PredictedActors.Add(FPredictedActorInfo( { NewID }) );
-	if (GEngine)
+	const uint32 ID = NextPredictedActorID++;
+	const int32 SlotIndex = NextSlotIndex;
+	NextSlotIndex = (NextSlotIndex + 1) % Max_Predicted_Actors;
+        
+	// Remove old mapping if slot was occupied
+	if (ClientActors[SlotIndex].ClientActorID != 0)
 	{
-		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, FString::Printf(TEXT("New Predicted ID: %u"), NewID));
+		IDToSlotMap.Remove(ClientActors[SlotIndex].ClientActorID);
 	}
-	return NewID;
+        
+	// Set up new entry
+	ClientActors[SlotIndex] = FPredictedActorInfo();
+	ClientActors[SlotIndex].ClientActorID = ID;
+	IDToSlotMap.Add(ID, SlotIndex);
+        
+	return ID;
 }
 
-void AFrogController::SetPredictedActor(uint32 ID, AClientPredictedActor* PredictedActor)
+FPredictedActorInfo* AFrogController::FindActorInfo(const uint32 ID)
 {
-	if (const auto PredictedActorInfo = PredictedActors.FindByPredicate([ID](const FPredictedActorInfo& Info)
-		{
-			//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, FString::Printf(TEXT("ID MATCHING: %u , %u"), Info.ClientActorID,ID));
-			return Info.ClientActorID == ID;
-		}))
+	if (const int32* SlotPtr = IDToSlotMap.Find(ID))
 	{
-		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, FString::Printf(TEXT("ANDY, ANDY: %u, %u"),PredictedActorInfo->ClientActorID, ID));
-		ensure(!PredictedActorInfo->PredictedActor.IsValid());
-		PredictedActorInfo->PredictedActor = PredictedActor;
+		return &ClientActors[*SlotPtr];
+	}
+	return nullptr;
+}
 
-		// If both are valid, link up
-		// if (PredictedActorInfo->PredictedActor.IsValid() && PredictedActorInfo->ReplicatedActor.IsValid())
-		// {
-		// 	PredictedActorInfo->ReplicatedActor->LinkReplicatedWithPredicted(PredictedActorInfo->PredictedActor.Get());
-		// }
+void AFrogController::RegisterClientActor(const uint32 ID, AClientPredictedActor* ClientActor)
+{
+	if (const auto ClientActorInfo = FindActorInfo(ID))
+	{
+		ensure(!ClientActorInfo->ClientActor.IsValid());
+		ClientActorInfo->ClientActor = ClientActor;
 	}
 }
 
-void AFrogController::SetPredictedActorReplicatedActor(uint32 ID, AClientPredictedActor* ReplicatedActor)
+void AFrogController::FindClientActorToFollow(const uint32 ID, AClientPredictedActor* ServerActor)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, FString::Printf(TEXT("prelambda, %u"), ID));
-	if (auto pInfo = PredictedActors.FindByPredicate([ID](const FPredictedActorInfo& Info)
+	if (const auto ClientActorInfo = FindActorInfo(ID))
 	{
-		return Info.ClientActorID == ID;
-	}))
-	{
-		ensure(!pInfo->ReplicatedActor.IsValid());
-		pInfo->ReplicatedActor = ReplicatedActor;
-
-		// If both are valid, link up
-		if (pInfo->PredictedActor.IsValid() && pInfo->ReplicatedActor.IsValid())
+		ensure(!ClientActorInfo->ServerActor.IsValid());
+		ClientActorInfo->ServerActor = ServerActor;
+		
+		if (ClientActorInfo->ClientActor.IsValid() && ClientActorInfo->ServerActor.IsValid())
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, FString::Printf(TEXT("ANDY, ANDY: %u , %u"), ID,pInfo->ClientActorID));
-			pInfo->ReplicatedActor->LinkReplicatedWithPredicted(pInfo->PredictedActor.Get());
+			ClientActorInfo->ServerActor->LinkServerToClientActor(ClientActorInfo->ClientActor.Get());
 		}
 	}
 }

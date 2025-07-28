@@ -16,26 +16,27 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
-	bool bIsPredictedCopy;
+	bool bIsClientCopy;
+	
 	UPROPERTY(Replicated)
 	uint32 ClientActorID;
 
 	UPROPERTY()
-	AClientPredictedActor* FollowedServerActor;
+	AClientPredictedActor* FollowedClientActor;
 
 public:	
 	virtual void Tick(float DeltaTime) override;
-	static uint32 GenerateClientID(const UObject* WorldContext);
-	bool IsLocallyOwned() const;
-	void LinkReplicatedWithPredicted(AClientPredictedActor* PredictedActor);
-	void UpdateFromFollowedActor(AClientPredictedActor* FollowedActor, float DeltaTime);
+	virtual void BeginDestroy() override;
 	
-	void FollowReplicatedActor(AClientPredictedActor* ReplicatedActor);
+	static uint32 GenerateClientID(const UObject* WorldContext);
+	
+	bool IsLocallyOwned() const;
+	void LinkServerToClientActor(AClientPredictedActor* ClientActor);
+	void LerpToFollowedClientActor(const AClientPredictedActor* ClientActor, float DeltaTime);
+	void SetClientID(uint32 ID);
+	void SetIsClientCopy(bool Value);
 
 	UFUNCTION()
 	void OnReplicatedActorDestroyed(AActor* DestroyedActor);
 	
-	virtual void BeginDestroy() override;
-	void SetIdentifier(uint32 ID);
-	void SetIsPredictedCopy(bool Value);
 };
