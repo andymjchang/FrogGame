@@ -37,7 +37,7 @@ AFrogCharacter::AFrogCharacter(const FObjectInitializer& ObjectInitializer)
 	bUseControllerRotationRoll = false;
 	GetCharacterMovement()->bOrientRotationToMovement = true; 	
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 1800.0f, 0.0f); 
-	GetCharacterMovement()->bIgnoreClientMovementErrorChecksAndCorrection = false;
+	GetCharacterMovement()->bIgnoreClientMovementErrorChecksAndCorrection = true;
 	GetCharacterMovement()->bServerAcceptClientAuthoritativePosition = true;
 	GetCharacterMovement()->JumpZVelocity = 700.f;
 	GetCharacterMovement()->AirControl = 0.35f;
