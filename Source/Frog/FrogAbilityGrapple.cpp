@@ -27,7 +27,7 @@ void UFrogAbilityGrapple::ActivateAbility(const FGameplayAbilitySpecHandle Handl
     Super::ActivateAbility(Handle, ActorInfo, ActivationInfo, TriggerEventData);
 
     AFrogCharacter* Character = Cast<AFrogCharacter>(ActorInfo->AvatarActor.Get());
-    if (!Character || !CanGrapple())
+    if (!Character)
     {
         EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
         return;
@@ -80,8 +80,7 @@ void UFrogAbilityGrapple::EndAbility(const FGameplayAbilitySpecHandle Handle,
 void UFrogAbilityGrapple::PerformGrapple(AFrogCharacter* Character, const FVector& GrapplePoint)
 {
     if (!Character) return;
-
-    // These are automatically predicted because of NetExecutionPolicy::LocalPredicted
+    
     Character->SetIsGrapple(true);
     Character->SetGrappleStrength(GrappleStrength);
     Character->SetGrapplePoint(GrapplePoint);
@@ -95,8 +94,7 @@ void UFrogAbilityGrapple::PerformGrapple(AFrogCharacter* Character, const FVecto
 void UFrogAbilityGrapple::PerformStopGrapple(AFrogCharacter* Character)
 {
     if (!Character) return;
-
-    // Also automatically predicted
+    
     Character->SetIsGrapple(false);
     Character->SetGrapplePoint(FVector::ZeroVector);
     
@@ -104,11 +102,6 @@ void UFrogAbilityGrapple::PerformStopGrapple(AFrogCharacter* Character)
     {
         MovementComp->SetMovementMode(MOVE_Falling);
     }
-}
-
-bool UFrogAbilityGrapple::CanGrapple() const
-{
-    return true;
 }
 
 FVector UFrogAbilityGrapple::TraceGrapplePoint(AActor* CastingActor, UCameraComponent* FollowCamera,

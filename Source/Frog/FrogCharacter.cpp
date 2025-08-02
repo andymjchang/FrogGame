@@ -17,6 +17,7 @@
 #include "FrogTongue.h"
 #include "Net/UnrealNetwork.h"
 #include "FrogMovementComponent.h"
+#include "Projectile.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AFrogCharacter
@@ -70,8 +71,8 @@ AFrogCharacter::AFrogCharacter(const FObjectInitializer& ObjectInitializer)
 
 	// Frog Ability System
 	AbilitySystemComponent = CreateDefaultSubobject<UFrogAbilitySystem>(TEXT("AbilitySystem"));
-	UnitAttributeSet = CreateDefaultSubobject<UUnitAttributeSet>(TEXT("UnitAttributes"));
-	AbilitySystemComponent->AddAttributeSetSubobject(UnitAttributeSet);
+	AttributeSet = CreateDefaultSubobject<UUnitAttributeSet>(TEXT("AttributeSet"));
+	AbilitySystemComponent->AddAttributeSetSubobject(AttributeSet);
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
@@ -105,7 +106,7 @@ UAbilitySystemComponent* AFrogCharacter::GetAbilitySystemComponent() const
 
 void AFrogCharacter::SetupAbilities()
 {
-	if (!IsValid(AbilitySystemComponent) || !IsValid(UnitAttributeSet)) return;
+	if (!IsValid(AbilitySystemComponent) || !IsValid(AttributeSet)) return;
 	if (IsValid(AbilitySet))
 	{
 		InitialAbilitySpecHandles.Append(AbilitySet->GrantAbilitiesToAbilitySystem(AbilitySystemComponent));
@@ -209,15 +210,20 @@ void AFrogCharacter::RedrawTongueLocation(float DeltaSeconds) const
 	if (IsValid(Tongue)) Tongue->EndLocation = GetActorTransform().InverseTransformPosition(GrapplePoint);
 }
 
-void AFrogCharacter::SpawnProjectile(const TSubclassOf<AClientPredictedActor> ActorClass, const FVector& Location, const FRotator& Rotation)
+void AFrogCharacter::SpawnProjectile(const TSubclassOf<AProjectile> ActorClass, const FVector& Location, const FRotator& Rotation)
 {
-	const uint32 ClientID = AClientPredictedActor::GenerateClientID(this);
-
-	ServerSpawnPredictedProjectile(ActorClass, Location, Rotation, ClientID);
-
-	if (IsLocallyControlled() && GetWorld()->GetNetMode() == NM_Client)
+	// const uint32 ClientID = AClientPredictedActor::GenerateClientID(this);
+	//
+	// ServerSpawnPredictedProjectile(ActorClass, Location, Rotation, ClientID);
+	//
+	// if (IsLocallyControlled() && GetWorld()->GetNetMode() == NM_Client)
+	// {
+	// 	SpawnPredictedProjectileInternal(ActorClass, Location, Rotation, ClientID, true);
+	// }
+	if (IsLocallyControlled())
 	{
-		SpawnPredictedProjectileInternal(ActorClass, Location, Rotation, ClientID, true);
+		AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(ActorClass, Location, Rotation);
+		Projectile->FireInDirection(FollowCamera->GetForwardVector());
 	}
 }
 

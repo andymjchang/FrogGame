@@ -42,14 +42,9 @@ protected:
      */
     FVector TraceGrapplePoint(AActor* CastingActor, UCameraComponent* FollowCamera, float CameraGrappleLength) const;
 
-    // Validates if grappling is allowed
-    bool CanGrapple() const;
-
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Grapple")
     float GrappleRange;
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Grapple")
     float GrappleStrength;
-
-private:
 
 };

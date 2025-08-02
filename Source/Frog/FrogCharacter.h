@@ -10,9 +10,9 @@
 #include "ClientPredictedActor.h"
 #include "UnitAttributeSet.h"
 #include "GameplayAbilitySet.h"
+#include "Projectile.h"
 #include "FrogCharacter.generated.h"
 
-// Forward declarations
 class UFrogTongue;
 class USpringArmComponent;
 class UCameraComponent;
@@ -53,6 +53,16 @@ class AFrogCharacter : public ACharacter, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 	
+public: /* Public Functions */
+	AFrogCharacter(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+	
+	void SetTongueVisibility(bool Value) const;
+	
+	UFUNCTION(BlueprintCallable)
+	void SpawnProjectile(TSubclassOf<AProjectile> ActorClass, const FVector& Location, const FRotator& Rotation);
+	
 protected: /* Members */
 	// Components
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
@@ -68,7 +78,7 @@ protected: /* Members */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GAS")
 	TArray<TSubclassOf<class UGameplayAbility>> DefaultAbilities;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GAS")
-	UUnitAttributeSet* UnitAttributeSet;
+	UUnitAttributeSet* AttributeSet;
 	UPROPERTY(EditAnywhere, Category = "GAS")
 	UAbilitySet* AbilitySet;
 	UPROPERTY(EditAnywhere, Category = "GAS")
@@ -93,19 +103,8 @@ protected: /* Members */
 	bool bIsGrapple;
 	UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = Grapple)
 	FVector GrapplePoint;
-
 	float GrappleStrength;
-
-public: /* Public Functions */
-	AFrogCharacter(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
-	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	
-	void SetTongueVisibility(bool Value) const;
-	
-	UFUNCTION(BlueprintCallable)
-	void SpawnProjectile(TSubclassOf<AClientPredictedActor> ActorClass, const FVector& Location, const FRotator& Rotation);
-
 protected: /* Protected Functions */
 	virtual void PostInitializeComponents() override;
 	virtual void BeginPlay() override;

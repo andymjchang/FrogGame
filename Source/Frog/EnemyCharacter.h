@@ -11,12 +11,7 @@ UCLASS()
 class FROG_API AEnemyCharacter : public ACharacter, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
-	
-protected:
-	// Gameplay Ability System
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "GAS")
-	UAbilitySystemComponent* AbilitySystemComponent;
-	
+
 public:
 	// Sets default values for this character's properties
 	AEnemyCharacter();
@@ -25,11 +20,18 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	
+protected:
+	// Gameplay Ability System
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "GAS")
+	UAbilitySystemComponent* AbilitySystemComponent;
 
-public:	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "GAS")
+	class UAttributeSet* AttributeSet;
 
 
 };
