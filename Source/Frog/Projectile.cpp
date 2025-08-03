@@ -68,8 +68,14 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, U
     }
 }
 
-void AProjectile::FireInDirection(const FVector& ShootDirection) const
+void AProjectile::FireInDirection(const FVector& ShootDirection)
 {
     ProjectileMovement->Velocity = ShootDirection * ProjectileMovement->InitialSpeed;
+}
+
+void AProjectile::ToggleCollision(bool Value)
+{
+    if (!Value) CollisionComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+    else CollisionComponent->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 }
 

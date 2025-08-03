@@ -125,12 +125,16 @@ protected: /* Protected Functions */
 	void RedrawTongueLocation(float DeltaSeconds) const;
 
 	// Spawn Projectile Functions
-	void SpawnPredictedProjectileInternal(const TSubclassOf<AClientPredictedActor>& ActorClass, 
-		const FVector& Location, const FRotator& Rotation, uint32 ClientID, bool bIsClientCopy);
+	void SpawnPredictedProjectileInternal(const TSubclassOf<AProjectile>& ActorClass,
+	                                      const FVector& Location, const FRotator& Rotation, FVector FireDirection, bool bIsVisualOnly);
 
 	UFUNCTION(Server, Reliable)
-	void ServerSpawnPredictedProjectile(TSubclassOf<AClientPredictedActor> ActorClass, 
-		const FVector& Location, const FRotator& Rotation, uint32 ClientID);
+	void ServerSpawnPredictedProjectile(TSubclassOf<AProjectile> ActorClass,
+	                                    const FVector& Location, const FRotator& Rotation, FVector FireDirection);
+
+	UFUNCTION(NetMulticast, Unreliable)
+	void MulticastSpawnPredictedProjectile(TSubclassOf<AProjectile> ActorClass,
+										const FVector& Location, const FRotator& Rotation, FVector FireDirection);
 
 public: /* Public Members and Getters */
 	// Getters 

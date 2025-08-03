@@ -18,6 +18,7 @@
 #include "Net/UnrealNetwork.h"
 #include "FrogMovementComponent.h"
 #include "Projectile.h"
+#include "Components/SphereComponent.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AFrogCharacter
@@ -59,7 +60,8 @@ AFrogCharacter::AFrogCharacter(const FObjectInitializer& ObjectInitializer)
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
 	CameraBoom->SetupAttachment(RootComponent);
 	CameraBoom->TargetArmLength = 400.0f; 
-	CameraBoom->bUsePawnControlRotation = true; 
+	CameraBoom->bUsePawnControlRotation = true;
+	
 	// Follow Camera
 	FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
@@ -212,44 +214,45 @@ void AFrogCharacter::RedrawTongueLocation(float DeltaSeconds) const
 
 void AFrogCharacter::SpawnProjectile(const TSubclassOf<AProjectile> ActorClass, const FVector& Location, const FRotator& Rotation)
 {
-	// const uint32 ClientID = AClientPredictedActor::GenerateClientID(this);
-	//
-	// ServerSpawnPredictedProjectile(ActorClass, Location, Rotation, ClientID);
-	//
-	// if (IsLocallyControlled() && GetWorld()->GetNetMode() == NM_Client)
-	// {
-	// 	SpawnPredictedProjectileInternal(ActorClass, Location, Rotation, ClientID, true);
-	// }
-	if (IsLocallyControlled())
+	const FVector FireDirection = FollowCamera->GetForwardVector(); 
+	ServerSpawnPredictedProjectile(ActorClass, Location, Rotation, FireDirection);
+	
+	if (IsLocallyControlled() && GetWorld()->GetNetMode() == NM_Client)
 	{
-		AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(ActorClass, Location, Rotation);
-		Projectile->FireInDirection(FollowCamera->GetForwardVector());
+		SpawnPredictedProjectileInternal(ActorClass, Location, Rotation, FireDirection, false);
+	}
+	
+}
+
+void AFrogCharacter::ServerSpawnPredictedProjectile_Implementation(const TSubclassOf<AProjectile> ActorClass,
+	const FVector& Location, const FRotator& Rotation, FVector FireDirection)
+{
+	SpawnPredictedProjectileInternal(ActorClass, Location, Rotation, FireDirection, true);
+	MulticastSpawnPredictedProjectile(ActorClass, Location, Rotation, FireDirection);
+}
+
+void AFrogCharacter::MulticastSpawnPredictedProjectile_Implementation(TSubclassOf<AProjectile> ActorClass,
+	const FVector& Location, const FRotator& Rotation, FVector FireDirection)
+{
+	if (!HasAuthority())
+	{
+		SpawnPredictedProjectileInternal(ActorClass, Location, Rotation, FireDirection, false);
 	}
 }
 
-void AFrogCharacter::ServerSpawnPredictedProjectile_Implementation(const TSubclassOf<AClientPredictedActor> ActorClass,
-	const FVector& Location, const FRotator& Rotation, const uint32 ClientID)
-{
-	SpawnPredictedProjectileInternal(ActorClass, Location, Rotation, ClientID, false);
-}
-
-void AFrogCharacter::SpawnPredictedProjectileInternal(const TSubclassOf<AClientPredictedActor>& ActorClass,
-	const FVector& Location, const FRotator& Rotation, uint32 ClientID, bool bIsClientCopy)
+void AFrogCharacter::SpawnPredictedProjectileInternal(const TSubclassOf<AProjectile>& ActorClass,
+	const FVector& Location, const FRotator& Rotation, FVector FireDirection, const bool bIsVisualOnly)
 {
 	FActorSpawnParameters Params;
 	Params.Owner = Params.Instigator = this;
-	Params.CustomPreSpawnInitalization = [ClientID, bIsClientCopy,this](AActor* Actor)
+	Params.CustomPreSpawnInitalization = [this, FireDirection, bIsVisualOnly](AActor* Actor)
 	{
-		if (const auto ClientPredictedActor = Cast<AClientPredictedActor>(Actor))
+		if (const auto Projectile = Cast<AProjectile>(Actor))
 		{
-			ClientPredictedActor->SetClientID(ClientID);
-			ClientPredictedActor->SetIsClientCopy(bIsClientCopy);
-			if (bIsClientCopy)
-			{
-				Cast<AFrogController>(GetController())->RegisterClientActor(ClientID, ClientPredictedActor);
-			}
+			Projectile->FireInDirection(FireDirection);
 		}
 	};
     
-	GetWorld()->SpawnActor<AClientPredictedActor>(ActorClass, Location, Rotation, Params);
+	GetWorld()->SpawnActor<AProjectile>(ActorClass, Location, Rotation, Params);
 }
+

@@ -16,7 +16,7 @@ public:
 
 protected:
 	/// Members
-	virtual void BeginPlay() override;
+	// virtual void BeginPlay() override;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	class USphereComponent* CollisionComponent;
@@ -38,5 +38,6 @@ protected:
 	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
 
 public:
-	void FireInDirection(const FVector& ShootDirection) const;
+	void FireInDirection(const FVector& ShootDirection);
+	void ToggleCollision(bool Value);
 };
