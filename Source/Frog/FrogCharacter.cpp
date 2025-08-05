@@ -2,7 +2,6 @@
 
 #include "FrogCharacter.h"
 
-#include "ClientPredictedActor.h"
 #include "Engine/LocalPlayer.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
@@ -13,12 +12,11 @@
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
 #include "FrogAbilitySystem.h"
-#include "FrogController.h"
 #include "FrogTongue.h"
 #include "Net/UnrealNetwork.h"
 #include "FrogMovementComponent.h"
 #include "Projectile.h"
-#include "Components/SphereComponent.h"
+#include "GameFramework/PlayerState.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AFrogCharacter
@@ -192,11 +190,13 @@ void AFrogCharacter::Look(const FInputActionValue& Value)
 	}
 }
 
+// ReSharper disable once CppMemberFunctionMayBeConst
 void AFrogCharacter::AbilityInputBindingPressedHandler(EAbilityInputID AbilityInputID)
 {
 	AbilitySystemComponent->AbilityLocalInputPressed(static_cast<uint32>(AbilityInputID));
 }
 
+// ReSharper disable once CppMemberFunctionMayBeConst
 void AFrogCharacter::AbilityInputBindingReleasedHandler(EAbilityInputID AbilityInputID)
 {
 	AbilitySystemComponent->AbilityLocalInputReleased(static_cast<uint32>(AbilityInputID));
@@ -215,28 +215,33 @@ void AFrogCharacter::RedrawTongueLocation(float DeltaSeconds) const
 void AFrogCharacter::SpawnProjectile(const TSubclassOf<AProjectile> ActorClass, const FVector& Location, const FRotator& Rotation)
 {
 	const FVector FireDirection = FollowCamera->GetForwardVector(); 
-	ServerSpawnPredictedProjectile(ActorClass, Location, Rotation, FireDirection);
-	
+	const int32 InstigatorPlayerId = GetPlayerState() ? GetPlayerState()->GetPlayerId() : -1;
+    
+	ServerSpawnPredictedProjectile(ActorClass, Location, Rotation, FireDirection, InstigatorPlayerId);
+    
 	if (IsLocallyControlled() && GetWorld()->GetNetMode() == NM_Client)
 	{
 		SpawnPredictedProjectileInternal(ActorClass, Location, Rotation, FireDirection, false);
 	}
-	
 }
 
 void AFrogCharacter::ServerSpawnPredictedProjectile_Implementation(const TSubclassOf<AProjectile> ActorClass,
-	const FVector& Location, const FRotator& Rotation, FVector FireDirection)
+	const FVector& Location, const FRotator& Rotation, const FVector FireDirection, const int32 InstigatorPlayerId)
 {
 	SpawnPredictedProjectileInternal(ActorClass, Location, Rotation, FireDirection, true);
-	MulticastSpawnPredictedProjectile(ActorClass, Location, Rotation, FireDirection);
+	MulticastSpawnPredictedProjectile(ActorClass, Location, Rotation, FireDirection, InstigatorPlayerId);
 }
 
-void AFrogCharacter::MulticastSpawnPredictedProjectile_Implementation(TSubclassOf<AProjectile> ActorClass,
-	const FVector& Location, const FRotator& Rotation, FVector FireDirection)
+void AFrogCharacter::MulticastSpawnPredictedProjectile_Implementation(const TSubclassOf<AProjectile> ActorClass,
+	const FVector& Location, const FRotator& Rotation, const FVector FireDirection, const int32 InstigatorPlayerId)
 {
 	if (!HasAuthority())
 	{
-		SpawnPredictedProjectileInternal(ActorClass, Location, Rotation, FireDirection, false);
+		const int32 LocalPlayerId = GetPlayerState() ? GetPlayerState()->GetPlayerId() : -1;
+		if (LocalPlayerId != InstigatorPlayerId)
+		{
+			SpawnPredictedProjectileInternal(ActorClass, Location, Rotation, FireDirection, false);
+		}
 	}
 }
 
@@ -250,6 +255,7 @@ void AFrogCharacter::SpawnPredictedProjectileInternal(const TSubclassOf<AProject
 		if (const auto Projectile = Cast<AProjectile>(Actor))
 		{
 			Projectile->FireInDirection(FireDirection);
+			Projectile->ToggleCollision(bIsVisualOnly);
 		}
 	};
     
