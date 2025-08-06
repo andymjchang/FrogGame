@@ -245,6 +245,7 @@ void AFrogCharacter::MulticastSpawnPredictedProjectile_Implementation(const TSub
 		// Print the parameter ID and local ID
 		UE_LOG(LogTemp, Warning, TEXT("Parameter InstigatorPlayerID: %d"), InstigatorPlayerID);
 		UE_LOG(LogTemp, Warning, TEXT("Local PlayerID: %d"), LocalPlayerID);
+		
        
 		if (LocalPlayerID != InstigatorPlayerID)
 		{
