@@ -33,7 +33,7 @@ protected:
                               const FGameplayAbilityActorInfo* ActorInfo,
                               const FGameplayAbilityActivationInfo ActivationInfo) override;
 
-    void PerformGrapple(AFrogCharacter* Character, const FVector& GrapplePoint);
+    void PerformGrapple(AFrogCharacter* Character, const FVector& GrapplePoint) const;
     void PerformStopGrapple(AFrogCharacter* Character);
 
     /**

@@ -36,7 +36,6 @@ void UFrogAbilityGrapple::ActivateAbility(const FGameplayAbilitySpecHandle Handl
     // Find grapple point
     UCameraComponent* Camera = Character->FindComponentByClass<UCameraComponent>();
     const FVector GrapplePoint = TraceGrapplePoint(Character, Camera, GrappleRange);
-    
     if (GrapplePoint.IsZero())
     {
         EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
@@ -52,7 +51,6 @@ void UFrogAbilityGrapple::InputReleased(const FGameplayAbilitySpecHandle Handle,
 {
     Super::InputReleased(Handle, ActorInfo, ActivationInfo);
     
-    // This is also predicted automatically
     if (AFrogCharacter* Character = Cast<AFrogCharacter>(ActorInfo->AvatarActor.Get()))
     {
         PerformStopGrapple(Character);
@@ -68,16 +66,10 @@ void UFrogAbilityGrapple::EndAbility(const FGameplayAbilitySpecHandle Handle,
                                     bool bWasCancelled)
 {
     CommitAbilityCooldown(Handle, ActorInfo, ActivationInfo, false);
-    // Clean up when ability ends
-    if (AFrogCharacter* Character = Cast<AFrogCharacter>(ActorInfo->AvatarActor.Get()))
-    {
-        PerformStopGrapple(Character);
-    }
-
     Super::EndAbility(Handle, ActorInfo, ActivationInfo, bReplicateEndAbility, bWasCancelled);
 }
 
-void UFrogAbilityGrapple::PerformGrapple(AFrogCharacter* Character, const FVector& GrapplePoint)
+void UFrogAbilityGrapple::PerformGrapple(AFrogCharacter* Character, const FVector& GrapplePoint) const
 {
     if (!Character) return;
     
