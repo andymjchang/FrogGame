@@ -24,7 +24,7 @@ void UFrogAbilityPrimary::ActivateAbility(const FGameplayAbilitySpecHandle Handl
 		return;
 	}
 	
-	Character->SpawnProjectile(ProjectileClass, Character->GetActorLocation(), Character->GetActorRotation());
+	Character->SpawnProjectile(ProjectileClass, Character->GetActorLocation(), FRotator::ZeroRotator);
 
 	CommitAbilityCooldown(Handle, ActorInfo, ActivationInfo, false);
 	EndAbility(Handle, ActorInfo, ActivationInfo, true, false);
