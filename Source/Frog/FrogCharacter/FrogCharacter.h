@@ -80,7 +80,7 @@ protected: /* Protected Functions */
 	void Look(const FInputActionValue& Value);
 
 	// Grapple functions 
-	void RedrawTongueLocation(float DeltaSeconds) const;
+	void RedrawTongueLocation() const;
 
 	// Spawn Projectile Functions
 	void SpawnPredictedProjectileInternal(const TSubclassOf<AProjectile>& ActorClass,
@@ -88,11 +88,11 @@ protected: /* Protected Functions */
 
 	UFUNCTION(Server, Reliable)
 	void ServerSpawnPredictedProjectile(TSubclassOf<AProjectile> ActorClass,
-		const FVector& Location, const FRotator& Rotation, FVector FireDirection, int32 InstigatorPlayerID);
+		const FVector& Location, const FRotator& Rotation, FVector FireDirection);
 
 	UFUNCTION(NetMulticast, Reliable)
 	void MulticastSpawnPredictedProjectile(TSubclassOf<AProjectile> ActorClass,
-		const FVector& Location, const FRotator& Rotation, FVector FireDirection, int32 InstigatorPlayerID);
+		const FVector& Location, const FRotator& Rotation, FVector FireDirection);
 	
 protected: /* Members */
 	// Components
