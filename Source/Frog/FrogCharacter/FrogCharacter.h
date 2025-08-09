@@ -7,6 +7,7 @@
 #include "Logging/LogMacros.h"
 #include "AbilitySystemInterface.h"
 #include "GameplayAbilitySet.h"
+#include "NiagaraSystem.h"
 #include "FrogCharacter.generated.h"
 
 class UAbilitySet;
@@ -79,10 +80,10 @@ protected: /* Protected Functions */
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
 
-	// Grapple functions 
+	// Grapple 
 	void RedrawTongueLocation() const;
 
-	// Spawn Projectile Functions
+	// Spawn Projectile
 	void SpawnPredictedProjectileInternal(const TSubclassOf<AProjectile>& ActorClass,
 		const FVector& Location, const FRotator& Rotation, FVector FireDirection, bool bIsVisualOnly);
 

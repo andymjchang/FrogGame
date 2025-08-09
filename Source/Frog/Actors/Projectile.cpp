@@ -74,7 +74,13 @@ void AProjectile::FireInDirection(const FVector& ShootDirection) const
 
 void AProjectile::ToggleCollision(const bool bIsVisualOnly) const
 {
-    if (bIsVisualOnly) CollisionComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-    else CollisionComponent->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+    if (bIsVisualOnly)
+    {
+        CollisionComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+    }
+    else
+    {
+        CollisionComponent->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+    }
 }
 

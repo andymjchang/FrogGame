@@ -18,7 +18,6 @@
 #include "Frog/GAS/AbilitySet.h"
 #include "Frog/GAS/UnitAttributeSet.h"
 #include "Frog/GAS/FrogAbilities/FrogAbilitySystem.h"
-#include "GameFramework/PlayerState.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AFrogCharacter
@@ -218,13 +217,8 @@ void AFrogCharacter::SpawnProjectile(const TSubclassOf<AProjectile> ActorClass, 
 {
 	const FVector FireDirection = FollowCamera->GetForwardVector(); 
 
-	ServerSpawnPredictedProjectile(ActorClass, Location, Rotation, FireDirection);
-
-	// Client prediction
-	if (IsLocallyControlled() && GetWorld()->GetNetMode() == NM_Client)
-	{
-		SpawnPredictedProjectileInternal(ActorClass, Location, Rotation, FireDirection, true);
-	}
+	bool bIsVisualOnly = GetLocalRole() != ROLE_Authority;
+	SpawnPredictedProjectileInternal(ActorClass, Location, Rotation, FireDirection, bIsVisualOnly);
 }
 
 void AFrogCharacter::ServerSpawnPredictedProjectile_Implementation(const TSubclassOf<AProjectile> ActorClass,
@@ -237,7 +231,7 @@ void AFrogCharacter::ServerSpawnPredictedProjectile_Implementation(const TSubcla
 void AFrogCharacter::MulticastSpawnPredictedProjectile_Implementation(const TSubclassOf<AProjectile> ActorClass,
 	const FVector& Location, const FRotator& Rotation, const FVector FireDirection)
 {
-	if (!HasAuthority() && !IsLocallyControlled())
+	if (GetLocalRole() == ROLE_SimulatedProxy)
 	{
 		SpawnPredictedProjectileInternal(ActorClass, Location, Rotation, FireDirection, true);
 	}
@@ -259,4 +253,5 @@ void AFrogCharacter::SpawnPredictedProjectileInternal(const TSubclassOf<AProject
     
 	GetWorld()->SpawnActor<AProjectile>(ActorClass, Location, Rotation, Params);
 }
+
 
