@@ -85,7 +85,7 @@ protected: /* Protected Functions */
 
 	// Spawn Projectile
 	void SpawnProjectileInternal(const TSubclassOf<AProjectile>& ActorClass,
-		const FVector& Location, const FRotator& Rotation, FVector FireDirection, bool bIsVisualOnly);
+		const FVector& Location, const FRotator& Rotation, FVector FireDirection, bool bApplyEffect);
 
 	UFUNCTION(NetMulticast, Reliable)
 	void MulticastSpawnProjectile(TSubclassOf<AProjectile> ActorClass,

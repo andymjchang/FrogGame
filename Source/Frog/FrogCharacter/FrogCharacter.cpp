@@ -219,12 +219,12 @@ void AFrogCharacter::SpawnProjectile(const TSubclassOf<AProjectile> ActorClass, 
 
 	if (GetLocalRole() == ROLE_Authority)
 	{
-		SpawnProjectileInternal(ActorClass, Location, Rotation, FireDirection, false);
+		SpawnProjectileInternal(ActorClass, Location, Rotation, FireDirection, true);
+		MulticastSpawnProjectile(ActorClass, Location, Rotation, FireDirection);
 	}
 	else
 	{
-		SpawnProjectileInternal(ActorClass, Location, Rotation, FireDirection, true);
-		MulticastSpawnProjectile(ActorClass, Location, Rotation, FireDirection);
+		SpawnProjectileInternal(ActorClass, Location, Rotation, FireDirection, false);
 	}
 	
 }
@@ -234,21 +234,21 @@ void AFrogCharacter::MulticastSpawnProjectile_Implementation(const TSubclassOf<A
 {
 	if (GetLocalRole() == ROLE_SimulatedProxy)
 	{
-		SpawnProjectileInternal(ActorClass, Location, Rotation, FireDirection, true);
+		SpawnProjectileInternal(ActorClass, Location, Rotation, FireDirection, false);
 	}
 }
 
 void AFrogCharacter::SpawnProjectileInternal(const TSubclassOf<AProjectile>& ActorClass,
-	const FVector& Location, const FRotator& Rotation, FVector FireDirection, const bool bIsVisualOnly)
+	const FVector& Location, const FRotator& Rotation, FVector FireDirection, const bool bApplyEffect)
 {
 	FActorSpawnParameters Params;
 	Params.Owner = Params.Instigator = this;
-	Params.CustomPreSpawnInitalization = [this, FireDirection, bIsVisualOnly](AActor* Actor)
+	Params.CustomPreSpawnInitalization = [this, FireDirection, bApplyEffect](AActor* Actor)
 	{
 		if (const auto Projectile = Cast<AProjectile>(Actor))
 		{
 			Projectile->FireInDirection(FireDirection);
-			Projectile->ToggleCollision(bIsVisualOnly);
+			Projectile->SetApplyEffect(bApplyEffect);
 		}
 	};
     

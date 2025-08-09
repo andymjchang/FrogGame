@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "Projectile.generated.h"
 
+class UNiagaraSystem;
+
 UCLASS()
 class FROG_API AProjectile : public AActor
 {
@@ -13,30 +15,35 @@ class FROG_API AProjectile : public AActor
 
 public:
 	AProjectile();
-
 	void FireInDirection(const FVector& ShootDirection) const;
-	void ToggleCollision(const bool bIsVisualOnly) const;
+	void SetApplyEffect(bool ApplyEffect);
 	
-protected:
-	/// Members
-	// virtual void BeginPlay() override;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
-	class USphereComponent* CollisionComponent;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
-	class UProjectileMovementComponent* ProjectileMovement;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
-	class UStaticMeshComponent* MeshComponent;
-
-	/// GAS
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "GAS")
+protected: /// Protected Functions
+	virtual void BeginPlay() override;
+	UFUNCTION()
+	void OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	                             UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep,
+	                             const FHitResult& SweepResult);
+	
+protected: /// Protected Members
+	bool bApplyEffect;
+	/// Combat
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Combat")
 	TSubclassOf<class UGameplayEffect> DamageEffect;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "GAS")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Combat")
 	float DamageAmount = 25.0f;
 
-	UFUNCTION()
-	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Combat")
+	UNiagaraSystem* HitFX;
+
+	/// Components
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	class USphereComponent* CollisionComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	class UProjectileMovementComponent* ProjectileMovement;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	class UStaticMeshComponent* MeshComponent;
 };

@@ -5,6 +5,7 @@
 
 #include "AbilitySystemComponent.h"
 #include "AbilitySystemInterface.h"
+#include "NiagaraFunctionLibrary.h"
 #include "Components/SphereComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 
@@ -13,9 +14,12 @@ AProjectile::AProjectile()
 {
     PrimaryActorTick.bCanEverTick = false;
 
+    InitialLifeSpan = 5.0f;
+
     CollisionComponent = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComponent"));
     CollisionComponent->SetSphereRadius(5.0f);
     CollisionComponent->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+    CollisionComponent->SetGenerateOverlapEvents(true);
     RootComponent = CollisionComponent;
 
     ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovement"));
@@ -28,43 +32,6 @@ AProjectile::AProjectile()
 
     MeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComponent"));
     MeshComponent->SetupAttachment(RootComponent);
-
-    // CollisionComponent->OnComponentHit.AddDynamic(this, &AProjectile::OnHit);
-
-    // Destroy after 5 seconds
-    InitialLifeSpan = 5.0f;
-}
-
-void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit)
-{
-    if (OtherActor && OtherActor != GetOwner())
-    {
-        // Check if the hit actor has an Ability System Component
-        if (const IAbilitySystemInterface* AbilitySystemInterface = Cast<IAbilitySystemInterface>(OtherActor))
-        {
-            UAbilitySystemComponent* TargetASC = AbilitySystemInterface->GetAbilitySystemComponent();
-            if (DamageEffect)
-            {
-                // Create effect context
-                FGameplayEffectContextHandle Context = TargetASC->MakeEffectContext();
-                Context.AddSourceObject(this);
-                Context.AddInstigator(GetInstigator(), GetOwner());
-
-                // Create effect spec
-                FGameplayEffectSpecHandle Spec = TargetASC->MakeOutgoingSpec(DamageEffect, 1.0f, Context);
-                if (Spec.IsValid())
-                {
-                    // Set damage amount
-                    Spec.Data->SetSetByCallerMagnitude(FGameplayTag::RequestGameplayTag("Damage.Basic"), DamageAmount);
-                    
-                    // Apply damage
-                    TargetASC->ApplyGameplayEffectSpecToSelf(*Spec.Data.Get());
-                }
-            }
-        }
-
-        Destroy();
-    }
 }
 
 void AProjectile::FireInDirection(const FVector& ShootDirection) const
@@ -72,15 +39,55 @@ void AProjectile::FireInDirection(const FVector& ShootDirection) const
     ProjectileMovement->Velocity = ShootDirection * ProjectileMovement->InitialSpeed;
 }
 
-void AProjectile::ToggleCollision(const bool bIsVisualOnly) const
+void AProjectile::SetApplyEffect(const bool ApplyEffect)
 {
-    if (bIsVisualOnly)
+   this->bApplyEffect = ApplyEffect;
+}
+
+void AProjectile::BeginPlay()
+{
+    Super::BeginPlay();
+    
+    CollisionComponent->OnComponentBeginOverlap.AddDynamic(this, &AProjectile::OnComponentBeginOverlap);
+}
+
+void AProjectile::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+                                          UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+    if (bApplyEffect)
     {
-        CollisionComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+        if (OtherActor && OtherActor != GetOwner())
+        {
+            if (const IAbilitySystemInterface* AbilitySystemInterface = Cast<IAbilitySystemInterface>(OtherActor))
+            {
+                UAbilitySystemComponent* TargetASC = AbilitySystemInterface->GetAbilitySystemComponent();
+                if (IsValid(DamageEffect))
+                {
+                    // Create effect context
+                    FGameplayEffectContextHandle Context = TargetASC->MakeEffectContext();
+                    Context.AddSourceObject(this);
+                    Context.AddInstigator(GetInstigator(), GetOwner());
+                    
+                    FGameplayEffectSpecHandle Spec = TargetASC->MakeOutgoingSpec(DamageEffect, 1.0f, Context);
+                    if (Spec.IsValid())
+                    {
+                        TargetASC->ApplyGameplayEffectSpecToSelf(*Spec.Data.Get());
+                    }
+                }
+            }
+        }
     }
-    else
-    {
-        CollisionComponent->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
-    }
+        
+    UNiagaraFunctionLibrary::SpawnSystemAtLocation(
+		GetWorld(),
+		HitFX,
+		GetActorLocation(),
+		FRotator::ZeroRotator,
+		FVector::OneVector,
+		true,
+		true
+	);
+    
+    Destroy();
 }
 
