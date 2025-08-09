@@ -217,27 +217,28 @@ void AFrogCharacter::SpawnProjectile(const TSubclassOf<AProjectile> ActorClass, 
 {
 	const FVector FireDirection = FollowCamera->GetForwardVector(); 
 
-	bool bIsVisualOnly = GetLocalRole() != ROLE_Authority;
-	SpawnPredictedProjectileInternal(ActorClass, Location, Rotation, FireDirection, bIsVisualOnly);
+	if (GetLocalRole() == ROLE_Authority)
+	{
+		SpawnProjectileInternal(ActorClass, Location, Rotation, FireDirection, false);
+	}
+	else
+	{
+		SpawnProjectileInternal(ActorClass, Location, Rotation, FireDirection, true);
+		MulticastSpawnProjectile(ActorClass, Location, Rotation, FireDirection);
+	}
+	
 }
 
-void AFrogCharacter::ServerSpawnPredictedProjectile_Implementation(const TSubclassOf<AProjectile> ActorClass,
-	const FVector& Location, const FRotator& Rotation, const FVector FireDirection)
-{
-	SpawnPredictedProjectileInternal(ActorClass, Location, Rotation, FireDirection, false);
-	MulticastSpawnPredictedProjectile(ActorClass, Location, Rotation, FireDirection);
-}
-
-void AFrogCharacter::MulticastSpawnPredictedProjectile_Implementation(const TSubclassOf<AProjectile> ActorClass,
+void AFrogCharacter::MulticastSpawnProjectile_Implementation(const TSubclassOf<AProjectile> ActorClass,
 	const FVector& Location, const FRotator& Rotation, const FVector FireDirection)
 {
 	if (GetLocalRole() == ROLE_SimulatedProxy)
 	{
-		SpawnPredictedProjectileInternal(ActorClass, Location, Rotation, FireDirection, true);
+		SpawnProjectileInternal(ActorClass, Location, Rotation, FireDirection, true);
 	}
 }
 
-void AFrogCharacter::SpawnPredictedProjectileInternal(const TSubclassOf<AProjectile>& ActorClass,
+void AFrogCharacter::SpawnProjectileInternal(const TSubclassOf<AProjectile>& ActorClass,
 	const FVector& Location, const FRotator& Rotation, FVector FireDirection, const bool bIsVisualOnly)
 {
 	FActorSpawnParameters Params;
