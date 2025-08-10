@@ -27,13 +27,6 @@ void AEnemyCharacter::BeginPlay()
 	
 }
 
-// Called every frame
-void AEnemyCharacter::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}
-
 UAbilitySystemComponent* AEnemyCharacter::GetAbilitySystemComponent() const
 {
 	return AbilitySystemComponent;

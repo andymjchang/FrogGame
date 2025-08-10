@@ -13,12 +13,7 @@ class FROG_API AEnemyCharacter : public ACharacter, public IAbilitySystemInterfa
 	GENERATED_BODY()
 
 public: /// Public Functions
-	// Sets default values for this character's properties
 	AEnemyCharacter();
-	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	
 protected: /// Protected Function
