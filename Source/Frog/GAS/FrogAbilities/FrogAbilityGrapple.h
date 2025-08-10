@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Frog/GAS/FrogGameplayAbility.h"
+#include "FrogGameplayAbility.h"
 #include "FrogAbilityGrapple.generated.h"
 
 class AFrogCharacter;

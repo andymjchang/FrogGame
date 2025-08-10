@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GAS/FrogGameplayAbility.h"
+#include "FrogGameplayAbility.h"
 #include "FrogAbilitySecondary.generated.h"
 
 /**

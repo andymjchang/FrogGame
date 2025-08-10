@@ -7,7 +7,9 @@
 #include "Logging/LogMacros.h"
 #include "AbilitySystemInterface.h"
 #include "GameplayAbilitySet.h"
+#include "InputAction.h"
 #include "NiagaraSystem.h"
+#include "GAS/FrogAbilities/FrogAbilitySystem.h"
 #include "FrogCharacter.generated.h"
 
 class UAbilitySet;
@@ -32,10 +34,10 @@ struct FAbilityInputToInputActionBinding
 	GENERATED_BODY()
 
 	UPROPERTY(EditDefaultsOnly)
-	UInputAction* InputAction;
+	UInputAction* InputAction = nullptr;
 
 	UPROPERTY(EditDefaultsOnly)
-	EAbilityInputID AbilityInputID;
+	EAbilityInputID AbilityInputID = EAbilityInputID::None;
 };
 
 /**
