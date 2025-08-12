@@ -155,6 +155,11 @@ void AFrogCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	}
 }
 
+bool AFrogCharacter::CanJumpInternal_Implementation() const
+{
+	return JumpIsAllowedInternal();
+}
+
 void AFrogCharacter::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);

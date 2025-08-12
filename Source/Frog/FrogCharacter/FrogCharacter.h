@@ -71,6 +71,7 @@ protected: /* Protected Functions */
 	virtual void Tick(float DeltaSeconds) override;
 	virtual void NotifyControllerChanged() override;
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
+	virtual bool CanJumpInternal_Implementation() const override;
 
 	// GAS
 	void AbilityInputBindingPressedHandler(EAbilityInputID AbilityInputID);
