@@ -7,6 +7,7 @@ UFrogGameplayAbility::UFrogGameplayAbility(): CooldownDuration(0)
 {
 	NetExecutionPolicy = EGameplayAbilityNetExecutionPolicy::LocalPredicted;
 	InstancingPolicy = EGameplayAbilityInstancingPolicy::InstancedPerActor;
+	ReplicationPolicy = EGameplayAbilityReplicationPolicy::ReplicateYes;
 }
 
 const FGameplayTagContainer * UFrogGameplayAbility::GetCooldownTags() const

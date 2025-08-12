@@ -6,9 +6,7 @@
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
 #include "AbilitySystemInterface.h"
-#include "GameplayAbilitySet.h"
 #include "InputAction.h"
-#include "NiagaraSystem.h"
 #include "GAS/FrogAbilities/FrogAbilitySystem.h"
 #include "FrogCharacter.generated.h"
 
@@ -104,6 +102,13 @@ protected: /* Members */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Grapple)
 	UFrogTongue* Tongue;
 
+	// Movement
+	UPROPERTY(EditDefaultsOnly, Category = "Movement")
+	float WalkSpeed;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Movement")
+	float DiveSpeed;
+
 	// Gameplay Ability System
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "GAS")
 	UFrogAbilitySystem* AbilitySystemComponent;
@@ -157,5 +162,8 @@ public: /* Public Members and Getters */
 	FORCEINLINE void SetGrappleStrength(const float NewGrappleStrength) { GrappleStrength = NewGrappleStrength; }
 	FORCEINLINE FVector GetGrapplePoint() const { return GrapplePoint; }
 	FORCEINLINE void SetGrapplePoint(const FVector& NewGrapplePoint) { GrapplePoint = NewGrapplePoint; }
+	FORCEINLINE float GetWalkSpeed() const { return WalkSpeed; }
+	FORCEINLINE float GetDiveSpeed() const { return DiveSpeed; }
+	
 };
 
