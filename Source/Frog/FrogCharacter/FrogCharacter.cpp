@@ -220,7 +220,60 @@ void AFrogCharacter::RedrawTongueLocation() const
 
 void AFrogCharacter::SpawnProjectile(const TSubclassOf<AProjectile> ActorClass, const FVector& Location, const FRotator& Rotation)
 {
-	const FVector FireDirection = FollowCamera->GetForwardVector(); 
+	FVector CameraForward = FollowCamera->GetForwardVector();
+	FVector CameraWorldLocation = FollowCamera->GetComponentLocation();
+	FVector CameraLookPoint = CameraWorldLocation + CameraForward * 3000.f;
+	float CameraDistance = (FollowCamera->GetComponentLocation() - Location).Size();
+	FVector CameraOffsetLocation = CameraWorldLocation + CameraForward * CameraDistance;
+    
+	// Line trace from camera to look point
+	FCollisionQueryParams Params;
+	Params.AddIgnoredActor(this);
+	FHitResult CameraHitResult;
+	bool bCameraHit = GetWorld()->LineTraceSingleByChannel(
+	   CameraHitResult,
+	   CameraOffsetLocation,
+	   CameraLookPoint,
+	   ECC_Visibility,
+	   Params
+	);
+
+	#if UE_BUILD_DEVELOPMENT || UE_BUILD_DEBUG
+	FColor CameraTraceColor = bCameraHit ? FColor::Red : FColor::Yellow;
+	DrawDebugLine(
+		GetWorld(),
+		CameraOffsetLocation,
+		bCameraHit ? CameraHitResult.ImpactPoint : CameraLookPoint,
+		CameraTraceColor,
+		false,
+		2.0f,
+		0,
+		2.0f
+	);
+	#endif
+
+	FVector CameraImpactPoint;
+	if (bCameraHit)
+	{
+		CameraImpactPoint = CameraHitResult.ImpactPoint;
+	} else
+	{
+		CameraImpactPoint = CameraWorldLocation + CameraForward * 3000.f;
+	}
+    
+	#if UE_BUILD_DEVELOPMENT || UE_BUILD_DEBUG
+	DrawDebugSphere(
+		GetWorld(),
+		CameraImpactPoint,
+		10.0f,
+		12,
+		FColor::Red,
+		false,
+		2.0f
+	);
+	#endif
+
+	const FVector FireDirection = (CameraImpactPoint - Location).GetSafeNormal();
 
 	if (GetLocalRole() == ROLE_Authority)
 	{
@@ -231,7 +284,6 @@ void AFrogCharacter::SpawnProjectile(const TSubclassOf<AProjectile> ActorClass, 
 	{
 		SpawnProjectileInternal(ActorClass, Location, Rotation, FireDirection, false);
 	}
-	
 }
 
 void AFrogCharacter::MulticastSpawnProjectile_Implementation(const TSubclassOf<AProjectile> ActorClass,
