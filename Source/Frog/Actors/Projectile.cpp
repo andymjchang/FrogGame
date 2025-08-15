@@ -4,10 +4,10 @@
 #include "Projectile.h"
 
 #include "AbilitySystemComponent.h"
-#include "AbilitySystemInterface.h"
 #include "NiagaraFunctionLibrary.h"
 #include "Components/SphereComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
+#include "GAS/UnitAbilitySystemInterface.h"
 
 // AProjectile.cpp
 AProjectile::AProjectile()
@@ -58,7 +58,7 @@ void AProjectile::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedCompone
     {
         if (OtherActor && OtherActor != GetOwner())
         {
-            if (const IAbilitySystemInterface* AbilitySystemInterface = Cast<IAbilitySystemInterface>(OtherActor))
+            if (const IUnitAbilitySystemInterface* AbilitySystemInterface = Cast<IUnitAbilitySystemInterface>(OtherActor))
             {
                 UAbilitySystemComponent* TargetASC = AbilitySystemInterface->GetAbilitySystemComponent();
                 if (IsValid(DamageEffect))

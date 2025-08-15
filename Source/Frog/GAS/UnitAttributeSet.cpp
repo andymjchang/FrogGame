@@ -20,8 +20,7 @@ void UUnitAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, 
 		NewValue = FMath::Clamp(NewValue, 0.0f, GetMaxHealth());
 		if (NewValue <= 0.0f)
 		{
-			IUnitAbilitySystemInterface* Owner = Cast<IUnitAbilitySystemInterface>(GetOwningActor());
-			if (Owner)
+			if (IUnitAbilitySystemInterface* Owner = Cast<IUnitAbilitySystemInterface>(GetOwningActor()))
 			{
 				Owner->HandleDeath();
 			}

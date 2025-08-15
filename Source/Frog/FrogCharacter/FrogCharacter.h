@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
-#include "AbilitySystemInterface.h"
 #include "InputAction.h"
 #include "GAS/UnitAbilitySystemInterface.h"
 #include "GAS/FrogAbilities/FrogAbilitySystem.h"
