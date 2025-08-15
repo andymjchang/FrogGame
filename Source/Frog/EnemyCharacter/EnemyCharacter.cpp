@@ -32,3 +32,9 @@ UAbilitySystemComponent* AEnemyCharacter::GetAbilitySystemComponent() const
 	return AbilitySystemComponent;
 }
 
+void AEnemyCharacter::HandleDeath()
+{
+	AbilitySystemComponent->CancelAllAbilities();
+	Destroy();
+}
+

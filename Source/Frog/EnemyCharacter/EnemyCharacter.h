@@ -3,19 +3,20 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "AbilitySystemInterface.h"
 #include "GameFramework/Character.h"
+#include "GAS/UnitAbilitySystemInterface.h"
 #include "EnemyCharacter.generated.h"
 
 UCLASS()
-class FROG_API AEnemyCharacter : public ACharacter, public IAbilitySystemInterface
+class FROG_API AEnemyCharacter : public ACharacter, public IUnitAbilitySystemInterface
 {
 	GENERATED_BODY()
 
 public: /// Public Functions
 	AEnemyCharacter();
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
-	
+	virtual void HandleDeath() override;
+
 protected: /// Protected Function
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

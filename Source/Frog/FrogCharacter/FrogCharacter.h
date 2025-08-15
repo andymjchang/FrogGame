@@ -7,6 +7,7 @@
 #include "Logging/LogMacros.h"
 #include "AbilitySystemInterface.h"
 #include "InputAction.h"
+#include "GAS/UnitAbilitySystemInterface.h"
 #include "GAS/FrogAbilities/FrogAbilitySystem.h"
 #include "FrogCharacter.generated.h"
 
@@ -51,7 +52,7 @@ struct FAbilityInputBindings
 };
 
 UCLASS(config=Game)
-class AFrogCharacter : public ACharacter, public IAbilitySystemInterface
+class AFrogCharacter : public ACharacter, public IUnitAbilitySystemInterface
 {
 	GENERATED_BODY()
 	
@@ -59,6 +60,7 @@ public: /* Public Functions */
 	explicit AFrogCharacter(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+	virtual void HandleDeath() override;
 	
 	void SetTongueVisibility(bool Value) const;
 	

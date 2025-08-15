@@ -122,6 +122,11 @@ void AFrogCharacter::SetupAbilities()
 	// AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(UUnitAttributeSet::GetHealthAttribute()).AddUObject(this, &AFrogCharacter::OnHealthAttributeChanged);
 }
 
+void AFrogCharacter::HandleDeath()
+{
+	
+}
+
 void AFrogCharacter::NotifyControllerChanged()
 {
 	Super::NotifyControllerChanged();
