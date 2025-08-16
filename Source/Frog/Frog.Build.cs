@@ -17,7 +17,7 @@ public class Frog : ModuleRules
 		PublicDependencyModuleNames.AddRange(new string[]
 		{
 			"Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "CableComponent", "GameplayTags",
-			"GameplayAbilities", "GameplayTasks", "Niagara", "OnlineSubsystem", "OnlineSubsystemSteam", "SteamSockets"
+			"GameplayAbilities", "GameplayTasks", "Niagara", "OnlineSubsystem", "OnlineSubsystemSteam"
 		});
 	}
 }
