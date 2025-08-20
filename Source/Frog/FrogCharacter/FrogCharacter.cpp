@@ -279,7 +279,7 @@ void AFrogCharacter::SpawnProjectile(const TSubclassOf<AProjectile> ActorClass, 
 	#endif
 
 	const FVector FireDirection = (CameraImpactPoint - Location).GetSafeNormal();
-
+	
 	if (GetLocalRole() == ROLE_Authority)
 	{
 		SpawnProjectileInternal(ActorClass, Location, Rotation, FireDirection, true);
