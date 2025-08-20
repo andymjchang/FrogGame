@@ -2,7 +2,7 @@
 
 #include "FrogAbilityJump.h"
 #include "GameFramework/Character.h"
-#include "FrogAbilitySystem.h"
+#include "GAS/FrogAbilitySystem.h"
 
 void UFrogAbilityJump::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
 	const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo,

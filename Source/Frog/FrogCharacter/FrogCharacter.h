@@ -7,7 +7,7 @@
 #include "Logging/LogMacros.h"
 #include "InputAction.h"
 #include "GAS/UnitAbilitySystemInterface.h"
-#include "GAS/FrogAbilities/FrogAbilitySystem.h"
+#include "GAS/FrogAbilitySystem.h"
 #include "FrogCharacter.generated.h"
 
 class UAbilitySet;

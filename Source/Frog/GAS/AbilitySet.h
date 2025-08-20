@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Engine/DataAsset.h"
-#include "FrogAbilities/FrogAbilitySystem.h"
+#include "FrogAbilitySystem.h"
 #include "AbilitySet.generated.h"
 
 struct FGameplayAbilitySpecHandle;

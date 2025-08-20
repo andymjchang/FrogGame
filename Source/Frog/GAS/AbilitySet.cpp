@@ -11,19 +11,19 @@ TArray<FGameplayAbilitySpecHandle> UAbilitySet::GrantAbilitiesToAbilitySystem(
 {
 	check(AbilitySystemComponent);
 
-	TArray<FGameplayAbilitySpecHandle> handles;
-	handles.Reserve(AbilitiesSetList.Num());
+	TArray<FGameplayAbilitySpecHandle> Handles;
+	Handles.Reserve(AbilitiesSetList.Num());
 
-	for (const auto abilitySetItem: AbilitiesSetList)
+	for (const auto AbilitySetItem: AbilitiesSetList)
 	{
-		handles.AddUnique(AbilitySystemComponent->GiveAbility(
+		Handles.AddUnique(AbilitySystemComponent->GiveAbility(
 			FGameplayAbilitySpec(
-				abilitySetItem.GameplayAbility,
+				AbilitySetItem.GameplayAbility,
 				0,
-				static_cast<uint32>(abilitySetItem.InputKey)
+				static_cast<uint32>(AbilitySetItem.InputKey)
 				)
 			));
 	}
 
-	return handles;
+	return Handles;
 }

@@ -17,7 +17,7 @@
 #include "Frog/Actors/Projectile.h"
 #include "Frog/GAS/AbilitySet.h"
 #include "Frog/GAS/UnitAttributeSet.h"
-#include "Frog/GAS/FrogAbilities/FrogAbilitySystem.h"
+#include "Frog/GAS/FrogAbilitySystem.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AFrogCharacter
