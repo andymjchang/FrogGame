@@ -19,5 +19,5 @@ public:
 	UPROPERTY(meta = (BindWidget))
 	UProgressBar* ProgressBar;
 
-	void SetProgressBarPercentage(const float Percentage) const;
+	void SetHealthBarPercent(const float Percent) const;
 };

@@ -6,17 +6,15 @@
 #include "Components/WidgetComponent.h"
 #include "NametagWidgetComponent.generated.h"
 
-
-class UNametagWidget;
+struct FOnAttributeChangeData;
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
-class UI_API UNametagWidgetComponent : public UWidgetComponent
+class FROG_API UNametagWidgetComponent : public UWidgetComponent
 {
 	GENERATED_BODY()
 
-public:
-	UNametagWidgetComponent();
-	
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	UNametagWidget* NametagWidget;
+protected:
+	virtual void BeginPlay() override;
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+	virtual void OnHealthChanged(const FOnAttributeChangeData& Data);
 };

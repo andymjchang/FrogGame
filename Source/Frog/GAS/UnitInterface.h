@@ -4,12 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "UObject/Interface.h"
-#include "UnitAbilitySystemInterface.generated.h"
+#include "UnitInterface.generated.h"
 
 class UAbilitySystemComponent;
 
 UINTERFACE()
-class UUnitAbilitySystemInterface : public UInterface
+class UUnitInterface : public UInterface
 {
 	GENERATED_BODY()
 };
@@ -17,15 +17,12 @@ class UUnitAbilitySystemInterface : public UInterface
 /**
  * 
  */
-class FROG_API IUnitAbilitySystemInterface
+class FROG_API IUnitInterface
 {
 	GENERATED_BODY()
 	
 public:
 	virtual void HandleDeath() = 0;
-	
-	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const = 0;
-	
 	virtual void SetHealth(const float NewHealth) = 0;
 	virtual void SetMaxHealth(const float NewMaxHealth) = 0;
 };

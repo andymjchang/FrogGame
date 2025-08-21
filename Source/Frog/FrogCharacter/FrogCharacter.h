@@ -6,8 +6,9 @@
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
 #include "InputAction.h"
-#include "GAS/UnitAbilitySystemInterface.h"
+#include "GAS/UnitInterface.h"
 #include "GAS/FrogAbilitySystem.h"
+#include "AbilitySystemInterface.h"
 #include "FrogCharacter.generated.h"
 
 class UNametagWidgetComponent;
@@ -54,7 +55,7 @@ struct FAbilityInputBindings
 };
 
 UCLASS(config=Game)
-class AFrogCharacter : public ACharacter, public IUnitAbilitySystemInterface
+class AFrogCharacter : public ACharacter, public IUnitInterface, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 

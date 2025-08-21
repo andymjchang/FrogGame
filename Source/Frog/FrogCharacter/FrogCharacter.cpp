@@ -18,7 +18,7 @@
 #include "Frog/GAS/AbilitySet.h"
 #include "Frog/GAS/UnitAttributeSet.h"
 #include "Frog/GAS/FrogAbilitySystem.h"
-#include "UI/World/NametagWidgetComponent.h"
+#include "Unit/NametagWidgetComponent.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AFrogCharacter
@@ -73,9 +73,10 @@ AFrogCharacter::AFrogCharacter(const FObjectInitializer& ObjectInitializer)
 
 	// Frog Ability System
 	AbilitySystemComponent = CreateDefaultSubobject<UFrogAbilitySystem>(TEXT("AbilitySystem"));
-
+	AttributeSet = CreateDefaultSubobject<UUnitAttributeSet>(TEXT("AttributeSet"));
+	
 	// World space healthbar/nametag
-	HealthBarWidgetComponent = CreateDefaultSubobject<UNametagWidgetComponent>(TEXT("HealthBarWidget"));
+	HealthBarWidgetComponent = CreateDefaultSubobject<UNametagWidgetComponent>(TEXT("NametagWidgetComponent"));
 	HealthBarWidgetComponent->SetupAttachment(RootComponent);
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 

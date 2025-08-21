@@ -5,7 +5,7 @@
 
 #include "Components/ProgressBar.h"
 
-void UNametagWidget::SetProgressBarPercentage(const float Percentage) const
+void UNametagWidget::SetHealthBarPercent(const float Percent) const
 {
-	ProgressBar->SetPercent(Percentage);
+	ProgressBar->SetPercent(Percent);
 }

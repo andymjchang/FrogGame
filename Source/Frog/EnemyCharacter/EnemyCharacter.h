@@ -3,12 +3,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AbilitySystemInterface.h"
 #include "GameFramework/Character.h"
-#include "GAS/UnitAbilitySystemInterface.h"
+#include "GAS/UnitInterface.h"
 #include "EnemyCharacter.generated.h"
 
 UCLASS()
-class FROG_API AEnemyCharacter : public ACharacter, public IUnitAbilitySystemInterface
+class FROG_API AEnemyCharacter : public ACharacter, public IUnitInterface, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 
