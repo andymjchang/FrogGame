@@ -8,6 +8,8 @@
 #include "GAS/UnitInterface.h"
 #include "EnemyCharacter.generated.h"
 
+class UNametagWidgetComponent;
+
 UCLASS()
 class FROG_API AEnemyCharacter : public ACharacter, public IUnitInterface, public IAbilitySystemInterface
 {
@@ -27,6 +29,9 @@ protected: /// Protected Function
 protected: /// Protected Members
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	class USphereComponent* HitboxComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UNametagWidgetComponent* HealthBarWidgetComponent;
 	
 	// Gameplay Ability System
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "GAS")
@@ -34,6 +39,7 @@ protected: /// Protected Members
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "GAS")
 	class UAttributeSet* AttributeSet;
+	
 
 
 };

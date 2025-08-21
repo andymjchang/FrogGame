@@ -6,6 +6,7 @@
 #include "AbilitySystemComponent.h"
 #include "Components/SphereComponent.h"
 #include "Frog/GAS/UnitAttributeSet.h"
+#include "Unit/NametagWidgetComponent.h"
 
 // Sets default values
 AEnemyCharacter::AEnemyCharacter()
@@ -18,6 +19,9 @@ AEnemyCharacter::AEnemyCharacter()
 	
 	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
 	AttributeSet = CreateDefaultSubobject<UUnitAttributeSet>(TEXT("AttributeSet"));
+
+	HealthBarWidgetComponent = CreateDefaultSubobject<UNametagWidgetComponent>(TEXT("NametagWidgetComponent"));
+	HealthBarWidgetComponent->SetupAttachment(RootComponent);
 }
 
 // Called when the game starts or when spawned
