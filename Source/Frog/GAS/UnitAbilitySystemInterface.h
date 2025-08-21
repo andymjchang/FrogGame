@@ -23,5 +23,9 @@ class FROG_API IUnitAbilitySystemInterface
 	
 public:
 	virtual void HandleDeath() = 0;
+	
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const = 0;
+	
+	virtual void SetHealth(const float NewHealth) = 0;
+	virtual void SetMaxHealth(const float NewMaxHealth) = 0;
 };

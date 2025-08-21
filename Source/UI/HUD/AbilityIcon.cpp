@@ -5,7 +5,7 @@
 #include "AbilitySystemComponent.h"
 #include "Components/ProgressBar.h"
 
-void UAbilityIcon::InitializeWidget(UAbilitySystemComponent* InputAbilitySystem, UGameplayAbility* InputAbility)
+void UAbilityIcon::TrackAbility(UAbilitySystemComponent* InputAbilitySystem, UGameplayAbility* InputAbility)
 {
 	if (InputAbilitySystem && InputAbility)
 	{

@@ -18,6 +18,7 @@
 #include "Frog/GAS/AbilitySet.h"
 #include "Frog/GAS/UnitAttributeSet.h"
 #include "Frog/GAS/FrogAbilitySystem.h"
+#include "UI/World/NametagWidgetComponent.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AFrogCharacter
@@ -72,8 +73,10 @@ AFrogCharacter::AFrogCharacter(const FObjectInitializer& ObjectInitializer)
 
 	// Frog Ability System
 	AbilitySystemComponent = CreateDefaultSubobject<UFrogAbilitySystem>(TEXT("AbilitySystem"));
-	// AttributeSet = CreateDefaultSubobject<UUnitAttributeSet>(TEXT("AttributeSet"));
-	// AbilitySystemComponent->AddAttributeSetSubobject(AttributeSet);
+
+	// World space healthbar/nametag
+	HealthBarWidgetComponent = CreateDefaultSubobject<UNametagWidgetComponent>(TEXT("HealthBarWidget"));
+	HealthBarWidgetComponent->SetupAttachment(RootComponent);
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
@@ -96,6 +99,16 @@ void AFrogCharacter::PostInitializeComponents()
 void AFrogCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// Setup Widgets
+	if (APlayerController* PC = GetController<APlayerController>())
+	{
+		if (IsLocallyControlled() && FrogHUDClass)
+		{
+			FrogHUDWidget = CreateWidget<UFrogHUD>(PC, FrogHUDClass);
+			if (FrogHUDWidget) FrogHUDWidget->AddToViewport();
+		}
+	}
 	
 	if (HasAuthority()) SetupAbilities();
 }
@@ -110,7 +123,7 @@ void AFrogCharacter::SetupAbilities()
 	if (!IsValid(AbilitySystemComponent) || !IsValid(AttributeSet)) return;
 	if (IsValid(AbilitySet))
 	{
-		InitialAbilitySpecHandles.Append(AbilitySet->GrantAbilitiesToAbilitySystem(AbilitySystemComponent));
+		InitialAbilitySpecHandles.Append(AbilitySet->GrantAbilitiesToAbilitySystem(AbilitySystemComponent, FrogHUDWidget));
 	}
 
 	// Apply initial stats
@@ -123,6 +136,16 @@ void AFrogCharacter::SetupAbilities()
 }
 
 void AFrogCharacter::HandleDeath()
+{
+	
+}
+
+void AFrogCharacter::SetHealth(const float NewHealth)
+{
+	
+}
+
+void AFrogCharacter::SetMaxHealth(const float NewMaxHealth)
 {
 	
 }
@@ -152,10 +175,10 @@ void AFrogCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AFrogCharacter::Look);
 
 		// GAS
-		for (const auto [InputAction, AbilityInputID] : AbilityInputBindings.Bindings)
+		for (const auto [InputAction, AbilityTag] : AbilityInputBindings.Bindings)
 		{
-			EnhancedInputComponent->BindAction(InputAction, ETriggerEvent::Started, this, &AFrogCharacter::AbilityInputBindingPressedHandler, AbilityInputID);
-			EnhancedInputComponent->BindAction(InputAction, ETriggerEvent::Completed, this, &AFrogCharacter::AbilityInputBindingReleasedHandler, AbilityInputID);
+			EnhancedInputComponent->BindAction(InputAction, ETriggerEvent::Started, this, &AFrogCharacter::AbilityInputBindingPressedHandler, AbilityTag);
+			EnhancedInputComponent->BindAction(InputAction, ETriggerEvent::Completed, this, &AFrogCharacter::AbilityInputBindingReleasedHandler, AbilityTag);
 		}
 	}
 }
@@ -316,6 +339,4 @@ void AFrogCharacter::SpawnProjectileInternal(const TSubclassOf<AProjectile>& Act
     
 	GetWorld()->SpawnActor<AProjectile>(ActorClass, Location, Rotation, Params);
 }
-
-
 

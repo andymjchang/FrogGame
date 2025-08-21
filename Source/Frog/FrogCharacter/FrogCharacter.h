@@ -10,6 +10,9 @@
 #include "GAS/FrogAbilitySystem.h"
 #include "FrogCharacter.generated.h"
 
+class UNametagWidgetComponent;
+class UWidgetComponent;
+class UFrogHUD;
 class UAbilitySet;
 class UUnitAttributeSet;
 class AProjectile;
@@ -35,7 +38,7 @@ struct FAbilityInputToInputActionBinding
 	UInputAction* InputAction = nullptr;
 
 	UPROPERTY(EditDefaultsOnly)
-	EAbilityInputID AbilityInputID = EAbilityInputID::None;
+	EAbilityInputID InputID = EAbilityInputID::None;
 };
 
 /**
@@ -54,17 +57,21 @@ UCLASS(config=Game)
 class AFrogCharacter : public ACharacter, public IUnitAbilitySystemInterface
 {
 	GENERATED_BODY()
-	
+
 public: /* Public Functions */
 	explicit AFrogCharacter(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	virtual void HandleDeath() override;
+	virtual void SetHealth(const float NewHealth) override;
+	virtual void SetMaxHealth(const float NewMaxHealth) override;
 	
 	void SetTongueVisibility(bool Value) const;
 	
 	UFUNCTION(BlueprintCallable)
 	void SpawnProjectile(TSubclassOf<AProjectile> ActorClass, const FVector& Location, const FRotator& Rotation);
+
+public: /* Public Members */
 
 protected: /* Protected Functions */
 	virtual void PostInitializeComponents() override;
@@ -95,15 +102,25 @@ protected: /* Protected Functions */
 	
 protected: /* Members */
 	// Components
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	USpringArmComponent* CameraBoom;
 	
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	UCameraComponent* FollowCamera;
 	
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Grapple)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	UFrogTongue* Tongue;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UNametagWidgetComponent* HealthBarWidgetComponent;
+
+	// HUD
+	UPROPERTY(EditDefaultsOnly, Category="HUD")
+	TSubclassOf<UFrogHUD> FrogHUDClass;
+	
+	UPROPERTY()
+	UFrogHUD* FrogHUDWidget;
+	
 	// Movement
 	UPROPERTY(EditDefaultsOnly, Category = "Movement")
 	float WalkSpeed;
@@ -153,8 +170,7 @@ protected: /* Members */
 	
 	float GrappleStrength;
 
-public: /* Public Members and Getters */
-	// Getters 
+public: /* Public Getters/Setters */
 	FORCEINLINE USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	FORCEINLINE UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 	FORCEINLINE UFrogTongue* GetTongue() const { return Tongue; }

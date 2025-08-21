@@ -38,3 +38,11 @@ void AEnemyCharacter::HandleDeath()
 	Destroy();
 }
 
+void AEnemyCharacter::SetHealth(const float NewHealth)
+{
+}
+
+void AEnemyCharacter::SetMaxHealth(const float NewMaxHealth)
+{
+}
+

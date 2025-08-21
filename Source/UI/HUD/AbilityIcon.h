@@ -3,8 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Blueprint/UserWidget.h"
 #include "GameplayTagContainer.h"
+#include "Blueprint/UserWidget.h"
 #include "AbilityIcon.generated.h"
 
 class UProgressBar;
@@ -17,10 +17,13 @@ class UI_API UAbilityIcon : public UUserWidget
 	GENERATED_BODY()
 	
 public:
-	void InitializeWidget(UAbilitySystemComponent* InputAbilitySystem, UGameplayAbility* InputAbility);
+	void TrackAbility(UAbilitySystemComponent* InputAbilitySystem, UGameplayAbility* InputAbility);
 
 	UPROPERTY(meta = (BindWidget))
 	UProgressBar* ProgressBar;
+
+	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
+	FGameplayTag AbilityTag;
 	
 protected:
 	UPROPERTY()

@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Engine/DataAsset.h"
 #include "FrogAbilitySystem.h"
+#include "UI/HUD/FrogHUD.h"
 #include "AbilitySet.generated.h"
 
 struct FGameplayAbilitySpecHandle;
@@ -34,5 +35,5 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "Ability System")
 	TArray<FAbilitySetItem> AbilitiesSetList;
 
-	TArray<FGameplayAbilitySpecHandle> GrantAbilitiesToAbilitySystem(UAbilitySystemComponent* AbilitySystemComponent) const;
+	TArray<FGameplayAbilitySpecHandle> GrantAbilitiesToAbilitySystem(UAbilitySystemComponent* InputAbilitySystem, const UFrogHUD* FrogHUD) const;
 };
