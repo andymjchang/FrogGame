@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "AbilitySystemInterface.h"
 #include "GameFramework/Character.h"
-#include "GAS/UnitInterface.h"
+#include "Unit/UnitInterface.h"
 #include "EnemyCharacter.generated.h"
 
 class UProjectileSpawnerComponent;
@@ -18,10 +18,14 @@ class FROG_API AEnemyCharacter : public ACharacter, public IUnitInterface, publi
 
 public: /// Public Functions
 	AEnemyCharacter();
+	
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+
+	/// Unit Interface
 	virtual void HandleDeath() override;
 	virtual void SetHealth(const float NewHealth) override;
 	virtual void SetMaxHealth(const float NewMaxHealth) override;
+	virtual UProjectileSpawnerComponent* GetProjectileSpawnerComponent() override;
 
 protected: /// Protected Function
 	// Called when the game starts or when spawned

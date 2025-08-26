@@ -6,6 +6,7 @@
 #include "UObject/Interface.h"
 #include "UnitInterface.generated.h"
 
+class UProjectileSpawnerComponent;
 class UAbilitySystemComponent;
 
 UINTERFACE()
@@ -25,4 +26,5 @@ public:
 	virtual void HandleDeath() = 0;
 	virtual void SetHealth(const float NewHealth) = 0;
 	virtual void SetMaxHealth(const float NewMaxHealth) = 0;
+	virtual UProjectileSpawnerComponent* GetProjectileSpawnerComponent();
 };

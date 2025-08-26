@@ -8,7 +8,6 @@
 #include "NiagaraFunctionLibrary.h"
 #include "Components/SphereComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
-#include "GAS/UnitInterface.h"
 
 // AProjectile.cpp
 AProjectile::AProjectile()

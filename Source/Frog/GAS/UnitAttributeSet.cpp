@@ -2,7 +2,7 @@
 
 #include "UnitAttributeSet.h"
 #include "GameplayEffectExtension.h"
-#include "UnitInterface.h"
+#include "Unit/UnitInterface.h"
 #include "Net/UnrealNetwork.h"
 
 void UUnitAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const

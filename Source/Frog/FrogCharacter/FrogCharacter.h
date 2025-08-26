@@ -6,7 +6,7 @@
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
 #include "InputAction.h"
-#include "GAS/UnitInterface.h"
+#include "Unit/UnitInterface.h"
 #include "GAS/FrogAbilitySystem.h"
 #include "AbilitySystemInterface.h"
 #include "FrogCharacter.generated.h"
@@ -63,15 +63,17 @@ class AFrogCharacter : public ACharacter, public IUnitInterface, public IAbility
 public: /* Public Functions */
 	explicit AFrogCharacter(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
+	/// Ability System Interface
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+
+	/// Unit Interface 
 	virtual void HandleDeath() override;
 	virtual void SetHealth(const float NewHealth) override;
 	virtual void SetMaxHealth(const float NewMaxHealth) override;
-	
-	void SetTongueVisibility(bool Value) const;
-	
-	UFUNCTION(BlueprintCallable)
-	void SpawnProjectile(TSubclassOf<AProjectile> ActorClass, const FVector& Location, const FRotator& Rotation);
+	virtual UProjectileSpawnerComponent* GetProjectileSpawnerComponent() override;
+
+	void SetTongueVisibility(bool Value) const;      
 
 public: /* Public Members */
 
@@ -93,14 +95,6 @@ protected: /* Protected Functions */
 
 	// Grapple 
 	void RedrawTongueLocation() const;
-
-	// Spawn Projectile
-	void SpawnProjectileInternal(const TSubclassOf<AProjectile>& ActorClass,
-		const FVector& Location, const FRotator& Rotation, FVector FireDirection, bool bApplyEffect);
-
-	UFUNCTION(NetMulticast, Reliable)
-	void MulticastSpawnProjectile(TSubclassOf<AProjectile> ActorClass,
-		const FVector& Location, const FRotator& Rotation, FVector FireDirection);
 	
 protected: /* Members */
 	// Components
@@ -179,8 +173,6 @@ public: /* Public Getters/Setters */
 	FORCEINLINE USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	FORCEINLINE UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 	FORCEINLINE UFrogTongue* GetTongue() const { return Tongue; }
-	FORCEINLINE UProjectileSpawnerComponent* GetProjectileSpawnerComponent() const { return ProjectileSpawner; }
-	
 	FORCEINLINE bool GetIsGrapple() const { return bIsGrapple; }
 	FORCEINLINE void SetIsGrapple(const bool bNewIsGrapple) { bIsGrapple = bNewIsGrapple; }
 	FORCEINLINE float GetGrappleStrength() const { return GrappleStrength; }
@@ -189,6 +181,5 @@ public: /* Public Getters/Setters */
 	FORCEINLINE void SetGrapplePoint(const FVector& NewGrapplePoint) { GrapplePoint = NewGrapplePoint; }
 	FORCEINLINE float GetWalkSpeed() const { return WalkSpeed; }
 	FORCEINLINE float GetDiveSpeed() const { return DiveSpeed; }
-	
 };
 

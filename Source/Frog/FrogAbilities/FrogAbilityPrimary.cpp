@@ -7,7 +7,8 @@
 #include "Unit/ProjectileSpawnerComponent.h"
 
 void UFrogAbilityPrimary::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
-                                          const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo,
+                                          const FGameplayAbilityActorInfo* ActorInfo,
+                                          const FGameplayAbilityActivationInfo ActivationInfo,
                                           const FGameplayEventData* TriggerEventData)
 {
 	if (!CommitAbilityCost(Handle, ActorInfo, ActivationInfo))
@@ -18,15 +19,19 @@ void UFrogAbilityPrimary::ActivateAbility(const FGameplayAbilitySpecHandle Handl
     
 	Super::ActivateAbility(Handle, ActorInfo, ActivationInfo, TriggerEventData);
 
-	const AFrogCharacter* Frog = Cast<AFrogCharacter>(ActorInfo->AvatarActor.Get());
-	if (!Frog)
+	IUnitInterface* Unit = Cast<IUnitInterface>(ActorInfo->AvatarActor.Get());
+	if (!Unit)
 	{
 		EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
 		return;
 	}
 	
-	Frog->GetProjectileSpawnerComponent()->RequestSpawnProjectile(ProjectileClass, Frog->GetActorLocation(),
-	                                                                   FRotator::ZeroRotator, GetCrosshairLocation());
+	if (UProjectileSpawnerComponent* ProjectileSpawner = Unit->GetProjectileSpawnerComponent())
+	{
+		FVector UnitLocation = ActorInfo->AvatarActor.Get()->GetActorLocation();
+		ProjectileSpawner->RequestSpawnProjectile(ProjectileClass, UnitLocation,
+			FRotator::ZeroRotator, GetCrosshairLocation());
+	}
 
 	CommitAbilityCooldown(Handle, ActorInfo, ActivationInfo, false);
 	EndAbility(Handle, ActorInfo, ActivationInfo, true, false);

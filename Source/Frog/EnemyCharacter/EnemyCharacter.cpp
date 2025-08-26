@@ -50,3 +50,8 @@ void AEnemyCharacter::SetMaxHealth(const float NewMaxHealth)
 {
 }
 
+UProjectileSpawnerComponent* AEnemyCharacter::GetProjectileSpawnerComponent()
+{
+	return ProjectileSpawner;
+}
+

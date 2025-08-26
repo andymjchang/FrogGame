@@ -154,6 +154,11 @@ void AFrogCharacter::SetMaxHealth(const float NewMaxHealth)
 	
 }
 
+UProjectileSpawnerComponent* AFrogCharacter::GetProjectileSpawnerComponent()
+{
+	return ProjectileSpawner;
+}
+
 void AFrogCharacter::NotifyControllerChanged()
 {
 	Super::NotifyControllerChanged();
