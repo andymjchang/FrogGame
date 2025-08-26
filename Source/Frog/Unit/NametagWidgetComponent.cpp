@@ -23,6 +23,11 @@ void UNametagWidgetComponent::BeginPlay()
         AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(UUnitAttributeSet::GetHealthAttribute())
            .AddUObject(this, &UNametagWidgetComponent::OnHealthChanged);
     }
+
+    if (const UNametagWidget* NametagWidget = Cast<UNametagWidget>(GetWidget()))
+    {
+        NametagWidget->SetHealthBarPercent(1.0);
+    }
 }
 
 void UNametagWidgetComponent::OnHealthChanged(const FOnAttributeChangeData& Data)

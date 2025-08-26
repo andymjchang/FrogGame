@@ -8,7 +8,6 @@
 
 UProjectileSpawnerComponent::UProjectileSpawnerComponent()
 {
-    SetIsReplicated(true);
 }
 
 void UProjectileSpawnerComponent::RequestSpawnProjectile(const TSubclassOf<AProjectile>& ActorClass, const FVector& Location, const FRotator& Rotation, const FVector& FireDirection)

@@ -14,7 +14,6 @@
 #include "FrogTongue.h"
 #include "Net/UnrealNetwork.h"
 #include "FrogMovementComponent.h"
-#include "Frog/Actors/Projectile.h"
 #include "Frog/GAS/AbilitySet.h"
 #include "Frog/GAS/UnitAttributeSet.h"
 #include "Frog/GAS/FrogAbilitySystem.h"
