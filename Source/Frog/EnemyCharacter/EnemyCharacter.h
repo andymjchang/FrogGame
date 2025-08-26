@@ -8,6 +8,7 @@
 #include "GAS/UnitInterface.h"
 #include "EnemyCharacter.generated.h"
 
+class UProjectileSpawnerComponent;
 class UNametagWidgetComponent;
 
 UCLASS()
@@ -27,11 +28,14 @@ protected: /// Protected Function
 	virtual void BeginPlay() override;
 	
 protected: /// Protected Members
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
-	class USphereComponent* HitboxComponent;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	class USphereComponent* Hitbox;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	UNametagWidgetComponent* HealthBarWidgetComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UProjectileSpawnerComponent* ProjectileSpawner;
 	
 	// Gameplay Ability System
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "GAS")
@@ -39,7 +43,5 @@ protected: /// Protected Members
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "GAS")
 	class UAttributeSet* AttributeSet;
-	
-
 
 };

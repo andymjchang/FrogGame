@@ -13,9 +13,9 @@ AEnemyCharacter::AEnemyCharacter()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
-	HitboxComponent = CreateDefaultSubobject<USphereComponent>(TEXT("HitboxComponent"));
-	HitboxComponent->SetCollisionProfileName(TEXT("EnemyHitbox"));
-	HitboxComponent->SetupAttachment(RootComponent);
+	Hitbox = CreateDefaultSubobject<USphereComponent>(TEXT("HitboxComponent"));
+	Hitbox->SetCollisionProfileName(TEXT("EnemyHitbox"));
+	Hitbox->SetupAttachment(RootComponent);
 	
 	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
 	AttributeSet = CreateDefaultSubobject<UUnitAttributeSet>(TEXT("AttributeSet"));
