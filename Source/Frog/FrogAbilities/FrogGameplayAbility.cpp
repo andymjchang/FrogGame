@@ -13,7 +13,7 @@ UFrogGameplayAbility::UFrogGameplayAbility(): CooldownDuration(0)
 	ReplicationPolicy = EGameplayAbilityReplicationPolicy::ReplicateYes;
 }
 
-const FGameplayTagContainer * UFrogGameplayAbility::GetCooldownTags() const
+const FGameplayTagContainer* UFrogGameplayAbility::GetCooldownTags() const
 {
 	FGameplayTagContainer* MutableTags = const_cast<FGameplayTagContainer*>(&TempCooldownTags);
 	MutableTags->Reset(); // MutableTags writes to the TempCooldownTags on the CDO so clear it in case the ability cooldown tags change (moved to a different slot)
@@ -36,11 +36,11 @@ void UFrogGameplayAbility::ApplyCooldown(const FGameplayAbilitySpecHandle Handle
 	}
 }
 
-void UFrogGameplayAbility::GetCrosshairLocation()
+FVector UFrogGameplayAbility::GetCrosshairLocation() const
 {
 	AActor* Owner = GetOwningActorFromActorInfo();
 	AFrogCharacter* FrogCharacter = Cast<AFrogCharacter>(Owner);
-	if (!FrogCharacter) return;
+	if (!FrogCharacter) return FVector::ZeroVector;
 	UCameraComponent* FollowCamera = FrogCharacter->GetFollowCamera();
 	FVector PlayerLocation = FrogCharacter->GetActorLocation();
 	
@@ -97,16 +97,7 @@ void UFrogGameplayAbility::GetCrosshairLocation()
 	);
 #endif
 
-	const FVector FireDirection = (CameraImpactPoint - Location).GetSafeNormal();
+	const FVector FireDirection = (CameraImpactPoint - PlayerLocation).GetSafeNormal();
 	
-	// if (GetLocalRole() == ROLE_Authority)
-	// {
-	// 	SpawnProjectileInternal(ActorClass, Location, Rotation, FireDirection, true);
-	// 	MulticastSpawnProjectile(ActorClass, Location, Rotation, FireDirection);
-	// }
-	// else
-	// {
-	// 	SpawnProjectileInternal(ActorClass, Location, Rotation, FireDirection, false);
-	// }
-	ProjectileSpawner->RequestSpawnProjectile()
+	return FireDirection;
 }

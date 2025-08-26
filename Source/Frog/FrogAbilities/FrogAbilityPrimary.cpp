@@ -4,6 +4,7 @@
 #include "FrogAbilities/FrogAbilityPrimary.h"
 
 #include "FrogCharacter/FrogCharacter.h"
+#include "Unit/ProjectileSpawnerComponent.h"
 
 void UFrogAbilityPrimary::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
                                           const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo,
@@ -17,14 +18,15 @@ void UFrogAbilityPrimary::ActivateAbility(const FGameplayAbilitySpecHandle Handl
     
 	Super::ActivateAbility(Handle, ActorInfo, ActivationInfo, TriggerEventData);
 
-	AFrogCharacter* Character = Cast<AFrogCharacter>(ActorInfo->AvatarActor.Get());
-	if (!Character)
+	const AFrogCharacter* Frog = Cast<AFrogCharacter>(ActorInfo->AvatarActor.Get());
+	if (!Frog)
 	{
 		EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
 		return;
 	}
 	
-	Character->SpawnProjectile(ProjectileClass, Character->GetActorLocation(), FRotator::ZeroRotator);
+	Frog->GetProjectileSpawnerComponent()->RequestSpawnProjectile(ProjectileClass, Frog->GetActorLocation(),
+	                                                                   FRotator::ZeroRotator, GetCrosshairLocation());
 
 	CommitAbilityCooldown(Handle, ActorInfo, ActivationInfo, false);
 	EndAbility(Handle, ActorInfo, ActivationInfo, true, false);

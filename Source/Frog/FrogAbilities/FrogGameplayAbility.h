@@ -19,7 +19,8 @@ public:
 	UFrogGameplayAbility();
 	virtual const FGameplayTagContainer* GetCooldownTags() const override;
 	virtual void ApplyCooldown(FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo,
-	                           FGameplayAbilityActivationInfo ActivationInfo) const override;
+							   FGameplayAbilityActivationInfo ActivationInfo) const override;
+	FVector GetCrosshairLocation() const;
 
 protected:
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Cooldown")
