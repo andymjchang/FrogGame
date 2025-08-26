@@ -25,6 +25,7 @@ class UCameraComponent;
 class UInputMappingContext;
 class UInputAction;
 class UFrogAbilitySystem;
+class UProjectileSpawnerComponent;
 
 
 /**
@@ -115,6 +116,9 @@ protected: /* Members */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	UNametagWidgetComponent* HealthBarWidgetComponent;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UProjectileSpawnerComponent* ProjectileSpawner;
+
 	// HUD
 	UPROPERTY(EditDefaultsOnly, Category="HUD")
 	TSubclassOf<UFrogHUD> FrogHUDClass;
@@ -175,6 +179,8 @@ public: /* Public Getters/Setters */
 	FORCEINLINE USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	FORCEINLINE UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 	FORCEINLINE UFrogTongue* GetTongue() const { return Tongue; }
+	FORCEINLINE UProjectileSpawnerComponent* GetProjectileSpawnerComponent() const { return ProjectileSpawner; }
+	
 	FORCEINLINE bool GetIsGrapple() const { return bIsGrapple; }
 	FORCEINLINE void SetIsGrapple(const bool bNewIsGrapple) { bIsGrapple = bNewIsGrapple; }
 	FORCEINLINE float GetGrappleStrength() const { return GrappleStrength; }

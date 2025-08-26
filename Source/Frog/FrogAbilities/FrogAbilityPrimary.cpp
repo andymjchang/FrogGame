@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "GAS/FrogAbilities/FrogAbilityPrimary.h"
+#include "FrogAbilities/FrogAbilityPrimary.h"
 
 #include "FrogCharacter/FrogCharacter.h"
 

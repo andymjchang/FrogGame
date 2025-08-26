@@ -19,6 +19,7 @@
 #include "Frog/GAS/UnitAttributeSet.h"
 #include "Frog/GAS/FrogAbilitySystem.h"
 #include "Unit/NametagWidgetComponent.h"
+#include "Unit/ProjectileSpawnerComponent.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AFrogCharacter
@@ -74,6 +75,9 @@ AFrogCharacter::AFrogCharacter(const FObjectInitializer& ObjectInitializer)
 	// Frog Ability System
 	AbilitySystemComponent = CreateDefaultSubobject<UFrogAbilitySystem>(TEXT("AbilitySystem"));
 	AttributeSet = CreateDefaultSubobject<UUnitAttributeSet>(TEXT("AttributeSet"));
+
+	// Projectile Spawner Component
+	ProjectileSpawner = CreateDefaultSubobject<UProjectileSpawnerComponent>(TEXT("ProjectileSpawner"));
 	
 	// World space healthbar/nametag
 	HealthBarWidgetComponent = CreateDefaultSubobject<UNametagWidgetComponent>(TEXT("NametagWidgetComponent"));
@@ -304,15 +308,16 @@ void AFrogCharacter::SpawnProjectile(const TSubclassOf<AProjectile> ActorClass, 
 
 	const FVector FireDirection = (CameraImpactPoint - Location).GetSafeNormal();
 	
-	if (GetLocalRole() == ROLE_Authority)
-	{
-		SpawnProjectileInternal(ActorClass, Location, Rotation, FireDirection, true);
-		MulticastSpawnProjectile(ActorClass, Location, Rotation, FireDirection);
-	}
-	else
-	{
-		SpawnProjectileInternal(ActorClass, Location, Rotation, FireDirection, false);
-	}
+	// if (GetLocalRole() == ROLE_Authority)
+	// {
+	// 	SpawnProjectileInternal(ActorClass, Location, Rotation, FireDirection, true);
+	// 	MulticastSpawnProjectile(ActorClass, Location, Rotation, FireDirection);
+	// }
+	// else
+	// {
+	// 	SpawnProjectileInternal(ActorClass, Location, Rotation, FireDirection, false);
+	// }
+	ProjectileSpawner->RequestSpawnProjectile()
 }
 
 void AFrogCharacter::MulticastSpawnProjectile_Implementation(const TSubclassOf<AProjectile> ActorClass,
