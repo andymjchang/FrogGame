@@ -7,8 +7,8 @@
 #include "Components/SphereComponent.h"
 #include "Frog/GAS/UnitAttributeSet.h"
 #include "Unit/NametagWidgetComponent.h"
+#include "Unit/ProjectileSpawnerComponent.h"
 
-// Sets default values
 AEnemyCharacter::AEnemyCharacter()
 {
 	PrimaryActorTick.bCanEverTick = true;
@@ -22,13 +22,13 @@ AEnemyCharacter::AEnemyCharacter()
 
 	HealthBarWidgetComponent = CreateDefaultSubobject<UNametagWidgetComponent>(TEXT("NametagWidgetComponent"));
 	HealthBarWidgetComponent->SetupAttachment(RootComponent);
+	
+	ProjectileSpawner = CreateDefaultSubobject<UProjectileSpawnerComponent>(TEXT("ProjectileSpawner"));
 }
 
-// Called when the game starts or when spawned
 void AEnemyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 UAbilitySystemComponent* AEnemyCharacter::GetAbilitySystemComponent() const

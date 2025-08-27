@@ -2,3 +2,10 @@
 
 
 #include "EnemyGameplayAbility.h"
+
+UEnemyGameplayAbility::UEnemyGameplayAbility()
+{
+	NetExecutionPolicy = EGameplayAbilityNetExecutionPolicy::LocalPredicted;
+	InstancingPolicy = EGameplayAbilityInstancingPolicy::InstancedPerActor;
+	ReplicationPolicy = EGameplayAbilityReplicationPolicy::ReplicateYes;
+}

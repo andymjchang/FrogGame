@@ -13,4 +13,6 @@ UCLASS()
 class FROG_API UEnemyGameplayAbility : public UGameplayAbility
 {
 	GENERATED_BODY()
+public:
+	UEnemyGameplayAbility();
 };

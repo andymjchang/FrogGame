@@ -63,7 +63,6 @@ void AProjectile::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedCompone
                 UAbilitySystemComponent* TargetASC = AbilitySystemInterface->GetAbilitySystemComponent();
                 if (IsValid(DamageEffect))
                 {
-                    // Create effect context
                     FGameplayEffectContextHandle Context = TargetASC->MakeEffectContext();
                     Context.AddSourceObject(this);
                     Context.AddInstigator(GetInstigator(), GetOwner());

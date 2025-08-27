@@ -3,34 +3,35 @@
 
 #include "EnemyTestAbility.h"
 
-#include "EnemyCharacter/EnemyCharacter.h"
 #include "Unit/ProjectileSpawnerComponent.h"
+#include "Unit/UnitInterface.h"
 
 void UEnemyTestAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
                                         const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo,
                                         const FGameplayEventData* TriggerEventData)
 {
-	if (!CommitAbilityCost(Handle, ActorInfo, ActivationInfo))
-	{
-		EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
-		return;
-	}
+	// if (!CommitAbilityCost(Handle, ActorInfo, ActivationInfo))
+	// {
+	// 	EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
+	// 	return;
+	// }
     
 	Super::ActivateAbility(Handle, ActorInfo, ActivationInfo, TriggerEventData);
 
-	AEnemyCharacter* EnemyUnit = Cast<AEnemyCharacter>(ActorInfo->AvatarActor.Get());
-	if (!EnemyUnit)
+	IUnitInterface* Unit = Cast<IUnitInterface>(ActorInfo->AvatarActor.Get());
+	if (!Unit)
 	{
 		EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
 		return;
 	}
 	
-	if (UProjectileSpawnerComponent* ProjectileSpawner = EnemyUnit->GetProjectileSpawnerComponent())
+	if (UProjectileSpawnerComponent* ProjectileSpawner = Unit->GetProjectileSpawnerComponent())
 	{
+		FVector UnitLocation = ActorInfo->AvatarActor.Get()->GetActorLocation();
 		ProjectileSpawner->RequestSpawnProjectile(ProjectileClass,
-			EnemyUnit->GetActorLocation(), FRotator::ZeroRotator, FVector(0, 0 , 1));
+			UnitLocation, FRotator::ZeroRotator, FVector(0, 0 , 1));
 	}
 
-	CommitAbilityCooldown(Handle, ActorInfo, ActivationInfo, false);
+	// CommitAbilityCooldown(Handle, ActorInfo, ActivationInfo, false);
 	EndAbility(Handle, ActorInfo, ActivationInfo, true, false);
 }
