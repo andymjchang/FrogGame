@@ -3,35 +3,57 @@
 
 #include "EnemyTestAbility.h"
 
+#include "AIController.h"
+#include "BehaviorTree/BlackboardComponent.h"
 #include "Unit/ProjectileSpawnerComponent.h"
 #include "Unit/UnitInterface.h"
 
 void UEnemyTestAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
-                                        const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo,
-                                        const FGameplayEventData* TriggerEventData)
+										const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo,
+										const FGameplayEventData* TriggerEventData)
 {
-	// if (!CommitAbilityCost(Handle, ActorInfo, ActivationInfo))
-	// {
-	// 	EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
-	// 	return;
-	// }
-    
 	Super::ActivateAbility(Handle, ActorInfo, ActivationInfo, TriggerEventData);
 
+	APawn* AvatarPawn = Cast<APawn>(ActorInfo->AvatarActor.Get());
+	if (!AvatarPawn)
+	{
+		EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
+		return;
+	}
+
+	// --- Accessing the Blackboard ---
+	AAIController* AIController = Cast<AAIController>(AvatarPawn->GetController());
+	UBlackboardComponent* BlackboardComp = AIController ? AIController->GetBlackboardComponent() : nullptr;
+
+	if (!BlackboardComp)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Could not find Blackboard Component."));
+		EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
+		return;
+	}
+
+	AActor* TargetActor = nullptr;
+	UObject* BlackboardObject = BlackboardComp->GetValueAsObject(TEXT("TargetActor"));
+	if (BlackboardObject)
+	{
+		TargetActor = Cast<AActor>(BlackboardObject);
+	}
+	FVector TargetLocation = TargetActor->GetActorLocation();
+	FVector TargetDirection = TargetLocation - AvatarPawn->GetActorLocation();
+	
 	IUnitInterface* Unit = Cast<IUnitInterface>(ActorInfo->AvatarActor.Get());
 	if (!Unit)
 	{
 		EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
 		return;
 	}
-	
+    
 	if (UProjectileSpawnerComponent* ProjectileSpawner = Unit->GetProjectileSpawnerComponent())
 	{
-		FVector UnitLocation = ActorInfo->AvatarActor.Get()->GetActorLocation();
+		// Use the location from the blackboard instead of the actor's location
 		ProjectileSpawner->RequestSpawnProjectile(ProjectileClass,
-			UnitLocation, FRotator::ZeroRotator, FVector(1, 0 , 0));
+		   AvatarPawn->GetActorLocation(), FRotator::ZeroRotator, TargetDirection);
 	}
-
-	// CommitAbilityCooldown(Handle, ActorInfo, ActivationInfo, false);
+    
 	EndAbility(Handle, ActorInfo, ActivationInfo, true, false);
 }
