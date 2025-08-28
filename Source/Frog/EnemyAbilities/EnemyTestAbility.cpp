@@ -29,7 +29,7 @@ void UEnemyTestAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
 	{
 		FVector UnitLocation = ActorInfo->AvatarActor.Get()->GetActorLocation();
 		ProjectileSpawner->RequestSpawnProjectile(ProjectileClass,
-			UnitLocation, FRotator::ZeroRotator, FVector(0, 0 , 1));
+			UnitLocation, FRotator::ZeroRotator, FVector(1, 0 , 0));
 	}
 
 	// CommitAbilityCooldown(Handle, ActorInfo, ActivationInfo, false);

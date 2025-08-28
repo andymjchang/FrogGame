@@ -16,22 +16,21 @@ class FROG_API AEnemyCharacter : public ACharacter, public IUnitInterface, publi
 {
 	GENERATED_BODY()
 
-public: /// Public Functions
+public: // Public Functions
 	AEnemyCharacter();
 	
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
-	/// Unit Interface
+	// Unit Interface
 	virtual void HandleDeath() override;
 	virtual void SetHealth(const float NewHealth) override;
 	virtual void SetMaxHealth(const float NewMaxHealth) override;
 	virtual UProjectileSpawnerComponent* GetProjectileSpawnerComponent() override;
 
-protected: /// Protected Function
-	// Called when the game starts or when spawned
+protected: // Protected Function
 	virtual void BeginPlay() override;
 	
-protected: /// Protected Members
+protected: // Protected Members
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class USphereComponent* Hitbox;
 

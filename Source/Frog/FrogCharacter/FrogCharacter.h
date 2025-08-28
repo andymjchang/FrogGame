@@ -103,6 +103,9 @@ protected: /* Members */
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	UCameraComponent* FollowCamera;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	class USphereComponent* Hitbox;
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	UFrogTongue* Tongue;

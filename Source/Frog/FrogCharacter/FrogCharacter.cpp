@@ -14,6 +14,7 @@
 #include "FrogTongue.h"
 #include "Net/UnrealNetwork.h"
 #include "FrogMovementComponent.h"
+#include "Components/SphereComponent.h"
 #include "Frog/GAS/AbilitySet.h"
 #include "Frog/GAS/UnitAttributeSet.h"
 #include "Frog/GAS/FrogAbilitySystem.h"
@@ -65,7 +66,12 @@ AFrogCharacter::AFrogCharacter(const FObjectInitializer& ObjectInitializer)
 	// Follow Camera
 	FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
-	FollowCamera->bUsePawnControlRotation = false; 
+	FollowCamera->bUsePawnControlRotation = false;
+
+	// Player hitbox
+	Hitbox = CreateDefaultSubobject<USphereComponent>(TEXT("HitboxComponent"));
+	Hitbox->SetCollisionProfileName(TEXT("PlayerHitbox"));
+	Hitbox->SetupAttachment(RootComponent);
 
 	// Setup Grapple
 	Tongue = CreateDefaultSubobject<UFrogTongue>(TEXT("TongueComponent"));
