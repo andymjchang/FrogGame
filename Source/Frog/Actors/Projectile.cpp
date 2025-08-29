@@ -49,6 +49,7 @@ void AProjectile::BeginPlay()
     Super::BeginPlay();
     
     CollisionComponent->OnComponentBeginOverlap.AddDynamic(this, &AProjectile::OnComponentBeginOverlap);
+    CollisionComponent->OnComponentHit.AddDynamic(this, &AProjectile::OnHit);
 }
 
 void AProjectile::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
@@ -77,16 +78,26 @@ void AProjectile::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedCompone
         }
     }
         
-    UNiagaraFunctionLibrary::SpawnSystemAtLocation(
-		GetWorld(),
-		HitFX,
-		GetActorLocation(),
-		FRotator::ZeroRotator,
-		FVector::OneVector,
-		true,
-		true
-	);
-    
+    SpawnDestroyVFX();
     Destroy();
+}
+
+void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
+{
+    SpawnDestroyVFX();
+    Destroy();
+}
+
+void AProjectile::SpawnDestroyVFX() const
+{
+    UNiagaraFunctionLibrary::SpawnSystemAtLocation(
+        GetWorld(),
+        HitFX,
+        GetActorLocation(),
+        FRotator::ZeroRotator,
+        FVector::OneVector,
+        true,
+        true
+    );
 }
 
