@@ -37,16 +37,16 @@ void UEnemyTestAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
 	if (BlackboardObject)
 	{
 		TargetActor = Cast<AActor>(BlackboardObject);
-	}
-	FVector TargetLocation = TargetActor->GetActorLocation();
-	FVector TargetDirection = TargetLocation - AvatarPawn->GetActorLocation();
-	
+	} 
 	IUnitInterface* Unit = Cast<IUnitInterface>(ActorInfo->AvatarActor.Get());
-	if (!Unit)
+	if (!Unit || !TargetActor)
 	{
 		EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
 		return;
 	}
+	
+	FVector TargetLocation = TargetActor->GetActorLocation();
+	FVector TargetDirection = TargetLocation - AvatarPawn->GetActorLocation();
     
 	if (UProjectileSpawnerComponent* ProjectileSpawner = Unit->GetProjectileSpawnerComponent())
 	{

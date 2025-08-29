@@ -234,8 +234,8 @@ void AFrogCharacter::Look(const FInputActionValue& Value)
 
 	if (IsValid(Controller))
 	{
-		AddControllerYawInput(LookAxisVector.X);
-		AddControllerPitchInput(LookAxisVector.Y);
+		AddControllerYawInput(LookAxisVector.X * 0.5);
+		AddControllerPitchInput(LookAxisVector.Y * 0.5);
 	}
 }
 
