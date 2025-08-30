@@ -32,9 +32,8 @@ void UEnemyTestAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
 		return;
 	}
 
-	AActor* TargetActor = nullptr;
-	UObject* BlackboardObject = BlackboardComp->GetValueAsObject(TEXT("TargetActor"));
-	if (BlackboardObject)
+	const AActor* TargetActor = nullptr;
+	if (UObject* BlackboardObject = BlackboardComp->GetValueAsObject(TEXT("TargetActor")))
 	{
 		TargetActor = Cast<AActor>(BlackboardObject);
 	} 
@@ -44,13 +43,12 @@ void UEnemyTestAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
 		EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
 		return;
 	}
-	
-	FVector TargetLocation = TargetActor->GetActorLocation();
-	FVector TargetDirection = TargetLocation - AvatarPawn->GetActorLocation();
+
+	const FVector TargetLocation = TargetActor->GetActorLocation();
+	const FVector TargetDirection = (TargetLocation - AvatarPawn->GetActorLocation()).GetSafeNormal();
     
 	if (UProjectileSpawnerComponent* ProjectileSpawner = Unit->GetProjectileSpawnerComponent())
 	{
-		// Use the location from the blackboard instead of the actor's location
 		ProjectileSpawner->RequestSpawnProjectile(ProjectileClass,
 		   AvatarPawn->GetActorLocation(), FRotator::ZeroRotator, TargetDirection);
 	}

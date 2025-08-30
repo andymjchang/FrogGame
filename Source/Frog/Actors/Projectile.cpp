@@ -16,11 +16,13 @@ AProjectile::AProjectile()
 
     InitialLifeSpan = 5.0f;
 
-    CollisionComponent = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComponent"));
-    CollisionComponent->SetSphereRadius(5.0f);
+    CollisionComponent = CreateDefaultSubobject<USphereComponent>(TEXT("CollisionComponent"));
     CollisionComponent->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
     CollisionComponent->SetGenerateOverlapEvents(true);
     RootComponent = CollisionComponent;
+
+    DamageCollisionComponent = CreateDefaultSubobject<USphereComponent>(TEXT("DamageCollisionComponent"));
+    DamageCollisionComponent->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 
     ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovement"));
     ProjectileMovement->SetUpdatedComponent(CollisionComponent);
@@ -29,9 +31,6 @@ AProjectile::AProjectile()
     ProjectileMovement->bRotationFollowsVelocity = true;
     ProjectileMovement->bShouldBounce = false;
     ProjectileMovement->ProjectileGravityScale = 0.0f;
-
-    MeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComponent"));
-    MeshComponent->SetupAttachment(RootComponent);
 }
 
 void AProjectile::FireInDirection(const FVector& ShootDirection) const

@@ -47,8 +47,8 @@ protected: /// Protected Members
 	class USphereComponent* CollisionComponent;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	class UProjectileMovementComponent* ProjectileMovement;
+	class USphereComponent* DamageCollisionComponent;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	class UStaticMeshComponent* MeshComponent;
+	class UProjectileMovementComponent* ProjectileMovement;
 };

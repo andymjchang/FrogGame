@@ -11,6 +11,10 @@ void UFrogMovementComponent::PhysCustom(const float DeltaTime, const int32 Itera
 	{
 		PhysGrapple(DeltaTime, Iterations);
 	}
+	if (CustomMovementMode == static_cast<uint8>(ECustomMovementMode::CMOVE_Downed))
+	{
+		PhysGrapple(DeltaTime, Iterations);
+	}
 	else
 	{
 		Super::PhysCustom(DeltaTime, Iterations);
@@ -69,12 +73,14 @@ void UFrogMovementComponent::OnMovementModeChanged(EMovementMode PreviousMovemen
 	// Enter Grapple
 	if (MovementMode == MOVE_Custom && CustomMovementMode == static_cast<uint8>(ECustomMovementMode::CMOVE_Grapple))
 	{
-		if (AFrogCharacter* Frog = Cast<AFrogCharacter>(CharacterOwner)) Frog->SetTongueVisibility(true);
+		if (const AFrogCharacter* Frog = Cast<AFrogCharacter>(CharacterOwner)) Frog->SetTongueVisibility(true);
+		return;
 	}
     
 	// Exit Grapple
 	if (PreviousMovementMode == MOVE_Custom && PreviousCustomMode == static_cast<uint8>(ECustomMovementMode::CMOVE_Grapple))
 	{
-		if (AFrogCharacter* Frog = Cast<AFrogCharacter>(CharacterOwner)) Frog->SetTongueVisibility(false);
+		if (const AFrogCharacter* Frog = Cast<AFrogCharacter>(CharacterOwner)) Frog->SetTongueVisibility(false);
+		return;
 	}
 }

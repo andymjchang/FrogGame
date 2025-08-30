@@ -11,6 +11,8 @@ UFrogGameplayAbility::UFrogGameplayAbility(): CooldownDuration(0)
 	NetExecutionPolicy = EGameplayAbilityNetExecutionPolicy::LocalPredicted;
 	InstancingPolicy = EGameplayAbilityInstancingPolicy::InstancedPerActor;
 	ReplicationPolicy = EGameplayAbilityReplicationPolicy::ReplicateYes;
+
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Frog.State.Downed")));
 }
 
 const FGameplayTagContainer* UFrogGameplayAbility::GetCooldownTags() const
