@@ -20,9 +20,13 @@ AProjectile::AProjectile()
     CollisionComponent->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
     RootComponent = CollisionComponent;
 
-    EffectCollisionComponent = CreateDefaultSubobject<USphereComponent>(TEXT("WorldCollisionComponent"));
+    EffectCollisionComponent = CreateDefaultSubobject<USphereComponent>(TEXT("EffectCollisionComponent"));
     EffectCollisionComponent->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
     EffectCollisionComponent->SetupAttachment(RootComponent);
+
+    EffectCollisionComponent2 = CreateDefaultSubobject<USphereComponent>(TEXT("EffectCollisionComponent2"));
+    EffectCollisionComponent2->SetCollisionProfileName(TEXT("NoCollision"));
+    EffectCollisionComponent2->SetupAttachment(RootComponent);
 
     ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovement"));
     ProjectileMovement->SetUpdatedComponent(CollisionComponent);
@@ -49,25 +53,41 @@ void AProjectile::BeginPlay()
 
     CollisionComponent->OnComponentHit.AddDynamic(this, &AProjectile::OnHit);
     EffectCollisionComponent->OnComponentBeginOverlap.AddDynamic(this, &AProjectile::OnComponentBeginOverlap);
+    if (bIsSecondHitboxActive)
+    {
+        EffectCollisionComponent2->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+        EffectCollisionComponent2->OnComponentBeginOverlap.AddDynamic(this, &AProjectile::OnComponentBeginOverlap2); 
+    }
 }
 
 void AProjectile::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
                                           UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-    if (bApplyEffect)
+    ApplyGameplayEffect(OtherActor, GameplayEffect);
+}
+
+void AProjectile::OnComponentBeginOverlap2(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+    UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+    ApplyGameplayEffect(OtherActor, GameplayEffect2);
+}
+
+void AProjectile::ApplyGameplayEffect(const AActor* OtherActor, const TSubclassOf<UGameplayEffect> Effect)
+{
+    if (OtherActor && OtherActor != GetOwner())
     {
-        if (OtherActor && OtherActor != GetOwner())
+        if (bApplyEffect)
         {
             if (const IAbilitySystemInterface* AbilitySystemInterface = Cast<IAbilitySystemInterface>(OtherActor))
             {
                 UAbilitySystemComponent* TargetASC = AbilitySystemInterface->GetAbilitySystemComponent();
-                if (IsValid(DamageEffect))
+                if (IsValid(GameplayEffect))
                 {
                     FGameplayEffectContextHandle Context = TargetASC->MakeEffectContext();
                     Context.AddSourceObject(this);
                     Context.AddInstigator(GetInstigator(), GetOwner());
                     
-                    FGameplayEffectSpecHandle Spec = TargetASC->MakeOutgoingSpec(DamageEffect, 1.0f, Context);
+                    FGameplayEffectSpecHandle Spec = TargetASC->MakeOutgoingSpec(Effect, 1.0f, Context);
                     if (Spec.IsValid())
                     {
                         TargetASC->ApplyGameplayEffectSpecToSelf(*Spec.Data.Get());
@@ -75,10 +95,11 @@ void AProjectile::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedCompone
                 }
             }
         }
+        SpawnDestroyVFX();
+        Destroy();
     }
         
-    SpawnDestroyVFX();
-    Destroy();
+    
 }
 
 void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)

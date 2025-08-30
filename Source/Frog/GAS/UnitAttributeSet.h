@@ -38,6 +38,11 @@ public:
 	FGameplayAttributeData Damage;
 	ATTRIBUTE_ACCESSORS(UUnitAttributeSet, Damage);
 
+	// Healing, server side only
+	UPROPERTY(BlueprintReadOnly, Category="Unit Attributes")
+	FGameplayAttributeData Healing;
+	ATTRIBUTE_ACCESSORS(UUnitAttributeSet, Healing);
+
 	// Movement Speed
 	UPROPERTY(BlueprintReadOnly, Category="Unit Attributes", ReplicatedUsing=OnRep_MovementSpeedModifier)
 	FGameplayAttributeData MovementSpeedModifier;

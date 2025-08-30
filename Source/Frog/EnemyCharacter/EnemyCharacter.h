@@ -8,6 +8,8 @@
 #include "Unit/UnitInterface.h"
 #include "EnemyCharacter.generated.h"
 
+class UAttributeSet;
+class USphereComponent;
 class UProjectileSpawnerComponent;
 class UNametagWidgetComponent;
 
@@ -32,19 +34,19 @@ protected: // Protected Function
 	
 protected: // Protected Members
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	class USphereComponent* Hitbox;
+	TObjectPtr<USphereComponent> Hitbox;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	UNametagWidgetComponent* HealthBarWidgetComponent;
+	TObjectPtr<UNametagWidgetComponent> HealthBarWidgetComponent;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	UProjectileSpawnerComponent* ProjectileSpawner;
+	TObjectPtr<UProjectileSpawnerComponent> ProjectileSpawner;
 	
 	// Gameplay Ability System
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "GAS")
-	UAbilitySystemComponent* AbilitySystemComponent;
+	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "GAS")
-	class UAttributeSet* AttributeSet;
+	TObjectPtr<UAttributeSet> AttributeSet;
 
 };

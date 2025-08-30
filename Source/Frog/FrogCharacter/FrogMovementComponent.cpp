@@ -73,14 +73,14 @@ void UFrogMovementComponent::OnMovementModeChanged(EMovementMode PreviousMovemen
 	// Enter Grapple
 	if (MovementMode == MOVE_Custom && CustomMovementMode == static_cast<uint8>(ECustomMovementMode::CMOVE_Grapple))
 	{
-		if (const AFrogCharacter* Frog = Cast<AFrogCharacter>(CharacterOwner)) Frog->SetTongueVisibility(true);
+		if (AFrogCharacter* Frog = Cast<AFrogCharacter>(CharacterOwner)) Frog->SetTongueVisibility(true);
 		return;
 	}
     
 	// Exit Grapple
 	if (PreviousMovementMode == MOVE_Custom && PreviousCustomMode == static_cast<uint8>(ECustomMovementMode::CMOVE_Grapple))
 	{
-		if (const AFrogCharacter* Frog = Cast<AFrogCharacter>(CharacterOwner)) Frog->SetTongueVisibility(false);
+		if (AFrogCharacter* Frog = Cast<AFrogCharacter>(CharacterOwner)) Frog->SetTongueVisibility(false);
 		return;
 	}
 }

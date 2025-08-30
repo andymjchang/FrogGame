@@ -10,6 +10,7 @@ void UUnitAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Ou
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 	DOREPLIFETIME(UUnitAttributeSet, Health);
 	DOREPLIFETIME(UUnitAttributeSet, MaxHealth);
+	DOREPLIFETIME(UUnitAttributeSet, MovementSpeedModifier);
 }
 
 void UUnitAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue)
@@ -38,6 +39,17 @@ void UUnitAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallba
 		if (LocalDamage > 0.f)
 		{
 			const float NewHealth = GetHealth() - LocalDamage;
+			SetHealth(FMath::Clamp(NewHealth, 0.0f, GetMaxHealth()));
+		}
+	}
+	else if (Data.EvaluatedData.Attribute == GetHealingAttribute())
+	{
+		const float LocalHealing = GetHealing();
+		SetHealing(0.f);
+
+		if (LocalHealing > 0.f)
+		{
+			const float NewHealth = GetHealth() + LocalHealing;
 			SetHealth(FMath::Clamp(NewHealth, 0.0f, GetMaxHealth()));
 		}
 	}

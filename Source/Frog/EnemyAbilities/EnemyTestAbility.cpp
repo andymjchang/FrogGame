@@ -55,4 +55,4 @@ void UEnemyTestAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
 	}
     
 	EndAbility(Handle, ActorInfo, ActivationInfo, true, false);
-}
+} 

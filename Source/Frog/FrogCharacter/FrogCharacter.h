@@ -11,6 +11,7 @@
 #include "AbilitySystemInterface.h"
 #include "FrogCharacter.generated.h"
 
+class USphereComponent;
 class UNametagWidgetComponent;
 class UWidgetComponent;
 class UFrogHUD;
@@ -73,7 +74,7 @@ public: /* Public Functions */
 	virtual void SetMaxHealth(const float NewMaxHealth) override;
 	virtual UProjectileSpawnerComponent* GetProjectileSpawnerComponent() override;
 
-	void SetTongueVisibility(bool Value) const;      
+	void SetTongueVisibility(bool Value);      
 
 public: /* Public Members */
 
@@ -94,34 +95,34 @@ protected: /* Protected Functions */
 	void Look(const FInputActionValue& Value);
 
 	// Grapple 
-	void RedrawTongueLocation() const;
+	void RedrawTongueLocation();
 	
 protected: /* Members */
 	// Components
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	USpringArmComponent* CameraBoom;
+	TObjectPtr<USpringArmComponent> CameraBoom;
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	UCameraComponent* FollowCamera;
+	TObjectPtr<UCameraComponent> FollowCamera;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	class USphereComponent* Hitbox;
+	TObjectPtr<USphereComponent> Hitbox;
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	UFrogTongue* Tongue;
+	TObjectPtr<UFrogTongue> Tongue;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	UNametagWidgetComponent* HealthBarWidgetComponent;
+	TObjectPtr<UNametagWidgetComponent> HealthBarWidgetComponent;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	UProjectileSpawnerComponent* ProjectileSpawner;
+	TObjectPtr<UProjectileSpawnerComponent> ProjectileSpawner;
 
 	// HUD
 	UPROPERTY(EditDefaultsOnly, Category="HUD")
 	TSubclassOf<UFrogHUD> FrogHUDClass;
 	
 	UPROPERTY()
-	UFrogHUD* FrogHUDWidget;
+	TObjectPtr<UFrogHUD> FrogHUDWidget;
 	
 	// Movement
 	UPROPERTY(EditDefaultsOnly, Category = "Movement")
@@ -135,16 +136,16 @@ protected: /* Members */
 
 	// Gameplay Ability System
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "GAS")
-	UFrogAbilitySystem* AbilitySystemComponent;
+	TObjectPtr<UFrogAbilitySystem> AbilitySystemComponent;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GAS")
 	TArray<TSubclassOf<UGameplayAbility>> DefaultAbilities;
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GAS")
-	UUnitAttributeSet* AttributeSet;
+	TObjectPtr<UUnitAttributeSet> AttributeSet;
 	
 	UPROPERTY(EditAnywhere, Category = "GAS")
-	UAbilitySet* AbilitySet;
+	TObjectPtr<UAbilitySet> AbilitySet;
 	
 	UPROPERTY(EditAnywhere, Category = "GAS")
 	TSubclassOf<UGameplayEffect> DefaultAttributes;
@@ -154,7 +155,7 @@ protected: /* Members */
 	
 	// Mapping Context
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
-	UInputMappingContext* DefaultMappingContext;
+	TObjectPtr<UInputMappingContext> DefaultMappingContext;
 	
 	UPROPERTY(EditDefaultsOnly, Category = Input)
 	FAbilityInputBindings AbilityInputBindings;
@@ -164,10 +165,10 @@ protected: /* Members */
 
 	// Input Actions
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
-	UInputAction* MoveAction;
+	TObjectPtr<UInputAction> MoveAction;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
-	UInputAction* LookAction;
+	TObjectPtr<UInputAction> LookAction;
 	
 	// Grapple 
 	UPROPERTY(Replicated)

@@ -244,7 +244,7 @@ void AFrogCharacter::Move(const FInputActionValue& Value)
 
 void AFrogCharacter::Look(const FInputActionValue& Value)
 {
-	FVector2D LookAxisVector = Value.Get<FVector2D>();
+	const FVector2D LookAxisVector = Value.Get<FVector2D>();
 
 	if (IsValid(Controller))
 	{
@@ -253,24 +253,22 @@ void AFrogCharacter::Look(const FInputActionValue& Value)
 	}
 }
 
-// ReSharper disable once CppMemberFunctionMayBeConst
 void AFrogCharacter::AbilityInputBindingPressedHandler(EAbilityInputID AbilityInputID)
 {
 	AbilitySystemComponent->AbilityLocalInputPressed(static_cast<uint32>(AbilityInputID));
 }
 
-// ReSharper disable once CppMemberFunctionMayBeConst
 void AFrogCharacter::AbilityInputBindingReleasedHandler(EAbilityInputID AbilityInputID)
 {
 	AbilitySystemComponent->AbilityLocalInputReleased(static_cast<uint32>(AbilityInputID));
 }
 
-void AFrogCharacter::SetTongueVisibility(const bool Value) const
+void AFrogCharacter::SetTongueVisibility(const bool Value)
 {
 	if (IsValid(Tongue)) Tongue->SetVisibility(Value);
 }
 
-void AFrogCharacter::RedrawTongueLocation() const
+void AFrogCharacter::RedrawTongueLocation()
 {
 	if (IsValid(Tongue)) Tongue->EndLocation = GetActorTransform().InverseTransformPosition(GrapplePoint);
 }
