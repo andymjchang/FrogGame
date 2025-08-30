@@ -147,7 +147,17 @@ void AFrogCharacter::SetupAbilities()
 
 void AFrogCharacter::HandleDeath()
 {
-	
+	if (IsValid(AbilitySystemComponent) && OnDeathEffect)
+	{
+		FGameplayEffectContextHandle ContextHandle = AbilitySystemComponent->MakeEffectContext();
+		ContextHandle.AddSourceObject(this);
+		const FGameplayEffectSpecHandle SpecHandle = AbilitySystemComponent->MakeOutgoingSpec(OnDeathEffect, 1.0f, ContextHandle);
+		
+		if (SpecHandle.IsValid())
+		{
+			AbilitySystemComponent->ApplyGameplayEffectSpecToSelf(*SpecHandle.Data.Get());
+		}
+	}
 }
 
 void AFrogCharacter::SetHealth(const float NewHealth)

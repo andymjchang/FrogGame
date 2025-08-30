@@ -24,27 +24,34 @@ public:
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	
 	// Health
-	UPROPERTY(BlueprintReadOnly, Category="Health", ReplicatedUsing=OnRep_Health)
+	UPROPERTY(BlueprintReadOnly, Category="Unit Attributes", ReplicatedUsing=OnRep_Health)
 	FGameplayAttributeData Health;
 	ATTRIBUTE_ACCESSORS(UUnitAttributeSet, Health);
 
 	// Max Health
-	UPROPERTY(BlueprintReadOnly, Category="MaxHealth", ReplicatedUsing=OnRep_Health)
+	UPROPERTY(BlueprintReadOnly, Category="Unit Attributes", ReplicatedUsing=OnRep_Health)
 	FGameplayAttributeData MaxHealth;
 	ATTRIBUTE_ACCESSORS(UUnitAttributeSet, MaxHealth);
 
 	// Damage, server side only
-	UPROPERTY(BlueprintReadOnly, Category="Damage")
+	UPROPERTY(BlueprintReadOnly, Category="Unit Attributes")
 	FGameplayAttributeData Damage;
 	ATTRIBUTE_ACCESSORS(UUnitAttributeSet, Damage);
+
+	// Movement Speed
+	UPROPERTY(BlueprintReadOnly, Category="Unit Attributes", ReplicatedUsing=OnRep_MovementSpeedModifier)
+	FGameplayAttributeData MovementSpeedModifier;
+	ATTRIBUTE_ACCESSORS(UUnitAttributeSet, MovementSpeedModifier);
 
 	virtual void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override;
 	virtual void PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data) override;
 
 	// On Rep Functions
 	UFUNCTION()
-	void OnRep_Health(const FGameplayAttributeData& OldHealth);
+	void OnRep_Health(const FGameplayAttributeData& OldHealth) const;
 	UFUNCTION()
-	void OnRep_MaxHealth(const FGameplayAttributeData& OldMaxHealth);
+	void OnRep_MaxHealth(const FGameplayAttributeData& OldMaxHealth) const;
+	UFUNCTION()
+	void OnRep_MovementSpeedModifier(const FGameplayAttributeData& OldMovementSpeedModifier) const;
 	
 };

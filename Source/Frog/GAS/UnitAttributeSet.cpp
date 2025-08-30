@@ -43,12 +43,17 @@ void UUnitAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallba
 	}
 }
 
-void UUnitAttributeSet::OnRep_Health(const FGameplayAttributeData& OldHealth)
+void UUnitAttributeSet::OnRep_Health(const FGameplayAttributeData& OldHealth) const
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UUnitAttributeSet, Health, OldHealth);
 }
 
-void UUnitAttributeSet::OnRep_MaxHealth(const FGameplayAttributeData& OldMaxHealth)
+void UUnitAttributeSet::OnRep_MaxHealth(const FGameplayAttributeData& OldMaxHealth) const
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UUnitAttributeSet, MaxHealth, OldMaxHealth);
+}
+
+void UUnitAttributeSet::OnRep_MovementSpeedModifier(const FGameplayAttributeData& OldMovementSpeedModifier) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UUnitAttributeSet, MaxHealth, OldMovementSpeedModifier);
 }
