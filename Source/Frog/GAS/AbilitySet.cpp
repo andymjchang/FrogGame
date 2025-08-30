@@ -29,11 +29,7 @@ TArray<FGameplayAbilitySpecHandle> UAbilitySet::GrantAbilitiesToAbilitySystem(
           
 			if (FrogHUD && Handle.IsValid())
 			{
-				FGameplayAbilitySpec* AbilitySpec = InputAbilitySystem->FindAbilitySpecFromHandle(Handle);
-				if (AbilitySpec && AbilitySpec->Ability)
-				{
-					FrogHUD->AssignAbilityToUISlot(AbilitySpec->Ability, InputAbilitySystem);
-				}
+				FrogHUD->AssignAbilityToUISlot(Handle, InputAbilitySystem);
 			}
 		}
 	}

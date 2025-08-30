@@ -15,7 +15,7 @@ class UI_API UFrogHUD : public UUserWidget
 	GENERATED_BODY()
 	
 public:
-	void AssignAbilityToUISlot(UGameplayAbility* InputAbility, UAbilitySystemComponent* InputAbilitySystem) const;
+	void AssignAbilityToUISlot(FGameplayAbilitySpecHandle InputAbilitySpecHandle, UAbilitySystemComponent* InputAbilitySystem) const;
 	
 	UPROPERTY(meta = (BindWidget))
 	UAbilityIcon* AbilityIconPrimary;

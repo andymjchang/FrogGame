@@ -3,45 +3,47 @@
 
 #include "FrogHUD.h"
 #include "AbilityIcon.h"
+#include "AbilitySystemComponent.h"
 #include "Abilities/GameplayAbility.h"
 
-void UFrogHUD::AssignAbilityToUISlot(UGameplayAbility* InputAbility, UAbilitySystemComponent* InputAbilitySystem) const
+void UFrogHUD::AssignAbilityToUISlot(FGameplayAbilitySpecHandle InputAbilitySpecHandle, UAbilitySystemComponent* InputAbilitySystem) const
 {
-	const FGameplayTagContainer& AbilityTags = InputAbility->GetAssetTags();
+	FGameplayAbilitySpec* AbilitySpec = InputAbilitySystem->FindAbilitySpecFromHandle(InputAbilitySpecHandle);
+	const FGameplayTagContainer& AbilityTags = AbilitySpec->Ability->GetAssetTags();
 
 	if (AbilityTags.HasTag(FGameplayTag::RequestGameplayTag(FName("Frog.AbilitySlot.Primary"))))
 	{
 		if (AbilityIconPrimary)
 		{
-			AbilityIconPrimary->TrackAbility(InputAbilitySystem, InputAbility);
+			AbilityIconPrimary->TrackAbility(InputAbilitySystem, InputAbilitySpecHandle);
 		}
 	}
 	else if (AbilityTags.HasTag(FGameplayTag::RequestGameplayTag(FName("Frog.AbilitySlot.Secondary"))))
 	{
 		if (AbilityIconSecondary)
 		{
-			AbilityIconSecondary->TrackAbility(InputAbilitySystem, InputAbility);
+			AbilityIconSecondary->TrackAbility(InputAbilitySystem, InputAbilitySpecHandle);
 		}
 	}
 	else if (AbilityTags.HasTag(FGameplayTag::RequestGameplayTag(FName("Frog.AbilitySlot.Grapple"))))
 	{
 		if (AbilityIconGrapple)
 		{
-			AbilityIconGrapple->TrackAbility(InputAbilitySystem, InputAbility);
+			AbilityIconGrapple->TrackAbility(InputAbilitySystem, InputAbilitySpecHandle);
 		}
 	}
 	else if (AbilityTags.HasTag(FGameplayTag::RequestGameplayTag(FName("Frog.AbilitySlot.Dive"))))
 	{
 		if (AbilityIconDive)
 		{
-			AbilityIconDive->TrackAbility(InputAbilitySystem, InputAbility);
+			AbilityIconDive->TrackAbility(InputAbilitySystem, InputAbilitySpecHandle);
 		}
 	}
 	else if (AbilityTags.HasTag(FGameplayTag::RequestGameplayTag(FName("Frog.AbilitySlot.Utility"))))
 	{
 		if (AbilityIconUtility)
 		{
-			AbilityIconUtility->TrackAbility(InputAbilitySystem, InputAbility);
+			AbilityIconUtility->TrackAbility(InputAbilitySystem, InputAbilitySpecHandle);
 		}
 	}
 }
