@@ -158,6 +158,8 @@ void AFrogCharacter::HandleDeath()
 			AbilitySystemComponent->ApplyGameplayEffectSpecToSelf(*SpecHandle.Data.Get());
 		}
 	}
+	GetCharacterMovement()->MaxWalkSpeed = 10.f;
+	AbilitySystemComponent->CancelAllAbilities();
 }
 
 void AFrogCharacter::SetHealth(const float NewHealth)

@@ -50,12 +50,6 @@ void UFrogAbilityGrapple::InputReleased(const FGameplayAbilitySpecHandle Handle,
                                        const FGameplayAbilityActivationInfo ActivationInfo)
 {
     Super::InputReleased(Handle, ActorInfo, ActivationInfo);
-    
-    if (AFrogCharacter* Character = Cast<AFrogCharacter>(ActorInfo->AvatarActor.Get()))
-    {
-        PerformStopGrapple(Character);
-    }
-    
     EndAbility(Handle, ActorInfo, ActivationInfo, true, false);
 }
 
@@ -66,6 +60,12 @@ void UFrogAbilityGrapple::EndAbility(const FGameplayAbilitySpecHandle Handle,
                                     bool bWasCancelled)
 {
     CommitAbilityCooldown(Handle, ActorInfo, ActivationInfo, false);
+    
+    if (AFrogCharacter* Character = Cast<AFrogCharacter>(ActorInfo->AvatarActor.Get()))
+    {
+        PerformStopGrapple(Character);
+    }
+    
     Super::EndAbility(Handle, ActorInfo, ActivationInfo, bReplicateEndAbility, bWasCancelled);
 }
 
