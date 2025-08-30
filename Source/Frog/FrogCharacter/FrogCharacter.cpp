@@ -158,8 +158,10 @@ void AFrogCharacter::HandleDeath()
 			AbilitySystemComponent->ApplyGameplayEffectSpecToSelf(*SpecHandle.Data.Get());
 		}
 	}
-	GetCharacterMovement()->MaxWalkSpeed = 10.f;
+	GetCharacterMovement()->MaxWalkSpeed = DownedSpeed;
 	AbilitySystemComponent->CancelAllAbilities();
+	GetMesh()->SetCollisionProfileName(TEXT("Ragdoll"));
+	GetMesh()->SetSimulatePhysics(true);
 }
 
 void AFrogCharacter::SetHealth(const float NewHealth)

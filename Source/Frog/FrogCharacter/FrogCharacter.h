@@ -130,6 +130,9 @@ protected: /* Members */
 	UPROPERTY(EditDefaultsOnly, Category = "Movement")
 	float DiveSpeed;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Movement")
+	float DownedSpeed;
+
 	// Gameplay Ability System
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "GAS")
 	UFrogAbilitySystem* AbilitySystemComponent;

@@ -46,11 +46,12 @@ void UEnemyTestAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
 
 	const FVector TargetLocation = TargetActor->GetActorLocation();
 	const FVector TargetDirection = (TargetLocation - AvatarPawn->GetActorLocation()).GetSafeNormal();
+	const FVector TempOffset = FVector(0, 0, 50.f);
     
 	if (UProjectileSpawnerComponent* ProjectileSpawner = Unit->GetProjectileSpawnerComponent())
 	{
 		ProjectileSpawner->RequestSpawnProjectile(ProjectileClass,
-		   AvatarPawn->GetActorLocation(), FRotator::ZeroRotator, TargetDirection);
+		   AvatarPawn->GetActorLocation() + TempOffset, FRotator::ZeroRotator, TargetDirection);
 	}
     
 	EndAbility(Handle, ActorInfo, ActivationInfo, true, false);
