@@ -18,11 +18,11 @@ AProjectile::AProjectile()
 
     CollisionComponent = CreateDefaultSubobject<USphereComponent>(TEXT("CollisionComponent"));
     CollisionComponent->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
-    CollisionComponent->SetGenerateOverlapEvents(true);
     RootComponent = CollisionComponent;
 
-    DamageCollisionComponent = CreateDefaultSubobject<USphereComponent>(TEXT("DamageCollisionComponent"));
-    DamageCollisionComponent->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+    EffectCollisionComponent = CreateDefaultSubobject<USphereComponent>(TEXT("WorldCollisionComponent"));
+    EffectCollisionComponent->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+    EffectCollisionComponent->SetupAttachment(RootComponent);
 
     ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovement"));
     ProjectileMovement->SetUpdatedComponent(CollisionComponent);
@@ -46,9 +46,9 @@ void AProjectile::SetApplyEffect(const bool ApplyEffect)
 void AProjectile::BeginPlay()
 {
     Super::BeginPlay();
-    
-    CollisionComponent->OnComponentBeginOverlap.AddDynamic(this, &AProjectile::OnComponentBeginOverlap);
+
     CollisionComponent->OnComponentHit.AddDynamic(this, &AProjectile::OnHit);
+    EffectCollisionComponent->OnComponentBeginOverlap.AddDynamic(this, &AProjectile::OnComponentBeginOverlap);
 }
 
 void AProjectile::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
