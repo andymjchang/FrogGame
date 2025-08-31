@@ -20,7 +20,7 @@ public:
 	virtual const FGameplayTagContainer* GetCooldownTags() const override;
 	virtual void ApplyCooldown(FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo,
 							   FGameplayAbilityActivationInfo ActivationInfo) const override;
-	FVector GetCrosshairLocation() const;
+	FVector GetCrosshairLocation(bool bGetClosestTarget) const;
 
 protected:
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Cooldown")

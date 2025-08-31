@@ -38,7 +38,7 @@ void UFrogGameplayAbility::ApplyCooldown(const FGameplayAbilitySpecHandle Handle
 	}
 }
 
-FVector UFrogGameplayAbility::GetCrosshairLocation() const
+FVector UFrogGameplayAbility::GetCrosshairLocation(bool bGetClosestTarget) const
 {
 	AActor* Owner = GetOwningActorFromActorInfo();
 	AFrogCharacter* FrogCharacter = Cast<AFrogCharacter>(Owner);
@@ -79,12 +79,12 @@ FVector UFrogGameplayAbility::GetCrosshairLocation() const
 #endif
 
 	FVector CameraImpactPoint;
-	if (bCameraHit)
+	if (bCameraHit && bGetClosestTarget)
 	{
 		CameraImpactPoint = CameraHitResult.ImpactPoint;
 	} else
 	{
-		CameraImpactPoint = CameraWorldLocation + CameraForward * 1000.f;
+		CameraImpactPoint = CameraWorldLocation + CameraForward * 3000.f;
 	}
     
 #if UE_BUILD_DEVELOPMENT || UE_BUILD_DEBUG
