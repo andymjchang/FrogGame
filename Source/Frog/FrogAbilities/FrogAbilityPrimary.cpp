@@ -28,9 +28,12 @@ void UFrogAbilityPrimary::ActivateAbility(const FGameplayAbilitySpecHandle Handl
 	
 	if (UProjectileSpawnerComponent* ProjectileSpawner = Unit->GetProjectileSpawnerComponent())
 	{
-		FVector UnitLocation = ActorInfo->AvatarActor.Get()->GetActorLocation();
-		ProjectileSpawner->RequestSpawnProjectile(ProjectileClass, UnitLocation,
-			FRotator::ZeroRotator, GetCrosshairLocation());
+		const FVector UnitLocation = ActorInfo->AvatarActor.Get()->GetActorLocation() + FVector(0, 0, 15.f);
+		const FVector CrosshairLocation = GetCrosshairLocation();
+		const FVector FireDirection = (GetCrosshairLocation() - UnitLocation).GetSafeNormal();
+		// const FRotator FireRotation = FRotator(0, 0, 0);
+		const FRotator FireRotation = FireDirection.Rotation();
+		ProjectileSpawner->RequestSpawnProjectile(ProjectileClass, UnitLocation, FireRotation, FireDirection);
 	}
 
 	CommitAbilityCooldown(Handle, ActorInfo, ActivationInfo, false);

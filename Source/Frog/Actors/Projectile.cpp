@@ -63,16 +63,16 @@ void AProjectile::BeginPlay()
 void AProjectile::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
                                           UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-    ApplyGameplayEffect(OtherActor, GameplayEffect);
+    ApplyGameplayEffect(OtherActor, GameplayEffect, bDestroyOnHitbox1Hit);
 }
 
 void AProjectile::OnComponentBeginOverlap2(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
     UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-    ApplyGameplayEffect(OtherActor, GameplayEffect2);
+    ApplyGameplayEffect(OtherActor, GameplayEffect2, bDestroyOnHitbox2Hit);
 }
 
-void AProjectile::ApplyGameplayEffect(const AActor* OtherActor, const TSubclassOf<UGameplayEffect> Effect)
+void AProjectile::ApplyGameplayEffect(const AActor* OtherActor, const TSubclassOf<UGameplayEffect> Effect, const bool bDestroyOnHit)
 {
     if (OtherActor && OtherActor != GetOwner())
     {
@@ -95,8 +95,8 @@ void AProjectile::ApplyGameplayEffect(const AActor* OtherActor, const TSubclassO
                 }
             }
         }
+        if (bDestroyOnHit) Destroy();
         SpawnDestroyVFX();
-        Destroy();
     }
         
     

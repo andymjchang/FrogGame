@@ -84,7 +84,7 @@ FVector UFrogGameplayAbility::GetCrosshairLocation() const
 		CameraImpactPoint = CameraHitResult.ImpactPoint;
 	} else
 	{
-		CameraImpactPoint = CameraWorldLocation + CameraForward * 3000.f;
+		CameraImpactPoint = CameraWorldLocation + CameraForward * 1000.f;
 	}
     
 #if UE_BUILD_DEVELOPMENT || UE_BUILD_DEBUG
@@ -99,7 +99,5 @@ FVector UFrogGameplayAbility::GetCrosshairLocation() const
 	);
 #endif
 
-	const FVector FireDirection = (CameraImpactPoint - PlayerLocation).GetSafeNormal();
-	
-	return FireDirection;
+	return CameraLookPoint;
 }

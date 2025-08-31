@@ -40,17 +40,24 @@ protected: // Protected Functions
 	           FVector NormalImpulse,
 	           const FHitResult& Hit);
 
-	void ApplyGameplayEffect(const AActor* OtherActor, TSubclassOf<UGameplayEffect> Effect);
+	void ApplyGameplayEffect(const AActor* OtherActor, TSubclassOf<UGameplayEffect> Effect, bool bDestroyOnHit);
 	void SpawnDestroyVFX() const;
 
 protected: // Protected Members
 	bool bApplyEffect;
+	
 	// Combat
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Combat")
 	TSubclassOf<UGameplayEffect> GameplayEffect;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Combat")
+	bool bDestroyOnHitbox1Hit;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Combat")
 	TSubclassOf<UGameplayEffect> GameplayEffect2;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Combat")
+	bool bDestroyOnHitbox2Hit;
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Combat")
 	TObjectPtr<UNiagaraSystem> HitFX;
