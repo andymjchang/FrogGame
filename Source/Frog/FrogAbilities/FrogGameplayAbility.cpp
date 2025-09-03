@@ -64,19 +64,19 @@ FVector UFrogGameplayAbility::GetCrosshairLocation(bool bGetClosestTarget) const
 	   Params
 	);
 
-#if UE_BUILD_DEVELOPMENT || UE_BUILD_DEBUG
-	FColor CameraTraceColor = bCameraHit ? FColor::Red : FColor::Yellow;
-	DrawDebugLine(
-		GetWorld(),
-		CameraOffsetLocation,
-		bCameraHit ? CameraHitResult.ImpactPoint : CameraLookPoint,
-		CameraTraceColor,
-		false,
-		2.0f,
-		0,
-		2.0f
-	);
-#endif
+// #if UE_BUILD_DEVELOPMENT || UE_BUILD_DEBUG
+// 	FColor CameraTraceColor = bCameraHit ? FColor::Red : FColor::Yellow;
+// 	DrawDebugLine(
+// 		GetWorld(),
+// 		CameraOffsetLocation,
+// 		bCameraHit ? CameraHitResult.ImpactPoint : CameraLookPoint,
+// 		CameraTraceColor,
+// 		false,
+// 		2.0f,
+// 		0,
+// 		2.0f
+// 	);
+// #endif
 
 	FVector CameraImpactPoint;
 	if (bCameraHit && bGetClosestTarget)
@@ -87,17 +87,17 @@ FVector UFrogGameplayAbility::GetCrosshairLocation(bool bGetClosestTarget) const
 		CameraImpactPoint = CameraWorldLocation + CameraForward * 3000.f;
 	}
     
-#if UE_BUILD_DEVELOPMENT || UE_BUILD_DEBUG
-	DrawDebugSphere(
-		GetWorld(),
-		CameraImpactPoint,
-		10.0f,
-		12,
-		FColor::Red,
-		false,
-		2.0f
-	);
-#endif
+// #if UE_BUILD_DEVELOPMENT || UE_BUILD_DEBUG
+// 	DrawDebugSphere(
+// 		GetWorld(),
+// 		CameraImpactPoint,
+// 		10.0f,
+// 		12,
+// 		FColor::Red,
+// 		false,
+// 		2.0f
+// 	);
+// #endif
 
-	return CameraLookPoint;
+	return CameraImpactPoint;
 }

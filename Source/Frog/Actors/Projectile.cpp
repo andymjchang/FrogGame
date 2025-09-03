@@ -17,11 +17,11 @@ AProjectile::AProjectile()
     InitialLifeSpan = 5.0f;
 
     CollisionComponent = CreateDefaultSubobject<USphereComponent>(TEXT("CollisionComponent"));
-    CollisionComponent->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+    CollisionComponent->SetCollisionProfileName(TEXT("ProjectileWorldCollider"));
     RootComponent = CollisionComponent;
 
     EffectCollisionComponent = CreateDefaultSubobject<USphereComponent>(TEXT("EffectCollisionComponent"));
-    EffectCollisionComponent->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+    EffectCollisionComponent->SetCollisionProfileName(TEXT("NoCollision"));
     EffectCollisionComponent->SetupAttachment(RootComponent);
 
     EffectCollisionComponent2 = CreateDefaultSubobject<USphereComponent>(TEXT("EffectCollisionComponent2"));

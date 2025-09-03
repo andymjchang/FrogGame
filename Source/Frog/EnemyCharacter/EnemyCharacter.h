@@ -29,6 +29,8 @@ public: // Public Functions
 	virtual void SetMaxHealth(const float NewMaxHealth) override;
 	virtual UProjectileSpawnerComponent* GetProjectileSpawnerComponent() override;
 
+	FORCEINLINE USphereComponent* GetHitboxComponent() { return Hitbox; }
+
 protected: // Protected Function
 	virtual void BeginPlay() override;
 	

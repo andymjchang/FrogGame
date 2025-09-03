@@ -21,6 +21,8 @@ public:
 	void FireInDirection(const FVector& ShootDirection) const;
 	void SetApplyEffect(bool ApplyEffect);
 	
+	FORCEINLINE UProjectileMovementComponent* GetProjectileMovementComponent() { return ProjectileMovement; }
+	
 protected: // Protected Functions
 	UFUNCTION()
 	virtual void BeginPlay() override;
@@ -42,7 +44,7 @@ protected: // Protected Functions
 
 	void ApplyGameplayEffect(const AActor* OtherActor, TSubclassOf<UGameplayEffect> Effect, bool bDestroyOnHit);
 	void SpawnDestroyVFX() const;
-
+	
 protected: // Protected Members
 	bool bApplyEffect;
 	
