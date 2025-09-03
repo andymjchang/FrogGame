@@ -18,6 +18,7 @@
 #include "Frog/GAS/AbilitySet.h"
 #include "Frog/GAS/UnitAttributeSet.h"
 #include "Frog/GAS/FrogAbilitySystem.h"
+#include "Kismet/KismetSystemLibrary.h"
 #include "Unit/NametagWidgetComponent.h"
 #include "Unit/ProjectileSpawnerComponent.h"
 
@@ -99,6 +100,7 @@ void AFrogCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLi
 	// Grapple
 	DOREPLIFETIME(AFrogCharacter, GrapplePoint);
 	DOREPLIFETIME(AFrogCharacter, bIsGrapple);
+	DOREPLIFETIME(AFrogCharacter, bFindEnemyUnderCrosshair);
 }
 
 void AFrogCharacter::PostInitializeComponents()
@@ -131,6 +133,11 @@ UAbilitySystemComponent* AFrogCharacter::GetAbilitySystemComponent() const
 void AFrogCharacter::SetupAbilities()
 {
 	if (!IsValid(AbilitySystemComponent) || !IsValid(AttributeSet)) return;
+
+	TargetEnemiesTagDelegateHandle = AbilitySystemComponent->
+									 RegisterGameplayTagEvent(FindEnemyUnderCrosshairGameplayTag).AddUObject(
+										 this, &AFrogCharacter::OnTargetEnemiesTagChanged);
+	
 	if (IsValid(AbilitySet))
 	{
 		InitialAbilitySpecHandles.Append(AbilitySet->GrantAbilitiesToAbilitySystem(AbilitySystemComponent, FrogHUDWidget));
@@ -139,10 +146,9 @@ void AFrogCharacter::SetupAbilities()
 	// Apply initial stats
 	if (IsValid(DefaultAttributes))
 	{
-		AbilitySystemComponent->ApplyGameplayEffectToSelf(DefaultAttributes->GetDefaultObject<UGameplayEffect>(), 0.f, AbilitySystemComponent->MakeEffectContext());
+		AbilitySystemComponent->ApplyGameplayEffectToSelf(DefaultAttributes->GetDefaultObject<UGameplayEffect>(), 0.f,
+		                                                  AbilitySystemComponent->MakeEffectContext());
 	}
-	
-	// AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(UUnitAttributeSet::GetHealthAttribute()).AddUObject(this, &AFrogCharacter::OnHealthAttributeChanged);
 }
 
 void AFrogCharacter::HandleDeath()
@@ -223,6 +229,9 @@ void AFrogCharacter::Tick(float DeltaSeconds)
 	
 	// Grapple
 	if (bIsGrapple) RedrawTongueLocation();
+
+	// Auto Target Enemies
+	if (bFindEnemyUnderCrosshair) FindEnemyUnderCrosshair();
 }
 
 void AFrogCharacter::Move(const FInputActionValue& Value)
@@ -273,3 +282,37 @@ void AFrogCharacter::RedrawTongueLocation()
 	if (IsValid(Tongue)) Tongue->EndLocation = GetActorTransform().InverseTransformPosition(GrapplePoint);
 }
 
+AActor* AFrogCharacter::FindEnemyUnderCrosshair() const
+{
+	const FVector TraceStart = FollowCamera->GetComponentLocation();
+	const FVector CameraForward = FollowCamera->GetForwardVector();
+	const float TraceDistance = FindEnemyUnderCrosshairTraceDistance;
+	const FVector TraceEnd = TraceStart + (CameraForward * TraceDistance);
+
+	FHitResult HitResult;
+	
+	const bool bHit = UKismetSystemLibrary::SphereTraceSingleForObjects(
+		GetWorld(),
+		TraceStart,
+		TraceEnd,
+		FindEnemyUnderCrosshairTraceRadius,
+		FindEnemyUnderCrosshairObjectType,
+		false,                     
+		TArray<AActor*>(),          
+		EDrawDebugTrace::None, 
+		HitResult,
+		true
+	);
+	
+	if (bHit)
+	{
+		return HitResult.GetActor();
+	}
+	
+	return nullptr;
+}
+
+void AFrogCharacter::OnTargetEnemiesTagChanged(const FGameplayTag Tag, int32 NewCount)
+{
+	bFindEnemyUnderCrosshair = NewCount > 0;
+}

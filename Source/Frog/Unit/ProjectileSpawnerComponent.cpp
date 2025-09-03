@@ -5,7 +5,6 @@
 #include "GameFramework/Actor.h"
 #include "Engine/World.h"
 #include "Actors/Projectile.h"
-#include "Actors/TargetedProjectile.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 
 UProjectileSpawnerComponent::UProjectileSpawnerComponent()

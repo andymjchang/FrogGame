@@ -97,6 +97,9 @@ protected: /* Protected Functions */
 	// Grapple 
 	void RedrawTongueLocation();
 	
+	AActor* FindEnemyUnderCrosshair() const;
+	virtual void OnTargetEnemiesTagChanged(const FGameplayTag Tag, int32 NewCount);
+
 protected: /* Members */
 	// Components
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
@@ -136,7 +139,8 @@ protected: /* Members */
 
 	// Gameplay Ability System
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "GAS")
-	TObjectPtr<UFrogAbilitySystem> AbilitySystemComponent;
+	// TObjectPtr<UFrogAbilitySystem> AbilitySystemComponent;
+	UFrogAbilitySystem* AbilitySystemComponent;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GAS")
 	TArray<TSubclassOf<UGameplayAbility>> DefaultAbilities;
@@ -152,6 +156,23 @@ protected: /* Members */
 
 	UPROPERTY(EditDefaultsOnly, Category = "GAS")
 	TSubclassOf<UGameplayEffect> OnDeathEffect;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Enemy Targeting")
+	float FindEnemyUnderCrosshairTraceRadius;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Enemy Targeting")
+	float FindEnemyUnderCrosshairTraceDistance;
+
+	UPROPERTY(Replicated)
+	bool bFindEnemyUnderCrosshair;
+
+	FDelegateHandle TargetEnemiesTagDelegateHandle;
+
+	UPROPERTY(EditAnywhere, Category = "Enemy Targeting", meta = (DisplayName = "Target Object Types"))
+	TArray<TEnumAsByte<EObjectTypeQuery>> FindEnemyUnderCrosshairObjectType;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Enemy Targeting")
+	FGameplayTag FindEnemyUnderCrosshairGameplayTag;
 	
 	// Mapping Context
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
@@ -191,5 +212,6 @@ public: /* Public Getters/Setters */
 	FORCEINLINE void SetGrapplePoint(const FVector& NewGrapplePoint) { GrapplePoint = NewGrapplePoint; }
 	FORCEINLINE float GetWalkSpeed() const { return WalkSpeed; }
 	FORCEINLINE float GetDiveSpeed() const { return DiveSpeed; }
+	FORCEINLINE void SetFindEnemyUnderCrosshair(const bool Value) { bFindEnemyUnderCrosshair = Value; }
 };
 

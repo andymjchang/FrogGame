@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "FrogGameplayAbility.h"
 #include "Abilities/GameplayAbility.h"
-#include "Actors/TargetedProjectile.h"
 #include "FrogTargetedProjectile.generated.h"
 
 class AProjectile;
@@ -22,6 +21,8 @@ public:
 	virtual void EndAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo,
 	                        const FGameplayAbilityActivationInfo ActivationInfo, bool bReplicateEndAbility,
 	                        bool bWasCancelled) override;
+	virtual void OnGiveAbility(const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilitySpec& Spec) override;
+	virtual void OnRemoveAbility(const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilitySpec& Spec) override;
 
 protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Projectile Ability")
@@ -44,6 +45,9 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Projectile Ability")
 	float TargetComponentLifeSpawn;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Projectile Ability")
+	FGameplayTag TargetEnemiesStateTag;
 
 private:
 	UFUNCTION()

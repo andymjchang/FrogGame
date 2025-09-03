@@ -2,6 +2,7 @@
 
 #include "FrogTargetedProjectile.h"
 #include "TimerManager.h"
+#include "FrogCharacter/FrogCharacter.h"
 #include "Unit/ProjectileSpawnerComponent.h"
 #include "Unit/UnitInterface.h"
 
@@ -39,6 +40,34 @@ void UFrogTargetedProjectile::EndAbility(const FGameplayAbilitySpecHandle Handle
     }
 
     Super::EndAbility(Handle, ActorInfo, ActivationInfo, bReplicateEndAbility, bWasCancelled);
+}
+
+void UFrogTargetedProjectile::OnGiveAbility(const FGameplayAbilityActorInfo* ActorInfo,
+    const FGameplayAbilitySpec& Spec)
+{
+    Super::OnGiveAbility(ActorInfo, Spec);
+    
+    if (TargetEnemiesStateTag.IsValid())
+    {
+        if (UAbilitySystemComponent* ASC = ActorInfo->AbilitySystemComponent.Get())
+        {
+            ASC->AddLooseGameplayTag(TargetEnemiesStateTag);
+        }
+    }
+}
+
+void UFrogTargetedProjectile::OnRemoveAbility(const FGameplayAbilityActorInfo* ActorInfo,
+    const FGameplayAbilitySpec& Spec)
+{
+    Super::OnRemoveAbility(ActorInfo, Spec);
+    
+    if (TargetEnemiesStateTag.IsValid())
+    {
+        if (UAbilitySystemComponent* ASC = ActorInfo->AbilitySystemComponent.Get())
+        {
+            ASC->RemoveLooseGameplayTag(TargetEnemiesStateTag);
+        }
+    }
 }
 
 void UFrogTargetedProjectile::FireProjectile()
