@@ -299,7 +299,7 @@ void AFrogCharacter::FindEnemyUnderCrosshair()
 		FindEnemyUnderCrosshairObjectType,
 		false,                     
 		TArray<AActor*>(),          
-		EDrawDebugTrace::ForOneFrame, 
+		EDrawDebugTrace::None, 
 		HitResult,
 		true
 	);
