@@ -2,6 +2,8 @@
 
 #include "FrogTargetedProjectile.h"
 #include "TimerManager.h"
+#include "Components/SphereComponent.h"
+#include "EnemyCharacter/EnemyCharacter.h"
 #include "FrogCharacter/FrogCharacter.h"
 #include "Unit/ProjectileSpawnerComponent.h"
 #include "Unit/UnitInterface.h"
@@ -16,11 +18,24 @@ void UFrogTargetedProjectile::ActivateAbility(const FGameplayAbilitySpecHandle H
        EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
        return;
     }
+
+    TargetComponent = nullptr;
+    if (const AFrogCharacter* Frog = Cast<AFrogCharacter>(ActorInfo->AvatarActor.Get()))
+    {
+        if (AEnemyCharacter* Enemy = Cast<AEnemyCharacter>(Frog->GetTargetEnemyActor()))
+        {
+            TargetComponent = Cast<USphereComponent>(Enemy->GetHitboxComponent());
+        }
+    }
+    if (!TargetComponent)
+    {
+        const FVector CrosshairLocation = GetCrosshairLocation(false);
+        AActor* DummyActor = GetWorld()->SpawnActor<AActor>(TargetComponentClass, CrosshairLocation, FRotator::ZeroRotator);
+        DummyActor->SetLifeSpan(TargetComponentLifeSpawn);
+        TargetComponent = DummyActor->GetRootComponent();
+    }
     
     ProjectilesFired = 0;
-
-    const FVector CrosshairLocation = GetCrosshairLocation(false);
-    TargetActor = GetWorld()->SpawnActor<AActor>(TargetComponentClass, CrosshairLocation, FRotator::ZeroRotator);
     
     GetWorld()->GetTimerManager().SetTimer(
         ProjectileTimerHandle,
@@ -94,15 +109,11 @@ void UFrogTargetedProjectile::FireProjectile()
         
         const FVector UnitLocation = ActorInfo->AvatarActor.Get()->GetActorLocation() + FVector(0, 0, 50.f);
         const FVector BaseFireDirection = (GetCrosshairLocation(false) - UnitLocation).GetSafeNormal();
-
-        if (TargetActor)
-        {
-            TargetActor->SetLifeSpan(TargetComponentLifeSpawn);
-            const FVector RandomizedDirection = FMath::VRandCone(BaseFireDirection, FMath::DegreesToRadians(SpreadAngleDegrees));
-            const FRotator FireRotation = FRotator(0, 0, 0);
+        
+        const FVector RandomizedDirection = FMath::VRandCone(BaseFireDirection, FMath::DegreesToRadians(SpreadAngleDegrees));
+        const FRotator FireRotation = FRotator(0, 0, 0);
             
-            ProjectileSpawner->RequestSpawnProjectile(ProjectileClass, UnitLocation, FireRotation, RandomizedDirection, TargetActor);
-        }
+        ProjectileSpawner->RequestSpawnProjectile(ProjectileClass, UnitLocation, FireRotation, RandomizedDirection, TargetComponent);
         
     }
 }

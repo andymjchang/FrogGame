@@ -39,9 +39,9 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Projectile Ability")
 	TSubclassOf<AActor> TargetComponentClass;
-	
+
 	UPROPERTY(BlueprintReadOnly, Category = "Projectile Ability")
-	TObjectPtr<AActor> TargetActor;
+	TObjectPtr<USceneComponent> TargetComponent;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Projectile Ability")
 	float TargetComponentLifeSpawn;

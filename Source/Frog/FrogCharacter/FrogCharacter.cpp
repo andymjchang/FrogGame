@@ -134,9 +134,9 @@ void AFrogCharacter::SetupAbilities()
 {
 	if (!IsValid(AbilitySystemComponent) || !IsValid(AttributeSet)) return;
 
-	TargetEnemiesTagDelegateHandle = AbilitySystemComponent->
+	TargetEnemyTagDelegateHandle = AbilitySystemComponent->
 									 RegisterGameplayTagEvent(FindEnemyUnderCrosshairGameplayTag).AddUObject(
-										 this, &AFrogCharacter::OnTargetEnemiesTagChanged);
+										 this, &AFrogCharacter::OnTargetEnemyTagChanged);
 	
 	if (IsValid(AbilitySet))
 	{
@@ -282,7 +282,7 @@ void AFrogCharacter::RedrawTongueLocation()
 	if (IsValid(Tongue)) Tongue->EndLocation = GetActorTransform().InverseTransformPosition(GrapplePoint);
 }
 
-AActor* AFrogCharacter::FindEnemyUnderCrosshair() const
+void AFrogCharacter::FindEnemyUnderCrosshair()
 {
 	const FVector TraceStart = FollowCamera->GetComponentLocation();
 	const FVector CameraForward = FollowCamera->GetForwardVector();
@@ -299,20 +299,25 @@ AActor* AFrogCharacter::FindEnemyUnderCrosshair() const
 		FindEnemyUnderCrosshairObjectType,
 		false,                     
 		TArray<AActor*>(),          
-		EDrawDebugTrace::None, 
+		EDrawDebugTrace::ForOneFrame, 
 		HitResult,
 		true
 	);
 	
 	if (bHit)
 	{
-		return HitResult.GetActor();
+		if (TargetEnemyActor != HitResult.GetActor())
+		{
+			TargetEnemyActor = HitResult.GetActor();
+		}
 	}
-	
-	return nullptr;
+	else
+	{
+		TargetEnemyActor = nullptr;
+	}
 }
 
-void AFrogCharacter::OnTargetEnemiesTagChanged(const FGameplayTag Tag, int32 NewCount)
+void AFrogCharacter::OnTargetEnemyTagChanged(const FGameplayTag Tag, int32 NewCount)
 {
 	bFindEnemyUnderCrosshair = NewCount > 0;
 }

@@ -20,14 +20,12 @@ void UEnemyTestAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
 		EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
 		return;
 	}
-
-	// --- Accessing the Blackboard ---
+	
 	AAIController* AIController = Cast<AAIController>(AvatarPawn->GetController());
 	UBlackboardComponent* BlackboardComp = AIController ? AIController->GetBlackboardComponent() : nullptr;
 
 	if (!BlackboardComp)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Could not find Blackboard Component."));
 		EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
 		return;
 	}
@@ -51,7 +49,7 @@ void UEnemyTestAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
 	if (UProjectileSpawnerComponent* ProjectileSpawner = Unit->GetProjectileSpawnerComponent())
 	{
 		ProjectileSpawner->RequestSpawnProjectile(ProjectileClass,
-		   AvatarPawn->GetActorLocation() + TempOffset, FRotator::ZeroRotator, TargetDirection);
+		                                          AvatarPawn->GetActorLocation() + TempOffset, FRotator::ZeroRotator, TargetDirection, nullptr);
 	}
     
 	EndAbility(Handle, ActorInfo, ActivationInfo, true, false);

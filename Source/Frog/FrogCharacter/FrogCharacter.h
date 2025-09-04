@@ -96,9 +96,10 @@ protected: /* Protected Functions */
 
 	// Grapple 
 	void RedrawTongueLocation();
-	
-	AActor* FindEnemyUnderCrosshair() const;
-	virtual void OnTargetEnemiesTagChanged(const FGameplayTag Tag, int32 NewCount);
+	void FindEnemyUnderCrosshair();
+
+	void FindEnemyUnderCrosshair() const;
+	virtual void OnTargetEnemyTagChanged(const FGameplayTag Tag, int32 NewCount);
 
 protected: /* Members */
 	// Components
@@ -139,8 +140,7 @@ protected: /* Members */
 
 	// Gameplay Ability System
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "GAS")
-	// TObjectPtr<UFrogAbilitySystem> AbilitySystemComponent;
-	UFrogAbilitySystem* AbilitySystemComponent;
+	TObjectPtr<UFrogAbilitySystem> AbilitySystemComponent;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GAS")
 	TArray<TSubclassOf<UGameplayAbility>> DefaultAbilities;
@@ -163,16 +163,18 @@ protected: /* Members */
 	UPROPERTY(EditDefaultsOnly, Category = "Enemy Targeting")
 	float FindEnemyUnderCrosshairTraceDistance;
 
-	UPROPERTY(Replicated)
-	bool bFindEnemyUnderCrosshair;
-
-	FDelegateHandle TargetEnemiesTagDelegateHandle;
-
-	UPROPERTY(EditAnywhere, Category = "Enemy Targeting", meta = (DisplayName = "Target Object Types"))
+	UPROPERTY(EditAnywhere, Category = "Enemy Targeting")
 	TArray<TEnumAsByte<EObjectTypeQuery>> FindEnemyUnderCrosshairObjectType;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Enemy Targeting")
 	FGameplayTag FindEnemyUnderCrosshairGameplayTag;
+
+	UPROPERTY(Replicated)
+	bool bFindEnemyUnderCrosshair;
+
+	FDelegateHandle TargetEnemyTagDelegateHandle;
+
+	TWeakObjectPtr<AActor> TargetEnemyActor;
 	
 	// Mapping Context
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
@@ -213,5 +215,6 @@ public: /* Public Getters/Setters */
 	FORCEINLINE float GetWalkSpeed() const { return WalkSpeed; }
 	FORCEINLINE float GetDiveSpeed() const { return DiveSpeed; }
 	FORCEINLINE void SetFindEnemyUnderCrosshair(const bool Value) { bFindEnemyUnderCrosshair = Value; }
+	FORCEINLINE AActor* GetTargetEnemyActor() const { return TargetEnemyActor.Get(); }
 };
 

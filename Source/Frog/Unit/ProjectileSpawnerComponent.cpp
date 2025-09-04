@@ -13,19 +13,19 @@ UProjectileSpawnerComponent::UProjectileSpawnerComponent()
 
 void UProjectileSpawnerComponent::RequestSpawnProjectile(const TSubclassOf<AProjectile>& ActorClass,
                                                          const FVector& Location, const FRotator& Rotation,
-                                                         const FVector& FireDirection, const AActor* TargetActor)
+                                                         const FVector& FireDirection, USceneComponent* TargetComponent)
 {
     const AActor* Owner = GetOwner();
     if (!Owner) return;
     
     if (Owner->GetLocalRole() == ROLE_Authority)
     {
-        SpawnProjectileInternal(ActorClass, Location, Rotation, FireDirection, true, TargetActor);
-        MulticastSpawnProjectile(ActorClass, Location, Rotation, FireDirection, TargetActor);
+        SpawnProjectileInternal(ActorClass, Location, Rotation, FireDirection, true, TargetComponent);
+        MulticastSpawnProjectile(ActorClass, Location, Rotation, FireDirection, TargetComponent);
     }
     else // Client prediction
     {
-        SpawnProjectileInternal(ActorClass, Location, Rotation, FireDirection, false, TargetActor);
+        SpawnProjectileInternal(ActorClass, Location, Rotation, FireDirection, false, TargetComponent);
     }
 }
 
@@ -33,36 +33,36 @@ void UProjectileSpawnerComponent::RequestSpawnProjectile(const TSubclassOf<AProj
 
 void UProjectileSpawnerComponent::MulticastSpawnProjectile_Implementation(
     const TSubclassOf<AProjectile> ActorClass, const FVector& Location, const FRotator& Rotation,
-    const FVector& FireDirection, const AActor* TargetActor)
+    const FVector& FireDirection, USceneComponent* TargetComponent)
 {
     const AActor* Owner = GetOwner();
     if (!Owner) return;
     
     if (Owner->GetLocalRole() == ROLE_SimulatedProxy)
     {
-        SpawnProjectileInternal(ActorClass, Location, Rotation, FireDirection, false, TargetActor);
+        SpawnProjectileInternal(ActorClass, Location, Rotation, FireDirection, false, TargetComponent);
     }
 }
 
 void UProjectileSpawnerComponent::SpawnProjectileInternal(const TSubclassOf<AProjectile>& ActorClass,
     const FVector& Location, const FRotator& Rotation, FVector FireDirection, bool bApplyEffect,
-    const AActor* TargetActor) const
+    USceneComponent* TargetComponent)
 {
     AActor* MyOwner = GetOwner();
     if (!GetWorld() || !MyOwner || !ActorClass) return;
 
     FActorSpawnParameters Params;
     Params.Owner = Params.Instigator = Cast<APawn>(MyOwner);
-    Params.CustomPreSpawnInitalization = [this, FireDirection, bApplyEffect, TargetActor](AActor* Actor)
+    Params.CustomPreSpawnInitalization = [this, FireDirection, bApplyEffect, TargetComponent](AActor* Actor)
     {
         if (const auto Projectile = Cast<AProjectile>(Actor))
         {
             Projectile->FireInDirection(FireDirection);
             Projectile->SetApplyEffect(bApplyEffect);
             
-            if (TargetActor)
+            if (TargetComponent)
             {
-                Projectile->GetProjectileMovementComponent()->HomingTargetComponent = TargetActor->GetRootComponent();
+                Projectile->GetProjectileMovementComponent()->HomingTargetComponent = TargetComponent ;
             }
         }
     };
