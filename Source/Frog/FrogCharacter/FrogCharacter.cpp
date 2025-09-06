@@ -144,6 +144,9 @@ void AFrogCharacter::SetupAbilities()
 									 RegisterGameplayTagEvent(FindEnemyUnderCrosshairGameplayTag).AddUObject(
 										 this, &AFrogCharacter::OnTargetEnemyTagChanged);
 
+	AbilitySystemComponent->OnGameplayEffectAppliedDelegateToTarget
+	.AddUObject(this, &AFrogCharacter::OnGameplayEffectApplied);
+
 	// Grant default abilities
 	if (IsValid(AbilitySet))
 	{
@@ -155,6 +158,39 @@ void AFrogCharacter::SetupAbilities()
 	{
 		AbilitySystemComponent->ApplyGameplayEffectToSelf(DefaultAttributes->GetDefaultObject<UGameplayEffect>(), 0.f,
 		                                                  AbilitySystemComponent->MakeEffectContext());
+	}
+}
+
+void AFrogCharacter::OnGameplayEffectApplied(
+	UAbilitySystemComponent* TargetASC,
+	const FGameplayEffectSpec& SpecApplied,
+	FActiveGameplayEffectHandle ActiveHandle)
+{
+	if (!TargetASC) return;
+
+	AActor* TargetActor = TargetASC->GetOwnerActor();
+	FString TargetName = TargetActor ? TargetActor->GetName() : TEXT("None");
+	FString EffectName = SpecApplied.Def ? SpecApplied.Def->GetName() : TEXT("UnknownEffect");
+
+	GEngine->AddOnScreenDebugMessage(
+		-1, 5.f, FColor::Red,
+		FString::Printf(TEXT("Effect Applied: %s -> Target ASC: %s"), *EffectName, *TargetName)
+	);
+
+	FGameplayTagContainer GrantedTags;
+	SpecApplied.GetAllGrantedTags(GrantedTags);
+	for (const FGameplayTag& Tag : GrantedTags)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow,
+			FString::Printf(TEXT("Granted Tag: %s"), *Tag.ToString()));
+	}
+
+	if (GrantedTags.HasTag(FGameplayTag::RequestGameplayTag(FName("Debuff"))))
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green,
+			FString::Printf(TEXT("%s got DEBUFF from %s"),
+			*TargetASC->GetOwner()->GetName(),
+			*SpecApplied.Def->GetName()));
 	}
 }
 
