@@ -179,11 +179,6 @@ void AFrogCharacter::OnGameplayEffectApplied(
 
 	FGameplayTagContainer GrantedTags;
 	SpecApplied.GetAllGrantedTags(GrantedTags);
-	for (const FGameplayTag& Tag : GrantedTags)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow,
-			FString::Printf(TEXT("Granted Tag: %s"), *Tag.ToString()));
-	}
 
 	if (GrantedTags.HasTag(FGameplayTag::RequestGameplayTag(FName("Debuff"))))
 	{
