@@ -80,7 +80,7 @@ AFrogCharacter::AFrogCharacter(const FObjectInitializer& ObjectInitializer)
 
 	// Frog Ability System
 	AbilitySystemComponent = CreateDefaultSubobject<UFrogAbilitySystem>(TEXT("AbilitySystem"));
-	AttributeSet = CreateDefaultSubobject<UUnitAttributeSet>(TEXT("AttributeSet"));
+	AttributeSet = CreateDefaultSubobject<UFrogAttributeSet>(TEXT("AttributeSet"));
 
 	// Projectile Spawner Component
 	ProjectileSpawner = CreateDefaultSubobject<UProjectileSpawnerComponent>(TEXT("ProjectileSpawner"));
@@ -134,10 +134,17 @@ void AFrogCharacter::SetupAbilities()
 {
 	if (!IsValid(AbilitySystemComponent) || !IsValid(AttributeSet)) return;
 
+	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(UFrogAttributeSet::GetManaAttribute()).AddUObject(
+		this, &AFrogCharacter::OnManaChanged);
+	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(UFrogAttributeSet::GetMaxManaAttribute()).AddUObject(
+		this, &AFrogCharacter::OnMaxManaChanged);
+
+	// Listen for abilities that need point and click targeting
 	TargetEnemyTagDelegateHandle = AbilitySystemComponent->
 									 RegisterGameplayTagEvent(FindEnemyUnderCrosshairGameplayTag).AddUObject(
 										 this, &AFrogCharacter::OnTargetEnemyTagChanged);
-	
+
+	// Grant default abilities
 	if (IsValid(AbilitySet))
 	{
 		InitialAbilitySpecHandles.Append(AbilitySet->GrantAbilitiesToAbilitySystem(AbilitySystemComponent, FrogHUDWidget));
@@ -270,6 +277,16 @@ void AFrogCharacter::AbilityInputBindingPressedHandler(EAbilityInputID AbilityIn
 void AFrogCharacter::AbilityInputBindingReleasedHandler(EAbilityInputID AbilityInputID)
 {
 	AbilitySystemComponent->AbilityLocalInputReleased(static_cast<uint32>(AbilityInputID));
+}
+
+void AFrogCharacter::OnManaChanged(const FOnAttributeChangeData& Data)
+{
+	if (FrogHUDWidget) FrogHUDWidget->UpdateMana(Data.NewValue);
+}
+
+void AFrogCharacter::OnMaxManaChanged(const FOnAttributeChangeData& Data)
+{
+	if (FrogHUDWidget) FrogHUDWidget->UpdateMaxMana(Data.NewValue);
 }
 
 void AFrogCharacter::SetTongueVisibility(const bool Value)

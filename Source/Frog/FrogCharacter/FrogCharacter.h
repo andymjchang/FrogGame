@@ -9,6 +9,7 @@
 #include "Unit/UnitInterface.h"
 #include "GAS/FrogAbilitySystem.h"
 #include "AbilitySystemInterface.h"
+#include "GAS/FrogAttributeSet.h"
 #include "FrogCharacter.generated.h"
 
 class USphereComponent;
@@ -16,7 +17,6 @@ class UNametagWidgetComponent;
 class UWidgetComponent;
 class UFrogHUD;
 class UAbilitySet;
-class UUnitAttributeSet;
 class AProjectile;
 enum class EAbilityInputID : uint8;
 struct FInputActionValue;
@@ -89,6 +89,8 @@ protected: /* Protected Functions */
 	// GAS
 	void AbilityInputBindingPressedHandler(EAbilityInputID AbilityInputID);
 	void AbilityInputBindingReleasedHandler(EAbilityInputID AbilityInputID);
+	void OnManaChanged(const FOnAttributeChangeData& Data);
+	void OnMaxManaChanged(const FOnAttributeChangeData& Data);
 	void SetupAbilities();
 	
 	void Move(const FInputActionValue& Value);
@@ -96,9 +98,9 @@ protected: /* Protected Functions */
 
 	// Grapple 
 	void RedrawTongueLocation();
-	void FindEnemyUnderCrosshair();
 
-	void FindEnemyUnderCrosshair() const;
+	// Find Enemy Under Crosshair
+	void FindEnemyUnderCrosshair();
 	virtual void OnTargetEnemyTagChanged(const FGameplayTag Tag, int32 NewCount);
 
 protected: /* Members */
@@ -146,7 +148,7 @@ protected: /* Members */
 	TArray<TSubclassOf<UGameplayAbility>> DefaultAbilities;
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GAS")
-	TObjectPtr<UUnitAttributeSet> AttributeSet;
+	TObjectPtr<UFrogAttributeSet> AttributeSet;
 	
 	UPROPERTY(EditAnywhere, Category = "GAS")
 	TObjectPtr<UAbilitySet> AbilitySet;

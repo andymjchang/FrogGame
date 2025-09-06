@@ -7,16 +7,19 @@
 #include "Blueprint/UserWidget.h"
 #include "FrogHUD.generated.h"
 
+class UTextBlock;
 class UAbilityIcon;
+class URadialSlider;
 
 UCLASS()
 class UI_API UFrogHUD : public UUserWidget
 {
 	GENERATED_BODY()
 	
+	// Ability Icons / Cooldowns
 public:
 	void AssignAbilityToUISlot(FGameplayAbilitySpecHandle InputAbilitySpecHandle, UAbilitySystemComponent* InputAbilitySystem) const;
-	
+
 	UPROPERTY(meta = (BindWidget))
 	UAbilityIcon* AbilityIconPrimary;
 	UPROPERTY(meta = (BindWidget))
@@ -27,4 +30,21 @@ public:
 	UAbilityIcon* AbilityIconDive;
 	UPROPERTY(meta = (BindWidget))
 	UAbilityIcon* AbilityIconUtility;
+
+	// Mana Bar
+public:
+	void UpdateManaHUD();
+	void UpdateMana(float NewManaValue);
+	void UpdateMaxMana(float NewMaxManaValue);
+
+private:
+	float Mana;
+	float MaxMana;
+	
+public:
+	UPROPERTY(meta = (BindWidget))
+	URadialSlider* ManaBar;
+	UPROPERTY(meta = (BindWidget))
+	UTextBlock* ManaText;
+
 };

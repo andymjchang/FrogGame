@@ -22,7 +22,8 @@ public class UI : ModuleRules
                 "SlateCore",
                 "UMG",
                 "GameplayTags",
-                "GameplayAbilities"
+                "GameplayAbilities",
+                "AdvancedWidgets"
             }
         );
     }

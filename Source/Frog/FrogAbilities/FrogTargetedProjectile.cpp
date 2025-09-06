@@ -24,7 +24,7 @@ void UFrogTargetedProjectile::ActivateAbility(const FGameplayAbilitySpecHandle H
     {
         if (AEnemyCharacter* Enemy = Cast<AEnemyCharacter>(Frog->GetTargetEnemyActor()))
         {
-            TargetComponent = Cast<USphereComponent>(Enemy->GetHitboxComponent());
+            TargetComponent = Cast<USceneComponent>(Enemy->GetHitboxComponent());
         }
     }
     if (!TargetComponent)
@@ -110,7 +110,15 @@ void UFrogTargetedProjectile::FireProjectile()
         const FVector UnitLocation = ActorInfo->AvatarActor.Get()->GetActorLocation() + FVector(0, 0, 50.f);
         const FVector BaseFireDirection = (GetCrosshairLocation(false) - UnitLocation).GetSafeNormal();
         
-        const FVector RandomizedDirection = FMath::VRandCone(BaseFireDirection, FMath::DegreesToRadians(SpreadAngleDegrees));
+        const float RandomAngle = FMath::FRandRange(MinSpreadAngleDegrees, MaxSpreadAngleDegrees);
+        const FVector RotationAxis = FVector::CrossProduct(BaseFireDirection, FMath::VRand()).GetSafeNormal();
+        FVector RandomizedDirection = BaseFireDirection.RotateAngleAxis(RandomAngle, RotationAxis);
+        
+        if (RandomizedDirection.Z < 0.f) // Don't fire into the ground
+        {
+            RandomizedDirection.Z = 0.f;
+            RandomizedDirection = RandomizedDirection.GetSafeNormal();
+        }
         const FRotator FireRotation = FRotator(0, 0, 0);
             
         ProjectileSpawner->RequestSpawnProjectile(ProjectileClass, UnitLocation, FireRotation, RandomizedDirection, TargetComponent);

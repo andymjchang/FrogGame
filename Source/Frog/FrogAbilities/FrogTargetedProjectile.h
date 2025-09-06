@@ -35,7 +35,10 @@ protected:
 	float DelayBetweenShots = 0.1f;
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Projectile Ability")
-	float SpreadAngleDegrees = 15.0f;
+	float MinSpreadAngleDegrees = 45.0f;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Projectile Ability")
+	float MaxSpreadAngleDegrees = 135.0f;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Projectile Ability")
 	TSubclassOf<AActor> TargetComponentClass;

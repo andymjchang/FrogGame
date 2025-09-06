@@ -29,7 +29,7 @@ public:
 	ATTRIBUTE_ACCESSORS(UUnitAttributeSet, Health);
 
 	// Max Health
-	UPROPERTY(BlueprintReadOnly, Category="Unit Attributes", ReplicatedUsing=OnRep_Health)
+	UPROPERTY(BlueprintReadOnly, Category="Unit Attributes", ReplicatedUsing=OnRep_MaxHealth)
 	FGameplayAttributeData MaxHealth;
 	ATTRIBUTE_ACCESSORS(UUnitAttributeSet, MaxHealth);
 
@@ -43,7 +43,7 @@ public:
 	FGameplayAttributeData Healing;
 	ATTRIBUTE_ACCESSORS(UUnitAttributeSet, Healing);
 
-	// Movement Speed
+	// Movement Speed Modifier
 	UPROPERTY(BlueprintReadOnly, Category="Unit Attributes", ReplicatedUsing=OnRep_MovementSpeedModifier)
 	FGameplayAttributeData MovementSpeedModifier;
 	ATTRIBUTE_ACCESSORS(UUnitAttributeSet, MovementSpeedModifier);
