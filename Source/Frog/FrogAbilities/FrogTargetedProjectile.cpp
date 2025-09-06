@@ -113,10 +113,11 @@ void UFrogTargetedProjectile::FireProjectile()
         const float RandomAngle = FMath::FRandRange(MinSpreadAngleDegrees, MaxSpreadAngleDegrees);
         const FVector RotationAxis = FVector::CrossProduct(BaseFireDirection, FMath::VRand()).GetSafeNormal();
         FVector RandomizedDirection = BaseFireDirection.RotateAngleAxis(RandomAngle, RotationAxis);
-        
-        if (RandomizedDirection.Z < 0.f) // Don't fire into the ground
+
+        const float MinZValue = FMath::Sin(FMath::DegreesToRadians(-MaxDownwardAngleDegrees));
+        if (RandomizedDirection.Z < MinZValue) 
         {
-            RandomizedDirection.Z = 0.f;
+            RandomizedDirection.Z = -RandomizedDirection.Z;
             RandomizedDirection = RandomizedDirection.GetSafeNormal();
         }
         const FRotator FireRotation = FRotator(0, 0, 0);

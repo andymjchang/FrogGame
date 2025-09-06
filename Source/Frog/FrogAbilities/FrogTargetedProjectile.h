@@ -41,6 +41,9 @@ protected:
 	float MaxSpreadAngleDegrees = 135.0f;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Projectile Ability")
+	float MaxDownwardAngleDegrees = 10.0f;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Projectile Ability")
 	TSubclassOf<AActor> TargetComponentClass;
 
 	UPROPERTY(BlueprintReadOnly, Category = "Projectile Ability")
