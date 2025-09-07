@@ -84,13 +84,11 @@ void UFrogGameplayAbility::OnCooldownTagChanged(const FGameplayTag CooldownTag, 
 		EndAbility(CurrentSpecHandle, CurrentActorInfo, CurrentActivationInfo, true, false);
 		if (bRecastIfHeld && bIsHeld)
 		{
-			// Don't try to activate immediately. Instead, set a timer to do it on the next frame.
-			// This "untangles" the execution and prevents the re-entrancy bug.
 			GetWorld()->GetTimerManager().SetTimer(
 				ReactivationTimerHandle,
 				this,
 				&UFrogGameplayAbility::AttemptReactivation,
-				0.01f,  // A tiny delay is enough to push execution to a later frame.
+				0.01f, 
 				false
 			);
 		}
@@ -101,7 +99,6 @@ void UFrogGameplayAbility::AttemptReactivation()
 {
 	if (UAbilitySystemComponent* ASC = GetAbilitySystemComponentFromActorInfo())
 	{
-		// This logic is now safely called in a separate, clean execution context.
 		ASC->TryActivateAbility(CurrentSpecHandle);
 	}
 }

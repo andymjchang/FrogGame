@@ -7,8 +7,6 @@
 
 #include "FrogTargetedProjectile.h"
 #include "TimerManager.h"
-#include "Components/SphereComponent.h"
-#include "EnemyCharacter/EnemyCharacter.h"
 #include "FrogCharacter/FrogCharacter.h"
 #include "Unit/ProjectileSpawnerComponent.h"
 #include "Unit/UnitInterface.h"
