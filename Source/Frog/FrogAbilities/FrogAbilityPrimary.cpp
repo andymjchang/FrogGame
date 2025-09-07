@@ -19,7 +19,7 @@ void UFrogAbilityPrimary::ActivateAbility(const FGameplayAbilitySpecHandle Handl
 	Super::ActivateAbility(Handle, ActorInfo, ActivationInfo, TriggerEventData);
 
 	FireProjectile();
-
+	
 	CommitAbilityCooldown(Handle, ActorInfo, ActivationInfo, false);
-	EndAbility(Handle, ActorInfo, ActivationInfo, true, false);
 }
+

@@ -6,13 +6,31 @@
 #include "Camera/CameraComponent.h"
 #include "FrogCharacter/FrogCharacter.h"
 
-UFrogGameplayAbility::UFrogGameplayAbility(): CooldownDuration(0)
+UFrogGameplayAbility::UFrogGameplayAbility() : CooldownDuration(0), bRecastIfHeld(false), bIsHeld(false)
 {
 	NetExecutionPolicy = EGameplayAbilityNetExecutionPolicy::LocalPredicted;
 	InstancingPolicy = EGameplayAbilityInstancingPolicy::InstancedPerActor;
 	ReplicationPolicy = EGameplayAbilityReplicationPolicy::ReplicateYes;
 
 	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Frog.State.Downed")));
+}
+
+void UFrogGameplayAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
+										  const FGameplayAbilityActorInfo* ActorInfo,
+										  const FGameplayAbilityActivationInfo ActivationInfo,
+										  const FGameplayEventData* TriggerEventData)
+{
+	Super::ActivateAbility(Handle, ActorInfo, ActivationInfo, TriggerEventData);
+	bIsHeld = true;
+}
+
+void UFrogGameplayAbility::InputReleased(const FGameplayAbilitySpecHandle Handle,
+									   const FGameplayAbilityActorInfo* ActorInfo,
+									   const FGameplayAbilityActivationInfo ActivationInfo)
+{
+	Super::InputReleased(Handle, ActorInfo, ActivationInfo);
+	bIsHeld = false;
+	// EndAbility(Handle, ActorInfo, ActivationInfo, true, false);
 }
 
 const FGameplayTagContainer* UFrogGameplayAbility::GetCooldownTags() const
@@ -25,6 +43,67 @@ const FGameplayTagContainer* UFrogGameplayAbility::GetCooldownTags() const
 	}
 	MutableTags->AppendTags(CooldownTags);
 	return MutableTags;
+}
+
+void UFrogGameplayAbility::OnGiveAbility(const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilitySpec& Spec)
+{
+	Super::OnGiveAbility(ActorInfo, Spec);
+
+	if (UAbilitySystemComponent* ASC = ActorInfo->AbilitySystemComponent.Get())
+	{
+		if (bRecastIfHeld && CooldownTags.Num() > 0)
+		{
+			const FGameplayTag CooldownTag = *CooldownTags.CreateConstIterator();
+			
+			CooldownEventHandle = ASC->RegisterGameplayTagEvent(CooldownTag, EGameplayTagEventType::NewOrRemoved)
+									 .AddUObject(this, &UFrogGameplayAbility::OnCooldownTagChanged);
+		}
+	}
+}
+
+void UFrogGameplayAbility::OnRemoveAbility(const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilitySpec& Spec)
+{
+	Super::OnRemoveAbility(ActorInfo, Spec);
+	
+	if (UAbilitySystemComponent* ASC = ActorInfo->AbilitySystemComponent.Get())
+	{
+		if (bRecastIfHeld && CooldownEventHandle.IsValid() && CooldownTags.Num() > 0)
+		{
+			const FGameplayTag CooldownTag = *CooldownTags.CreateConstIterator();
+			
+			ASC->UnregisterGameplayTagEvent(CooldownEventHandle, CooldownTag, EGameplayTagEventType::NewOrRemoved);
+			CooldownEventHandle.Reset(); 
+		}
+	}
+}
+
+void UFrogGameplayAbility::OnCooldownTagChanged(const FGameplayTag CooldownTag, int32 NewCount)
+{
+	if (NewCount == 0)
+	{
+		EndAbility(CurrentSpecHandle, CurrentActorInfo, CurrentActivationInfo, true, false);
+		if (bRecastIfHeld && bIsHeld)
+		{
+			// Don't try to activate immediately. Instead, set a timer to do it on the next frame.
+			// This "untangles" the execution and prevents the re-entrancy bug.
+			GetWorld()->GetTimerManager().SetTimer(
+				ReactivationTimerHandle,
+				this,
+				&UFrogGameplayAbility::AttemptReactivation,
+				0.01f,  // A tiny delay is enough to push execution to a later frame.
+				false
+			);
+		}
+	}
+}
+
+void UFrogGameplayAbility::AttemptReactivation()
+{
+	if (UAbilitySystemComponent* ASC = GetAbilitySystemComponentFromActorInfo())
+	{
+		// This logic is now safely called in a separate, clean execution context.
+		ASC->TryActivateAbility(CurrentSpecHandle);
+	}
 }
 
 void UFrogGameplayAbility::ApplyCooldown(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo * ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo) const

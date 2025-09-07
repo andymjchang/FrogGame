@@ -17,9 +17,16 @@ class FROG_API UFrogGameplayAbility : public UGameplayAbility
 
 public:
 	UFrogGameplayAbility();
+	virtual void ActivateAbility(FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo,
+	                             FGameplayAbilityActivationInfo ActivationInfo, const FGameplayEventData* TriggerEventData) override;
+	virtual void InputReleased(FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo,
+	                           FGameplayAbilityActivationInfo ActivationInfo) override;
+
 	virtual const FGameplayTagContainer* GetCooldownTags() const override;
+
 	virtual void ApplyCooldown(FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo,
-							   FGameplayAbilityActivationInfo ActivationInfo) const override;
+	                           FGameplayAbilityActivationInfo ActivationInfo) const override;
+	
 	FVector GetCrosshairLocation(bool bGetClosestTarget) const;
 
 protected:
@@ -28,6 +35,22 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Cooldown")
 	FGameplayTagContainer CooldownTags;
+
+	virtual void OnGiveAbility(const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilitySpec& Spec) override;
+	virtual void OnRemoveAbility(const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilitySpec& Spec) override;
+
+	UFUNCTION()
+	void OnCooldownTagChanged(const FGameplayTag Tag, int32 NewCount);
+	void AttemptReactivation();
+
+	UPROPERTY(EditDefaultsOnly, Category = "Cooldown")
+	bool bRecastIfHeld;
+
+	bool bIsHeld;
+
+private:
+	FDelegateHandle CooldownEventHandle;
+	FTimerHandle ReactivationTimerHandle;
 
 	// Temp container that we will return the pointer to in GetCooldownTags().
 	// This will be a union of our CooldownTags and the Cooldown GE's cooldown tags.

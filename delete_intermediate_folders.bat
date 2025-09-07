@@ -70,23 +70,4 @@ if exist "DerivedDataCache" (
 )
 echo.
 
-:: Delete plugin cache folders
-echo Checking for plugin folders...
-if exist "Plugins" (
-    for /d %%d in (Plugins\*) do (
-        if exist "%%d\Intermediate" (
-            echo Deleting plugin cache: %%d\Intermediate
-            rmdir /s /q "%%d\Intermediate" 2>nul
-        )
-        if exist "%%d\Binaries" (
-            echo Deleting plugin binaries: %%d\Binaries
-            rmdir /s /q "%%d\Binaries" 2>nul
-        )
-    )
-    echo Plugin cleanup completed
-) else (
-    echo No Plugins folder found - skipping
-)
-echo.
-
 pause

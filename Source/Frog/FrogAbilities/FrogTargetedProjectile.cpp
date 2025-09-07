@@ -11,6 +11,8 @@ void UFrogTargetedProjectile::ActivateAbility(const FGameplayAbilitySpecHandle H
                                               const FGameplayAbilityActivationInfo ActivationInfo,
                                               const FGameplayEventData* TriggerEventData)
 {
+    Super::ActivateAbility(Handle, ActorInfo, ActivationInfo, TriggerEventData);
+    
     if (!CommitAbility(Handle, ActorInfo, ActivationInfo))
     {
        EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
@@ -87,13 +89,17 @@ void UFrogTargetedProjectile::FireProjectile()
 {
     ProjectilesFired++;
 
-    if (ProjectilesFired > NumProjectiles)
+    Super::FireProjectile();
+    
+    if (ProjectilesFired >= NumProjectiles)
     {
-        EndAbility(GetCurrentAbilitySpecHandle(), GetCurrentActorInfo(), GetCurrentActivationInfo(), true, false);
-        return;
+        // EndAbility(GetCurrentAbilitySpecHandle(), GetCurrentActorInfo(), GetCurrentActivationInfo(), true, false);
+        if (GetWorld())
+        {
+            GetWorld()->GetTimerManager().ClearTimer(ProjectileTimerHandle);
+        }
     }
     
-    Super::FireProjectile();
 }
 
 FVector UFrogTargetedProjectile::GetFireDirection(FVector SpawnLocation)
