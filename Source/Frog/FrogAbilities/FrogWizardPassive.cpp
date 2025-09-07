@@ -43,11 +43,12 @@ void UFrogWizardPassive::OnGameplayEffectApplied(UAbilitySystemComponent* Abilit
 	if (SourceActor && SourceActor != TargetActor)
 	{
 		FGameplayTagContainer GrantedTags;
-		GameplayEffectSpec.GetAllGrantedTags(GrantedTags);
+		// GameplayEffectSpec.GetAllGrantedTags(GrantedTags);
+		GameplayEffectSpec.GetAllAssetTags(GrantedTags);
 
 		if (GrantedTags.HasTag(TrackedTag))
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, FString::Printf(TEXT("x: %d"), 13));
+			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, FString::Printf(TEXT("damaged: %d"), 2));
 		}
 	}
 }

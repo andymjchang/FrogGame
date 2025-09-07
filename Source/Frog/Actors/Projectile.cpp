@@ -97,11 +97,9 @@ void AProjectile::ApplyGameplayEffect(const AActor* OtherActor, const TSubclassO
                 }
             }
         }
-        if (bDestroyOnHit) Destroy();
-        SpawnDestroyVFX();
     }
-        
-    
+    if (bDestroyOnHit) Destroy();
+    SpawnDestroyVFX();
 }
 
 void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
