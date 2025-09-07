@@ -92,8 +92,6 @@ protected: /* Protected Functions */
 	void OnManaChanged(const FOnAttributeChangeData& Data);
 	void OnMaxManaChanged(const FOnAttributeChangeData& Data);
 	void SetupAbilities();
-	void OnGameplayEffectApplied(UAbilitySystemComponent* TargetASC, const FGameplayEffectSpec& SpecApplied,
-	                             FActiveGameplayEffectHandle ActiveHandle);
 
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
