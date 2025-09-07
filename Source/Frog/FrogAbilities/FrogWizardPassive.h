@@ -25,4 +25,7 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly)
 	FGameplayTag TrackedTag;
+
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<UGameplayEffect> GainManaEffectClass;
 };

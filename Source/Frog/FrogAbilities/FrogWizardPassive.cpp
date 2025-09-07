@@ -43,12 +43,25 @@ void UFrogWizardPassive::OnGameplayEffectApplied(UAbilitySystemComponent* Abilit
 	if (SourceActor && SourceActor != TargetActor)
 	{
 		FGameplayTagContainer GrantedTags;
-		// GameplayEffectSpec.GetAllGrantedTags(GrantedTags);
 		GameplayEffectSpec.GetAllAssetTags(GrantedTags);
 
 		if (GrantedTags.HasTag(TrackedTag))
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, FString::Printf(TEXT("damaged: %d"), 2));
+			if (UAbilitySystemComponent* ASC = Cast<IAbilitySystemInterface>(GetActorInfo().AvatarActor.Get())->GetAbilitySystemComponent())
+			{
+				if (GainManaEffectClass)
+				{
+					FGameplayEffectContextHandle Context = ASC->MakeEffectContext();
+					Context.AddSourceObject(this);
+					Context.AddInstigator(SourceActor->GetInstigator(), SourceActor->GetOwner()); 
+					FGameplayEffectSpecHandle Spec = ASC->MakeOutgoingSpec(GainManaEffectClass, 1.0f, Context);
+                
+					if (Spec.IsValid())
+					{ 
+						ASC->ApplyGameplayEffectSpecToTarget(*Spec.Data.Get(), ASC);
+					}
+				}
+			}
 		}
 	}
 }
