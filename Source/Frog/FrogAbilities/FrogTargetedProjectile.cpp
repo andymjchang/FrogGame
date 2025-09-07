@@ -5,8 +5,6 @@
 #include "Components/SphereComponent.h"
 #include "EnemyCharacter/EnemyCharacter.h"
 #include "FrogCharacter/FrogCharacter.h"
-#include "Unit/ProjectileSpawnerComponent.h"
-#include "Unit/UnitInterface.h"
 
 void UFrogTargetedProjectile::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
                                               const FGameplayAbilityActorInfo* ActorInfo,
@@ -87,13 +85,6 @@ void UFrogTargetedProjectile::OnRemoveAbility(const FGameplayAbilityActorInfo* A
 
 void UFrogTargetedProjectile::FireProjectile()
 {
-    const FGameplayAbilityActorInfo* ActorInfo = GetCurrentActorInfo();
-    if (!ActorInfo || !ActorInfo->AvatarActor.IsValid())
-    {
-        EndAbility(GetCurrentAbilitySpecHandle(), GetCurrentActorInfo(), GetCurrentActivationInfo(), true, true);
-        return;
-    }
-    
     ProjectilesFired++;
 
     if (ProjectilesFired > NumProjectiles)
@@ -102,27 +93,21 @@ void UFrogTargetedProjectile::FireProjectile()
         return;
     }
     
-    IUnitInterface* Unit = Cast<IUnitInterface>(ActorInfo->AvatarActor.Get());
-    if (Unit && Unit->GetProjectileSpawnerComponent() && ProjectileClass)
-    {
-        UProjectileSpawnerComponent* ProjectileSpawner = Unit->GetProjectileSpawnerComponent();
-        
-        const FVector UnitLocation = ActorInfo->AvatarActor.Get()->GetActorLocation() + FVector(0, 0, 50.f);
-        const FVector BaseFireDirection = (GetCrosshairLocation(false) - UnitLocation).GetSafeNormal();
-        
-        const float RandomAngle = FMath::FRandRange(MinSpreadAngleDegrees, MaxSpreadAngleDegrees);
-        const FVector RotationAxis = FVector::CrossProduct(BaseFireDirection, FMath::VRand()).GetSafeNormal();
-        FVector RandomizedDirection = BaseFireDirection.RotateAngleAxis(RandomAngle, RotationAxis);
-
-        const float MinZValue = FMath::Sin(FMath::DegreesToRadians(-MaxDownwardAngleDegrees));
-        if (RandomizedDirection.Z < MinZValue) 
-        {
-            RandomizedDirection.Z = -RandomizedDirection.Z;
-            RandomizedDirection = RandomizedDirection.GetSafeNormal();
-        }
-        const FRotator FireRotation = FRotator(0, 0, 0);
-            
-        ProjectileSpawner->RequestSpawnProjectile(ProjectileClass, UnitLocation, FireRotation, RandomizedDirection, TargetComponent);
-        
-    }
+    Super::FireProjectile();
 }
+
+FVector UFrogTargetedProjectile::GetFireDirection(FVector SpawnLocation)
+{
+    const FVector BaseFireDirection = (GetCrosshairLocation(false) - GetSpawnLocation()).GetSafeNormal();
+    const float RandomAngle = FMath::FRandRange(MinSpreadAngleDegrees, MaxSpreadAngleDegrees);
+    const FVector RotationAxis = FVector::CrossProduct(BaseFireDirection, FMath::VRand()).GetSafeNormal();
+    
+    return BaseFireDirection.RotateAngleAxis(RandomAngle, RotationAxis);
+}
+
+USceneComponent* UFrogTargetedProjectile::GetTargetComponent()
+{
+    return TargetComponent;
+}
+
+

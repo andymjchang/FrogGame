@@ -17,14 +17,16 @@ public:
 	UProjectileSpawnerComponent();
 	
 	void RequestSpawnProjectile(const TSubclassOf<AProjectile>& ActorClass, const FVector& Location, const FRotator& Rotation,
-	                            const FVector& FireDirection, USceneComponent* TargetComponent);
+	                            const FVector& FireDirection, USceneComponent* TargetComponent, UAbilitySystemComponent* AbilitySystem);
 	
 protected:
 	UFUNCTION(NetMulticast, Reliable)
 	void MulticastSpawnProjectile(TSubclassOf<AProjectile> ActorClass, const FVector& Location,
-	                              const FRotator& Rotation, const FVector& FireDirection, USceneComponent* TargetComponent);
+	                              const FRotator& Rotation, const FVector& FireDirection,
+	                              USceneComponent* TargetComponent, UAbilitySystemComponent* AbilitySystem);
 	
 	void SpawnProjectileInternal(const TSubclassOf<AProjectile>& ActorClass, const FVector& Location,
-	                             const FRotator& Rotation, FVector FireDirection, bool bApplyEffect, USceneComponent* TargetComponent);
+	                             const FRotator& Rotation, FVector FireDirection, bool bApplyEffect,
+	                             USceneComponent* TargetComponent, UAbilitySystemComponent* AbilitySystem);
 	
 };

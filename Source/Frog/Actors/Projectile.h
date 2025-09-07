@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "Projectile.generated.h"
 
+class UAbilitySystemComponent;
 class UProjectileMovementComponent;
 class USphereComponent;
 class UGameplayEffect;
@@ -20,6 +21,7 @@ public:
 	AProjectile();
 	void FireInDirection(const FVector& ShootDirection) const;
 	void SetApplyEffect(bool ApplyEffect);
+	void SetOwningAbilitySystem(UAbilitySystemComponent* InputAbilitySystem);
 	
 	FORCEINLINE UProjectileMovementComponent* GetProjectileMovementComponent() { return ProjectileMovement; }
 	
@@ -47,6 +49,8 @@ protected: // Protected Functions
 	
 protected: // Protected Members
 	bool bApplyEffect;
+
+	TWeakObjectPtr<UAbilitySystemComponent> OwningAbilitySystem;
 	
 	// Combat
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Combat")

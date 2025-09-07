@@ -5,6 +5,7 @@
 
 #include "AIController.h"
 #include "BehaviorTree/BlackboardComponent.h"
+#include "EnemyCharacter/EnemyCharacter.h"
 #include "Unit/ProjectileSpawnerComponent.h"
 #include "Unit/UnitInterface.h"
 
@@ -48,8 +49,14 @@ void UEnemyTestAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
     
 	if (UProjectileSpawnerComponent* ProjectileSpawner = Unit->GetProjectileSpawnerComponent())
 	{
-		ProjectileSpawner->RequestSpawnProjectile(ProjectileClass,
-		                                          AvatarPawn->GetActorLocation() + TempOffset, FRotator::ZeroRotator, TargetDirection, nullptr);
+		if (UAbilitySystemComponent* OwningAbilitySystem = Cast<IAbilitySystemInterface>(ActorInfo->AvatarActor.Get())->GetAbilitySystemComponent())
+		{
+			const FVector SpawnLocation = AvatarPawn->GetActorLocation() + TempOffset;
+			const FRotator SpawnRotation = FRotator(0, 0, 0);
+			
+			ProjectileSpawner->RequestSpawnProjectile(ProjectileClass, SpawnLocation, SpawnRotation, TargetDirection,
+			                                          nullptr, OwningAbilitySystem);
+		}
 	}
     
 	EndAbility(Handle, ActorInfo, ActivationInfo, true, false);

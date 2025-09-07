@@ -4,13 +4,14 @@
 
 #include "CoreMinimal.h"
 #include "FrogGameplayAbility.h"
+#include "FrogAbilityProjectile.h"
 #include "Abilities/GameplayAbility.h"
 #include "FrogTargetedProjectile.generated.h"
 
 class AProjectile;
 
 UCLASS()
-class FROG_API UFrogTargetedProjectile : public UFrogGameplayAbility
+class FROG_API UFrogTargetedProjectile : public UFrogAbilityProjectile
 {
 	GENERATED_BODY()
 
@@ -25,40 +26,39 @@ public:
 	virtual void OnRemoveAbility(const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilitySpec& Spec) override;
 
 protected:
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Projectile Ability")
-	TSubclassOf<AProjectile> ProjectileClass;
-	
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Projectile Ability")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Targeted Projectile Class")
 	int32 NumProjectiles = 5;
 	
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Projectile Ability")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Targeted Projectile Class")
 	float DelayBetweenShots = 0.1f;
 	
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Projectile Ability")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Targeted Projectile Class")
 	float MinSpreadAngleDegrees = 45.0f;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Projectile Ability")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Targeted Projectile Class")
 	float MaxSpreadAngleDegrees = 135.0f;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Projectile Ability")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Targeted Projectile Class")
 	float MaxDownwardAngleDegrees = 10.0f;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Projectile Ability")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Targeted Projectile Class")
 	TSubclassOf<AActor> TargetComponentClass;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Projectile Ability")
+	UPROPERTY(BlueprintReadOnly, Category = "Targeted Projectile Class")
 	TObjectPtr<USceneComponent> TargetComponent;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Projectile Ability")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Targeted Projectile Class")
 	float TargetComponentLifeSpawn;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Projectile Ability")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Targeted Projectile Class")
 	FGameplayTag TargetEnemiesStateTag;
 
 private:
 	UFUNCTION()
-	void FireProjectile();
-	
+	virtual void FireProjectile() override;
+	virtual FVector GetFireDirection(FVector SpawnLocation) override;
+	virtual USceneComponent* GetTargetComponent() override;
+
 	FTimerHandle ProjectileTimerHandle;
 
 	int32 ProjectilesFired = 0;

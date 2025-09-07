@@ -47,6 +47,11 @@ void AProjectile::SetApplyEffect(const bool ApplyEffect)
    this->bApplyEffect = ApplyEffect;
 }
 
+void AProjectile::SetOwningAbilitySystem(UAbilitySystemComponent* InputAbilitySystem)
+{
+    this->OwningAbilitySystem = InputAbilitySystem;
+}
+
 void AProjectile::BeginPlay()
 {
     Super::BeginPlay();
@@ -74,24 +79,21 @@ void AProjectile::OnComponentBeginOverlap2(UPrimitiveComponent* OverlappedCompon
 
 void AProjectile::ApplyGameplayEffect(const AActor* OtherActor, const TSubclassOf<UGameplayEffect> Effect, const bool bDestroyOnHit)
 {
-    if (OtherActor && OtherActor != GetOwner())
+    if (bApplyEffect && OtherActor && OtherActor != GetOwner())
     {
-        if (bApplyEffect)
+        if (const IAbilitySystemInterface* AbilitySystemInterface = Cast<IAbilitySystemInterface>(OtherActor))
         {
-            if (const IAbilitySystemInterface* AbilitySystemInterface = Cast<IAbilitySystemInterface>(OtherActor))
+            UAbilitySystemComponent* TargetASC = AbilitySystemInterface->GetAbilitySystemComponent();
+            if (GameplayEffect && OwningAbilitySystem.IsValid() && TargetASC)
             {
-                UAbilitySystemComponent* TargetASC = AbilitySystemInterface->GetAbilitySystemComponent();
-                if (IsValid(GameplayEffect))
-                {
-                    FGameplayEffectContextHandle Context = TargetASC->MakeEffectContext();
-                    Context.AddSourceObject(this);
-                    Context.AddInstigator(GetInstigator(), GetOwner());
-                    
-                    FGameplayEffectSpecHandle Spec = TargetASC->MakeOutgoingSpec(Effect, 1.0f, Context);
-                    if (Spec.IsValid())
-                    {
-                        TargetASC->ApplyGameplayEffectSpecToSelf(*Spec.Data.Get());
-                    }
+                FGameplayEffectContextHandle Context = OwningAbilitySystem->MakeEffectContext();
+                Context.AddSourceObject(this);
+                Context.AddInstigator(GetInstigator(), GetOwner()); 
+                FGameplayEffectSpecHandle Spec = OwningAbilitySystem->MakeOutgoingSpec(Effect, 1.0f, Context);
+                
+                if (Spec.IsValid())
+                { 
+                    OwningAbilitySystem->ApplyGameplayEffectSpecToTarget(*Spec.Data.Get(), TargetASC);
                 }
             }
         }

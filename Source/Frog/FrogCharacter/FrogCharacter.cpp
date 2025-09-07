@@ -166,26 +166,26 @@ void AFrogCharacter::OnGameplayEffectApplied(
 	const FGameplayEffectSpec& SpecApplied,
 	FActiveGameplayEffectHandle ActiveHandle)
 {
-	if (!TargetASC) return;
+	// if (!TargetASC) return;
+	//
+	// AActor* TargetActor = TargetASC->GetOwnerActor();
+	// FString TargetName = TargetActor ? TargetActor->GetName() : TEXT("None");
+	// FString EffectName = SpecApplied.Def ? SpecApplied.Def->GetName() : TEXT("UnknownEffect");
 
-	AActor* TargetActor = TargetASC->GetOwnerActor();
-	FString TargetName = TargetActor ? TargetActor->GetName() : TEXT("None");
-	FString EffectName = SpecApplied.Def ? SpecApplied.Def->GetName() : TEXT("UnknownEffect");
-
-	GEngine->AddOnScreenDebugMessage(
-		-1, 5.f, FColor::Red,
-		FString::Printf(TEXT("Effect Applied: %s -> Target ASC: %s"), *EffectName, *TargetName)
-	);
-
+	// GEngine->AddOnScreenDebugMessage(
+	// 	-1, 5.f, FColor::Red,
+	// 	FString::Printf(TEXT("Effect Applied: %s -> Target ASC: %s"), *EffectName, *TargetName)
+	// );
+	//
 	FGameplayTagContainer GrantedTags;
 	SpecApplied.GetAllGrantedTags(GrantedTags);
 
 	if (GrantedTags.HasTag(FGameplayTag::RequestGameplayTag(FName("Debuff"))))
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green,
-			FString::Printf(TEXT("%s got DEBUFF from %s"),
-			*TargetASC->GetOwner()->GetName(),
-			*SpecApplied.Def->GetName()));
+		// GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green,
+		// 	FString::Printf(TEXT("%s got DEBUFF from %s"),
+		// 	*TargetASC->GetOwner()->GetName(),
+		// 	*SpecApplied.Def->GetName()));
 	}
 }
 

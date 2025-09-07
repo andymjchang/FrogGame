@@ -4,7 +4,6 @@
 #include "FrogAbilities/FrogAbilityPrimary.h"
 
 #include "FrogCharacter/FrogCharacter.h"
-#include "Unit/ProjectileSpawnerComponent.h"
 
 void UFrogAbilityPrimary::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
                                           const FGameplayAbilityActorInfo* ActorInfo,
@@ -19,20 +18,7 @@ void UFrogAbilityPrimary::ActivateAbility(const FGameplayAbilitySpecHandle Handl
     
 	Super::ActivateAbility(Handle, ActorInfo, ActivationInfo, TriggerEventData);
 
-	IUnitInterface* Unit = Cast<IUnitInterface>(ActorInfo->AvatarActor.Get());
-	if (!Unit)
-	{
-		EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
-		return;
-	}
-	
-	if (UProjectileSpawnerComponent* ProjectileSpawner = Unit->GetProjectileSpawnerComponent())
-	{
-		const FVector UnitLocation = ActorInfo->AvatarActor.Get()->GetActorLocation() + FVector(0, 0, 50.f);
-		const FVector FireDirection = (GetCrosshairLocation(false) - UnitLocation).GetSafeNormal();
-		const FRotator FireRotation = FRotator(0, 0, 0);
-		ProjectileSpawner->RequestSpawnProjectile(ProjectileClass, UnitLocation, FireRotation, FireDirection, nullptr);
-	}
+	FireProjectile();
 
 	CommitAbilityCooldown(Handle, ActorInfo, ActivationInfo, false);
 	EndAbility(Handle, ActorInfo, ActivationInfo, true, false);
