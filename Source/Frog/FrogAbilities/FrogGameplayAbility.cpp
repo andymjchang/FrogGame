@@ -30,7 +30,6 @@ void UFrogGameplayAbility::InputReleased(const FGameplayAbilitySpecHandle Handle
 {
 	Super::InputReleased(Handle, ActorInfo, ActivationInfo);
 	bIsHeld = false;
-	// EndAbility(Handle, ActorInfo, ActivationInfo, true, false);
 }
 
 const FGameplayTagContainer* UFrogGameplayAbility::GetCooldownTags() const

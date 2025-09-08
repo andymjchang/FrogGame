@@ -23,6 +23,6 @@ protected:
 	virtual FRotator GetFireRotation();
 	virtual FVector GetFireDirection(FVector SpawnLocation);
 	virtual USceneComponent* GetTargetComponent();
-	void FireProjectile(FVector SpawnLocation, FRotator ProjectileRotation, FVector FireDirection);
+	void FireProjectile(const FVector& SpawnLocation, const FRotator& ProjectileRotation, const FVector& FireDirection);
 	virtual void FireProjectile();
 };

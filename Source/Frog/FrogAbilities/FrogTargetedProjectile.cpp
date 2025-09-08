@@ -93,7 +93,6 @@ void UFrogTargetedProjectile::FireProjectile()
     
     if (ProjectilesFired >= NumProjectiles)
     {
-        // EndAbility(GetCurrentAbilitySpecHandle(), GetCurrentActorInfo(), GetCurrentActivationInfo(), true, false);
         if (GetWorld())
         {
             GetWorld()->GetTimerManager().ClearTimer(ProjectileTimerHandle);

@@ -7,11 +7,11 @@
 
 #include "FrogTargetedProjectile.h"
 #include "TimerManager.h"
-#include "FrogCharacter/FrogCharacter.h"
+#include "FrogCharacter/FrogCharacter.h" 
 #include "Unit/ProjectileSpawnerComponent.h"
 #include "Unit/UnitInterface.h"
 
-void UFrogAbilityProjectile::FireProjectile(FVector SpawnLocation, FRotator FireRotation, FVector FireDirection)
+void UFrogAbilityProjectile::FireProjectile(const FVector& SpawnLocation, const FRotator& FireRotation, const FVector& FireDirection)
 {
     const FGameplayAbilityActorInfo* ActorInfo = GetCurrentActorInfo();
     if (!ActorInfo || !ActorInfo->AvatarActor.IsValid())
@@ -24,10 +24,7 @@ void UFrogAbilityProjectile::FireProjectile(FVector SpawnLocation, FRotator Fire
     if (Unit && Unit->GetProjectileSpawnerComponent() && ProjectileClass)
     {
         UProjectileSpawnerComponent* ProjectileSpawner = Unit->GetProjectileSpawnerComponent();
-
-        // const FVector SpawnLocation = GetSpawnLocation();
-        // const FRotator FireRotation = GetFireRotation();
-        // const FVector FireDirection = GetFireDirection(SpawnLocation);
+        
         USceneComponent* TargetComponent = GetTargetComponent();
         if (UAbilitySystemComponent* OwningAbilitySystem = Cast<IAbilitySystemInterface>(ActorInfo->AvatarActor.Get())->GetAbilitySystemComponent())
         {
