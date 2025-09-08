@@ -49,7 +49,7 @@ void UFA_ArcingTargetedProjectile::ActivateAbility(const FGameplayAbilitySpecHan
 
 void UFA_ArcingTargetedProjectile::EndAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, bool bReplicateEndAbility, bool bWasCancelled)
 {
-    if (GetWorld())
+    if (GetWorld() && ProjectileTimerHandle.IsValid())
     {
         GetWorld()->GetTimerManager().ClearTimer(ProjectileTimerHandle);
     }
@@ -75,6 +75,11 @@ void UFA_ArcingTargetedProjectile::OnRemoveAbility(const FGameplayAbilityActorIn
     const FGameplayAbilitySpec& Spec)
 {
     Super::OnRemoveAbility(ActorInfo, Spec);
+
+    if (GetWorld() && ProjectileTimerHandle.IsValid())
+    {
+        GetWorld()->GetTimerManager().ClearTimer(ProjectileTimerHandle);
+    }
     
     if (TargetEnemiesStateTag.IsValid())
     {

@@ -85,13 +85,10 @@ void UFrogAbility::OnCooldownTagChanged(const FGameplayTag CooldownTag, int32 Ne
 		EndAbility(CurrentSpecHandle, CurrentActorInfo, CurrentActivationInfo, true, false);
 		if (bRecastIfHeld && bIsHeld)
 		{
-			GetWorld()->GetTimerManager().SetTimer(
-				ReactivationTimerHandle,
-				this,
-				&UFrogAbility::AttemptReactivation,
-				0.01f, 
-				false
-			);
+			if (UAbilitySystemComponent* ASC = GetAbilitySystemComponentFromActorInfo())
+			{
+				ASC->TryActivateAbility(CurrentSpecHandle);
+			}
 		}
 	}
 }
