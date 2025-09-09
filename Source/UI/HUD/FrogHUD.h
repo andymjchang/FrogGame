@@ -15,6 +15,10 @@ UCLASS()
 class UI_API UFrogHUD : public UUserWidget
 {
 	GENERATED_BODY()
+
+public:
+	UFUNCTION(BlueprintImplementableEvent)
+	void PlayHitmarkerAnimation();
 	
 	// Ability Icons / Cooldowns
 public:

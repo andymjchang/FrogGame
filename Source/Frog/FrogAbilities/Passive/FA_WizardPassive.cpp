@@ -45,7 +45,7 @@ void UFA_WizardPassive::OnGameplayEffectApplied(UAbilitySystemComponent* Ability
 		FGameplayTagContainer GrantedTags;
 		GameplayEffectSpec.GetAllAssetTags(GrantedTags);
 
-		if (GrantedTags.HasTag(TrackedTag))
+		if (TrackedTag.IsValid() && GrantedTags.HasTag(TrackedTag))
 		{
 			if (UAbilitySystemComponent* ASC = Cast<IAbilitySystemInterface>(GetActorInfo().AvatarActor.Get())->GetAbilitySystemComponent())
 			{

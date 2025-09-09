@@ -139,10 +139,13 @@ void AFrogCharacter::SetupAbilities()
 	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(UFrogAttributeSet::GetMaxManaAttribute()).AddUObject(
 		this, &AFrogCharacter::OnMaxManaChanged);
 
+	// Listen for when gameplay tags are applied
+	GameplayTagAppliedHandle = AbilitySystemComponent->OnGameplayEffectAppliedDelegateToTarget.AddUObject(
+		this, &AFrogCharacter::OnGameplayEffectApplied);
+
 	// Listen for abilities that need point and click targeting
-	TargetEnemyTagDelegateHandle = AbilitySystemComponent->
-									 RegisterGameplayTagEvent(FindEnemyUnderCrosshairGameplayTag).AddUObject(
-										 this, &AFrogCharacter::OnTargetEnemyTagChanged);
+	TargetEnemyTagDelegateHandle = AbilitySystemComponent->RegisterGameplayTagEvent(FindEnemyUnderCrosshairGameplayTag).
+		AddUObject(this, &AFrogCharacter::OnTargetEnemyTagChanged);
 
 	// Grant default abilities
 	if (IsValid(AbilitySet))
@@ -337,4 +340,23 @@ void AFrogCharacter::FindEnemyUnderCrosshair()
 void AFrogCharacter::OnTargetEnemyTagChanged(const FGameplayTag Tag, int32 NewCount)
 {
 	bFindEnemyUnderCrosshair = NewCount > 0;
+}
+
+void AFrogCharacter::OnGameplayEffectApplied(UAbilitySystemComponent* InputAbilitySystem,
+	const FGameplayEffectSpec& GameplayEffectSpec, FActiveGameplayEffectHandle ActiveGameplayEffectSpec)
+{
+	FGameplayTagContainer GrantedTags;
+	GameplayEffectSpec.GetAllAssetTags(GrantedTags);
+
+	if (DamageTag.IsValid() && GrantedTags.HasTag(DamageTag))
+	{
+		FrogHUDWidget->PlayHitmarkerAnimation();
+	}
+	// AActor* TargetActor = AbilitySystemComponent->GetOwnerActor();
+	// AActor* SourceActor = GameplayEffectSpec.GetContext().GetEffectCauser();
+	//
+	// if (SourceActor && SourceActor != TargetActor)
+	// {
+	// 	
+	// }
 }

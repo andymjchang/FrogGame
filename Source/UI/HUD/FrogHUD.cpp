@@ -85,3 +85,4 @@ void UFrogHUD::UpdateManaHUD()
 		ManaText->SetText(FText::AsNumber(Mana));
 	}
 }
+

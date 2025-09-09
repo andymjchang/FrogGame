@@ -103,6 +103,15 @@ protected: /* Protected Functions */
 	void FindEnemyUnderCrosshair();
 	virtual void OnTargetEnemyTagChanged(const FGameplayTag Tag, int32 NewCount);
 
+	// Track applied gameplay effects
+	UPROPERTY(EditDefaultsOnly)
+	FGameplayTag DamageTag;
+
+	FDelegateHandle GameplayTagAppliedHandle;
+	void OnGameplayEffectApplied(UAbilitySystemComponent* InputAbilitySystem,
+	                             const FGameplayEffectSpec& GameplayEffectSpec,
+	                             FActiveGameplayEffectHandle ActiveGameplayEffectSpec);
+
 protected: /* Members */
 	// Components
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
