@@ -5,28 +5,35 @@
 
 #include "FrogCharacter.h"
 
-void UFrogMovementComponent::PhysCustom(const float DeltaTime, const int32 Iterations) 
+void UFrogMovementComponent::PhysCustom(const float DeltaTime, const int32 Iterations)
+
 {
+	Super::PhysCustom(DeltaTime, Iterations);
+	
 	if (CustomMovementMode == static_cast<uint8>(ECustomMovementMode::CMOVE_Grapple))
 	{
 		PhysGrapple(DeltaTime, Iterations);
 	}
 	if (CustomMovementMode == static_cast<uint8>(ECustomMovementMode::CMOVE_Downed))
 	{
-		PhysGrapple(DeltaTime, Iterations);
+		
 	}
 	else
 	{
-		Super::PhysCustom(DeltaTime, Iterations);
+		
 	}
-}
+} 
 
 void UFrogMovementComponent::PhysGrapple(float DeltaTime, int32 Iterations)
 {
 	if (!CharacterOwner) return;
 
 	AFrogCharacter* Frog = Cast<AFrogCharacter>(CharacterOwner);
-	if (!Frog || !Frog->GetIsGrapple()) return;
+	if (!Frog || !Frog->GetIsGrapple())
+	{
+		SetMovementMode(MOVE_Falling);
+		return;
+	}
 	
 	const FVector GrappleDirection = (Frog->GetGrapplePoint() - Frog->GetActorLocation()).GetSafeNormal();
 	const float GrappleDistance = (Frog->GetGrapplePoint() - Frog->GetActorLocation()).Size();
@@ -58,6 +65,7 @@ void UFrogMovementComponent::PhysGrapple(float DeltaTime, int32 Iterations)
     
 	if (Hit.bBlockingHit)
 	{
+		HandleImpact(Hit, DeltaTime, Delta);
 		SlideAlongSurface(Delta, 1.f - Hit.Time, Hit.Normal, Hit, false);
 	}
     
@@ -69,18 +77,21 @@ void UFrogMovementComponent::PhysGrapple(float DeltaTime, int32 Iterations)
 void UFrogMovementComponent::OnMovementModeChanged(EMovementMode PreviousMovementMode, uint8 PreviousCustomMode)
 {
 	Super::OnMovementModeChanged(PreviousMovementMode, PreviousCustomMode);
-    
+
+	AFrogCharacter* Frog = Cast<AFrogCharacter>(CharacterOwner);
+	if (!Frog) return;
+	
 	// Enter Grapple
 	if (MovementMode == MOVE_Custom && CustomMovementMode == static_cast<uint8>(ECustomMovementMode::CMOVE_Grapple))
 	{
-		if (AFrogCharacter* Frog = Cast<AFrogCharacter>(CharacterOwner)) Frog->SetTongueVisibility(true);
+		Frog->SetTongueVisibility(true);
 		return;
 	}
     
 	// Exit Grapple
 	if (PreviousMovementMode == MOVE_Custom && PreviousCustomMode == static_cast<uint8>(ECustomMovementMode::CMOVE_Grapple))
 	{
-		if (AFrogCharacter* Frog = Cast<AFrogCharacter>(CharacterOwner)) Frog->SetTongueVisibility(false);
+		Frog->SetTongueVisibility(false);
 		return;
 	}
 }
