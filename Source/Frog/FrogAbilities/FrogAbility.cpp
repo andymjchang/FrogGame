@@ -25,6 +25,14 @@ void UFrogAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
 	bIsHeld = true;
 }
 
+void UFrogAbility::InputPressed(const FGameplayAbilitySpecHandle Handle,
+									   const FGameplayAbilityActorInfo* ActorInfo,
+									   const FGameplayAbilityActivationInfo ActivationInfo)
+{
+	Super::InputPressed(Handle, ActorInfo, ActivationInfo);
+	bIsHeld = true;
+}
+
 void UFrogAbility::InputReleased(const FGameplayAbilitySpecHandle Handle,
 									   const FGameplayAbilityActorInfo* ActorInfo,
 									   const FGameplayAbilityActivationInfo ActivationInfo)
