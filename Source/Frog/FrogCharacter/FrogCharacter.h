@@ -74,7 +74,10 @@ public: /* Public Functions */
 	virtual void SetMaxHealth(const float NewMaxHealth) override;
 	virtual UProjectileSpawnerComponent* GetProjectileSpawnerComponent() override;
 
-	void SetTongueVisibility(bool Value);      
+	void SetTongueVisibility(bool Value);
+
+	UFUNCTION(BlueprintCallable)
+	FVector GetFloorLocation();
 
 public: /* Public Members */
 

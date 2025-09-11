@@ -360,3 +360,30 @@ void AFrogCharacter::OnGameplayEffectApplied(UAbilitySystemComponent* InputAbili
 	// 	
 	// }
 }
+
+FVector AFrogCharacter::GetFloorLocation()
+{
+	FVector StartLocation = GetActorLocation();
+	FVector EndLocation = StartLocation - FVector(0.f, 0.f, 1500.f);
+	FVector FloorLocation;
+	
+	FHitResult HitResult;
+	
+	FCollisionQueryParams CollisionParams;
+	CollisionParams.AddIgnoredActor(this);
+
+	const bool bHit = GetWorld()->LineTraceSingleByChannel(
+		HitResult,
+		StartLocation,
+		EndLocation,
+		ECC_Visibility,
+		CollisionParams
+	);
+
+	// Optional: Draw a debug line to visualize the trace
+	DrawDebugLine(GetWorld(), StartLocation, EndLocation, FColor::Green, false, 1.0f, 0, 1.0f);
+	
+	if (bHit) FloorLocation = HitResult.Location;
+
+	return FloorLocation;
+}

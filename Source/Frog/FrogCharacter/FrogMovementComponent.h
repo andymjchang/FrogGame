@@ -12,6 +12,7 @@ enum class ECustomMovementMode : uint8
 	CMOVE_None UMETA(DisplayName = "None"),
 	CMOVE_Grapple UMETA(DisplayName = "Grapple"),
 	CMOVE_Downed UMETA(DisplayName = "Downed"),
+	CMOVE_Floating UMETA(DisplayName = "Floating"),
 };
 
 /**
