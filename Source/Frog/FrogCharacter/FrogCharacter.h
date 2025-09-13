@@ -12,6 +12,7 @@
 #include "GAS/FrogAttributeSet.h"
 #include "FrogCharacter.generated.h"
 
+class UInventoryComponent;
 class USphereComponent;
 class UNametagWidgetComponent;
 class UWidgetComponent;
@@ -134,6 +135,9 @@ protected: /* Members */
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<UProjectileSpawnerComponent> ProjectileSpawner;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	TObjectPtr<UInventoryComponent> InventoryComponent;
 
 	// HUD
 	UPROPERTY(EditDefaultsOnly, Category="HUD")

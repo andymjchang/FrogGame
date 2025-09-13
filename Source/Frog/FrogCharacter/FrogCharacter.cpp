@@ -19,6 +19,7 @@
 #include "Frog/GAS/UnitAttributeSet.h"
 #include "Frog/GAS/FrogAbilitySystem.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "Unit/InventoryComponent.h"
 #include "Unit/NametagWidgetComponent.h"
 #include "Unit/ProjectileSpawnerComponent.h"
 
@@ -89,8 +90,8 @@ AFrogCharacter::AFrogCharacter(const FObjectInitializer& ObjectInitializer)
 	HealthBarWidgetComponent = CreateDefaultSubobject<UNametagWidgetComponent>(TEXT("NametagWidgetComponent"));
 	HealthBarWidgetComponent->SetupAttachment(RootComponent);
 
-	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
-	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
+	// Inventory Component
+	InventoryComponent = CreateDefaultSubobject<UInventoryComponent>(TEXT("InventoryComponent"));
 }
 
 void AFrogCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
