@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "Engine/DataAsset.h"
 #include "GameplayEffect.h"
+#include "GAS/FrogAbilitySystem.h"
 #include "InventoryItemData.generated.h"
 
 /**
@@ -30,6 +31,9 @@ public:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item")
 	TSubclassOf<UGameplayAbility> GrantedAbility;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item")
+	EAbilityInputID AbilityInputKey;
 	
 	virtual void OnItemAdded(AActor* Owner);
 	virtual void OnItemRemoved(AActor* Owner);
