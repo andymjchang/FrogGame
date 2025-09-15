@@ -175,8 +175,13 @@ void AFrogCharacter::HandleDeath()
 			AbilitySystemComponent->ApplyGameplayEffectSpecToSelf(*SpecHandle.Data.Get());
 		}
 	}
-	GetCharacterMovement()->MaxWalkSpeed = DownedSpeed;
 	AbilitySystemComponent->CancelAllAbilities();
+	MulticastOnDeath();
+}
+
+void AFrogCharacter::MulticastOnDeath_Implementation()
+{
+	GetCharacterMovement()->MaxWalkSpeed = DownedSpeed;
 	GetMesh()->SetCollisionProfileName(TEXT("Ragdoll"));
 	GetMesh()->SetSimulatePhysics(true);
 }
@@ -285,12 +290,12 @@ void AFrogCharacter::AbilityInputBindingReleasedHandler(EAbilityInputID AbilityI
 
 void AFrogCharacter::OnManaChanged(const FOnAttributeChangeData& Data)
 {
-	if (FrogHUDWidget) FrogHUDWidget->UpdateMana(Data.NewValue);
+	if (FrogHUDWidget && IsLocallyControlled()) FrogHUDWidget->UpdateMana(Data.NewValue);
 }
 
 void AFrogCharacter::OnMaxManaChanged(const FOnAttributeChangeData& Data)
 {
-	if (FrogHUDWidget) FrogHUDWidget->UpdateMaxMana(Data.NewValue);
+	if (FrogHUDWidget && IsLocallyControlled()) FrogHUDWidget->UpdateMaxMana(Data.NewValue);
 }
 
 void AFrogCharacter::SetTongueVisibility(const bool Value)
@@ -349,7 +354,7 @@ void AFrogCharacter::OnGameplayEffectApplied(UAbilitySystemComponent* InputAbili
 	FGameplayTagContainer GrantedTags;
 	GameplayEffectSpec.GetAllAssetTags(GrantedTags);
 
-	if (DamageTag.IsValid() && GrantedTags.HasTag(DamageTag))
+	if (IsLocallyControlled() && DamageTag.IsValid() && GrantedTags.HasTag(DamageTag))
 	{
 		FrogHUDWidget->PlayHitmarkerAnimation();
 	}

@@ -1,5 +1,7 @@
 #include "InventoryItemData.h"
 #include "AbilitySystemComponent.h"
+#include "FrogCharacter/FrogCharacter.h"
+#include "UI/HUD/FrogHUD.h"
 
 UInventoryItemData::UInventoryItemData() : ItemIcon(nullptr), AbilityInputKey()
 {
@@ -11,16 +13,16 @@ void UInventoryItemData::OnItemAdded(AActor* Owner)
 {
 	if (!Owner) return;
 	
-	if (UAbilitySystemComponent* AbilitySystemComponent = Owner->FindComponentByClass<UAbilitySystemComponent>())
+	if (UAbilitySystemComponent* AbilitySystem = Owner->FindComponentByClass<UAbilitySystemComponent>())
 	{
 		if (PassiveGameplayEffect)
 		{
-			FGameplayEffectContextHandle EffectContext = AbilitySystemComponent->MakeEffectContext();
+			FGameplayEffectContextHandle EffectContext = AbilitySystem->MakeEffectContext();
 			EffectContext.AddSourceObject(this);
-			FGameplayEffectSpecHandle SpecHandle = AbilitySystemComponent->MakeOutgoingSpec(PassiveGameplayEffect, 1, EffectContext);
+			FGameplayEffectSpecHandle SpecHandle = AbilitySystem->MakeOutgoingSpec(PassiveGameplayEffect, 1, EffectContext);
 			if (SpecHandle.IsValid())
 			{
-				PassiveEffectHandle = AbilitySystemComponent->ApplyGameplayEffectSpecToSelf(*SpecHandle.Data.Get());
+				PassiveEffectHandle = AbilitySystem->ApplyGameplayEffectSpecToSelf(*SpecHandle.Data.Get());
 			}
 		}
 
@@ -28,13 +30,18 @@ void UInventoryItemData::OnItemAdded(AActor* Owner)
 		{
 			if (AbilityInputKey != EAbilityInputID::None)
 			{
-				FGameplayAbilitySpec* ExistingAbilitySpec = AbilitySystemComponent->FindAbilitySpecFromInputID(static_cast<int32>(AbilityInputKey));
-				if (ExistingAbilitySpec)
+				if (const FGameplayAbilitySpec* OldAbilitySpec = AbilitySystem->FindAbilitySpecFromInputID(static_cast<int32>(AbilityInputKey)))
 				{
-					AbilitySystemComponent->ClearAbility(ExistingAbilitySpec->Handle);
+					AbilitySystem->ClearAbility(OldAbilitySpec->Handle);
 				}
 			}
-			AbilitySpecHandle = AbilitySystemComponent->GiveAbility(FGameplayAbilitySpec(GrantedAbility, 1, static_cast<int32>(AbilityInputKey), this));
+			AbilitySpecHandle = AbilitySystem->GiveAbility(FGameplayAbilitySpec(GrantedAbility, 1, static_cast<int32>(AbilityInputKey), this));
+
+			const UFrogHUD* FrogHUD = Cast<AFrogCharacter>(Owner)->GetFrogHUD();
+			if (FrogHUD && AbilitySpecHandle.IsValid())
+			{
+				FrogHUD->AssignAbilityToUISlot(AbilitySpecHandle, AbilitySystem);
+			}
 		}
 	}
 }

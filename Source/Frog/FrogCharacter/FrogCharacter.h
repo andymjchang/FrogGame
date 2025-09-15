@@ -71,6 +71,8 @@ public: /* Public Functions */
 
 	/// Unit Interface 
 	virtual void HandleDeath() override;
+	UFUNCTION(NetMulticast, Reliable)
+	void MulticastOnDeath();
 	virtual void SetHealth(const float NewHealth) override;
 	virtual void SetMaxHealth(const float NewMaxHealth) override;
 	virtual UProjectileSpawnerComponent* GetProjectileSpawnerComponent() override;
@@ -234,5 +236,6 @@ public: /* Public Getters/Setters */
 	FORCEINLINE float GetDiveSpeed() const { return DiveSpeed; }
 	FORCEINLINE void SetFindEnemyUnderCrosshair(const bool Value) { bFindEnemyUnderCrosshair = Value; }
 	FORCEINLINE AActor* GetTargetEnemyActor() const { return TargetEnemyActor.Get(); }
+	FORCEINLINE UFrogHUD* GetFrogHUD() const { return FrogHUDWidget; }
 };
 
