@@ -8,6 +8,9 @@
 #include "Unit/UnitInterface.h"
 #include "EnemyCharacter.generated.h"
 
+class UBehaviorTreeComponent;
+class UBehaviorTree;
+class UBlackboardComponent;
 class UAttributeSet;
 class USphereComponent;
 class UProjectileSpawnerComponent;
@@ -31,6 +34,9 @@ public: // Public Functions
 
 	FORCEINLINE USphereComponent* GetHitboxComponent() { return Hitbox; }
 
+	UFUNCTION(BlueprintCallable)
+	UBehaviorTree* GetBehaviorTree() { return BehaviorTreeAsset; }
+
 protected: // Protected Function
 	virtual void BeginPlay() override;
 	
@@ -50,5 +56,9 @@ protected: // Protected Members
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "GAS")
 	TObjectPtr<UAttributeSet> AttributeSet;
+
+	// AI
+	UPROPERTY(EditDefaultsOnly, Category = "AI")
+	TObjectPtr<UBehaviorTree> BehaviorTreeAsset	;
 
 };
