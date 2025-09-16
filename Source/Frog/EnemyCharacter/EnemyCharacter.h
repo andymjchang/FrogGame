@@ -12,7 +12,7 @@ class UBehaviorTreeComponent;
 class UBehaviorTree;
 class UBlackboardComponent;
 class UAttributeSet;
-class USphereComponent;
+class UCapsuleComponent;
 class UProjectileSpawnerComponent;
 class UNametagWidgetComponent;
 
@@ -32,7 +32,7 @@ public: // Public Functions
 	virtual void SetMaxHealth(const float NewMaxHealth) override;
 	virtual UProjectileSpawnerComponent* GetProjectileSpawnerComponent() override;
 
-	FORCEINLINE USphereComponent* GetHitboxComponent() { return Hitbox; }
+	FORCEINLINE UCapsuleComponent* GetHitboxComponent() { return Hitbox; }
 
 	UFUNCTION(BlueprintCallable)
 	UBehaviorTree* GetBehaviorTree() { return BehaviorTreeAsset; }
@@ -42,7 +42,7 @@ protected: // Protected Function
 	
 protected: // Protected Members
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	TObjectPtr<USphereComponent> Hitbox;
+	TObjectPtr<UCapsuleComponent> Hitbox;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<UNametagWidgetComponent> HealthBarWidgetComponent;

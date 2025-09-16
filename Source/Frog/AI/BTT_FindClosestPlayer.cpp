@@ -19,38 +19,31 @@ EBTNodeResult::Type UBTT_FindClosestPlayer::ExecuteTask(UBehaviorTreeComponent& 
 {
     const AAIController* AIController = OwnerComp.GetAIOwner();
     if (!AIController) return EBTNodeResult::Failed;
-
     const APawn* ControlledPawn = AIController->GetPawn();
     if (!ControlledPawn) return EBTNodeResult::Failed;
-
-    // Find closest player class
+   
     AActor* ClosestPlayer = nullptr;
     float MinDistanceSquared = FLT_MAX; 
     TArray<AActor*> FoundPlayers;
     
     UGameplayStatics::GetAllActorsOfClass(GetWorld(), AFrogCharacter::StaticClass(), FoundPlayers);
-
     if (FoundPlayers.Num() == 0) return EBTNodeResult::Failed;
 
+    // Skip downed players
     const FGameplayTag DownedTag = FGameplayTag::RequestGameplayTag(FName("Frog.State.Downed"));
-    
     for (AActor* PlayerActor : FoundPlayers)
     {
        if (!PlayerActor) continue;
-
-       // Check if the player has the "Downed" tag. If so, ignore them.
-       IAbilitySystemInterface* AbilitySystemInterface = Cast<IAbilitySystemInterface>(PlayerActor);
-       if (AbilitySystemInterface)
+       if (IAbilitySystemInterface* AbilitySystemInterface = Cast<IAbilitySystemInterface>(PlayerActor))
        {
           UAbilitySystemComponent* AbilitySystemComp = AbilitySystemInterface->GetAbilitySystemComponent();
           if (AbilitySystemComp && AbilitySystemComp->HasMatchingGameplayTag(DownedTag))
           {
-             continue; // Skip this downed player
+             continue; 
           }
        }
        
        const float DistanceSquared = FVector::DistSquared(ControlledPawn->GetActorLocation(), PlayerActor->GetActorLocation());
-
        if (DistanceSquared < MinDistanceSquared)
        {
           MinDistanceSquared = DistanceSquared;
@@ -58,7 +51,7 @@ EBTNodeResult::Type UBTT_FindClosestPlayer::ExecuteTask(UBehaviorTreeComponent& 
        }
     }
 
-    // Write to blackboard if we found a valid (not downed) player.
+    // Write to blackboard
     if (ClosestPlayer)
     {
        if (UBlackboardComponent* BlackboardComp = OwnerComp.GetBlackboardComponent())
@@ -67,8 +60,7 @@ EBTNodeResult::Type UBTT_FindClosestPlayer::ExecuteTask(UBehaviorTreeComponent& 
           return EBTNodeResult::Succeeded;
        }
     }
-    
-    // If ClosestPlayer is null (no players found, or all players are downed), fail the task.
+   
     return EBTNodeResult::Failed;
 }
 

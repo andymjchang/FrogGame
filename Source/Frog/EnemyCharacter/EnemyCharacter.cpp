@@ -4,7 +4,7 @@
 #include "EnemyCharacter.h"
 
 #include "AbilitySystemComponent.h"
-#include "Components/SphereComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "Frog/GAS/UnitAttributeSet.h"
 #include "Unit/NametagWidgetComponent.h"
 #include "Unit/ProjectileSpawnerComponent.h"
@@ -13,7 +13,7 @@ AEnemyCharacter::AEnemyCharacter()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
-	Hitbox = CreateDefaultSubobject<USphereComponent>(TEXT("HitboxComponent"));
+	Hitbox = CreateDefaultSubobject<UCapsuleComponent>(TEXT("HitboxComponent"));
 	Hitbox->SetCollisionProfileName(TEXT("EnemyHitbox"));
 	Hitbox->SetupAttachment(RootComponent);
 	
