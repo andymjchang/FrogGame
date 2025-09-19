@@ -15,16 +15,24 @@ EBTNodeResult::Type UBTT_MoveForwardWithTurnLimit::ExecuteTask(UBehaviorTreeComp
 	AAIController* AIController = OwnerComp.GetAIOwner();
 	if (!AIController || !AIController->GetPawn())
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, FString::Printf(TEXT("x: %d"), 1));
 		return EBTNodeResult::Failed;
 	}
 	
 	UBlackboardComponent* BlackboardComp = OwnerComp.GetBlackboardComponent();
 	if (!BlackboardComp)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, FString::Printf(TEXT("x: %d"), 2));
 		return EBTNodeResult::Failed;
 	}
+
+	UObject* TargetObject = BlackboardComp->GetValueAsObject(TargetActorKey.SelectedKeyName);
+	AActor* TargetActor = Cast<AActor>(TargetObject);
+	if (!TargetActor)
+	{
+		FinishLatentTask(OwnerComp, EBTNodeResult::Failed);
+		return EBTNodeResult::Failed;
+	}
+
+	AIController->SetFocus(TargetActor, EAIFocusPriority::Gameplay);
 
 	return EBTNodeResult::InProgress;
 }
@@ -46,33 +54,33 @@ void UBTT_MoveForwardWithTurnLimit::TickTask(UBehaviorTreeComponent& OwnerComp, 
 		return;
 	}
 
-	// Get the target Actor from the Blackboard
-	UObject* TargetObject = BlackboardComp->GetValueAsObject(TargetActorKey.SelectedKeyName);
-	AActor* TargetActor = Cast<AActor>(TargetObject);
-
-	// If the target actor is not valid (e.g., it was destroyed), fail the task
-	if (!TargetActor)
-	{
-		FinishLatentTask(OwnerComp, EBTNodeResult::Failed);
-		return;
-	}
-
-	// Get the location from the valid target actor
-	const FVector TargetLocation = TargetActor->GetActorLocation();
-	const FVector PawnLocation = ControlledPawn->GetActorLocation();
-
-	// Check if we have reached the destination
-	if (FVector::Dist(PawnLocation, TargetLocation) <= AcceptanceRadius)
-	{
-		FinishLatentTask(OwnerComp, EBTNodeResult::Succeeded);
-		return;
-	}
+	// // Get the target Actor from the Blackboard
+	// UObject* TargetObject = BlackboardComp->GetValueAsObject(TargetActorKey.SelectedKeyName);
+	// AActor* TargetActor = Cast<AActor>(TargetObject);
+	//
+	// // If the target actor is not valid (e.g., it was destroyed), fail the task
+	// if (!TargetActor)
+	// {
+	// 	FinishLatentTask(OwnerComp, EBTNodeResult::Failed);
+	// 	return;
+	// }
+	//
+	// // Get the location from the valid target actor
+	// const FVector TargetLocation = TargetActor->GetActorLocation();
+	// const FVector PawnLocation = ControlledPawn->GetActorLocation();
+	//
+	// // Check if we have reached the destination
+	// if (FVector::Dist(PawnLocation, TargetLocation) <= AcceptanceRadius)
+	// {
+	// 	FinishLatentTask(OwnerComp, EBTNodeResult::Succeeded);
+	// 	return;
+	// }
 
 	// --- Rotation Logic ---
-	const FRotator TargetRotation = UKismetMathLibrary::FindLookAtRotation(PawnLocation, TargetLocation);
-	const FRotator CurrentRotation = ControlledPawn->GetActorRotation();
-	const FRotator NewRotation = UKismetMathLibrary::RInterpTo(CurrentRotation, TargetRotation, DeltaSeconds, TurnSpeed);
-	ControlledPawn->SetActorRotation(FRotator(0.f, NewRotation.Yaw, 0.f));
+	// const FRotator TargetRotation = UKismetMathLibrary::FindLookAtRotation(PawnLocation, TargetLocation);
+	// const FRotator CurrentRotation = ControlledPawn->GetActorRotation();
+	// const FRotator NewRotation = UKismetMathLibrary::RInterpTo(CurrentRotation, TargetRotation, DeltaSeconds, TurnSpeed);
+	// ControlledPawn->SetActorRotation(FRotator(0.f, NewRotation.Yaw, 0.f));
 
 	// --- Movement Logic ---
 	ControlledPawn->AddMovementInput(ControlledPawn->GetActorForwardVector(), 1.0f);
