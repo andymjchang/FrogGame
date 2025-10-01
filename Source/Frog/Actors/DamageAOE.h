@@ -33,5 +33,6 @@ protected:
 	TSubclassOf<UGameplayEffect> GameplayEffect;
 
 private:
+	UPROPERTY()
 	TWeakObjectPtr<UAbilitySystemComponent> OwningAbilitySystem;
 };

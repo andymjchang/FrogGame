@@ -193,7 +193,7 @@ protected: /* Members */
 	bool bFindEnemyUnderCrosshair;
 
 	FDelegateHandle TargetEnemyTagDelegateHandle;
-
+	
 	TWeakObjectPtr<AActor> TargetEnemyActor;
 	
 	// Mapping Context

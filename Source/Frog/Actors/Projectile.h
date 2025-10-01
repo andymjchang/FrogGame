@@ -49,7 +49,7 @@ protected: // Protected Functions
 	
 protected: // Protected Members
 	bool bApplyEffect;
-
+	
 	TWeakObjectPtr<UAbilitySystemComponent> OwningAbilitySystem;
 	
 	// Combat
