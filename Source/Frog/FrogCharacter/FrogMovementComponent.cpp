@@ -55,7 +55,7 @@ void UFrogMovementComponent::PhysGrapple(float DeltaTime, int32 Iterations)
 	{
 		SpeedLimit = GetMaxSpeed();
 	}
-	Velocity = NewFallVelocity(Velocity, -GetGravityDirection() * GetGravityZ(), DeltaTime); 
+	//Velocity = NewFallVelocity(Velocity, -GetGravityDirection() * GetGravityZ(), DeltaTime); 
 	if (Velocity.Size() > SpeedLimit) Velocity = Velocity.GetSafeNormal() * GetMaxSpeed();
     
 	// Move with sliding collision
