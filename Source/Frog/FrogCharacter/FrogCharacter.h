@@ -220,7 +220,7 @@ protected: /* Members */
 	UPROPERTY(Replicated)
 	FVector GrapplePoint;
 	
-	float GrappleStrength;
+	float GrappleAcceleration;
 
 public: /* Public Getters/Setters */
 	FORCEINLINE USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
@@ -228,8 +228,8 @@ public: /* Public Getters/Setters */
 	FORCEINLINE UFrogTongue* GetTongue() const { return Tongue; }
 	FORCEINLINE bool GetIsGrapple() const { return bIsGrapple; }
 	FORCEINLINE void SetIsGrapple(const bool bNewIsGrapple) { bIsGrapple = bNewIsGrapple; }
-	FORCEINLINE float GetGrappleStrength() const { return GrappleStrength; }
-	FORCEINLINE void SetGrappleStrength(const float NewGrappleStrength) { GrappleStrength = NewGrappleStrength; }
+	FORCEINLINE float GetGrappleAcceleration() const { return GrappleAcceleration; }
+	FORCEINLINE void SetGrappleAcceleration(const float NewGrappleAcceleration) { GrappleAcceleration = NewGrappleAcceleration; }
 	FORCEINLINE FVector GetGrapplePoint() const { return GrapplePoint; }
 	FORCEINLINE void SetGrapplePoint(const FVector& NewGrapplePoint) { GrapplePoint = NewGrapplePoint; }
 	FORCEINLINE float GetWalkSpeed() const { return WalkSpeed; }

@@ -10,7 +10,7 @@
 UFA_Grapple::UFA_Grapple()
 {
     GrappleRange = 3000.0f;
-    GrappleStrength = 4000.f;
+    GrappleAcceleration = 4000.f;
 }
 
 void UFA_Grapple::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
@@ -74,7 +74,7 @@ void UFA_Grapple::PerformGrapple(AFrogCharacter* Character, const FVector& Grapp
     if (!Character) return;
     
     Character->SetIsGrapple(true);
-    Character->SetGrappleStrength(GrappleStrength);
+    Character->SetGrappleAcceleration(GrappleAcceleration);
     Character->SetGrapplePoint(GrapplePoint);
     
     if (UCharacterMovementComponent* MovementComp = Character->GetCharacterMovement())

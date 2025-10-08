@@ -45,6 +45,6 @@ protected:
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Grapple")
     float GrappleRange;
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Grapple")
-    float GrappleStrength;
+    float GrappleAcceleration;
 
 };

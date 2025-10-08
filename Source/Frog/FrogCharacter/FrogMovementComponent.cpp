@@ -39,7 +39,7 @@ void UFrogMovementComponent::PhysGrapple(float DeltaTime, int32 Iterations)
 	const float GrappleDistance = (Frog->GetGrapplePoint() - Frog->GetActorLocation()).Size();
     
 	// Apply grapple acceleration
-	const FVector GrappleAcceleration = GrappleDirection * Frog->GetGrappleStrength();
+	const FVector GrappleAcceleration = GrappleDirection * Frog->GetGrappleAcceleration();
 	if (GrappleDistance > 50.f) Velocity += GrappleAcceleration * DeltaTime;
 
 	// Clamp speed 
