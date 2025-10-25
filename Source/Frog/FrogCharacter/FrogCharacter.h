@@ -236,6 +236,8 @@ public: /* Public Getters/Setters */
 	FORCEINLINE float GetDiveSpeed() const { return DiveSpeed; }
 	FORCEINLINE void SetFindEnemyUnderCrosshair(const bool Value) { bFindEnemyUnderCrosshair = Value; }
 	FORCEINLINE AActor* GetTargetEnemyActor() const { return TargetEnemyActor.Get(); }
+
+	UFUNCTION(BlueprintCallable)
 	FORCEINLINE UFrogHUD* GetFrogHUD() const { return FrogHUDWidget; }
 };
 
