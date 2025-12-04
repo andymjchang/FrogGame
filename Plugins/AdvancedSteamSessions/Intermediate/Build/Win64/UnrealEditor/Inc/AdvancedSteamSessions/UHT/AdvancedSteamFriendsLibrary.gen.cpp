@@ -5,12 +5,14 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#include "AdvancedSteamSessions/Classes/AdvancedSteamFriendsLibrary.h"
-#include "AdvancedSessions/Classes/BlueprintDataDefinitions.h"
+#include "AdvancedSteamFriendsLibrary.h"
+#include "BlueprintDataDefinitions.h"
+
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+
 void EmptyLinkFunctionForGeneratedCodeAdvancedSteamFriendsLibrary() {}
 
-// Begin Cross Module References
+// ********** Begin Cross Module References ********************************************************
 ADVANCEDSESSIONS_API UEnum* Z_Construct_UEnum_AdvancedSessions_EBlueprintAsyncResultSwitch();
 ADVANCEDSESSIONS_API UEnum* Z_Construct_UEnum_AdvancedSessions_EBlueprintResultSwitch();
 ADVANCEDSESSIONS_API UScriptStruct* Z_Construct_UScriptStruct_FBPUniqueNetId();
@@ -23,9 +25,9 @@ ADVANCEDSTEAMSESSIONS_API UScriptStruct* Z_Construct_UScriptStruct_FBPSteamGroup
 ENGINE_API UClass* Z_Construct_UClass_UBlueprintFunctionLibrary();
 ENGINE_API UClass* Z_Construct_UClass_UTexture2D_NoRegister();
 UPackage* Z_Construct_UPackage__Script_AdvancedSteamSessions();
-// End Cross Module References
+// ********** End Cross Module References **********************************************************
 
-// Begin Enum SteamAvatarSize
+// ********** Begin Enum SteamAvatarSize ***********************************************************
 static FEnumRegistrationInfo Z_Registration_Info_UEnum_SteamAvatarSize;
 static UEnum* SteamAvatarSize_StaticEnum()
 {
@@ -80,9 +82,9 @@ UEnum* Z_Construct_UEnum_AdvancedSteamSessions_SteamAvatarSize()
 	}
 	return Z_Registration_Info_UEnum_SteamAvatarSize.InnerSingleton;
 }
-// End Enum SteamAvatarSize
+// ********** End Enum SteamAvatarSize *************************************************************
 
-// Begin Enum ESteamUserOverlayType
+// ********** Begin Enum ESteamUserOverlayType *****************************************************
 static FEnumRegistrationInfo Z_Registration_Info_UEnum_ESteamUserOverlayType;
 static UEnum* ESteamUserOverlayType_StaticEnum()
 {
@@ -169,21 +171,17 @@ UEnum* Z_Construct_UEnum_AdvancedSteamSessions_ESteamUserOverlayType()
 	}
 	return Z_Registration_Info_UEnum_ESteamUserOverlayType.InnerSingleton;
 }
-// End Enum ESteamUserOverlayType
+// ********** End Enum ESteamUserOverlayType *******************************************************
 
-// Begin ScriptStruct FBPSteamGroupInfo
-static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_BPSteamGroupInfo;
+// ********** Begin ScriptStruct FBPSteamGroupInfo *************************************************
+static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_FBPSteamGroupInfo;
 class UScriptStruct* FBPSteamGroupInfo::StaticStruct()
 {
-	if (!Z_Registration_Info_UScriptStruct_BPSteamGroupInfo.OuterSingleton)
+	if (!Z_Registration_Info_UScriptStruct_FBPSteamGroupInfo.OuterSingleton)
 	{
-		Z_Registration_Info_UScriptStruct_BPSteamGroupInfo.OuterSingleton = GetStaticStruct(Z_Construct_UScriptStruct_FBPSteamGroupInfo, (UObject*)Z_Construct_UPackage__Script_AdvancedSteamSessions(), TEXT("BPSteamGroupInfo"));
+		Z_Registration_Info_UScriptStruct_FBPSteamGroupInfo.OuterSingleton = GetStaticStruct(Z_Construct_UScriptStruct_FBPSteamGroupInfo, (UObject*)Z_Construct_UPackage__Script_AdvancedSteamSessions(), TEXT("BPSteamGroupInfo"));
 	}
-	return Z_Registration_Info_UScriptStruct_BPSteamGroupInfo.OuterSingleton;
-}
-template<> ADVANCEDSTEAMSESSIONS_API UScriptStruct* StaticStruct<FBPSteamGroupInfo>()
-{
-	return FBPSteamGroupInfo::StaticStruct();
+	return Z_Registration_Info_UScriptStruct_FBPSteamGroupInfo.OuterSingleton;
 }
 struct Z_Construct_UScriptStruct_FBPSteamGroupInfo_Statics
 {
@@ -237,7 +235,7 @@ struct Z_Construct_UScriptStruct_FBPSteamGroupInfo_Statics
 	}
 	static const UECodeGen_Private::FStructParams StructParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FBPSteamGroupInfo_Statics::NewProp_GroupID = { "GroupID", nullptr, (EPropertyFlags)0x0010000000000015, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FBPSteamGroupInfo, GroupID), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_GroupID_MetaData), NewProp_GroupID_MetaData) }; // 700456651
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FBPSteamGroupInfo_Statics::NewProp_GroupID = { "GroupID", nullptr, (EPropertyFlags)0x0010000000000015, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FBPSteamGroupInfo, GroupID), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_GroupID_MetaData), NewProp_GroupID_MetaData) }; // 2620465461
 const UECodeGen_Private::FStrPropertyParams Z_Construct_UScriptStruct_FBPSteamGroupInfo_Statics::NewProp_GroupName = { "GroupName", nullptr, (EPropertyFlags)0x0010000000000015, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FBPSteamGroupInfo, GroupName), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_GroupName_MetaData), NewProp_GroupName_MetaData) };
 const UECodeGen_Private::FStrPropertyParams Z_Construct_UScriptStruct_FBPSteamGroupInfo_Statics::NewProp_GroupTag = { "GroupTag", nullptr, (EPropertyFlags)0x0010000000000015, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FBPSteamGroupInfo, GroupTag), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_GroupTag_MetaData), NewProp_GroupTag_MetaData) };
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UScriptStruct_FBPSteamGroupInfo_Statics::NewProp_numOnline = { "numOnline", nullptr, (EPropertyFlags)0x0010000000000015, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FBPSteamGroupInfo, numOnline), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_numOnline_MetaData), NewProp_numOnline_MetaData) };
@@ -267,15 +265,15 @@ const UECodeGen_Private::FStructParams Z_Construct_UScriptStruct_FBPSteamGroupIn
 };
 UScriptStruct* Z_Construct_UScriptStruct_FBPSteamGroupInfo()
 {
-	if (!Z_Registration_Info_UScriptStruct_BPSteamGroupInfo.InnerSingleton)
+	if (!Z_Registration_Info_UScriptStruct_FBPSteamGroupInfo.InnerSingleton)
 	{
-		UECodeGen_Private::ConstructUScriptStruct(Z_Registration_Info_UScriptStruct_BPSteamGroupInfo.InnerSingleton, Z_Construct_UScriptStruct_FBPSteamGroupInfo_Statics::StructParams);
+		UECodeGen_Private::ConstructUScriptStruct(Z_Registration_Info_UScriptStruct_FBPSteamGroupInfo.InnerSingleton, Z_Construct_UScriptStruct_FBPSteamGroupInfo_Statics::StructParams);
 	}
-	return Z_Registration_Info_UScriptStruct_BPSteamGroupInfo.InnerSingleton;
+	return Z_Registration_Info_UScriptStruct_FBPSteamGroupInfo.InnerSingleton;
 }
-// End ScriptStruct FBPSteamGroupInfo
+// ********** End ScriptStruct FBPSteamGroupInfo ***************************************************
 
-// Begin Enum EBPTextFilteringContext
+// ********** Begin Enum EBPTextFilteringContext ***************************************************
 static FEnumRegistrationInfo Z_Registration_Info_UEnum_EBPTextFilteringContext;
 static UEnum* EBPTextFilteringContext_StaticEnum()
 {
@@ -338,9 +336,9 @@ UEnum* Z_Construct_UEnum_AdvancedSteamSessions_EBPTextFilteringContext()
 	}
 	return Z_Registration_Info_UEnum_EBPTextFilteringContext.InnerSingleton;
 }
-// End Enum EBPTextFilteringContext
+// ********** End Enum EBPTextFilteringContext *****************************************************
 
-// Begin Class UAdvancedSteamFriendsLibrary Function CreateSteamIDFromString
+// ********** Begin Class UAdvancedSteamFriendsLibrary Function CreateSteamIDFromString ************
 struct Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_CreateSteamIDFromString_Statics
 {
 	struct AdvancedSteamFriendsLibrary_eventCreateSteamIDFromString_Parms
@@ -369,13 +367,13 @@ struct Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_CreateSteamIDFromStrin
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
 const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_CreateSteamIDFromString_Statics::NewProp_SteamID64 = { "SteamID64", nullptr, (EPropertyFlags)0x0010000000000082, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSteamFriendsLibrary_eventCreateSteamIDFromString_Parms, SteamID64), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SteamID64_MetaData), NewProp_SteamID64_MetaData) };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_CreateSteamIDFromString_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSteamFriendsLibrary_eventCreateSteamIDFromString_Parms, ReturnValue), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(0, nullptr) }; // 700456651
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_CreateSteamIDFromString_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSteamFriendsLibrary_eventCreateSteamIDFromString_Parms, ReturnValue), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(0, nullptr) }; // 2620465461
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_CreateSteamIDFromString_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_CreateSteamIDFromString_Statics::NewProp_SteamID64,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_CreateSteamIDFromString_Statics::NewProp_ReturnValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_CreateSteamIDFromString_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_CreateSteamIDFromString_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSteamFriendsLibrary, nullptr, "CreateSteamIDFromString", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_CreateSteamIDFromString_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_CreateSteamIDFromString_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_CreateSteamIDFromString_Statics::AdvancedSteamFriendsLibrary_eventCreateSteamIDFromString_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_CreateSteamIDFromString_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_CreateSteamIDFromString_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_CreateSteamIDFromString_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSteamFriendsLibrary, nullptr, "CreateSteamIDFromString", Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_CreateSteamIDFromString_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_CreateSteamIDFromString_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_CreateSteamIDFromString_Statics::AdvancedSteamFriendsLibrary_eventCreateSteamIDFromString_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_CreateSteamIDFromString_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_CreateSteamIDFromString_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_CreateSteamIDFromString_Statics::AdvancedSteamFriendsLibrary_eventCreateSteamIDFromString_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_CreateSteamIDFromString()
 {
@@ -394,9 +392,9 @@ DEFINE_FUNCTION(UAdvancedSteamFriendsLibrary::execCreateSteamIDFromString)
 	*(FBPUniqueNetId*)Z_Param__Result=UAdvancedSteamFriendsLibrary::CreateSteamIDFromString(Z_Param_SteamID64);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSteamFriendsLibrary Function CreateSteamIDFromString
+// ********** End Class UAdvancedSteamFriendsLibrary Function CreateSteamIDFromString **************
 
-// Begin Class UAdvancedSteamFriendsLibrary Function FilterText
+// ********** Begin Class UAdvancedSteamFriendsLibrary Function FilterText *************************
 struct Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_FilterText_Statics
 {
 	struct AdvancedSteamFriendsLibrary_eventFilterText_Parms
@@ -435,7 +433,7 @@ struct Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_FilterText_Statics
 const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_FilterText_Statics::NewProp_TextToFilter = { "TextToFilter", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSteamFriendsLibrary_eventFilterText_Parms, TextToFilter), METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FBytePropertyParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_FilterText_Statics::NewProp_Context_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_FilterText_Statics::NewProp_Context = { "Context", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSteamFriendsLibrary_eventFilterText_Parms, Context), Z_Construct_UEnum_AdvancedSteamSessions_EBPTextFilteringContext, METADATA_PARAMS(0, nullptr) }; // 2533580417
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_FilterText_Statics::NewProp_TextSourceID = { "TextSourceID", nullptr, (EPropertyFlags)0x0010000000000082, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSteamFriendsLibrary_eventFilterText_Parms, TextSourceID), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_TextSourceID_MetaData), NewProp_TextSourceID_MetaData) }; // 700456651
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_FilterText_Statics::NewProp_TextSourceID = { "TextSourceID", nullptr, (EPropertyFlags)0x0010000000000082, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSteamFriendsLibrary_eventFilterText_Parms, TextSourceID), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_TextSourceID_MetaData), NewProp_TextSourceID_MetaData) }; // 2620465461
 const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_FilterText_Statics::NewProp_FilteredText = { "FilteredText", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSteamFriendsLibrary_eventFilterText_Parms, FilteredText), METADATA_PARAMS(0, nullptr) };
 void Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_FilterText_Statics::NewProp_ReturnValue_SetBit(void* Obj)
 {
@@ -451,7 +449,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_FilterText_Statics::NewProp_ReturnValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_FilterText_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_FilterText_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSteamFriendsLibrary, nullptr, "FilterText", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_FilterText_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_FilterText_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_FilterText_Statics::AdvancedSteamFriendsLibrary_eventFilterText_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_FilterText_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_FilterText_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_FilterText_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSteamFriendsLibrary, nullptr, "FilterText", Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_FilterText_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_FilterText_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_FilterText_Statics::AdvancedSteamFriendsLibrary_eventFilterText_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_FilterText_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_FilterText_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_FilterText_Statics::AdvancedSteamFriendsLibrary_eventFilterText_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_FilterText()
 {
@@ -473,9 +471,9 @@ DEFINE_FUNCTION(UAdvancedSteamFriendsLibrary::execFilterText)
 	*(bool*)Z_Param__Result=UAdvancedSteamFriendsLibrary::FilterText(Z_Param_TextToFilter,EBPTextFilteringContext(Z_Param_Context),Z_Param_TextSourceID,Z_Param_Out_FilteredText);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSteamFriendsLibrary Function FilterText
+// ********** End Class UAdvancedSteamFriendsLibrary Function FilterText ***************************
 
-// Begin Class UAdvancedSteamFriendsLibrary Function GetFriendSteamLevel
+// ********** Begin Class UAdvancedSteamFriendsLibrary Function GetFriendSteamLevel ****************
 struct Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetFriendSteamLevel_Statics
 {
 	struct AdvancedSteamFriendsLibrary_eventGetFriendSteamLevel_Parms
@@ -503,14 +501,14 @@ struct Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetFriendSteamLevel_St
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetFriendSteamLevel_Statics::NewProp_UniqueNetId = { "UniqueNetId", nullptr, (EPropertyFlags)0x0010000000000082, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSteamFriendsLibrary_eventGetFriendSteamLevel_Parms, UniqueNetId), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_UniqueNetId_MetaData), NewProp_UniqueNetId_MetaData) }; // 700456651
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetFriendSteamLevel_Statics::NewProp_UniqueNetId = { "UniqueNetId", nullptr, (EPropertyFlags)0x0010000000000082, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSteamFriendsLibrary_eventGetFriendSteamLevel_Parms, UniqueNetId), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_UniqueNetId_MetaData), NewProp_UniqueNetId_MetaData) }; // 2620465461
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetFriendSteamLevel_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSteamFriendsLibrary_eventGetFriendSteamLevel_Parms, ReturnValue), METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetFriendSteamLevel_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetFriendSteamLevel_Statics::NewProp_UniqueNetId,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetFriendSteamLevel_Statics::NewProp_ReturnValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetFriendSteamLevel_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetFriendSteamLevel_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSteamFriendsLibrary, nullptr, "GetFriendSteamLevel", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetFriendSteamLevel_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetFriendSteamLevel_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetFriendSteamLevel_Statics::AdvancedSteamFriendsLibrary_eventGetFriendSteamLevel_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetFriendSteamLevel_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetFriendSteamLevel_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetFriendSteamLevel_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSteamFriendsLibrary, nullptr, "GetFriendSteamLevel", Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetFriendSteamLevel_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetFriendSteamLevel_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetFriendSteamLevel_Statics::AdvancedSteamFriendsLibrary_eventGetFriendSteamLevel_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetFriendSteamLevel_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetFriendSteamLevel_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetFriendSteamLevel_Statics::AdvancedSteamFriendsLibrary_eventGetFriendSteamLevel_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetFriendSteamLevel()
 {
@@ -529,9 +527,9 @@ DEFINE_FUNCTION(UAdvancedSteamFriendsLibrary::execGetFriendSteamLevel)
 	*(int32*)Z_Param__Result=UAdvancedSteamFriendsLibrary::GetFriendSteamLevel(Z_Param_UniqueNetId);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSteamFriendsLibrary Function GetFriendSteamLevel
+// ********** End Class UAdvancedSteamFriendsLibrary Function GetFriendSteamLevel ******************
 
-// Begin Class UAdvancedSteamFriendsLibrary Function GetLocalSteamIDFromSteam
+// ********** Begin Class UAdvancedSteamFriendsLibrary Function GetLocalSteamIDFromSteam ***********
 struct Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetLocalSteamIDFromSteam_Statics
 {
 	struct AdvancedSteamFriendsLibrary_eventGetLocalSteamIDFromSteam_Parms
@@ -554,12 +552,12 @@ struct Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetLocalSteamIDFromSte
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetLocalSteamIDFromSteam_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSteamFriendsLibrary_eventGetLocalSteamIDFromSteam_Parms, ReturnValue), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(0, nullptr) }; // 700456651
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetLocalSteamIDFromSteam_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSteamFriendsLibrary_eventGetLocalSteamIDFromSteam_Parms, ReturnValue), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(0, nullptr) }; // 2620465461
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetLocalSteamIDFromSteam_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetLocalSteamIDFromSteam_Statics::NewProp_ReturnValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetLocalSteamIDFromSteam_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetLocalSteamIDFromSteam_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSteamFriendsLibrary, nullptr, "GetLocalSteamIDFromSteam", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetLocalSteamIDFromSteam_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetLocalSteamIDFromSteam_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetLocalSteamIDFromSteam_Statics::AdvancedSteamFriendsLibrary_eventGetLocalSteamIDFromSteam_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetLocalSteamIDFromSteam_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetLocalSteamIDFromSteam_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetLocalSteamIDFromSteam_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSteamFriendsLibrary, nullptr, "GetLocalSteamIDFromSteam", Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetLocalSteamIDFromSteam_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetLocalSteamIDFromSteam_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetLocalSteamIDFromSteam_Statics::AdvancedSteamFriendsLibrary_eventGetLocalSteamIDFromSteam_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetLocalSteamIDFromSteam_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetLocalSteamIDFromSteam_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetLocalSteamIDFromSteam_Statics::AdvancedSteamFriendsLibrary_eventGetLocalSteamIDFromSteam_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetLocalSteamIDFromSteam()
 {
@@ -577,9 +575,9 @@ DEFINE_FUNCTION(UAdvancedSteamFriendsLibrary::execGetLocalSteamIDFromSteam)
 	*(FBPUniqueNetId*)Z_Param__Result=UAdvancedSteamFriendsLibrary::GetLocalSteamIDFromSteam();
 	P_NATIVE_END;
 }
-// End Class UAdvancedSteamFriendsLibrary Function GetLocalSteamIDFromSteam
+// ********** End Class UAdvancedSteamFriendsLibrary Function GetLocalSteamIDFromSteam *************
 
-// Begin Class UAdvancedSteamFriendsLibrary Function GetSteamFriendAvatar
+// ********** Begin Class UAdvancedSteamFriendsLibrary Function GetSteamFriendAvatar ***************
 struct Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendAvatar_Statics
 {
 	struct AdvancedSteamFriendsLibrary_eventGetSteamFriendAvatar_Parms
@@ -615,7 +613,7 @@ struct Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendAvatar_S
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendAvatar_Statics::NewProp_UniqueNetId = { "UniqueNetId", nullptr, (EPropertyFlags)0x0010000000000082, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSteamFriendsLibrary_eventGetSteamFriendAvatar_Parms, UniqueNetId), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_UniqueNetId_MetaData), NewProp_UniqueNetId_MetaData) }; // 700456651
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendAvatar_Statics::NewProp_UniqueNetId = { "UniqueNetId", nullptr, (EPropertyFlags)0x0010000000000082, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSteamFriendsLibrary_eventGetSteamFriendAvatar_Parms, UniqueNetId), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_UniqueNetId_MetaData), NewProp_UniqueNetId_MetaData) }; // 2620465461
 const UECodeGen_Private::FBytePropertyParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendAvatar_Statics::NewProp_Result_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendAvatar_Statics::NewProp_Result = { "Result", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSteamFriendsLibrary_eventGetSteamFriendAvatar_Parms, Result), Z_Construct_UEnum_AdvancedSessions_EBlueprintAsyncResultSwitch, METADATA_PARAMS(0, nullptr) }; // 1911516857
 const UECodeGen_Private::FBytePropertyParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendAvatar_Statics::NewProp_AvatarSize_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
@@ -630,7 +628,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendAvatar_Statics::NewProp_ReturnValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendAvatar_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendAvatar_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSteamFriendsLibrary, nullptr, "GetSteamFriendAvatar", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendAvatar_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendAvatar_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendAvatar_Statics::AdvancedSteamFriendsLibrary_eventGetSteamFriendAvatar_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendAvatar_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendAvatar_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendAvatar_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSteamFriendsLibrary, nullptr, "GetSteamFriendAvatar", Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendAvatar_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendAvatar_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendAvatar_Statics::AdvancedSteamFriendsLibrary_eventGetSteamFriendAvatar_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendAvatar_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendAvatar_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendAvatar_Statics::AdvancedSteamFriendsLibrary_eventGetSteamFriendAvatar_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendAvatar()
 {
@@ -651,9 +649,9 @@ DEFINE_FUNCTION(UAdvancedSteamFriendsLibrary::execGetSteamFriendAvatar)
 	*(UTexture2D**)Z_Param__Result=UAdvancedSteamFriendsLibrary::GetSteamFriendAvatar(Z_Param_UniqueNetId,(EBlueprintAsyncResultSwitch&)(Z_Param_Out_Result),SteamAvatarSize(Z_Param_AvatarSize));
 	P_NATIVE_END;
 }
-// End Class UAdvancedSteamFriendsLibrary Function GetSteamFriendAvatar
+// ********** End Class UAdvancedSteamFriendsLibrary Function GetSteamFriendAvatar *****************
 
-// Begin Class UAdvancedSteamFriendsLibrary Function GetSteamFriendGamePlayed
+// ********** Begin Class UAdvancedSteamFriendsLibrary Function GetSteamFriendGamePlayed ***********
 struct Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendGamePlayed_Statics
 {
 	struct AdvancedSteamFriendsLibrary_eventGetSteamFriendGamePlayed_Parms
@@ -685,7 +683,7 @@ struct Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendGamePlay
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendGamePlayed_Statics::NewProp_UniqueNetId = { "UniqueNetId", nullptr, (EPropertyFlags)0x0010000000000082, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSteamFriendsLibrary_eventGetSteamFriendGamePlayed_Parms, UniqueNetId), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_UniqueNetId_MetaData), NewProp_UniqueNetId_MetaData) }; // 700456651
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendGamePlayed_Statics::NewProp_UniqueNetId = { "UniqueNetId", nullptr, (EPropertyFlags)0x0010000000000082, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSteamFriendsLibrary_eventGetSteamFriendGamePlayed_Parms, UniqueNetId), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_UniqueNetId_MetaData), NewProp_UniqueNetId_MetaData) }; // 2620465461
 const UECodeGen_Private::FBytePropertyParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendGamePlayed_Statics::NewProp_Result_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendGamePlayed_Statics::NewProp_Result = { "Result", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSteamFriendsLibrary_eventGetSteamFriendGamePlayed_Parms, Result), Z_Construct_UEnum_AdvancedSessions_EBlueprintResultSwitch, METADATA_PARAMS(0, nullptr) }; // 1157740906
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendGamePlayed_Statics::NewProp_AppID = { "AppID", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSteamFriendsLibrary_eventGetSteamFriendGamePlayed_Parms, AppID), METADATA_PARAMS(0, nullptr) };
@@ -696,7 +694,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendGamePlayed_Statics::NewProp_AppID,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendGamePlayed_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendGamePlayed_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSteamFriendsLibrary, nullptr, "GetSteamFriendGamePlayed", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendGamePlayed_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendGamePlayed_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendGamePlayed_Statics::AdvancedSteamFriendsLibrary_eventGetSteamFriendGamePlayed_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendGamePlayed_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendGamePlayed_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendGamePlayed_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSteamFriendsLibrary, nullptr, "GetSteamFriendGamePlayed", Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendGamePlayed_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendGamePlayed_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendGamePlayed_Statics::AdvancedSteamFriendsLibrary_eventGetSteamFriendGamePlayed_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendGamePlayed_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendGamePlayed_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendGamePlayed_Statics::AdvancedSteamFriendsLibrary_eventGetSteamFriendGamePlayed_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendGamePlayed()
 {
@@ -717,9 +715,9 @@ DEFINE_FUNCTION(UAdvancedSteamFriendsLibrary::execGetSteamFriendGamePlayed)
 	UAdvancedSteamFriendsLibrary::GetSteamFriendGamePlayed(Z_Param_UniqueNetId,(EBlueprintResultSwitch&)(Z_Param_Out_Result),Z_Param_Out_AppID);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSteamFriendsLibrary Function GetSteamFriendGamePlayed
+// ********** End Class UAdvancedSteamFriendsLibrary Function GetSteamFriendGamePlayed *************
 
-// Begin Class UAdvancedSteamFriendsLibrary Function GetSteamGroups
+// ********** Begin Class UAdvancedSteamFriendsLibrary Function GetSteamGroups *********************
 struct Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamGroups_Statics
 {
 	struct AdvancedSteamFriendsLibrary_eventGetSteamGroups_Parms
@@ -743,14 +741,14 @@ struct Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamGroups_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamGroups_Statics::NewProp_SteamGroups_Inner = { "SteamGroups", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FBPSteamGroupInfo, METADATA_PARAMS(0, nullptr) }; // 3406212885
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamGroups_Statics::NewProp_SteamGroups = { "SteamGroups", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSteamFriendsLibrary_eventGetSteamGroups_Parms, SteamGroups), EArrayPropertyFlags::None, METADATA_PARAMS(0, nullptr) }; // 3406212885
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamGroups_Statics::NewProp_SteamGroups_Inner = { "SteamGroups", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FBPSteamGroupInfo, METADATA_PARAMS(0, nullptr) }; // 3145522780
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamGroups_Statics::NewProp_SteamGroups = { "SteamGroups", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSteamFriendsLibrary_eventGetSteamGroups_Parms, SteamGroups), EArrayPropertyFlags::None, METADATA_PARAMS(0, nullptr) }; // 3145522780
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamGroups_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamGroups_Statics::NewProp_SteamGroups_Inner,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamGroups_Statics::NewProp_SteamGroups,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamGroups_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamGroups_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSteamFriendsLibrary, nullptr, "GetSteamGroups", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamGroups_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamGroups_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamGroups_Statics::AdvancedSteamFriendsLibrary_eventGetSteamGroups_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamGroups_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamGroups_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamGroups_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSteamFriendsLibrary, nullptr, "GetSteamGroups", Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamGroups_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamGroups_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamGroups_Statics::AdvancedSteamFriendsLibrary_eventGetSteamGroups_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamGroups_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamGroups_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamGroups_Statics::AdvancedSteamFriendsLibrary_eventGetSteamGroups_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamGroups()
 {
@@ -769,9 +767,9 @@ DEFINE_FUNCTION(UAdvancedSteamFriendsLibrary::execGetSteamGroups)
 	UAdvancedSteamFriendsLibrary::GetSteamGroups(Z_Param_Out_SteamGroups);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSteamFriendsLibrary Function GetSteamGroups
+// ********** End Class UAdvancedSteamFriendsLibrary Function GetSteamGroups ***********************
 
-// Begin Class UAdvancedSteamFriendsLibrary Function GetSteamPersonaName
+// ********** Begin Class UAdvancedSteamFriendsLibrary Function GetSteamPersonaName ****************
 struct Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamPersonaName_Statics
 {
 	struct AdvancedSteamFriendsLibrary_eventGetSteamPersonaName_Parms
@@ -799,14 +797,14 @@ struct Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamPersonaName_St
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamPersonaName_Statics::NewProp_UniqueNetId = { "UniqueNetId", nullptr, (EPropertyFlags)0x0010000000000082, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSteamFriendsLibrary_eventGetSteamPersonaName_Parms, UniqueNetId), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_UniqueNetId_MetaData), NewProp_UniqueNetId_MetaData) }; // 700456651
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamPersonaName_Statics::NewProp_UniqueNetId = { "UniqueNetId", nullptr, (EPropertyFlags)0x0010000000000082, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSteamFriendsLibrary_eventGetSteamPersonaName_Parms, UniqueNetId), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_UniqueNetId_MetaData), NewProp_UniqueNetId_MetaData) }; // 2620465461
 const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamPersonaName_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSteamFriendsLibrary_eventGetSteamPersonaName_Parms, ReturnValue), METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamPersonaName_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamPersonaName_Statics::NewProp_UniqueNetId,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamPersonaName_Statics::NewProp_ReturnValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamPersonaName_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamPersonaName_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSteamFriendsLibrary, nullptr, "GetSteamPersonaName", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamPersonaName_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamPersonaName_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamPersonaName_Statics::AdvancedSteamFriendsLibrary_eventGetSteamPersonaName_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamPersonaName_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamPersonaName_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamPersonaName_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSteamFriendsLibrary, nullptr, "GetSteamPersonaName", Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamPersonaName_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamPersonaName_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamPersonaName_Statics::AdvancedSteamFriendsLibrary_eventGetSteamPersonaName_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamPersonaName_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamPersonaName_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamPersonaName_Statics::AdvancedSteamFriendsLibrary_eventGetSteamPersonaName_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamPersonaName()
 {
@@ -825,9 +823,9 @@ DEFINE_FUNCTION(UAdvancedSteamFriendsLibrary::execGetSteamPersonaName)
 	*(FString*)Z_Param__Result=UAdvancedSteamFriendsLibrary::GetSteamPersonaName(Z_Param_UniqueNetId);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSteamFriendsLibrary Function GetSteamPersonaName
+// ********** End Class UAdvancedSteamFriendsLibrary Function GetSteamPersonaName ******************
 
-// Begin Class UAdvancedSteamFriendsLibrary Function InitTextFiltering
+// ********** Begin Class UAdvancedSteamFriendsLibrary Function InitTextFiltering ******************
 struct Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_InitTextFiltering_Statics
 {
 	struct AdvancedSteamFriendsLibrary_eventInitTextFiltering_Parms
@@ -860,7 +858,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_InitTextFiltering_Statics::NewProp_ReturnValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_InitTextFiltering_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_InitTextFiltering_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSteamFriendsLibrary, nullptr, "InitTextFiltering", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_InitTextFiltering_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_InitTextFiltering_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_InitTextFiltering_Statics::AdvancedSteamFriendsLibrary_eventInitTextFiltering_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_InitTextFiltering_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_InitTextFiltering_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_InitTextFiltering_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSteamFriendsLibrary, nullptr, "InitTextFiltering", Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_InitTextFiltering_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_InitTextFiltering_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_InitTextFiltering_Statics::AdvancedSteamFriendsLibrary_eventInitTextFiltering_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_InitTextFiltering_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_InitTextFiltering_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_InitTextFiltering_Statics::AdvancedSteamFriendsLibrary_eventInitTextFiltering_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_InitTextFiltering()
 {
@@ -878,9 +876,9 @@ DEFINE_FUNCTION(UAdvancedSteamFriendsLibrary::execInitTextFiltering)
 	*(bool*)Z_Param__Result=UAdvancedSteamFriendsLibrary::InitTextFiltering();
 	P_NATIVE_END;
 }
-// End Class UAdvancedSteamFriendsLibrary Function InitTextFiltering
+// ********** End Class UAdvancedSteamFriendsLibrary Function InitTextFiltering ********************
 
-// Begin Class UAdvancedSteamFriendsLibrary Function IsOverlayEnabled
+// ********** Begin Class UAdvancedSteamFriendsLibrary Function IsOverlayEnabled *******************
 struct Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_IsOverlayEnabled_Statics
 {
 	struct AdvancedSteamFriendsLibrary_eventIsOverlayEnabled_Parms
@@ -913,7 +911,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_IsOverlayEnabled_Statics::NewProp_ReturnValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_IsOverlayEnabled_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_IsOverlayEnabled_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSteamFriendsLibrary, nullptr, "IsOverlayEnabled", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_IsOverlayEnabled_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_IsOverlayEnabled_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_IsOverlayEnabled_Statics::AdvancedSteamFriendsLibrary_eventIsOverlayEnabled_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_IsOverlayEnabled_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_IsOverlayEnabled_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_IsOverlayEnabled_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSteamFriendsLibrary, nullptr, "IsOverlayEnabled", Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_IsOverlayEnabled_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_IsOverlayEnabled_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_IsOverlayEnabled_Statics::AdvancedSteamFriendsLibrary_eventIsOverlayEnabled_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_IsOverlayEnabled_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_IsOverlayEnabled_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_IsOverlayEnabled_Statics::AdvancedSteamFriendsLibrary_eventIsOverlayEnabled_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_IsOverlayEnabled()
 {
@@ -931,9 +929,9 @@ DEFINE_FUNCTION(UAdvancedSteamFriendsLibrary::execIsOverlayEnabled)
 	*(bool*)Z_Param__Result=UAdvancedSteamFriendsLibrary::IsOverlayEnabled();
 	P_NATIVE_END;
 }
-// End Class UAdvancedSteamFriendsLibrary Function IsOverlayEnabled
+// ********** End Class UAdvancedSteamFriendsLibrary Function IsOverlayEnabled *********************
 
-// Begin Class UAdvancedSteamFriendsLibrary Function IsSteamInBigPictureMode
+// ********** Begin Class UAdvancedSteamFriendsLibrary Function IsSteamInBigPictureMode ************
 struct Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_IsSteamInBigPictureMode_Statics
 {
 	struct AdvancedSteamFriendsLibrary_eventIsSteamInBigPictureMode_Parms
@@ -966,7 +964,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_IsSteamInBigPictureMode_Statics::NewProp_ReturnValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_IsSteamInBigPictureMode_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_IsSteamInBigPictureMode_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSteamFriendsLibrary, nullptr, "IsSteamInBigPictureMode", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_IsSteamInBigPictureMode_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_IsSteamInBigPictureMode_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_IsSteamInBigPictureMode_Statics::AdvancedSteamFriendsLibrary_eventIsSteamInBigPictureMode_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_IsSteamInBigPictureMode_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_IsSteamInBigPictureMode_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_IsSteamInBigPictureMode_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSteamFriendsLibrary, nullptr, "IsSteamInBigPictureMode", Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_IsSteamInBigPictureMode_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_IsSteamInBigPictureMode_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_IsSteamInBigPictureMode_Statics::AdvancedSteamFriendsLibrary_eventIsSteamInBigPictureMode_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_IsSteamInBigPictureMode_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_IsSteamInBigPictureMode_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_IsSteamInBigPictureMode_Statics::AdvancedSteamFriendsLibrary_eventIsSteamInBigPictureMode_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_IsSteamInBigPictureMode()
 {
@@ -984,9 +982,9 @@ DEFINE_FUNCTION(UAdvancedSteamFriendsLibrary::execIsSteamInBigPictureMode)
 	*(bool*)Z_Param__Result=UAdvancedSteamFriendsLibrary::IsSteamInBigPictureMode();
 	P_NATIVE_END;
 }
-// End Class UAdvancedSteamFriendsLibrary Function IsSteamInBigPictureMode
+// ********** End Class UAdvancedSteamFriendsLibrary Function IsSteamInBigPictureMode **************
 
-// Begin Class UAdvancedSteamFriendsLibrary Function OpenSteamUserOverlay
+// ********** Begin Class UAdvancedSteamFriendsLibrary Function OpenSteamUserOverlay ***************
 struct Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_OpenSteamUserOverlay_Statics
 {
 	struct AdvancedSteamFriendsLibrary_eventOpenSteamUserOverlay_Parms
@@ -1018,7 +1016,7 @@ struct Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_OpenSteamUserOverlay_S
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_OpenSteamUserOverlay_Statics::NewProp_UniqueNetId = { "UniqueNetId", nullptr, (EPropertyFlags)0x0010000000000082, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSteamFriendsLibrary_eventOpenSteamUserOverlay_Parms, UniqueNetId), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_UniqueNetId_MetaData), NewProp_UniqueNetId_MetaData) }; // 700456651
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_OpenSteamUserOverlay_Statics::NewProp_UniqueNetId = { "UniqueNetId", nullptr, (EPropertyFlags)0x0010000000000082, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSteamFriendsLibrary_eventOpenSteamUserOverlay_Parms, UniqueNetId), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_UniqueNetId_MetaData), NewProp_UniqueNetId_MetaData) }; // 2620465461
 const UECodeGen_Private::FBytePropertyParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_OpenSteamUserOverlay_Statics::NewProp_DialogType_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_OpenSteamUserOverlay_Statics::NewProp_DialogType = { "DialogType", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSteamFriendsLibrary_eventOpenSteamUserOverlay_Parms, DialogType), Z_Construct_UEnum_AdvancedSteamSessions_ESteamUserOverlayType, METADATA_PARAMS(0, nullptr) }; // 1877924798
 void Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_OpenSteamUserOverlay_Statics::NewProp_ReturnValue_SetBit(void* Obj)
@@ -1033,7 +1031,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_OpenSteamUserOverlay_Statics::NewProp_ReturnValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_OpenSteamUserOverlay_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_OpenSteamUserOverlay_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSteamFriendsLibrary, nullptr, "OpenSteamUserOverlay", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_OpenSteamUserOverlay_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_OpenSteamUserOverlay_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_OpenSteamUserOverlay_Statics::AdvancedSteamFriendsLibrary_eventOpenSteamUserOverlay_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_OpenSteamUserOverlay_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_OpenSteamUserOverlay_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_OpenSteamUserOverlay_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSteamFriendsLibrary, nullptr, "OpenSteamUserOverlay", Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_OpenSteamUserOverlay_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_OpenSteamUserOverlay_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_OpenSteamUserOverlay_Statics::AdvancedSteamFriendsLibrary_eventOpenSteamUserOverlay_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_OpenSteamUserOverlay_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_OpenSteamUserOverlay_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_OpenSteamUserOverlay_Statics::AdvancedSteamFriendsLibrary_eventOpenSteamUserOverlay_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_OpenSteamUserOverlay()
 {
@@ -1053,9 +1051,9 @@ DEFINE_FUNCTION(UAdvancedSteamFriendsLibrary::execOpenSteamUserOverlay)
 	*(bool*)Z_Param__Result=UAdvancedSteamFriendsLibrary::OpenSteamUserOverlay(Z_Param_UniqueNetId,ESteamUserOverlayType(Z_Param_DialogType));
 	P_NATIVE_END;
 }
-// End Class UAdvancedSteamFriendsLibrary Function OpenSteamUserOverlay
+// ********** End Class UAdvancedSteamFriendsLibrary Function OpenSteamUserOverlay *****************
 
-// Begin Class UAdvancedSteamFriendsLibrary Function RequestSteamFriendInfo
+// ********** Begin Class UAdvancedSteamFriendsLibrary Function RequestSteamFriendInfo *************
 struct Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_RequestSteamFriendInfo_Statics
 {
 	struct AdvancedSteamFriendsLibrary_eventRequestSteamFriendInfo_Parms
@@ -1088,7 +1086,7 @@ struct Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_RequestSteamFriendInfo
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_RequestSteamFriendInfo_Statics::NewProp_UniqueNetId = { "UniqueNetId", nullptr, (EPropertyFlags)0x0010000000000082, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSteamFriendsLibrary_eventRequestSteamFriendInfo_Parms, UniqueNetId), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_UniqueNetId_MetaData), NewProp_UniqueNetId_MetaData) }; // 700456651
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_RequestSteamFriendInfo_Statics::NewProp_UniqueNetId = { "UniqueNetId", nullptr, (EPropertyFlags)0x0010000000000082, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSteamFriendsLibrary_eventRequestSteamFriendInfo_Parms, UniqueNetId), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_UniqueNetId_MetaData), NewProp_UniqueNetId_MetaData) }; // 2620465461
 void Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_RequestSteamFriendInfo_Statics::NewProp_bRequireNameOnly_SetBit(void* Obj)
 {
 	((AdvancedSteamFriendsLibrary_eventRequestSteamFriendInfo_Parms*)Obj)->bRequireNameOnly = 1;
@@ -1105,7 +1103,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_RequestSteamFriendInfo_Statics::NewProp_ReturnValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_RequestSteamFriendInfo_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_RequestSteamFriendInfo_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSteamFriendsLibrary, nullptr, "RequestSteamFriendInfo", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_RequestSteamFriendInfo_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_RequestSteamFriendInfo_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_RequestSteamFriendInfo_Statics::AdvancedSteamFriendsLibrary_eventRequestSteamFriendInfo_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_RequestSteamFriendInfo_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_RequestSteamFriendInfo_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_RequestSteamFriendInfo_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSteamFriendsLibrary, nullptr, "RequestSteamFriendInfo", Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_RequestSteamFriendInfo_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_RequestSteamFriendInfo_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_RequestSteamFriendInfo_Statics::AdvancedSteamFriendsLibrary_eventRequestSteamFriendInfo_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_RequestSteamFriendInfo_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_RequestSteamFriendInfo_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_RequestSteamFriendInfo_Statics::AdvancedSteamFriendsLibrary_eventRequestSteamFriendInfo_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_RequestSteamFriendInfo()
 {
@@ -1125,9 +1123,9 @@ DEFINE_FUNCTION(UAdvancedSteamFriendsLibrary::execRequestSteamFriendInfo)
 	*(bool*)Z_Param__Result=UAdvancedSteamFriendsLibrary::RequestSteamFriendInfo(Z_Param_UniqueNetId,Z_Param_bRequireNameOnly);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSteamFriendsLibrary Function RequestSteamFriendInfo
+// ********** End Class UAdvancedSteamFriendsLibrary Function RequestSteamFriendInfo ***************
 
-// Begin Class UAdvancedSteamFriendsLibrary
+// ********** Begin Class UAdvancedSteamFriendsLibrary *********************************************
 void UAdvancedSteamFriendsLibrary::StaticRegisterNativesUAdvancedSteamFriendsLibrary()
 {
 	UClass* Class = UAdvancedSteamFriendsLibrary::StaticClass();
@@ -1148,10 +1146,34 @@ void UAdvancedSteamFriendsLibrary::StaticRegisterNativesUAdvancedSteamFriendsLib
 	};
 	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 }
-IMPLEMENT_CLASS_NO_AUTO_REGISTRATION(UAdvancedSteamFriendsLibrary);
+FClassRegistrationInfo Z_Registration_Info_UClass_UAdvancedSteamFriendsLibrary;
+UClass* UAdvancedSteamFriendsLibrary::GetPrivateStaticClass()
+{
+	using TClass = UAdvancedSteamFriendsLibrary;
+	if (!Z_Registration_Info_UClass_UAdvancedSteamFriendsLibrary.InnerSingleton)
+	{
+		GetPrivateStaticClassBody(
+			StaticPackage(),
+			TEXT("AdvancedSteamFriendsLibrary"),
+			Z_Registration_Info_UClass_UAdvancedSteamFriendsLibrary.InnerSingleton,
+			StaticRegisterNativesUAdvancedSteamFriendsLibrary,
+			sizeof(TClass),
+			alignof(TClass),
+			TClass::StaticClassFlags,
+			TClass::StaticClassCastFlags(),
+			TClass::StaticConfigName(),
+			(UClass::ClassConstructorType)InternalConstructor<TClass>,
+			(UClass::ClassVTableHelperCtorCallerType)InternalVTableHelperCtorCaller<TClass>,
+			UOBJECT_CPPCLASS_STATICFUNCTIONS_FORCLASS(TClass),
+			&TClass::Super::StaticClass,
+			&TClass::WithinClass::StaticClass
+		);
+	}
+	return Z_Registration_Info_UClass_UAdvancedSteamFriendsLibrary.InnerSingleton;
+}
 UClass* Z_Construct_UClass_UAdvancedSteamFriendsLibrary_NoRegister()
 {
-	return UAdvancedSteamFriendsLibrary::StaticClass();
+	return UAdvancedSteamFriendsLibrary::GetPrivateStaticClass();
 }
 struct Z_Construct_UClass_UAdvancedSteamFriendsLibrary_Statics
 {
@@ -1163,19 +1185,19 @@ struct Z_Construct_UClass_UAdvancedSteamFriendsLibrary_Statics
 #endif // WITH_METADATA
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_CreateSteamIDFromString, "CreateSteamIDFromString" }, // 4213969286
-		{ &Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_FilterText, "FilterText" }, // 2238116449
-		{ &Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetFriendSteamLevel, "GetFriendSteamLevel" }, // 2986844350
-		{ &Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetLocalSteamIDFromSteam, "GetLocalSteamIDFromSteam" }, // 76861347
-		{ &Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendAvatar, "GetSteamFriendAvatar" }, // 1394808610
-		{ &Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendGamePlayed, "GetSteamFriendGamePlayed" }, // 641850303
-		{ &Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamGroups, "GetSteamGroups" }, // 3620249705
-		{ &Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamPersonaName, "GetSteamPersonaName" }, // 3090654043
-		{ &Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_InitTextFiltering, "InitTextFiltering" }, // 957926474
-		{ &Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_IsOverlayEnabled, "IsOverlayEnabled" }, // 1402835464
-		{ &Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_IsSteamInBigPictureMode, "IsSteamInBigPictureMode" }, // 1702194190
-		{ &Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_OpenSteamUserOverlay, "OpenSteamUserOverlay" }, // 2538553259
-		{ &Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_RequestSteamFriendInfo, "RequestSteamFriendInfo" }, // 86593012
+		{ &Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_CreateSteamIDFromString, "CreateSteamIDFromString" }, // 1065408745
+		{ &Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_FilterText, "FilterText" }, // 2790355525
+		{ &Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetFriendSteamLevel, "GetFriendSteamLevel" }, // 2174970233
+		{ &Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetLocalSteamIDFromSteam, "GetLocalSteamIDFromSteam" }, // 1968289249
+		{ &Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendAvatar, "GetSteamFriendAvatar" }, // 4039202713
+		{ &Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamFriendGamePlayed, "GetSteamFriendGamePlayed" }, // 3460643319
+		{ &Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamGroups, "GetSteamGroups" }, // 726300350
+		{ &Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_GetSteamPersonaName, "GetSteamPersonaName" }, // 475548267
+		{ &Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_InitTextFiltering, "InitTextFiltering" }, // 2512254508
+		{ &Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_IsOverlayEnabled, "IsOverlayEnabled" }, // 85629807
+		{ &Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_IsSteamInBigPictureMode, "IsSteamInBigPictureMode" }, // 3174770534
+		{ &Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_OpenSteamUserOverlay, "OpenSteamUserOverlay" }, // 2849056362
+		{ &Z_Construct_UFunction_UAdvancedSteamFriendsLibrary_RequestSteamFriendInfo, "RequestSteamFriendInfo" }, // 167532536
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -1211,17 +1233,13 @@ UClass* Z_Construct_UClass_UAdvancedSteamFriendsLibrary()
 	}
 	return Z_Registration_Info_UClass_UAdvancedSteamFriendsLibrary.OuterSingleton;
 }
-template<> ADVANCEDSTEAMSESSIONS_API UClass* StaticClass<UAdvancedSteamFriendsLibrary>()
-{
-	return UAdvancedSteamFriendsLibrary::StaticClass();
-}
 UAdvancedSteamFriendsLibrary::UAdvancedSteamFriendsLibrary(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {}
 DEFINE_VTABLE_PTR_HELPER_CTOR(UAdvancedSteamFriendsLibrary);
 UAdvancedSteamFriendsLibrary::~UAdvancedSteamFriendsLibrary() {}
-// End Class UAdvancedSteamFriendsLibrary
+// ********** End Class UAdvancedSteamFriendsLibrary ***********************************************
 
-// Begin Registration
-struct Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamFriendsLibrary_h_Statics
+// ********** Begin Registration *******************************************************************
+struct Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamFriendsLibrary_h__Script_AdvancedSteamSessions_Statics
 {
 	static constexpr FEnumRegisterCompiledInInfo EnumInfo[] = {
 		{ SteamAvatarSize_StaticEnum, TEXT("SteamAvatarSize"), &Z_Registration_Info_UEnum_SteamAvatarSize, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 194323626U) },
@@ -1229,15 +1247,16 @@ struct Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSteamSessions_Sourc
 		{ EBPTextFilteringContext_StaticEnum, TEXT("EBPTextFilteringContext"), &Z_Registration_Info_UEnum_EBPTextFilteringContext, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 2533580417U) },
 	};
 	static constexpr FStructRegisterCompiledInInfo ScriptStructInfo[] = {
-		{ FBPSteamGroupInfo::StaticStruct, Z_Construct_UScriptStruct_FBPSteamGroupInfo_Statics::NewStructOps, TEXT("BPSteamGroupInfo"), &Z_Registration_Info_UScriptStruct_BPSteamGroupInfo, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FBPSteamGroupInfo), 3406212885U) },
+		{ FBPSteamGroupInfo::StaticStruct, Z_Construct_UScriptStruct_FBPSteamGroupInfo_Statics::NewStructOps, TEXT("BPSteamGroupInfo"), &Z_Registration_Info_UScriptStruct_FBPSteamGroupInfo, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FBPSteamGroupInfo), 3145522780U) },
 	};
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UAdvancedSteamFriendsLibrary, UAdvancedSteamFriendsLibrary::StaticClass, TEXT("UAdvancedSteamFriendsLibrary"), &Z_Registration_Info_UClass_UAdvancedSteamFriendsLibrary, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAdvancedSteamFriendsLibrary), 2465689138U) },
+		{ Z_Construct_UClass_UAdvancedSteamFriendsLibrary, UAdvancedSteamFriendsLibrary::StaticClass, TEXT("UAdvancedSteamFriendsLibrary"), &Z_Registration_Info_UClass_UAdvancedSteamFriendsLibrary, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAdvancedSteamFriendsLibrary), 1201872263U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamFriendsLibrary_h_1708993266(TEXT("/Script/AdvancedSteamSessions"),
-	Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamFriendsLibrary_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamFriendsLibrary_h_Statics::ClassInfo),
-	Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamFriendsLibrary_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamFriendsLibrary_h_Statics::ScriptStructInfo),
-	Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamFriendsLibrary_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamFriendsLibrary_h_Statics::EnumInfo));
-// End Registration
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamFriendsLibrary_h__Script_AdvancedSteamSessions_1199553785(TEXT("/Script/AdvancedSteamSessions"),
+	Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamFriendsLibrary_h__Script_AdvancedSteamSessions_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamFriendsLibrary_h__Script_AdvancedSteamSessions_Statics::ClassInfo),
+	Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamFriendsLibrary_h__Script_AdvancedSteamSessions_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamFriendsLibrary_h__Script_AdvancedSteamSessions_Statics::ScriptStructInfo),
+	Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamFriendsLibrary_h__Script_AdvancedSteamSessions_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamFriendsLibrary_h__Script_AdvancedSteamSessions_Statics::EnumInfo));
+// ********** End Registration *********************************************************************
+
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

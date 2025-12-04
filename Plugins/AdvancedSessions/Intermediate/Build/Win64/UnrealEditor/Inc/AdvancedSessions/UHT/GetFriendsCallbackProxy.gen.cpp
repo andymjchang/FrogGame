@@ -5,12 +5,14 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#include "AdvancedSessions/Classes/GetFriendsCallbackProxy.h"
-#include "AdvancedSessions/Classes/BlueprintDataDefinitions.h"
+#include "GetFriendsCallbackProxy.h"
+#include "BlueprintDataDefinitions.h"
+
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+
 void EmptyLinkFunctionForGeneratedCodeGetFriendsCallbackProxy() {}
 
-// Begin Cross Module References
+// ********** Begin Cross Module References ********************************************************
 ADVANCEDSESSIONS_API UClass* Z_Construct_UClass_UGetFriendsCallbackProxy();
 ADVANCEDSESSIONS_API UClass* Z_Construct_UClass_UGetFriendsCallbackProxy_NoRegister();
 ADVANCEDSESSIONS_API UFunction* Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintGetFriendsListDelegate__DelegateSignature();
@@ -19,9 +21,9 @@ COREUOBJECT_API UClass* Z_Construct_UClass_UObject_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_APlayerController_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_UOnlineBlueprintCallProxyBase();
 UPackage* Z_Construct_UPackage__Script_AdvancedSessions();
-// End Cross Module References
+// ********** End Cross Module References **********************************************************
 
-// Begin Delegate FBlueprintGetFriendsListDelegate
+// ********** Begin Delegate FBlueprintGetFriendsListDelegate **************************************
 struct Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintGetFriendsListDelegate__DelegateSignature_Statics
 {
 	struct _Script_AdvancedSessions_eventBlueprintGetFriendsListDelegate_Parms
@@ -39,23 +41,23 @@ struct Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintGetFriendsListDel
 	static const UECodeGen_Private::FStructPropertyParams NewProp_Results_Inner;
 	static const UECodeGen_Private::FArrayPropertyParams NewProp_Results;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
-	static const UECodeGen_Private::FFunctionParams FuncParams;
+	static const UECodeGen_Private::FDelegateFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintGetFriendsListDelegate__DelegateSignature_Statics::NewProp_Results_Inner = { "Results", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FBPFriendInfo, METADATA_PARAMS(0, nullptr) }; // 3265087352
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintGetFriendsListDelegate__DelegateSignature_Statics::NewProp_Results = { "Results", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(_Script_AdvancedSessions_eventBlueprintGetFriendsListDelegate_Parms, Results), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Results_MetaData), NewProp_Results_MetaData) }; // 3265087352
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintGetFriendsListDelegate__DelegateSignature_Statics::NewProp_Results_Inner = { "Results", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FBPFriendInfo, METADATA_PARAMS(0, nullptr) }; // 1295210154
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintGetFriendsListDelegate__DelegateSignature_Statics::NewProp_Results = { "Results", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(_Script_AdvancedSessions_eventBlueprintGetFriendsListDelegate_Parms, Results), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Results_MetaData), NewProp_Results_MetaData) }; // 1295210154
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintGetFriendsListDelegate__DelegateSignature_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintGetFriendsListDelegate__DelegateSignature_Statics::NewProp_Results_Inner,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintGetFriendsListDelegate__DelegateSignature_Statics::NewProp_Results,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintGetFriendsListDelegate__DelegateSignature_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintGetFriendsListDelegate__DelegateSignature_Statics::FuncParams = { (UObject*(*)())Z_Construct_UPackage__Script_AdvancedSessions, nullptr, "BlueprintGetFriendsListDelegate__DelegateSignature", nullptr, nullptr, Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintGetFriendsListDelegate__DelegateSignature_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintGetFriendsListDelegate__DelegateSignature_Statics::PropPointers), sizeof(Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintGetFriendsListDelegate__DelegateSignature_Statics::_Script_AdvancedSessions_eventBlueprintGetFriendsListDelegate_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00130000, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintGetFriendsListDelegate__DelegateSignature_Statics::Function_MetaDataParams), Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintGetFriendsListDelegate__DelegateSignature_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FDelegateFunctionParams Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintGetFriendsListDelegate__DelegateSignature_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UPackage__Script_AdvancedSessions, nullptr, "BlueprintGetFriendsListDelegate__DelegateSignature", Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintGetFriendsListDelegate__DelegateSignature_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintGetFriendsListDelegate__DelegateSignature_Statics::PropPointers), sizeof(Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintGetFriendsListDelegate__DelegateSignature_Statics::_Script_AdvancedSessions_eventBlueprintGetFriendsListDelegate_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00530000, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintGetFriendsListDelegate__DelegateSignature_Statics::Function_MetaDataParams), Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintGetFriendsListDelegate__DelegateSignature_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintGetFriendsListDelegate__DelegateSignature_Statics::_Script_AdvancedSessions_eventBlueprintGetFriendsListDelegate_Parms) < MAX_uint16);
 UFunction* Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintGetFriendsListDelegate__DelegateSignature()
 {
 	static UFunction* ReturnFunction = nullptr;
 	if (!ReturnFunction)
 	{
-		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintGetFriendsListDelegate__DelegateSignature_Statics::FuncParams);
+		UECodeGen_Private::ConstructUDelegateFunction(&ReturnFunction, Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintGetFriendsListDelegate__DelegateSignature_Statics::FuncParams);
 	}
 	return ReturnFunction;
 }
@@ -69,9 +71,9 @@ void FBlueprintGetFriendsListDelegate_DelegateWrapper(const FMulticastScriptDele
 	Parms.Results=Results;
 	BlueprintGetFriendsListDelegate.ProcessMulticastDelegate<UObject>(&Parms);
 }
-// End Delegate FBlueprintGetFriendsListDelegate
+// ********** End Delegate FBlueprintGetFriendsListDelegate ****************************************
 
-// Begin Class UGetFriendsCallbackProxy Function GetAndStoreFriendsList
+// ********** Begin Class UGetFriendsCallbackProxy Function GetAndStoreFriendsList *****************
 struct Z_Construct_UFunction_UGetFriendsCallbackProxy_GetAndStoreFriendsList_Statics
 {
 	struct GetFriendsCallbackProxy_eventGetAndStoreFriendsList_Parms
@@ -109,7 +111,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UGetFr
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UGetFriendsCallbackProxy_GetAndStoreFriendsList_Statics::NewProp_ReturnValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UGetFriendsCallbackProxy_GetAndStoreFriendsList_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UGetFriendsCallbackProxy_GetAndStoreFriendsList_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UGetFriendsCallbackProxy, nullptr, "GetAndStoreFriendsList", nullptr, nullptr, Z_Construct_UFunction_UGetFriendsCallbackProxy_GetAndStoreFriendsList_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UGetFriendsCallbackProxy_GetAndStoreFriendsList_Statics::PropPointers), sizeof(Z_Construct_UFunction_UGetFriendsCallbackProxy_GetAndStoreFriendsList_Statics::GetFriendsCallbackProxy_eventGetAndStoreFriendsList_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UGetFriendsCallbackProxy_GetAndStoreFriendsList_Statics::Function_MetaDataParams), Z_Construct_UFunction_UGetFriendsCallbackProxy_GetAndStoreFriendsList_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UGetFriendsCallbackProxy_GetAndStoreFriendsList_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UGetFriendsCallbackProxy, nullptr, "GetAndStoreFriendsList", Z_Construct_UFunction_UGetFriendsCallbackProxy_GetAndStoreFriendsList_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UGetFriendsCallbackProxy_GetAndStoreFriendsList_Statics::PropPointers), sizeof(Z_Construct_UFunction_UGetFriendsCallbackProxy_GetAndStoreFriendsList_Statics::GetFriendsCallbackProxy_eventGetAndStoreFriendsList_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UGetFriendsCallbackProxy_GetAndStoreFriendsList_Statics::Function_MetaDataParams), Z_Construct_UFunction_UGetFriendsCallbackProxy_GetAndStoreFriendsList_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UGetFriendsCallbackProxy_GetAndStoreFriendsList_Statics::GetFriendsCallbackProxy_eventGetAndStoreFriendsList_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UGetFriendsCallbackProxy_GetAndStoreFriendsList()
 {
@@ -129,9 +131,9 @@ DEFINE_FUNCTION(UGetFriendsCallbackProxy::execGetAndStoreFriendsList)
 	*(UGetFriendsCallbackProxy**)Z_Param__Result=UGetFriendsCallbackProxy::GetAndStoreFriendsList(Z_Param_WorldContextObject,Z_Param_PlayerController);
 	P_NATIVE_END;
 }
-// End Class UGetFriendsCallbackProxy Function GetAndStoreFriendsList
+// ********** End Class UGetFriendsCallbackProxy Function GetAndStoreFriendsList *******************
 
-// Begin Class UGetFriendsCallbackProxy
+// ********** Begin Class UGetFriendsCallbackProxy *************************************************
 void UGetFriendsCallbackProxy::StaticRegisterNativesUGetFriendsCallbackProxy()
 {
 	UClass* Class = UGetFriendsCallbackProxy::StaticClass();
@@ -140,10 +142,34 @@ void UGetFriendsCallbackProxy::StaticRegisterNativesUGetFriendsCallbackProxy()
 	};
 	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 }
-IMPLEMENT_CLASS_NO_AUTO_REGISTRATION(UGetFriendsCallbackProxy);
+FClassRegistrationInfo Z_Registration_Info_UClass_UGetFriendsCallbackProxy;
+UClass* UGetFriendsCallbackProxy::GetPrivateStaticClass()
+{
+	using TClass = UGetFriendsCallbackProxy;
+	if (!Z_Registration_Info_UClass_UGetFriendsCallbackProxy.InnerSingleton)
+	{
+		GetPrivateStaticClassBody(
+			StaticPackage(),
+			TEXT("GetFriendsCallbackProxy"),
+			Z_Registration_Info_UClass_UGetFriendsCallbackProxy.InnerSingleton,
+			StaticRegisterNativesUGetFriendsCallbackProxy,
+			sizeof(TClass),
+			alignof(TClass),
+			TClass::StaticClassFlags,
+			TClass::StaticClassCastFlags(),
+			TClass::StaticConfigName(),
+			(UClass::ClassConstructorType)InternalConstructor<TClass>,
+			(UClass::ClassVTableHelperCtorCallerType)InternalVTableHelperCtorCaller<TClass>,
+			UOBJECT_CPPCLASS_STATICFUNCTIONS_FORCLASS(TClass),
+			&TClass::Super::StaticClass,
+			&TClass::WithinClass::StaticClass
+		);
+	}
+	return Z_Registration_Info_UClass_UGetFriendsCallbackProxy.InnerSingleton;
+}
 UClass* Z_Construct_UClass_UGetFriendsCallbackProxy_NoRegister()
 {
-	return UGetFriendsCallbackProxy::StaticClass();
+	return UGetFriendsCallbackProxy::GetPrivateStaticClass();
 }
 struct Z_Construct_UClass_UGetFriendsCallbackProxy_Statics
 {
@@ -176,7 +202,7 @@ struct Z_Construct_UClass_UGetFriendsCallbackProxy_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_UGetFriendsCallbackProxy_GetAndStoreFriendsList, "GetAndStoreFriendsList" }, // 1912623589
+		{ &Z_Construct_UFunction_UGetFriendsCallbackProxy_GetAndStoreFriendsList, "GetAndStoreFriendsList" }, // 3726919758
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -184,8 +210,8 @@ struct Z_Construct_UClass_UGetFriendsCallbackProxy_Statics
 	};
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
-const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UGetFriendsCallbackProxy_Statics::NewProp_OnSuccess = { "OnSuccess", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UGetFriendsCallbackProxy, OnSuccess), Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintGetFriendsListDelegate__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnSuccess_MetaData), NewProp_OnSuccess_MetaData) }; // 844112360
-const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UGetFriendsCallbackProxy_Statics::NewProp_OnFailure = { "OnFailure", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UGetFriendsCallbackProxy, OnFailure), Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintGetFriendsListDelegate__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnFailure_MetaData), NewProp_OnFailure_MetaData) }; // 844112360
+const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UGetFriendsCallbackProxy_Statics::NewProp_OnSuccess = { "OnSuccess", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UGetFriendsCallbackProxy, OnSuccess), Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintGetFriendsListDelegate__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnSuccess_MetaData), NewProp_OnSuccess_MetaData) }; // 3078213012
+const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UGetFriendsCallbackProxy_Statics::NewProp_OnFailure = { "OnFailure", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UGetFriendsCallbackProxy, OnFailure), Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintGetFriendsListDelegate__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnFailure_MetaData), NewProp_OnFailure_MetaData) }; // 3078213012
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UGetFriendsCallbackProxy_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UGetFriendsCallbackProxy_Statics::NewProp_OnSuccess,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UGetFriendsCallbackProxy_Statics::NewProp_OnFailure,
@@ -219,24 +245,21 @@ UClass* Z_Construct_UClass_UGetFriendsCallbackProxy()
 	}
 	return Z_Registration_Info_UClass_UGetFriendsCallbackProxy.OuterSingleton;
 }
-template<> ADVANCEDSESSIONS_API UClass* StaticClass<UGetFriendsCallbackProxy>()
-{
-	return UGetFriendsCallbackProxy::StaticClass();
-}
 DEFINE_VTABLE_PTR_HELPER_CTOR(UGetFriendsCallbackProxy);
 UGetFriendsCallbackProxy::~UGetFriendsCallbackProxy() {}
-// End Class UGetFriendsCallbackProxy
+// ********** End Class UGetFriendsCallbackProxy ***************************************************
 
-// Begin Registration
-struct Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_GetFriendsCallbackProxy_h_Statics
+// ********** Begin Registration *******************************************************************
+struct Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_GetFriendsCallbackProxy_h__Script_AdvancedSessions_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UGetFriendsCallbackProxy, UGetFriendsCallbackProxy::StaticClass, TEXT("UGetFriendsCallbackProxy"), &Z_Registration_Info_UClass_UGetFriendsCallbackProxy, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UGetFriendsCallbackProxy), 2394332397U) },
+		{ Z_Construct_UClass_UGetFriendsCallbackProxy, UGetFriendsCallbackProxy::StaticClass, TEXT("UGetFriendsCallbackProxy"), &Z_Registration_Info_UClass_UGetFriendsCallbackProxy, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UGetFriendsCallbackProxy), 2275713614U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_GetFriendsCallbackProxy_h_460884568(TEXT("/Script/AdvancedSessions"),
-	Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_GetFriendsCallbackProxy_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_GetFriendsCallbackProxy_h_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_GetFriendsCallbackProxy_h__Script_AdvancedSessions_882649665(TEXT("/Script/AdvancedSessions"),
+	Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_GetFriendsCallbackProxy_h__Script_AdvancedSessions_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_GetFriendsCallbackProxy_h__Script_AdvancedSessions_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
-// End Registration
+// ********** End Registration *********************************************************************
+
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

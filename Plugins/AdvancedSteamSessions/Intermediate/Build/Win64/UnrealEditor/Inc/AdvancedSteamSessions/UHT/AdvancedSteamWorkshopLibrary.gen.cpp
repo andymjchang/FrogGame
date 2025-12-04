@@ -5,11 +5,13 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#include "AdvancedSteamSessions/Classes/AdvancedSteamWorkshopLibrary.h"
+#include "AdvancedSteamWorkshopLibrary.h"
+
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+
 void EmptyLinkFunctionForGeneratedCodeAdvancedSteamWorkshopLibrary() {}
 
-// Begin Cross Module References
+// ********** Begin Cross Module References ********************************************************
 ADVANCEDSTEAMSESSIONS_API UClass* Z_Construct_UClass_UAdvancedSteamWorkshopLibrary();
 ADVANCEDSTEAMSESSIONS_API UClass* Z_Construct_UClass_UAdvancedSteamWorkshopLibrary_NoRegister();
 ADVANCEDSTEAMSESSIONS_API UEnum* Z_Construct_UEnum_AdvancedSteamSessions_FBPSteamResult();
@@ -18,21 +20,17 @@ ADVANCEDSTEAMSESSIONS_API UScriptStruct* Z_Construct_UScriptStruct_FBPSteamWorks
 ADVANCEDSTEAMSESSIONS_API UScriptStruct* Z_Construct_UScriptStruct_FBPSteamWorkshopItemDetails();
 ENGINE_API UClass* Z_Construct_UClass_UBlueprintFunctionLibrary();
 UPackage* Z_Construct_UPackage__Script_AdvancedSteamSessions();
-// End Cross Module References
+// ********** End Cross Module References **********************************************************
 
-// Begin ScriptStruct FBPSteamWorkshopID
-static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_BPSteamWorkshopID;
+// ********** Begin ScriptStruct FBPSteamWorkshopID ************************************************
+static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_FBPSteamWorkshopID;
 class UScriptStruct* FBPSteamWorkshopID::StaticStruct()
 {
-	if (!Z_Registration_Info_UScriptStruct_BPSteamWorkshopID.OuterSingleton)
+	if (!Z_Registration_Info_UScriptStruct_FBPSteamWorkshopID.OuterSingleton)
 	{
-		Z_Registration_Info_UScriptStruct_BPSteamWorkshopID.OuterSingleton = GetStaticStruct(Z_Construct_UScriptStruct_FBPSteamWorkshopID, (UObject*)Z_Construct_UPackage__Script_AdvancedSteamSessions(), TEXT("BPSteamWorkshopID"));
+		Z_Registration_Info_UScriptStruct_FBPSteamWorkshopID.OuterSingleton = GetStaticStruct(Z_Construct_UScriptStruct_FBPSteamWorkshopID, (UObject*)Z_Construct_UPackage__Script_AdvancedSteamSessions(), TEXT("BPSteamWorkshopID"));
 	}
-	return Z_Registration_Info_UScriptStruct_BPSteamWorkshopID.OuterSingleton;
-}
-template<> ADVANCEDSTEAMSESSIONS_API UScriptStruct* StaticStruct<FBPSteamWorkshopID>()
-{
-	return FBPSteamWorkshopID::StaticStruct();
+	return Z_Registration_Info_UScriptStruct_FBPSteamWorkshopID.OuterSingleton;
 }
 struct Z_Construct_UScriptStruct_FBPSteamWorkshopID_Statics
 {
@@ -69,15 +67,15 @@ const UECodeGen_Private::FStructParams Z_Construct_UScriptStruct_FBPSteamWorksho
 };
 UScriptStruct* Z_Construct_UScriptStruct_FBPSteamWorkshopID()
 {
-	if (!Z_Registration_Info_UScriptStruct_BPSteamWorkshopID.InnerSingleton)
+	if (!Z_Registration_Info_UScriptStruct_FBPSteamWorkshopID.InnerSingleton)
 	{
-		UECodeGen_Private::ConstructUScriptStruct(Z_Registration_Info_UScriptStruct_BPSteamWorkshopID.InnerSingleton, Z_Construct_UScriptStruct_FBPSteamWorkshopID_Statics::StructParams);
+		UECodeGen_Private::ConstructUScriptStruct(Z_Registration_Info_UScriptStruct_FBPSteamWorkshopID.InnerSingleton, Z_Construct_UScriptStruct_FBPSteamWorkshopID_Statics::StructParams);
 	}
-	return Z_Registration_Info_UScriptStruct_BPSteamWorkshopID.InnerSingleton;
+	return Z_Registration_Info_UScriptStruct_FBPSteamWorkshopID.InnerSingleton;
 }
-// End ScriptStruct FBPSteamWorkshopID
+// ********** End ScriptStruct FBPSteamWorkshopID **************************************************
 
-// Begin Enum FBPSteamResult
+// ********** Begin Enum FBPSteamResult ************************************************************
 static FEnumRegistrationInfo Z_Registration_Info_UEnum_FBPSteamResult;
 static UEnum* FBPSteamResult_StaticEnum()
 {
@@ -467,9 +465,9 @@ UEnum* Z_Construct_UEnum_AdvancedSteamSessions_FBPSteamResult()
 	}
 	return Z_Registration_Info_UEnum_FBPSteamResult.InnerSingleton;
 }
-// End Enum FBPSteamResult
+// ********** End Enum FBPSteamResult **************************************************************
 
-// Begin Enum FBPWorkshopFileType
+// ********** Begin Enum FBPWorkshopFileType *******************************************************
 static FEnumRegistrationInfo Z_Registration_Info_UEnum_FBPWorkshopFileType;
 static UEnum* FBPWorkshopFileType_StaticEnum()
 {
@@ -555,21 +553,17 @@ UEnum* Z_Construct_UEnum_AdvancedSteamSessions_FBPWorkshopFileType()
 	}
 	return Z_Registration_Info_UEnum_FBPWorkshopFileType.InnerSingleton;
 }
-// End Enum FBPWorkshopFileType
+// ********** End Enum FBPWorkshopFileType *********************************************************
 
-// Begin ScriptStruct FBPSteamWorkshopItemDetails
-static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_BPSteamWorkshopItemDetails;
+// ********** Begin ScriptStruct FBPSteamWorkshopItemDetails ***************************************
+static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_FBPSteamWorkshopItemDetails;
 class UScriptStruct* FBPSteamWorkshopItemDetails::StaticStruct()
 {
-	if (!Z_Registration_Info_UScriptStruct_BPSteamWorkshopItemDetails.OuterSingleton)
+	if (!Z_Registration_Info_UScriptStruct_FBPSteamWorkshopItemDetails.OuterSingleton)
 	{
-		Z_Registration_Info_UScriptStruct_BPSteamWorkshopItemDetails.OuterSingleton = GetStaticStruct(Z_Construct_UScriptStruct_FBPSteamWorkshopItemDetails, (UObject*)Z_Construct_UPackage__Script_AdvancedSteamSessions(), TEXT("BPSteamWorkshopItemDetails"));
+		Z_Registration_Info_UScriptStruct_FBPSteamWorkshopItemDetails.OuterSingleton = GetStaticStruct(Z_Construct_UScriptStruct_FBPSteamWorkshopItemDetails, (UObject*)Z_Construct_UPackage__Script_AdvancedSteamSessions(), TEXT("BPSteamWorkshopItemDetails"));
 	}
-	return Z_Registration_Info_UScriptStruct_BPSteamWorkshopItemDetails.OuterSingleton;
-}
-template<> ADVANCEDSTEAMSESSIONS_API UScriptStruct* StaticStruct<FBPSteamWorkshopItemDetails>()
-{
-	return FBPSteamWorkshopItemDetails::StaticStruct();
+	return Z_Registration_Info_UScriptStruct_FBPSteamWorkshopItemDetails.OuterSingleton;
 }
 struct Z_Construct_UScriptStruct_FBPSteamWorkshopItemDetails_Statics
 {
@@ -801,15 +795,15 @@ const UECodeGen_Private::FStructParams Z_Construct_UScriptStruct_FBPSteamWorksho
 };
 UScriptStruct* Z_Construct_UScriptStruct_FBPSteamWorkshopItemDetails()
 {
-	if (!Z_Registration_Info_UScriptStruct_BPSteamWorkshopItemDetails.InnerSingleton)
+	if (!Z_Registration_Info_UScriptStruct_FBPSteamWorkshopItemDetails.InnerSingleton)
 	{
-		UECodeGen_Private::ConstructUScriptStruct(Z_Registration_Info_UScriptStruct_BPSteamWorkshopItemDetails.InnerSingleton, Z_Construct_UScriptStruct_FBPSteamWorkshopItemDetails_Statics::StructParams);
+		UECodeGen_Private::ConstructUScriptStruct(Z_Registration_Info_UScriptStruct_FBPSteamWorkshopItemDetails.InnerSingleton, Z_Construct_UScriptStruct_FBPSteamWorkshopItemDetails_Statics::StructParams);
 	}
-	return Z_Registration_Info_UScriptStruct_BPSteamWorkshopItemDetails.InnerSingleton;
+	return Z_Registration_Info_UScriptStruct_FBPSteamWorkshopItemDetails.InnerSingleton;
 }
-// End ScriptStruct FBPSteamWorkshopItemDetails
+// ********** End ScriptStruct FBPSteamWorkshopItemDetails *****************************************
 
-// Begin Class UAdvancedSteamWorkshopLibrary Function GetNumSubscribedWorkshopItems
+// ********** Begin Class UAdvancedSteamWorkshopLibrary Function GetNumSubscribedWorkshopItems *****
 struct Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetNumSubscribedWorkshopItems_Statics
 {
 	struct AdvancedSteamWorkshopLibrary_eventGetNumSubscribedWorkshopItems_Parms
@@ -831,7 +825,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetNumSubscribedWorkshopItems_Statics::NewProp_NumberOfItems,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetNumSubscribedWorkshopItems_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetNumSubscribedWorkshopItems_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSteamWorkshopLibrary, nullptr, "GetNumSubscribedWorkshopItems", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetNumSubscribedWorkshopItems_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetNumSubscribedWorkshopItems_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetNumSubscribedWorkshopItems_Statics::AdvancedSteamWorkshopLibrary_eventGetNumSubscribedWorkshopItems_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetNumSubscribedWorkshopItems_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetNumSubscribedWorkshopItems_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetNumSubscribedWorkshopItems_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSteamWorkshopLibrary, nullptr, "GetNumSubscribedWorkshopItems", Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetNumSubscribedWorkshopItems_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetNumSubscribedWorkshopItems_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetNumSubscribedWorkshopItems_Statics::AdvancedSteamWorkshopLibrary_eventGetNumSubscribedWorkshopItems_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetNumSubscribedWorkshopItems_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetNumSubscribedWorkshopItems_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetNumSubscribedWorkshopItems_Statics::AdvancedSteamWorkshopLibrary_eventGetNumSubscribedWorkshopItems_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetNumSubscribedWorkshopItems()
 {
@@ -850,9 +844,9 @@ DEFINE_FUNCTION(UAdvancedSteamWorkshopLibrary::execGetNumSubscribedWorkshopItems
 	UAdvancedSteamWorkshopLibrary::GetNumSubscribedWorkshopItems(Z_Param_Out_NumberOfItems);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSteamWorkshopLibrary Function GetNumSubscribedWorkshopItems
+// ********** End Class UAdvancedSteamWorkshopLibrary Function GetNumSubscribedWorkshopItems *******
 
-// Begin Class UAdvancedSteamWorkshopLibrary Function GetSubscribedWorkshopItems
+// ********** Begin Class UAdvancedSteamWorkshopLibrary Function GetSubscribedWorkshopItems ********
 struct Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetSubscribedWorkshopItems_Statics
 {
 	struct AdvancedSteamWorkshopLibrary_eventGetSubscribedWorkshopItems_Parms
@@ -879,15 +873,15 @@ struct Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetSubscribedWorkshop
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetSubscribedWorkshopItems_Statics::NewProp_NumberOfItems = { "NumberOfItems", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSteamWorkshopLibrary_eventGetSubscribedWorkshopItems_Parms, NumberOfItems), METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetSubscribedWorkshopItems_Statics::NewProp_ReturnValue_Inner = { "ReturnValue", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FBPSteamWorkshopID, METADATA_PARAMS(0, nullptr) }; // 3268673891
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetSubscribedWorkshopItems_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSteamWorkshopLibrary_eventGetSubscribedWorkshopItems_Parms, ReturnValue), EArrayPropertyFlags::None, METADATA_PARAMS(0, nullptr) }; // 3268673891
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetSubscribedWorkshopItems_Statics::NewProp_ReturnValue_Inner = { "ReturnValue", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FBPSteamWorkshopID, METADATA_PARAMS(0, nullptr) }; // 301282290
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetSubscribedWorkshopItems_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSteamWorkshopLibrary_eventGetSubscribedWorkshopItems_Parms, ReturnValue), EArrayPropertyFlags::None, METADATA_PARAMS(0, nullptr) }; // 301282290
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetSubscribedWorkshopItems_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetSubscribedWorkshopItems_Statics::NewProp_NumberOfItems,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetSubscribedWorkshopItems_Statics::NewProp_ReturnValue_Inner,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetSubscribedWorkshopItems_Statics::NewProp_ReturnValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetSubscribedWorkshopItems_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetSubscribedWorkshopItems_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSteamWorkshopLibrary, nullptr, "GetSubscribedWorkshopItems", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetSubscribedWorkshopItems_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetSubscribedWorkshopItems_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetSubscribedWorkshopItems_Statics::AdvancedSteamWorkshopLibrary_eventGetSubscribedWorkshopItems_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetSubscribedWorkshopItems_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetSubscribedWorkshopItems_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetSubscribedWorkshopItems_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSteamWorkshopLibrary, nullptr, "GetSubscribedWorkshopItems", Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetSubscribedWorkshopItems_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetSubscribedWorkshopItems_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetSubscribedWorkshopItems_Statics::AdvancedSteamWorkshopLibrary_eventGetSubscribedWorkshopItems_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetSubscribedWorkshopItems_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetSubscribedWorkshopItems_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetSubscribedWorkshopItems_Statics::AdvancedSteamWorkshopLibrary_eventGetSubscribedWorkshopItems_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetSubscribedWorkshopItems()
 {
@@ -906,9 +900,9 @@ DEFINE_FUNCTION(UAdvancedSteamWorkshopLibrary::execGetSubscribedWorkshopItems)
 	*(TArray<FBPSteamWorkshopID>*)Z_Param__Result=UAdvancedSteamWorkshopLibrary::GetSubscribedWorkshopItems(Z_Param_Out_NumberOfItems);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSteamWorkshopLibrary Function GetSubscribedWorkshopItems
+// ********** End Class UAdvancedSteamWorkshopLibrary Function GetSubscribedWorkshopItems **********
 
-// Begin Class UAdvancedSteamWorkshopLibrary
+// ********** Begin Class UAdvancedSteamWorkshopLibrary ********************************************
 void UAdvancedSteamWorkshopLibrary::StaticRegisterNativesUAdvancedSteamWorkshopLibrary()
 {
 	UClass* Class = UAdvancedSteamWorkshopLibrary::StaticClass();
@@ -918,10 +912,34 @@ void UAdvancedSteamWorkshopLibrary::StaticRegisterNativesUAdvancedSteamWorkshopL
 	};
 	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 }
-IMPLEMENT_CLASS_NO_AUTO_REGISTRATION(UAdvancedSteamWorkshopLibrary);
+FClassRegistrationInfo Z_Registration_Info_UClass_UAdvancedSteamWorkshopLibrary;
+UClass* UAdvancedSteamWorkshopLibrary::GetPrivateStaticClass()
+{
+	using TClass = UAdvancedSteamWorkshopLibrary;
+	if (!Z_Registration_Info_UClass_UAdvancedSteamWorkshopLibrary.InnerSingleton)
+	{
+		GetPrivateStaticClassBody(
+			StaticPackage(),
+			TEXT("AdvancedSteamWorkshopLibrary"),
+			Z_Registration_Info_UClass_UAdvancedSteamWorkshopLibrary.InnerSingleton,
+			StaticRegisterNativesUAdvancedSteamWorkshopLibrary,
+			sizeof(TClass),
+			alignof(TClass),
+			TClass::StaticClassFlags,
+			TClass::StaticClassCastFlags(),
+			TClass::StaticConfigName(),
+			(UClass::ClassConstructorType)InternalConstructor<TClass>,
+			(UClass::ClassVTableHelperCtorCallerType)InternalVTableHelperCtorCaller<TClass>,
+			UOBJECT_CPPCLASS_STATICFUNCTIONS_FORCLASS(TClass),
+			&TClass::Super::StaticClass,
+			&TClass::WithinClass::StaticClass
+		);
+	}
+	return Z_Registration_Info_UClass_UAdvancedSteamWorkshopLibrary.InnerSingleton;
+}
 UClass* Z_Construct_UClass_UAdvancedSteamWorkshopLibrary_NoRegister()
 {
-	return UAdvancedSteamWorkshopLibrary::StaticClass();
+	return UAdvancedSteamWorkshopLibrary::GetPrivateStaticClass();
 }
 struct Z_Construct_UClass_UAdvancedSteamWorkshopLibrary_Statics
 {
@@ -933,8 +951,8 @@ struct Z_Construct_UClass_UAdvancedSteamWorkshopLibrary_Statics
 #endif // WITH_METADATA
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetNumSubscribedWorkshopItems, "GetNumSubscribedWorkshopItems" }, // 3934132033
-		{ &Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetSubscribedWorkshopItems, "GetSubscribedWorkshopItems" }, // 1288772071
+		{ &Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetNumSubscribedWorkshopItems, "GetNumSubscribedWorkshopItems" }, // 890475308
+		{ &Z_Construct_UFunction_UAdvancedSteamWorkshopLibrary_GetSubscribedWorkshopItems, "GetSubscribedWorkshopItems" }, // 1137630264
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -970,33 +988,30 @@ UClass* Z_Construct_UClass_UAdvancedSteamWorkshopLibrary()
 	}
 	return Z_Registration_Info_UClass_UAdvancedSteamWorkshopLibrary.OuterSingleton;
 }
-template<> ADVANCEDSTEAMSESSIONS_API UClass* StaticClass<UAdvancedSteamWorkshopLibrary>()
-{
-	return UAdvancedSteamWorkshopLibrary::StaticClass();
-}
 UAdvancedSteamWorkshopLibrary::UAdvancedSteamWorkshopLibrary(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {}
 DEFINE_VTABLE_PTR_HELPER_CTOR(UAdvancedSteamWorkshopLibrary);
 UAdvancedSteamWorkshopLibrary::~UAdvancedSteamWorkshopLibrary() {}
-// End Class UAdvancedSteamWorkshopLibrary
+// ********** End Class UAdvancedSteamWorkshopLibrary **********************************************
 
-// Begin Registration
-struct Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamWorkshopLibrary_h_Statics
+// ********** Begin Registration *******************************************************************
+struct Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamWorkshopLibrary_h__Script_AdvancedSteamSessions_Statics
 {
 	static constexpr FEnumRegisterCompiledInInfo EnumInfo[] = {
 		{ FBPSteamResult_StaticEnum, TEXT("FBPSteamResult"), &Z_Registration_Info_UEnum_FBPSteamResult, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 1312760389U) },
 		{ FBPWorkshopFileType_StaticEnum, TEXT("FBPWorkshopFileType"), &Z_Registration_Info_UEnum_FBPWorkshopFileType, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 3046689419U) },
 	};
 	static constexpr FStructRegisterCompiledInInfo ScriptStructInfo[] = {
-		{ FBPSteamWorkshopID::StaticStruct, Z_Construct_UScriptStruct_FBPSteamWorkshopID_Statics::NewStructOps, TEXT("BPSteamWorkshopID"), &Z_Registration_Info_UScriptStruct_BPSteamWorkshopID, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FBPSteamWorkshopID), 3268673891U) },
-		{ FBPSteamWorkshopItemDetails::StaticStruct, Z_Construct_UScriptStruct_FBPSteamWorkshopItemDetails_Statics::NewStructOps, TEXT("BPSteamWorkshopItemDetails"), &Z_Registration_Info_UScriptStruct_BPSteamWorkshopItemDetails, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FBPSteamWorkshopItemDetails), 3265448874U) },
+		{ FBPSteamWorkshopID::StaticStruct, Z_Construct_UScriptStruct_FBPSteamWorkshopID_Statics::NewStructOps, TEXT("BPSteamWorkshopID"), &Z_Registration_Info_UScriptStruct_FBPSteamWorkshopID, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FBPSteamWorkshopID), 301282290U) },
+		{ FBPSteamWorkshopItemDetails::StaticStruct, Z_Construct_UScriptStruct_FBPSteamWorkshopItemDetails_Statics::NewStructOps, TEXT("BPSteamWorkshopItemDetails"), &Z_Registration_Info_UScriptStruct_FBPSteamWorkshopItemDetails, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FBPSteamWorkshopItemDetails), 1827740272U) },
 	};
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UAdvancedSteamWorkshopLibrary, UAdvancedSteamWorkshopLibrary::StaticClass, TEXT("UAdvancedSteamWorkshopLibrary"), &Z_Registration_Info_UClass_UAdvancedSteamWorkshopLibrary, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAdvancedSteamWorkshopLibrary), 4030153186U) },
+		{ Z_Construct_UClass_UAdvancedSteamWorkshopLibrary, UAdvancedSteamWorkshopLibrary::StaticClass, TEXT("UAdvancedSteamWorkshopLibrary"), &Z_Registration_Info_UClass_UAdvancedSteamWorkshopLibrary, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAdvancedSteamWorkshopLibrary), 1409282689U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamWorkshopLibrary_h_1803068485(TEXT("/Script/AdvancedSteamSessions"),
-	Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamWorkshopLibrary_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamWorkshopLibrary_h_Statics::ClassInfo),
-	Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamWorkshopLibrary_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamWorkshopLibrary_h_Statics::ScriptStructInfo),
-	Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamWorkshopLibrary_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamWorkshopLibrary_h_Statics::EnumInfo));
-// End Registration
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamWorkshopLibrary_h__Script_AdvancedSteamSessions_3686584040(TEXT("/Script/AdvancedSteamSessions"),
+	Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamWorkshopLibrary_h__Script_AdvancedSteamSessions_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamWorkshopLibrary_h__Script_AdvancedSteamSessions_Statics::ClassInfo),
+	Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamWorkshopLibrary_h__Script_AdvancedSteamSessions_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamWorkshopLibrary_h__Script_AdvancedSteamSessions_Statics::ScriptStructInfo),
+	Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamWorkshopLibrary_h__Script_AdvancedSteamSessions_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamWorkshopLibrary_h__Script_AdvancedSteamSessions_Statics::EnumInfo));
+// ********** End Registration *********************************************************************
+
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

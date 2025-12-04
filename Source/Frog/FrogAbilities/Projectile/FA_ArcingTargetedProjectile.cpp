@@ -3,6 +3,7 @@
 #include "FA_ArcingTargetedProjectile.h"
 #include "TimerManager.h"
 #include "Components/SphereComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "EnemyCharacter/EnemyCharacter.h"
 #include "FrogCharacter/FrogCharacter.h"
 

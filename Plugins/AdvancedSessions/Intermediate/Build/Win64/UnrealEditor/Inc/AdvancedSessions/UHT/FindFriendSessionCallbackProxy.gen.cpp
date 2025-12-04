@@ -5,13 +5,15 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#include "AdvancedSessions/Classes/FindFriendSessionCallbackProxy.h"
-#include "AdvancedSessions/Classes/BlueprintDataDefinitions.h"
-#include "OnlineSubsystemUtils/Classes/FindSessionsCallbackProxy.h"
+#include "FindFriendSessionCallbackProxy.h"
+#include "BlueprintDataDefinitions.h"
+#include "FindSessionsCallbackProxy.h"
+
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+
 void EmptyLinkFunctionForGeneratedCodeFindFriendSessionCallbackProxy() {}
 
-// Begin Cross Module References
+// ********** Begin Cross Module References ********************************************************
 ADVANCEDSESSIONS_API UClass* Z_Construct_UClass_UFindFriendSessionCallbackProxy();
 ADVANCEDSESSIONS_API UClass* Z_Construct_UClass_UFindFriendSessionCallbackProxy_NoRegister();
 ADVANCEDSESSIONS_API UFunction* Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintFindFriendSessionDelegate__DelegateSignature();
@@ -21,9 +23,9 @@ ENGINE_API UClass* Z_Construct_UClass_APlayerController_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_UOnlineBlueprintCallProxyBase();
 ONLINESUBSYSTEMUTILS_API UScriptStruct* Z_Construct_UScriptStruct_FBlueprintSessionResult();
 UPackage* Z_Construct_UPackage__Script_AdvancedSessions();
-// End Cross Module References
+// ********** End Cross Module References **********************************************************
 
-// Begin Delegate FBlueprintFindFriendSessionDelegate
+// ********** Begin Delegate FBlueprintFindFriendSessionDelegate ***********************************
 struct Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintFindFriendSessionDelegate__DelegateSignature_Statics
 {
 	struct _Script_AdvancedSessions_eventBlueprintFindFriendSessionDelegate_Parms
@@ -41,23 +43,23 @@ struct Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintFindFriendSession
 	static const UECodeGen_Private::FStructPropertyParams NewProp_SessionInfo_Inner;
 	static const UECodeGen_Private::FArrayPropertyParams NewProp_SessionInfo;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
-	static const UECodeGen_Private::FFunctionParams FuncParams;
+	static const UECodeGen_Private::FDelegateFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintFindFriendSessionDelegate__DelegateSignature_Statics::NewProp_SessionInfo_Inner = { "SessionInfo", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FBlueprintSessionResult, METADATA_PARAMS(0, nullptr) }; // 1307808723
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintFindFriendSessionDelegate__DelegateSignature_Statics::NewProp_SessionInfo = { "SessionInfo", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(_Script_AdvancedSessions_eventBlueprintFindFriendSessionDelegate_Parms, SessionInfo), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SessionInfo_MetaData), NewProp_SessionInfo_MetaData) }; // 1307808723
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintFindFriendSessionDelegate__DelegateSignature_Statics::NewProp_SessionInfo_Inner = { "SessionInfo", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FBlueprintSessionResult, METADATA_PARAMS(0, nullptr) }; // 3859927135
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintFindFriendSessionDelegate__DelegateSignature_Statics::NewProp_SessionInfo = { "SessionInfo", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(_Script_AdvancedSessions_eventBlueprintFindFriendSessionDelegate_Parms, SessionInfo), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SessionInfo_MetaData), NewProp_SessionInfo_MetaData) }; // 3859927135
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintFindFriendSessionDelegate__DelegateSignature_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintFindFriendSessionDelegate__DelegateSignature_Statics::NewProp_SessionInfo_Inner,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintFindFriendSessionDelegate__DelegateSignature_Statics::NewProp_SessionInfo,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintFindFriendSessionDelegate__DelegateSignature_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintFindFriendSessionDelegate__DelegateSignature_Statics::FuncParams = { (UObject*(*)())Z_Construct_UPackage__Script_AdvancedSessions, nullptr, "BlueprintFindFriendSessionDelegate__DelegateSignature", nullptr, nullptr, Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintFindFriendSessionDelegate__DelegateSignature_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintFindFriendSessionDelegate__DelegateSignature_Statics::PropPointers), sizeof(Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintFindFriendSessionDelegate__DelegateSignature_Statics::_Script_AdvancedSessions_eventBlueprintFindFriendSessionDelegate_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00130000, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintFindFriendSessionDelegate__DelegateSignature_Statics::Function_MetaDataParams), Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintFindFriendSessionDelegate__DelegateSignature_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FDelegateFunctionParams Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintFindFriendSessionDelegate__DelegateSignature_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UPackage__Script_AdvancedSessions, nullptr, "BlueprintFindFriendSessionDelegate__DelegateSignature", Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintFindFriendSessionDelegate__DelegateSignature_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintFindFriendSessionDelegate__DelegateSignature_Statics::PropPointers), sizeof(Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintFindFriendSessionDelegate__DelegateSignature_Statics::_Script_AdvancedSessions_eventBlueprintFindFriendSessionDelegate_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00530000, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintFindFriendSessionDelegate__DelegateSignature_Statics::Function_MetaDataParams), Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintFindFriendSessionDelegate__DelegateSignature_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintFindFriendSessionDelegate__DelegateSignature_Statics::_Script_AdvancedSessions_eventBlueprintFindFriendSessionDelegate_Parms) < MAX_uint16);
 UFunction* Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintFindFriendSessionDelegate__DelegateSignature()
 {
 	static UFunction* ReturnFunction = nullptr;
 	if (!ReturnFunction)
 	{
-		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintFindFriendSessionDelegate__DelegateSignature_Statics::FuncParams);
+		UECodeGen_Private::ConstructUDelegateFunction(&ReturnFunction, Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintFindFriendSessionDelegate__DelegateSignature_Statics::FuncParams);
 	}
 	return ReturnFunction;
 }
@@ -71,9 +73,9 @@ void FBlueprintFindFriendSessionDelegate_DelegateWrapper(const FMulticastScriptD
 	Parms.SessionInfo=SessionInfo;
 	BlueprintFindFriendSessionDelegate.ProcessMulticastDelegate<UObject>(&Parms);
 }
-// End Delegate FBlueprintFindFriendSessionDelegate
+// ********** End Delegate FBlueprintFindFriendSessionDelegate *************************************
 
-// Begin Class UFindFriendSessionCallbackProxy Function FindFriendSession
+// ********** Begin Class UFindFriendSessionCallbackProxy Function FindFriendSession ***************
 struct Z_Construct_UFunction_UFindFriendSessionCallbackProxy_FindFriendSession_Statics
 {
 	struct FindFriendSessionCallbackProxy_eventFindFriendSession_Parms
@@ -109,7 +111,7 @@ struct Z_Construct_UFunction_UFindFriendSessionCallbackProxy_FindFriendSession_S
 };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UFindFriendSessionCallbackProxy_FindFriendSession_Statics::NewProp_WorldContextObject = { "WorldContextObject", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FindFriendSessionCallbackProxy_eventFindFriendSession_Parms, WorldContextObject), Z_Construct_UClass_UObject_NoRegister, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UFindFriendSessionCallbackProxy_FindFriendSession_Statics::NewProp_PlayerController = { "PlayerController", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FindFriendSessionCallbackProxy_eventFindFriendSession_Parms, PlayerController), Z_Construct_UClass_APlayerController_NoRegister, METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UFindFriendSessionCallbackProxy_FindFriendSession_Statics::NewProp_FriendUniqueNetId = { "FriendUniqueNetId", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FindFriendSessionCallbackProxy_eventFindFriendSession_Parms, FriendUniqueNetId), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_FriendUniqueNetId_MetaData), NewProp_FriendUniqueNetId_MetaData) }; // 700456651
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UFindFriendSessionCallbackProxy_FindFriendSession_Statics::NewProp_FriendUniqueNetId = { "FriendUniqueNetId", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FindFriendSessionCallbackProxy_eventFindFriendSession_Parms, FriendUniqueNetId), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_FriendUniqueNetId_MetaData), NewProp_FriendUniqueNetId_MetaData) }; // 2620465461
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UFindFriendSessionCallbackProxy_FindFriendSession_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FindFriendSessionCallbackProxy_eventFindFriendSession_Parms, ReturnValue), Z_Construct_UClass_UFindFriendSessionCallbackProxy_NoRegister, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UFindFriendSessionCallbackProxy_FindFriendSession_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UFindFriendSessionCallbackProxy_FindFriendSession_Statics::NewProp_WorldContextObject,
@@ -118,7 +120,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UFindF
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UFindFriendSessionCallbackProxy_FindFriendSession_Statics::NewProp_ReturnValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UFindFriendSessionCallbackProxy_FindFriendSession_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UFindFriendSessionCallbackProxy_FindFriendSession_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UFindFriendSessionCallbackProxy, nullptr, "FindFriendSession", nullptr, nullptr, Z_Construct_UFunction_UFindFriendSessionCallbackProxy_FindFriendSession_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UFindFriendSessionCallbackProxy_FindFriendSession_Statics::PropPointers), sizeof(Z_Construct_UFunction_UFindFriendSessionCallbackProxy_FindFriendSession_Statics::FindFriendSessionCallbackProxy_eventFindFriendSession_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UFindFriendSessionCallbackProxy_FindFriendSession_Statics::Function_MetaDataParams), Z_Construct_UFunction_UFindFriendSessionCallbackProxy_FindFriendSession_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UFindFriendSessionCallbackProxy_FindFriendSession_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UFindFriendSessionCallbackProxy, nullptr, "FindFriendSession", Z_Construct_UFunction_UFindFriendSessionCallbackProxy_FindFriendSession_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UFindFriendSessionCallbackProxy_FindFriendSession_Statics::PropPointers), sizeof(Z_Construct_UFunction_UFindFriendSessionCallbackProxy_FindFriendSession_Statics::FindFriendSessionCallbackProxy_eventFindFriendSession_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UFindFriendSessionCallbackProxy_FindFriendSession_Statics::Function_MetaDataParams), Z_Construct_UFunction_UFindFriendSessionCallbackProxy_FindFriendSession_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UFindFriendSessionCallbackProxy_FindFriendSession_Statics::FindFriendSessionCallbackProxy_eventFindFriendSession_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UFindFriendSessionCallbackProxy_FindFriendSession()
 {
@@ -139,9 +141,9 @@ DEFINE_FUNCTION(UFindFriendSessionCallbackProxy::execFindFriendSession)
 	*(UFindFriendSessionCallbackProxy**)Z_Param__Result=UFindFriendSessionCallbackProxy::FindFriendSession(Z_Param_WorldContextObject,Z_Param_PlayerController,Z_Param_Out_FriendUniqueNetId);
 	P_NATIVE_END;
 }
-// End Class UFindFriendSessionCallbackProxy Function FindFriendSession
+// ********** End Class UFindFriendSessionCallbackProxy Function FindFriendSession *****************
 
-// Begin Class UFindFriendSessionCallbackProxy
+// ********** Begin Class UFindFriendSessionCallbackProxy ******************************************
 void UFindFriendSessionCallbackProxy::StaticRegisterNativesUFindFriendSessionCallbackProxy()
 {
 	UClass* Class = UFindFriendSessionCallbackProxy::StaticClass();
@@ -150,10 +152,34 @@ void UFindFriendSessionCallbackProxy::StaticRegisterNativesUFindFriendSessionCal
 	};
 	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 }
-IMPLEMENT_CLASS_NO_AUTO_REGISTRATION(UFindFriendSessionCallbackProxy);
+FClassRegistrationInfo Z_Registration_Info_UClass_UFindFriendSessionCallbackProxy;
+UClass* UFindFriendSessionCallbackProxy::GetPrivateStaticClass()
+{
+	using TClass = UFindFriendSessionCallbackProxy;
+	if (!Z_Registration_Info_UClass_UFindFriendSessionCallbackProxy.InnerSingleton)
+	{
+		GetPrivateStaticClassBody(
+			StaticPackage(),
+			TEXT("FindFriendSessionCallbackProxy"),
+			Z_Registration_Info_UClass_UFindFriendSessionCallbackProxy.InnerSingleton,
+			StaticRegisterNativesUFindFriendSessionCallbackProxy,
+			sizeof(TClass),
+			alignof(TClass),
+			TClass::StaticClassFlags,
+			TClass::StaticClassCastFlags(),
+			TClass::StaticConfigName(),
+			(UClass::ClassConstructorType)InternalConstructor<TClass>,
+			(UClass::ClassVTableHelperCtorCallerType)InternalVTableHelperCtorCaller<TClass>,
+			UOBJECT_CPPCLASS_STATICFUNCTIONS_FORCLASS(TClass),
+			&TClass::Super::StaticClass,
+			&TClass::WithinClass::StaticClass
+		);
+	}
+	return Z_Registration_Info_UClass_UFindFriendSessionCallbackProxy.InnerSingleton;
+}
 UClass* Z_Construct_UClass_UFindFriendSessionCallbackProxy_NoRegister()
 {
-	return UFindFriendSessionCallbackProxy::StaticClass();
+	return UFindFriendSessionCallbackProxy::GetPrivateStaticClass();
 }
 struct Z_Construct_UClass_UFindFriendSessionCallbackProxy_Statics
 {
@@ -186,7 +212,7 @@ struct Z_Construct_UClass_UFindFriendSessionCallbackProxy_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_UFindFriendSessionCallbackProxy_FindFriendSession, "FindFriendSession" }, // 2429463939
+		{ &Z_Construct_UFunction_UFindFriendSessionCallbackProxy_FindFriendSession, "FindFriendSession" }, // 1729635440
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -194,8 +220,8 @@ struct Z_Construct_UClass_UFindFriendSessionCallbackProxy_Statics
 	};
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
-const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UFindFriendSessionCallbackProxy_Statics::NewProp_OnSuccess = { "OnSuccess", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UFindFriendSessionCallbackProxy, OnSuccess), Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintFindFriendSessionDelegate__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnSuccess_MetaData), NewProp_OnSuccess_MetaData) }; // 269219830
-const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UFindFriendSessionCallbackProxy_Statics::NewProp_OnFailure = { "OnFailure", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UFindFriendSessionCallbackProxy, OnFailure), Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintFindFriendSessionDelegate__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnFailure_MetaData), NewProp_OnFailure_MetaData) }; // 269219830
+const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UFindFriendSessionCallbackProxy_Statics::NewProp_OnSuccess = { "OnSuccess", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UFindFriendSessionCallbackProxy, OnSuccess), Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintFindFriendSessionDelegate__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnSuccess_MetaData), NewProp_OnSuccess_MetaData) }; // 2817942467
+const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UFindFriendSessionCallbackProxy_Statics::NewProp_OnFailure = { "OnFailure", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UFindFriendSessionCallbackProxy, OnFailure), Z_Construct_UDelegateFunction_AdvancedSessions_BlueprintFindFriendSessionDelegate__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnFailure_MetaData), NewProp_OnFailure_MetaData) }; // 2817942467
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UFindFriendSessionCallbackProxy_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UFindFriendSessionCallbackProxy_Statics::NewProp_OnSuccess,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UFindFriendSessionCallbackProxy_Statics::NewProp_OnFailure,
@@ -229,24 +255,21 @@ UClass* Z_Construct_UClass_UFindFriendSessionCallbackProxy()
 	}
 	return Z_Registration_Info_UClass_UFindFriendSessionCallbackProxy.OuterSingleton;
 }
-template<> ADVANCEDSESSIONS_API UClass* StaticClass<UFindFriendSessionCallbackProxy>()
-{
-	return UFindFriendSessionCallbackProxy::StaticClass();
-}
 DEFINE_VTABLE_PTR_HELPER_CTOR(UFindFriendSessionCallbackProxy);
 UFindFriendSessionCallbackProxy::~UFindFriendSessionCallbackProxy() {}
-// End Class UFindFriendSessionCallbackProxy
+// ********** End Class UFindFriendSessionCallbackProxy ********************************************
 
-// Begin Registration
-struct Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_FindFriendSessionCallbackProxy_h_Statics
+// ********** Begin Registration *******************************************************************
+struct Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_FindFriendSessionCallbackProxy_h__Script_AdvancedSessions_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UFindFriendSessionCallbackProxy, UFindFriendSessionCallbackProxy::StaticClass, TEXT("UFindFriendSessionCallbackProxy"), &Z_Registration_Info_UClass_UFindFriendSessionCallbackProxy, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UFindFriendSessionCallbackProxy), 2095461194U) },
+		{ Z_Construct_UClass_UFindFriendSessionCallbackProxy, UFindFriendSessionCallbackProxy::StaticClass, TEXT("UFindFriendSessionCallbackProxy"), &Z_Registration_Info_UClass_UFindFriendSessionCallbackProxy, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UFindFriendSessionCallbackProxy), 2082174673U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_FindFriendSessionCallbackProxy_h_1365403343(TEXT("/Script/AdvancedSessions"),
-	Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_FindFriendSessionCallbackProxy_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_FindFriendSessionCallbackProxy_h_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_FindFriendSessionCallbackProxy_h__Script_AdvancedSessions_4238367791(TEXT("/Script/AdvancedSessions"),
+	Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_FindFriendSessionCallbackProxy_h__Script_AdvancedSessions_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_FindFriendSessionCallbackProxy_h__Script_AdvancedSessions_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
-// End Registration
+// ********** End Registration *********************************************************************
+
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

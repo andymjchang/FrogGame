@@ -1,17 +1,17 @@
-"F:\Unreal\Frog\Plugins\AdvancedSessions\Intermediate\Build\Win64\x64\UnrealEditor\Development\AdvancedSessions\Module.AdvancedSessions.2.cpp"
-/FI"F:\Unreal\Frog\Intermediate\Build\Win64\x64\FrogEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h"
-/FI"F:\Unreal\Frog\Plugins\AdvancedSessions\Intermediate\Build\Win64\x64\UnrealEditor\Development\AdvancedSessions\Definitions.AdvancedSessions.h"
-/Yu"F:\Unreal\Frog\Intermediate\Build\Win64\x64\FrogEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h"
-/Fp"F:\Unreal\Frog\Intermediate\Build\Win64\x64\FrogEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h.pch"
-/Fo"F:\Unreal\Frog\Plugins\AdvancedSessions\Intermediate\Build\Win64\x64\UnrealEditor\Development\AdvancedSessions\Module.AdvancedSessions.2.cpp.obj"
-/experimental:log "F:\Unreal\Frog\Plugins\AdvancedSessions\Intermediate\Build\Win64\x64\UnrealEditor\Development\AdvancedSessions\Module.AdvancedSessions.2.cpp.sarif"
-/sourceDependencies "F:\Unreal\Frog\Plugins\AdvancedSessions\Intermediate\Build\Win64\x64\UnrealEditor\Development\AdvancedSessions\Module.AdvancedSessions.2.cpp.dep.json"
-@"F:\Unreal\Frog\Plugins\AdvancedSessions\Intermediate\Build\Win64\x64\UnrealEditor\Development\AdvancedSessions\AdvancedSessions.Shared.rsp"
-/d2ssa-cfg-question-
+"C:/Users/maxyu/Documents/Frog/Plugins/AdvancedSessions/Intermediate/Build/Win64/x64/UnrealEditor/Development/AdvancedSessions/Module.AdvancedSessions.2.cpp"
+@"C:/Users/maxyu/Documents/Frog/Plugins/AdvancedSessions/Intermediate/Build/Win64/x64/UnrealEditor/Development/AdvancedSessions/AdvancedSessions.Shared.rsp"
+/FI"C:/Users/maxyu/Documents/Frog/Intermediate/Build/Win64/x64/FrogEditor/Development/UnrealEd/SharedPCH.UnrealEd.Project.ValApi.ValExpApi.Cpp20.h"
+/FI"C:/Users/maxyu/Documents/Frog/Plugins/AdvancedSessions/Intermediate/Build/Win64/x64/UnrealEditor/Development/AdvancedSessions/Definitions.AdvancedSessions.h"
+/Yu"C:/Users/maxyu/Documents/Frog/Intermediate/Build/Win64/x64/FrogEditor/Development/UnrealEd/SharedPCH.UnrealEd.Project.ValApi.ValExpApi.Cpp20.h"
+/Fp"C:/Users/maxyu/Documents/Frog/Intermediate/Build/Win64/x64/FrogEditor/Development/UnrealEd/SharedPCH.UnrealEd.Project.ValApi.ValExpApi.Cpp20.h.pch"
+/Fo"C:/Users/maxyu/Documents/Frog/Plugins/AdvancedSessions/Intermediate/Build/Win64/x64/UnrealEditor/Development/AdvancedSessions/Module.AdvancedSessions.2.cpp.obj"
+/experimental:log "C:/Users/maxyu/Documents/Frog/Plugins/AdvancedSessions/Intermediate/Build/Win64/x64/UnrealEditor/Development/AdvancedSessions/Module.AdvancedSessions.2.cpp.sarif"
+/sourceDependencies "C:/Users/maxyu/Documents/Frog/Plugins/AdvancedSessions/Intermediate/Build/Win64/x64/UnrealEditor/Development/AdvancedSessions/Module.AdvancedSessions.2.cpp.dep.json"
 /Zc:inline
 /nologo
 /Oi
 /FC
+/diagnostics:caret
 /c
 /Gw
 /Gy
@@ -39,15 +39,14 @@
 /fp:fast
 /Zo
 /Zp8
+/W4
 /we4456
 /we4458
 /we4459
-/we4668
 /wd4244
 /wd4838
 /TP
 /GR-
-/W4
 /std:c++20
 /Zc:preprocessor
 /wd5054

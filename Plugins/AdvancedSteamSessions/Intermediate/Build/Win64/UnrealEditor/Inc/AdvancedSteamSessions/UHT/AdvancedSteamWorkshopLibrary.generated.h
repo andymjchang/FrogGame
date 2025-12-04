@@ -5,75 +5,87 @@
 ===========================================================================*/
 
 // IWYU pragma: private, include "AdvancedSteamWorkshopLibrary.h"
-#include "UObject/ObjectMacros.h"
-#include "UObject/ScriptMacros.h"
 
-PRAGMA_DISABLE_DEPRECATION_WARNINGS
-struct FBPSteamWorkshopID;
 #ifdef ADVANCEDSTEAMSESSIONS_AdvancedSteamWorkshopLibrary_generated_h
 #error "AdvancedSteamWorkshopLibrary.generated.h already included, missing '#pragma once' in AdvancedSteamWorkshopLibrary.h"
 #endif
 #define ADVANCEDSTEAMSESSIONS_AdvancedSteamWorkshopLibrary_generated_h
 
-#define FID_Unreal_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamWorkshopLibrary_h_63_GENERATED_BODY \
+#include "UObject/ObjectMacros.h"
+#include "UObject/ScriptMacros.h"
+
+PRAGMA_DISABLE_DEPRECATION_WARNINGS
+
+struct FBPSteamWorkshopID;
+
+// ********** Begin ScriptStruct FBPSteamWorkshopID ************************************************
+#define FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamWorkshopLibrary_h_63_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FBPSteamWorkshopID_Statics; \
 	ADVANCEDSTEAMSESSIONS_API static class UScriptStruct* StaticStruct();
 
 
-template<> ADVANCEDSTEAMSESSIONS_API UScriptStruct* StaticStruct<struct FBPSteamWorkshopID>();
+struct FBPSteamWorkshopID;
+// ********** End ScriptStruct FBPSteamWorkshopID **************************************************
 
-#define FID_Unreal_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamWorkshopLibrary_h_208_GENERATED_BODY \
+// ********** Begin ScriptStruct FBPSteamWorkshopItemDetails ***************************************
+#define FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamWorkshopLibrary_h_208_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FBPSteamWorkshopItemDetails_Statics; \
 	ADVANCEDSTEAMSESSIONS_API static class UScriptStruct* StaticStruct();
 
 
-template<> ADVANCEDSTEAMSESSIONS_API UScriptStruct* StaticStruct<struct FBPSteamWorkshopItemDetails>();
+struct FBPSteamWorkshopItemDetails;
+// ********** End ScriptStruct FBPSteamWorkshopItemDetails *****************************************
 
-#define FID_Unreal_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamWorkshopLibrary_h_339_RPC_WRAPPERS_NO_PURE_DECLS \
+// ********** Begin Class UAdvancedSteamWorkshopLibrary ********************************************
+#define FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamWorkshopLibrary_h_339_RPC_WRAPPERS_NO_PURE_DECLS \
 	DECLARE_FUNCTION(execGetNumSubscribedWorkshopItems); \
 	DECLARE_FUNCTION(execGetSubscribedWorkshopItems);
 
 
-#define FID_Unreal_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamWorkshopLibrary_h_339_INCLASS_NO_PURE_DECLS \
+ADVANCEDSTEAMSESSIONS_API UClass* Z_Construct_UClass_UAdvancedSteamWorkshopLibrary_NoRegister();
+
+#define FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamWorkshopLibrary_h_339_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUAdvancedSteamWorkshopLibrary(); \
 	friend struct Z_Construct_UClass_UAdvancedSteamWorkshopLibrary_Statics; \
+	static UClass* GetPrivateStaticClass(); \
+	friend ADVANCEDSTEAMSESSIONS_API UClass* Z_Construct_UClass_UAdvancedSteamWorkshopLibrary_NoRegister(); \
 public: \
-	DECLARE_CLASS(UAdvancedSteamWorkshopLibrary, UBlueprintFunctionLibrary, COMPILED_IN_FLAGS(0), CASTCLASS_None, TEXT("/Script/AdvancedSteamSessions"), NO_API) \
+	DECLARE_CLASS2(UAdvancedSteamWorkshopLibrary, UBlueprintFunctionLibrary, COMPILED_IN_FLAGS(0), CASTCLASS_None, TEXT("/Script/AdvancedSteamSessions"), Z_Construct_UClass_UAdvancedSteamWorkshopLibrary_NoRegister) \
 	DECLARE_SERIALIZER(UAdvancedSteamWorkshopLibrary)
 
 
-#define FID_Unreal_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamWorkshopLibrary_h_339_ENHANCED_CONSTRUCTORS \
+#define FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamWorkshopLibrary_h_339_ENHANCED_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API UAdvancedSteamWorkshopLibrary(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
-private: \
-	/** Private move- and copy-constructors, should never be used */ \
-	UAdvancedSteamWorkshopLibrary(UAdvancedSteamWorkshopLibrary&&); \
-	UAdvancedSteamWorkshopLibrary(const UAdvancedSteamWorkshopLibrary&); \
-public: \
+	/** Deleted move- and copy-constructors, should never be used */ \
+	UAdvancedSteamWorkshopLibrary(UAdvancedSteamWorkshopLibrary&&) = delete; \
+	UAdvancedSteamWorkshopLibrary(const UAdvancedSteamWorkshopLibrary&) = delete; \
 	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, UAdvancedSteamWorkshopLibrary); \
 	DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UAdvancedSteamWorkshopLibrary); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UAdvancedSteamWorkshopLibrary) \
 	NO_API virtual ~UAdvancedSteamWorkshopLibrary();
 
 
-#define FID_Unreal_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamWorkshopLibrary_h_336_PROLOG
-#define FID_Unreal_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamWorkshopLibrary_h_339_GENERATED_BODY \
+#define FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamWorkshopLibrary_h_336_PROLOG
+#define FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamWorkshopLibrary_h_339_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Unreal_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamWorkshopLibrary_h_339_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_Unreal_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamWorkshopLibrary_h_339_INCLASS_NO_PURE_DECLS \
-	FID_Unreal_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamWorkshopLibrary_h_339_ENHANCED_CONSTRUCTORS \
+	FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamWorkshopLibrary_h_339_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamWorkshopLibrary_h_339_INCLASS_NO_PURE_DECLS \
+	FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamWorkshopLibrary_h_339_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-template<> ADVANCEDSTEAMSESSIONS_API UClass* StaticClass<class UAdvancedSteamWorkshopLibrary>();
+class UAdvancedSteamWorkshopLibrary;
+
+// ********** End Class UAdvancedSteamWorkshopLibrary **********************************************
 
 #undef CURRENT_FILE_ID
-#define CURRENT_FILE_ID FID_Unreal_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamWorkshopLibrary_h
+#define CURRENT_FILE_ID FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSteamSessions_Source_AdvancedSteamSessions_Classes_AdvancedSteamWorkshopLibrary_h
 
-
+// ********** Begin Enum FBPSteamResult ************************************************************
 #define FOREACH_ENUM_FBPSTEAMRESULT(op) \
 	op(FBPSteamResult::K_EResultInvalid) \
 	op(FBPSteamResult::k_EResultOK) \
@@ -170,7 +182,9 @@ template<> ADVANCEDSTEAMSESSIONS_API UClass* StaticClass<class UAdvancedSteamWor
 enum class FBPSteamResult : uint8;
 template<> struct TIsUEnumClass<FBPSteamResult> { enum { Value = true }; };
 template<> ADVANCEDSTEAMSESSIONS_API UEnum* StaticEnum<FBPSteamResult>();
+// ********** End Enum FBPSteamResult **************************************************************
 
+// ********** Begin Enum FBPWorkshopFileType *******************************************************
 #define FOREACH_ENUM_FBPWORKSHOPFILETYPE(op) \
 	op(FBPWorkshopFileType::k_EWorkshopFileTypeCommunity) \
 	op(FBPWorkshopFileType::k_EWorkshopFileTypeMicrotransaction) \
@@ -192,5 +206,6 @@ template<> ADVANCEDSTEAMSESSIONS_API UEnum* StaticEnum<FBPSteamResult>();
 enum class FBPWorkshopFileType : uint8;
 template<> struct TIsUEnumClass<FBPWorkshopFileType> { enum { Value = true }; };
 template<> ADVANCEDSTEAMSESSIONS_API UEnum* StaticEnum<FBPWorkshopFileType>();
+// ********** End Enum FBPWorkshopFileType *********************************************************
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

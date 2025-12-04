@@ -7,9 +7,9 @@
 #pragma once
 
 
-#include "AdvancedSteamSessions/Classes/AdvancedSteamFriendsLibrary.h"
-#include "AdvancedSteamSessions/Classes/AdvancedSteamWorkshopLibrary.h"
-#include "AdvancedSteamSessions/Classes/SteamNotificationsSubsystem.h"
-#include "AdvancedSteamSessions/Classes/SteamRequestGroupOfficersCallbackProxy.h"
-#include "AdvancedSteamSessions/Classes/SteamWSRequestUGCDetailsCallbackProxy.h"
+#include "AdvancedSteamFriendsLibrary.h"
+#include "AdvancedSteamWorkshopLibrary.h"
+#include "SteamNotificationsSubsystem.h"
+#include "SteamRequestGroupOfficersCallbackProxy.h"
+#include "SteamWSRequestUGCDetailsCallbackProxy.h"
 

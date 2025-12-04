@@ -5,11 +5,13 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#include "AdvancedSessions/Classes/BlueprintDataDefinitions.h"
+#include "BlueprintDataDefinitions.h"
+
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+
 void EmptyLinkFunctionForGeneratedCodeBlueprintDataDefinitions() {}
 
-// Begin Cross Module References
+// ********** Begin Cross Module References ********************************************************
 ADVANCEDSESSIONS_API UEnum* Z_Construct_UEnum_AdvancedSessions_EBlueprintAsyncResultSwitch();
 ADVANCEDSESSIONS_API UEnum* Z_Construct_UEnum_AdvancedSessions_EBlueprintResultSwitch();
 ADVANCEDSESSIONS_API UEnum* Z_Construct_UEnum_AdvancedSessions_EBPLoginStatus();
@@ -28,9 +30,9 @@ ADVANCEDSESSIONS_API UScriptStruct* Z_Construct_UScriptStruct_FBPUserOnlineAccou
 ADVANCEDSESSIONS_API UScriptStruct* Z_Construct_UScriptStruct_FSessionPropertyKeyPair();
 ADVANCEDSESSIONS_API UScriptStruct* Z_Construct_UScriptStruct_FSessionsSearchSetting();
 UPackage* Z_Construct_UPackage__Script_AdvancedSessions();
-// End Cross Module References
+// ********** End Cross Module References **********************************************************
 
-// Begin Enum EBPUserPrivileges
+// ********** Begin Enum EBPUserPrivileges *********************************************************
 static FEnumRegistrationInfo Z_Registration_Info_UEnum_EBPUserPrivileges;
 static UEnum* EBPUserPrivileges_StaticEnum()
 {
@@ -92,9 +94,9 @@ UEnum* Z_Construct_UEnum_AdvancedSessions_EBPUserPrivileges()
 	}
 	return Z_Registration_Info_UEnum_EBPUserPrivileges.InnerSingleton;
 }
-// End Enum EBPUserPrivileges
+// ********** End Enum EBPUserPrivileges ***********************************************************
 
-// Begin Enum EBPLoginStatus
+// ********** Begin Enum EBPLoginStatus ************************************************************
 static FEnumRegistrationInfo Z_Registration_Info_UEnum_EBPLoginStatus;
 static UEnum* EBPLoginStatus_StaticEnum()
 {
@@ -152,21 +154,17 @@ UEnum* Z_Construct_UEnum_AdvancedSessions_EBPLoginStatus()
 	}
 	return Z_Registration_Info_UEnum_EBPLoginStatus.InnerSingleton;
 }
-// End Enum EBPLoginStatus
+// ********** End Enum EBPLoginStatus **************************************************************
 
-// Begin ScriptStruct FBPUserOnlineAccount
-static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_BPUserOnlineAccount;
+// ********** Begin ScriptStruct FBPUserOnlineAccount **********************************************
+static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_FBPUserOnlineAccount;
 class UScriptStruct* FBPUserOnlineAccount::StaticStruct()
 {
-	if (!Z_Registration_Info_UScriptStruct_BPUserOnlineAccount.OuterSingleton)
+	if (!Z_Registration_Info_UScriptStruct_FBPUserOnlineAccount.OuterSingleton)
 	{
-		Z_Registration_Info_UScriptStruct_BPUserOnlineAccount.OuterSingleton = GetStaticStruct(Z_Construct_UScriptStruct_FBPUserOnlineAccount, (UObject*)Z_Construct_UPackage__Script_AdvancedSessions(), TEXT("BPUserOnlineAccount"));
+		Z_Registration_Info_UScriptStruct_FBPUserOnlineAccount.OuterSingleton = GetStaticStruct(Z_Construct_UScriptStruct_FBPUserOnlineAccount, (UObject*)Z_Construct_UPackage__Script_AdvancedSessions(), TEXT("BPUserOnlineAccount"));
 	}
-	return Z_Registration_Info_UScriptStruct_BPUserOnlineAccount.OuterSingleton;
-}
-template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FBPUserOnlineAccount>()
-{
-	return FBPUserOnlineAccount::StaticStruct();
+	return Z_Registration_Info_UScriptStruct_FBPUserOnlineAccount.OuterSingleton;
 }
 struct Z_Construct_UScriptStruct_FBPUserOnlineAccount_Statics
 {
@@ -197,15 +195,15 @@ const UECodeGen_Private::FStructParams Z_Construct_UScriptStruct_FBPUserOnlineAc
 };
 UScriptStruct* Z_Construct_UScriptStruct_FBPUserOnlineAccount()
 {
-	if (!Z_Registration_Info_UScriptStruct_BPUserOnlineAccount.InnerSingleton)
+	if (!Z_Registration_Info_UScriptStruct_FBPUserOnlineAccount.InnerSingleton)
 	{
-		UECodeGen_Private::ConstructUScriptStruct(Z_Registration_Info_UScriptStruct_BPUserOnlineAccount.InnerSingleton, Z_Construct_UScriptStruct_FBPUserOnlineAccount_Statics::StructParams);
+		UECodeGen_Private::ConstructUScriptStruct(Z_Registration_Info_UScriptStruct_FBPUserOnlineAccount.InnerSingleton, Z_Construct_UScriptStruct_FBPUserOnlineAccount_Statics::StructParams);
 	}
-	return Z_Registration_Info_UScriptStruct_BPUserOnlineAccount.InnerSingleton;
+	return Z_Registration_Info_UScriptStruct_FBPUserOnlineAccount.InnerSingleton;
 }
-// End ScriptStruct FBPUserOnlineAccount
+// ********** End ScriptStruct FBPUserOnlineAccount ************************************************
 
-// Begin Enum ESessionSettingSearchResult
+// ********** Begin Enum ESessionSettingSearchResult ***********************************************
 static FEnumRegistrationInfo Z_Registration_Info_UEnum_ESessionSettingSearchResult;
 static UEnum* ESessionSettingSearchResult_StaticEnum()
 {
@@ -262,9 +260,9 @@ UEnum* Z_Construct_UEnum_AdvancedSessions_ESessionSettingSearchResult()
 	}
 	return Z_Registration_Info_UEnum_ESessionSettingSearchResult.InnerSingleton;
 }
-// End Enum ESessionSettingSearchResult
+// ********** End Enum ESessionSettingSearchResult *************************************************
 
-// Begin Enum EBlueprintResultSwitch
+// ********** Begin Enum EBlueprintResultSwitch ****************************************************
 static FEnumRegistrationInfo Z_Registration_Info_UEnum_EBlueprintResultSwitch;
 static UEnum* EBlueprintResultSwitch_StaticEnum()
 {
@@ -323,9 +321,9 @@ UEnum* Z_Construct_UEnum_AdvancedSessions_EBlueprintResultSwitch()
 	}
 	return Z_Registration_Info_UEnum_EBlueprintResultSwitch.InnerSingleton;
 }
-// End Enum EBlueprintResultSwitch
+// ********** End Enum EBlueprintResultSwitch ******************************************************
 
-// Begin Enum EBlueprintAsyncResultSwitch
+// ********** Begin Enum EBlueprintAsyncResultSwitch ***********************************************
 static FEnumRegistrationInfo Z_Registration_Info_UEnum_EBlueprintAsyncResultSwitch;
 static UEnum* EBlueprintAsyncResultSwitch_StaticEnum()
 {
@@ -388,9 +386,9 @@ UEnum* Z_Construct_UEnum_AdvancedSessions_EBlueprintAsyncResultSwitch()
 	}
 	return Z_Registration_Info_UEnum_EBlueprintAsyncResultSwitch.InnerSingleton;
 }
-// End Enum EBlueprintAsyncResultSwitch
+// ********** End Enum EBlueprintAsyncResultSwitch *************************************************
 
-// Begin Enum EBPServerPresenceSearchType
+// ********** Begin Enum EBPServerPresenceSearchType ***********************************************
 static FEnumRegistrationInfo Z_Registration_Info_UEnum_EBPServerPresenceSearchType;
 static UEnum* EBPServerPresenceSearchType_StaticEnum()
 {
@@ -448,9 +446,9 @@ UEnum* Z_Construct_UEnum_AdvancedSessions_EBPServerPresenceSearchType()
 	}
 	return Z_Registration_Info_UEnum_EBPServerPresenceSearchType.InnerSingleton;
 }
-// End Enum EBPServerPresenceSearchType
+// ********** End Enum EBPServerPresenceSearchType *************************************************
 
-// Begin Enum EBPOnlinePresenceState
+// ********** Begin Enum EBPOnlinePresenceState ****************************************************
 static FEnumRegistrationInfo Z_Registration_Info_UEnum_EBPOnlinePresenceState;
 static UEnum* EBPOnlinePresenceState_StaticEnum()
 {
@@ -514,9 +512,9 @@ UEnum* Z_Construct_UEnum_AdvancedSessions_EBPOnlinePresenceState()
 	}
 	return Z_Registration_Info_UEnum_EBPOnlinePresenceState.InnerSingleton;
 }
-// End Enum EBPOnlinePresenceState
+// ********** End Enum EBPOnlinePresenceState ******************************************************
 
-// Begin Enum EBPOnlineSessionState
+// ********** Begin Enum EBPOnlineSessionState *****************************************************
 static FEnumRegistrationInfo Z_Registration_Info_UEnum_EBPOnlineSessionState;
 static UEnum* EBPOnlineSessionState_StaticEnum()
 {
@@ -594,21 +592,17 @@ UEnum* Z_Construct_UEnum_AdvancedSessions_EBPOnlineSessionState()
 	}
 	return Z_Registration_Info_UEnum_EBPOnlineSessionState.InnerSingleton;
 }
-// End Enum EBPOnlineSessionState
+// ********** End Enum EBPOnlineSessionState *******************************************************
 
-// Begin ScriptStruct FBPUniqueNetId
-static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_BPUniqueNetId;
+// ********** Begin ScriptStruct FBPUniqueNetId ****************************************************
+static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_FBPUniqueNetId;
 class UScriptStruct* FBPUniqueNetId::StaticStruct()
 {
-	if (!Z_Registration_Info_UScriptStruct_BPUniqueNetId.OuterSingleton)
+	if (!Z_Registration_Info_UScriptStruct_FBPUniqueNetId.OuterSingleton)
 	{
-		Z_Registration_Info_UScriptStruct_BPUniqueNetId.OuterSingleton = GetStaticStruct(Z_Construct_UScriptStruct_FBPUniqueNetId, (UObject*)Z_Construct_UPackage__Script_AdvancedSessions(), TEXT("BPUniqueNetId"));
+		Z_Registration_Info_UScriptStruct_FBPUniqueNetId.OuterSingleton = GetStaticStruct(Z_Construct_UScriptStruct_FBPUniqueNetId, (UObject*)Z_Construct_UPackage__Script_AdvancedSessions(), TEXT("BPUniqueNetId"));
 	}
-	return Z_Registration_Info_UScriptStruct_BPUniqueNetId.OuterSingleton;
-}
-template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FBPUniqueNetId>()
-{
-	return FBPUniqueNetId::StaticStruct();
+	return Z_Registration_Info_UScriptStruct_FBPUniqueNetId.OuterSingleton;
 }
 struct Z_Construct_UScriptStruct_FBPUniqueNetId_Statics
 {
@@ -645,27 +639,23 @@ const UECodeGen_Private::FStructParams Z_Construct_UScriptStruct_FBPUniqueNetId_
 };
 UScriptStruct* Z_Construct_UScriptStruct_FBPUniqueNetId()
 {
-	if (!Z_Registration_Info_UScriptStruct_BPUniqueNetId.InnerSingleton)
+	if (!Z_Registration_Info_UScriptStruct_FBPUniqueNetId.InnerSingleton)
 	{
-		UECodeGen_Private::ConstructUScriptStruct(Z_Registration_Info_UScriptStruct_BPUniqueNetId.InnerSingleton, Z_Construct_UScriptStruct_FBPUniqueNetId_Statics::StructParams);
+		UECodeGen_Private::ConstructUScriptStruct(Z_Registration_Info_UScriptStruct_FBPUniqueNetId.InnerSingleton, Z_Construct_UScriptStruct_FBPUniqueNetId_Statics::StructParams);
 	}
-	return Z_Registration_Info_UScriptStruct_BPUniqueNetId.InnerSingleton;
+	return Z_Registration_Info_UScriptStruct_FBPUniqueNetId.InnerSingleton;
 }
-// End ScriptStruct FBPUniqueNetId
+// ********** End ScriptStruct FBPUniqueNetId ******************************************************
 
-// Begin ScriptStruct FBPOnlineUser
-static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_BPOnlineUser;
+// ********** Begin ScriptStruct FBPOnlineUser *****************************************************
+static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_FBPOnlineUser;
 class UScriptStruct* FBPOnlineUser::StaticStruct()
 {
-	if (!Z_Registration_Info_UScriptStruct_BPOnlineUser.OuterSingleton)
+	if (!Z_Registration_Info_UScriptStruct_FBPOnlineUser.OuterSingleton)
 	{
-		Z_Registration_Info_UScriptStruct_BPOnlineUser.OuterSingleton = GetStaticStruct(Z_Construct_UScriptStruct_FBPOnlineUser, (UObject*)Z_Construct_UPackage__Script_AdvancedSessions(), TEXT("BPOnlineUser"));
+		Z_Registration_Info_UScriptStruct_FBPOnlineUser.OuterSingleton = GetStaticStruct(Z_Construct_UScriptStruct_FBPOnlineUser, (UObject*)Z_Construct_UPackage__Script_AdvancedSessions(), TEXT("BPOnlineUser"));
 	}
-	return Z_Registration_Info_UScriptStruct_BPOnlineUser.OuterSingleton;
-}
-template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FBPOnlineUser>()
-{
-	return FBPOnlineUser::StaticStruct();
+	return Z_Registration_Info_UScriptStruct_FBPOnlineUser.OuterSingleton;
 }
 struct Z_Construct_UScriptStruct_FBPOnlineUser_Statics
 {
@@ -697,7 +687,7 @@ struct Z_Construct_UScriptStruct_FBPOnlineUser_Statics
 	}
 	static const UECodeGen_Private::FStructParams StructParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FBPOnlineUser_Statics::NewProp_UniqueNetId = { "UniqueNetId", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FBPOnlineUser, UniqueNetId), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_UniqueNetId_MetaData), NewProp_UniqueNetId_MetaData) }; // 700456651
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FBPOnlineUser_Statics::NewProp_UniqueNetId = { "UniqueNetId", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FBPOnlineUser, UniqueNetId), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_UniqueNetId_MetaData), NewProp_UniqueNetId_MetaData) }; // 2620465461
 const UECodeGen_Private::FStrPropertyParams Z_Construct_UScriptStruct_FBPOnlineUser_Statics::NewProp_DisplayName = { "DisplayName", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FBPOnlineUser, DisplayName), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DisplayName_MetaData), NewProp_DisplayName_MetaData) };
 const UECodeGen_Private::FStrPropertyParams Z_Construct_UScriptStruct_FBPOnlineUser_Statics::NewProp_RealName = { "RealName", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FBPOnlineUser, RealName), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_RealName_MetaData), NewProp_RealName_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UScriptStruct_FBPOnlineUser_Statics::PropPointers[] = {
@@ -721,28 +711,24 @@ const UECodeGen_Private::FStructParams Z_Construct_UScriptStruct_FBPOnlineUser_S
 };
 UScriptStruct* Z_Construct_UScriptStruct_FBPOnlineUser()
 {
-	if (!Z_Registration_Info_UScriptStruct_BPOnlineUser.InnerSingleton)
+	if (!Z_Registration_Info_UScriptStruct_FBPOnlineUser.InnerSingleton)
 	{
-		UECodeGen_Private::ConstructUScriptStruct(Z_Registration_Info_UScriptStruct_BPOnlineUser.InnerSingleton, Z_Construct_UScriptStruct_FBPOnlineUser_Statics::StructParams);
+		UECodeGen_Private::ConstructUScriptStruct(Z_Registration_Info_UScriptStruct_FBPOnlineUser.InnerSingleton, Z_Construct_UScriptStruct_FBPOnlineUser_Statics::StructParams);
 	}
-	return Z_Registration_Info_UScriptStruct_BPOnlineUser.InnerSingleton;
+	return Z_Registration_Info_UScriptStruct_FBPOnlineUser.InnerSingleton;
 }
-// End ScriptStruct FBPOnlineUser
+// ********** End ScriptStruct FBPOnlineUser *******************************************************
 
-// Begin ScriptStruct FBPOnlineRecentPlayer
+// ********** Begin ScriptStruct FBPOnlineRecentPlayer *********************************************
 static_assert(std::is_polymorphic<FBPOnlineRecentPlayer>() == std::is_polymorphic<FBPOnlineUser>(), "USTRUCT FBPOnlineRecentPlayer cannot be polymorphic unless super FBPOnlineUser is polymorphic");
-static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_BPOnlineRecentPlayer;
+static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_FBPOnlineRecentPlayer;
 class UScriptStruct* FBPOnlineRecentPlayer::StaticStruct()
 {
-	if (!Z_Registration_Info_UScriptStruct_BPOnlineRecentPlayer.OuterSingleton)
+	if (!Z_Registration_Info_UScriptStruct_FBPOnlineRecentPlayer.OuterSingleton)
 	{
-		Z_Registration_Info_UScriptStruct_BPOnlineRecentPlayer.OuterSingleton = GetStaticStruct(Z_Construct_UScriptStruct_FBPOnlineRecentPlayer, (UObject*)Z_Construct_UPackage__Script_AdvancedSessions(), TEXT("BPOnlineRecentPlayer"));
+		Z_Registration_Info_UScriptStruct_FBPOnlineRecentPlayer.OuterSingleton = GetStaticStruct(Z_Construct_UScriptStruct_FBPOnlineRecentPlayer, (UObject*)Z_Construct_UPackage__Script_AdvancedSessions(), TEXT("BPOnlineRecentPlayer"));
 	}
-	return Z_Registration_Info_UScriptStruct_BPOnlineRecentPlayer.OuterSingleton;
-}
-template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FBPOnlineRecentPlayer>()
-{
-	return FBPOnlineRecentPlayer::StaticStruct();
+	return Z_Registration_Info_UScriptStruct_FBPOnlineRecentPlayer.OuterSingleton;
 }
 struct Z_Construct_UScriptStruct_FBPOnlineRecentPlayer_Statics
 {
@@ -784,27 +770,23 @@ const UECodeGen_Private::FStructParams Z_Construct_UScriptStruct_FBPOnlineRecent
 };
 UScriptStruct* Z_Construct_UScriptStruct_FBPOnlineRecentPlayer()
 {
-	if (!Z_Registration_Info_UScriptStruct_BPOnlineRecentPlayer.InnerSingleton)
+	if (!Z_Registration_Info_UScriptStruct_FBPOnlineRecentPlayer.InnerSingleton)
 	{
-		UECodeGen_Private::ConstructUScriptStruct(Z_Registration_Info_UScriptStruct_BPOnlineRecentPlayer.InnerSingleton, Z_Construct_UScriptStruct_FBPOnlineRecentPlayer_Statics::StructParams);
+		UECodeGen_Private::ConstructUScriptStruct(Z_Registration_Info_UScriptStruct_FBPOnlineRecentPlayer.InnerSingleton, Z_Construct_UScriptStruct_FBPOnlineRecentPlayer_Statics::StructParams);
 	}
-	return Z_Registration_Info_UScriptStruct_BPOnlineRecentPlayer.InnerSingleton;
+	return Z_Registration_Info_UScriptStruct_FBPOnlineRecentPlayer.InnerSingleton;
 }
-// End ScriptStruct FBPOnlineRecentPlayer
+// ********** End ScriptStruct FBPOnlineRecentPlayer ***********************************************
 
-// Begin ScriptStruct FBPFriendPresenceInfo
-static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_BPFriendPresenceInfo;
+// ********** Begin ScriptStruct FBPFriendPresenceInfo *********************************************
+static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_FBPFriendPresenceInfo;
 class UScriptStruct* FBPFriendPresenceInfo::StaticStruct()
 {
-	if (!Z_Registration_Info_UScriptStruct_BPFriendPresenceInfo.OuterSingleton)
+	if (!Z_Registration_Info_UScriptStruct_FBPFriendPresenceInfo.OuterSingleton)
 	{
-		Z_Registration_Info_UScriptStruct_BPFriendPresenceInfo.OuterSingleton = GetStaticStruct(Z_Construct_UScriptStruct_FBPFriendPresenceInfo, (UObject*)Z_Construct_UPackage__Script_AdvancedSessions(), TEXT("BPFriendPresenceInfo"));
+		Z_Registration_Info_UScriptStruct_FBPFriendPresenceInfo.OuterSingleton = GetStaticStruct(Z_Construct_UScriptStruct_FBPFriendPresenceInfo, (UObject*)Z_Construct_UPackage__Script_AdvancedSessions(), TEXT("BPFriendPresenceInfo"));
 	}
-	return Z_Registration_Info_UScriptStruct_BPFriendPresenceInfo.OuterSingleton;
-}
-template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FBPFriendPresenceInfo>()
-{
-	return FBPFriendPresenceInfo::StaticStruct();
+	return Z_Registration_Info_UScriptStruct_FBPFriendPresenceInfo.OuterSingleton;
 }
 struct Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics
 {
@@ -916,27 +898,23 @@ const UECodeGen_Private::FStructParams Z_Construct_UScriptStruct_FBPFriendPresen
 };
 UScriptStruct* Z_Construct_UScriptStruct_FBPFriendPresenceInfo()
 {
-	if (!Z_Registration_Info_UScriptStruct_BPFriendPresenceInfo.InnerSingleton)
+	if (!Z_Registration_Info_UScriptStruct_FBPFriendPresenceInfo.InnerSingleton)
 	{
-		UECodeGen_Private::ConstructUScriptStruct(Z_Registration_Info_UScriptStruct_BPFriendPresenceInfo.InnerSingleton, Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::StructParams);
+		UECodeGen_Private::ConstructUScriptStruct(Z_Registration_Info_UScriptStruct_FBPFriendPresenceInfo.InnerSingleton, Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::StructParams);
 	}
-	return Z_Registration_Info_UScriptStruct_BPFriendPresenceInfo.InnerSingleton;
+	return Z_Registration_Info_UScriptStruct_FBPFriendPresenceInfo.InnerSingleton;
 }
-// End ScriptStruct FBPFriendPresenceInfo
+// ********** End ScriptStruct FBPFriendPresenceInfo ***********************************************
 
-// Begin ScriptStruct FBPFriendInfo
-static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_BPFriendInfo;
+// ********** Begin ScriptStruct FBPFriendInfo *****************************************************
+static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_FBPFriendInfo;
 class UScriptStruct* FBPFriendInfo::StaticStruct()
 {
-	if (!Z_Registration_Info_UScriptStruct_BPFriendInfo.OuterSingleton)
+	if (!Z_Registration_Info_UScriptStruct_FBPFriendInfo.OuterSingleton)
 	{
-		Z_Registration_Info_UScriptStruct_BPFriendInfo.OuterSingleton = GetStaticStruct(Z_Construct_UScriptStruct_FBPFriendInfo, (UObject*)Z_Construct_UPackage__Script_AdvancedSessions(), TEXT("BPFriendInfo"));
+		Z_Registration_Info_UScriptStruct_FBPFriendInfo.OuterSingleton = GetStaticStruct(Z_Construct_UScriptStruct_FBPFriendInfo, (UObject*)Z_Construct_UPackage__Script_AdvancedSessions(), TEXT("BPFriendInfo"));
 	}
-	return Z_Registration_Info_UScriptStruct_BPFriendInfo.OuterSingleton;
-}
-template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FBPFriendInfo>()
-{
-	return FBPFriendInfo::StaticStruct();
+	return Z_Registration_Info_UScriptStruct_FBPFriendInfo.OuterSingleton;
 }
 struct Z_Construct_UScriptStruct_FBPFriendInfo_Statics
 {
@@ -989,13 +967,13 @@ const UECodeGen_Private::FStrPropertyParams Z_Construct_UScriptStruct_FBPFriendI
 const UECodeGen_Private::FStrPropertyParams Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_RealName = { "RealName", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FBPFriendInfo, RealName), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_RealName_MetaData), NewProp_RealName_MetaData) };
 const UECodeGen_Private::FBytePropertyParams Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_OnlineState_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FEnumPropertyParams Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_OnlineState = { "OnlineState", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FBPFriendInfo, OnlineState), Z_Construct_UEnum_AdvancedSessions_EBPOnlinePresenceState, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnlineState_MetaData), NewProp_OnlineState_MetaData) }; // 1416142724
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_UniqueNetId = { "UniqueNetId", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FBPFriendInfo, UniqueNetId), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_UniqueNetId_MetaData), NewProp_UniqueNetId_MetaData) }; // 700456651
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_UniqueNetId = { "UniqueNetId", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FBPFriendInfo, UniqueNetId), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_UniqueNetId_MetaData), NewProp_UniqueNetId_MetaData) }; // 2620465461
 void Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_bIsPlayingSameGame_SetBit(void* Obj)
 {
 	((FBPFriendInfo*)Obj)->bIsPlayingSameGame = 1;
 }
 const UECodeGen_Private::FBoolPropertyParams Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_bIsPlayingSameGame = { "bIsPlayingSameGame", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(FBPFriendInfo), &Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_bIsPlayingSameGame_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_bIsPlayingSameGame_MetaData), NewProp_bIsPlayingSameGame_MetaData) };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_PresenceInfo = { "PresenceInfo", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FBPFriendInfo, PresenceInfo), Z_Construct_UScriptStruct_FBPFriendPresenceInfo, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PresenceInfo_MetaData), NewProp_PresenceInfo_MetaData) }; // 2227166924
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_PresenceInfo = { "PresenceInfo", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FBPFriendInfo, PresenceInfo), Z_Construct_UScriptStruct_FBPFriendPresenceInfo, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PresenceInfo_MetaData), NewProp_PresenceInfo_MetaData) }; // 478067226
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UScriptStruct_FBPFriendInfo_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_DisplayName,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_RealName,
@@ -1021,15 +999,15 @@ const UECodeGen_Private::FStructParams Z_Construct_UScriptStruct_FBPFriendInfo_S
 };
 UScriptStruct* Z_Construct_UScriptStruct_FBPFriendInfo()
 {
-	if (!Z_Registration_Info_UScriptStruct_BPFriendInfo.InnerSingleton)
+	if (!Z_Registration_Info_UScriptStruct_FBPFriendInfo.InnerSingleton)
 	{
-		UECodeGen_Private::ConstructUScriptStruct(Z_Registration_Info_UScriptStruct_BPFriendInfo.InnerSingleton, Z_Construct_UScriptStruct_FBPFriendInfo_Statics::StructParams);
+		UECodeGen_Private::ConstructUScriptStruct(Z_Registration_Info_UScriptStruct_FBPFriendInfo.InnerSingleton, Z_Construct_UScriptStruct_FBPFriendInfo_Statics::StructParams);
 	}
-	return Z_Registration_Info_UScriptStruct_BPFriendInfo.InnerSingleton;
+	return Z_Registration_Info_UScriptStruct_FBPFriendInfo.InnerSingleton;
 }
-// End ScriptStruct FBPFriendInfo
+// ********** End ScriptStruct FBPFriendInfo *******************************************************
 
-// Begin Enum EOnlineComparisonOpRedux
+// ********** Begin Enum EOnlineComparisonOpRedux **************************************************
 static FEnumRegistrationInfo Z_Registration_Info_UEnum_EOnlineComparisonOpRedux;
 static UEnum* EOnlineComparisonOpRedux_StaticEnum()
 {
@@ -1093,21 +1071,17 @@ UEnum* Z_Construct_UEnum_AdvancedSessions_EOnlineComparisonOpRedux()
 	}
 	return Z_Registration_Info_UEnum_EOnlineComparisonOpRedux.InnerSingleton;
 }
-// End Enum EOnlineComparisonOpRedux
+// ********** End Enum EOnlineComparisonOpRedux ****************************************************
 
-// Begin ScriptStruct FSessionPropertyKeyPair
-static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_SessionPropertyKeyPair;
+// ********** Begin ScriptStruct FSessionPropertyKeyPair *******************************************
+static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_FSessionPropertyKeyPair;
 class UScriptStruct* FSessionPropertyKeyPair::StaticStruct()
 {
-	if (!Z_Registration_Info_UScriptStruct_SessionPropertyKeyPair.OuterSingleton)
+	if (!Z_Registration_Info_UScriptStruct_FSessionPropertyKeyPair.OuterSingleton)
 	{
-		Z_Registration_Info_UScriptStruct_SessionPropertyKeyPair.OuterSingleton = GetStaticStruct(Z_Construct_UScriptStruct_FSessionPropertyKeyPair, (UObject*)Z_Construct_UPackage__Script_AdvancedSessions(), TEXT("SessionPropertyKeyPair"));
+		Z_Registration_Info_UScriptStruct_FSessionPropertyKeyPair.OuterSingleton = GetStaticStruct(Z_Construct_UScriptStruct_FSessionPropertyKeyPair, (UObject*)Z_Construct_UPackage__Script_AdvancedSessions(), TEXT("SessionPropertyKeyPair"));
 	}
-	return Z_Registration_Info_UScriptStruct_SessionPropertyKeyPair.OuterSingleton;
-}
-template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FSessionPropertyKeyPair>()
-{
-	return FSessionPropertyKeyPair::StaticStruct();
+	return Z_Registration_Info_UScriptStruct_FSessionPropertyKeyPair.OuterSingleton;
 }
 struct Z_Construct_UScriptStruct_FSessionPropertyKeyPair_Statics
 {
@@ -1144,27 +1118,23 @@ const UECodeGen_Private::FStructParams Z_Construct_UScriptStruct_FSessionPropert
 };
 UScriptStruct* Z_Construct_UScriptStruct_FSessionPropertyKeyPair()
 {
-	if (!Z_Registration_Info_UScriptStruct_SessionPropertyKeyPair.InnerSingleton)
+	if (!Z_Registration_Info_UScriptStruct_FSessionPropertyKeyPair.InnerSingleton)
 	{
-		UECodeGen_Private::ConstructUScriptStruct(Z_Registration_Info_UScriptStruct_SessionPropertyKeyPair.InnerSingleton, Z_Construct_UScriptStruct_FSessionPropertyKeyPair_Statics::StructParams);
+		UECodeGen_Private::ConstructUScriptStruct(Z_Registration_Info_UScriptStruct_FSessionPropertyKeyPair.InnerSingleton, Z_Construct_UScriptStruct_FSessionPropertyKeyPair_Statics::StructParams);
 	}
-	return Z_Registration_Info_UScriptStruct_SessionPropertyKeyPair.InnerSingleton;
+	return Z_Registration_Info_UScriptStruct_FSessionPropertyKeyPair.InnerSingleton;
 }
-// End ScriptStruct FSessionPropertyKeyPair
+// ********** End ScriptStruct FSessionPropertyKeyPair *********************************************
 
-// Begin ScriptStruct FSessionsSearchSetting
-static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_SessionsSearchSetting;
+// ********** Begin ScriptStruct FSessionsSearchSetting ********************************************
+static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_FSessionsSearchSetting;
 class UScriptStruct* FSessionsSearchSetting::StaticStruct()
 {
-	if (!Z_Registration_Info_UScriptStruct_SessionsSearchSetting.OuterSingleton)
+	if (!Z_Registration_Info_UScriptStruct_FSessionsSearchSetting.OuterSingleton)
 	{
-		Z_Registration_Info_UScriptStruct_SessionsSearchSetting.OuterSingleton = GetStaticStruct(Z_Construct_UScriptStruct_FSessionsSearchSetting, (UObject*)Z_Construct_UPackage__Script_AdvancedSessions(), TEXT("SessionsSearchSetting"));
+		Z_Registration_Info_UScriptStruct_FSessionsSearchSetting.OuterSingleton = GetStaticStruct(Z_Construct_UScriptStruct_FSessionsSearchSetting, (UObject*)Z_Construct_UPackage__Script_AdvancedSessions(), TEXT("SessionsSearchSetting"));
 	}
-	return Z_Registration_Info_UScriptStruct_SessionsSearchSetting.OuterSingleton;
-}
-template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FSessionsSearchSetting>()
-{
-	return FSessionsSearchSetting::StaticStruct();
+	return Z_Registration_Info_UScriptStruct_FSessionsSearchSetting.OuterSingleton;
 }
 struct Z_Construct_UScriptStruct_FSessionsSearchSetting_Statics
 {
@@ -1201,16 +1171,16 @@ const UECodeGen_Private::FStructParams Z_Construct_UScriptStruct_FSessionsSearch
 };
 UScriptStruct* Z_Construct_UScriptStruct_FSessionsSearchSetting()
 {
-	if (!Z_Registration_Info_UScriptStruct_SessionsSearchSetting.InnerSingleton)
+	if (!Z_Registration_Info_UScriptStruct_FSessionsSearchSetting.InnerSingleton)
 	{
-		UECodeGen_Private::ConstructUScriptStruct(Z_Registration_Info_UScriptStruct_SessionsSearchSetting.InnerSingleton, Z_Construct_UScriptStruct_FSessionsSearchSetting_Statics::StructParams);
+		UECodeGen_Private::ConstructUScriptStruct(Z_Registration_Info_UScriptStruct_FSessionsSearchSetting.InnerSingleton, Z_Construct_UScriptStruct_FSessionsSearchSetting_Statics::StructParams);
 	}
-	return Z_Registration_Info_UScriptStruct_SessionsSearchSetting.InnerSingleton;
+	return Z_Registration_Info_UScriptStruct_FSessionsSearchSetting.InnerSingleton;
 }
-// End ScriptStruct FSessionsSearchSetting
+// ********** End ScriptStruct FSessionsSearchSetting **********************************************
 
-// Begin Registration
-struct Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_BlueprintDataDefinitions_h_Statics
+// ********** Begin Registration *******************************************************************
+struct Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_BlueprintDataDefinitions_h__Script_AdvancedSessions_Statics
 {
 	static constexpr FEnumRegisterCompiledInInfo EnumInfo[] = {
 		{ EBPUserPrivileges_StaticEnum, TEXT("EBPUserPrivileges"), &Z_Registration_Info_UEnum_EBPUserPrivileges, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 3561584933U) },
@@ -1224,19 +1194,20 @@ struct Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSessions_Source_Adv
 		{ EOnlineComparisonOpRedux_StaticEnum, TEXT("EOnlineComparisonOpRedux"), &Z_Registration_Info_UEnum_EOnlineComparisonOpRedux, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 4002211731U) },
 	};
 	static constexpr FStructRegisterCompiledInInfo ScriptStructInfo[] = {
-		{ FBPUserOnlineAccount::StaticStruct, Z_Construct_UScriptStruct_FBPUserOnlineAccount_Statics::NewStructOps, TEXT("BPUserOnlineAccount"), &Z_Registration_Info_UScriptStruct_BPUserOnlineAccount, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FBPUserOnlineAccount), 276139420U) },
-		{ FBPUniqueNetId::StaticStruct, Z_Construct_UScriptStruct_FBPUniqueNetId_Statics::NewStructOps, TEXT("BPUniqueNetId"), &Z_Registration_Info_UScriptStruct_BPUniqueNetId, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FBPUniqueNetId), 700456651U) },
-		{ FBPOnlineUser::StaticStruct, Z_Construct_UScriptStruct_FBPOnlineUser_Statics::NewStructOps, TEXT("BPOnlineUser"), &Z_Registration_Info_UScriptStruct_BPOnlineUser, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FBPOnlineUser), 2605093861U) },
-		{ FBPOnlineRecentPlayer::StaticStruct, Z_Construct_UScriptStruct_FBPOnlineRecentPlayer_Statics::NewStructOps, TEXT("BPOnlineRecentPlayer"), &Z_Registration_Info_UScriptStruct_BPOnlineRecentPlayer, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FBPOnlineRecentPlayer), 2416626344U) },
-		{ FBPFriendPresenceInfo::StaticStruct, Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewStructOps, TEXT("BPFriendPresenceInfo"), &Z_Registration_Info_UScriptStruct_BPFriendPresenceInfo, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FBPFriendPresenceInfo), 2227166924U) },
-		{ FBPFriendInfo::StaticStruct, Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewStructOps, TEXT("BPFriendInfo"), &Z_Registration_Info_UScriptStruct_BPFriendInfo, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FBPFriendInfo), 3265087352U) },
-		{ FSessionPropertyKeyPair::StaticStruct, Z_Construct_UScriptStruct_FSessionPropertyKeyPair_Statics::NewStructOps, TEXT("SessionPropertyKeyPair"), &Z_Registration_Info_UScriptStruct_SessionPropertyKeyPair, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FSessionPropertyKeyPair), 304289449U) },
-		{ FSessionsSearchSetting::StaticStruct, Z_Construct_UScriptStruct_FSessionsSearchSetting_Statics::NewStructOps, TEXT("SessionsSearchSetting"), &Z_Registration_Info_UScriptStruct_SessionsSearchSetting, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FSessionsSearchSetting), 4243169235U) },
+		{ FBPUserOnlineAccount::StaticStruct, Z_Construct_UScriptStruct_FBPUserOnlineAccount_Statics::NewStructOps, TEXT("BPUserOnlineAccount"), &Z_Registration_Info_UScriptStruct_FBPUserOnlineAccount, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FBPUserOnlineAccount), 709701724U) },
+		{ FBPUniqueNetId::StaticStruct, Z_Construct_UScriptStruct_FBPUniqueNetId_Statics::NewStructOps, TEXT("BPUniqueNetId"), &Z_Registration_Info_UScriptStruct_FBPUniqueNetId, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FBPUniqueNetId), 2620465461U) },
+		{ FBPOnlineUser::StaticStruct, Z_Construct_UScriptStruct_FBPOnlineUser_Statics::NewStructOps, TEXT("BPOnlineUser"), &Z_Registration_Info_UScriptStruct_FBPOnlineUser, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FBPOnlineUser), 1870670918U) },
+		{ FBPOnlineRecentPlayer::StaticStruct, Z_Construct_UScriptStruct_FBPOnlineRecentPlayer_Statics::NewStructOps, TEXT("BPOnlineRecentPlayer"), &Z_Registration_Info_UScriptStruct_FBPOnlineRecentPlayer, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FBPOnlineRecentPlayer), 2512518429U) },
+		{ FBPFriendPresenceInfo::StaticStruct, Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewStructOps, TEXT("BPFriendPresenceInfo"), &Z_Registration_Info_UScriptStruct_FBPFriendPresenceInfo, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FBPFriendPresenceInfo), 478067226U) },
+		{ FBPFriendInfo::StaticStruct, Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewStructOps, TEXT("BPFriendInfo"), &Z_Registration_Info_UScriptStruct_FBPFriendInfo, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FBPFriendInfo), 1295210154U) },
+		{ FSessionPropertyKeyPair::StaticStruct, Z_Construct_UScriptStruct_FSessionPropertyKeyPair_Statics::NewStructOps, TEXT("SessionPropertyKeyPair"), &Z_Registration_Info_UScriptStruct_FSessionPropertyKeyPair, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FSessionPropertyKeyPair), 3281033595U) },
+		{ FSessionsSearchSetting::StaticStruct, Z_Construct_UScriptStruct_FSessionsSearchSetting_Statics::NewStructOps, TEXT("SessionsSearchSetting"), &Z_Registration_Info_UScriptStruct_FSessionsSearchSetting, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FSessionsSearchSetting), 2206548994U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_BlueprintDataDefinitions_h_3523486101(TEXT("/Script/AdvancedSessions"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_BlueprintDataDefinitions_h__Script_AdvancedSessions_1421065887(TEXT("/Script/AdvancedSessions"),
 	nullptr, 0,
-	Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_BlueprintDataDefinitions_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_BlueprintDataDefinitions_h_Statics::ScriptStructInfo),
-	Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_BlueprintDataDefinitions_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_BlueprintDataDefinitions_h_Statics::EnumInfo));
-// End Registration
+	Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_BlueprintDataDefinitions_h__Script_AdvancedSessions_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_BlueprintDataDefinitions_h__Script_AdvancedSessions_Statics::ScriptStructInfo),
+	Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_BlueprintDataDefinitions_h__Script_AdvancedSessions_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_BlueprintDataDefinitions_h__Script_AdvancedSessions_Statics::EnumInfo));
+// ********** End Registration *********************************************************************
+
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

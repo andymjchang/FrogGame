@@ -5,20 +5,24 @@
 ===========================================================================*/
 
 // IWYU pragma: private, include "AdvancedExternalUILibrary.h"
-#include "UObject/ObjectMacros.h"
-#include "UObject/ScriptMacros.h"
 
-PRAGMA_DISABLE_DEPRECATION_WARNINGS
-class APlayerController;
-class UObject;
-enum class EBlueprintResultSwitch : uint8;
-struct FBPUniqueNetId;
 #ifdef ADVANCEDSESSIONS_AdvancedExternalUILibrary_generated_h
 #error "AdvancedExternalUILibrary.generated.h already included, missing '#pragma once' in AdvancedExternalUILibrary.h"
 #endif
 #define ADVANCEDSESSIONS_AdvancedExternalUILibrary_generated_h
 
-#define FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedExternalUILibrary_h_29_RPC_WRAPPERS_NO_PURE_DECLS \
+#include "UObject/ObjectMacros.h"
+#include "UObject/ScriptMacros.h"
+
+PRAGMA_DISABLE_DEPRECATION_WARNINGS
+
+class APlayerController;
+class UObject;
+enum class EBlueprintResultSwitch : uint8;
+struct FBPUniqueNetId;
+
+// ********** Begin Class UAdvancedExternalUILibrary ***********************************************
+#define FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedExternalUILibrary_h_29_RPC_WRAPPERS_NO_PURE_DECLS \
 	DECLARE_FUNCTION(execShowAccountUpgradeUI); \
 	DECLARE_FUNCTION(execShowProfileUI); \
 	DECLARE_FUNCTION(execCloseWebURLUI); \
@@ -28,44 +32,47 @@ struct FBPUniqueNetId;
 	DECLARE_FUNCTION(execShowFriendsUI);
 
 
-#define FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedExternalUILibrary_h_29_INCLASS_NO_PURE_DECLS \
+ADVANCEDSESSIONS_API UClass* Z_Construct_UClass_UAdvancedExternalUILibrary_NoRegister();
+
+#define FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedExternalUILibrary_h_29_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUAdvancedExternalUILibrary(); \
 	friend struct Z_Construct_UClass_UAdvancedExternalUILibrary_Statics; \
+	static UClass* GetPrivateStaticClass(); \
+	friend ADVANCEDSESSIONS_API UClass* Z_Construct_UClass_UAdvancedExternalUILibrary_NoRegister(); \
 public: \
-	DECLARE_CLASS(UAdvancedExternalUILibrary, UBlueprintFunctionLibrary, COMPILED_IN_FLAGS(0), CASTCLASS_None, TEXT("/Script/AdvancedSessions"), NO_API) \
+	DECLARE_CLASS2(UAdvancedExternalUILibrary, UBlueprintFunctionLibrary, COMPILED_IN_FLAGS(0), CASTCLASS_None, TEXT("/Script/AdvancedSessions"), Z_Construct_UClass_UAdvancedExternalUILibrary_NoRegister) \
 	DECLARE_SERIALIZER(UAdvancedExternalUILibrary)
 
 
-#define FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedExternalUILibrary_h_29_ENHANCED_CONSTRUCTORS \
+#define FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedExternalUILibrary_h_29_ENHANCED_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API UAdvancedExternalUILibrary(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
-private: \
-	/** Private move- and copy-constructors, should never be used */ \
-	UAdvancedExternalUILibrary(UAdvancedExternalUILibrary&&); \
-	UAdvancedExternalUILibrary(const UAdvancedExternalUILibrary&); \
-public: \
+	/** Deleted move- and copy-constructors, should never be used */ \
+	UAdvancedExternalUILibrary(UAdvancedExternalUILibrary&&) = delete; \
+	UAdvancedExternalUILibrary(const UAdvancedExternalUILibrary&) = delete; \
 	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, UAdvancedExternalUILibrary); \
 	DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UAdvancedExternalUILibrary); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UAdvancedExternalUILibrary) \
 	NO_API virtual ~UAdvancedExternalUILibrary();
 
 
-#define FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedExternalUILibrary_h_26_PROLOG
-#define FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedExternalUILibrary_h_29_GENERATED_BODY \
+#define FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedExternalUILibrary_h_26_PROLOG
+#define FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedExternalUILibrary_h_29_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedExternalUILibrary_h_29_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedExternalUILibrary_h_29_INCLASS_NO_PURE_DECLS \
-	FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedExternalUILibrary_h_29_ENHANCED_CONSTRUCTORS \
+	FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedExternalUILibrary_h_29_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedExternalUILibrary_h_29_INCLASS_NO_PURE_DECLS \
+	FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedExternalUILibrary_h_29_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-template<> ADVANCEDSESSIONS_API UClass* StaticClass<class UAdvancedExternalUILibrary>();
+class UAdvancedExternalUILibrary;
+
+// ********** End Class UAdvancedExternalUILibrary *************************************************
 
 #undef CURRENT_FILE_ID
-#define CURRENT_FILE_ID FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedExternalUILibrary_h
-
+#define CURRENT_FILE_ID FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedExternalUILibrary_h
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

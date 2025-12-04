@@ -5,12 +5,14 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#include "AdvancedSessions/Classes/AdvancedExternalUILibrary.h"
-#include "AdvancedSessions/Classes/BlueprintDataDefinitions.h"
+#include "AdvancedExternalUILibrary.h"
+#include "BlueprintDataDefinitions.h"
+
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+
 void EmptyLinkFunctionForGeneratedCodeAdvancedExternalUILibrary() {}
 
-// Begin Cross Module References
+// ********** Begin Cross Module References ********************************************************
 ADVANCEDSESSIONS_API UClass* Z_Construct_UClass_UAdvancedExternalUILibrary();
 ADVANCEDSESSIONS_API UClass* Z_Construct_UClass_UAdvancedExternalUILibrary_NoRegister();
 ADVANCEDSESSIONS_API UEnum* Z_Construct_UEnum_AdvancedSessions_EBlueprintResultSwitch();
@@ -19,9 +21,9 @@ COREUOBJECT_API UClass* Z_Construct_UClass_UObject_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_APlayerController_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_UBlueprintFunctionLibrary();
 UPackage* Z_Construct_UPackage__Script_AdvancedSessions();
-// End Cross Module References
+// ********** End Cross Module References **********************************************************
 
-// Begin Class UAdvancedExternalUILibrary Function CloseWebURLUI
+// ********** Begin Class UAdvancedExternalUILibrary Function CloseWebURLUI ************************
 struct Z_Construct_UFunction_UAdvancedExternalUILibrary_CloseWebURLUI_Statics
 {
 	struct AdvancedExternalUILibrary_eventCloseWebURLUI_Parms
@@ -50,7 +52,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedExternalUILibrary_CloseWebURLUI_Statics::NewProp_WorldContextObject,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedExternalUILibrary_CloseWebURLUI_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedExternalUILibrary_CloseWebURLUI_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedExternalUILibrary, nullptr, "CloseWebURLUI", nullptr, nullptr, Z_Construct_UFunction_UAdvancedExternalUILibrary_CloseWebURLUI_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedExternalUILibrary_CloseWebURLUI_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedExternalUILibrary_CloseWebURLUI_Statics::AdvancedExternalUILibrary_eventCloseWebURLUI_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedExternalUILibrary_CloseWebURLUI_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedExternalUILibrary_CloseWebURLUI_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedExternalUILibrary_CloseWebURLUI_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedExternalUILibrary, nullptr, "CloseWebURLUI", Z_Construct_UFunction_UAdvancedExternalUILibrary_CloseWebURLUI_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedExternalUILibrary_CloseWebURLUI_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedExternalUILibrary_CloseWebURLUI_Statics::AdvancedExternalUILibrary_eventCloseWebURLUI_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedExternalUILibrary_CloseWebURLUI_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedExternalUILibrary_CloseWebURLUI_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedExternalUILibrary_CloseWebURLUI_Statics::AdvancedExternalUILibrary_eventCloseWebURLUI_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedExternalUILibrary_CloseWebURLUI()
 {
@@ -69,9 +71,9 @@ DEFINE_FUNCTION(UAdvancedExternalUILibrary::execCloseWebURLUI)
 	UAdvancedExternalUILibrary::CloseWebURLUI(Z_Param_WorldContextObject);
 	P_NATIVE_END;
 }
-// End Class UAdvancedExternalUILibrary Function CloseWebURLUI
+// ********** End Class UAdvancedExternalUILibrary Function CloseWebURLUI **************************
 
-// Begin Class UAdvancedExternalUILibrary Function ShowAccountUpgradeUI
+// ********** Begin Class UAdvancedExternalUILibrary Function ShowAccountUpgradeUI *****************
 struct Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowAccountUpgradeUI_Statics
 {
 	struct AdvancedExternalUILibrary_eventShowAccountUpgradeUI_Parms
@@ -105,7 +107,7 @@ struct Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowAccountUpgradeUI_Sta
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowAccountUpgradeUI_Statics::NewProp_WorldContextObject = { "WorldContextObject", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedExternalUILibrary_eventShowAccountUpgradeUI_Parms, WorldContextObject), Z_Construct_UClass_UObject_NoRegister, METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowAccountUpgradeUI_Statics::NewProp_PlayerRequestingAccountUpgradeUI = { "PlayerRequestingAccountUpgradeUI", nullptr, (EPropertyFlags)0x0010000000000082, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedExternalUILibrary_eventShowAccountUpgradeUI_Parms, PlayerRequestingAccountUpgradeUI), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PlayerRequestingAccountUpgradeUI_MetaData), NewProp_PlayerRequestingAccountUpgradeUI_MetaData) }; // 700456651
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowAccountUpgradeUI_Statics::NewProp_PlayerRequestingAccountUpgradeUI = { "PlayerRequestingAccountUpgradeUI", nullptr, (EPropertyFlags)0x0010000000000082, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedExternalUILibrary_eventShowAccountUpgradeUI_Parms, PlayerRequestingAccountUpgradeUI), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PlayerRequestingAccountUpgradeUI_MetaData), NewProp_PlayerRequestingAccountUpgradeUI_MetaData) }; // 2620465461
 const UECodeGen_Private::FBytePropertyParams Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowAccountUpgradeUI_Statics::NewProp_Result_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowAccountUpgradeUI_Statics::NewProp_Result = { "Result", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedExternalUILibrary_eventShowAccountUpgradeUI_Parms, Result), Z_Construct_UEnum_AdvancedSessions_EBlueprintResultSwitch, METADATA_PARAMS(0, nullptr) }; // 1157740906
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowAccountUpgradeUI_Statics::PropPointers[] = {
@@ -115,7 +117,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowAccountUpgradeUI_Statics::NewProp_Result,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowAccountUpgradeUI_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowAccountUpgradeUI_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedExternalUILibrary, nullptr, "ShowAccountUpgradeUI", nullptr, nullptr, Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowAccountUpgradeUI_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowAccountUpgradeUI_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowAccountUpgradeUI_Statics::AdvancedExternalUILibrary_eventShowAccountUpgradeUI_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowAccountUpgradeUI_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowAccountUpgradeUI_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowAccountUpgradeUI_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedExternalUILibrary, nullptr, "ShowAccountUpgradeUI", Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowAccountUpgradeUI_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowAccountUpgradeUI_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowAccountUpgradeUI_Statics::AdvancedExternalUILibrary_eventShowAccountUpgradeUI_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowAccountUpgradeUI_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowAccountUpgradeUI_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowAccountUpgradeUI_Statics::AdvancedExternalUILibrary_eventShowAccountUpgradeUI_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowAccountUpgradeUI()
 {
@@ -136,9 +138,9 @@ DEFINE_FUNCTION(UAdvancedExternalUILibrary::execShowAccountUpgradeUI)
 	UAdvancedExternalUILibrary::ShowAccountUpgradeUI(Z_Param_WorldContextObject,Z_Param_PlayerRequestingAccountUpgradeUI,(EBlueprintResultSwitch&)(Z_Param_Out_Result));
 	P_NATIVE_END;
 }
-// End Class UAdvancedExternalUILibrary Function ShowAccountUpgradeUI
+// ********** End Class UAdvancedExternalUILibrary Function ShowAccountUpgradeUI *******************
 
-// Begin Class UAdvancedExternalUILibrary Function ShowFriendsUI
+// ********** Begin Class UAdvancedExternalUILibrary Function ShowFriendsUI ************************
 struct Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowFriendsUI_Statics
 {
 	struct AdvancedExternalUILibrary_eventShowFriendsUI_Parms
@@ -179,7 +181,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowFriendsUI_Statics::NewProp_Result,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowFriendsUI_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowFriendsUI_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedExternalUILibrary, nullptr, "ShowFriendsUI", nullptr, nullptr, Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowFriendsUI_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowFriendsUI_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowFriendsUI_Statics::AdvancedExternalUILibrary_eventShowFriendsUI_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowFriendsUI_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowFriendsUI_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowFriendsUI_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedExternalUILibrary, nullptr, "ShowFriendsUI", Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowFriendsUI_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowFriendsUI_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowFriendsUI_Statics::AdvancedExternalUILibrary_eventShowFriendsUI_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowFriendsUI_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowFriendsUI_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowFriendsUI_Statics::AdvancedExternalUILibrary_eventShowFriendsUI_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowFriendsUI()
 {
@@ -200,9 +202,9 @@ DEFINE_FUNCTION(UAdvancedExternalUILibrary::execShowFriendsUI)
 	UAdvancedExternalUILibrary::ShowFriendsUI(Z_Param_WorldContextObject,Z_Param_PlayerController,(EBlueprintResultSwitch&)(Z_Param_Out_Result));
 	P_NATIVE_END;
 }
-// End Class UAdvancedExternalUILibrary Function ShowFriendsUI
+// ********** End Class UAdvancedExternalUILibrary Function ShowFriendsUI **************************
 
-// Begin Class UAdvancedExternalUILibrary Function ShowInviteUI
+// ********** Begin Class UAdvancedExternalUILibrary Function ShowInviteUI *************************
 struct Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowInviteUI_Statics
 {
 	struct AdvancedExternalUILibrary_eventShowInviteUI_Parms
@@ -243,7 +245,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowInviteUI_Statics::NewProp_Result,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowInviteUI_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowInviteUI_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedExternalUILibrary, nullptr, "ShowInviteUI", nullptr, nullptr, Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowInviteUI_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowInviteUI_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowInviteUI_Statics::AdvancedExternalUILibrary_eventShowInviteUI_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowInviteUI_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowInviteUI_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowInviteUI_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedExternalUILibrary, nullptr, "ShowInviteUI", Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowInviteUI_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowInviteUI_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowInviteUI_Statics::AdvancedExternalUILibrary_eventShowInviteUI_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowInviteUI_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowInviteUI_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowInviteUI_Statics::AdvancedExternalUILibrary_eventShowInviteUI_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowInviteUI()
 {
@@ -264,9 +266,9 @@ DEFINE_FUNCTION(UAdvancedExternalUILibrary::execShowInviteUI)
 	UAdvancedExternalUILibrary::ShowInviteUI(Z_Param_WorldContextObject,Z_Param_PlayerController,(EBlueprintResultSwitch&)(Z_Param_Out_Result));
 	P_NATIVE_END;
 }
-// End Class UAdvancedExternalUILibrary Function ShowInviteUI
+// ********** End Class UAdvancedExternalUILibrary Function ShowInviteUI ***************************
 
-// Begin Class UAdvancedExternalUILibrary Function ShowLeaderBoardUI
+// ********** Begin Class UAdvancedExternalUILibrary Function ShowLeaderBoardUI ********************
 struct Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowLeaderBoardUI_Statics
 {
 	struct AdvancedExternalUILibrary_eventShowLeaderBoardUI_Parms
@@ -307,7 +309,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowLeaderBoardUI_Statics::NewProp_Result,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowLeaderBoardUI_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowLeaderBoardUI_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedExternalUILibrary, nullptr, "ShowLeaderBoardUI", nullptr, nullptr, Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowLeaderBoardUI_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowLeaderBoardUI_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowLeaderBoardUI_Statics::AdvancedExternalUILibrary_eventShowLeaderBoardUI_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowLeaderBoardUI_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowLeaderBoardUI_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowLeaderBoardUI_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedExternalUILibrary, nullptr, "ShowLeaderBoardUI", Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowLeaderBoardUI_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowLeaderBoardUI_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowLeaderBoardUI_Statics::AdvancedExternalUILibrary_eventShowLeaderBoardUI_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowLeaderBoardUI_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowLeaderBoardUI_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowLeaderBoardUI_Statics::AdvancedExternalUILibrary_eventShowLeaderBoardUI_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowLeaderBoardUI()
 {
@@ -328,9 +330,9 @@ DEFINE_FUNCTION(UAdvancedExternalUILibrary::execShowLeaderBoardUI)
 	UAdvancedExternalUILibrary::ShowLeaderBoardUI(Z_Param_WorldContextObject,Z_Param_LeaderboardName,(EBlueprintResultSwitch&)(Z_Param_Out_Result));
 	P_NATIVE_END;
 }
-// End Class UAdvancedExternalUILibrary Function ShowLeaderBoardUI
+// ********** End Class UAdvancedExternalUILibrary Function ShowLeaderBoardUI **********************
 
-// Begin Class UAdvancedExternalUILibrary Function ShowProfileUI
+// ********** Begin Class UAdvancedExternalUILibrary Function ShowProfileUI ************************
 struct Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowProfileUI_Statics
 {
 	struct AdvancedExternalUILibrary_eventShowProfileUI_Parms
@@ -369,8 +371,8 @@ struct Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowProfileUI_Statics
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowProfileUI_Statics::NewProp_WorldContextObject = { "WorldContextObject", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedExternalUILibrary_eventShowProfileUI_Parms, WorldContextObject), Z_Construct_UClass_UObject_NoRegister, METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowProfileUI_Statics::NewProp_PlayerViewingProfile = { "PlayerViewingProfile", nullptr, (EPropertyFlags)0x0010000000000082, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedExternalUILibrary_eventShowProfileUI_Parms, PlayerViewingProfile), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PlayerViewingProfile_MetaData), NewProp_PlayerViewingProfile_MetaData) }; // 700456651
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowProfileUI_Statics::NewProp_PlayerToViewProfileOf = { "PlayerToViewProfileOf", nullptr, (EPropertyFlags)0x0010000000000082, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedExternalUILibrary_eventShowProfileUI_Parms, PlayerToViewProfileOf), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PlayerToViewProfileOf_MetaData), NewProp_PlayerToViewProfileOf_MetaData) }; // 700456651
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowProfileUI_Statics::NewProp_PlayerViewingProfile = { "PlayerViewingProfile", nullptr, (EPropertyFlags)0x0010000000000082, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedExternalUILibrary_eventShowProfileUI_Parms, PlayerViewingProfile), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PlayerViewingProfile_MetaData), NewProp_PlayerViewingProfile_MetaData) }; // 2620465461
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowProfileUI_Statics::NewProp_PlayerToViewProfileOf = { "PlayerToViewProfileOf", nullptr, (EPropertyFlags)0x0010000000000082, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedExternalUILibrary_eventShowProfileUI_Parms, PlayerToViewProfileOf), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PlayerToViewProfileOf_MetaData), NewProp_PlayerToViewProfileOf_MetaData) }; // 2620465461
 const UECodeGen_Private::FBytePropertyParams Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowProfileUI_Statics::NewProp_Result_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowProfileUI_Statics::NewProp_Result = { "Result", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedExternalUILibrary_eventShowProfileUI_Parms, Result), Z_Construct_UEnum_AdvancedSessions_EBlueprintResultSwitch, METADATA_PARAMS(0, nullptr) }; // 1157740906
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowProfileUI_Statics::PropPointers[] = {
@@ -381,7 +383,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowProfileUI_Statics::NewProp_Result,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowProfileUI_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowProfileUI_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedExternalUILibrary, nullptr, "ShowProfileUI", nullptr, nullptr, Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowProfileUI_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowProfileUI_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowProfileUI_Statics::AdvancedExternalUILibrary_eventShowProfileUI_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowProfileUI_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowProfileUI_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowProfileUI_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedExternalUILibrary, nullptr, "ShowProfileUI", Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowProfileUI_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowProfileUI_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowProfileUI_Statics::AdvancedExternalUILibrary_eventShowProfileUI_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowProfileUI_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowProfileUI_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowProfileUI_Statics::AdvancedExternalUILibrary_eventShowProfileUI_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowProfileUI()
 {
@@ -403,9 +405,9 @@ DEFINE_FUNCTION(UAdvancedExternalUILibrary::execShowProfileUI)
 	UAdvancedExternalUILibrary::ShowProfileUI(Z_Param_WorldContextObject,Z_Param_PlayerViewingProfile,Z_Param_PlayerToViewProfileOf,(EBlueprintResultSwitch&)(Z_Param_Out_Result));
 	P_NATIVE_END;
 }
-// End Class UAdvancedExternalUILibrary Function ShowProfileUI
+// ********** End Class UAdvancedExternalUILibrary Function ShowProfileUI **************************
 
-// Begin Class UAdvancedExternalUILibrary Function ShowWebURLUI
+// ********** Begin Class UAdvancedExternalUILibrary Function ShowWebURLUI *************************
 struct Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowWebURLUI_Statics
 {
 	struct AdvancedExternalUILibrary_eventShowWebURLUI_Parms
@@ -504,7 +506,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowWebURLUI_Statics::NewProp_SizeY,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowWebURLUI_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowWebURLUI_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedExternalUILibrary, nullptr, "ShowWebURLUI", nullptr, nullptr, Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowWebURLUI_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowWebURLUI_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowWebURLUI_Statics::AdvancedExternalUILibrary_eventShowWebURLUI_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowWebURLUI_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowWebURLUI_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowWebURLUI_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedExternalUILibrary, nullptr, "ShowWebURLUI", Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowWebURLUI_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowWebURLUI_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowWebURLUI_Statics::AdvancedExternalUILibrary_eventShowWebURLUI_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowWebURLUI_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowWebURLUI_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowWebURLUI_Statics::AdvancedExternalUILibrary_eventShowWebURLUI_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowWebURLUI()
 {
@@ -533,9 +535,9 @@ DEFINE_FUNCTION(UAdvancedExternalUILibrary::execShowWebURLUI)
 	UAdvancedExternalUILibrary::ShowWebURLUI(Z_Param_WorldContextObject,Z_Param_URLToShow,(EBlueprintResultSwitch&)(Z_Param_Out_Result),Z_Param_Out_AllowedDomains,Z_Param_bEmbedded,Z_Param_bShowBackground,Z_Param_bShowCloseButton,Z_Param_OffsetX,Z_Param_OffsetY,Z_Param_SizeX,Z_Param_SizeY);
 	P_NATIVE_END;
 }
-// End Class UAdvancedExternalUILibrary Function ShowWebURLUI
+// ********** End Class UAdvancedExternalUILibrary Function ShowWebURLUI ***************************
 
-// Begin Class UAdvancedExternalUILibrary
+// ********** Begin Class UAdvancedExternalUILibrary ***********************************************
 void UAdvancedExternalUILibrary::StaticRegisterNativesUAdvancedExternalUILibrary()
 {
 	UClass* Class = UAdvancedExternalUILibrary::StaticClass();
@@ -550,10 +552,34 @@ void UAdvancedExternalUILibrary::StaticRegisterNativesUAdvancedExternalUILibrary
 	};
 	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 }
-IMPLEMENT_CLASS_NO_AUTO_REGISTRATION(UAdvancedExternalUILibrary);
+FClassRegistrationInfo Z_Registration_Info_UClass_UAdvancedExternalUILibrary;
+UClass* UAdvancedExternalUILibrary::GetPrivateStaticClass()
+{
+	using TClass = UAdvancedExternalUILibrary;
+	if (!Z_Registration_Info_UClass_UAdvancedExternalUILibrary.InnerSingleton)
+	{
+		GetPrivateStaticClassBody(
+			StaticPackage(),
+			TEXT("AdvancedExternalUILibrary"),
+			Z_Registration_Info_UClass_UAdvancedExternalUILibrary.InnerSingleton,
+			StaticRegisterNativesUAdvancedExternalUILibrary,
+			sizeof(TClass),
+			alignof(TClass),
+			TClass::StaticClassFlags,
+			TClass::StaticClassCastFlags(),
+			TClass::StaticConfigName(),
+			(UClass::ClassConstructorType)InternalConstructor<TClass>,
+			(UClass::ClassVTableHelperCtorCallerType)InternalVTableHelperCtorCaller<TClass>,
+			UOBJECT_CPPCLASS_STATICFUNCTIONS_FORCLASS(TClass),
+			&TClass::Super::StaticClass,
+			&TClass::WithinClass::StaticClass
+		);
+	}
+	return Z_Registration_Info_UClass_UAdvancedExternalUILibrary.InnerSingleton;
+}
 UClass* Z_Construct_UClass_UAdvancedExternalUILibrary_NoRegister()
 {
-	return UAdvancedExternalUILibrary::StaticClass();
+	return UAdvancedExternalUILibrary::GetPrivateStaticClass();
 }
 struct Z_Construct_UClass_UAdvancedExternalUILibrary_Statics
 {
@@ -565,13 +591,13 @@ struct Z_Construct_UClass_UAdvancedExternalUILibrary_Statics
 #endif // WITH_METADATA
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_UAdvancedExternalUILibrary_CloseWebURLUI, "CloseWebURLUI" }, // 2899357585
-		{ &Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowAccountUpgradeUI, "ShowAccountUpgradeUI" }, // 680863895
-		{ &Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowFriendsUI, "ShowFriendsUI" }, // 3421262988
-		{ &Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowInviteUI, "ShowInviteUI" }, // 1040608672
-		{ &Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowLeaderBoardUI, "ShowLeaderBoardUI" }, // 258027479
-		{ &Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowProfileUI, "ShowProfileUI" }, // 578846270
-		{ &Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowWebURLUI, "ShowWebURLUI" }, // 3507568909
+		{ &Z_Construct_UFunction_UAdvancedExternalUILibrary_CloseWebURLUI, "CloseWebURLUI" }, // 1182706533
+		{ &Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowAccountUpgradeUI, "ShowAccountUpgradeUI" }, // 713254103
+		{ &Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowFriendsUI, "ShowFriendsUI" }, // 2036459014
+		{ &Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowInviteUI, "ShowInviteUI" }, // 3226762682
+		{ &Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowLeaderBoardUI, "ShowLeaderBoardUI" }, // 2778728837
+		{ &Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowProfileUI, "ShowProfileUI" }, // 4146456814
+		{ &Z_Construct_UFunction_UAdvancedExternalUILibrary_ShowWebURLUI, "ShowWebURLUI" }, // 1183131611
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -607,25 +633,22 @@ UClass* Z_Construct_UClass_UAdvancedExternalUILibrary()
 	}
 	return Z_Registration_Info_UClass_UAdvancedExternalUILibrary.OuterSingleton;
 }
-template<> ADVANCEDSESSIONS_API UClass* StaticClass<UAdvancedExternalUILibrary>()
-{
-	return UAdvancedExternalUILibrary::StaticClass();
-}
 UAdvancedExternalUILibrary::UAdvancedExternalUILibrary(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {}
 DEFINE_VTABLE_PTR_HELPER_CTOR(UAdvancedExternalUILibrary);
 UAdvancedExternalUILibrary::~UAdvancedExternalUILibrary() {}
-// End Class UAdvancedExternalUILibrary
+// ********** End Class UAdvancedExternalUILibrary *************************************************
 
-// Begin Registration
-struct Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedExternalUILibrary_h_Statics
+// ********** Begin Registration *******************************************************************
+struct Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedExternalUILibrary_h__Script_AdvancedSessions_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UAdvancedExternalUILibrary, UAdvancedExternalUILibrary::StaticClass, TEXT("UAdvancedExternalUILibrary"), &Z_Registration_Info_UClass_UAdvancedExternalUILibrary, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAdvancedExternalUILibrary), 2618012829U) },
+		{ Z_Construct_UClass_UAdvancedExternalUILibrary, UAdvancedExternalUILibrary::StaticClass, TEXT("UAdvancedExternalUILibrary"), &Z_Registration_Info_UClass_UAdvancedExternalUILibrary, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAdvancedExternalUILibrary), 874999043U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedExternalUILibrary_h_2857674530(TEXT("/Script/AdvancedSessions"),
-	Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedExternalUILibrary_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedExternalUILibrary_h_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedExternalUILibrary_h__Script_AdvancedSessions_777289994(TEXT("/Script/AdvancedSessions"),
+	Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedExternalUILibrary_h__Script_AdvancedSessions_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedExternalUILibrary_h__Script_AdvancedSessions_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
-// End Registration
+// ********** End Registration *********************************************************************
+
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

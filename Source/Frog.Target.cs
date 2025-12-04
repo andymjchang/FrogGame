@@ -16,6 +16,6 @@ public class FrogTarget : TargetRules
 
 	private void RegisterModulesCreatedByRider()
 	{
-		ExtraModuleNames.AddRange(new string[] { "UI" });
+		ExtraModuleNames.AddRange(new string[] { "UI", "FrogShop" });
 	}
 }

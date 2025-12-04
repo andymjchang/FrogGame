@@ -9,6 +9,7 @@
 #include "Engine/CollisionProfile.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Components/SphereComponent.h"
+#include "Components/CapsuleComponent.h"
 
 AHomingProjectile::AHomingProjectile()
 {

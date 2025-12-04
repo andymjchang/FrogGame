@@ -5,20 +5,22 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#include "AdvancedSessions/Classes/AutoLoginUserCallbackProxy.h"
+#include "AutoLoginUserCallbackProxy.h"
+
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+
 void EmptyLinkFunctionForGeneratedCodeAutoLoginUserCallbackProxy() {}
 
-// Begin Cross Module References
+// ********** Begin Cross Module References ********************************************************
 ADVANCEDSESSIONS_API UClass* Z_Construct_UClass_UAutoLoginUserCallbackProxy();
 ADVANCEDSESSIONS_API UClass* Z_Construct_UClass_UAutoLoginUserCallbackProxy_NoRegister();
 COREUOBJECT_API UClass* Z_Construct_UClass_UObject_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_UOnlineBlueprintCallProxyBase();
 ENGINE_API UFunction* Z_Construct_UDelegateFunction_Engine_EmptyOnlineDelegate__DelegateSignature();
 UPackage* Z_Construct_UPackage__Script_AdvancedSessions();
-// End Cross Module References
+// ********** End Cross Module References **********************************************************
 
-// Begin Class UAutoLoginUserCallbackProxy Function AutoLoginUser
+// ********** Begin Class UAutoLoginUserCallbackProxy Function AutoLoginUser ***********************
 struct Z_Construct_UFunction_UAutoLoginUserCallbackProxy_AutoLoginUser_Statics
 {
 	struct AutoLoginUserCallbackProxy_eventAutoLoginUser_Parms
@@ -56,7 +58,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAutoL
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAutoLoginUserCallbackProxy_AutoLoginUser_Statics::NewProp_ReturnValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAutoLoginUserCallbackProxy_AutoLoginUser_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAutoLoginUserCallbackProxy_AutoLoginUser_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAutoLoginUserCallbackProxy, nullptr, "AutoLoginUser", nullptr, nullptr, Z_Construct_UFunction_UAutoLoginUserCallbackProxy_AutoLoginUser_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAutoLoginUserCallbackProxy_AutoLoginUser_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAutoLoginUserCallbackProxy_AutoLoginUser_Statics::AutoLoginUserCallbackProxy_eventAutoLoginUser_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAutoLoginUserCallbackProxy_AutoLoginUser_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAutoLoginUserCallbackProxy_AutoLoginUser_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAutoLoginUserCallbackProxy_AutoLoginUser_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAutoLoginUserCallbackProxy, nullptr, "AutoLoginUser", Z_Construct_UFunction_UAutoLoginUserCallbackProxy_AutoLoginUser_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAutoLoginUserCallbackProxy_AutoLoginUser_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAutoLoginUserCallbackProxy_AutoLoginUser_Statics::AutoLoginUserCallbackProxy_eventAutoLoginUser_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAutoLoginUserCallbackProxy_AutoLoginUser_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAutoLoginUserCallbackProxy_AutoLoginUser_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAutoLoginUserCallbackProxy_AutoLoginUser_Statics::AutoLoginUserCallbackProxy_eventAutoLoginUser_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAutoLoginUserCallbackProxy_AutoLoginUser()
 {
@@ -76,9 +78,9 @@ DEFINE_FUNCTION(UAutoLoginUserCallbackProxy::execAutoLoginUser)
 	*(UAutoLoginUserCallbackProxy**)Z_Param__Result=UAutoLoginUserCallbackProxy::AutoLoginUser(Z_Param_WorldContextObject,Z_Param_LocalUserNum);
 	P_NATIVE_END;
 }
-// End Class UAutoLoginUserCallbackProxy Function AutoLoginUser
+// ********** End Class UAutoLoginUserCallbackProxy Function AutoLoginUser *************************
 
-// Begin Class UAutoLoginUserCallbackProxy
+// ********** Begin Class UAutoLoginUserCallbackProxy **********************************************
 void UAutoLoginUserCallbackProxy::StaticRegisterNativesUAutoLoginUserCallbackProxy()
 {
 	UClass* Class = UAutoLoginUserCallbackProxy::StaticClass();
@@ -87,10 +89,34 @@ void UAutoLoginUserCallbackProxy::StaticRegisterNativesUAutoLoginUserCallbackPro
 	};
 	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 }
-IMPLEMENT_CLASS_NO_AUTO_REGISTRATION(UAutoLoginUserCallbackProxy);
+FClassRegistrationInfo Z_Registration_Info_UClass_UAutoLoginUserCallbackProxy;
+UClass* UAutoLoginUserCallbackProxy::GetPrivateStaticClass()
+{
+	using TClass = UAutoLoginUserCallbackProxy;
+	if (!Z_Registration_Info_UClass_UAutoLoginUserCallbackProxy.InnerSingleton)
+	{
+		GetPrivateStaticClassBody(
+			StaticPackage(),
+			TEXT("AutoLoginUserCallbackProxy"),
+			Z_Registration_Info_UClass_UAutoLoginUserCallbackProxy.InnerSingleton,
+			StaticRegisterNativesUAutoLoginUserCallbackProxy,
+			sizeof(TClass),
+			alignof(TClass),
+			TClass::StaticClassFlags,
+			TClass::StaticClassCastFlags(),
+			TClass::StaticConfigName(),
+			(UClass::ClassConstructorType)InternalConstructor<TClass>,
+			(UClass::ClassVTableHelperCtorCallerType)InternalVTableHelperCtorCaller<TClass>,
+			UOBJECT_CPPCLASS_STATICFUNCTIONS_FORCLASS(TClass),
+			&TClass::Super::StaticClass,
+			&TClass::WithinClass::StaticClass
+		);
+	}
+	return Z_Registration_Info_UClass_UAutoLoginUserCallbackProxy.InnerSingleton;
+}
 UClass* Z_Construct_UClass_UAutoLoginUserCallbackProxy_NoRegister()
 {
-	return UAutoLoginUserCallbackProxy::StaticClass();
+	return UAutoLoginUserCallbackProxy::GetPrivateStaticClass();
 }
 struct Z_Construct_UClass_UAutoLoginUserCallbackProxy_Statics
 {
@@ -123,7 +149,7 @@ struct Z_Construct_UClass_UAutoLoginUserCallbackProxy_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_UAutoLoginUserCallbackProxy_AutoLoginUser, "AutoLoginUser" }, // 1709804665
+		{ &Z_Construct_UFunction_UAutoLoginUserCallbackProxy_AutoLoginUser, "AutoLoginUser" }, // 3394505450
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -131,8 +157,8 @@ struct Z_Construct_UClass_UAutoLoginUserCallbackProxy_Statics
 	};
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
-const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UAutoLoginUserCallbackProxy_Statics::NewProp_OnSuccess = { "OnSuccess", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UAutoLoginUserCallbackProxy, OnSuccess), Z_Construct_UDelegateFunction_Engine_EmptyOnlineDelegate__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnSuccess_MetaData), NewProp_OnSuccess_MetaData) }; // 2328757345
-const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UAutoLoginUserCallbackProxy_Statics::NewProp_OnFailure = { "OnFailure", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UAutoLoginUserCallbackProxy, OnFailure), Z_Construct_UDelegateFunction_Engine_EmptyOnlineDelegate__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnFailure_MetaData), NewProp_OnFailure_MetaData) }; // 2328757345
+const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UAutoLoginUserCallbackProxy_Statics::NewProp_OnSuccess = { "OnSuccess", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UAutoLoginUserCallbackProxy, OnSuccess), Z_Construct_UDelegateFunction_Engine_EmptyOnlineDelegate__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnSuccess_MetaData), NewProp_OnSuccess_MetaData) }; // 1205031399
+const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UAutoLoginUserCallbackProxy_Statics::NewProp_OnFailure = { "OnFailure", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UAutoLoginUserCallbackProxy, OnFailure), Z_Construct_UDelegateFunction_Engine_EmptyOnlineDelegate__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnFailure_MetaData), NewProp_OnFailure_MetaData) }; // 1205031399
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UAutoLoginUserCallbackProxy_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAutoLoginUserCallbackProxy_Statics::NewProp_OnSuccess,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAutoLoginUserCallbackProxy_Statics::NewProp_OnFailure,
@@ -166,24 +192,21 @@ UClass* Z_Construct_UClass_UAutoLoginUserCallbackProxy()
 	}
 	return Z_Registration_Info_UClass_UAutoLoginUserCallbackProxy.OuterSingleton;
 }
-template<> ADVANCEDSESSIONS_API UClass* StaticClass<UAutoLoginUserCallbackProxy>()
-{
-	return UAutoLoginUserCallbackProxy::StaticClass();
-}
 DEFINE_VTABLE_PTR_HELPER_CTOR(UAutoLoginUserCallbackProxy);
 UAutoLoginUserCallbackProxy::~UAutoLoginUserCallbackProxy() {}
-// End Class UAutoLoginUserCallbackProxy
+// ********** End Class UAutoLoginUserCallbackProxy ************************************************
 
-// Begin Registration
-struct Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AutoLoginUserCallbackProxy_h_Statics
+// ********** Begin Registration *******************************************************************
+struct Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AutoLoginUserCallbackProxy_h__Script_AdvancedSessions_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UAutoLoginUserCallbackProxy, UAutoLoginUserCallbackProxy::StaticClass, TEXT("UAutoLoginUserCallbackProxy"), &Z_Registration_Info_UClass_UAutoLoginUserCallbackProxy, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAutoLoginUserCallbackProxy), 660773183U) },
+		{ Z_Construct_UClass_UAutoLoginUserCallbackProxy, UAutoLoginUserCallbackProxy::StaticClass, TEXT("UAutoLoginUserCallbackProxy"), &Z_Registration_Info_UClass_UAutoLoginUserCallbackProxy, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAutoLoginUserCallbackProxy), 2465575847U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AutoLoginUserCallbackProxy_h_811051021(TEXT("/Script/AdvancedSessions"),
-	Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AutoLoginUserCallbackProxy_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AutoLoginUserCallbackProxy_h_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AutoLoginUserCallbackProxy_h__Script_AdvancedSessions_2662461416(TEXT("/Script/AdvancedSessions"),
+	Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AutoLoginUserCallbackProxy_h__Script_AdvancedSessions_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AutoLoginUserCallbackProxy_h__Script_AdvancedSessions_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
-// End Registration
+// ********** End Registration *********************************************************************
+
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

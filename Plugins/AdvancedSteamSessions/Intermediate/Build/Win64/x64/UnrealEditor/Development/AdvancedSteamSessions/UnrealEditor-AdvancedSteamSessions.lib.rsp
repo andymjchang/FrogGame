@@ -6,12 +6,7 @@
 /NAME:"UnrealEditor-AdvancedSteamSessions.dll"
 /IGNORE:4221
 /NODEFAULTLIB
-"F:\Unreal\Frog\Intermediate\Build\Win64\x64\FrogEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h.obj"
-"F:\Unreal\Frog\Plugins\AdvancedSteamSessions\Intermediate\Build\Win64\x64\UnrealEditor\Development\AdvancedSteamSessions\Module.AdvancedSteamSessions.cpp.obj"
-"F:\Unreal\Frog\Plugins\AdvancedSteamSessions\Intermediate\Build\Win64\x64\UnrealEditor\Development\AdvancedSteamSessions\AdvancedSteamFriendsLibrary.cpp.obj"
-"F:\Unreal\Frog\Plugins\AdvancedSteamSessions\Intermediate\Build\Win64\x64\UnrealEditor\Development\AdvancedSteamSessions\AdvancedSteamSessions.cpp.obj"
-"F:\Unreal\Frog\Plugins\AdvancedSteamSessions\Intermediate\Build\Win64\x64\UnrealEditor\Development\AdvancedSteamSessions\AdvancedSteamWorkshopLibrary.cpp.obj"
-"F:\Unreal\Frog\Plugins\AdvancedSteamSessions\Intermediate\Build\Win64\x64\UnrealEditor\Development\AdvancedSteamSessions\SteamRequestGroupOfficersCallbackProxy.cpp.obj"
-"F:\Unreal\Frog\Plugins\AdvancedSteamSessions\Intermediate\Build\Win64\x64\UnrealEditor\Development\AdvancedSteamSessions\SteamWSRequestUGCDetailsCallbackProxy.cpp.obj"
-"F:\Unreal\Frog\Plugins\AdvancedSteamSessions\Intermediate\Build\Win64\x64\UnrealEditor\Development\AdvancedSteamSessions\Default.rc2.res"
-/OUT:"F:\Unreal\Frog\Plugins\AdvancedSteamSessions\Intermediate\Build\Win64\x64\UnrealEditor\Development\AdvancedSteamSessions\UnrealEditor-AdvancedSteamSessions.lib"
+"C:/Users/maxyu/Documents/Frog/Intermediate/Build/Win64/x64/FrogEditor/Development/UnrealEd/SharedPCH.UnrealEd.Project.ValApi.ValExpApi.Cpp20.h.obj"
+"C:/Users/maxyu/Documents/Frog/Plugins/AdvancedSteamSessions/Intermediate/Build/Win64/x64/UnrealEditor/Development/AdvancedSteamSessions/Module.AdvancedSteamSessions.cpp.obj"
+"C:/Users/maxyu/Documents/Frog/Plugins/AdvancedSteamSessions/Intermediate/Build/Win64/x64/UnrealEditor/Development/AdvancedSteamSessions/Default.rc2.res"
+/OUT:"C:/Users/maxyu/Documents/Frog/Plugins/AdvancedSteamSessions/Intermediate/Build/Win64/x64/UnrealEditor/Development/AdvancedSteamSessions/UnrealEditor-AdvancedSteamSessions.lib"

@@ -5,14 +5,16 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#include "AdvancedSessions/Classes/AdvancedSessionsLibrary.h"
-#include "AdvancedSessions/Classes/BlueprintDataDefinitions.h"
-#include "OnlineSubsystemUtils/Classes/FindSessionsCallbackProxy.h"
-#include "Runtime/Engine/Classes/GameFramework/OnlineReplStructs.h"
+#include "AdvancedSessionsLibrary.h"
+#include "BlueprintDataDefinitions.h"
+#include "FindSessionsCallbackProxy.h"
+#include "GameFramework/OnlineReplStructs.h"
+
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+
 void EmptyLinkFunctionForGeneratedCodeAdvancedSessionsLibrary() {}
 
-// Begin Cross Module References
+// ********** Begin Cross Module References ********************************************************
 ADVANCEDSESSIONS_API UClass* Z_Construct_UClass_UAdvancedSessionsLibrary();
 ADVANCEDSESSIONS_API UClass* Z_Construct_UClass_UAdvancedSessionsLibrary_NoRegister();
 ADVANCEDSESSIONS_API UEnum* Z_Construct_UEnum_AdvancedSessions_EBlueprintResultSwitch();
@@ -29,9 +31,9 @@ ENGINE_API UClass* Z_Construct_UClass_UBlueprintFunctionLibrary();
 ENGINE_API UScriptStruct* Z_Construct_UScriptStruct_FUniqueNetIdRepl();
 ONLINESUBSYSTEMUTILS_API UScriptStruct* Z_Construct_UScriptStruct_FBlueprintSessionResult();
 UPackage* Z_Construct_UPackage__Script_AdvancedSessions();
-// End Cross Module References
+// ********** End Cross Module References **********************************************************
 
-// Begin Class UAdvancedSessionsLibrary Function AddOrModifyExtraSettings
+// ********** Begin Class UAdvancedSessionsLibrary Function AddOrModifyExtraSettings ***************
 struct Z_Construct_UFunction_UAdvancedSessionsLibrary_AddOrModifyExtraSettings_Statics
 {
 	struct AdvancedSessionsLibrary_eventAddOrModifyExtraSettings_Parms
@@ -61,12 +63,12 @@ struct Z_Construct_UFunction_UAdvancedSessionsLibrary_AddOrModifyExtraSettings_S
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_AddOrModifyExtraSettings_Statics::NewProp_SettingsArray_Inner = { "SettingsArray", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(0, nullptr) }; // 304289449
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_AddOrModifyExtraSettings_Statics::NewProp_SettingsArray = { "SettingsArray", nullptr, (EPropertyFlags)0x0010000008000180, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventAddOrModifyExtraSettings_Parms, SettingsArray), EArrayPropertyFlags::None, METADATA_PARAMS(0, nullptr) }; // 304289449
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_AddOrModifyExtraSettings_Statics::NewProp_NewOrChangedSettings_Inner = { "NewOrChangedSettings", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(0, nullptr) }; // 304289449
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_AddOrModifyExtraSettings_Statics::NewProp_NewOrChangedSettings = { "NewOrChangedSettings", nullptr, (EPropertyFlags)0x0010000008000180, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventAddOrModifyExtraSettings_Parms, NewOrChangedSettings), EArrayPropertyFlags::None, METADATA_PARAMS(0, nullptr) }; // 304289449
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_AddOrModifyExtraSettings_Statics::NewProp_ModifiedSettingsArray_Inner = { "ModifiedSettingsArray", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(0, nullptr) }; // 304289449
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_AddOrModifyExtraSettings_Statics::NewProp_ModifiedSettingsArray = { "ModifiedSettingsArray", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventAddOrModifyExtraSettings_Parms, ModifiedSettingsArray), EArrayPropertyFlags::None, METADATA_PARAMS(0, nullptr) }; // 304289449
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_AddOrModifyExtraSettings_Statics::NewProp_SettingsArray_Inner = { "SettingsArray", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(0, nullptr) }; // 3281033595
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_AddOrModifyExtraSettings_Statics::NewProp_SettingsArray = { "SettingsArray", nullptr, (EPropertyFlags)0x0010000008000180, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventAddOrModifyExtraSettings_Parms, SettingsArray), EArrayPropertyFlags::None, METADATA_PARAMS(0, nullptr) }; // 3281033595
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_AddOrModifyExtraSettings_Statics::NewProp_NewOrChangedSettings_Inner = { "NewOrChangedSettings", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(0, nullptr) }; // 3281033595
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_AddOrModifyExtraSettings_Statics::NewProp_NewOrChangedSettings = { "NewOrChangedSettings", nullptr, (EPropertyFlags)0x0010000008000180, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventAddOrModifyExtraSettings_Parms, NewOrChangedSettings), EArrayPropertyFlags::None, METADATA_PARAMS(0, nullptr) }; // 3281033595
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_AddOrModifyExtraSettings_Statics::NewProp_ModifiedSettingsArray_Inner = { "ModifiedSettingsArray", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(0, nullptr) }; // 3281033595
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_AddOrModifyExtraSettings_Statics::NewProp_ModifiedSettingsArray = { "ModifiedSettingsArray", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventAddOrModifyExtraSettings_Parms, ModifiedSettingsArray), EArrayPropertyFlags::None, METADATA_PARAMS(0, nullptr) }; // 3281033595
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvancedSessionsLibrary_AddOrModifyExtraSettings_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_AddOrModifyExtraSettings_Statics::NewProp_SettingsArray_Inner,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_AddOrModifyExtraSettings_Statics::NewProp_SettingsArray,
@@ -76,7 +78,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_AddOrModifyExtraSettings_Statics::NewProp_ModifiedSettingsArray,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_AddOrModifyExtraSettings_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_AddOrModifyExtraSettings_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "AddOrModifyExtraSettings", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSessionsLibrary_AddOrModifyExtraSettings_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_AddOrModifyExtraSettings_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_AddOrModifyExtraSettings_Statics::AdvancedSessionsLibrary_eventAddOrModifyExtraSettings_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_AddOrModifyExtraSettings_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_AddOrModifyExtraSettings_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_AddOrModifyExtraSettings_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "AddOrModifyExtraSettings", Z_Construct_UFunction_UAdvancedSessionsLibrary_AddOrModifyExtraSettings_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_AddOrModifyExtraSettings_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_AddOrModifyExtraSettings_Statics::AdvancedSessionsLibrary_eventAddOrModifyExtraSettings_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_AddOrModifyExtraSettings_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_AddOrModifyExtraSettings_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_AddOrModifyExtraSettings_Statics::AdvancedSessionsLibrary_eventAddOrModifyExtraSettings_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSessionsLibrary_AddOrModifyExtraSettings()
 {
@@ -97,9 +99,9 @@ DEFINE_FUNCTION(UAdvancedSessionsLibrary::execAddOrModifyExtraSettings)
 	UAdvancedSessionsLibrary::AddOrModifyExtraSettings(Z_Param_Out_SettingsArray,Z_Param_Out_NewOrChangedSettings,Z_Param_Out_ModifiedSettingsArray);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSessionsLibrary Function AddOrModifyExtraSettings
+// ********** End Class UAdvancedSessionsLibrary Function AddOrModifyExtraSettings *****************
 
-// Begin Class UAdvancedSessionsLibrary Function BanPlayer
+// ********** Begin Class UAdvancedSessionsLibrary Function BanPlayer ******************************
 struct Z_Construct_UFunction_UAdvancedSessionsLibrary_BanPlayer_Statics
 {
 	struct AdvancedSessionsLibrary_eventBanPlayer_Parms
@@ -145,7 +147,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_BanPlayer_Statics::NewProp_ReturnValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_BanPlayer_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_BanPlayer_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "BanPlayer", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSessionsLibrary_BanPlayer_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_BanPlayer_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_BanPlayer_Statics::AdvancedSessionsLibrary_eventBanPlayer_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_BanPlayer_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_BanPlayer_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_BanPlayer_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "BanPlayer", Z_Construct_UFunction_UAdvancedSessionsLibrary_BanPlayer_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_BanPlayer_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_BanPlayer_Statics::AdvancedSessionsLibrary_eventBanPlayer_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_BanPlayer_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_BanPlayer_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_BanPlayer_Statics::AdvancedSessionsLibrary_eventBanPlayer_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSessionsLibrary_BanPlayer()
 {
@@ -166,9 +168,9 @@ DEFINE_FUNCTION(UAdvancedSessionsLibrary::execBanPlayer)
 	*(bool*)Z_Param__Result=UAdvancedSessionsLibrary::BanPlayer(Z_Param_WorldContextObject,Z_Param_PlayerToBan,Z_Param_BanReason);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSessionsLibrary Function BanPlayer
+// ********** End Class UAdvancedSessionsLibrary Function BanPlayer ********************************
 
-// Begin Class UAdvancedSessionsLibrary Function Conv_BPUniqueIDToUniqueNetIDRepl
+// ********** Begin Class UAdvancedSessionsLibrary Function Conv_BPUniqueIDToUniqueNetIDRepl *******
 struct Z_Construct_UFunction_UAdvancedSessionsLibrary_Conv_BPUniqueIDToUniqueNetIDRepl_Statics
 {
 	struct AdvancedSessionsLibrary_eventConv_BPUniqueIDToUniqueNetIDRepl_Parms
@@ -199,14 +201,14 @@ struct Z_Construct_UFunction_UAdvancedSessionsLibrary_Conv_BPUniqueIDToUniqueNet
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_Conv_BPUniqueIDToUniqueNetIDRepl_Statics::NewProp_InUniqueID = { "InUniqueID", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventConv_BPUniqueIDToUniqueNetIDRepl_Parms, InUniqueID), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_InUniqueID_MetaData), NewProp_InUniqueID_MetaData) }; // 700456651
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_Conv_BPUniqueIDToUniqueNetIDRepl_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventConv_BPUniqueIDToUniqueNetIDRepl_Parms, ReturnValue), Z_Construct_UScriptStruct_FUniqueNetIdRepl, METADATA_PARAMS(0, nullptr) }; // 3410776867
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_Conv_BPUniqueIDToUniqueNetIDRepl_Statics::NewProp_InUniqueID = { "InUniqueID", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventConv_BPUniqueIDToUniqueNetIDRepl_Parms, InUniqueID), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_InUniqueID_MetaData), NewProp_InUniqueID_MetaData) }; // 2620465461
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_Conv_BPUniqueIDToUniqueNetIDRepl_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventConv_BPUniqueIDToUniqueNetIDRepl_Parms, ReturnValue), Z_Construct_UScriptStruct_FUniqueNetIdRepl, METADATA_PARAMS(0, nullptr) }; // 774471623
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvancedSessionsLibrary_Conv_BPUniqueIDToUniqueNetIDRepl_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_Conv_BPUniqueIDToUniqueNetIDRepl_Statics::NewProp_InUniqueID,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_Conv_BPUniqueIDToUniqueNetIDRepl_Statics::NewProp_ReturnValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_Conv_BPUniqueIDToUniqueNetIDRepl_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_Conv_BPUniqueIDToUniqueNetIDRepl_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "Conv_BPUniqueIDToUniqueNetIDRepl", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSessionsLibrary_Conv_BPUniqueIDToUniqueNetIDRepl_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_Conv_BPUniqueIDToUniqueNetIDRepl_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_Conv_BPUniqueIDToUniqueNetIDRepl_Statics::AdvancedSessionsLibrary_eventConv_BPUniqueIDToUniqueNetIDRepl_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_Conv_BPUniqueIDToUniqueNetIDRepl_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_Conv_BPUniqueIDToUniqueNetIDRepl_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_Conv_BPUniqueIDToUniqueNetIDRepl_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "Conv_BPUniqueIDToUniqueNetIDRepl", Z_Construct_UFunction_UAdvancedSessionsLibrary_Conv_BPUniqueIDToUniqueNetIDRepl_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_Conv_BPUniqueIDToUniqueNetIDRepl_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_Conv_BPUniqueIDToUniqueNetIDRepl_Statics::AdvancedSessionsLibrary_eventConv_BPUniqueIDToUniqueNetIDRepl_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_Conv_BPUniqueIDToUniqueNetIDRepl_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_Conv_BPUniqueIDToUniqueNetIDRepl_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_Conv_BPUniqueIDToUniqueNetIDRepl_Statics::AdvancedSessionsLibrary_eventConv_BPUniqueIDToUniqueNetIDRepl_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSessionsLibrary_Conv_BPUniqueIDToUniqueNetIDRepl()
 {
@@ -225,9 +227,9 @@ DEFINE_FUNCTION(UAdvancedSessionsLibrary::execConv_BPUniqueIDToUniqueNetIDRepl)
 	*(FUniqueNetIdRepl*)Z_Param__Result=UAdvancedSessionsLibrary::Conv_BPUniqueIDToUniqueNetIDRepl(Z_Param_Out_InUniqueID);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSessionsLibrary Function Conv_BPUniqueIDToUniqueNetIDRepl
+// ********** End Class UAdvancedSessionsLibrary Function Conv_BPUniqueIDToUniqueNetIDRepl *********
 
-// Begin Class UAdvancedSessionsLibrary Function EqualEqual_UNetIDUnetID
+// ********** Begin Class UAdvancedSessionsLibrary Function EqualEqual_UNetIDUnetID ****************
 struct Z_Construct_UFunction_UAdvancedSessionsLibrary_EqualEqual_UNetIDUnetID_Statics
 {
 	struct AdvancedSessionsLibrary_eventEqualEqual_UNetIDUnetID_Parms
@@ -264,8 +266,8 @@ struct Z_Construct_UFunction_UAdvancedSessionsLibrary_EqualEqual_UNetIDUnetID_St
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_EqualEqual_UNetIDUnetID_Statics::NewProp_A = { "A", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventEqualEqual_UNetIDUnetID_Parms, A), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_A_MetaData), NewProp_A_MetaData) }; // 700456651
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_EqualEqual_UNetIDUnetID_Statics::NewProp_B = { "B", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventEqualEqual_UNetIDUnetID_Parms, B), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_B_MetaData), NewProp_B_MetaData) }; // 700456651
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_EqualEqual_UNetIDUnetID_Statics::NewProp_A = { "A", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventEqualEqual_UNetIDUnetID_Parms, A), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_A_MetaData), NewProp_A_MetaData) }; // 2620465461
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_EqualEqual_UNetIDUnetID_Statics::NewProp_B = { "B", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventEqualEqual_UNetIDUnetID_Parms, B), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_B_MetaData), NewProp_B_MetaData) }; // 2620465461
 void Z_Construct_UFunction_UAdvancedSessionsLibrary_EqualEqual_UNetIDUnetID_Statics::NewProp_ReturnValue_SetBit(void* Obj)
 {
 	((AdvancedSessionsLibrary_eventEqualEqual_UNetIDUnetID_Parms*)Obj)->ReturnValue = 1;
@@ -277,7 +279,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_EqualEqual_UNetIDUnetID_Statics::NewProp_ReturnValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_EqualEqual_UNetIDUnetID_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_EqualEqual_UNetIDUnetID_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "EqualEqual_UNetIDUnetID", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSessionsLibrary_EqualEqual_UNetIDUnetID_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_EqualEqual_UNetIDUnetID_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_EqualEqual_UNetIDUnetID_Statics::AdvancedSessionsLibrary_eventEqualEqual_UNetIDUnetID_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_EqualEqual_UNetIDUnetID_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_EqualEqual_UNetIDUnetID_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_EqualEqual_UNetIDUnetID_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "EqualEqual_UNetIDUnetID", Z_Construct_UFunction_UAdvancedSessionsLibrary_EqualEqual_UNetIDUnetID_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_EqualEqual_UNetIDUnetID_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_EqualEqual_UNetIDUnetID_Statics::AdvancedSessionsLibrary_eventEqualEqual_UNetIDUnetID_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_EqualEqual_UNetIDUnetID_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_EqualEqual_UNetIDUnetID_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_EqualEqual_UNetIDUnetID_Statics::AdvancedSessionsLibrary_eventEqualEqual_UNetIDUnetID_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSessionsLibrary_EqualEqual_UNetIDUnetID()
 {
@@ -297,9 +299,9 @@ DEFINE_FUNCTION(UAdvancedSessionsLibrary::execEqualEqual_UNetIDUnetID)
 	*(bool*)Z_Param__Result=UAdvancedSessionsLibrary::EqualEqual_UNetIDUnetID(Z_Param_Out_A,Z_Param_Out_B);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSessionsLibrary Function EqualEqual_UNetIDUnetID
+// ********** End Class UAdvancedSessionsLibrary Function EqualEqual_UNetIDUnetID ******************
 
-// Begin Class UAdvancedSessionsLibrary Function FindSessionPropertyByName
+// ********** Begin Class UAdvancedSessionsLibrary Function FindSessionPropertyByName **************
 struct Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyByName_Statics
 {
 	struct AdvancedSessionsLibrary_eventFindSessionPropertyByName_Parms
@@ -334,12 +336,12 @@ struct Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyByName_
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyByName_Statics::NewProp_ExtraSettings_Inner = { "ExtraSettings", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(0, nullptr) }; // 304289449
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyByName_Statics::NewProp_ExtraSettings = { "ExtraSettings", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventFindSessionPropertyByName_Parms, ExtraSettings), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ExtraSettings_MetaData), NewProp_ExtraSettings_MetaData) }; // 304289449
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyByName_Statics::NewProp_ExtraSettings_Inner = { "ExtraSettings", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(0, nullptr) }; // 3281033595
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyByName_Statics::NewProp_ExtraSettings = { "ExtraSettings", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventFindSessionPropertyByName_Parms, ExtraSettings), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ExtraSettings_MetaData), NewProp_ExtraSettings_MetaData) }; // 3281033595
 const UECodeGen_Private::FNamePropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyByName_Statics::NewProp_SettingsName = { "SettingsName", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventFindSessionPropertyByName_Parms, SettingsName), METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FBytePropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyByName_Statics::NewProp_Result_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyByName_Statics::NewProp_Result = { "Result", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventFindSessionPropertyByName_Parms, Result), Z_Construct_UEnum_AdvancedSessions_EBlueprintResultSwitch, METADATA_PARAMS(0, nullptr) }; // 1157740906
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyByName_Statics::NewProp_OutProperty = { "OutProperty", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventFindSessionPropertyByName_Parms, OutProperty), Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(0, nullptr) }; // 304289449
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyByName_Statics::NewProp_OutProperty = { "OutProperty", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventFindSessionPropertyByName_Parms, OutProperty), Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(0, nullptr) }; // 3281033595
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyByName_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyByName_Statics::NewProp_ExtraSettings_Inner,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyByName_Statics::NewProp_ExtraSettings,
@@ -349,7 +351,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyByName_Statics::NewProp_OutProperty,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyByName_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyByName_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "FindSessionPropertyByName", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyByName_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyByName_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyByName_Statics::AdvancedSessionsLibrary_eventFindSessionPropertyByName_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyByName_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyByName_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyByName_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "FindSessionPropertyByName", Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyByName_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyByName_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyByName_Statics::AdvancedSessionsLibrary_eventFindSessionPropertyByName_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyByName_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyByName_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyByName_Statics::AdvancedSessionsLibrary_eventFindSessionPropertyByName_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyByName()
 {
@@ -371,9 +373,9 @@ DEFINE_FUNCTION(UAdvancedSessionsLibrary::execFindSessionPropertyByName)
 	UAdvancedSessionsLibrary::FindSessionPropertyByName(Z_Param_Out_ExtraSettings,Z_Param_SettingsName,(EBlueprintResultSwitch&)(Z_Param_Out_Result),Z_Param_Out_OutProperty);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSessionsLibrary Function FindSessionPropertyByName
+// ********** End Class UAdvancedSessionsLibrary Function FindSessionPropertyByName ****************
 
-// Begin Class UAdvancedSessionsLibrary Function FindSessionPropertyIndexByName
+// ********** Begin Class UAdvancedSessionsLibrary Function FindSessionPropertyIndexByName *********
 struct Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyIndexByName_Statics
 {
 	struct AdvancedSessionsLibrary_eventFindSessionPropertyIndexByName_Parms
@@ -408,8 +410,8 @@ struct Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyIndexBy
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyIndexByName_Statics::NewProp_ExtraSettings_Inner = { "ExtraSettings", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(0, nullptr) }; // 304289449
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyIndexByName_Statics::NewProp_ExtraSettings = { "ExtraSettings", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventFindSessionPropertyIndexByName_Parms, ExtraSettings), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ExtraSettings_MetaData), NewProp_ExtraSettings_MetaData) }; // 304289449
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyIndexByName_Statics::NewProp_ExtraSettings_Inner = { "ExtraSettings", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(0, nullptr) }; // 3281033595
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyIndexByName_Statics::NewProp_ExtraSettings = { "ExtraSettings", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventFindSessionPropertyIndexByName_Parms, ExtraSettings), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ExtraSettings_MetaData), NewProp_ExtraSettings_MetaData) }; // 3281033595
 const UECodeGen_Private::FNamePropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyIndexByName_Statics::NewProp_SettingName = { "SettingName", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventFindSessionPropertyIndexByName_Parms, SettingName), METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FBytePropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyIndexByName_Statics::NewProp_Result_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyIndexByName_Statics::NewProp_Result = { "Result", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventFindSessionPropertyIndexByName_Parms, Result), Z_Construct_UEnum_AdvancedSessions_EBlueprintResultSwitch, METADATA_PARAMS(0, nullptr) }; // 1157740906
@@ -423,7 +425,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyIndexByName_Statics::NewProp_OutIndex,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyIndexByName_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyIndexByName_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "FindSessionPropertyIndexByName", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyIndexByName_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyIndexByName_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyIndexByName_Statics::AdvancedSessionsLibrary_eventFindSessionPropertyIndexByName_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyIndexByName_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyIndexByName_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyIndexByName_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "FindSessionPropertyIndexByName", Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyIndexByName_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyIndexByName_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyIndexByName_Statics::AdvancedSessionsLibrary_eventFindSessionPropertyIndexByName_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyIndexByName_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyIndexByName_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyIndexByName_Statics::AdvancedSessionsLibrary_eventFindSessionPropertyIndexByName_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyIndexByName()
 {
@@ -445,9 +447,9 @@ DEFINE_FUNCTION(UAdvancedSessionsLibrary::execFindSessionPropertyIndexByName)
 	UAdvancedSessionsLibrary::FindSessionPropertyIndexByName(Z_Param_Out_ExtraSettings,Z_Param_SettingName,(EBlueprintResultSwitch&)(Z_Param_Out_Result),Z_Param_Out_OutIndex);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSessionsLibrary Function FindSessionPropertyIndexByName
+// ********** End Class UAdvancedSessionsLibrary Function FindSessionPropertyIndexByName ***********
 
-// Begin Class UAdvancedSessionsLibrary Function GetCurrentSessionID_AsString
+// ********** Begin Class UAdvancedSessionsLibrary Function GetCurrentSessionID_AsString ***********
 struct Z_Construct_UFunction_UAdvancedSessionsLibrary_GetCurrentSessionID_AsString_Statics
 {
 	struct AdvancedSessionsLibrary_eventGetCurrentSessionID_AsString_Parms
@@ -480,7 +482,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_GetCurrentSessionID_AsString_Statics::NewProp_SessionID,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetCurrentSessionID_AsString_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetCurrentSessionID_AsString_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "GetCurrentSessionID_AsString", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSessionsLibrary_GetCurrentSessionID_AsString_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetCurrentSessionID_AsString_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetCurrentSessionID_AsString_Statics::AdvancedSessionsLibrary_eventGetCurrentSessionID_AsString_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetCurrentSessionID_AsString_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_GetCurrentSessionID_AsString_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetCurrentSessionID_AsString_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "GetCurrentSessionID_AsString", Z_Construct_UFunction_UAdvancedSessionsLibrary_GetCurrentSessionID_AsString_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetCurrentSessionID_AsString_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetCurrentSessionID_AsString_Statics::AdvancedSessionsLibrary_eventGetCurrentSessionID_AsString_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetCurrentSessionID_AsString_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_GetCurrentSessionID_AsString_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetCurrentSessionID_AsString_Statics::AdvancedSessionsLibrary_eventGetCurrentSessionID_AsString_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSessionsLibrary_GetCurrentSessionID_AsString()
 {
@@ -500,9 +502,9 @@ DEFINE_FUNCTION(UAdvancedSessionsLibrary::execGetCurrentSessionID_AsString)
 	UAdvancedSessionsLibrary::GetCurrentSessionID_AsString(Z_Param_WorldContextObject,Z_Param_Out_SessionID);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSessionsLibrary Function GetCurrentSessionID_AsString
+// ********** End Class UAdvancedSessionsLibrary Function GetCurrentSessionID_AsString *************
 
-// Begin Class UAdvancedSessionsLibrary Function GetCurrentUniqueBuildID
+// ********** Begin Class UAdvancedSessionsLibrary Function GetCurrentUniqueBuildID ****************
 struct Z_Construct_UFunction_UAdvancedSessionsLibrary_GetCurrentUniqueBuildID_Statics
 {
 	struct AdvancedSessionsLibrary_eventGetCurrentUniqueBuildID_Parms
@@ -530,7 +532,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_GetCurrentUniqueBuildID_Statics::NewProp_UniqueBuildId,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetCurrentUniqueBuildID_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetCurrentUniqueBuildID_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "GetCurrentUniqueBuildID", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSessionsLibrary_GetCurrentUniqueBuildID_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetCurrentUniqueBuildID_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetCurrentUniqueBuildID_Statics::AdvancedSessionsLibrary_eventGetCurrentUniqueBuildID_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetCurrentUniqueBuildID_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_GetCurrentUniqueBuildID_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetCurrentUniqueBuildID_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "GetCurrentUniqueBuildID", Z_Construct_UFunction_UAdvancedSessionsLibrary_GetCurrentUniqueBuildID_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetCurrentUniqueBuildID_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetCurrentUniqueBuildID_Statics::AdvancedSessionsLibrary_eventGetCurrentUniqueBuildID_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetCurrentUniqueBuildID_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_GetCurrentUniqueBuildID_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetCurrentUniqueBuildID_Statics::AdvancedSessionsLibrary_eventGetCurrentUniqueBuildID_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSessionsLibrary_GetCurrentUniqueBuildID()
 {
@@ -549,9 +551,9 @@ DEFINE_FUNCTION(UAdvancedSessionsLibrary::execGetCurrentUniqueBuildID)
 	UAdvancedSessionsLibrary::GetCurrentUniqueBuildID(Z_Param_Out_UniqueBuildId);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSessionsLibrary Function GetCurrentUniqueBuildID
+// ********** End Class UAdvancedSessionsLibrary Function GetCurrentUniqueBuildID ******************
 
-// Begin Class UAdvancedSessionsLibrary Function GetExtraSettings
+// ********** Begin Class UAdvancedSessionsLibrary Function GetExtraSettings ***********************
 struct Z_Construct_UFunction_UAdvancedSessionsLibrary_GetExtraSettings_Statics
 {
 	struct AdvancedSessionsLibrary_eventGetExtraSettings_Parms
@@ -577,16 +579,16 @@ struct Z_Construct_UFunction_UAdvancedSessionsLibrary_GetExtraSettings_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetExtraSettings_Statics::NewProp_SessionResult = { "SessionResult", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetExtraSettings_Parms, SessionResult), Z_Construct_UScriptStruct_FBlueprintSessionResult, METADATA_PARAMS(0, nullptr) }; // 1307808723
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetExtraSettings_Statics::NewProp_ExtraSettings_Inner = { "ExtraSettings", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(0, nullptr) }; // 304289449
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetExtraSettings_Statics::NewProp_ExtraSettings = { "ExtraSettings", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetExtraSettings_Parms, ExtraSettings), EArrayPropertyFlags::None, METADATA_PARAMS(0, nullptr) }; // 304289449
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetExtraSettings_Statics::NewProp_SessionResult = { "SessionResult", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetExtraSettings_Parms, SessionResult), Z_Construct_UScriptStruct_FBlueprintSessionResult, METADATA_PARAMS(0, nullptr) }; // 3859927135
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetExtraSettings_Statics::NewProp_ExtraSettings_Inner = { "ExtraSettings", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(0, nullptr) }; // 3281033595
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetExtraSettings_Statics::NewProp_ExtraSettings = { "ExtraSettings", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetExtraSettings_Parms, ExtraSettings), EArrayPropertyFlags::None, METADATA_PARAMS(0, nullptr) }; // 3281033595
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvancedSessionsLibrary_GetExtraSettings_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_GetExtraSettings_Statics::NewProp_SessionResult,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_GetExtraSettings_Statics::NewProp_ExtraSettings_Inner,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_GetExtraSettings_Statics::NewProp_ExtraSettings,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetExtraSettings_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetExtraSettings_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "GetExtraSettings", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSessionsLibrary_GetExtraSettings_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetExtraSettings_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetExtraSettings_Statics::AdvancedSessionsLibrary_eventGetExtraSettings_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetExtraSettings_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_GetExtraSettings_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetExtraSettings_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "GetExtraSettings", Z_Construct_UFunction_UAdvancedSessionsLibrary_GetExtraSettings_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetExtraSettings_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetExtraSettings_Statics::AdvancedSessionsLibrary_eventGetExtraSettings_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetExtraSettings_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_GetExtraSettings_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetExtraSettings_Statics::AdvancedSessionsLibrary_eventGetExtraSettings_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSessionsLibrary_GetExtraSettings()
 {
@@ -606,9 +608,9 @@ DEFINE_FUNCTION(UAdvancedSessionsLibrary::execGetExtraSettings)
 	UAdvancedSessionsLibrary::GetExtraSettings(Z_Param_SessionResult,Z_Param_Out_ExtraSettings);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSessionsLibrary Function GetExtraSettings
+// ********** End Class UAdvancedSessionsLibrary Function GetExtraSettings *************************
 
-// Begin Class UAdvancedSessionsLibrary Function GetNetPlayerIndex
+// ********** Begin Class UAdvancedSessionsLibrary Function GetNetPlayerIndex **********************
 struct Z_Construct_UFunction_UAdvancedSessionsLibrary_GetNetPlayerIndex_Statics
 {
 	struct AdvancedSessionsLibrary_eventGetNetPlayerIndex_Parms
@@ -640,7 +642,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_GetNetPlayerIndex_Statics::NewProp_NetPlayerIndex,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetNetPlayerIndex_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetNetPlayerIndex_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "GetNetPlayerIndex", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSessionsLibrary_GetNetPlayerIndex_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetNetPlayerIndex_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetNetPlayerIndex_Statics::AdvancedSessionsLibrary_eventGetNetPlayerIndex_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetNetPlayerIndex_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_GetNetPlayerIndex_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetNetPlayerIndex_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "GetNetPlayerIndex", Z_Construct_UFunction_UAdvancedSessionsLibrary_GetNetPlayerIndex_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetNetPlayerIndex_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetNetPlayerIndex_Statics::AdvancedSessionsLibrary_eventGetNetPlayerIndex_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetNetPlayerIndex_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_GetNetPlayerIndex_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetNetPlayerIndex_Statics::AdvancedSessionsLibrary_eventGetNetPlayerIndex_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSessionsLibrary_GetNetPlayerIndex()
 {
@@ -660,9 +662,9 @@ DEFINE_FUNCTION(UAdvancedSessionsLibrary::execGetNetPlayerIndex)
 	UAdvancedSessionsLibrary::GetNetPlayerIndex(Z_Param_PlayerController,Z_Param_Out_NetPlayerIndex);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSessionsLibrary Function GetNetPlayerIndex
+// ********** End Class UAdvancedSessionsLibrary Function GetNetPlayerIndex ************************
 
-// Begin Class UAdvancedSessionsLibrary Function GetNumberOfNetworkPlayers
+// ********** Begin Class UAdvancedSessionsLibrary Function GetNumberOfNetworkPlayers **************
 struct Z_Construct_UFunction_UAdvancedSessionsLibrary_GetNumberOfNetworkPlayers_Statics
 {
 	struct AdvancedSessionsLibrary_eventGetNumberOfNetworkPlayers_Parms
@@ -697,7 +699,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_GetNumberOfNetworkPlayers_Statics::NewProp_NumNetPlayers,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetNumberOfNetworkPlayers_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetNumberOfNetworkPlayers_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "GetNumberOfNetworkPlayers", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSessionsLibrary_GetNumberOfNetworkPlayers_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetNumberOfNetworkPlayers_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetNumberOfNetworkPlayers_Statics::AdvancedSessionsLibrary_eventGetNumberOfNetworkPlayers_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetNumberOfNetworkPlayers_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_GetNumberOfNetworkPlayers_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetNumberOfNetworkPlayers_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "GetNumberOfNetworkPlayers", Z_Construct_UFunction_UAdvancedSessionsLibrary_GetNumberOfNetworkPlayers_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetNumberOfNetworkPlayers_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetNumberOfNetworkPlayers_Statics::AdvancedSessionsLibrary_eventGetNumberOfNetworkPlayers_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetNumberOfNetworkPlayers_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_GetNumberOfNetworkPlayers_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetNumberOfNetworkPlayers_Statics::AdvancedSessionsLibrary_eventGetNumberOfNetworkPlayers_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSessionsLibrary_GetNumberOfNetworkPlayers()
 {
@@ -717,9 +719,9 @@ DEFINE_FUNCTION(UAdvancedSessionsLibrary::execGetNumberOfNetworkPlayers)
 	UAdvancedSessionsLibrary::GetNumberOfNetworkPlayers(Z_Param_WorldContextObject,Z_Param_Out_NumNetPlayers);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSessionsLibrary Function GetNumberOfNetworkPlayers
+// ********** End Class UAdvancedSessionsLibrary Function GetNumberOfNetworkPlayers ****************
 
-// Begin Class UAdvancedSessionsLibrary Function GetPlayerName
+// ********** Begin Class UAdvancedSessionsLibrary Function GetPlayerName **************************
 struct Z_Construct_UFunction_UAdvancedSessionsLibrary_GetPlayerName_Statics
 {
 	struct AdvancedSessionsLibrary_eventGetPlayerName_Parms
@@ -751,7 +753,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_GetPlayerName_Statics::NewProp_PlayerName,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetPlayerName_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetPlayerName_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "GetPlayerName", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSessionsLibrary_GetPlayerName_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetPlayerName_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetPlayerName_Statics::AdvancedSessionsLibrary_eventGetPlayerName_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetPlayerName_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_GetPlayerName_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetPlayerName_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "GetPlayerName", Z_Construct_UFunction_UAdvancedSessionsLibrary_GetPlayerName_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetPlayerName_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetPlayerName_Statics::AdvancedSessionsLibrary_eventGetPlayerName_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetPlayerName_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_GetPlayerName_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetPlayerName_Statics::AdvancedSessionsLibrary_eventGetPlayerName_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSessionsLibrary_GetPlayerName()
 {
@@ -771,9 +773,9 @@ DEFINE_FUNCTION(UAdvancedSessionsLibrary::execGetPlayerName)
 	UAdvancedSessionsLibrary::GetPlayerName(Z_Param_PlayerController,Z_Param_Out_PlayerName);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSessionsLibrary Function GetPlayerName
+// ********** End Class UAdvancedSessionsLibrary Function GetPlayerName ****************************
 
-// Begin Class UAdvancedSessionsLibrary Function GetSessionID_AsString
+// ********** Begin Class UAdvancedSessionsLibrary Function GetSessionID_AsString ******************
 struct Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionID_AsString_Statics
 {
 	struct AdvancedSessionsLibrary_eventGetSessionID_AsString_Parms
@@ -801,14 +803,14 @@ struct Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionID_AsString_Stat
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionID_AsString_Statics::NewProp_SessionResult = { "SessionResult", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetSessionID_AsString_Parms, SessionResult), Z_Construct_UScriptStruct_FBlueprintSessionResult, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SessionResult_MetaData), NewProp_SessionResult_MetaData) }; // 1307808723
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionID_AsString_Statics::NewProp_SessionResult = { "SessionResult", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetSessionID_AsString_Parms, SessionResult), Z_Construct_UScriptStruct_FBlueprintSessionResult, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SessionResult_MetaData), NewProp_SessionResult_MetaData) }; // 3859927135
 const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionID_AsString_Statics::NewProp_SessionID = { "SessionID", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetSessionID_AsString_Parms, SessionID), METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionID_AsString_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionID_AsString_Statics::NewProp_SessionResult,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionID_AsString_Statics::NewProp_SessionID,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionID_AsString_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionID_AsString_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "GetSessionID_AsString", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionID_AsString_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionID_AsString_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionID_AsString_Statics::AdvancedSessionsLibrary_eventGetSessionID_AsString_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionID_AsString_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionID_AsString_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionID_AsString_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "GetSessionID_AsString", Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionID_AsString_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionID_AsString_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionID_AsString_Statics::AdvancedSessionsLibrary_eventGetSessionID_AsString_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionID_AsString_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionID_AsString_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionID_AsString_Statics::AdvancedSessionsLibrary_eventGetSessionID_AsString_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionID_AsString()
 {
@@ -828,9 +830,9 @@ DEFINE_FUNCTION(UAdvancedSessionsLibrary::execGetSessionID_AsString)
 	UAdvancedSessionsLibrary::GetSessionID_AsString(Z_Param_Out_SessionResult,Z_Param_Out_SessionID);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSessionsLibrary Function GetSessionID_AsString
+// ********** End Class UAdvancedSessionsLibrary Function GetSessionID_AsString ********************
 
-// Begin Class UAdvancedSessionsLibrary Function GetSessionPropertyBool
+// ********** Begin Class UAdvancedSessionsLibrary Function GetSessionPropertyBool *****************
 struct Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyBool_Statics
 {
 	struct AdvancedSessionsLibrary_eventGetSessionPropertyBool_Parms
@@ -866,8 +868,8 @@ struct Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyBool_Sta
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyBool_Statics::NewProp_ExtraSettings_Inner = { "ExtraSettings", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(0, nullptr) }; // 304289449
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyBool_Statics::NewProp_ExtraSettings = { "ExtraSettings", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetSessionPropertyBool_Parms, ExtraSettings), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ExtraSettings_MetaData), NewProp_ExtraSettings_MetaData) }; // 304289449
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyBool_Statics::NewProp_ExtraSettings_Inner = { "ExtraSettings", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(0, nullptr) }; // 3281033595
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyBool_Statics::NewProp_ExtraSettings = { "ExtraSettings", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetSessionPropertyBool_Parms, ExtraSettings), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ExtraSettings_MetaData), NewProp_ExtraSettings_MetaData) }; // 3281033595
 const UECodeGen_Private::FNamePropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyBool_Statics::NewProp_SettingName = { "SettingName", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetSessionPropertyBool_Parms, SettingName), METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FBytePropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyBool_Statics::NewProp_SearchResult_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyBool_Statics::NewProp_SearchResult = { "SearchResult", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetSessionPropertyBool_Parms, SearchResult), Z_Construct_UEnum_AdvancedSessions_ESessionSettingSearchResult, METADATA_PARAMS(0, nullptr) }; // 699207488
@@ -885,7 +887,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyBool_Statics::NewProp_SettingValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyBool_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyBool_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "GetSessionPropertyBool", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyBool_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyBool_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyBool_Statics::AdvancedSessionsLibrary_eventGetSessionPropertyBool_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyBool_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyBool_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyBool_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "GetSessionPropertyBool", Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyBool_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyBool_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyBool_Statics::AdvancedSessionsLibrary_eventGetSessionPropertyBool_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyBool_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyBool_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyBool_Statics::AdvancedSessionsLibrary_eventGetSessionPropertyBool_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyBool()
 {
@@ -907,9 +909,9 @@ DEFINE_FUNCTION(UAdvancedSessionsLibrary::execGetSessionPropertyBool)
 	UAdvancedSessionsLibrary::GetSessionPropertyBool(Z_Param_Out_ExtraSettings,Z_Param_SettingName,(ESessionSettingSearchResult&)(Z_Param_Out_SearchResult),Z_Param_Out_SettingValue);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSessionsLibrary Function GetSessionPropertyBool
+// ********** End Class UAdvancedSessionsLibrary Function GetSessionPropertyBool *******************
 
-// Begin Class UAdvancedSessionsLibrary Function GetSessionPropertyByte
+// ********** Begin Class UAdvancedSessionsLibrary Function GetSessionPropertyByte *****************
 struct Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyByte_Statics
 {
 	struct AdvancedSessionsLibrary_eventGetSessionPropertyByte_Parms
@@ -944,8 +946,8 @@ struct Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyByte_Sta
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyByte_Statics::NewProp_ExtraSettings_Inner = { "ExtraSettings", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(0, nullptr) }; // 304289449
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyByte_Statics::NewProp_ExtraSettings = { "ExtraSettings", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetSessionPropertyByte_Parms, ExtraSettings), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ExtraSettings_MetaData), NewProp_ExtraSettings_MetaData) }; // 304289449
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyByte_Statics::NewProp_ExtraSettings_Inner = { "ExtraSettings", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(0, nullptr) }; // 3281033595
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyByte_Statics::NewProp_ExtraSettings = { "ExtraSettings", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetSessionPropertyByte_Parms, ExtraSettings), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ExtraSettings_MetaData), NewProp_ExtraSettings_MetaData) }; // 3281033595
 const UECodeGen_Private::FNamePropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyByte_Statics::NewProp_SettingName = { "SettingName", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetSessionPropertyByte_Parms, SettingName), METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FBytePropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyByte_Statics::NewProp_SearchResult_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyByte_Statics::NewProp_SearchResult = { "SearchResult", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetSessionPropertyByte_Parms, SearchResult), Z_Construct_UEnum_AdvancedSessions_ESessionSettingSearchResult, METADATA_PARAMS(0, nullptr) }; // 699207488
@@ -959,7 +961,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyByte_Statics::NewProp_SettingValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyByte_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyByte_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "GetSessionPropertyByte", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyByte_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyByte_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyByte_Statics::AdvancedSessionsLibrary_eventGetSessionPropertyByte_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyByte_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyByte_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyByte_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "GetSessionPropertyByte", Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyByte_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyByte_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyByte_Statics::AdvancedSessionsLibrary_eventGetSessionPropertyByte_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyByte_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyByte_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyByte_Statics::AdvancedSessionsLibrary_eventGetSessionPropertyByte_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyByte()
 {
@@ -981,9 +983,9 @@ DEFINE_FUNCTION(UAdvancedSessionsLibrary::execGetSessionPropertyByte)
 	UAdvancedSessionsLibrary::GetSessionPropertyByte(Z_Param_Out_ExtraSettings,Z_Param_SettingName,(ESessionSettingSearchResult&)(Z_Param_Out_SearchResult),Z_Param_Out_SettingValue);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSessionsLibrary Function GetSessionPropertyByte
+// ********** End Class UAdvancedSessionsLibrary Function GetSessionPropertyByte *******************
 
-// Begin Class UAdvancedSessionsLibrary Function GetSessionPropertyFloat
+// ********** Begin Class UAdvancedSessionsLibrary Function GetSessionPropertyFloat ****************
 struct Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyFloat_Statics
 {
 	struct AdvancedSessionsLibrary_eventGetSessionPropertyFloat_Parms
@@ -1018,8 +1020,8 @@ struct Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyFloat_St
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyFloat_Statics::NewProp_ExtraSettings_Inner = { "ExtraSettings", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(0, nullptr) }; // 304289449
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyFloat_Statics::NewProp_ExtraSettings = { "ExtraSettings", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetSessionPropertyFloat_Parms, ExtraSettings), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ExtraSettings_MetaData), NewProp_ExtraSettings_MetaData) }; // 304289449
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyFloat_Statics::NewProp_ExtraSettings_Inner = { "ExtraSettings", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(0, nullptr) }; // 3281033595
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyFloat_Statics::NewProp_ExtraSettings = { "ExtraSettings", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetSessionPropertyFloat_Parms, ExtraSettings), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ExtraSettings_MetaData), NewProp_ExtraSettings_MetaData) }; // 3281033595
 const UECodeGen_Private::FNamePropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyFloat_Statics::NewProp_SettingName = { "SettingName", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetSessionPropertyFloat_Parms, SettingName), METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FBytePropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyFloat_Statics::NewProp_SearchResult_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyFloat_Statics::NewProp_SearchResult = { "SearchResult", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetSessionPropertyFloat_Parms, SearchResult), Z_Construct_UEnum_AdvancedSessions_ESessionSettingSearchResult, METADATA_PARAMS(0, nullptr) }; // 699207488
@@ -1033,7 +1035,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyFloat_Statics::NewProp_SettingValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyFloat_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyFloat_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "GetSessionPropertyFloat", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyFloat_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyFloat_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyFloat_Statics::AdvancedSessionsLibrary_eventGetSessionPropertyFloat_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyFloat_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyFloat_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyFloat_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "GetSessionPropertyFloat", Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyFloat_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyFloat_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyFloat_Statics::AdvancedSessionsLibrary_eventGetSessionPropertyFloat_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyFloat_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyFloat_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyFloat_Statics::AdvancedSessionsLibrary_eventGetSessionPropertyFloat_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyFloat()
 {
@@ -1055,9 +1057,9 @@ DEFINE_FUNCTION(UAdvancedSessionsLibrary::execGetSessionPropertyFloat)
 	UAdvancedSessionsLibrary::GetSessionPropertyFloat(Z_Param_Out_ExtraSettings,Z_Param_SettingName,(ESessionSettingSearchResult&)(Z_Param_Out_SearchResult),Z_Param_Out_SettingValue);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSessionsLibrary Function GetSessionPropertyFloat
+// ********** End Class UAdvancedSessionsLibrary Function GetSessionPropertyFloat ******************
 
-// Begin Class UAdvancedSessionsLibrary Function GetSessionPropertyInt
+// ********** Begin Class UAdvancedSessionsLibrary Function GetSessionPropertyInt ******************
 struct Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyInt_Statics
 {
 	struct AdvancedSessionsLibrary_eventGetSessionPropertyInt_Parms
@@ -1092,8 +1094,8 @@ struct Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyInt_Stat
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyInt_Statics::NewProp_ExtraSettings_Inner = { "ExtraSettings", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(0, nullptr) }; // 304289449
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyInt_Statics::NewProp_ExtraSettings = { "ExtraSettings", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetSessionPropertyInt_Parms, ExtraSettings), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ExtraSettings_MetaData), NewProp_ExtraSettings_MetaData) }; // 304289449
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyInt_Statics::NewProp_ExtraSettings_Inner = { "ExtraSettings", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(0, nullptr) }; // 3281033595
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyInt_Statics::NewProp_ExtraSettings = { "ExtraSettings", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetSessionPropertyInt_Parms, ExtraSettings), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ExtraSettings_MetaData), NewProp_ExtraSettings_MetaData) }; // 3281033595
 const UECodeGen_Private::FNamePropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyInt_Statics::NewProp_SettingName = { "SettingName", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetSessionPropertyInt_Parms, SettingName), METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FBytePropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyInt_Statics::NewProp_SearchResult_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyInt_Statics::NewProp_SearchResult = { "SearchResult", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetSessionPropertyInt_Parms, SearchResult), Z_Construct_UEnum_AdvancedSessions_ESessionSettingSearchResult, METADATA_PARAMS(0, nullptr) }; // 699207488
@@ -1107,7 +1109,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyInt_Statics::NewProp_SettingValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyInt_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyInt_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "GetSessionPropertyInt", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyInt_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyInt_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyInt_Statics::AdvancedSessionsLibrary_eventGetSessionPropertyInt_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyInt_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyInt_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyInt_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "GetSessionPropertyInt", Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyInt_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyInt_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyInt_Statics::AdvancedSessionsLibrary_eventGetSessionPropertyInt_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyInt_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyInt_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyInt_Statics::AdvancedSessionsLibrary_eventGetSessionPropertyInt_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyInt()
 {
@@ -1129,9 +1131,9 @@ DEFINE_FUNCTION(UAdvancedSessionsLibrary::execGetSessionPropertyInt)
 	UAdvancedSessionsLibrary::GetSessionPropertyInt(Z_Param_Out_ExtraSettings,Z_Param_SettingName,(ESessionSettingSearchResult&)(Z_Param_Out_SearchResult),Z_Param_Out_SettingValue);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSessionsLibrary Function GetSessionPropertyInt
+// ********** End Class UAdvancedSessionsLibrary Function GetSessionPropertyInt ********************
 
-// Begin Class UAdvancedSessionsLibrary Function GetSessionPropertyKey
+// ********** Begin Class UAdvancedSessionsLibrary Function GetSessionPropertyKey ******************
 struct Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyKey_Statics
 {
 	struct AdvancedSessionsLibrary_eventGetSessionPropertyKey_Parms
@@ -1159,14 +1161,14 @@ struct Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyKey_Stat
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyKey_Statics::NewProp_SessionProperty = { "SessionProperty", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetSessionPropertyKey_Parms, SessionProperty), Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SessionProperty_MetaData), NewProp_SessionProperty_MetaData) }; // 304289449
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyKey_Statics::NewProp_SessionProperty = { "SessionProperty", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetSessionPropertyKey_Parms, SessionProperty), Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SessionProperty_MetaData), NewProp_SessionProperty_MetaData) }; // 3281033595
 const UECodeGen_Private::FNamePropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyKey_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetSessionPropertyKey_Parms, ReturnValue), METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyKey_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyKey_Statics::NewProp_SessionProperty,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyKey_Statics::NewProp_ReturnValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyKey_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyKey_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "GetSessionPropertyKey", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyKey_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyKey_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyKey_Statics::AdvancedSessionsLibrary_eventGetSessionPropertyKey_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyKey_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyKey_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyKey_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "GetSessionPropertyKey", Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyKey_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyKey_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyKey_Statics::AdvancedSessionsLibrary_eventGetSessionPropertyKey_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyKey_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyKey_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyKey_Statics::AdvancedSessionsLibrary_eventGetSessionPropertyKey_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyKey()
 {
@@ -1185,9 +1187,9 @@ DEFINE_FUNCTION(UAdvancedSessionsLibrary::execGetSessionPropertyKey)
 	*(FName*)Z_Param__Result=UAdvancedSessionsLibrary::GetSessionPropertyKey(Z_Param_Out_SessionProperty);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSessionsLibrary Function GetSessionPropertyKey
+// ********** End Class UAdvancedSessionsLibrary Function GetSessionPropertyKey ********************
 
-// Begin Class UAdvancedSessionsLibrary Function GetSessionPropertyString
+// ********** Begin Class UAdvancedSessionsLibrary Function GetSessionPropertyString ***************
 struct Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyString_Statics
 {
 	struct AdvancedSessionsLibrary_eventGetSessionPropertyString_Parms
@@ -1222,8 +1224,8 @@ struct Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyString_S
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyString_Statics::NewProp_ExtraSettings_Inner = { "ExtraSettings", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(0, nullptr) }; // 304289449
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyString_Statics::NewProp_ExtraSettings = { "ExtraSettings", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetSessionPropertyString_Parms, ExtraSettings), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ExtraSettings_MetaData), NewProp_ExtraSettings_MetaData) }; // 304289449
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyString_Statics::NewProp_ExtraSettings_Inner = { "ExtraSettings", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(0, nullptr) }; // 3281033595
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyString_Statics::NewProp_ExtraSettings = { "ExtraSettings", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetSessionPropertyString_Parms, ExtraSettings), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ExtraSettings_MetaData), NewProp_ExtraSettings_MetaData) }; // 3281033595
 const UECodeGen_Private::FNamePropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyString_Statics::NewProp_SettingName = { "SettingName", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetSessionPropertyString_Parms, SettingName), METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FBytePropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyString_Statics::NewProp_SearchResult_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyString_Statics::NewProp_SearchResult = { "SearchResult", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetSessionPropertyString_Parms, SearchResult), Z_Construct_UEnum_AdvancedSessions_ESessionSettingSearchResult, METADATA_PARAMS(0, nullptr) }; // 699207488
@@ -1237,7 +1239,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyString_Statics::NewProp_SettingValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyString_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyString_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "GetSessionPropertyString", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyString_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyString_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyString_Statics::AdvancedSessionsLibrary_eventGetSessionPropertyString_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyString_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyString_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyString_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "GetSessionPropertyString", Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyString_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyString_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyString_Statics::AdvancedSessionsLibrary_eventGetSessionPropertyString_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyString_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyString_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyString_Statics::AdvancedSessionsLibrary_eventGetSessionPropertyString_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyString()
 {
@@ -1259,9 +1261,9 @@ DEFINE_FUNCTION(UAdvancedSessionsLibrary::execGetSessionPropertyString)
 	UAdvancedSessionsLibrary::GetSessionPropertyString(Z_Param_Out_ExtraSettings,Z_Param_SettingName,(ESessionSettingSearchResult&)(Z_Param_Out_SearchResult),Z_Param_Out_SettingValue);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSessionsLibrary Function GetSessionPropertyString
+// ********** End Class UAdvancedSessionsLibrary Function GetSessionPropertyString *****************
 
-// Begin Class UAdvancedSessionsLibrary Function GetSessionSettings
+// ********** Begin Class UAdvancedSessionsLibrary Function GetSessionSettings *********************
 struct Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionSettings_Statics
 {
 	struct AdvancedSessionsLibrary_eventGetSessionSettings_Parms
@@ -1342,8 +1344,8 @@ void Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionSettings_Statics::
 }
 const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionSettings_Statics::NewProp_bIsAnticheatEnabled = { "bIsAnticheatEnabled", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AdvancedSessionsLibrary_eventGetSessionSettings_Parms), &Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionSettings_Statics::NewProp_bIsAnticheatEnabled_SetBit, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionSettings_Statics::NewProp_BuildUniqueID = { "BuildUniqueID", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetSessionSettings_Parms, BuildUniqueID), METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionSettings_Statics::NewProp_ExtraSettings_Inner = { "ExtraSettings", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(0, nullptr) }; // 304289449
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionSettings_Statics::NewProp_ExtraSettings = { "ExtraSettings", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetSessionSettings_Parms, ExtraSettings), EArrayPropertyFlags::None, METADATA_PARAMS(0, nullptr) }; // 304289449
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionSettings_Statics::NewProp_ExtraSettings_Inner = { "ExtraSettings", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(0, nullptr) }; // 3281033595
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionSettings_Statics::NewProp_ExtraSettings = { "ExtraSettings", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetSessionSettings_Parms, ExtraSettings), EArrayPropertyFlags::None, METADATA_PARAMS(0, nullptr) }; // 3281033595
 const UECodeGen_Private::FBytePropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionSettings_Statics::NewProp_Result_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionSettings_Statics::NewProp_Result = { "Result", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetSessionSettings_Parms, Result), Z_Construct_UEnum_AdvancedSessions_EBlueprintResultSwitch, METADATA_PARAMS(0, nullptr) }; // 1157740906
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionSettings_Statics::PropPointers[] = {
@@ -1362,7 +1364,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionSettings_Statics::NewProp_Result,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionSettings_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionSettings_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "GetSessionSettings", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionSettings_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionSettings_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionSettings_Statics::AdvancedSessionsLibrary_eventGetSessionSettings_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionSettings_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionSettings_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionSettings_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "GetSessionSettings", Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionSettings_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionSettings_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionSettings_Statics::AdvancedSessionsLibrary_eventGetSessionSettings_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionSettings_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionSettings_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionSettings_Statics::AdvancedSessionsLibrary_eventGetSessionSettings_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionSettings()
 {
@@ -1391,9 +1393,9 @@ DEFINE_FUNCTION(UAdvancedSessionsLibrary::execGetSessionSettings)
 	UAdvancedSessionsLibrary::GetSessionSettings(Z_Param_WorldContextObject,Z_Param_Out_NumConnections,Z_Param_Out_NumPrivateConnections,Z_Param_Out_bIsLAN,Z_Param_Out_bIsDedicated,Z_Param_Out_bAllowInvites,Z_Param_Out_bAllowJoinInProgress,Z_Param_Out_bIsAnticheatEnabled,Z_Param_Out_BuildUniqueID,Z_Param_Out_ExtraSettings,(EBlueprintResultSwitch&)(Z_Param_Out_Result));
 	P_NATIVE_END;
 }
-// End Class UAdvancedSessionsLibrary Function GetSessionSettings
+// ********** End Class UAdvancedSessionsLibrary Function GetSessionSettings ***********************
 
-// Begin Class UAdvancedSessionsLibrary Function GetSessionState
+// ********** Begin Class UAdvancedSessionsLibrary Function GetSessionState ************************
 struct Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionState_Statics
 {
 	struct AdvancedSessionsLibrary_eventGetSessionState_Parms
@@ -1429,7 +1431,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionState_Statics::NewProp_SessionState,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionState_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionState_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "GetSessionState", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionState_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionState_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionState_Statics::AdvancedSessionsLibrary_eventGetSessionState_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionState_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionState_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionState_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "GetSessionState", Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionState_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionState_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionState_Statics::AdvancedSessionsLibrary_eventGetSessionState_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionState_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionState_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionState_Statics::AdvancedSessionsLibrary_eventGetSessionState_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionState()
 {
@@ -1449,9 +1451,9 @@ DEFINE_FUNCTION(UAdvancedSessionsLibrary::execGetSessionState)
 	UAdvancedSessionsLibrary::GetSessionState(Z_Param_WorldContextObject,(EBPOnlineSessionState&)(Z_Param_Out_SessionState));
 	P_NATIVE_END;
 }
-// End Class UAdvancedSessionsLibrary Function GetSessionState
+// ********** End Class UAdvancedSessionsLibrary Function GetSessionState **************************
 
-// Begin Class UAdvancedSessionsLibrary Function GetUniqueBuildID
+// ********** Begin Class UAdvancedSessionsLibrary Function GetUniqueBuildID ***********************
 struct Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueBuildID_Statics
 {
 	struct AdvancedSessionsLibrary_eventGetUniqueBuildID_Parms
@@ -1476,14 +1478,14 @@ struct Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueBuildID_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueBuildID_Statics::NewProp_SessionResult = { "SessionResult", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetUniqueBuildID_Parms, SessionResult), Z_Construct_UScriptStruct_FBlueprintSessionResult, METADATA_PARAMS(0, nullptr) }; // 1307808723
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueBuildID_Statics::NewProp_SessionResult = { "SessionResult", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetUniqueBuildID_Parms, SessionResult), Z_Construct_UScriptStruct_FBlueprintSessionResult, METADATA_PARAMS(0, nullptr) }; // 3859927135
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueBuildID_Statics::NewProp_UniqueBuildId = { "UniqueBuildId", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetUniqueBuildID_Parms, UniqueBuildId), METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueBuildID_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueBuildID_Statics::NewProp_SessionResult,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueBuildID_Statics::NewProp_UniqueBuildId,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueBuildID_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueBuildID_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "GetUniqueBuildID", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueBuildID_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueBuildID_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueBuildID_Statics::AdvancedSessionsLibrary_eventGetUniqueBuildID_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueBuildID_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueBuildID_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueBuildID_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "GetUniqueBuildID", Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueBuildID_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueBuildID_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueBuildID_Statics::AdvancedSessionsLibrary_eventGetUniqueBuildID_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueBuildID_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueBuildID_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueBuildID_Statics::AdvancedSessionsLibrary_eventGetUniqueBuildID_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueBuildID()
 {
@@ -1503,9 +1505,9 @@ DEFINE_FUNCTION(UAdvancedSessionsLibrary::execGetUniqueBuildID)
 	UAdvancedSessionsLibrary::GetUniqueBuildID(Z_Param_SessionResult,Z_Param_Out_UniqueBuildId);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSessionsLibrary Function GetUniqueBuildID
+// ********** End Class UAdvancedSessionsLibrary Function GetUniqueBuildID *************************
 
-// Begin Class UAdvancedSessionsLibrary Function GetUniqueNetID
+// ********** Begin Class UAdvancedSessionsLibrary Function GetUniqueNetID *************************
 struct Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetID_Statics
 {
 	struct AdvancedSessionsLibrary_eventGetUniqueNetID_Parms
@@ -1531,13 +1533,13 @@ struct Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetID_Statics
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetID_Statics::NewProp_PlayerController = { "PlayerController", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetUniqueNetID_Parms, PlayerController), Z_Construct_UClass_APlayerController_NoRegister, METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetID_Statics::NewProp_UniqueNetId = { "UniqueNetId", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetUniqueNetID_Parms, UniqueNetId), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(0, nullptr) }; // 700456651
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetID_Statics::NewProp_UniqueNetId = { "UniqueNetId", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetUniqueNetID_Parms, UniqueNetId), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(0, nullptr) }; // 2620465461
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetID_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetID_Statics::NewProp_PlayerController,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetID_Statics::NewProp_UniqueNetId,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetID_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetID_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "GetUniqueNetID", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetID_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetID_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetID_Statics::AdvancedSessionsLibrary_eventGetUniqueNetID_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetID_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetID_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetID_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "GetUniqueNetID", Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetID_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetID_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetID_Statics::AdvancedSessionsLibrary_eventGetUniqueNetID_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetID_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetID_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetID_Statics::AdvancedSessionsLibrary_eventGetUniqueNetID_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetID()
 {
@@ -1557,9 +1559,9 @@ DEFINE_FUNCTION(UAdvancedSessionsLibrary::execGetUniqueNetID)
 	UAdvancedSessionsLibrary::GetUniqueNetID(Z_Param_PlayerController,Z_Param_Out_UniqueNetId);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSessionsLibrary Function GetUniqueNetID
+// ********** End Class UAdvancedSessionsLibrary Function GetUniqueNetID ***************************
 
-// Begin Class UAdvancedSessionsLibrary Function GetUniqueNetIDFromPlayerState
+// ********** Begin Class UAdvancedSessionsLibrary Function GetUniqueNetIDFromPlayerState **********
 struct Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetIDFromPlayerState_Statics
 {
 	struct AdvancedSessionsLibrary_eventGetUniqueNetIDFromPlayerState_Parms
@@ -1585,13 +1587,13 @@ struct Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetIDFromPlayerSt
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetIDFromPlayerState_Statics::NewProp_PlayerState = { "PlayerState", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetUniqueNetIDFromPlayerState_Parms, PlayerState), Z_Construct_UClass_APlayerState_NoRegister, METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetIDFromPlayerState_Statics::NewProp_UniqueNetId = { "UniqueNetId", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetUniqueNetIDFromPlayerState_Parms, UniqueNetId), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(0, nullptr) }; // 700456651
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetIDFromPlayerState_Statics::NewProp_UniqueNetId = { "UniqueNetId", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventGetUniqueNetIDFromPlayerState_Parms, UniqueNetId), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(0, nullptr) }; // 2620465461
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetIDFromPlayerState_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetIDFromPlayerState_Statics::NewProp_PlayerState,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetIDFromPlayerState_Statics::NewProp_UniqueNetId,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetIDFromPlayerState_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetIDFromPlayerState_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "GetUniqueNetIDFromPlayerState", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetIDFromPlayerState_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetIDFromPlayerState_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetIDFromPlayerState_Statics::AdvancedSessionsLibrary_eventGetUniqueNetIDFromPlayerState_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetIDFromPlayerState_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetIDFromPlayerState_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetIDFromPlayerState_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "GetUniqueNetIDFromPlayerState", Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetIDFromPlayerState_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetIDFromPlayerState_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetIDFromPlayerState_Statics::AdvancedSessionsLibrary_eventGetUniqueNetIDFromPlayerState_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetIDFromPlayerState_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetIDFromPlayerState_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetIDFromPlayerState_Statics::AdvancedSessionsLibrary_eventGetUniqueNetIDFromPlayerState_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetIDFromPlayerState()
 {
@@ -1611,9 +1613,9 @@ DEFINE_FUNCTION(UAdvancedSessionsLibrary::execGetUniqueNetIDFromPlayerState)
 	UAdvancedSessionsLibrary::GetUniqueNetIDFromPlayerState(Z_Param_PlayerState,Z_Param_Out_UniqueNetId);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSessionsLibrary Function GetUniqueNetIDFromPlayerState
+// ********** End Class UAdvancedSessionsLibrary Function GetUniqueNetIDFromPlayerState ************
 
-// Begin Class UAdvancedSessionsLibrary Function HasOnlineSubsystem
+// ********** Begin Class UAdvancedSessionsLibrary Function HasOnlineSubsystem *********************
 struct Z_Construct_UFunction_UAdvancedSessionsLibrary_HasOnlineSubsystem_Statics
 {
 	struct AdvancedSessionsLibrary_eventHasOnlineSubsystem_Parms
@@ -1650,7 +1652,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_HasOnlineSubsystem_Statics::NewProp_ReturnValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_HasOnlineSubsystem_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_HasOnlineSubsystem_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "HasOnlineSubsystem", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSessionsLibrary_HasOnlineSubsystem_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_HasOnlineSubsystem_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_HasOnlineSubsystem_Statics::AdvancedSessionsLibrary_eventHasOnlineSubsystem_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_HasOnlineSubsystem_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_HasOnlineSubsystem_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_HasOnlineSubsystem_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "HasOnlineSubsystem", Z_Construct_UFunction_UAdvancedSessionsLibrary_HasOnlineSubsystem_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_HasOnlineSubsystem_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_HasOnlineSubsystem_Statics::AdvancedSessionsLibrary_eventHasOnlineSubsystem_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_HasOnlineSubsystem_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_HasOnlineSubsystem_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_HasOnlineSubsystem_Statics::AdvancedSessionsLibrary_eventHasOnlineSubsystem_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSessionsLibrary_HasOnlineSubsystem()
 {
@@ -1669,9 +1671,9 @@ DEFINE_FUNCTION(UAdvancedSessionsLibrary::execHasOnlineSubsystem)
 	*(bool*)Z_Param__Result=UAdvancedSessionsLibrary::HasOnlineSubsystem(Z_Param_SubSystemName);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSessionsLibrary Function HasOnlineSubsystem
+// ********** End Class UAdvancedSessionsLibrary Function HasOnlineSubsystem ***********************
 
-// Begin Class UAdvancedSessionsLibrary Function IsPlayerInSession
+// ********** Begin Class UAdvancedSessionsLibrary Function IsPlayerInSession **********************
 struct Z_Construct_UFunction_UAdvancedSessionsLibrary_IsPlayerInSession_Statics
 {
 	struct AdvancedSessionsLibrary_eventIsPlayerInSession_Parms
@@ -1704,7 +1706,7 @@ struct Z_Construct_UFunction_UAdvancedSessionsLibrary_IsPlayerInSession_Statics
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_IsPlayerInSession_Statics::NewProp_WorldContextObject = { "WorldContextObject", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventIsPlayerInSession_Parms, WorldContextObject), Z_Construct_UClass_UObject_NoRegister, METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_IsPlayerInSession_Statics::NewProp_PlayerToCheck = { "PlayerToCheck", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventIsPlayerInSession_Parms, PlayerToCheck), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PlayerToCheck_MetaData), NewProp_PlayerToCheck_MetaData) }; // 700456651
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_IsPlayerInSession_Statics::NewProp_PlayerToCheck = { "PlayerToCheck", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventIsPlayerInSession_Parms, PlayerToCheck), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PlayerToCheck_MetaData), NewProp_PlayerToCheck_MetaData) }; // 2620465461
 void Z_Construct_UFunction_UAdvancedSessionsLibrary_IsPlayerInSession_Statics::NewProp_bIsInSession_SetBit(void* Obj)
 {
 	((AdvancedSessionsLibrary_eventIsPlayerInSession_Parms*)Obj)->bIsInSession = 1;
@@ -1716,7 +1718,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_IsPlayerInSession_Statics::NewProp_bIsInSession,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_IsPlayerInSession_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_IsPlayerInSession_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "IsPlayerInSession", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSessionsLibrary_IsPlayerInSession_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_IsPlayerInSession_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_IsPlayerInSession_Statics::AdvancedSessionsLibrary_eventIsPlayerInSession_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_IsPlayerInSession_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_IsPlayerInSession_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_IsPlayerInSession_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "IsPlayerInSession", Z_Construct_UFunction_UAdvancedSessionsLibrary_IsPlayerInSession_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_IsPlayerInSession_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_IsPlayerInSession_Statics::AdvancedSessionsLibrary_eventIsPlayerInSession_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_IsPlayerInSession_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_IsPlayerInSession_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_IsPlayerInSession_Statics::AdvancedSessionsLibrary_eventIsPlayerInSession_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSessionsLibrary_IsPlayerInSession()
 {
@@ -1737,9 +1739,9 @@ DEFINE_FUNCTION(UAdvancedSessionsLibrary::execIsPlayerInSession)
 	UAdvancedSessionsLibrary::IsPlayerInSession(Z_Param_WorldContextObject,Z_Param_Out_PlayerToCheck,Z_Param_Out_bIsInSession);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSessionsLibrary Function IsPlayerInSession
+// ********** End Class UAdvancedSessionsLibrary Function IsPlayerInSession ************************
 
-// Begin Class UAdvancedSessionsLibrary Function IsValidSession
+// ********** Begin Class UAdvancedSessionsLibrary Function IsValidSession *************************
 struct Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidSession_Statics
 {
 	struct AdvancedSessionsLibrary_eventIsValidSession_Parms
@@ -1768,7 +1770,7 @@ struct Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidSession_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidSession_Statics::NewProp_SessionResult = { "SessionResult", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventIsValidSession_Parms, SessionResult), Z_Construct_UScriptStruct_FBlueprintSessionResult, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SessionResult_MetaData), NewProp_SessionResult_MetaData) }; // 1307808723
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidSession_Statics::NewProp_SessionResult = { "SessionResult", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventIsValidSession_Parms, SessionResult), Z_Construct_UScriptStruct_FBlueprintSessionResult, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SessionResult_MetaData), NewProp_SessionResult_MetaData) }; // 3859927135
 void Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidSession_Statics::NewProp_ReturnValue_SetBit(void* Obj)
 {
 	((AdvancedSessionsLibrary_eventIsValidSession_Parms*)Obj)->ReturnValue = 1;
@@ -1779,7 +1781,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidSession_Statics::NewProp_ReturnValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidSession_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidSession_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "IsValidSession", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidSession_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidSession_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidSession_Statics::AdvancedSessionsLibrary_eventIsValidSession_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidSession_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidSession_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidSession_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "IsValidSession", Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidSession_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidSession_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidSession_Statics::AdvancedSessionsLibrary_eventIsValidSession_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidSession_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidSession_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidSession_Statics::AdvancedSessionsLibrary_eventIsValidSession_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidSession()
 {
@@ -1798,9 +1800,9 @@ DEFINE_FUNCTION(UAdvancedSessionsLibrary::execIsValidSession)
 	*(bool*)Z_Param__Result=UAdvancedSessionsLibrary::IsValidSession(Z_Param_Out_SessionResult);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSessionsLibrary Function IsValidSession
+// ********** End Class UAdvancedSessionsLibrary Function IsValidSession ***************************
 
-// Begin Class UAdvancedSessionsLibrary Function IsValidUniqueNetID
+// ********** Begin Class UAdvancedSessionsLibrary Function IsValidUniqueNetID *********************
 struct Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidUniqueNetID_Statics
 {
 	struct AdvancedSessionsLibrary_eventIsValidUniqueNetID_Parms
@@ -1829,7 +1831,7 @@ struct Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidUniqueNetID_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidUniqueNetID_Statics::NewProp_UniqueNetId = { "UniqueNetId", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventIsValidUniqueNetID_Parms, UniqueNetId), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_UniqueNetId_MetaData), NewProp_UniqueNetId_MetaData) }; // 700456651
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidUniqueNetID_Statics::NewProp_UniqueNetId = { "UniqueNetId", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventIsValidUniqueNetID_Parms, UniqueNetId), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_UniqueNetId_MetaData), NewProp_UniqueNetId_MetaData) }; // 2620465461
 void Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidUniqueNetID_Statics::NewProp_ReturnValue_SetBit(void* Obj)
 {
 	((AdvancedSessionsLibrary_eventIsValidUniqueNetID_Parms*)Obj)->ReturnValue = 1;
@@ -1840,7 +1842,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidUniqueNetID_Statics::NewProp_ReturnValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidUniqueNetID_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidUniqueNetID_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "IsValidUniqueNetID", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidUniqueNetID_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidUniqueNetID_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidUniqueNetID_Statics::AdvancedSessionsLibrary_eventIsValidUniqueNetID_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidUniqueNetID_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidUniqueNetID_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidUniqueNetID_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "IsValidUniqueNetID", Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidUniqueNetID_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidUniqueNetID_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidUniqueNetID_Statics::AdvancedSessionsLibrary_eventIsValidUniqueNetID_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidUniqueNetID_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidUniqueNetID_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidUniqueNetID_Statics::AdvancedSessionsLibrary_eventIsValidUniqueNetID_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidUniqueNetID()
 {
@@ -1859,9 +1861,9 @@ DEFINE_FUNCTION(UAdvancedSessionsLibrary::execIsValidUniqueNetID)
 	*(bool*)Z_Param__Result=UAdvancedSessionsLibrary::IsValidUniqueNetID(Z_Param_Out_UniqueNetId);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSessionsLibrary Function IsValidUniqueNetID
+// ********** End Class UAdvancedSessionsLibrary Function IsValidUniqueNetID ***********************
 
-// Begin Class UAdvancedSessionsLibrary Function KickPlayer
+// ********** Begin Class UAdvancedSessionsLibrary Function KickPlayer *****************************
 struct Z_Construct_UFunction_UAdvancedSessionsLibrary_KickPlayer_Statics
 {
 	struct AdvancedSessionsLibrary_eventKickPlayer_Parms
@@ -1907,7 +1909,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_KickPlayer_Statics::NewProp_ReturnValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_KickPlayer_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_KickPlayer_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "KickPlayer", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSessionsLibrary_KickPlayer_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_KickPlayer_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_KickPlayer_Statics::AdvancedSessionsLibrary_eventKickPlayer_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_KickPlayer_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_KickPlayer_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_KickPlayer_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "KickPlayer", Z_Construct_UFunction_UAdvancedSessionsLibrary_KickPlayer_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_KickPlayer_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_KickPlayer_Statics::AdvancedSessionsLibrary_eventKickPlayer_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_KickPlayer_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_KickPlayer_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_KickPlayer_Statics::AdvancedSessionsLibrary_eventKickPlayer_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSessionsLibrary_KickPlayer()
 {
@@ -1928,9 +1930,9 @@ DEFINE_FUNCTION(UAdvancedSessionsLibrary::execKickPlayer)
 	*(bool*)Z_Param__Result=UAdvancedSessionsLibrary::KickPlayer(Z_Param_WorldContextObject,Z_Param_PlayerToKick,Z_Param_KickReason);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSessionsLibrary Function KickPlayer
+// ********** End Class UAdvancedSessionsLibrary Function KickPlayer *******************************
 
-// Begin Class UAdvancedSessionsLibrary Function MakeLiteralSessionPropertyBool
+// ********** Begin Class UAdvancedSessionsLibrary Function MakeLiteralSessionPropertyBool *********
 struct Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyBool_Statics
 {
 	struct AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyBool_Parms
@@ -1964,14 +1966,14 @@ void Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyBo
 	((AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyBool_Parms*)Obj)->Value = 1;
 }
 const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyBool_Statics::NewProp_Value = { "Value", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyBool_Parms), &Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyBool_Statics::NewProp_Value_SetBit, METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyBool_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyBool_Parms, ReturnValue), Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(0, nullptr) }; // 304289449
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyBool_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyBool_Parms, ReturnValue), Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(0, nullptr) }; // 3281033595
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyBool_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyBool_Statics::NewProp_Key,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyBool_Statics::NewProp_Value,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyBool_Statics::NewProp_ReturnValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyBool_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyBool_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "MakeLiteralSessionPropertyBool", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyBool_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyBool_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyBool_Statics::AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyBool_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyBool_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyBool_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyBool_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "MakeLiteralSessionPropertyBool", Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyBool_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyBool_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyBool_Statics::AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyBool_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyBool_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyBool_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyBool_Statics::AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyBool_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyBool()
 {
@@ -1991,9 +1993,9 @@ DEFINE_FUNCTION(UAdvancedSessionsLibrary::execMakeLiteralSessionPropertyBool)
 	*(FSessionPropertyKeyPair*)Z_Param__Result=UAdvancedSessionsLibrary::MakeLiteralSessionPropertyBool(Z_Param_Key,Z_Param_Value);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSessionsLibrary Function MakeLiteralSessionPropertyBool
+// ********** End Class UAdvancedSessionsLibrary Function MakeLiteralSessionPropertyBool ***********
 
-// Begin Class UAdvancedSessionsLibrary Function MakeLiteralSessionPropertyByte
+// ********** Begin Class UAdvancedSessionsLibrary Function MakeLiteralSessionPropertyByte *********
 struct Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyByte_Statics
 {
 	struct AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyByte_Parms
@@ -2022,14 +2024,14 @@ struct Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionProperty
 };
 const UECodeGen_Private::FNamePropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyByte_Statics::NewProp_Key = { "Key", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyByte_Parms, Key), METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FBytePropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyByte_Statics::NewProp_Value = { "Value", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyByte_Parms, Value), nullptr, METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyByte_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyByte_Parms, ReturnValue), Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(0, nullptr) }; // 304289449
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyByte_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyByte_Parms, ReturnValue), Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(0, nullptr) }; // 3281033595
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyByte_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyByte_Statics::NewProp_Key,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyByte_Statics::NewProp_Value,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyByte_Statics::NewProp_ReturnValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyByte_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyByte_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "MakeLiteralSessionPropertyByte", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyByte_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyByte_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyByte_Statics::AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyByte_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyByte_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyByte_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyByte_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "MakeLiteralSessionPropertyByte", Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyByte_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyByte_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyByte_Statics::AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyByte_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyByte_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyByte_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyByte_Statics::AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyByte_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyByte()
 {
@@ -2049,9 +2051,9 @@ DEFINE_FUNCTION(UAdvancedSessionsLibrary::execMakeLiteralSessionPropertyByte)
 	*(FSessionPropertyKeyPair*)Z_Param__Result=UAdvancedSessionsLibrary::MakeLiteralSessionPropertyByte(Z_Param_Key,Z_Param_Value);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSessionsLibrary Function MakeLiteralSessionPropertyByte
+// ********** End Class UAdvancedSessionsLibrary Function MakeLiteralSessionPropertyByte ***********
 
-// Begin Class UAdvancedSessionsLibrary Function MakeLiteralSessionPropertyFloat
+// ********** Begin Class UAdvancedSessionsLibrary Function MakeLiteralSessionPropertyFloat ********
 struct Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyFloat_Statics
 {
 	struct AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyFloat_Parms
@@ -2080,14 +2082,14 @@ struct Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionProperty
 };
 const UECodeGen_Private::FNamePropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyFloat_Statics::NewProp_Key = { "Key", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyFloat_Parms, Key), METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyFloat_Statics::NewProp_Value = { "Value", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyFloat_Parms, Value), METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyFloat_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyFloat_Parms, ReturnValue), Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(0, nullptr) }; // 304289449
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyFloat_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyFloat_Parms, ReturnValue), Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(0, nullptr) }; // 3281033595
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyFloat_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyFloat_Statics::NewProp_Key,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyFloat_Statics::NewProp_Value,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyFloat_Statics::NewProp_ReturnValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyFloat_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyFloat_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "MakeLiteralSessionPropertyFloat", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyFloat_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyFloat_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyFloat_Statics::AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyFloat_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyFloat_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyFloat_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyFloat_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "MakeLiteralSessionPropertyFloat", Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyFloat_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyFloat_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyFloat_Statics::AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyFloat_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyFloat_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyFloat_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyFloat_Statics::AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyFloat_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyFloat()
 {
@@ -2107,9 +2109,9 @@ DEFINE_FUNCTION(UAdvancedSessionsLibrary::execMakeLiteralSessionPropertyFloat)
 	*(FSessionPropertyKeyPair*)Z_Param__Result=UAdvancedSessionsLibrary::MakeLiteralSessionPropertyFloat(Z_Param_Key,Z_Param_Value);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSessionsLibrary Function MakeLiteralSessionPropertyFloat
+// ********** End Class UAdvancedSessionsLibrary Function MakeLiteralSessionPropertyFloat **********
 
-// Begin Class UAdvancedSessionsLibrary Function MakeLiteralSessionPropertyInt
+// ********** Begin Class UAdvancedSessionsLibrary Function MakeLiteralSessionPropertyInt **********
 struct Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyInt_Statics
 {
 	struct AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyInt_Parms
@@ -2138,14 +2140,14 @@ struct Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionProperty
 };
 const UECodeGen_Private::FNamePropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyInt_Statics::NewProp_Key = { "Key", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyInt_Parms, Key), METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyInt_Statics::NewProp_Value = { "Value", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyInt_Parms, Value), METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyInt_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyInt_Parms, ReturnValue), Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(0, nullptr) }; // 304289449
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyInt_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyInt_Parms, ReturnValue), Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(0, nullptr) }; // 3281033595
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyInt_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyInt_Statics::NewProp_Key,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyInt_Statics::NewProp_Value,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyInt_Statics::NewProp_ReturnValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyInt_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyInt_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "MakeLiteralSessionPropertyInt", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyInt_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyInt_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyInt_Statics::AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyInt_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyInt_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyInt_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyInt_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "MakeLiteralSessionPropertyInt", Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyInt_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyInt_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyInt_Statics::AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyInt_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyInt_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyInt_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyInt_Statics::AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyInt_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyInt()
 {
@@ -2165,9 +2167,9 @@ DEFINE_FUNCTION(UAdvancedSessionsLibrary::execMakeLiteralSessionPropertyInt)
 	*(FSessionPropertyKeyPair*)Z_Param__Result=UAdvancedSessionsLibrary::MakeLiteralSessionPropertyInt(Z_Param_Key,Z_Param_Value);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSessionsLibrary Function MakeLiteralSessionPropertyInt
+// ********** End Class UAdvancedSessionsLibrary Function MakeLiteralSessionPropertyInt ************
 
-// Begin Class UAdvancedSessionsLibrary Function MakeLiteralSessionPropertyString
+// ********** Begin Class UAdvancedSessionsLibrary Function MakeLiteralSessionPropertyString *******
 struct Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyString_Statics
 {
 	struct AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyString_Parms
@@ -2196,14 +2198,14 @@ struct Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionProperty
 };
 const UECodeGen_Private::FNamePropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyString_Statics::NewProp_Key = { "Key", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyString_Parms, Key), METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyString_Statics::NewProp_Value = { "Value", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyString_Parms, Value), METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyString_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyString_Parms, ReturnValue), Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(0, nullptr) }; // 304289449
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyString_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyString_Parms, ReturnValue), Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(0, nullptr) }; // 3281033595
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyString_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyString_Statics::NewProp_Key,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyString_Statics::NewProp_Value,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyString_Statics::NewProp_ReturnValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyString_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyString_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "MakeLiteralSessionPropertyString", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyString_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyString_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyString_Statics::AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyString_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyString_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyString_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyString_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "MakeLiteralSessionPropertyString", Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyString_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyString_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyString_Statics::AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyString_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyString_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyString_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyString_Statics::AdvancedSessionsLibrary_eventMakeLiteralSessionPropertyString_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyString()
 {
@@ -2223,9 +2225,9 @@ DEFINE_FUNCTION(UAdvancedSessionsLibrary::execMakeLiteralSessionPropertyString)
 	*(FSessionPropertyKeyPair*)Z_Param__Result=UAdvancedSessionsLibrary::MakeLiteralSessionPropertyString(Z_Param_Key,Z_Param_Value);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSessionsLibrary Function MakeLiteralSessionPropertyString
+// ********** End Class UAdvancedSessionsLibrary Function MakeLiteralSessionPropertyString *********
 
-// Begin Class UAdvancedSessionsLibrary Function MakeLiteralSessionSearchProperty
+// ********** Begin Class UAdvancedSessionsLibrary Function MakeLiteralSessionSearchProperty *******
 struct Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionSearchProperty_Statics
 {
 	struct AdvancedSessionsLibrary_eventMakeLiteralSessionSearchProperty_Parms
@@ -2253,10 +2255,10 @@ struct Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionSearchPr
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionSearchProperty_Statics::NewProp_SessionSearchProperty = { "SessionSearchProperty", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventMakeLiteralSessionSearchProperty_Parms, SessionSearchProperty), Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(0, nullptr) }; // 304289449
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionSearchProperty_Statics::NewProp_SessionSearchProperty = { "SessionSearchProperty", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventMakeLiteralSessionSearchProperty_Parms, SessionSearchProperty), Z_Construct_UScriptStruct_FSessionPropertyKeyPair, METADATA_PARAMS(0, nullptr) }; // 3281033595
 const UECodeGen_Private::FBytePropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionSearchProperty_Statics::NewProp_ComparisonOp_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionSearchProperty_Statics::NewProp_ComparisonOp = { "ComparisonOp", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventMakeLiteralSessionSearchProperty_Parms, ComparisonOp), Z_Construct_UEnum_AdvancedSessions_EOnlineComparisonOpRedux, METADATA_PARAMS(0, nullptr) }; // 4002211731
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionSearchProperty_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventMakeLiteralSessionSearchProperty_Parms, ReturnValue), Z_Construct_UScriptStruct_FSessionsSearchSetting, METADATA_PARAMS(0, nullptr) }; // 4243169235
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionSearchProperty_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventMakeLiteralSessionSearchProperty_Parms, ReturnValue), Z_Construct_UScriptStruct_FSessionsSearchSetting, METADATA_PARAMS(0, nullptr) }; // 2206548994
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionSearchProperty_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionSearchProperty_Statics::NewProp_SessionSearchProperty,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionSearchProperty_Statics::NewProp_ComparisonOp_Underlying,
@@ -2264,7 +2266,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionSearchProperty_Statics::NewProp_ReturnValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionSearchProperty_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionSearchProperty_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "MakeLiteralSessionSearchProperty", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionSearchProperty_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionSearchProperty_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionSearchProperty_Statics::AdvancedSessionsLibrary_eventMakeLiteralSessionSearchProperty_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionSearchProperty_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionSearchProperty_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionSearchProperty_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "MakeLiteralSessionSearchProperty", Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionSearchProperty_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionSearchProperty_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionSearchProperty_Statics::AdvancedSessionsLibrary_eventMakeLiteralSessionSearchProperty_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionSearchProperty_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionSearchProperty_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionSearchProperty_Statics::AdvancedSessionsLibrary_eventMakeLiteralSessionSearchProperty_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionSearchProperty()
 {
@@ -2284,9 +2286,9 @@ DEFINE_FUNCTION(UAdvancedSessionsLibrary::execMakeLiteralSessionSearchProperty)
 	*(FSessionsSearchSetting*)Z_Param__Result=UAdvancedSessionsLibrary::MakeLiteralSessionSearchProperty(Z_Param_SessionSearchProperty,EOnlineComparisonOpRedux(Z_Param_ComparisonOp));
 	P_NATIVE_END;
 }
-// End Class UAdvancedSessionsLibrary Function MakeLiteralSessionSearchProperty
+// ********** End Class UAdvancedSessionsLibrary Function MakeLiteralSessionSearchProperty *********
 
-// Begin Class UAdvancedSessionsLibrary Function ServerTravel
+// ********** Begin Class UAdvancedSessionsLibrary Function ServerTravel ***************************
 struct Z_Construct_UFunction_UAdvancedSessionsLibrary_ServerTravel_Statics
 {
 	struct AdvancedSessionsLibrary_eventServerTravel_Parms
@@ -2350,7 +2352,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_ServerTravel_Statics::NewProp_ReturnValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_ServerTravel_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_ServerTravel_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "ServerTravel", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSessionsLibrary_ServerTravel_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_ServerTravel_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_ServerTravel_Statics::AdvancedSessionsLibrary_eventServerTravel_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022405, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_ServerTravel_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_ServerTravel_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_ServerTravel_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "ServerTravel", Z_Construct_UFunction_UAdvancedSessionsLibrary_ServerTravel_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_ServerTravel_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_ServerTravel_Statics::AdvancedSessionsLibrary_eventServerTravel_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022405, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_ServerTravel_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_ServerTravel_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_ServerTravel_Statics::AdvancedSessionsLibrary_eventServerTravel_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSessionsLibrary_ServerTravel()
 {
@@ -2372,9 +2374,9 @@ DEFINE_FUNCTION(UAdvancedSessionsLibrary::execServerTravel)
 	*(bool*)Z_Param__Result=UAdvancedSessionsLibrary::ServerTravel(Z_Param_WorldContextObject,Z_Param_InURL,Z_Param_bAbsolute,Z_Param_bShouldSkipGameNotify);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSessionsLibrary Function ServerTravel
+// ********** End Class UAdvancedSessionsLibrary Function ServerTravel *****************************
 
-// Begin Class UAdvancedSessionsLibrary Function SetPlayerName
+// ********** Begin Class UAdvancedSessionsLibrary Function SetPlayerName **************************
 struct Z_Construct_UFunction_UAdvancedSessionsLibrary_SetPlayerName_Statics
 {
 	struct AdvancedSessionsLibrary_eventSetPlayerName_Parms
@@ -2406,7 +2408,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvan
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_SetPlayerName_Statics::NewProp_PlayerName,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_SetPlayerName_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_SetPlayerName_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "SetPlayerName", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSessionsLibrary_SetPlayerName_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_SetPlayerName_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_SetPlayerName_Statics::AdvancedSessionsLibrary_eventSetPlayerName_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_SetPlayerName_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_SetPlayerName_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_SetPlayerName_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "SetPlayerName", Z_Construct_UFunction_UAdvancedSessionsLibrary_SetPlayerName_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_SetPlayerName_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_SetPlayerName_Statics::AdvancedSessionsLibrary_eventSetPlayerName_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_SetPlayerName_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_SetPlayerName_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_SetPlayerName_Statics::AdvancedSessionsLibrary_eventSetPlayerName_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSessionsLibrary_SetPlayerName()
 {
@@ -2426,9 +2428,9 @@ DEFINE_FUNCTION(UAdvancedSessionsLibrary::execSetPlayerName)
 	UAdvancedSessionsLibrary::SetPlayerName(Z_Param_PlayerController,Z_Param_PlayerName);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSessionsLibrary Function SetPlayerName
+// ********** End Class UAdvancedSessionsLibrary Function SetPlayerName ****************************
 
-// Begin Class UAdvancedSessionsLibrary Function UniqueNetIdToString
+// ********** Begin Class UAdvancedSessionsLibrary Function UniqueNetIdToString ********************
 struct Z_Construct_UFunction_UAdvancedSessionsLibrary_UniqueNetIdToString_Statics
 {
 	struct AdvancedSessionsLibrary_eventUniqueNetIdToString_Parms
@@ -2456,14 +2458,14 @@ struct Z_Construct_UFunction_UAdvancedSessionsLibrary_UniqueNetIdToString_Static
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_UniqueNetIdToString_Statics::NewProp_UniqueNetId = { "UniqueNetId", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventUniqueNetIdToString_Parms, UniqueNetId), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_UniqueNetId_MetaData), NewProp_UniqueNetId_MetaData) }; // 700456651
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_UniqueNetIdToString_Statics::NewProp_UniqueNetId = { "UniqueNetId", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventUniqueNetIdToString_Parms, UniqueNetId), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_UniqueNetId_MetaData), NewProp_UniqueNetId_MetaData) }; // 2620465461
 const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UAdvancedSessionsLibrary_UniqueNetIdToString_Statics::NewProp_String = { "String", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedSessionsLibrary_eventUniqueNetIdToString_Parms, String), METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvancedSessionsLibrary_UniqueNetIdToString_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_UniqueNetIdToString_Statics::NewProp_UniqueNetId,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedSessionsLibrary_UniqueNetIdToString_Statics::NewProp_String,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_UniqueNetIdToString_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_UniqueNetIdToString_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "UniqueNetIdToString", nullptr, nullptr, Z_Construct_UFunction_UAdvancedSessionsLibrary_UniqueNetIdToString_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_UniqueNetIdToString_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_UniqueNetIdToString_Statics::AdvancedSessionsLibrary_eventUniqueNetIdToString_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_UniqueNetIdToString_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_UniqueNetIdToString_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedSessionsLibrary_UniqueNetIdToString_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UAdvancedSessionsLibrary, nullptr, "UniqueNetIdToString", Z_Construct_UFunction_UAdvancedSessionsLibrary_UniqueNetIdToString_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_UniqueNetIdToString_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_UniqueNetIdToString_Statics::AdvancedSessionsLibrary_eventUniqueNetIdToString_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedSessionsLibrary_UniqueNetIdToString_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedSessionsLibrary_UniqueNetIdToString_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UAdvancedSessionsLibrary_UniqueNetIdToString_Statics::AdvancedSessionsLibrary_eventUniqueNetIdToString_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAdvancedSessionsLibrary_UniqueNetIdToString()
 {
@@ -2483,9 +2485,9 @@ DEFINE_FUNCTION(UAdvancedSessionsLibrary::execUniqueNetIdToString)
 	UAdvancedSessionsLibrary::UniqueNetIdToString(Z_Param_Out_UniqueNetId,Z_Param_Out_String);
 	P_NATIVE_END;
 }
-// End Class UAdvancedSessionsLibrary Function UniqueNetIdToString
+// ********** End Class UAdvancedSessionsLibrary Function UniqueNetIdToString **********************
 
-// Begin Class UAdvancedSessionsLibrary
+// ********** Begin Class UAdvancedSessionsLibrary *************************************************
 void UAdvancedSessionsLibrary::StaticRegisterNativesUAdvancedSessionsLibrary()
 {
 	UClass* Class = UAdvancedSessionsLibrary::StaticClass();
@@ -2531,10 +2533,34 @@ void UAdvancedSessionsLibrary::StaticRegisterNativesUAdvancedSessionsLibrary()
 	};
 	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 }
-IMPLEMENT_CLASS_NO_AUTO_REGISTRATION(UAdvancedSessionsLibrary);
+FClassRegistrationInfo Z_Registration_Info_UClass_UAdvancedSessionsLibrary;
+UClass* UAdvancedSessionsLibrary::GetPrivateStaticClass()
+{
+	using TClass = UAdvancedSessionsLibrary;
+	if (!Z_Registration_Info_UClass_UAdvancedSessionsLibrary.InnerSingleton)
+	{
+		GetPrivateStaticClassBody(
+			StaticPackage(),
+			TEXT("AdvancedSessionsLibrary"),
+			Z_Registration_Info_UClass_UAdvancedSessionsLibrary.InnerSingleton,
+			StaticRegisterNativesUAdvancedSessionsLibrary,
+			sizeof(TClass),
+			alignof(TClass),
+			TClass::StaticClassFlags,
+			TClass::StaticClassCastFlags(),
+			TClass::StaticConfigName(),
+			(UClass::ClassConstructorType)InternalConstructor<TClass>,
+			(UClass::ClassVTableHelperCtorCallerType)InternalVTableHelperCtorCaller<TClass>,
+			UOBJECT_CPPCLASS_STATICFUNCTIONS_FORCLASS(TClass),
+			&TClass::Super::StaticClass,
+			&TClass::WithinClass::StaticClass
+		);
+	}
+	return Z_Registration_Info_UClass_UAdvancedSessionsLibrary.InnerSingleton;
+}
 UClass* Z_Construct_UClass_UAdvancedSessionsLibrary_NoRegister()
 {
-	return UAdvancedSessionsLibrary::StaticClass();
+	return UAdvancedSessionsLibrary::GetPrivateStaticClass();
 }
 struct Z_Construct_UClass_UAdvancedSessionsLibrary_Statics
 {
@@ -2546,44 +2572,44 @@ struct Z_Construct_UClass_UAdvancedSessionsLibrary_Statics
 #endif // WITH_METADATA
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_AddOrModifyExtraSettings, "AddOrModifyExtraSettings" }, // 2902376221
-		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_BanPlayer, "BanPlayer" }, // 3928408214
-		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_Conv_BPUniqueIDToUniqueNetIDRepl, "Conv_BPUniqueIDToUniqueNetIDRepl" }, // 652655457
-		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_EqualEqual_UNetIDUnetID, "EqualEqual_UNetIDUnetID" }, // 3137044768
-		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyByName, "FindSessionPropertyByName" }, // 4197125477
-		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyIndexByName, "FindSessionPropertyIndexByName" }, // 3326723576
-		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_GetCurrentSessionID_AsString, "GetCurrentSessionID_AsString" }, // 1085006594
-		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_GetCurrentUniqueBuildID, "GetCurrentUniqueBuildID" }, // 4036300519
-		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_GetExtraSettings, "GetExtraSettings" }, // 1475578501
-		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_GetNetPlayerIndex, "GetNetPlayerIndex" }, // 3192867927
-		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_GetNumberOfNetworkPlayers, "GetNumberOfNetworkPlayers" }, // 2735412775
-		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_GetPlayerName, "GetPlayerName" }, // 4120329675
-		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionID_AsString, "GetSessionID_AsString" }, // 2521110756
-		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyBool, "GetSessionPropertyBool" }, // 1922888190
-		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyByte, "GetSessionPropertyByte" }, // 3706765391
-		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyFloat, "GetSessionPropertyFloat" }, // 377309205
-		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyInt, "GetSessionPropertyInt" }, // 892870906
-		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyKey, "GetSessionPropertyKey" }, // 1554919903
-		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyString, "GetSessionPropertyString" }, // 3996568596
-		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionSettings, "GetSessionSettings" }, // 2525446462
-		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionState, "GetSessionState" }, // 3107666132
-		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueBuildID, "GetUniqueBuildID" }, // 4021627990
-		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetID, "GetUniqueNetID" }, // 303639147
-		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetIDFromPlayerState, "GetUniqueNetIDFromPlayerState" }, // 3354004582
-		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_HasOnlineSubsystem, "HasOnlineSubsystem" }, // 4232738578
-		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_IsPlayerInSession, "IsPlayerInSession" }, // 2155517989
-		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidSession, "IsValidSession" }, // 1341791316
-		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidUniqueNetID, "IsValidUniqueNetID" }, // 477622664
-		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_KickPlayer, "KickPlayer" }, // 2648825375
-		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyBool, "MakeLiteralSessionPropertyBool" }, // 3344487955
-		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyByte, "MakeLiteralSessionPropertyByte" }, // 940432236
-		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyFloat, "MakeLiteralSessionPropertyFloat" }, // 1658737756
-		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyInt, "MakeLiteralSessionPropertyInt" }, // 2340928845
-		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyString, "MakeLiteralSessionPropertyString" }, // 980406887
-		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionSearchProperty, "MakeLiteralSessionSearchProperty" }, // 1918759862
-		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_ServerTravel, "ServerTravel" }, // 3087032475
-		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_SetPlayerName, "SetPlayerName" }, // 3636490218
-		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_UniqueNetIdToString, "UniqueNetIdToString" }, // 817116503
+		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_AddOrModifyExtraSettings, "AddOrModifyExtraSettings" }, // 1749067457
+		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_BanPlayer, "BanPlayer" }, // 1991984359
+		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_Conv_BPUniqueIDToUniqueNetIDRepl, "Conv_BPUniqueIDToUniqueNetIDRepl" }, // 2935490196
+		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_EqualEqual_UNetIDUnetID, "EqualEqual_UNetIDUnetID" }, // 3248771617
+		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyByName, "FindSessionPropertyByName" }, // 4199534411
+		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_FindSessionPropertyIndexByName, "FindSessionPropertyIndexByName" }, // 2325582761
+		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_GetCurrentSessionID_AsString, "GetCurrentSessionID_AsString" }, // 2580674545
+		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_GetCurrentUniqueBuildID, "GetCurrentUniqueBuildID" }, // 1825272882
+		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_GetExtraSettings, "GetExtraSettings" }, // 2130221624
+		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_GetNetPlayerIndex, "GetNetPlayerIndex" }, // 1184313852
+		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_GetNumberOfNetworkPlayers, "GetNumberOfNetworkPlayers" }, // 2893069994
+		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_GetPlayerName, "GetPlayerName" }, // 3062695116
+		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionID_AsString, "GetSessionID_AsString" }, // 1087362312
+		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyBool, "GetSessionPropertyBool" }, // 1169707568
+		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyByte, "GetSessionPropertyByte" }, // 3780074044
+		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyFloat, "GetSessionPropertyFloat" }, // 627449159
+		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyInt, "GetSessionPropertyInt" }, // 2000627370
+		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyKey, "GetSessionPropertyKey" }, // 3180443378
+		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionPropertyString, "GetSessionPropertyString" }, // 747131803
+		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionSettings, "GetSessionSettings" }, // 2174796690
+		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_GetSessionState, "GetSessionState" }, // 2075876163
+		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueBuildID, "GetUniqueBuildID" }, // 2931230031
+		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetID, "GetUniqueNetID" }, // 2890823866
+		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_GetUniqueNetIDFromPlayerState, "GetUniqueNetIDFromPlayerState" }, // 3831074130
+		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_HasOnlineSubsystem, "HasOnlineSubsystem" }, // 2599786184
+		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_IsPlayerInSession, "IsPlayerInSession" }, // 3004296143
+		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidSession, "IsValidSession" }, // 2163799960
+		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_IsValidUniqueNetID, "IsValidUniqueNetID" }, // 1951390125
+		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_KickPlayer, "KickPlayer" }, // 2591404997
+		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyBool, "MakeLiteralSessionPropertyBool" }, // 3247378650
+		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyByte, "MakeLiteralSessionPropertyByte" }, // 3316382285
+		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyFloat, "MakeLiteralSessionPropertyFloat" }, // 1538783790
+		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyInt, "MakeLiteralSessionPropertyInt" }, // 1367067125
+		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionPropertyString, "MakeLiteralSessionPropertyString" }, // 2482888549
+		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_MakeLiteralSessionSearchProperty, "MakeLiteralSessionSearchProperty" }, // 1168434706
+		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_ServerTravel, "ServerTravel" }, // 3377211155
+		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_SetPlayerName, "SetPlayerName" }, // 1795738194
+		{ &Z_Construct_UFunction_UAdvancedSessionsLibrary_UniqueNetIdToString, "UniqueNetIdToString" }, // 2338019704
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -2619,25 +2645,22 @@ UClass* Z_Construct_UClass_UAdvancedSessionsLibrary()
 	}
 	return Z_Registration_Info_UClass_UAdvancedSessionsLibrary.OuterSingleton;
 }
-template<> ADVANCEDSESSIONS_API UClass* StaticClass<UAdvancedSessionsLibrary>()
-{
-	return UAdvancedSessionsLibrary::StaticClass();
-}
 UAdvancedSessionsLibrary::UAdvancedSessionsLibrary(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {}
 DEFINE_VTABLE_PTR_HELPER_CTOR(UAdvancedSessionsLibrary);
 UAdvancedSessionsLibrary::~UAdvancedSessionsLibrary() {}
-// End Class UAdvancedSessionsLibrary
+// ********** End Class UAdvancedSessionsLibrary ***************************************************
 
-// Begin Registration
-struct Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedSessionsLibrary_h_Statics
+// ********** Begin Registration *******************************************************************
+struct Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedSessionsLibrary_h__Script_AdvancedSessions_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UAdvancedSessionsLibrary, UAdvancedSessionsLibrary::StaticClass, TEXT("UAdvancedSessionsLibrary"), &Z_Registration_Info_UClass_UAdvancedSessionsLibrary, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAdvancedSessionsLibrary), 2946818799U) },
+		{ Z_Construct_UClass_UAdvancedSessionsLibrary, UAdvancedSessionsLibrary::StaticClass, TEXT("UAdvancedSessionsLibrary"), &Z_Registration_Info_UClass_UAdvancedSessionsLibrary, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAdvancedSessionsLibrary), 3834618282U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedSessionsLibrary_h_3631478302(TEXT("/Script/AdvancedSessions"),
-	Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedSessionsLibrary_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedSessionsLibrary_h_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedSessionsLibrary_h__Script_AdvancedSessions_1082032778(TEXT("/Script/AdvancedSessions"),
+	Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedSessionsLibrary_h__Script_AdvancedSessions_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedSessionsLibrary_h__Script_AdvancedSessions_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
-// End Registration
+// ********** End Registration *********************************************************************
+
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

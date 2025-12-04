@@ -5,11 +5,13 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#include "AdvancedSessions/Classes/CancelFindSessionsCallbackProxy.h"
+#include "CancelFindSessionsCallbackProxy.h"
+
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+
 void EmptyLinkFunctionForGeneratedCodeCancelFindSessionsCallbackProxy() {}
 
-// Begin Cross Module References
+// ********** Begin Cross Module References ********************************************************
 ADVANCEDSESSIONS_API UClass* Z_Construct_UClass_UCancelFindSessionsCallbackProxy();
 ADVANCEDSESSIONS_API UClass* Z_Construct_UClass_UCancelFindSessionsCallbackProxy_NoRegister();
 COREUOBJECT_API UClass* Z_Construct_UClass_UObject_NoRegister();
@@ -17,9 +19,9 @@ ENGINE_API UClass* Z_Construct_UClass_APlayerController_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_UOnlineBlueprintCallProxyBase();
 ENGINE_API UFunction* Z_Construct_UDelegateFunction_Engine_EmptyOnlineDelegate__DelegateSignature();
 UPackage* Z_Construct_UPackage__Script_AdvancedSessions();
-// End Cross Module References
+// ********** End Cross Module References **********************************************************
 
-// Begin Class UCancelFindSessionsCallbackProxy Function CancelFindSessions
+// ********** Begin Class UCancelFindSessionsCallbackProxy Function CancelFindSessions *************
 struct Z_Construct_UFunction_UCancelFindSessionsCallbackProxy_CancelFindSessions_Statics
 {
 	struct CancelFindSessionsCallbackProxy_eventCancelFindSessions_Parms
@@ -57,7 +59,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UCance
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UCancelFindSessionsCallbackProxy_CancelFindSessions_Statics::NewProp_ReturnValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UCancelFindSessionsCallbackProxy_CancelFindSessions_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UCancelFindSessionsCallbackProxy_CancelFindSessions_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UCancelFindSessionsCallbackProxy, nullptr, "CancelFindSessions", nullptr, nullptr, Z_Construct_UFunction_UCancelFindSessionsCallbackProxy_CancelFindSessions_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UCancelFindSessionsCallbackProxy_CancelFindSessions_Statics::PropPointers), sizeof(Z_Construct_UFunction_UCancelFindSessionsCallbackProxy_CancelFindSessions_Statics::CancelFindSessionsCallbackProxy_eventCancelFindSessions_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UCancelFindSessionsCallbackProxy_CancelFindSessions_Statics::Function_MetaDataParams), Z_Construct_UFunction_UCancelFindSessionsCallbackProxy_CancelFindSessions_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UCancelFindSessionsCallbackProxy_CancelFindSessions_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UCancelFindSessionsCallbackProxy, nullptr, "CancelFindSessions", Z_Construct_UFunction_UCancelFindSessionsCallbackProxy_CancelFindSessions_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UCancelFindSessionsCallbackProxy_CancelFindSessions_Statics::PropPointers), sizeof(Z_Construct_UFunction_UCancelFindSessionsCallbackProxy_CancelFindSessions_Statics::CancelFindSessionsCallbackProxy_eventCancelFindSessions_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UCancelFindSessionsCallbackProxy_CancelFindSessions_Statics::Function_MetaDataParams), Z_Construct_UFunction_UCancelFindSessionsCallbackProxy_CancelFindSessions_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_UCancelFindSessionsCallbackProxy_CancelFindSessions_Statics::CancelFindSessionsCallbackProxy_eventCancelFindSessions_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UCancelFindSessionsCallbackProxy_CancelFindSessions()
 {
@@ -77,9 +79,9 @@ DEFINE_FUNCTION(UCancelFindSessionsCallbackProxy::execCancelFindSessions)
 	*(UCancelFindSessionsCallbackProxy**)Z_Param__Result=UCancelFindSessionsCallbackProxy::CancelFindSessions(Z_Param_WorldContextObject,Z_Param_PlayerController);
 	P_NATIVE_END;
 }
-// End Class UCancelFindSessionsCallbackProxy Function CancelFindSessions
+// ********** End Class UCancelFindSessionsCallbackProxy Function CancelFindSessions ***************
 
-// Begin Class UCancelFindSessionsCallbackProxy
+// ********** Begin Class UCancelFindSessionsCallbackProxy *****************************************
 void UCancelFindSessionsCallbackProxy::StaticRegisterNativesUCancelFindSessionsCallbackProxy()
 {
 	UClass* Class = UCancelFindSessionsCallbackProxy::StaticClass();
@@ -88,10 +90,34 @@ void UCancelFindSessionsCallbackProxy::StaticRegisterNativesUCancelFindSessionsC
 	};
 	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 }
-IMPLEMENT_CLASS_NO_AUTO_REGISTRATION(UCancelFindSessionsCallbackProxy);
+FClassRegistrationInfo Z_Registration_Info_UClass_UCancelFindSessionsCallbackProxy;
+UClass* UCancelFindSessionsCallbackProxy::GetPrivateStaticClass()
+{
+	using TClass = UCancelFindSessionsCallbackProxy;
+	if (!Z_Registration_Info_UClass_UCancelFindSessionsCallbackProxy.InnerSingleton)
+	{
+		GetPrivateStaticClassBody(
+			StaticPackage(),
+			TEXT("CancelFindSessionsCallbackProxy"),
+			Z_Registration_Info_UClass_UCancelFindSessionsCallbackProxy.InnerSingleton,
+			StaticRegisterNativesUCancelFindSessionsCallbackProxy,
+			sizeof(TClass),
+			alignof(TClass),
+			TClass::StaticClassFlags,
+			TClass::StaticClassCastFlags(),
+			TClass::StaticConfigName(),
+			(UClass::ClassConstructorType)InternalConstructor<TClass>,
+			(UClass::ClassVTableHelperCtorCallerType)InternalVTableHelperCtorCaller<TClass>,
+			UOBJECT_CPPCLASS_STATICFUNCTIONS_FORCLASS(TClass),
+			&TClass::Super::StaticClass,
+			&TClass::WithinClass::StaticClass
+		);
+	}
+	return Z_Registration_Info_UClass_UCancelFindSessionsCallbackProxy.InnerSingleton;
+}
 UClass* Z_Construct_UClass_UCancelFindSessionsCallbackProxy_NoRegister()
 {
-	return UCancelFindSessionsCallbackProxy::StaticClass();
+	return UCancelFindSessionsCallbackProxy::GetPrivateStaticClass();
 }
 struct Z_Construct_UClass_UCancelFindSessionsCallbackProxy_Statics
 {
@@ -124,7 +150,7 @@ struct Z_Construct_UClass_UCancelFindSessionsCallbackProxy_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_UCancelFindSessionsCallbackProxy_CancelFindSessions, "CancelFindSessions" }, // 1787130798
+		{ &Z_Construct_UFunction_UCancelFindSessionsCallbackProxy_CancelFindSessions, "CancelFindSessions" }, // 1944376794
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -132,8 +158,8 @@ struct Z_Construct_UClass_UCancelFindSessionsCallbackProxy_Statics
 	};
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
-const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UCancelFindSessionsCallbackProxy_Statics::NewProp_OnSuccess = { "OnSuccess", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UCancelFindSessionsCallbackProxy, OnSuccess), Z_Construct_UDelegateFunction_Engine_EmptyOnlineDelegate__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnSuccess_MetaData), NewProp_OnSuccess_MetaData) }; // 2328757345
-const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UCancelFindSessionsCallbackProxy_Statics::NewProp_OnFailure = { "OnFailure", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UCancelFindSessionsCallbackProxy, OnFailure), Z_Construct_UDelegateFunction_Engine_EmptyOnlineDelegate__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnFailure_MetaData), NewProp_OnFailure_MetaData) }; // 2328757345
+const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UCancelFindSessionsCallbackProxy_Statics::NewProp_OnSuccess = { "OnSuccess", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UCancelFindSessionsCallbackProxy, OnSuccess), Z_Construct_UDelegateFunction_Engine_EmptyOnlineDelegate__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnSuccess_MetaData), NewProp_OnSuccess_MetaData) }; // 1205031399
+const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UCancelFindSessionsCallbackProxy_Statics::NewProp_OnFailure = { "OnFailure", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UCancelFindSessionsCallbackProxy, OnFailure), Z_Construct_UDelegateFunction_Engine_EmptyOnlineDelegate__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnFailure_MetaData), NewProp_OnFailure_MetaData) }; // 1205031399
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UCancelFindSessionsCallbackProxy_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UCancelFindSessionsCallbackProxy_Statics::NewProp_OnSuccess,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UCancelFindSessionsCallbackProxy_Statics::NewProp_OnFailure,
@@ -167,24 +193,21 @@ UClass* Z_Construct_UClass_UCancelFindSessionsCallbackProxy()
 	}
 	return Z_Registration_Info_UClass_UCancelFindSessionsCallbackProxy.OuterSingleton;
 }
-template<> ADVANCEDSESSIONS_API UClass* StaticClass<UCancelFindSessionsCallbackProxy>()
-{
-	return UCancelFindSessionsCallbackProxy::StaticClass();
-}
 DEFINE_VTABLE_PTR_HELPER_CTOR(UCancelFindSessionsCallbackProxy);
 UCancelFindSessionsCallbackProxy::~UCancelFindSessionsCallbackProxy() {}
-// End Class UCancelFindSessionsCallbackProxy
+// ********** End Class UCancelFindSessionsCallbackProxy *******************************************
 
-// Begin Registration
-struct Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_CancelFindSessionsCallbackProxy_h_Statics
+// ********** Begin Registration *******************************************************************
+struct Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_CancelFindSessionsCallbackProxy_h__Script_AdvancedSessions_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UCancelFindSessionsCallbackProxy, UCancelFindSessionsCallbackProxy::StaticClass, TEXT("UCancelFindSessionsCallbackProxy"), &Z_Registration_Info_UClass_UCancelFindSessionsCallbackProxy, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UCancelFindSessionsCallbackProxy), 3686568427U) },
+		{ Z_Construct_UClass_UCancelFindSessionsCallbackProxy, UCancelFindSessionsCallbackProxy::StaticClass, TEXT("UCancelFindSessionsCallbackProxy"), &Z_Registration_Info_UClass_UCancelFindSessionsCallbackProxy, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UCancelFindSessionsCallbackProxy), 1431818513U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_CancelFindSessionsCallbackProxy_h_1644898559(TEXT("/Script/AdvancedSessions"),
-	Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_CancelFindSessionsCallbackProxy_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_CancelFindSessionsCallbackProxy_h_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_CancelFindSessionsCallbackProxy_h__Script_AdvancedSessions_608511355(TEXT("/Script/AdvancedSessions"),
+	Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_CancelFindSessionsCallbackProxy_h__Script_AdvancedSessions_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_CancelFindSessionsCallbackProxy_h__Script_AdvancedSessions_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
-// End Registration
+// ********** End Registration *********************************************************************
+
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

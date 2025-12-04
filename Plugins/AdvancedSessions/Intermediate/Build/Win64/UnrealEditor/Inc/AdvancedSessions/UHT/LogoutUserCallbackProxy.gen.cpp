@@ -5,11 +5,13 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#include "AdvancedSessions/Classes/LogoutUserCallbackProxy.h"
+#include "LogoutUserCallbackProxy.h"
+
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+
 void EmptyLinkFunctionForGeneratedCodeLogoutUserCallbackProxy() {}
 
-// Begin Cross Module References
+// ********** Begin Cross Module References ********************************************************
 ADVANCEDSESSIONS_API UClass* Z_Construct_UClass_ULogoutUserCallbackProxy();
 ADVANCEDSESSIONS_API UClass* Z_Construct_UClass_ULogoutUserCallbackProxy_NoRegister();
 COREUOBJECT_API UClass* Z_Construct_UClass_UObject_NoRegister();
@@ -17,9 +19,9 @@ ENGINE_API UClass* Z_Construct_UClass_APlayerController_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_UOnlineBlueprintCallProxyBase();
 ENGINE_API UFunction* Z_Construct_UDelegateFunction_Engine_EmptyOnlineDelegate__DelegateSignature();
 UPackage* Z_Construct_UPackage__Script_AdvancedSessions();
-// End Cross Module References
+// ********** End Cross Module References **********************************************************
 
-// Begin Class ULogoutUserCallbackProxy Function LogoutUser
+// ********** Begin Class ULogoutUserCallbackProxy Function LogoutUser *****************************
 struct Z_Construct_UFunction_ULogoutUserCallbackProxy_LogoutUser_Statics
 {
 	struct LogoutUserCallbackProxy_eventLogoutUser_Parms
@@ -57,7 +59,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_ULogou
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ULogoutUserCallbackProxy_LogoutUser_Statics::NewProp_ReturnValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_ULogoutUserCallbackProxy_LogoutUser_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_ULogoutUserCallbackProxy_LogoutUser_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ULogoutUserCallbackProxy, nullptr, "LogoutUser", nullptr, nullptr, Z_Construct_UFunction_ULogoutUserCallbackProxy_LogoutUser_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_ULogoutUserCallbackProxy_LogoutUser_Statics::PropPointers), sizeof(Z_Construct_UFunction_ULogoutUserCallbackProxy_LogoutUser_Statics::LogoutUserCallbackProxy_eventLogoutUser_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_ULogoutUserCallbackProxy_LogoutUser_Statics::Function_MetaDataParams), Z_Construct_UFunction_ULogoutUserCallbackProxy_LogoutUser_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_ULogoutUserCallbackProxy_LogoutUser_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_ULogoutUserCallbackProxy, nullptr, "LogoutUser", Z_Construct_UFunction_ULogoutUserCallbackProxy_LogoutUser_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_ULogoutUserCallbackProxy_LogoutUser_Statics::PropPointers), sizeof(Z_Construct_UFunction_ULogoutUserCallbackProxy_LogoutUser_Statics::LogoutUserCallbackProxy_eventLogoutUser_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_ULogoutUserCallbackProxy_LogoutUser_Statics::Function_MetaDataParams), Z_Construct_UFunction_ULogoutUserCallbackProxy_LogoutUser_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_ULogoutUserCallbackProxy_LogoutUser_Statics::LogoutUserCallbackProxy_eventLogoutUser_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_ULogoutUserCallbackProxy_LogoutUser()
 {
@@ -77,9 +79,9 @@ DEFINE_FUNCTION(ULogoutUserCallbackProxy::execLogoutUser)
 	*(ULogoutUserCallbackProxy**)Z_Param__Result=ULogoutUserCallbackProxy::LogoutUser(Z_Param_WorldContextObject,Z_Param_PlayerController);
 	P_NATIVE_END;
 }
-// End Class ULogoutUserCallbackProxy Function LogoutUser
+// ********** End Class ULogoutUserCallbackProxy Function LogoutUser *******************************
 
-// Begin Class ULogoutUserCallbackProxy
+// ********** Begin Class ULogoutUserCallbackProxy *************************************************
 void ULogoutUserCallbackProxy::StaticRegisterNativesULogoutUserCallbackProxy()
 {
 	UClass* Class = ULogoutUserCallbackProxy::StaticClass();
@@ -88,10 +90,34 @@ void ULogoutUserCallbackProxy::StaticRegisterNativesULogoutUserCallbackProxy()
 	};
 	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 }
-IMPLEMENT_CLASS_NO_AUTO_REGISTRATION(ULogoutUserCallbackProxy);
+FClassRegistrationInfo Z_Registration_Info_UClass_ULogoutUserCallbackProxy;
+UClass* ULogoutUserCallbackProxy::GetPrivateStaticClass()
+{
+	using TClass = ULogoutUserCallbackProxy;
+	if (!Z_Registration_Info_UClass_ULogoutUserCallbackProxy.InnerSingleton)
+	{
+		GetPrivateStaticClassBody(
+			StaticPackage(),
+			TEXT("LogoutUserCallbackProxy"),
+			Z_Registration_Info_UClass_ULogoutUserCallbackProxy.InnerSingleton,
+			StaticRegisterNativesULogoutUserCallbackProxy,
+			sizeof(TClass),
+			alignof(TClass),
+			TClass::StaticClassFlags,
+			TClass::StaticClassCastFlags(),
+			TClass::StaticConfigName(),
+			(UClass::ClassConstructorType)InternalConstructor<TClass>,
+			(UClass::ClassVTableHelperCtorCallerType)InternalVTableHelperCtorCaller<TClass>,
+			UOBJECT_CPPCLASS_STATICFUNCTIONS_FORCLASS(TClass),
+			&TClass::Super::StaticClass,
+			&TClass::WithinClass::StaticClass
+		);
+	}
+	return Z_Registration_Info_UClass_ULogoutUserCallbackProxy.InnerSingleton;
+}
 UClass* Z_Construct_UClass_ULogoutUserCallbackProxy_NoRegister()
 {
-	return ULogoutUserCallbackProxy::StaticClass();
+	return ULogoutUserCallbackProxy::GetPrivateStaticClass();
 }
 struct Z_Construct_UClass_ULogoutUserCallbackProxy_Statics
 {
@@ -124,7 +150,7 @@ struct Z_Construct_UClass_ULogoutUserCallbackProxy_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_ULogoutUserCallbackProxy_LogoutUser, "LogoutUser" }, // 39354993
+		{ &Z_Construct_UFunction_ULogoutUserCallbackProxy_LogoutUser, "LogoutUser" }, // 3592623946
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -132,8 +158,8 @@ struct Z_Construct_UClass_ULogoutUserCallbackProxy_Statics
 	};
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
-const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_ULogoutUserCallbackProxy_Statics::NewProp_OnSuccess = { "OnSuccess", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ULogoutUserCallbackProxy, OnSuccess), Z_Construct_UDelegateFunction_Engine_EmptyOnlineDelegate__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnSuccess_MetaData), NewProp_OnSuccess_MetaData) }; // 2328757345
-const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_ULogoutUserCallbackProxy_Statics::NewProp_OnFailure = { "OnFailure", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ULogoutUserCallbackProxy, OnFailure), Z_Construct_UDelegateFunction_Engine_EmptyOnlineDelegate__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnFailure_MetaData), NewProp_OnFailure_MetaData) }; // 2328757345
+const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_ULogoutUserCallbackProxy_Statics::NewProp_OnSuccess = { "OnSuccess", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ULogoutUserCallbackProxy, OnSuccess), Z_Construct_UDelegateFunction_Engine_EmptyOnlineDelegate__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnSuccess_MetaData), NewProp_OnSuccess_MetaData) }; // 1205031399
+const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_ULogoutUserCallbackProxy_Statics::NewProp_OnFailure = { "OnFailure", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ULogoutUserCallbackProxy, OnFailure), Z_Construct_UDelegateFunction_Engine_EmptyOnlineDelegate__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnFailure_MetaData), NewProp_OnFailure_MetaData) }; // 1205031399
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ULogoutUserCallbackProxy_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULogoutUserCallbackProxy_Statics::NewProp_OnSuccess,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ULogoutUserCallbackProxy_Statics::NewProp_OnFailure,
@@ -167,24 +193,21 @@ UClass* Z_Construct_UClass_ULogoutUserCallbackProxy()
 	}
 	return Z_Registration_Info_UClass_ULogoutUserCallbackProxy.OuterSingleton;
 }
-template<> ADVANCEDSESSIONS_API UClass* StaticClass<ULogoutUserCallbackProxy>()
-{
-	return ULogoutUserCallbackProxy::StaticClass();
-}
 DEFINE_VTABLE_PTR_HELPER_CTOR(ULogoutUserCallbackProxy);
 ULogoutUserCallbackProxy::~ULogoutUserCallbackProxy() {}
-// End Class ULogoutUserCallbackProxy
+// ********** End Class ULogoutUserCallbackProxy ***************************************************
 
-// Begin Registration
-struct Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_LogoutUserCallbackProxy_h_Statics
+// ********** Begin Registration *******************************************************************
+struct Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_LogoutUserCallbackProxy_h__Script_AdvancedSessions_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_ULogoutUserCallbackProxy, ULogoutUserCallbackProxy::StaticClass, TEXT("ULogoutUserCallbackProxy"), &Z_Registration_Info_UClass_ULogoutUserCallbackProxy, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ULogoutUserCallbackProxy), 3389705567U) },
+		{ Z_Construct_UClass_ULogoutUserCallbackProxy, ULogoutUserCallbackProxy::StaticClass, TEXT("ULogoutUserCallbackProxy"), &Z_Registration_Info_UClass_ULogoutUserCallbackProxy, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ULogoutUserCallbackProxy), 263300513U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_LogoutUserCallbackProxy_h_2337715334(TEXT("/Script/AdvancedSessions"),
-	Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_LogoutUserCallbackProxy_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_LogoutUserCallbackProxy_h_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_LogoutUserCallbackProxy_h__Script_AdvancedSessions_3183277230(TEXT("/Script/AdvancedSessions"),
+	Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_LogoutUserCallbackProxy_h__Script_AdvancedSessions_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_LogoutUserCallbackProxy_h__Script_AdvancedSessions_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
-// End Registration
+// ********** End Registration *********************************************************************
+
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

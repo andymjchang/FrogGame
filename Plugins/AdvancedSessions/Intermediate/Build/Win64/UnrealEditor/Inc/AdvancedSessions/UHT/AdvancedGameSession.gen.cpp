@@ -5,27 +5,53 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#include "AdvancedSessions/Classes/AdvancedGameSession.h"
-#include "Runtime/Engine/Classes/GameFramework/OnlineReplStructs.h"
+#include "AdvancedGameSession.h"
+#include "GameFramework/OnlineReplStructs.h"
+
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+
 void EmptyLinkFunctionForGeneratedCodeAdvancedGameSession() {}
 
-// Begin Cross Module References
+// ********** Begin Cross Module References ********************************************************
 ADVANCEDSESSIONS_API UClass* Z_Construct_UClass_AAdvancedGameSession();
 ADVANCEDSESSIONS_API UClass* Z_Construct_UClass_AAdvancedGameSession_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_AGameSession();
 ENGINE_API UScriptStruct* Z_Construct_UScriptStruct_FUniqueNetIdRepl();
 UPackage* Z_Construct_UPackage__Script_AdvancedSessions();
-// End Cross Module References
+// ********** End Cross Module References **********************************************************
 
-// Begin Class AAdvancedGameSession
+// ********** Begin Class AAdvancedGameSession *****************************************************
 void AAdvancedGameSession::StaticRegisterNativesAAdvancedGameSession()
 {
 }
-IMPLEMENT_CLASS_NO_AUTO_REGISTRATION(AAdvancedGameSession);
+FClassRegistrationInfo Z_Registration_Info_UClass_AAdvancedGameSession;
+UClass* AAdvancedGameSession::GetPrivateStaticClass()
+{
+	using TClass = AAdvancedGameSession;
+	if (!Z_Registration_Info_UClass_AAdvancedGameSession.InnerSingleton)
+	{
+		GetPrivateStaticClassBody(
+			StaticPackage(),
+			TEXT("AdvancedGameSession"),
+			Z_Registration_Info_UClass_AAdvancedGameSession.InnerSingleton,
+			StaticRegisterNativesAAdvancedGameSession,
+			sizeof(TClass),
+			alignof(TClass),
+			TClass::StaticClassFlags,
+			TClass::StaticClassCastFlags(),
+			TClass::StaticConfigName(),
+			(UClass::ClassConstructorType)InternalConstructor<TClass>,
+			(UClass::ClassVTableHelperCtorCallerType)InternalVTableHelperCtorCaller<TClass>,
+			UOBJECT_CPPCLASS_STATICFUNCTIONS_FORCLASS(TClass),
+			&TClass::Super::StaticClass,
+			&TClass::WithinClass::StaticClass
+		);
+	}
+	return Z_Registration_Info_UClass_AAdvancedGameSession.InnerSingleton;
+}
 UClass* Z_Construct_UClass_AAdvancedGameSession_NoRegister()
 {
-	return AAdvancedGameSession::StaticClass();
+	return AAdvancedGameSession::GetPrivateStaticClass();
 }
 struct Z_Construct_UClass_AAdvancedGameSession_Statics
 {
@@ -57,8 +83,8 @@ struct Z_Construct_UClass_AAdvancedGameSession_Statics
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
 const UECodeGen_Private::FTextPropertyParams Z_Construct_UClass_AAdvancedGameSession_Statics::NewProp_BanList_ValueProp = { "BanList", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Text, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 1, METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AAdvancedGameSession_Statics::NewProp_BanList_Key_KeyProp = { "BanList_Key", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FUniqueNetIdRepl, METADATA_PARAMS(0, nullptr) }; // 3410776867
-const UECodeGen_Private::FMapPropertyParams Z_Construct_UClass_AAdvancedGameSession_Statics::NewProp_BanList = { "BanList", nullptr, (EPropertyFlags)0x0010000000002000, UECodeGen_Private::EPropertyGenFlags::Map, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AAdvancedGameSession, BanList), EMapPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_BanList_MetaData), NewProp_BanList_MetaData) }; // 3410776867
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AAdvancedGameSession_Statics::NewProp_BanList_Key_KeyProp = { "BanList_Key", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FUniqueNetIdRepl, METADATA_PARAMS(0, nullptr) }; // 774471623
+const UECodeGen_Private::FMapPropertyParams Z_Construct_UClass_AAdvancedGameSession_Statics::NewProp_BanList = { "BanList", nullptr, (EPropertyFlags)0x0010000000002000, UECodeGen_Private::EPropertyGenFlags::Map, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AAdvancedGameSession, BanList), EMapPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_BanList_MetaData), NewProp_BanList_MetaData) }; // 774471623
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AAdvancedGameSession_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AAdvancedGameSession_Statics::NewProp_BanList_ValueProp,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AAdvancedGameSession_Statics::NewProp_BanList_Key_KeyProp,
@@ -82,7 +108,7 @@ const UECodeGen_Private::FClassParams Z_Construct_UClass_AAdvancedGameSession_St
 	0,
 	UE_ARRAY_COUNT(Z_Construct_UClass_AAdvancedGameSession_Statics::PropPointers),
 	0,
-	0x008002A4u,
+	0x008003A4u,
 	METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AAdvancedGameSession_Statics::Class_MetaDataParams), Z_Construct_UClass_AAdvancedGameSession_Statics::Class_MetaDataParams)
 };
 UClass* Z_Construct_UClass_AAdvancedGameSession()
@@ -93,24 +119,21 @@ UClass* Z_Construct_UClass_AAdvancedGameSession()
 	}
 	return Z_Registration_Info_UClass_AAdvancedGameSession.OuterSingleton;
 }
-template<> ADVANCEDSESSIONS_API UClass* StaticClass<AAdvancedGameSession>()
-{
-	return AAdvancedGameSession::StaticClass();
-}
 DEFINE_VTABLE_PTR_HELPER_CTOR(AAdvancedGameSession);
 AAdvancedGameSession::~AAdvancedGameSession() {}
-// End Class AAdvancedGameSession
+// ********** End Class AAdvancedGameSession *******************************************************
 
-// Begin Registration
-struct Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedGameSession_h_Statics
+// ********** Begin Registration *******************************************************************
+struct Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedGameSession_h__Script_AdvancedSessions_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AAdvancedGameSession, AAdvancedGameSession::StaticClass, TEXT("AAdvancedGameSession"), &Z_Registration_Info_UClass_AAdvancedGameSession, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AAdvancedGameSession), 301130797U) },
+		{ Z_Construct_UClass_AAdvancedGameSession, AAdvancedGameSession::StaticClass, TEXT("AAdvancedGameSession"), &Z_Registration_Info_UClass_AAdvancedGameSession, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AAdvancedGameSession), 2861355461U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedGameSession_h_3638530080(TEXT("/Script/AdvancedSessions"),
-	Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedGameSession_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Unreal_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedGameSession_h_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedGameSession_h__Script_AdvancedSessions_4276057329(TEXT("/Script/AdvancedSessions"),
+	Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedGameSession_h__Script_AdvancedSessions_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_maxyu_Documents_Frog_Plugins_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedGameSession_h__Script_AdvancedSessions_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
-// End Registration
+// ********** End Registration *********************************************************************
+
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
