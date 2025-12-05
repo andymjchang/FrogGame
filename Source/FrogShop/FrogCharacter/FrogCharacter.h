@@ -6,13 +6,12 @@
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
 #include "InputAction.h"
-#include "Unit/UnitInterface.h"
-#include "GAS/FrogAbilitySystem.h"
+#include "FrogShop/Unit/UnitInterface.h"
+#include "FrogShop/GAS/FrogAbilitySystem.h"
 #include "AbilitySystemInterface.h"
-#include "GAS/FrogAttributeSet.h"
+#include "FrogShop/GAS/FrogAttributeSet.h"
 #include "FrogCharacter.generated.h"
 
-class UInventoryComponent;
 class USphereComponent;
 class UNametagWidgetComponent;
 class UWidgetComponent;
@@ -58,7 +57,7 @@ struct FAbilityInputBindings
 };
 
 UCLASS(config=Game)
-class AFrogCharacter : public ACharacter, public IUnitInterface, public IAbilitySystemInterface
+class FROGSHOP_API AFrogCharacter : public ACharacter, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 
@@ -69,19 +68,6 @@ public: /* Public Functions */
 	/// Ability System Interface
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
-	/// Unit Interface 
-	virtual void HandleDeath() override;
-	UFUNCTION(NetMulticast, Reliable)
-	void MulticastOnDeath();
-	virtual void SetHealth(const float NewHealth) override;
-	virtual void SetMaxHealth(const float NewMaxHealth) override;
-	virtual UProjectileSpawnerComponent* GetProjectileSpawnerComponent() override;
-
-	void SetTongueVisibility(bool Value);
-
-	UFUNCTION(BlueprintCallable)
-	FVector GetFloorLocation();
-
 public: /* Public Members */
 
 protected: /* Protected Functions */
@@ -90,33 +76,13 @@ protected: /* Protected Functions */
 	virtual void Tick(float DeltaSeconds) override;
 	virtual void NotifyControllerChanged() override;
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
-	virtual bool CanJumpInternal_Implementation() const override;
 
 	// GAS
 	void AbilityInputBindingPressedHandler(EAbilityInputID AbilityInputID);
 	void AbilityInputBindingReleasedHandler(EAbilityInputID AbilityInputID);
-	void OnManaChanged(const FOnAttributeChangeData& Data);
-	void OnMaxManaChanged(const FOnAttributeChangeData& Data);
 	void SetupAbilities();
 
 	void Move(const FInputActionValue& Value);
-	void Look(const FInputActionValue& Value);
-
-	// Grapple 
-	void RedrawTongueLocation();
-
-	// Find Enemy Under Crosshair
-	void FindEnemyUnderCrosshair();
-	virtual void OnTargetEnemyTagChanged(const FGameplayTag Tag, int32 NewCount);
-
-	// Track applied gameplay effects
-	UPROPERTY(EditDefaultsOnly)
-	FGameplayTag DamageTag;
-
-	FDelegateHandle GameplayTagAppliedHandle;
-	void OnGameplayEffectApplied(UAbilitySystemComponent* InputAbilitySystem,
-	                             const FGameplayEffectSpec& GameplayEffectSpec,
-	                             FActiveGameplayEffectHandle ActiveGameplayEffectSpec);
 
 protected: /* Members */
 	// Components
@@ -127,19 +93,7 @@ protected: /* Members */
 	TObjectPtr<UCameraComponent> FollowCamera;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	TObjectPtr<USphereComponent> Hitbox;
-	
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	TObjectPtr<UFrogTongue> Tongue;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	TObjectPtr<UNametagWidgetComponent> HealthBarWidgetComponent;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	TObjectPtr<UProjectileSpawnerComponent> ProjectileSpawner;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	TObjectPtr<UInventoryComponent> InventoryComponent;
+	TObjectPtr<UNametagWidgetComponent> NametagWidgetComponent;
 
 	// HUD
 	UPROPERTY(EditDefaultsOnly, Category="HUD")
@@ -151,12 +105,6 @@ protected: /* Members */
 	// Movement
 	UPROPERTY(EditDefaultsOnly, Category = "Movement")
 	float WalkSpeed;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Movement")
-	float DiveSpeed;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Movement")
-	float DownedSpeed;
 
 	// Gameplay Ability System
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "GAS")
@@ -173,28 +121,6 @@ protected: /* Members */
 	
 	UPROPERTY(EditAnywhere, Category = "GAS")
 	TSubclassOf<UGameplayEffect> DefaultAttributes;
-
-	UPROPERTY(EditDefaultsOnly, Category = "GAS")
-	TSubclassOf<UGameplayEffect> OnDeathEffect;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Enemy Targeting")
-	float FindEnemyUnderCrosshairTraceRadius;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Enemy Targeting")
-	float FindEnemyUnderCrosshairTraceDistance;
-
-	UPROPERTY(EditAnywhere, Category = "Enemy Targeting")
-	TArray<TEnumAsByte<EObjectTypeQuery>> FindEnemyUnderCrosshairObjectType;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Enemy Targeting")
-	FGameplayTag FindEnemyUnderCrosshairGameplayTag;
-
-	UPROPERTY(Replicated)
-	bool bFindEnemyUnderCrosshair;
-
-	FDelegateHandle TargetEnemyTagDelegateHandle;
-	
-	TWeakObjectPtr<AActor> TargetEnemyActor;
 	
 	// Mapping Context
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
@@ -209,33 +135,11 @@ protected: /* Members */
 	// Input Actions
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	TObjectPtr<UInputAction> MoveAction;
-	
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
-	TObjectPtr<UInputAction> LookAction;
-	
-	// Grapple 
-	UPROPERTY(Replicated)
-	bool bIsGrapple;
-	
-	UPROPERTY(Replicated)
-	FVector GrapplePoint;
-	
-	float GrappleAcceleration;
 
 public: /* Public Getters/Setters */
 	FORCEINLINE USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	FORCEINLINE UCameraComponent* GetFollowCamera() const { return FollowCamera; }
-	FORCEINLINE UFrogTongue* GetTongue() const { return Tongue; }
-	FORCEINLINE bool GetIsGrapple() const { return bIsGrapple; }
-	FORCEINLINE void SetIsGrapple(const bool bNewIsGrapple) { bIsGrapple = bNewIsGrapple; }
-	FORCEINLINE float GetGrappleAcceleration() const { return GrappleAcceleration; }
-	FORCEINLINE void SetGrappleAcceleration(const float NewGrappleAcceleration) { GrappleAcceleration = NewGrappleAcceleration; }
-	FORCEINLINE FVector GetGrapplePoint() const { return GrapplePoint; }
-	FORCEINLINE void SetGrapplePoint(const FVector& NewGrapplePoint) { GrapplePoint = NewGrapplePoint; }
 	FORCEINLINE float GetWalkSpeed() const { return WalkSpeed; }
-	FORCEINLINE float GetDiveSpeed() const { return DiveSpeed; }
-	FORCEINLINE void SetFindEnemyUnderCrosshair(const bool Value) { bFindEnemyUnderCrosshair = Value; }
-	FORCEINLINE AActor* GetTargetEnemyActor() const { return TargetEnemyActor.Get(); }
 
 	UFUNCTION(BlueprintCallable)
 	FORCEINLINE UFrogHUD* GetFrogHUD() const { return FrogHUDWidget; }

@@ -23,6 +23,9 @@ class FROGSHOP_API IInteractable
 
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
+	bool movable;
+	int capacity;
+	
 	virtual UInteractableComponent* GetInteractableComponent() = 0;
 	virtual void OnStartInteract(AActor* OtherActor) = 0;
 	virtual void OnStopInteract(AActor* OtherActor) {};

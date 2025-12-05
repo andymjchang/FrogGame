@@ -13,7 +13,7 @@ class UNiagaraComponent;
  * 
  */
 UCLASS()
-class FROG_API AFrogController : public APlayerController
+class FROGSHOP_API AFrogController : public APlayerController
 {
 	GENERATED_BODY()
 };

@@ -8,7 +8,7 @@
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class FROG_API UFrogInventoryComponent : public UActorComponent
+class FROGSHOP_API UFrogInventoryComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
