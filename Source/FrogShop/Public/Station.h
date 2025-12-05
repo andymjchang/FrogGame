@@ -7,6 +7,7 @@
 #include "Interactable.h"
 #include "Station.generated.h"
 
+class UBoxComponent;
 class UPrimitiveComponent;
 
 UCLASS()
@@ -19,26 +20,29 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
-    
-	UFUNCTION()
-	void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-						UPrimitiveComponent* OtherComp, int32 OtherBodyIndex,
-						bool bFromSweep, const FHitResult& SweepResult);
-	UFUNCTION()
-	void OnOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-					  UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 public:
 	virtual void Tick(float DeltaTime) override;
-	virtual void On_Interact() override;
-	void CompleteInteraction();
 
+	// Interactable Interface
+	UFUNCTION()
+	virtual void OnStartInteract(AActor* OtherActor) override;
+	UFUNCTION()
+	virtual void OnStopInteract(AActor* OtherActor) override;
+	UFUNCTION()
+	virtual UInteractableComponent* GetInteractableComponent() override;
+	
 protected:
-	// Reference to collision component (set in Blueprint or found at runtime)
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Collision")
-	TObjectPtr<UPrimitiveComponent> InteractionCollision;
+	// Interaction hitbox
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Interaction")
+	TObjectPtr<UBoxComponent> InteractHitBox;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Gameplay Variables")
 	int Capacity = 1;
+	
 	TArray<FString> Inventory;
+	
 	FTimerHandle InteractionTimerHandle;
+
+	TObjectPtr<UInteractableComponent> InteractableComponent;
 };

@@ -2,41 +2,38 @@
 
 #include "Station.h"
 #include "Components/PrimitiveComponent.h"
+#include "FrogShop/FrogGameplay/InteractableComponent.h"
 
 AStation::AStation()
 {
 	PrimaryActorTick.bCanEverTick = true;
+
+	// Create the InteractableComponent
+	InteractableComponent = CreateDefaultSubobject<UInteractableComponent>(TEXT("InteractableComponent"));
+    
+	// Attach the hitbox to root
+	InteractableComponent->SetupAttachment(GetRootComponent());
 }
 
 void AStation::BeginPlay()
 {
 	Super::BeginPlay();
     
-	InteractionCollision = Cast<UPrimitiveComponent>(GetDefaultSubobjectByName(TEXT("StationCollisionComponent")));
-    
-	if (InteractionCollision)
+	if (InteractableComponent)
 	{
-		InteractionCollision->OnComponentBeginOverlap.AddDynamic(this, &AStation::OnOverlapBegin);
-		InteractionCollision->OnComponentEndOverlap.AddDynamic(this, &AStation::OnOverlapEnd);
+		InteractableComponent->StartInteract.AddDynamic(this, &AStation::OnStartInteract);
+		InteractableComponent->StopInteract.AddDynamic(this, &AStation::OnStopInteract);
 	}
 }
 
-void AStation::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-							  UPrimitiveComponent* OtherComp, int32 OtherBodyIndex,
-							  bool bFromSweep, const FHitResult& SweepResult)
+void AStation::OnStartInteract(AActor* OtherActor)
 {
-	if (OtherActor && OtherActor != this)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, FString::Printf(TEXT("OVERLAP START%d"), Capacity));
-		On_Interact();
-	}
+	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, FString::Printf(TEXT("Started interacting with: %s"), *OtherActor->GetName()));
 }
 
-void AStation::OnOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-					  UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+void AStation::OnStopInteract(AActor* OtherActor)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, FString::Printf(TEXT("OVERLAP END%d"), Capacity));
-	GetWorldTimerManager().ClearTimer(InteractionTimerHandle);
+	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, FString::Printf(TEXT("Stopped interacting with: %s"), *OtherActor->GetName()));
 }
 
 void AStation::Tick(float DeltaTime)
@@ -44,13 +41,7 @@ void AStation::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-void AStation::On_Interact()
+UInteractableComponent* AStation::GetInteractableComponent()
 {
-	//Should check player for inventory, if player has items in inventory, should either add or swap items, if not, should see if inventory is at capacity, if yes, should start timer
-	GetWorldTimerManager().SetTimer(InteractionTimerHandle, this, &AStation::CompleteInteraction, 2.0f, false);
-}
-
-void AStation::CompleteInteraction()
-{
-	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, FString::Printf(TEXT("INTERACTION COMPLETE %d"), Capacity));
+	return InteractableComponent;
 }

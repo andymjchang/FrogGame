@@ -7,6 +7,8 @@
 #include "Interactable.h"
 #include "Item.generated.h"
 
+class UBoxComponent;
+class UInteractableComponent;
 class UPrimitiveComponent;
 
 UCLASS()
@@ -19,18 +21,24 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
-    
-	UFUNCTION()
-	void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, 
-						UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, 
-						bool bFromSweep, const FHitResult& SweepResult);
-
+	
+	
 public:
 	virtual void Tick(float DeltaTime) override;
-	virtual void On_Interact() override;
+
+	// Interactable Interface
+	UFUNCTION()
+	virtual void OnStartInteract(AActor* OtherActor) override;
+	UFUNCTION()
+	virtual void OnStopInteract(AActor* OtherActor) override;
+	UFUNCTION()
+	virtual UInteractableComponent*  GetInteractableComponent() override;
+	
+	TObjectPtr<UInteractableComponent> InteractableComponent;
+	// virtual void On_Interact() override;
 
 protected:
-	// Reference to collision component (set in Blueprint or found at runtime)
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Collision")
-	TObjectPtr<UPrimitiveComponent> InteractionCollision;
+	// Interaction hitbox
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Interaction")
+	TObjectPtr<UBoxComponent> InteractHitBox;
 };
