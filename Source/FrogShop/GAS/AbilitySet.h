@@ -27,7 +27,7 @@ public:
  * 
  */
 UCLASS()
-class FROG_API UAbilitySet : public UDataAsset
+class FROGSHOP_API UAbilitySet : public UDataAsset
 {
 	GENERATED_BODY()
 

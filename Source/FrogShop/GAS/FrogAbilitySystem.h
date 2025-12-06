@@ -21,7 +21,7 @@ enum class EAbilityInputID : uint8
  * 
  */
 UCLASS()
-class FROG_API UFrogAbilitySystem : public UAbilitySystemComponent
+class FROGSHOP_API UFrogAbilitySystem : public UAbilitySystemComponent
 {
 	GENERATED_BODY()
 	

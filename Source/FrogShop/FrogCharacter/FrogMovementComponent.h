@@ -19,7 +19,7 @@ enum class ECustomMovementMode : uint8
  * 
  */
 UCLASS()
-class FROG_API UFrogMovementComponent : public UCharacterMovementComponent
+class FROGSHOP_API UFrogMovementComponent : public UCharacterMovementComponent
 {
 	GENERATED_BODY()
 	
@@ -27,7 +27,6 @@ public:
 	virtual void PhysCustom(float DeltaTime, int32 Iterations) override;
 	
 protected:
-	void PhysGrapple(float DeltaTime, int32 Iterations);
 	virtual void OnMovementModeChanged(EMovementMode PreviousMovementMode, uint8 PreviousCustomMode) override;
 	
 };

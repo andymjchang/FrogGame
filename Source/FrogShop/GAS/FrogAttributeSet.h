@@ -10,7 +10,7 @@
  * 
  */
 UCLASS()
-class FROG_API UFrogAttributeSet : public UUnitAttributeSet
+class FROGSHOP_API UFrogAttributeSet : public UUnitAttributeSet
 {
 	GENERATED_BODY()
 	

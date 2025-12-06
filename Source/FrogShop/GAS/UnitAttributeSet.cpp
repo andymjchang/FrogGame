@@ -2,7 +2,6 @@
 
 #include "UnitAttributeSet.h"
 #include "GameplayEffectExtension.h"
-#include "Unit/UnitInterface.h"
 #include "Net/UnrealNetwork.h"
 
 void UUnitAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -19,13 +18,7 @@ void UUnitAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, 
 	if (Attribute == GetHealthAttribute())
 	{
 		NewValue = FMath::Clamp(NewValue, 0.0f, GetMaxHealth());
-		if (NewValue <= 0.0f)
-		{
-			if (IUnitInterface* Owner = Cast<IUnitInterface>(GetOwningActor()))
-			{
-				Owner->HandleDeath();
-			}
-		}
+
 	}
 }
 

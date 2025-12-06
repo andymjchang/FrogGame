@@ -16,7 +16,7 @@
  * 
  */
 UCLASS(BlueprintType, Blueprintable)
-class FROG_API UUnitAttributeSet : public UAttributeSet
+class FROGSHOP_API UUnitAttributeSet : public UAttributeSet
 {
 	GENERATED_BODY()
 	

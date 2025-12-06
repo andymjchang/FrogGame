@@ -9,7 +9,7 @@
 struct FOnAttributeChangeData;
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
-class FROG_API UNametagWidgetComponent : public UWidgetComponent
+class FROGSHOP_API UNametagWidgetComponent : public UWidgetComponent
 {
 	GENERATED_BODY()
 
