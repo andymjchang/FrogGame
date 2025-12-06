@@ -10,7 +10,7 @@ public class FrogEditorTarget : TargetRules
 		Type = TargetType.Editor;
 		DefaultBuildSettings = BuildSettingsVersion.V5;
 		IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_6;
-		ExtraModuleNames.Add("FrogShop");
+		ExtraModuleNames.Add("Frog");
 		RegisterModulesCreatedByRider();
 	}
 

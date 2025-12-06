@@ -10,7 +10,7 @@ public class FrogTarget : TargetRules
 		Type = TargetType.Game;
 		DefaultBuildSettings = BuildSettingsVersion.V5;
 		IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_5;
-		ExtraModuleNames.Add("FrogShop");
+		ExtraModuleNames.Add("Frog");
 		RegisterModulesCreatedByRider();
 	}
 
