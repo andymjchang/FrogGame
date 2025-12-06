@@ -114,10 +114,14 @@ UAbilitySystemComponent* AFrogCharacter::GetAbilitySystemComponent() const
 	return AbilitySystemComponent;
 }
 
+void AFrogCharacter::Interact()
+{
+
+}
+
 void AFrogCharacter::SetupAbilities()
 {
 	if (!IsValid(AbilitySystemComponent) || !IsValid(AttributeSet)) return;
-
 	// Grant default abilities
 	if (IsValid(AbilitySet))
 	{
