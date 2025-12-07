@@ -16,6 +16,8 @@
 #include "GAS/UnitAttributeSet.h"
 #include "GAS/FrogAbilitySystem.h"
 #include "NametagWidgetComponent.h"
+#include "Components/SphereComponent.h"
+#include "FrogGameplay/Interactable.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AFrogCharacter
@@ -68,6 +70,9 @@ AFrogCharacter::AFrogCharacter(const FObjectInitializer& ObjectInitializer)
 	// Hitbox = CreateDefaultSubobject<USphereComponent>(TEXT("HitboxComponent"));
 	// Hitbox->SetCollisionProfileName(TEXT("PlayerHitbox"));
 	// Hitbox->SetupAttachment(RootComponent);
+	InteractHitbox =  CreateDefaultSubobject<USphereComponent>(TEXT("InteractHitbox"));
+	InteractHitbox->SetCollisionProfileName(TEXT("PickupItems"));
+	InteractHitbox->SetupAttachment(RootComponent);
 
 	// Setup Grapple
 	// Tongue = CreateDefaultSubobject<UFrogTongue>(TEXT("TongueComponent"));
@@ -107,6 +112,9 @@ void AFrogCharacter::BeginPlay()
 	}
 	
 	if (HasAuthority()) SetupAbilities();
+
+	InteractHitbox->OnComponentBeginOverlap.AddDynamic(this, &AFrogCharacter::OnOverlapBegin);
+	InteractHitbox->OnComponentEndOverlap.AddDynamic(this, &AFrogCharacter::OnOverlapEnd);
 }
 
 UAbilitySystemComponent* AFrogCharacter::GetAbilitySystemComponent() const
@@ -167,9 +175,59 @@ void AFrogCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	}
 }
 
+void AFrogCharacter::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if (AInteractable* Interactable = Cast<AInteractable>(OtherActor))
+	{
+		OverlappingInteractables.Add(Interactable);
+		UpdateClosestInteractable();
+	}
+}
+
+void AFrogCharacter::UpdateClosestInteractable()
+{
+	CurrentInteractable = nullptr;
+
+	float BestDistanceSq = MAX_FLT;
+
+	for (TWeakObjectPtr<AInteractable> I : OverlappingInteractables)
+	{
+		if (!I.IsValid()) continue;
+
+		float DistSq = FVector::DistSquared(I->GetActorLocation(), GetActorLocation());
+		if (DistSq < BestDistanceSq)
+		{
+			BestDistanceSq = DistSq;
+			CurrentInteractable = I;
+		}
+	}
+
+	if (CurrentInteractable.IsValid() && GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Yellow,
+			FString::Printf(TEXT("Current Interaction Target: %s"), *CurrentInteractable->GetName()));
+	}
+}
+
+void AFrogCharacter::OnOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+                                  UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+	if (AInteractable* Interactable = Cast<AInteractable>(OtherActor))
+	{
+		OverlappingInteractables.Remove(Interactable);
+		UpdateClosestInteractable();
+	}
+}
+
 void AFrogCharacter::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
+
+	if (OverlappingInteractables.Num() > 1)
+	{
+		UpdateClosestInteractable();
+	}
 }
 
 void AFrogCharacter::Move(const FInputActionValue& Value)

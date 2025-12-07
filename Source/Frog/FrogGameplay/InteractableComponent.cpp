@@ -18,11 +18,11 @@ UInteractableComponent::UInteractableComponent()
 void UInteractableComponent::BeginPlay()
 {
     Super::BeginPlay();
-
-    SetCollisionProfileName(TEXT("ItemHitBox"));
+    
     // Bind overlap events
     OnComponentBeginOverlap.AddDynamic(this, &UInteractableComponent::OnOverlapBegin);
-    this->OnComponentEndOverlap.AddDynamic(this, &UInteractableComponent::OnOverlapEnd);
+    OnComponentEndOverlap.AddDynamic(this, &UInteractableComponent::OnOverlapEnd);
+    SetCollisionProfileName(TEXT("ItemHitBox"));
 }
 
 void UInteractableComponent::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,

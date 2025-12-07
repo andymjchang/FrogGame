@@ -9,8 +9,10 @@
 #include "GAS/FrogAbilitySystem.h"
 #include "AbilitySystemInterface.h"
 #include "GAS/FrogAttributeSet.h"
+#include "FrogGameplay/Interactable.h"
 #include "FrogCharacter.generated.h"
 
+class UBoxComponent;
 class USphereComponent;
 class UNametagWidgetComponent;
 class UWidgetComponent;
@@ -76,7 +78,13 @@ protected: /* Protected Functions */
 	virtual void Tick(float DeltaSeconds) override;
 	virtual void NotifyControllerChanged() override;
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
-
+	UFUNCTION()
+	void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
+						int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	void UpdateClosestInteractable();
+	UFUNCTION()
+	void OnOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
+					  int32 OtherBodyIndex);
 	// GAS
 	void AbilityInputBindingPressedHandler(EAbilityInputID AbilityInputID);
 	void AbilityInputBindingReleasedHandler(EAbilityInputID AbilityInputID);
@@ -135,6 +143,15 @@ protected: /* Members */
 	// Input Actions
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	TObjectPtr<UInputAction> MoveAction;
+
+	//HitBoxes
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Input)
+	TObjectPtr<USphereComponent> InteractHitbox;
+
+	//GamePlay
+	//Interactions
+	TArray<TWeakObjectPtr<AInteractable>> OverlappingInteractables;
+	TWeakObjectPtr<AInteractable> CurrentInteractable;
 
 public: /* Public Getters/Setters */
 	FORCEINLINE USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
