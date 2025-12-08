@@ -18,16 +18,13 @@ class UNametagWidgetComponent;
 class UWidgetComponent;
 class UFrogHUD;
 class UAbilitySet;
-class AProjectile;
 enum class EAbilityInputID : uint8;
 struct FInputActionValue;
-class UFrogTongue;
 class USpringArmComponent;
 class UCameraComponent;
 class UInputMappingContext;
 class UInputAction;
 class UFrogAbilitySystem;
-class UProjectileSpawnerComponent;
 
 
 /**
