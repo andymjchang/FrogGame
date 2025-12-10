@@ -3,34 +3,23 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
-#include "Interactable.generated.h"
-
-class UBoxComponent;
+#include "FrogGameplay/Station.h"
+#include "Cauldron.generated.h"
 
 UCLASS()
-class FROG_API AInteractable : public AActor
+class FROG_API ACauldron : public AStation
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this actor's properties
-	AInteractable();
-	FORCEINLINE bool IsMoveable() const { return Moveable; }
-	
-private:
-	int Capacity;
-	bool Moveable;
-	
+	ACauldron();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Interaction")
-	TObjectPtr<UBoxComponent> InteractHitBox;
-	
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-	
 };

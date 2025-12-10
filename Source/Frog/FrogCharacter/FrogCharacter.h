@@ -145,9 +145,9 @@ protected: /* Members */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Input)
 	TObjectPtr<USphereComponent> InteractHitbox;
 
-	//GamePlay
-	//Interactions
+	//GamePlay Interactions
 	TArray<TWeakObjectPtr<AInteractable>> OverlappingInteractables;
+	
 	TWeakObjectPtr<AInteractable> CurrentInteractable;
 
 public: /* Public Getters/Setters */

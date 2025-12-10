@@ -125,7 +125,16 @@ UAbilitySystemComponent* AFrogCharacter::GetAbilitySystemComponent() const
 
 void AFrogCharacter::Interact()
 {
+	if (!CurrentInteractable.IsValid()) return;
 
+	if (CurrentInteractable->IsMoveable())
+	{
+		// Pickup interactable
+	}
+	else
+	{
+		// Interact with station	
+	}
 }
 
 void AFrogCharacter::SetupAbilities()
@@ -183,6 +192,10 @@ void AFrogCharacter::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AA
 	{
 		OverlappingInteractables.Add(Interactable);
 		UpdateClosestInteractable();
+		if (GEngine)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Began Overlapping with Interactable: %s"), *Interactable->GetName()));
+		}
 	}
 }
 

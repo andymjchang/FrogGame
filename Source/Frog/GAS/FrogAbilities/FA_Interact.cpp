@@ -23,19 +23,6 @@ void UFA_Interact::ActivateAbility(FGameplayAbilitySpecHandle Handle, const FGam
 	}
 }
 
-void UFA_Interact::InputPressed(const FGameplayAbilitySpecHandle Handle,
-									   const FGameplayAbilityActorInfo* ActorInfo,
-									   const FGameplayAbilityActivationInfo ActivationInfo)
-{
-	Super::InputPressed(Handle, ActorInfo, ActivationInfo);
-
-	if (GEngine)
-	{
-		const FString DebugMessage = FString::Printf(TEXT("ACTIVATING"));
-		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, DebugMessage);
-	}
-}
-
 void UFA_Interact::InputReleased(FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo,
                                  FGameplayAbilityActivationInfo ActivationInfo)
 {

@@ -3,13 +3,14 @@
 
 AItem::AItem()
 {
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 }
 
 void AItem::BeginPlay()
 {
 	Super::BeginPlay();
 }
+
 void AItem::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);

@@ -2,11 +2,10 @@
 
 #include "Station.h"
 #include "Components/PrimitiveComponent.h"
-#include "FrogGameplay/InteractableComponent.h"
 
 AStation::AStation()
 {
-	PrimaryActorTick.bCanEverTick = true;
+	
 }
 
 void AStation::BeginPlay()
@@ -17,4 +16,9 @@ void AStation::BeginPlay()
 void AStation::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+}
+
+void AStation::OnInteract()
+{
+	
 }
