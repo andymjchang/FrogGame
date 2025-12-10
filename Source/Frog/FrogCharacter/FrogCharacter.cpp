@@ -18,6 +18,7 @@
 #include "NametagWidgetComponent.h"
 #include "Components/SphereComponent.h"
 #include "FrogGameplay/Interactable.h"
+#include "GameUI/FrogHUD.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AFrogCharacter
@@ -133,7 +134,7 @@ void AFrogCharacter::SetupAbilities()
 	// Grant default abilities
 	if (IsValid(AbilitySet))
 	{
-		InitialAbilitySpecHandles.Append(AbilitySet->GrantAbilitiesToAbilitySystem(AbilitySystemComponent, FrogHUDWidget));
+		InitialAbilitySpecHandles.Append(AbilitySet->GrantAbilitiesToAbilitySystem(AbilitySystemComponent));
 	}
 
 	// Apply initial stats

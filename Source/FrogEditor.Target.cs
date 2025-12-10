@@ -16,6 +16,6 @@ public class FrogEditorTarget : TargetRules
 
 	private void RegisterModulesCreatedByRider()
 	{
-		ExtraModuleNames.AddRange(new string[] { "UI"});
+		ExtraModuleNames.AddRange(new string[] {});
 	}
 }

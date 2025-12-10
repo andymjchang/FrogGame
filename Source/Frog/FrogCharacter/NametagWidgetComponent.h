@@ -14,7 +14,5 @@ class FROG_API UNametagWidgetComponent : public UWidgetComponent
 	GENERATED_BODY()
 
 protected:
-	virtual void BeginPlay() override;
-	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
-	virtual void OnHealthChanged(const FOnAttributeChangeData& Data);
+
 };

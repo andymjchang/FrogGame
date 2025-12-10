@@ -5,10 +5,9 @@
 
 #include "AbilitySystemComponent.h"
 #include "Abilities/GameplayAbility.h"
-#include "UI/HUD/FrogHUD.h"
 
 TArray<FGameplayAbilitySpecHandle> UAbilitySet::GrantAbilitiesToAbilitySystem(
-	UAbilitySystemComponent* InputAbilitySystem, const UFrogHUD* FrogHUD) const
+	UAbilitySystemComponent* InputAbilitySystem)
 {
 	TArray<FGameplayAbilitySpecHandle> Handles;
 	Handles.Reserve(AbilitiesSetList.Num());
@@ -27,10 +26,10 @@ TArray<FGameplayAbilitySpecHandle> UAbilitySet::GrantAbilitiesToAbilitySystem(
           
 			Handles.AddUnique(Handle);
           
-			if (FrogHUD && Handle.IsValid())
-			{
-				FrogHUD->AssignAbilityToUISlot(Handle, InputAbilitySystem);
-			}
+			// if (FrogHUD && Handle.IsValid())
+			// {
+			// 	FrogHUD->AssignAbilityToUISlot(Handle, InputAbilitySystem);
+			// }
 		}
 	}
     
