@@ -132,29 +132,23 @@ UAbilitySystemComponent* AFrogCharacter::GetAbilitySystemComponent() const
 
 void AFrogCharacter::Interact()
 {
-	
 	const bool bCurrentlyHighlighting = CurrentInteractable.IsValid();
 	const bool bHoldingInteractable = HeldInteractable.IsValid();
 	
 	// Interact with Moveable Interactable
 	if (bCurrentlyHighlighting && CurrentInteractable->IsMoveable())
 	{
-		if (GEngine)
-		{
-			const FString DebugMessage = FString::Printf(TEXT("bro"));
-			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, DebugMessage);
-		}
 		if (!bHoldingInteractable) // Pickup
 		{
 			CurrentInteractable->AttachToComponent(InteractableAttachPoint, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-			CurrentInteractable->DisableInteractable();
 			HeldInteractable = CurrentInteractable;
+			HeldInteractable->DisableInteractable();
 		}
-		else // Place down
-		{
-			HeldInteractable->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-			HeldInteractable->EnableInteractable();
-		}
+		// else // Place down
+		// {
+		// 	HeldInteractable->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+		// 	HeldInteractable->EnableInteractable();
+		// }
 		return;
 	}
 
@@ -167,7 +161,7 @@ void AFrogCharacter::Interact()
 			{
 				if (Station->TryAddItem(Item))
 				{
-					HeldInteractable->Destroy();
+					// HeldInteractable->Destroy();
 				}
 			}
 		}
@@ -250,11 +244,11 @@ void AFrogCharacter::UpdateClosestInteractable()
 		}
 	}
 
-	if (CurrentInteractable.IsValid() && GEngine)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Yellow,
-			FString::Printf(TEXT("Current Interaction Target: %s"), *CurrentInteractable->GetName()));
-	}
+	// if (CurrentInteractable.IsValid() && GEngine)
+	// {
+	// 	GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Yellow,
+	// 		FString::Printf(TEXT("Current Interaction Target: %s"), *CurrentInteractable->GetName()));
+	// }
 }
 
 void AFrogCharacter::OnOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,

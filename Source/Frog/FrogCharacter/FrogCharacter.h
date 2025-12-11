@@ -149,10 +149,10 @@ protected: /* Members */
 	TArray<TWeakObjectPtr<AInteractable>> OverlappingInteractables;
 	TWeakObjectPtr<AInteractable> CurrentInteractable;
 	
-	UPROPERTY()
+	UPROPERTY(BlueprintReadWrite)
 	TWeakObjectPtr<AInteractable> HeldInteractable;
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) // Change this back later
 	TObjectPtr<USceneComponent> InteractableAttachPoint;
 
 public: /* Public Getters/Setters */
