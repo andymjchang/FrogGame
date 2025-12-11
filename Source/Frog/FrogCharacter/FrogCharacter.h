@@ -141,14 +141,19 @@ protected: /* Members */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	TObjectPtr<UInputAction> MoveAction;
 
-	//HitBoxes
+	// HitBoxes
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Input)
 	TObjectPtr<USphereComponent> InteractHitbox;
 
-	//GamePlay Interactions
+	// GamePlay Interactions
 	TArray<TWeakObjectPtr<AInteractable>> OverlappingInteractables;
-	
 	TWeakObjectPtr<AInteractable> CurrentInteractable;
+	
+	UPROPERTY()
+	TWeakObjectPtr<AInteractable> HeldInteractable;
+
+	UPROPERTY(EditDefaultsOnly)
+	TObjectPtr<USceneComponent> InteractableAttachPoint;
 
 public: /* Public Getters/Setters */
 	FORCEINLINE USpringArmComponent* GetCameraBoom() const { return CameraBoom; }

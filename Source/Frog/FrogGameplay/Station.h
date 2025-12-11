@@ -7,6 +7,8 @@
 #include "Interactable.h"
 #include "Station.generated.h"
 
+class AItem;
+class AFrogCharacter;
 class UBoxComponent;
 class UPrimitiveComponent;
 
@@ -23,10 +25,14 @@ protected:
 
 public:
 	virtual void Tick(float DeltaTime) override;
-	virtual void OnInteract();
+	virtual void OnInteract(AFrogCharacter* Interactor);
+	virtual bool TryAddItem(AItem* Item);
 
-	
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Gameplay Variables")
-	int Capacity = 1;
+	int MaxCapacity = 4;
+	int CurrentCapacity = 0;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Gameplay Variables")
+	TArray<AItem*> Items;
 };

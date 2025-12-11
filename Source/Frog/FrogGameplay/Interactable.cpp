@@ -9,21 +9,35 @@
 // Sets default values
 AInteractable::AInteractable()
 {
-	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Networking
+	bReplicates = true;
+
 	PrimaryActorTick.bCanEverTick = true;
 
-	// Create and configure the interact hitbox
+	// Root scene component
+	RootSceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootSceneComponent"));
+	RootComponent = RootSceneComponent;
+
+	// Interact hitbox
 	InteractHitBox = CreateDefaultSubobject<UBoxComponent>(TEXT("InteractHitBox"));
-	InteractHitBox->SetupAttachment(RootComponent);
+	InteractHitBox->SetupAttachment(GetRootComponent());
+	InteractHitBox->SetCollisionProfileName(TEXT("ItemHitBox"));
+}
+
+void AInteractable::EnableInteractable()
+{
+	if (IsValid(InteractHitBox)) InteractHitBox->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+}
+
+void AInteractable::DisableInteractable()
+{
+	if (IsValid(InteractHitBox)) InteractHitBox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
 // Called when the game starts or when spawned
 void AInteractable::BeginPlay()
 {
 	Super::BeginPlay();
-
-	// Bind overlap events
-	InteractHitBox->SetCollisionProfileName(TEXT("ItemHitBox"));
 }
 
 // Called every frame

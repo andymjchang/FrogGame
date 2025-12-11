@@ -6,6 +6,8 @@
 #include "FrogGameplay/Station.h"
 #include "Cauldron.generated.h"
 
+class AFrogCharacter;
+
 UCLASS()
 class FROG_API ACauldron : public AStation
 {
@@ -14,7 +16,8 @@ class FROG_API ACauldron : public AStation
 public:
 	// Sets default values for this actor's properties
 	ACauldron();
-
+	virtual void OnInteract(AFrogCharacter* Interactor) override;
+	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

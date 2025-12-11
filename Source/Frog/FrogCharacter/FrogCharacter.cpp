@@ -12,12 +12,15 @@
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
 #include "FrogMovementComponent.h"
+#include "MovieSceneTracksComponentTypes.h"
 #include "GAS/AbilitySet.h"
 #include "GAS/UnitAttributeSet.h"
 #include "GAS/FrogAbilitySystem.h"
 #include "NametagWidgetComponent.h"
 #include "Components/SphereComponent.h"
 #include "FrogGameplay/Interactable.h"
+#include "FrogGameplay/Item.h"
+#include "FrogGameplay/Station.h"
 #include "GameUI/FrogHUD.h"
 
 //////////////////////////////////////////////////////////////////////////
@@ -83,9 +86,13 @@ AFrogCharacter::AFrogCharacter(const FObjectInitializer& ObjectInitializer)
 	AbilitySystemComponent = CreateDefaultSubobject<UFrogAbilitySystem>(TEXT("AbilitySystem"));
 	AttributeSet = CreateDefaultSubobject<UFrogAttributeSet>(TEXT("AttributeSet"));
 	
-	// World space healthbar/nametag
+	// World space nametag
 	NametagWidgetComponent = CreateDefaultSubobject<UNametagWidgetComponent>(TEXT("NametagWidgetComponent"));
 	NametagWidgetComponent->SetupAttachment(RootComponent);
+
+	// Held Interactable Attach Point
+	InteractableAttachPoint = CreateDefaultSubobject<USceneComponent>(TEXT("InteractableAttachPoint"));
+	InteractableAttachPoint->SetupAttachment(GetMesh());
 }
 
 void AFrogCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -125,15 +132,45 @@ UAbilitySystemComponent* AFrogCharacter::GetAbilitySystemComponent() const
 
 void AFrogCharacter::Interact()
 {
-	if (!CurrentInteractable.IsValid()) return;
-
-	if (CurrentInteractable->IsMoveable())
+	
+	const bool bCurrentlyHighlighting = CurrentInteractable.IsValid();
+	const bool bHoldingInteractable = HeldInteractable.IsValid();
+	
+	// Interact with Moveable Interactable
+	if (bCurrentlyHighlighting && CurrentInteractable->IsMoveable())
 	{
-		// Pickup interactable
+		if (GEngine)
+		{
+			const FString DebugMessage = FString::Printf(TEXT("bro"));
+			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, DebugMessage);
+		}
+		if (!bHoldingInteractable) // Pickup
+		{
+			CurrentInteractable->AttachToComponent(InteractableAttachPoint, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+			CurrentInteractable->DisableInteractable();
+			HeldInteractable = CurrentInteractable;
+		}
+		else // Place down
+		{
+			HeldInteractable->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+			HeldInteractable->EnableInteractable();
+		}
+		return;
 	}
-	else
+
+	// Interact with Station
+	if (AStation* Station = Cast<AStation>(CurrentInteractable.Get()))
 	{
-		// Interact with station	
+		if (bHoldingInteractable)
+		{
+			if (AItem* Item = Cast<AItem>(HeldInteractable))
+			{
+				if (Station->TryAddItem(Item))
+				{
+					HeldInteractable->Destroy();
+				}
+			}
+		}
 	}
 }
 
@@ -192,10 +229,6 @@ void AFrogCharacter::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AA
 	{
 		OverlappingInteractables.Add(Interactable);
 		UpdateClosestInteractable();
-		if (GEngine)
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Began Overlapping with Interactable: %s"), *Interactable->GetName()));
-		}
 	}
 }
 

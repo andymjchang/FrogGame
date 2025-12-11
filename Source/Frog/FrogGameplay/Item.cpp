@@ -4,6 +4,7 @@
 AItem::AItem()
 {
 	PrimaryActorTick.bCanEverTick = false;
+	Moveable = true;
 }
 
 void AItem::BeginPlay()

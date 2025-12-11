@@ -16,18 +16,30 @@ class FROG_API AInteractable : public AActor
 public:
 	// Sets default values for this actor's properties
 	AInteractable();
-	FORCEINLINE bool IsMoveable() const { return Moveable; }
 	
-private:
-	int Capacity;
-	bool Moveable;
+	FORCEINLINE bool IsMoveable() const { return Moveable; }
+
+	// Interaction
+	void EnableInteractable();
+	void DisableInteractable();
+
 	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Item Settings")
+	int Capacity;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "Item Settings")
+	bool Moveable;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Interaction")
 	TObjectPtr<UBoxComponent> InteractHitBox;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Interaction")
+	TObjectPtr<USceneComponent> RootSceneComponent;
+	
 	
 public:
 	// Called every frame
