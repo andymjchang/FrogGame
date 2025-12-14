@@ -21,7 +21,11 @@ void AStation::Tick(float DeltaTime)
 
 void AStation::OnInteract(AFrogCharacter* Interactor)
 {
-	
+	if (GEngine)
+	{
+		const FString DebugMessage = FString::Printf(TEXT("move selector to "));
+		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, DebugMessage);
+	}
 }
 
 bool AStation::TryAddItem(AItem* Item)

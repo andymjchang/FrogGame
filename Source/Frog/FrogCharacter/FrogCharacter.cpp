@@ -165,6 +165,10 @@ void AFrogCharacter::Interact()
 				}
 			}
 		}
+		else
+		{
+			Station->OnInteract(this);
+		}
 	}
 }
 
