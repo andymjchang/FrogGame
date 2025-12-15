@@ -1,23 +1,29 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
-
-#include "FrogGameState.h"
-
-#include "FrogCharacter/FrogController.h"
-#include "GameUI/FrogHUD.h"
+﻿#include "FrogGameState.h"
 #include "Net/UnrealNetwork.h"
 
 AFrogGameState::AFrogGameState()
 {
     PrimaryActorTick.bCanEverTick = true;
+    
+    // Initialize Defaults
     Score = 0;
     PhaseEndTime = 0.0f;
     CurrentPhase = EFrogGamePhase::Night;
 }
 
+void AFrogGameState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+    DOREPLIFETIME(AFrogGameState, Score);
+    DOREPLIFETIME(AFrogGameState, CurrentPhase);
+    DOREPLIFETIME(AFrogGameState, PhaseEndTime);
+}
+
 void AFrogGameState::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
-
+    
     if (!HasAuthority()) return;
     
     if (CurrentPhase == EFrogGamePhase::Day)
@@ -29,27 +35,13 @@ void AFrogGameState::Tick(float DeltaSeconds)
     }
 }
 
-void AFrogGameState::UpdateScore()
-{
-    UWorld* World = GetWorld();
-    if (!World) return;
-
-    APlayerController* PlayerController = World->GetFirstPlayerController();
-
-    // 4. Safety Check and Execute
-    if (AFrogController* FrogPC = Cast<AFrogController>(PlayerController))
-    {
-        FrogPC->GetFrogHUD()->UpdateScoreText(Score);
-    }
-}
-
 void AFrogGameState::TriggerDayPhase(float DayDuration)
 {
     if (!HasAuthority()) return;
 
     CurrentPhase = EFrogGamePhase::Day;
     PhaseEndTime = GetServerWorldTimeSeconds() + DayDuration;
-   
+    
     OnRep_CurrentPhase();
     OnRep_PhaseEndTime();
 }
@@ -60,7 +52,7 @@ void AFrogGameState::TriggerNightPhase()
 
     CurrentPhase = EFrogGamePhase::Night;
     PhaseEndTime = 0.0f;
-   
+    
     OnRep_CurrentPhase();
     OnRep_PhaseEndTime();
 }
@@ -75,12 +67,11 @@ void AFrogGameState::AddScore(int32 Amount)
 
 float AFrogGameState::GetTimeRemaining() const
 {
-    if (PhaseEndTime <= 0.0f) return 0.0f;
-
-    float Remaining = PhaseEndTime - GetServerWorldTimeSeconds();
-    return FMath::Max(Remaining, 0.0f);
+    if (CurrentPhase != EFrogGamePhase::Day || PhaseEndTime <= 0.0f) return 0.0f;
+    return FMath::Max(PhaseEndTime - GetServerWorldTimeSeconds(), 0.0f);
 }
 
+// OnRep Functions
 void AFrogGameState::OnRep_Score()
 {
     OnScoreChanged.Broadcast(Score);
@@ -94,13 +85,4 @@ void AFrogGameState::OnRep_CurrentPhase()
 void AFrogGameState::OnRep_PhaseEndTime()
 {
     OnPhaseEndTimeUpdated.Broadcast(PhaseEndTime);
-}
-
-void AFrogGameState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
-{
-    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-
-    DOREPLIFETIME(AFrogGameState, Score);
-    DOREPLIFETIME(AFrogGameState, CurrentPhase);
-    DOREPLIFETIME(AFrogGameState, PhaseEndTime);
 }
