@@ -12,7 +12,6 @@
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
 #include "FrogMovementComponent.h"
-#include "MovieSceneTracksComponentTypes.h"
 #include "GAS/AbilitySet.h"
 #include "GAS/UnitAttributeSet.h"
 #include "GAS/FrogAbilitySystem.h"
@@ -112,11 +111,7 @@ void AFrogCharacter::BeginPlay()
 	// Setup Widgets
 	if (APlayerController* PC = GetController<APlayerController>())
 	{
-		if (IsLocallyControlled() && FrogHUDClass)
-		{
-			FrogHUDWidget = CreateWidget<UFrogHUD>(PC, FrogHUDClass);
-			if (FrogHUDWidget) FrogHUDWidget->AddToViewport();
-		}
+		
 	}
 	
 	if (HasAuthority()) SetupAbilities();

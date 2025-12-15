@@ -2,3 +2,8 @@
 
 
 #include "FrogHUD.h"
+
+void UFrogHUD::UpdateScoreText(int NewScore) const
+{
+	ScoreText->SetText(FText::AsNumber(NewScore));
+}

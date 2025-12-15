@@ -24,6 +24,7 @@ public:
 	AFrogGameState();
 
 	virtual void Tick(float DeltaSeconds) override;
+	void UpdateScore();
 
 	UPROPERTY(ReplicatedUsing = OnRep_Score, EditAnywhere, BlueprintReadWrite, Category = "Frog Game")
 	int32 Score;

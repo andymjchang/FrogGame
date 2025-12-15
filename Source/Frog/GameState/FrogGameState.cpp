@@ -1,6 +1,9 @@
 ﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 #include "FrogGameState.h"
+
+#include "FrogCharacter/FrogController.h"
+#include "GameUI/FrogHUD.h"
 #include "Net/UnrealNetwork.h"
 
 AFrogGameState::AFrogGameState()
@@ -23,6 +26,20 @@ void AFrogGameState::Tick(float DeltaSeconds)
         {
             TriggerNightPhase();
         }
+    }
+}
+
+void AFrogGameState::UpdateScore()
+{
+    UWorld* World = GetWorld();
+    if (!World) return;
+
+    APlayerController* PlayerController = World->GetFirstPlayerController();
+
+    // 4. Safety Check and Execute
+    if (AFrogController* FrogPC = Cast<AFrogController>(PlayerController))
+    {
+        FrogPC->GetFrogHUD()->UpdateScoreText(Score);
     }
 }
 

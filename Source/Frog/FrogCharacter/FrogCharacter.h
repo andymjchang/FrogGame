@@ -16,7 +16,6 @@ class UBoxComponent;
 class USphereComponent;
 class UNametagWidgetComponent;
 class UWidgetComponent;
-class UFrogHUD;
 class UAbilitySet;
 enum class EAbilityInputID : uint8;
 struct FInputActionValue;
@@ -99,13 +98,6 @@ protected: /* Members */
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<UNametagWidgetComponent> NametagWidgetComponent;
-
-	// HUD
-	UPROPERTY(EditDefaultsOnly, Category="HUD")
-	TSubclassOf<UFrogHUD> FrogHUDClass;
-	
-	UPROPERTY()
-	TObjectPtr<UFrogHUD> FrogHUDWidget;
 	
 	// Movement
 	UPROPERTY(EditDefaultsOnly, Category = "Movement")
@@ -159,8 +151,5 @@ public: /* Public Getters/Setters */
 	FORCEINLINE USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	FORCEINLINE UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 	FORCEINLINE float GetWalkSpeed() const { return WalkSpeed; }
-
-	UFUNCTION(BlueprintCallable)
-	FORCEINLINE UFrogHUD* GetFrogHUD() const { return FrogHUDWidget; }
 };
 
