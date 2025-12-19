@@ -28,13 +28,13 @@ public:
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
     // Replicated variables
-    UPROPERTY(ReplicatedUsing = OnRep_Score, EditAnywhere, BlueprintReadWrite, Category = "Frog Game")
-    int32 Score;
+    UPROPERTY(ReplicatedUsing = OnRep_Score, BlueprintReadOnly, Category = "Frog Game")
+    int32 Score = 0;
 
-    UPROPERTY(ReplicatedUsing = OnRep_CurrentPhase, EditAnywhere, BlueprintReadWrite, Category = "Frog Game")
-    EFrogGamePhase CurrentPhase;
+    UPROPERTY(ReplicatedUsing = OnRep_CurrentPhase, BlueprintReadOnly, Category = "Frog Game")
+    EFrogGamePhase CurrentPhase = EFrogGamePhase::Day;
 
-    UPROPERTY(ReplicatedUsing = OnRep_PhaseEndTime, EditAnywhere, BlueprintReadWrite, Category = "Frog Game")
+    UPROPERTY(ReplicatedUsing = OnRep_PhaseEndTime, BlueprintReadOnly, Category = "Frog Game")
     float PhaseEndTime;
 
     // Delegates
