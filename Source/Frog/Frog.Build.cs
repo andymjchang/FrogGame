@@ -18,7 +18,7 @@ public class Frog : ModuleRules
 		{
 			"Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "CableComponent", "GameplayTags",
 			"GameplayAbilities", "GameplayTasks", "Niagara", "OnlineSubsystem", "OnlineSubsystemSteam",
-			"UMG", "AIModule"
+			"UMG", "AIModule", "CommonUI", "CommonInput"
 		});
 	}
 }

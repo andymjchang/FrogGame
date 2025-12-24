@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameplayTagContainer.h"
 #include "Engine/DataAsset.h"
 #include "RoomDefinition.generated.h"
 
@@ -15,6 +16,9 @@ class FROG_API URoomDefinition : public UDataAsset
 	
 public:
 	URoomDefinition();
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	FGameplayTagContainer RoomTags;
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Room Visuals", meta = (EditFixedSize))
 	TArray<EDoorTypes> DoorArray;

@@ -6,9 +6,9 @@
 #include "GameFramework/PlayerController.h"
 #include "FrogController.generated.h"
 
+class UUserBaseWidget;
 class UNiagaraSystem;
 class UNiagaraComponent;
-class UFrogHUD;
 
 /**
  * 
@@ -19,15 +19,15 @@ class FROG_API AFrogController : public APlayerController
 	GENERATED_BODY()
 public:
 	UFUNCTION(BlueprintCallable)
-	FORCEINLINE UFrogHUD* GetFrogHUD() const { return FrogHUDWidget; }
+	FORCEINLINE UUserBaseWidget* GetFrogBaseWidget() const { return FrogBaseWidget; }
 
 	virtual void BeginPlay() override;
 
 protected:
 	// HUD
 	UPROPERTY(EditDefaultsOnly, Category="HUD")
-	TSubclassOf<UFrogHUD> FrogHUDClass;
+	TSubclassOf<UUserBaseWidget> BaseWidgetClass;
 	
 	UPROPERTY()
-	TObjectPtr<UFrogHUD> FrogHUDWidget;
+	TObjectPtr<UUserBaseWidget> FrogBaseWidget;
 };
