@@ -4,13 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "CommonActivatableWidget.h"
-#include "RoomSelect.generated.h"
+#include "Shop.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class FROG_API URoomSelect : public UCommonActivatableWidget
+class FROG_API UShop : public UCommonActivatableWidget
 {
 	GENERATED_BODY()
 };
