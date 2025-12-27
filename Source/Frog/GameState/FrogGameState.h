@@ -65,10 +65,8 @@ protected:
     // OnRep functions
     UFUNCTION()
     void OnRep_Score();
-
     UFUNCTION()
     void OnRep_CurrentPhase();
-
     UFUNCTION()
     void OnRep_PhaseEndTime();
 };
