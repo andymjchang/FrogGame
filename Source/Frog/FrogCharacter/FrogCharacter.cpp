@@ -128,43 +128,67 @@ UAbilitySystemComponent* AFrogCharacter::GetAbilitySystemComponent() const
 void AFrogCharacter::Interact()
 {
 	const bool bCurrentlyHighlighting = CurrentInteractable.IsValid();
-	const bool bHoldingInteractable = HeldInteractable.IsValid();
-	
-	// Interact with Moveable Interactable
-	if (bCurrentlyHighlighting && CurrentInteractable->IsMoveable())
+	if (!bCurrentlyHighlighting)
 	{
-		if (!bHoldingInteractable) // Pickup
-		{
-			CurrentInteractable->AttachToComponent(InteractableAttachPoint, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-			HeldInteractable = CurrentInteractable;
-			HeldInteractable->DisableInteractable();
-		}
-		// else // Place down
-		// {
-		// 	HeldInteractable->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-		// 	HeldInteractable->EnableInteractable();
-		// }
 		return;
 	}
+	
+	const bool bHoldingInteractable = HeldInteractable.IsValid();
 
-	// Interact with Station
-	if (AStation* Station = Cast<AStation>(CurrentInteractable.Get()))
-	{
-		if (bHoldingInteractable)
+	if (bHoldingInteractable){
+		int holdingCapacity = HeldInteractable->GetCapacity();
+		if (holdingCapacity > 0 or CurrentInteractable->GetOfferedInteractable() != nullptr)
 		{
-			if (AItem* Item = Cast<AItem>(HeldInteractable))
+			AddInteractable(CurrentInteractable->GetOfferedInteractable());
+		}else
+		{
+			//TryGive
+			if (CurrentInteractable->GetCapacity() > 0)
 			{
-				if (Station->TryAddItem(Item))
+				//Detatch held interactable and give it to the highlighted interactable
+				if (CurrentInteractable->AddInteractable(HeldInteractable.Get()))
 				{
-					// HeldInteractable->Destroy();
+					HeldInteractable = nullptr;
 				}
 			}
 		}
-		else
+	}
+	else
+	{
+		AInteractable* ItemToPickUp = CurrentInteractable->GetOfferedInteractable();
+		if (IsValid(ItemToPickUp))
 		{
-			Station->OnInteract(this);
+			AddInteractable(ItemToPickUp);
 		}
 	}
+}
+
+bool AFrogCharacter::AddInteractable(AInteractable* InteractableToAdd)
+{
+	if (!InteractableToAdd) return false;
+
+	FAttachmentTransformRules Rules(EAttachmentRule::SnapToTarget, true);
+
+	// If already holding a container, put the item IN the container
+	if (HeldInteractable.IsValid() && HeldInteractable->GetCapacity() > 0)
+	{
+		return HeldInteractable->AddInteractable(InteractableToAdd);
+	}
+	else if (!HeldInteractable.IsValid())
+	{
+		// Pick up item directly
+		HeldInteractable = InteractableToAdd;
+        
+		InteractableToAdd->DisableInteractable();
+		//InteractableToAdd->GetRootComponent()->SetSimulatePhysics(false);
+        
+		// Attach to the character's designated hand/attach point
+		InteractableToAdd->AttachToComponent(InteractableAttachPoint, Rules);
+        
+		return true;
+	}
+
+	return false;
 }
 
 void AFrogCharacter::SetupAbilities()

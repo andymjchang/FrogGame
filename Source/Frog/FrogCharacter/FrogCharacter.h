@@ -87,6 +87,8 @@ protected: /* Protected Functions */
 	void SetupAbilities();
 
 	void Move(const FInputActionValue& Value);
+	//Gameplay functions
+	bool AddInteractable(AInteractable* InteractableToAdd);
 
 protected: /* Members */
 	// Components

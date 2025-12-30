@@ -34,15 +34,19 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Item Settings")
 	bool Moveable;
 
+	TWeakObjectPtr<AInteractable> OfferedInteractable;
+	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Interaction")
 	TObjectPtr<UBoxComponent> InteractHitBox;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Interaction")
-	TObjectPtr<USceneComponent> RootSceneComponent;
+	// UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Interaction")
+	// TObjectPtr<USceneComponent> RootSceneComponent;
 	
 	
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-	
+	int GetCapacity();
+	AInteractable* GetOfferedInteractable();
+	bool AddInteractable(AInteractable* InteractableToAdd);
 };
