@@ -31,6 +31,6 @@ public:
 	void PopWidget();
 
 protected:
-	UPROPERTY(meta = (BindWidget))
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (BindWidget))
 	TObjectPtr<UCommonActivatableWidgetStack> MenuStack;
 };
