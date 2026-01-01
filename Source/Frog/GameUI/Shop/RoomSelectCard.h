@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "CommonButtonBase.h"
+#include "Rooms/RoomDefinition.h"
 #include "RoomSelectCard.generated.h"
 
 // Forward declarations to avoid heavy includes in the header
@@ -18,19 +19,23 @@ class FROG_API URoomSelectCard : public UCommonButtonBase
 	GENERATED_BODY()
 
 public:
-	/** * Sets the image and text for this card. 
-	 * Call this after creating the widget.
-	 */
 	UFUNCTION(BlueprintCallable, Category = "UI")
-	void InitializeCard(UTexture2D* InTexture, FText InTitle);
+	void InitializeCard(UTexture2D* InTexture, FText InTitle, URoomDefinition* InRoomDefinition);
 
 protected:
 	// --- Bound Widgets --- //
-	// The names here must match the names in the Widget Blueprint exactly.
-
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<UImage> CardImage;
 
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<UCommonTextBlock> CardText;
+	
+	UPROPERTY(EditAnywhere, Category = "User Settings", meta = (ClampMin = "0", ClampMax = "1"))
+	FLinearColor HoverTintColor = FLinearColor(0.7f, 0.7f, 0.7f, 1.0f); 
+	
+	UPROPERTY(EditAnywhere, Category = "User Settings", meta = (ClampMin = "0", ClampMax = "1"))
+	FLinearColor NormalTintColor = FLinearColor(1.f, 1.f, 1.f, 1.0f); 
+	
+	virtual void NativeOnHovered() override;
+	virtual void NativeOnUnhovered() override;
 };

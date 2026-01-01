@@ -1,8 +1,9 @@
 ﻿#include "RoomSelectCard.h"
 #include "Components/Image.h"
 #include "CommonTextBlock.h"
+#include "Rooms/RoomDefinition.h"
 
-void URoomSelectCard::InitializeCard(UTexture2D* InTexture, FText InTitle)
+void URoomSelectCard::InitializeCard(UTexture2D* InTexture, FText InTitle, URoomDefinition* InRoomDefinition)
 {
 	// Update the Text
 	if (CardText)
@@ -20,8 +21,27 @@ void URoomSelectCard::InitializeCard(UTexture2D* InTexture, FText InTitle)
 		}
 		else
 		{
-			// Optional: Hide image if no texture is provided
-			// CardImage->SetVisibility(ESlateVisibility::Collapsed);
+			CardImage->SetVisibility(ESlateVisibility::Collapsed);
 		}
+	}
+}
+
+void URoomSelectCard::NativeOnHovered()
+{
+	Super::NativeOnHovered();
+
+	if (CardImage)
+	{
+		CardImage->SetColorAndOpacity(HoverTintColor);
+	}
+}
+
+void URoomSelectCard::NativeOnUnhovered()
+{
+	Super::NativeOnUnhovered();
+
+	if (CardImage)
+	{
+		CardImage->SetColorAndOpacity(NormalTintColor);
 	}
 }
