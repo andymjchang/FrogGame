@@ -26,13 +26,6 @@ protected:
 public:
 	virtual void Tick(float DeltaTime) override;
 	virtual void OnInteract(AFrogCharacter* Interactor);
-	virtual bool TryAddItem(AItem* Item);
 
 protected:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Gameplay Variables")
-	int MaxCapacity = 4;
-	int CurrentCapacity = 0;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Gameplay Variables")
-	TArray<AItem*> Items;
 };

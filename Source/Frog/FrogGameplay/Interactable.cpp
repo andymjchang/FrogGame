@@ -2,8 +2,6 @@
 
 
 #include "Interactable.h"
-
-#include "ViewportInteractionTypes.h"
 #include "Components/BoxComponent.h"
 
 
@@ -30,51 +28,24 @@ void AInteractable::DisableInteractable()
 	if (IsValid(InteractHitBox)) InteractHitBox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
-int AInteractable::GetCapacity()
+bool AInteractable::TryAddToInventory(AInteractable* InteractableToAdd)
 {
-	return Capacity;
-}
-
-AInteractable* AInteractable::GetOfferedInteractable()
-{
-	if (OfferedInteractable.IsValid() && OfferedInteractable->Moveable)
-	{
-		AInteractable* Temp = OfferedInteractable.Get();
-		OfferedInteractable = this;
-		Capacity++;
-		return Temp;
-	}
-	return nullptr;
-}
-
-
-bool AInteractable::AddInteractable(AInteractable* InteractableToAdd)
-{
-	if (Capacity <= 0 || !InteractableToAdd) { return false; }
-
-	OfferedInteractable = InteractableToAdd;
-	Capacity--;
-
-	// Physics/Collision Cleanup
-	InteractableToAdd->DisableInteractable();
-	//InteractableToAdd->GetRootComponent()->SetSimulatePhysics(false);
+	if (GetInventorySize() >= MaxCapacity || !IsValid(InteractableToAdd)) return false;
+	if (!InteractableToAdd->GetOwnedItemTags().HasAny(CompatibleInteractableTags)) return false;
+	
+	Inventory.Add(InteractableToAdd);
 
 	// Attachment
-	FAttachmentTransformRules Rules(EAttachmentRule::SnapToTarget, true);
+	InteractableToAdd->DisableInteractable();
+	const FAttachmentTransformRules Rules(EAttachmentRule::SnapToTarget, false);
 	InteractableToAdd->AttachToComponent(GetRootComponent(), Rules); 
-	// Tip: Use a specific socket name if your mesh has one, e.g., GetMesh(), "SlotSocket"
 
 	return true;
 }
-// Called when the game starts or when spawned
+
 void AInteractable::BeginPlay()
 {
 	Super::BeginPlay();
-}
-
-// Called every frame
-void AInteractable::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
+	Inventory.Reserve(MaxCapacity);
 }
 

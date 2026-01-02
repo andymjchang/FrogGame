@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameplayTagContainer.h"
 #include "GameFramework/Actor.h"
 #include "Interactable.generated.h"
 
@@ -14,39 +15,43 @@ class FROG_API AInteractable : public AActor
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this actor's properties
 	AInteractable();
 	
-	FORCEINLINE bool IsMoveable() const { return Moveable; }
-
-	// Interaction
+public:
 	void EnableInteractable();
 	void DisableInteractable();
+	bool TryAddToInventory(AInteractable* InteractableToAdd);
+	
+protected:
+	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
+	int MaxCapacity = 4;
+
+	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
+	bool Moveable;
+	 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "User Settings")
+	FGameplayTagContainer CompatibleInteractableTags;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "User Settings")
+	FGameplayTagContainer OwnedInteractableTags;
+	
+	UPROPERTY(BlueprintReadOnly)
+	TObjectPtr<AInteractable> OfferedInteractable;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	TObjectPtr<UBoxComponent> InteractHitBox;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	TArray<AInteractable*> Inventory;
+	
 
 	
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Item Settings")
-	int Capacity;
-	
-	UPROPERTY(EditDefaultsOnly, Category = "Item Settings")
-	bool Moveable;
-
-	TWeakObjectPtr<AInteractable> OfferedInteractable;
-	
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Interaction")
-	TObjectPtr<UBoxComponent> InteractHitBox;
-
-	// UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Interaction")
-	// TObjectPtr<USceneComponent> RootSceneComponent;
-	
-	
 public:
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-	int GetCapacity();
-	AInteractable* GetOfferedInteractable();
-	bool AddInteractable(AInteractable* InteractableToAdd);
+	FORCEINLINE bool IsMoveable() const { return Moveable; }
+	FORCEINLINE int GetInventorySize() const { return Inventory.Num(); }
+	FORCEINLINE FGameplayTagContainer& GetOwnedItemTags() { return OwnedInteractableTags; }
+	FORCEINLINE AInteractable* GetOfferedInteractable() { return OfferedInteractable.Get(); };
 };

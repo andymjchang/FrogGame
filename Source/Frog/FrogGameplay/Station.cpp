@@ -23,18 +23,7 @@ void AStation::OnInteract(AFrogCharacter* Interactor)
 {
 	if (GEngine)
 	{
-		const FString DebugMessage = FString::Printf(TEXT("move selector to "));
+		const FString DebugMessage = FString::Printf(TEXT("interacted with station "));
 		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, DebugMessage);
 	}
-}
-
-bool AStation::TryAddItem(AItem* Item)
-{
-	if (CurrentCapacity < MaxCapacity)
-	{
-		Items.Add(Item);
-		CurrentCapacity++;
-		return true;
-	}
-	return false;
 }
