@@ -3,7 +3,7 @@
 
 #include "InventoryWidget.h"
 
-void UInventoryWidget::UpdateInventory(TArray<AInteractable> Inventory)
+void UInventoryWidget::UpdateInventory(const TArray<AInteractable>& Inventory)
 {
 	const int InventorySize = Inventory.Num();
 	
