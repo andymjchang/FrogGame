@@ -2,3 +2,9 @@
 
 
 #include "InventoryWidget.h"
+
+void UInventoryWidget::UpdateInventory(TArray<AInteractable> Inventory)
+{
+	const int InventorySize = Inventory.Num();
+	
+}

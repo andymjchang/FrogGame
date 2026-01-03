@@ -2,6 +2,8 @@
 
 
 #include "Interactable.h"
+
+#include "InteractableData.h"
 #include "Components/BoxComponent.h"
 
 
@@ -12,7 +14,6 @@ AInteractable::AInteractable()
 	bReplicates = true;
 
 	PrimaryActorTick.bCanEverTick = true;
-	OfferedInteractable = this;
 	InteractHitBox = CreateDefaultSubobject<UBoxComponent>(TEXT("InteractHitBox"));
 	InteractHitBox->SetupAttachment(GetRootComponent());
 	InteractHitBox->SetCollisionProfileName(TEXT("ItemHitBox"));
@@ -30,11 +31,15 @@ void AInteractable::DisableInteractable()
 
 bool AInteractable::TryAddToInventory(AInteractable* InteractableToAdd)
 {
-	if (GetInventorySize() >= MaxCapacity || !IsValid(InteractableToAdd)) return false;
-	if (!InteractableToAdd->GetCompatibleItemTags().HasAny(OwnedInteractableTags)) return false;
+	if (!IsValid(Data) || !IsValid(InteractableToAdd)) return false;
+	
+	UInteractableData* InteractableData = InteractableToAdd->GetData();
+	if (!IsValid(InteractableData)) return false;
+	
+	if (!InteractableData->GetCompatibleTags().HasAny(Data->GetOwnedTags())) return false;
+	if (GetInventorySize() >= Data->GetMaxCapacity()) return false;
 	
 	Inventory.Add(InteractableToAdd);
-
 	// Attachment
 	InteractableToAdd->DisableInteractable();
 	const FAttachmentTransformRules Rules(EAttachmentRule::SnapToTarget, false);
@@ -46,6 +51,8 @@ bool AInteractable::TryAddToInventory(AInteractable* InteractableToAdd)
 void AInteractable::BeginPlay()
 {
 	Super::BeginPlay();
-	Inventory.Reserve(MaxCapacity);
+	
+	if (IsValid(Data)) Inventory.Reserve(Data->GetMaxCapacity());
+	OfferedInteractable = this;
 }
 

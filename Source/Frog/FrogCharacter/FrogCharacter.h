@@ -102,7 +102,7 @@ protected: /* Members */
 	TObjectPtr<UNametagWidgetComponent> NametagWidgetComponent;
 	
 	// Movement
-	UPROPERTY(EditDefaultsOnly, Category = "Movement")
+	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
 	float WalkSpeed;
 
 	// Gameplay Ability System
@@ -122,21 +122,21 @@ protected: /* Members */
 	TSubclassOf<UGameplayEffect> DefaultAttributes;
 	
 	// Mapping Context
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	TObjectPtr<UInputMappingContext> DefaultMappingContext;
 	
-	UPROPERTY(EditDefaultsOnly, Category = Input)
+	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	FAbilityInputBindings AbilityInputBindings;
 	
 	UPROPERTY(Transient)
 	TArray<FGameplayAbilitySpecHandle> InitialAbilitySpecHandles;
 
 	// Input Actions
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	TObjectPtr<UInputAction> MoveAction;
 
 	// HitBoxes
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Input)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
 	TObjectPtr<USphereComponent> InteractHitbox;
 
 	// GamePlay Interactions
@@ -148,6 +148,9 @@ protected: /* Members */
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) // Change this back later
 	TObjectPtr<USceneComponent> InteractableAttachPoint;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
+	FGameplayTagContainer OwnedInteractableTags;
 
 public: /* Public Getters/Setters */
 	FORCEINLINE USpringArmComponent* GetCameraBoom() const { return CameraBoom; }

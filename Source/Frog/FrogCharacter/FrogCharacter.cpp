@@ -18,6 +18,7 @@
 #include "NametagWidgetComponent.h"
 #include "Components/SphereComponent.h"
 #include "FrogGameplay/Interactable.h"
+#include "FrogGameplay/InteractableData.h"
 #include "FrogGameplay/Item.h"
 #include "FrogGameplay/Station.h"
 #include "GameUI/FrogHUD.h"
@@ -161,12 +162,13 @@ void AFrogCharacter::Interact()
 
 bool AFrogCharacter::TryAddInteractableToPlayer(AInteractable* InteractableToAdd)
 {
-	if (!IsValid(InteractableToAdd) || !InteractableToAdd->IsMoveable()) return false;
+	if (!IsValid(InteractableToAdd) || !IsValid(InteractableToAdd->GetData()) || !InteractableToAdd->GetData()->GetIsMoveable()) return false;
 
-	const FAttachmentTransformRules Rules(EAttachmentRule::SnapToTarget, false);
+	if (HeldInteractable.IsValid()) return false; // Can't be holding item
 	
-	if (!HeldInteractable.IsValid())
+	if (InteractableToAdd->GetData()->GetCompatibleTags().HasAny(OwnedInteractableTags))
 	{
+		const FAttachmentTransformRules Rules(EAttachmentRule::SnapToTarget, false);
 		HeldInteractable = InteractableToAdd;
 		InteractableToAdd->DisableInteractable();
 		InteractableToAdd->AttachToComponent(InteractableAttachPoint, Rules);

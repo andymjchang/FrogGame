@@ -7,6 +7,7 @@
 #include "GameFramework/Actor.h"
 #include "Interactable.generated.h"
 
+class UInteractableData;
 class UBoxComponent;
 
 UCLASS()
@@ -24,16 +25,7 @@ public:
 	
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
-	int MaxCapacity = 4;
-
-	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
-	bool Moveable;
-	 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "User Settings")
-	FGameplayTagContainer CompatibleInteractableTags;
-	
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "User Settings")
-	FGameplayTagContainer OwnedInteractableTags;
+	TObjectPtr<UInteractableData> Data;
 	
 	UPROPERTY(BlueprintReadOnly)
 	TObjectPtr<AInteractable> OfferedInteractable;
@@ -43,16 +35,12 @@ protected:
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TArray<AInteractable*> Inventory;
-	
 
-	
 protected:
 	virtual void BeginPlay() override;
 
 public:
-	FORCEINLINE bool IsMoveable() const { return Moveable; }
+	FORCEINLINE UInteractableData* GetData() { return Data; }
 	FORCEINLINE int GetInventorySize() const { return Inventory.Num(); }
-	FORCEINLINE FGameplayTagContainer& GetCompatibleItemTags() { return CompatibleInteractableTags; }
-	FORCEINLINE FGameplayTagContainer& GetOwnedItemTags() { return OwnedInteractableTags; }
 	FORCEINLINE AInteractable* GetOfferedInteractable() { return OfferedInteractable.Get(); };
 };

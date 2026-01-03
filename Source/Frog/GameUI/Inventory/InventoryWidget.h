@@ -4,9 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "CommonUserWidget.h"
+#include "FrogGameplay/Interactable.h"
 #include "InventoryWidget.generated.h"
 
 class UHorizontalBox;
+
 /**
  * 
  */
@@ -14,6 +16,9 @@ UCLASS()
 class FROG_API UInventoryWidget : public UCommonUserWidget
 {
 	GENERATED_BODY()
+	
+public:
+	void UpdateInventory(TArray<AInteractable> Inventory);
 	
 protected:
 	UPROPERTY(meta = (BindWidget))
