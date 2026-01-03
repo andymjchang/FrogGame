@@ -52,6 +52,7 @@ protected:
 public:
 	FORCEINLINE bool IsMoveable() const { return Moveable; }
 	FORCEINLINE int GetInventorySize() const { return Inventory.Num(); }
+	FORCEINLINE FGameplayTagContainer& GetCompatibleItemTags() { return CompatibleInteractableTags; }
 	FORCEINLINE FGameplayTagContainer& GetOwnedItemTags() { return OwnedInteractableTags; }
 	FORCEINLINE AInteractable* GetOfferedInteractable() { return OfferedInteractable.Get(); };
 };

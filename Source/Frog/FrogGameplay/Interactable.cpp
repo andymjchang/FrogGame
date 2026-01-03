@@ -31,7 +31,7 @@ void AInteractable::DisableInteractable()
 bool AInteractable::TryAddToInventory(AInteractable* InteractableToAdd)
 {
 	if (GetInventorySize() >= MaxCapacity || !IsValid(InteractableToAdd)) return false;
-	if (!InteractableToAdd->GetOwnedItemTags().HasAny(CompatibleInteractableTags)) return false;
+	if (!InteractableToAdd->GetCompatibleItemTags().HasAny(OwnedInteractableTags)) return false;
 	
 	Inventory.Add(InteractableToAdd);
 
