@@ -7,9 +7,9 @@
 #include "GameFramework/Actor.h"
 #include "Interactable.generated.h"
 
+class UInventoryWidgetComponent;
 class UInteractableData;
 class UBoxComponent;
-class UWidgetComponent;
 
 UCLASS()
 class FROG_API AInteractable : public AActor
@@ -38,7 +38,10 @@ protected:
 	TArray<AInteractable*> Inventory;
 	
 	UPROPERTY(EditDefaultsOnly)
-	UWidgetComponent* InventoryWidgetComponent;
+	UInventoryWidgetComponent* InventoryWidgetComponent;
+	
+	UPROPERTY(EditDefaultsOnly)
+	USceneComponent* RootSceneComponent;
 
 protected:
 	virtual void BeginPlay() override;

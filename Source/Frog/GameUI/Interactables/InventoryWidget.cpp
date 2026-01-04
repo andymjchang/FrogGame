@@ -8,15 +8,6 @@
 
 void UInventoryWidget::UpdateInventoryWidget(const TArray<AInteractable*>& Inventory)
 {
-	const int32 InventorySize = Inventory.Num();
-	if (GEngine)
-	{
-		const FString DebugMessage = FString::Printf(TEXT("size %d"), InventorySize);
-		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, DebugMessage);
-		const FString DebugMessage2 = FString::Printf(TEXT("elements %d"), InventoryElements.Num());
-		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, DebugMessage2);
-	}
-	// Update Visuals
 	for (int32 i = 0; i < InventoryElements.Num(); i++)
 	{
 		if (!IsValid(InventoryElements[i])) continue;
@@ -36,6 +27,7 @@ void UInventoryWidget::NativeConstruct()
 {
 	Super::NativeConstruct();
     
+	if (!IsValid(TopRowHBox) or !IsValid(BottomRowHBox)) return;
 	InventoryElements.Empty();
 
 	// Add children from a box

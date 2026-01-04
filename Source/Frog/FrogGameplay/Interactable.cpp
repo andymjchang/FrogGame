@@ -5,8 +5,8 @@
 
 #include "InteractableData.h"
 #include "Components/BoxComponent.h"
-#include "Components/WidgetComponent.h"
 #include "GameUI/Interactables/InventoryWidget.h"
+#include "GameUI/Interactables/InventoryWidgetComponent.h"
 
 
 // Sets default values
@@ -15,15 +15,20 @@ AInteractable::AInteractable()
 	// Networking
 	bReplicates = true;
 
+	// Root Component
+	RootSceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootSceneComponent"));
+	SetRootComponent(RootSceneComponent);
+	
+	// Interact Hitbox
 	PrimaryActorTick.bCanEverTick = true;
 	InteractHitBox = CreateDefaultSubobject<UBoxComponent>(TEXT("InteractHitBox"));
 	InteractHitBox->SetupAttachment(RootComponent);
 	InteractHitBox->SetCollisionProfileName(TEXT("ItemHitBox"));
-	SetRootComponent(InteractHitBox);
 	
 	// Inventory Widget
-	InventoryWidgetComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("InventoryWidgetComponent"));
+	InventoryWidgetComponent = CreateDefaultSubobject<UInventoryWidgetComponent>(TEXT("InventoryWidgetComponent"));
 	InventoryWidgetComponent->SetupAttachment(RootComponent);
+	InventoryWidgetComponent->SetRelativeLocation(FVector(0.0f, 0.0f, 600.0f));
 }
 
 void AInteractable::EnableInteractable()
