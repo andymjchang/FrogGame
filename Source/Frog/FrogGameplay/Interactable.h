@@ -9,6 +9,7 @@
 
 class UInteractableData;
 class UBoxComponent;
+class UWidgetComponent;
 
 UCLASS()
 class FROG_API AInteractable : public AActor
@@ -35,6 +36,9 @@ protected:
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TArray<AInteractable*> Inventory;
+	
+	UPROPERTY(EditDefaultsOnly)
+	UWidgetComponent* InventoryWidgetComponent;
 
 protected:
 	virtual void BeginPlay() override;

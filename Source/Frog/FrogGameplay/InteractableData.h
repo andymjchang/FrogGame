@@ -7,6 +7,7 @@
 #include "Engine/DataAsset.h"
 #include "InteractableData.generated.h"
 
+// TODO: Identity which data assets are needed before starting a day and pre load
 /**
  * 
  */
@@ -20,6 +21,7 @@ public:
 	FORCEINLINE FGameplayTagContainer& GetCompatibleTags() { return CompatibleTags; }
 	FORCEINLINE FGameplayTagContainer& GetOwnedTags() { return OwnedTags; }
 	FORCEINLINE int GetMaxCapacity() const { return MaxCapacity; }
+	FORCEINLINE UTexture2D* GetIcon() const { return Icon.Get(); }
 	
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
@@ -35,5 +37,5 @@ protected:
 	FGameplayTagContainer OwnedTags;
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "User Settings")
-	TSoftObjectPtr<UTexture2D> Icon;
+	TObjectPtr<UTexture2D> Icon;
 };

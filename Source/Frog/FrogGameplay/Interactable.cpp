@@ -5,6 +5,8 @@
 
 #include "InteractableData.h"
 #include "Components/BoxComponent.h"
+#include "Components/WidgetComponent.h"
+#include "GameUI/Interactables/InventoryWidget.h"
 
 
 // Sets default values
@@ -15,8 +17,13 @@ AInteractable::AInteractable()
 
 	PrimaryActorTick.bCanEverTick = true;
 	InteractHitBox = CreateDefaultSubobject<UBoxComponent>(TEXT("InteractHitBox"));
-	InteractHitBox->SetupAttachment(GetRootComponent());
+	InteractHitBox->SetupAttachment(RootComponent);
 	InteractHitBox->SetCollisionProfileName(TEXT("ItemHitBox"));
+	SetRootComponent(InteractHitBox);
+	
+	// Inventory Widget
+	InventoryWidgetComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("InventoryWidgetComponent"));
+	InventoryWidgetComponent->SetupAttachment(RootComponent);
 }
 
 void AInteractable::EnableInteractable()
@@ -40,6 +47,11 @@ bool AInteractable::TryAddToInventory(AInteractable* InteractableToAdd)
 	if (GetInventorySize() >= Data->GetMaxCapacity()) return false;
 	
 	Inventory.Add(InteractableToAdd);
+	// Inventory Widget
+	if (UInventoryWidget* InventoryWidget = Cast<UInventoryWidget>(InventoryWidgetComponent->GetWidget()))
+	{
+		InventoryWidget->UpdateInventoryWidget(Inventory);
+	}
 	// Attachment
 	InteractableToAdd->DisableInteractable();
 	const FAttachmentTransformRules Rules(EAttachmentRule::SnapToTarget, false);
