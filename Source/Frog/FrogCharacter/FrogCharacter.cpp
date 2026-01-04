@@ -172,6 +172,7 @@ bool AFrogCharacter::TryAddInteractableToPlayer(AInteractable* InteractableToAdd
 		HeldInteractable = InteractableToAdd;
 		InteractableToAdd->DisableInteractable();
 		InteractableToAdd->AttachToComponent(InteractableAttachPoint, Rules);
+		// InteractableToAdd->SetActorRelativeScale3D(FVector(0.6f));
 		return true;
 	}
 
