@@ -21,6 +21,10 @@ public:
 	AStation();
 
 protected:
+	UPROPERTY(EditDefaultsOnly)
+	TObjectPtr<UWidgetComponent> ProgressBarWidgetComponent;
+	
+protected:
 	virtual void BeginPlay() override;
 
 public:

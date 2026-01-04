@@ -7,7 +7,7 @@
 #include "GameFramework/Actor.h"
 #include "Interactable.generated.h"
 
-class UInventoryWidgetComponent;
+class UWidgetComponent;
 class UInteractableData;
 class UBoxComponent;
 
@@ -38,7 +38,7 @@ protected:
 	TArray<AInteractable*> Inventory;
 	
 	UPROPERTY(EditDefaultsOnly)
-	UInventoryWidgetComponent* InventoryWidgetComponent;
+	UWidgetComponent* InventoryWidgetComponent;
 	
 	UPROPERTY(EditDefaultsOnly)
 	USceneComponent* RootSceneComponent;

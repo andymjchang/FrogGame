@@ -5,11 +5,9 @@
 
 #include "InteractableData.h"
 #include "Components/BoxComponent.h"
+#include "Components/WidgetComponent.h"
 #include "GameUI/Interactables/InventoryWidget.h"
-#include "GameUI/Interactables/InventoryWidgetComponent.h"
 
-
-// Sets default values
 AInteractable::AInteractable()
 {
 	// Networking
@@ -24,11 +22,15 @@ AInteractable::AInteractable()
 	InteractHitBox = CreateDefaultSubobject<UBoxComponent>(TEXT("InteractHitBox"));
 	InteractHitBox->SetupAttachment(RootComponent);
 	InteractHitBox->SetCollisionProfileName(TEXT("ItemHitBox"));
+	InteractHitBox->InitBoxExtent(FVector(128.f, 128.f, 128.f));
+	InteractHitBox->SetRelativeLocation(FVector(0.0f, 0.0f, 128.0f));
 	
 	// Inventory Widget
-	InventoryWidgetComponent = CreateDefaultSubobject<UInventoryWidgetComponent>(TEXT("InventoryWidgetComponent"));
+	InventoryWidgetComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("InventoryWidgetComponent"));
 	InventoryWidgetComponent->SetupAttachment(RootComponent);
 	InventoryWidgetComponent->SetRelativeLocation(FVector(0.0f, 0.0f, 600.0f));
+	InventoryWidgetComponent->SetWidgetSpace(EWidgetSpace::Screen);
+	InventoryWidgetComponent->SetDrawSize(FIntPoint(100, 100));
 }
 
 void AInteractable::EnableInteractable()

@@ -20,7 +20,7 @@ class FROG_API UInventoryWidget : public UCommonUserWidget
 	
 public:
 	void UpdateInventoryWidget(const TArray<AInteractable*>& Inventory);
-	void NativeConstruct();
+	virtual void NativeConstruct() override;
 
 protected:
 	UPROPERTY(meta = (BindWidget))

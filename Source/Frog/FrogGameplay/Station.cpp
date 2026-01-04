@@ -2,11 +2,17 @@
 
 #include "Station.h"
 #include "Components/PrimitiveComponent.h"
+#include "Components/WidgetComponent.h"
 #include "FrogCharacter/FrogCharacter.h"
 
 AStation::AStation()
 {
-	
+	// Inventory Widget
+	ProgressBarWidgetComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("ProgressBarWidgetComponent"));
+	ProgressBarWidgetComponent->SetupAttachment(RootComponent);
+	ProgressBarWidgetComponent->SetRelativeLocation(FVector(0.0f, 0.0f, -600.0f));
+	ProgressBarWidgetComponent->SetWidgetSpace(EWidgetSpace::Screen);
+	ProgressBarWidgetComponent->SetDrawSize(FIntPoint(100, 20));
 }
 
 void AStation::BeginPlay()
