@@ -3,11 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameplayTagContainer.h"
 #include "GameFramework/Actor.h"
 #include "Interactable.generated.h"
 
-class UWidgetComponent;
+class UInteractableWidgetComponent;
 class UInteractableData;
 class UBoxComponent;
 
@@ -38,7 +37,7 @@ protected:
 	TArray<AInteractable*> Inventory;
 	
 	UPROPERTY(EditDefaultsOnly)
-	UWidgetComponent* InventoryWidgetComponent;
+	TObjectPtr<UInteractableWidgetComponent> InventoryWidgetComponent;
 	
 	UPROPERTY(EditDefaultsOnly)
 	USceneComponent* RootSceneComponent;

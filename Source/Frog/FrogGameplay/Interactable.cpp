@@ -5,7 +5,7 @@
 
 #include "InteractableData.h"
 #include "Components/BoxComponent.h"
-#include "Components/WidgetComponent.h"
+#include "GameUI/Interactables/InteractableWidgetComponent.h"
 #include "GameUI/Interactables/InventoryWidget.h"
 
 AInteractable::AInteractable()
@@ -26,10 +26,9 @@ AInteractable::AInteractable()
 	InteractHitBox->SetRelativeLocation(FVector(0.0f, 0.0f, 128.0f));
 	
 	// Inventory Widget
-	InventoryWidgetComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("InventoryWidgetComponent"));
+	InventoryWidgetComponent = CreateDefaultSubobject<UInteractableWidgetComponent>(TEXT("InventoryWidgetComponent"));
 	InventoryWidgetComponent->SetupAttachment(RootComponent);
 	InventoryWidgetComponent->SetRelativeLocation(FVector(0.0f, 0.0f, 600.0f));
-	InventoryWidgetComponent->SetWidgetSpace(EWidgetSpace::Screen);
 	InventoryWidgetComponent->SetDrawSize(FIntPoint(100, 100));
 }
 

@@ -4,11 +4,12 @@
 #include "Components/PrimitiveComponent.h"
 #include "Components/WidgetComponent.h"
 #include "FrogCharacter/FrogCharacter.h"
+#include "GameUI/Interactables/InteractableWidgetComponent.h"
 
 AStation::AStation()
 {
 	// Inventory Widget
-	ProgressBarWidgetComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("ProgressBarWidgetComponent"));
+	ProgressBarWidgetComponent = CreateDefaultSubobject<UInteractableWidgetComponent>(TEXT("UBillboardWidgetComponent"));
 	ProgressBarWidgetComponent->SetupAttachment(RootComponent);
 	ProgressBarWidgetComponent->SetRelativeLocation(FVector(0.0f, 0.0f, -600.0f));
 	ProgressBarWidgetComponent->SetWidgetSpace(EWidgetSpace::Screen);
@@ -18,6 +19,7 @@ AStation::AStation()
 void AStation::BeginPlay()
 {
 	Super::BeginPlay();
+	ProgressBarWidgetComponent->SetVisibility(false);
 }
 
 void AStation::Tick(float DeltaTime)

@@ -11,6 +11,7 @@ class AItem;
 class AFrogCharacter;
 class UBoxComponent;
 class UPrimitiveComponent;
+class UInteractableWidgetComponent;
 
 UCLASS()
 class FROG_API AStation : public AInteractable
@@ -21,8 +22,8 @@ public:
 	AStation();
 
 protected:
-	UPROPERTY(EditDefaultsOnly)
-	TObjectPtr<UWidgetComponent> ProgressBarWidgetComponent;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	TObjectPtr<UInteractableWidgetComponent> ProgressBarWidgetComponent;
 	
 protected:
 	virtual void BeginPlay() override;
