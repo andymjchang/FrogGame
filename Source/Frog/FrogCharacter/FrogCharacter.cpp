@@ -126,38 +126,115 @@ UAbilitySystemComponent* AFrogCharacter::GetAbilitySystemComponent() const
 	return AbilitySystemComponent;
 }
 
-void AFrogCharacter::Interact()
-{
-	AInteractable* OtherInteractable = CurrentInteractable.Get();
-	if (!IsValid(OtherInteractable)) return;
-	AInteractable* OtherOffer = CurrentInteractable->GetOfferedInteractable();
-	if (!IsValid(OtherOffer)) return;
-	
-	// If holding an item
-	if (HeldInteractable.IsValid())
-	{
-		// Try adding Other's Offer to Held Item
-		const bool SuccessfulAdd = HeldInteractable->TryAddToInventory(OtherOffer);
-		if (!SuccessfulAdd)
-		{
-			// Try adding Held Item's Offer to Other Offer
-			if (OtherInteractable->TryAddToInventory(HeldInteractable->GetOfferedInteractable()))
-			{
-				HeldInteractable = nullptr;
-			}
-		}
-	}
-	else // If not holding an item
-	{
-		// Try adding Other's Offer to Player
-		const bool SuccessfulAdd = TryAddInteractableToPlayer(OtherOffer);
-		if (!SuccessfulAdd)
-		{
-			// Try adding Other to Player
-			TryAddInteractableToPlayer(OtherInteractable);
-		}
-
-	}
+void AFrogCharacter::Interact() {
+    AInteractable* OtherInteractable = CurrentInteractable.Get();
+    if (!IsValid(OtherInteractable))
+    {
+        if (GEngine)
+        {
+            GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("Interact: CurrentInteractable is invalid"));
+        }
+        return;
+    }
+    
+    AInteractable* OtherOffer = CurrentInteractable->GetOfferedInteractable();
+    if (!IsValid(OtherOffer))
+    {
+        if (GEngine)
+        {
+            const FString DebugMessage = FString::Printf(TEXT("Interact: OtherOffer is invalid for %s"), *OtherInteractable->GetName());
+            GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, DebugMessage);
+        }
+        return;
+    }
+    
+    // If holding an item
+    if (HeldInteractable.IsValid())
+    {
+        if (GEngine)
+        {
+            const FString DebugMessage = FString::Printf(TEXT("Interact: Holding item %s, attempting to add %s to it"), 
+                *HeldInteractable->GetName(), *OtherOffer->GetName());
+            GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, DebugMessage);
+        }
+        
+        // Try adding Other's Offer to Held Item
+        const bool SuccessfulAdd = HeldInteractable->TryAddToInventory(OtherOffer);
+        if (!SuccessfulAdd)
+        {
+            if (GEngine)
+            {
+                GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Orange, TEXT("Interact: Failed to add to held item, trying reverse add"));
+            }
+            
+            // Try adding Held Item's Offer to Other Offer
+            if (OtherInteractable->TryAddToInventory(HeldInteractable->GetOfferedInteractable()))
+            {
+                if (GEngine)
+                {
+                    GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, TEXT("Interact: Successfully added held item's offer to other, clearing held item"));
+                }
+                HeldInteractable = nullptr;
+            }
+            else
+            {
+                if (GEngine)
+                {
+                    GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("Interact: Failed to add held item's offer to other"));
+                }
+            }
+        }
+        else
+        {
+            if (GEngine)
+            {
+                GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, TEXT("Interact: Successfully added other's offer to held item"));
+            }
+        }
+    }
+    else // If not holding an item
+    {
+        if (GEngine)
+        {
+            const FString DebugMessage = FString::Printf(TEXT("Interact: Not holding item, attempting to add %s to player"), *OtherOffer->GetName());
+            GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Cyan, DebugMessage);
+        }
+        
+        // Try adding Other's Offer to Player
+        const bool SuccessfulAdd = TryAddInteractableToPlayer(OtherOffer);
+        if (!SuccessfulAdd)
+        {
+            if (GEngine)
+            {
+                const FString DebugMessage = FString::Printf(TEXT("Interact: Failed to add offer, trying to add %s directly to player"), *OtherInteractable->GetName());
+                GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Orange, DebugMessage);
+            }
+            
+            // Try adding Other to Player
+            const bool DirectAddSuccess = TryAddInteractableToPlayer(OtherInteractable);
+            if (DirectAddSuccess)
+            {
+                if (GEngine)
+                {
+                    GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, TEXT("Interact: Successfully added interactable directly to player"));
+                }
+            }
+            else
+            {
+                if (GEngine)
+                {
+                    GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("Interact: Failed to add interactable directly to player"));
+                }
+            }
+        }
+        else
+        {
+            if (GEngine)
+            {
+                GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, TEXT("Interact: Successfully added other's offer to player"));
+            }
+        }
+    }
 }
 
 bool AFrogCharacter::TryAddInteractableToPlayer(AInteractable* InteractableToAdd)
