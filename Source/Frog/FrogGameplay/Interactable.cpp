@@ -53,6 +53,10 @@ bool AInteractable::TryAddToInventory(AInteractable* InteractableToAdd)
 	if (GetInventorySize() >= Data->GetMaxCapacity()) return false;
 	
 	Inventory.Add(InteractableToAdd);
+	
+	//update offer
+	OfferedInteractable = InteractableToAdd;
+	
 	// Inventory Widget
 	if (UInventoryWidget* InventoryWidget = Cast<UInventoryWidget>(InventoryWidgetComponent->GetWidget()))
 	{
@@ -64,6 +68,35 @@ bool AInteractable::TryAddToInventory(AInteractable* InteractableToAdd)
 	InteractableToAdd->AttachToComponent(GetRootComponent(), Rules); 
 
 	return true;
+}
+
+bool AInteractable::TryRemoveFromInventory(AInteractable* InteractableToRemove)
+{
+	if (!IsValid(InteractableToRemove)) return false;
+    
+	if (Inventory.Remove(InteractableToRemove) > 0)
+	{
+		// Update offered interactable
+		if (Inventory.Num() > 0)
+		{
+			// Offer the last item in inventory
+			OfferedInteractable = Inventory.Last();
+		}
+		else
+		{
+			// Inventory is empty, offer self
+			OfferedInteractable = this;
+		}
+        
+		// Update widget if needed
+		if (UInventoryWidget* InventoryWidget = Cast<UInventoryWidget>(InventoryWidgetComponent->GetWidget()))
+		{
+			InventoryWidget->UpdateInventoryWidget(Inventory);
+		}
+        
+		return true;
+	}
+	return false;
 }
 
 void AInteractable::BeginPlay()

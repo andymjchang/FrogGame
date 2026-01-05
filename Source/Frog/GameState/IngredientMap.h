@@ -1,12 +1,13 @@
-﻿#pragma once
+﻿// IngredientMap.h
+#pragma once
 
 #include "CoreMinimal.h"
 #include "Engine/DataAsset.h"
 #include "GameplayTagContainer.h"
 #include "IngredientMap.generated.h"
 
-// Forward declaration (assuming UInteractableData is defined elsewhere)
-class UInteractableData;
+// Forward declaration
+class AInteractable;
 
 // Wrapper struct that serves as the map key
 USTRUCT(BlueprintType)
@@ -43,27 +44,17 @@ class FROG_API UIngredientMap : public UDataAsset
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Mapping")
-	TMap<FIngredientBehavior, UInteractableData*> BehaviorToInteractableMap;
+	TMap<FIngredientBehavior, TSubclassOf<AInteractable>> BehaviorToInteractableMap;
 
 	UFUNCTION(BlueprintCallable, Category = "Mapping")
-	UInteractableData* GetInteractableByBehavior(const FGameplayTagContainer& Tags) const
+	TSubclassOf<AInteractable> GetInteractableClassByBehavior(const FGameplayTagContainer& InTags) const
 	{
 		FIngredientBehavior Behavior;
-		Behavior.Tags = Tags;
+		Behavior.Tags = InTags;
         
-		if (UInteractableData* const* FoundData = BehaviorToInteractableMap.Find(Behavior))
+		if (TSubclassOf<AInteractable> const* FoundClass = BehaviorToInteractableMap.Find(Behavior))
 		{
-			return *FoundData;
-		}
-		return nullptr;
-	}
-
-	UFUNCTION(BlueprintCallable, Category = "Mapping")
-	UInteractableData* GetInteractableByBehaviorStruct(const FIngredientBehavior& Behavior) const
-	{
-		if (UInteractableData* const* FoundData = BehaviorToInteractableMap.Find(Behavior))
-		{
-			return *FoundData;
+			return *FoundClass;
 		}
 		return nullptr;
 	}

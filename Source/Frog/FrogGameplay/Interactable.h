@@ -21,7 +21,7 @@ public:
 public:
 	void EnableInteractable();
 	void DisableInteractable();
-	bool TryAddToInventory(AInteractable* InteractableToAdd);
+	virtual bool TryAddToInventory(AInteractable* InteractableToAdd);
 	
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
@@ -49,4 +49,6 @@ public:
 	FORCEINLINE UInteractableData* GetData() { return Data; }
 	FORCEINLINE int GetInventorySize() const { return Inventory.Num(); }
 	FORCEINLINE AInteractable* GetOfferedInteractable() { return OfferedInteractable.Get(); };
+	
+	bool TryRemoveFromInventory(AInteractable* InteractableToRemove);
 };

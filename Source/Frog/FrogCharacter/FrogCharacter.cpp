@@ -160,21 +160,46 @@ void AFrogCharacter::Interact() {
         
         // Try adding Other's Offer to Held Item
         const bool SuccessfulAdd = HeldInteractable->TryAddToInventory(OtherOffer);
-        if (!SuccessfulAdd)
+        if (SuccessfulAdd)
+        {
+            // Remove from source's inventory
+            OtherInteractable->TryRemoveFromInventory(OtherOffer);
+            
+            if (GEngine)
+            {
+                GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, TEXT("Interact: Successfully added other's offer to held item"));
+            }
+        }
+        else
         {
             if (GEngine)
             {
                 GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Orange, TEXT("Interact: Failed to add to held item, trying reverse add"));
             }
             
-            // Try adding Held Item's Offer to Other Offer
-            if (OtherInteractable->TryAddToInventory(HeldInteractable->GetOfferedInteractable()))
+            // Try adding Held Item's Offer to Other
+            AInteractable* HeldOffer = HeldInteractable->GetOfferedInteractable();
+            if (OtherInteractable->TryAddToInventory(HeldOffer))
             {
-                if (GEngine)
+                // Remove from held item's inventory
+                HeldInteractable->TryRemoveFromInventory(HeldOffer);
+                
+                // Clear held item if it's now offering itself (empty inventory)
+                if (HeldInteractable->GetOfferedInteractable() == HeldInteractable.Get())
                 {
-                    GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, TEXT("Interact: Successfully added held item's offer to other, clearing held item"));
+                    if (GEngine)
+                    {
+                        GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, TEXT("Interact: Successfully added held item's offer to other, clearing held item"));
+                    }
+                    HeldInteractable = nullptr;
                 }
-                HeldInteractable = nullptr;
+                else
+                {
+                    if (GEngine)
+                    {
+                        GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, TEXT("Interact: Successfully added held item's offer to other"));
+                    }
+                }
             }
             else
             {
@@ -182,13 +207,6 @@ void AFrogCharacter::Interact() {
                 {
                     GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("Interact: Failed to add held item's offer to other"));
                 }
-            }
-        }
-        else
-        {
-            if (GEngine)
-            {
-                GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, TEXT("Interact: Successfully added other's offer to held item"));
             }
         }
     }
@@ -202,7 +220,17 @@ void AFrogCharacter::Interact() {
         
         // Try adding Other's Offer to Player
         const bool SuccessfulAdd = TryAddInteractableToPlayer(OtherOffer);
-        if (!SuccessfulAdd)
+        if (SuccessfulAdd)
+        {
+            // Remove from source's inventory
+            OtherInteractable->TryRemoveFromInventory(OtherOffer);
+            
+            if (GEngine)
+            {
+                GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, TEXT("Interact: Successfully added other's offer to player"));
+            }
+        }
+        else
         {
             if (GEngine)
             {
@@ -227,22 +255,51 @@ void AFrogCharacter::Interact() {
                 }
             }
         }
-        else
-        {
-            if (GEngine)
-            {
-                GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, TEXT("Interact: Successfully added other's offer to player"));
-            }
-        }
     }
 }
 
 bool AFrogCharacter::TryAddInteractableToPlayer(AInteractable* InteractableToAdd)
 {
-	if (!IsValid(InteractableToAdd) || !IsValid(InteractableToAdd->GetData()) || !InteractableToAdd->GetData()->GetIsMoveable()) return false;
+	if (!IsValid(InteractableToAdd))
+	{
+		if (GEngine)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, 
+				TEXT("Player: InteractableToAdd is not valid"));
+		}
+		return false;
+	}
+    
+	if (!IsValid(InteractableToAdd->GetData()))
+	{
+		if (GEngine)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, 
+				TEXT("Player: InteractableToAdd has no valid Data"));
+		}
+		return false;
+	}
+    
+	if (!InteractableToAdd->GetData()->GetIsMoveable())
+	{
+		if (GEngine)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Orange, 
+				TEXT("Player: Interactable is not moveable"));
+		}
+		return false;
+	}
 
-	if (HeldInteractable.IsValid()) return false; // Can't be holding item
-	
+	if (HeldInteractable.IsValid())
+	{
+		if (GEngine)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Orange, 
+				TEXT("Player: Already holding an item"));
+		}
+		return false;
+	}
+    
 	if (InteractableToAdd->GetData()->GetCompatibleTags().HasAny(OwnedInteractableTags))
 	{
 		const FAttachmentTransformRules Rules(EAttachmentRule::SnapToTarget, false);
@@ -250,7 +307,19 @@ bool AFrogCharacter::TryAddInteractableToPlayer(AInteractable* InteractableToAdd
 		InteractableToAdd->DisableInteractable();
 		InteractableToAdd->AttachToComponent(InteractableAttachPoint, Rules);
 		// InteractableToAdd->SetActorRelativeScale3D(FVector(0.6f));
+        
+		if (GEngine)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, 
+				TEXT("Player: Successfully picked up interactable"));
+		}
 		return true;
+	}
+    
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Orange, 
+			TEXT("Player: Interactable tags not compatible with player"));
 	}
 
 	return false;

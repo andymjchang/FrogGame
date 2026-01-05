@@ -2,7 +2,10 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameStateBase.h"
+#include "IngredientMap.h"
 #include "FrogGameState.generated.h"
+
+class AInteractable;
 
 UENUM(BlueprintType)
 enum class EFrogGamePhase : uint8
@@ -26,6 +29,19 @@ public:
     
     virtual void Tick(float DeltaSeconds) override;
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Frog Game|Data")
+    UIngredientMap* IngredientMap;
+
+    UFUNCTION(BlueprintCallable, Category = "Frog Game|Data")
+    TSubclassOf<AInteractable> GetResultInteractableClass(const FGameplayTagContainer& InteractableTags) const
+    {
+        if (IngredientMap)
+        {
+            return IngredientMap->GetInteractableClassByBehavior(InteractableTags);
+        }
+        return nullptr;
+    }
 
     // Replicated variables
     UPROPERTY(ReplicatedUsing = OnRep_Score, BlueprintReadOnly, Category = "Frog Game")

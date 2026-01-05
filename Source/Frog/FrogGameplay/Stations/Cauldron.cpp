@@ -12,15 +12,6 @@ ACauldron::ACauldron()
 	PrimaryActorTick.bCanEverTick = true;
 }
 
-void ACauldron::OnInteract(AFrogCharacter* Interactor)
-{
-	if (GEngine)
-	{
-		const FString DebugMessage = FString::Printf(TEXT("Cauldron V2"));
-		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, DebugMessage);
-	}
-}
-
 // Called when the game starts or when spawned
 void ACauldron::BeginPlay()
 {
