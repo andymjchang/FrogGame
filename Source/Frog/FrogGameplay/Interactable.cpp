@@ -54,8 +54,8 @@ bool AInteractable::TryAddToInventory(AInteractable* InteractableToAdd)
 	
 	Inventory.Add(InteractableToAdd);
 	
-	//update offer
-	OfferedInteractable = InteractableToAdd;
+	// update offer
+	// OfferedInteractable = InteractableToAdd;
 	
 	// Inventory Widget
 	if (UInventoryWidget* InventoryWidget = Cast<UInventoryWidget>(InventoryWidgetComponent->GetWidget()))

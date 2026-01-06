@@ -8,6 +8,7 @@
 #include "GameplayTagContainer.h"
 #include "Station.generated.h"
 
+class UStationProgressBar;
 class UInteractableData;
 class AItem;
 class AFrogCharacter;
@@ -22,27 +23,30 @@ class FROG_API AStation : public AInteractable
     
 public:
 	AStation();
-
 	virtual bool TryAddToInventory(AInteractable* InteractableToAdd) override;
+	virtual void Tick(float DeltaTime) override;
 
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	TObjectPtr<UInteractableWidgetComponent> ProgressBarWidgetComponent;
+    
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Station")
+	float ProcessingDuration = 3.0f;
+	
+	UPROPERTY()
+	TSoftObjectPtr<UStationProgressBar> ProgressBarWidget;
 	
 protected:
 	virtual void BeginPlay() override;
-
-	// Timer handle for processing
-	FTimerHandle ProcessingTimerHandle;
-
-	// Processing duration
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Station")
-	float ProcessingDuration = 3.0f;
-
-	// Function called when timer completes
+	
 	UFUNCTION()
 	void OnProcessingComplete();
 
-	// Helper to gather all tags from station + inventory
 	FGameplayTagContainer GatherAllTags() const;
+
+
+private:
+	bool bIsProcessing = false;
+	double ProcessStartTime = 0.0f;
+	double ProcessEndTime = 0.0f;
 };

@@ -5,7 +5,7 @@
 
 #include "Components/ProgressBar.h"
 
-void UStationProgressBar::SetPercentProgress(const float NewPercentage)
+void UStationProgressBar::SetProgressPercent(const float NewPercentage)
 {
 	ProgressBar->SetPercent(NewPercentage);
 }

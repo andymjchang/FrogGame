@@ -16,7 +16,7 @@ class FROG_API UStationProgressBar : public UCommonUserWidget
 	GENERATED_BODY()
 	
 public:
-	void SetPercentProgress(float NewPercentage);
+	void SetProgressPercent(float NewPercentage);
 	
 protected:
 	UPROPERTY(meta = (BindWidget))
