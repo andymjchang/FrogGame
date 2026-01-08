@@ -18,7 +18,7 @@ protected:
 	virtual void BeginPlay() override;
 
 	UFUNCTION()
-	void HandleInteractableRemoved(AInteractable* RemovedInteractable);
+	void HandleInteractableRemoved(AInteractable* AddedInteractable);
 
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "User Settings")

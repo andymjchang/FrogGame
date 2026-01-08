@@ -12,11 +12,11 @@ void ASpawner::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	OnRemovedFromInventory.AddDynamic(this, &ASpawner::HandleInteractableRemoved);
+	OnRemovedFromInventory.AddUObject(this, &ASpawner::HandleInteractableRemoved);
 	SpawnAndReplenish();
 }
 
-void ASpawner::HandleInteractableRemoved(AInteractable* RemovedInteractable)
+void ASpawner::HandleInteractableRemoved(AInteractable* AddedInteractable)
 {
 	// Could add support for timed respawns
 	SpawnAndReplenish();

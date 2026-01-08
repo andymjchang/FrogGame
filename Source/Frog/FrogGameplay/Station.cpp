@@ -2,7 +2,6 @@
 
 #include "Station.h"
 #include "InteractableData.h"
-#include "GameState/IngredientMap.h"
 #include "GameState/FrogGameState.h"
 #include "TimerManager.h"
 #include "Components/PrimitiveComponent.h"
@@ -26,6 +25,9 @@ AStation::AStation()
 void AStation::BeginPlay()
 {
     Super::BeginPlay();
+    
+    OnAddedToInventory.AddUObject(this, &AStation::HandleInteractableAdded);
+    
     if (ProgressBarWidgetComponent)
     {
         ProgressBarWidgetComponent->SetVisibility(false);
@@ -62,12 +64,10 @@ void AStation::Tick(float DeltaTime)
     }
 }
 
-bool AStation::TryAddToInventory(AInteractable* InteractableToAdd)
+void AStation::HandleInteractableAdded(AInteractable* InteractableToAdd)
 {
-    const bool bSuccess = Super::TryAddToInventory(InteractableToAdd);
-    
     // Don't autostart if the added item is the finished item
-    if (bSuccess and OfferedInteractable == this)
+    if (OfferedInteractable == this)
     {
         bIsProcessing = true;
         ProcessStartTime = GetWorld()->GetTimeSeconds();
@@ -78,8 +78,6 @@ bool AStation::TryAddToInventory(AInteractable* InteractableToAdd)
             ProgressBarWidgetComponent->SetVisibility(true);
         }
     }
-    
-    return bSuccess;
 }
 
 FGameplayTagContainer AStation::GatherAllTags() const

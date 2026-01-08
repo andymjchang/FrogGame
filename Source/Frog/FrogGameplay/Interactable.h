@@ -6,11 +6,12 @@
 #include "GameFramework/Actor.h"
 #include "Interactable.generated.h"
 
+class AInteractable;
 class UInteractableWidgetComponent;
 class UInteractableData;
 class UBoxComponent;
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnRemovedFromInventory, AInteractable*, RemovedInteractable);
+DECLARE_MULTICAST_DELEGATE_OneParam(FOnInventoryItemChanged, AInteractable*);
 
 UCLASS()
 class FROG_API AInteractable : public AActor
@@ -25,12 +26,13 @@ protected:
 	virtual void BeginPlay() override;
 	
 public:
-	UPROPERTY()
-	FOnRemovedFromInventory OnRemovedFromInventory;
+	// Delegate 
+	FOnInventoryItemChanged OnRemovedFromInventory;
+	FOnInventoryItemChanged OnAddedToInventory;
 	
 	void EnableInteractable();
 	void DisableInteractable();
-	virtual bool TryAddToInventory(AInteractable* InteractableToAdd);
+	bool TryAddToInventory(AInteractable* InteractableToAdd);
 
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "User Settings")

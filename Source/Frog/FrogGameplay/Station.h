@@ -23,7 +23,6 @@ class FROG_API AStation : public AInteractable
     
 public:
 	AStation();
-	virtual bool TryAddToInventory(AInteractable* InteractableToAdd) override;
 	virtual void Tick(float DeltaTime) override;
 
 protected:
@@ -35,6 +34,8 @@ protected:
 	
 	UPROPERTY()
 	TSoftObjectPtr<UStationProgressBar> ProgressBarWidget;
+	
+	void HandleInteractableAdded(AInteractable* InteractableToAdd);
 	
 protected:
 	virtual void BeginPlay() override;

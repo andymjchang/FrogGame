@@ -67,6 +67,8 @@ bool AInteractable::TryAddToInventory(AInteractable* InteractableToAdd)
 	const FAttachmentTransformRules Rules(EAttachmentRule::SnapToTarget, false);
 	InteractableToAdd->AttachToComponent(AttachPoint, Rules); 
 
+	OnAddedToInventory.Broadcast(InteractableToAdd);
+	
 	return true;
 }
 
@@ -76,8 +78,6 @@ bool AInteractable::TryRemoveFromInventory(AInteractable* InteractableToRemove)
 	
 	if (Inventory.Remove(InteractableToRemove) > 0)
 	{
-		OnRemovedFromInventory.Broadcast(InteractableToRemove);
-		
 		// Update offered interactable
 		if (Inventory.Num() > 0)
 		{
@@ -96,6 +96,8 @@ bool AInteractable::TryRemoveFromInventory(AInteractable* InteractableToRemove)
 			InventoryWidget->UpdateInventoryWidget(Inventory);
 		}
         
+		OnRemovedFromInventory.Broadcast(InteractableToRemove);
+		
 		return true;
 	}
 	return false;

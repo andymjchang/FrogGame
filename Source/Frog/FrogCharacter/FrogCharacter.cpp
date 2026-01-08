@@ -179,13 +179,14 @@ void AFrogCharacter::Interact() {
             
             // Try adding Held Item's Offer to Other
             AInteractable* HeldOffer = HeldInteractable->GetOfferedInteractable();
+        	bool OfferingItself = HeldInteractable->GetOfferedInteractable() == HeldInteractable.Get();
             if (OtherInteractable->TryAddToInventory(HeldOffer))
             {
                 // Remove from held item's inventory
                 HeldInteractable->TryRemoveFromInventory(HeldOffer);
                 
-                // Clear held item if it's now offering itself (empty inventory)
-                if (HeldInteractable->GetOfferedInteractable() == HeldInteractable.Get())
+                // Clear HeldInteractable pointer if giving the entire item away
+                if (!HeldInteractable.IsValid() or OfferingItself)
                 {
                     if (GEngine)
                     {
