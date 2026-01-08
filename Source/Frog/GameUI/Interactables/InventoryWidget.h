@@ -19,12 +19,15 @@ class FROG_API UInventoryWidget : public UCommonUserWidget
 	GENERATED_BODY()
 	
 public:
+	virtual void NativeOnInitialized() override;
+	
+public:
 	void UpdateInventoryWidget(const TArray<AInteractable*>& Inventory);
-	virtual void NativeConstruct() override;
 
 protected:
 	UPROPERTY(meta = (BindWidget))
 	UHorizontalBox* TopRowHBox;
+	
 	UPROPERTY(meta = (BindWidget))
 	UHorizontalBox* BottomRowHBox;
 	

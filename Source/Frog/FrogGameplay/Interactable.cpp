@@ -10,7 +10,7 @@
 
 AInteractable::AInteractable()
 {
-	// Networking
+	PrimaryActorTick.bCanEverTick = true;
 	bReplicates = true;
 
 	// Root Component
@@ -18,7 +18,6 @@ AInteractable::AInteractable()
 	SetRootComponent(RootSceneComponent);
 	
 	// Interact Hitbox
-	PrimaryActorTick.bCanEverTick = true;
 	InteractHitBox = CreateDefaultSubobject<UBoxComponent>(TEXT("InteractHitBox"));
 	InteractHitBox->SetupAttachment(RootComponent);
 	InteractHitBox->SetCollisionProfileName(TEXT("ItemHitBox"));
@@ -30,6 +29,10 @@ AInteractable::AInteractable()
 	InventoryWidgetComponent->SetupAttachment(RootComponent);
 	InventoryWidgetComponent->SetRelativeLocation(FVector(0.0f, 0.0f, 600.0f));
 	InventoryWidgetComponent->SetDrawSize(FIntPoint(100, 100));
+	
+	// Attach point
+	AttachPoint = CreateDefaultSubobject<USceneComponent>(TEXT("AttachPoint"));
+	AttachPoint->SetupAttachment(RootComponent);
 }
 
 void AInteractable::EnableInteractable()
@@ -54,9 +57,6 @@ bool AInteractable::TryAddToInventory(AInteractable* InteractableToAdd)
 	
 	Inventory.Add(InteractableToAdd);
 	
-	// update offer
-	// OfferedInteractable = InteractableToAdd;
-	
 	// Inventory Widget
 	if (UInventoryWidget* InventoryWidget = Cast<UInventoryWidget>(InventoryWidgetComponent->GetWidget()))
 	{
@@ -65,7 +65,7 @@ bool AInteractable::TryAddToInventory(AInteractable* InteractableToAdd)
 	// Attachment
 	InteractableToAdd->DisableInteractable();
 	const FAttachmentTransformRules Rules(EAttachmentRule::SnapToTarget, false);
-	InteractableToAdd->AttachToComponent(GetRootComponent(), Rules); 
+	InteractableToAdd->AttachToComponent(AttachPoint, Rules); 
 
 	return true;
 }
@@ -73,9 +73,11 @@ bool AInteractable::TryAddToInventory(AInteractable* InteractableToAdd)
 bool AInteractable::TryRemoveFromInventory(AInteractable* InteractableToRemove)
 {
 	if (!IsValid(InteractableToRemove)) return false;
-    
+	
 	if (Inventory.Remove(InteractableToRemove) > 0)
 	{
+		OnRemovedFromInventory.Broadcast(InteractableToRemove);
+		
 		// Update offered interactable
 		if (Inventory.Num() > 0)
 		{
@@ -99,11 +101,20 @@ bool AInteractable::TryRemoveFromInventory(AInteractable* InteractableToRemove)
 	return false;
 }
 
+void AInteractable::PostInitializeComponents()
+{
+	Super::PostInitializeComponents();
+	
+	if (IsValid(Data)) 
+	{
+		Inventory.Reserve(Data->GetMaxCapacity());
+	}
+}
+
 void AInteractable::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	if (IsValid(Data)) Inventory.Reserve(Data->GetMaxCapacity());
 	OfferedInteractable = this;
 }
 
