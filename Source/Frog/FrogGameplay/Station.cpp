@@ -35,6 +35,13 @@ void AStation::BeginPlay()
     }
 }
 
+void AStation::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+    OnAddedToInventory.RemoveAll(this);
+
+    Super::EndPlay(EndPlayReason);
+}
+
 void AStation::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);

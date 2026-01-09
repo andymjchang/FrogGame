@@ -39,7 +39,8 @@ protected:
 	
 protected:
 	virtual void BeginPlay() override;
-	
+	virtual void EndPlay(EEndPlayReason::Type EndPlayReason) override;
+
 	UFUNCTION()
 	void OnProcessingComplete();
 

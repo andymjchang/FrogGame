@@ -20,6 +20,18 @@ void AFrogGameState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLi
     DOREPLIFETIME(AFrogGameState, PhaseEndTime);
 }
 
+TSubclassOf<AInteractable> AFrogGameState::GetResultInteractableClass(
+    const FGameplayTagContainer& InteractableTags) const
+{
+    {
+        if (IngredientMap)
+        {
+            return IngredientMap->GetInteractableClassByBehavior(InteractableTags);
+        }
+        return nullptr;
+    }
+}
+
 void AFrogGameState::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
@@ -57,7 +69,7 @@ void AFrogGameState::TriggerNightPhase()
     OnRep_PhaseEndTime();
 }
 
-void AFrogGameState::AddScore(int32 Amount)
+void AFrogGameState::ServerAddScore(int32 Amount)
 {
     if (!HasAuthority()) return;
 

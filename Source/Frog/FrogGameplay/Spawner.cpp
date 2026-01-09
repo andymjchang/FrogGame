@@ -16,6 +16,13 @@ void ASpawner::BeginPlay()
 	SpawnAndReplenish();
 }
 
+void ASpawner::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	OnAddedToInventory.RemoveAll(this);
+
+	Super::EndPlay(EndPlayReason);
+}
+
 void ASpawner::HandleInteractableRemoved(AInteractable* AddedInteractable)
 {
 	// Could add support for timed respawns

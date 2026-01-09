@@ -9,11 +9,11 @@ void UFrogHUD::NativeConstruct()
 
     if (FrogGameState.IsValid())
     {
-        OnScoreChanged(FrogGameState->Score);
-        OnPhaseChanged(FrogGameState->CurrentPhase);
+        OnScoreChanged(FrogGameState->GetScore());
+        OnPhaseChanged(FrogGameState->GetCurrentPhase());
         
-        FrogGameState->OnScoreChanged.AddDynamic(this, &UFrogHUD::OnScoreChanged);
-        FrogGameState->OnPhaseChanged.AddDynamic(this, &UFrogHUD::OnPhaseChanged);
+        FrogGameState->OnScoreChanged.AddUObject(this, &UFrogHUD::OnScoreChanged);
+        FrogGameState->OnPhaseChanged.AddUObject(this, &UFrogHUD::OnPhaseChanged);
         
         if (GetWorld())
         {
@@ -41,8 +41,8 @@ void UFrogHUD::NativeDestruct()
     // Clean up delegates
     if (FrogGameState.IsValid())
     {
-        FrogGameState->OnScoreChanged.RemoveDynamic(this, &UFrogHUD::OnScoreChanged);
-        FrogGameState->OnPhaseChanged.RemoveDynamic(this, &UFrogHUD::OnPhaseChanged);
+        FrogGameState->OnScoreChanged.RemoveAll(this);
+        FrogGameState->OnPhaseChanged.RemoveAll(this);
     }
 }
 
@@ -75,7 +75,7 @@ void UFrogHUD::UpdateCountdownDisplay()
 {
     if (!FrogGameState.IsValid() || !IsValid(DayTimerText)) return;
 
-    if (FrogGameState->CurrentPhase == EFrogGamePhase::Day)
+    if (FrogGameState->GetCurrentPhase() == EFrogGamePhase::Day)
     {
         const float TimeRemaining = FrogGameState->GetTimeRemaining();
         const int32 TotalSeconds = FMath::Max(0, FMath::CeilToInt(TimeRemaining));

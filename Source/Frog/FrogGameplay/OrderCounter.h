@@ -4,20 +4,23 @@
 
 #include "CoreMinimal.h"
 #include "Interactable.h"
-#include "Consumer.generated.h"
+#include "OrderCounter.generated.h"
+
+class AFrogGameState;
 
 UCLASS()
-class FROG_API AConsumer : public AInteractable
+class FROG_API AOrderCounter : public AInteractable
 {
 	GENERATED_BODY()
 
 public:
-	AConsumer();
+	AOrderCounter();
 
 protected:
 	virtual void BeginPlay() override;
-	void EndPlay(EEndPlayReason::Type EndPlayReason);
-
+	virtual void EndPlay(EEndPlayReason::Type EndPlayReason) override;
 	void HandleInteractableAdded(AInteractable* Interactable);
-
+	
+protected:
+	TWeakObjectPtr<AFrogGameState> GameState;
 };

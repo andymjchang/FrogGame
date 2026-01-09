@@ -15,9 +15,9 @@ enum class EFrogGamePhase : uint8
 };
 
 // Delegates
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnScoreChanged, int32, NewScore);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPhaseChanged, EFrogGamePhase, NewPhase);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPhaseEndTimeUpdated, float, NewEndTime);
+DECLARE_MULTICAST_DELEGATE_OneParam(FOnScoreChanged, int32);
+DECLARE_MULTICAST_DELEGATE_OneParam(FOnPhaseChanged, EFrogGamePhase);
+DECLARE_MULTICAST_DELEGATE_OneParam(FOnPhaseEndTimeUpdated, float);
 
 UCLASS()
 class FROG_API AFrogGameState : public AGameStateBase
@@ -30,54 +30,41 @@ public:
     virtual void Tick(float DeltaSeconds) override;
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
     
-    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Frog Game|Data")
-    UIngredientMap* IngredientMap;
-
-    UFUNCTION(BlueprintCallable, Category = "Frog Game|Data")
-    TSubclassOf<AInteractable> GetResultInteractableClass(const FGameplayTagContainer& InteractableTags) const
-    {
-        if (IngredientMap)
-        {
-            return IngredientMap->GetInteractableClassByBehavior(InteractableTags);
-        }
-        return nullptr;
-    }
+    // Delegates
+    FOnScoreChanged OnScoreChanged;
+    FOnPhaseChanged OnPhaseChanged;
+    FOnPhaseEndTimeUpdated OnPhaseEndTimeUpdated;
+     
+    // Server only functions
+    void ServerAddScore(int32 Amount);
+    
+    // Client functions
+    TSubclassOf<AInteractable> GetResultInteractableClass(const FGameplayTagContainer& InteractableTags) const;
+    float GetTimeRemaining() const;
+    
+    FORCEINLINE int GetScore() const { return Score; }
+    FORCEINLINE int GetPhaseEndTime() const { return PhaseEndTime; }
+    FORCEINLINE EFrogGamePhase GetCurrentPhase() const { return CurrentPhase; }
+    
+protected:  
+    UPROPERTY()
+    TObjectPtr<UIngredientMap> IngredientMap;
 
     // Replicated variables
-    UPROPERTY(ReplicatedUsing = OnRep_Score, BlueprintReadOnly, Category = "Frog Game")
+    UPROPERTY(ReplicatedUsing = OnRep_Score)
     int32 Score = 0;
 
-    UPROPERTY(ReplicatedUsing = OnRep_CurrentPhase, BlueprintReadOnly, Category = "Frog Game")
+    UPROPERTY(ReplicatedUsing = OnRep_CurrentPhase)
     EFrogGamePhase CurrentPhase = EFrogGamePhase::Day;
 
-    UPROPERTY(ReplicatedUsing = OnRep_PhaseEndTime, BlueprintReadOnly, Category = "Frog Game")
+    UPROPERTY(ReplicatedUsing = OnRep_PhaseEndTime)
     float PhaseEndTime;
-
-    // Delegates
-    UPROPERTY(BlueprintAssignable, Category = "Frog Game|Events")
-    FOnScoreChanged OnScoreChanged;
-
-    UPROPERTY(BlueprintAssignable, Category = "Frog Game|Events")
-    FOnPhaseChanged OnPhaseChanged;
-
-    UPROPERTY(BlueprintAssignable, Category = "Frog Game|Events")
-    FOnPhaseEndTimeUpdated OnPhaseEndTimeUpdated;
-
-    // Server functions
-    UFUNCTION(BlueprintCallable, Category = "Frog Game")
+    
+protected:
+    // Server only functions
     void TriggerDayPhase(float DayDuration);
-
-    UFUNCTION(BlueprintCallable, Category = "Frog Game")
     void TriggerNightPhase();
 
-    UFUNCTION(BlueprintCallable, Category = "Frog Game")
-    void AddScore(int32 Amount);
-
-    // Client functions
-    UFUNCTION(BlueprintPure, Category = "Frog Game")
-    float GetTimeRemaining() const;
-
-protected:
     // OnRep functions
     UFUNCTION()
     void OnRep_Score();
