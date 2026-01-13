@@ -45,14 +45,27 @@ void AInteractable::DisableInteractable()
 	if (IsValid(InteractHitBox)) InteractHitBox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
+bool AInteractable::HasMatchingInteractableTag(const FGameplayTagContainer& AcceptedTags) const
+{
+	if (AcceptedTags.IsEmpty()) return false;
+	if (!IsValid(Data)) return false;
+
+	const FGameplayTagContainer& OwnedTags = Data->GetOwnedTags();
+	for (const FGameplayTag& OwnedTag : OwnedTags)
+	{
+		if (OwnedTag.MatchesAny(AcceptedTags))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 bool AInteractable::TryAddToInventory(AInteractable* InteractableToAdd)
 {
 	if (!IsValid(Data) || !IsValid(InteractableToAdd)) return false;
-	
-	UInteractableData* InteractableData = InteractableToAdd->GetData();
-	if (!IsValid(InteractableData)) return false;
-	
-	if (!InteractableData->GetCompatibleTags().HasAny(Data->GetOwnedTags())) return false;
+	if (!InteractableToAdd->HasMatchingInteractableTag(Data->GetAcceptedTags())) return false;
 	if (GetInventorySize() >= Data->GetMaxCapacity()) return false;
 	
 	Inventory.Add(InteractableToAdd);

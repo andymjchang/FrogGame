@@ -18,7 +18,7 @@ class FROG_API UInteractableData : public UPrimaryDataAsset
 	
 public:
 	FORCEINLINE bool GetIsMoveable() const { return IsMoveable; }
-	FORCEINLINE FGameplayTagContainer& GetCompatibleTags() { return CompatibleTags; }
+	FORCEINLINE FGameplayTagContainer& GetAcceptedTags() { return AcceptedTags; }
 	FORCEINLINE FGameplayTagContainer& GetOwnedTags() { return OwnedTags; }
 	FORCEINLINE int GetMaxCapacity() const { return MaxCapacity; }
 	FORCEINLINE UTexture2D* GetIcon() const { return Icon.Get(); }
@@ -31,7 +31,7 @@ protected:
 	bool IsMoveable;
 	 
 	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
-	FGameplayTagContainer CompatibleTags;
+	FGameplayTagContainer AcceptedTags;
 	
 	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
 	FGameplayTagContainer OwnedTags;

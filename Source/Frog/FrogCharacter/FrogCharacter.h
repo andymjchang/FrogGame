@@ -150,7 +150,7 @@ protected: /* Members */
 	TObjectPtr<USceneComponent> InteractableAttachPoint;
 	
 	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
-	FGameplayTagContainer OwnedInteractableTags;
+	FGameplayTagContainer AcceptedTags;
 
 public: /* Public Getters/Setters */
 	FORCEINLINE USpringArmComponent* GetCameraBoom() const { return CameraBoom; }

@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameplayTagContainer.h"
 #include "GameFramework/Actor.h"
 #include "Interactable.generated.h"
 
@@ -32,7 +33,9 @@ public:
 	
 	void EnableInteractable();
 	void DisableInteractable();
+	bool HasMatchingInteractableTag(const FGameplayTagContainer& AcceptedTags) const;
 	bool TryAddToInventory(AInteractable* InteractableToAdd);
+	bool TryRemoveFromInventory(AInteractable* InteractableToRemove);
 
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
@@ -57,9 +60,8 @@ protected:
 	TObjectPtr<USceneComponent> AttachPoint;
 	
 public:
-	FORCEINLINE UInteractableData* GetData() { return Data; }
+	FORCEINLINE UInteractableData* GetData() const { return Data; }
 	FORCEINLINE int GetInventorySize() const { return Inventory.Num(); }
-	FORCEINLINE AInteractable* GetOfferedInteractable() { return OfferedInteractable.Get(); };
-	bool TryRemoveFromInventory(AInteractable* InteractableToRemove);
+	FORCEINLINE AInteractable* GetOfferedInteractable() const { return OfferedInteractable.Get(); };
 
 };

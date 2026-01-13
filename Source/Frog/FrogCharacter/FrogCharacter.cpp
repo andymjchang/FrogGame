@@ -297,18 +297,18 @@ bool AFrogCharacter::TryAddInteractableToPlayer(AInteractable* InteractableToAdd
 		}
 		return false;
 	}
-    
-	if (InteractableToAdd->GetData()->GetCompatibleTags().HasAny(OwnedInteractableTags))
+	
+	if (InteractableToAdd->HasMatchingInteractableTag(AcceptedTags))
 	{
 		const FAttachmentTransformRules Rules(EAttachmentRule::SnapToTarget, false);
 		HeldInteractable = InteractableToAdd;
 		InteractableToAdd->DisableInteractable();
 		InteractableToAdd->AttachToComponent(InteractableAttachPoint, Rules);
-        
+       
 		if (GEngine)
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, 
-				TEXT("Player: Successfully picked up interactable"));
+			   TEXT("Player: Successfully picked up interactable"));
 		}
 		return true;
 	}
