@@ -6,7 +6,7 @@ AFrogGameState::AFrogGameState()
     PrimaryActorTick.bCanEverTick = true;
     
     // Initialize Defaults
-    Score = 0;
+    Money = 0;
     PhaseEndTime = 0.0f;
     CurrentPhase = EFrogGamePhase::Night;
 }
@@ -15,21 +15,28 @@ void AFrogGameState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLi
 {
     Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
-    DOREPLIFETIME(AFrogGameState, Score);
+    DOREPLIFETIME(AFrogGameState, Money);
     DOREPLIFETIME(AFrogGameState, CurrentPhase);
     DOREPLIFETIME(AFrogGameState, PhaseEndTime);
 }
 
-TSubclassOf<AInteractable> AFrogGameState::GetResultInteractableClass(
+TSubclassOf<AInteractable> AFrogGameState::GetRecipeResultClass(
     const FGameplayTagContainer& InteractableTags) const
 {
+    if (IngredientMap)
     {
-        if (IngredientMap)
-        {
-            return IngredientMap->GetInteractableClassByBehavior(InteractableTags);
-        }
-        return nullptr;
+        return IngredientMap->LookupInteractableClassByTagContainer(InteractableTags).InteractableClass;
     }
+    return nullptr;
+}
+
+UInteractableData* AFrogGameState::GetRecipeResultData(const FGameplayTagContainer& InteractableTags) const
+{
+    if (IngredientMap)
+    {
+        return IngredientMap->LookupInteractableClassByTagContainer(InteractableTags).InteractableData;
+    }
+    return nullptr;
 }
 
 void AFrogGameState::Tick(float DeltaSeconds)
@@ -69,12 +76,12 @@ void AFrogGameState::TriggerNightPhase()
     OnRep_PhaseEndTime();
 }
 
-void AFrogGameState::ServerAddScore(int32 Amount)
+void AFrogGameState::ServerAddMoney(int32 Amount)
 {
     if (!HasAuthority()) return;
 
-    Score += Amount;
-    OnRep_Score();
+    Money += Amount;
+    OnRep_Money();
 }
 
 float AFrogGameState::GetTimeRemaining() const
@@ -84,9 +91,9 @@ float AFrogGameState::GetTimeRemaining() const
 }
 
 // OnRep Functions
-void AFrogGameState::OnRep_Score()
+void AFrogGameState::OnRep_Money()
 {
-    OnScoreChanged.Broadcast(Score);
+    OnMoneyChanged.Broadcast(Money);
 }
 
 void AFrogGameState::OnRep_CurrentPhase()

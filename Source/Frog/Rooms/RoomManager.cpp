@@ -260,11 +260,7 @@ bool ARoomManager::MoveSelector(const ERoomInputDirection InputDir)
     if (FindNextSpotInDirection(CurrentIndex, ToRoomDirection(InputDir), TargetIndex, bHitExistingRoom))
     {
         CurrentIndex = TargetIndex;
-        // if (GEngine)
-        // {
-        //     const FString DebugMessage = FString::Printf(TEXT("move selector to %s"), *CurrentIndex.ToString());
-        //     GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, DebugMessage);
-        // }
+        UE_LOG(LogTemp, Log, TEXT("[%f] move selector to %s"), GetWorld()->GetTimeSeconds(), *CurrentIndex.ToString());
         return true;
     }
     

@@ -109,10 +109,7 @@ FGameplayTagContainer AStation::GatherAllTags() const
 
 void AStation::OnProcessingComplete()
 {
-    if (GEngine)
-    {
-        GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("Station: Processing complete!"));
-    }
+    UE_LOG(LogTemp, Log, TEXT("[%f] Station: Processing complete!"), GetWorld()->GetTimeSeconds());
     
     AFrogGameState* GameState = GetWorld()->GetGameState<AFrogGameState>();
     if (!IsValid(GameState))
@@ -127,7 +124,7 @@ void AStation::OnProcessingComplete()
     
     FGameplayTagContainer AllTags = GatherAllTags();
     
-    TSubclassOf<AInteractable> ResultClass = GameState->GetResultInteractableClass(AllTags);
+    TSubclassOf<AInteractable> ResultClass = GameState->GetRecipeResultClass(AllTags);
     
     if (ResultClass)
     {

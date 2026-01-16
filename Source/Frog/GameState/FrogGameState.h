@@ -15,7 +15,7 @@ enum class EFrogGamePhase : uint8
 };
 
 // Delegates
-DECLARE_MULTICAST_DELEGATE_OneParam(FOnScoreChanged, int32);
+DECLARE_MULTICAST_DELEGATE_OneParam(FOnMoneyChanged, int32);
 DECLARE_MULTICAST_DELEGATE_OneParam(FOnPhaseChanged, EFrogGamePhase);
 DECLARE_MULTICAST_DELEGATE_OneParam(FOnPhaseEndTimeUpdated, float);
 
@@ -31,18 +31,19 @@ public:
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
     
     // Delegates
-    FOnScoreChanged OnScoreChanged;
+    FOnMoneyChanged OnMoneyChanged;
     FOnPhaseChanged OnPhaseChanged;
     FOnPhaseEndTimeUpdated OnPhaseEndTimeUpdated;
      
     // Server only functions
-    void ServerAddScore(int32 Amount);
+    void ServerAddMoney(int32 Amount);
     
     // Client functions
-    TSubclassOf<AInteractable> GetResultInteractableClass(const FGameplayTagContainer& InteractableTags) const;
+    TSubclassOf<AInteractable> GetRecipeResultClass(const FGameplayTagContainer& InteractableTags) const;
+    UInteractableData* GetRecipeResultData(const FGameplayTagContainer& InteractableTags) const;
     float GetTimeRemaining() const;
     
-    FORCEINLINE int GetScore() const { return Score; }
+    FORCEINLINE int GetMoney() const { return Money; }
     FORCEINLINE int GetPhaseEndTime() const { return PhaseEndTime; }
     FORCEINLINE EFrogGamePhase GetCurrentPhase() const { return CurrentPhase; }
     
@@ -51,8 +52,8 @@ protected:
     TObjectPtr<UIngredientMap> IngredientMap;
 
     // Replicated variables
-    UPROPERTY(ReplicatedUsing = OnRep_Score)
-    int32 Score = 0;
+    UPROPERTY(ReplicatedUsing = OnRep_Money)
+    int32 Money = 0;
 
     UPROPERTY(ReplicatedUsing = OnRep_CurrentPhase)
     EFrogGamePhase CurrentPhase = EFrogGamePhase::Day;
@@ -67,7 +68,7 @@ protected:
 
     // OnRep functions
     UFUNCTION()
-    void OnRep_Score();
+    void OnRep_Money();
     UFUNCTION()
     void OnRep_CurrentPhase();
     UFUNCTION()

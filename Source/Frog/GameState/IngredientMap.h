@@ -6,26 +6,27 @@
 #include "GameplayTagContainer.h"
 #include "IngredientMap.generated.h"
 
+class UInteractableData;
 // Forward declaration
 class AInteractable;
 
 // Wrapper struct that serves as the map key
 USTRUCT(BlueprintType)
-struct FIngredientBehavior
+struct FRecipe
 {
 	GENERATED_BODY()
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	FGameplayTagContainer Tags;
 
 	// Equality operator required for TMap
-	bool operator==(const FIngredientBehavior& Other) const
+	bool operator==(const FRecipe& Other) const
 	{
 		return Tags.HasAllExact(Other.Tags) && 
 			   Other.Tags.HasAllExact(Tags);
 	}
 
-	friend uint32 GetTypeHash(const FIngredientBehavior& Behavior)
+	friend uint32 GetTypeHash(const FRecipe& Behavior)
 	{
 		uint32 Hash = 0;
 		for (const FGameplayTag& Tag : Behavior.Tags)
@@ -36,6 +37,23 @@ struct FIngredientBehavior
 	}
 };
 
+USTRUCT(BlueprintType)
+struct FRecipeResult
+{
+	GENERATED_BODY()
+    
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	TSubclassOf<AInteractable> InteractableClass;
+    
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	UInteractableData* InteractableData;
+
+	FRecipeResult()
+		: InteractableClass(nullptr)
+		, InteractableData(nullptr)
+	{}
+};
+
 // The main mapping Data Asset
 UCLASS(BlueprintType)
 class FROG_API UIngredientMap : public UDataAsset
@@ -43,19 +61,9 @@ class FROG_API UIngredientMap : public UDataAsset
 	GENERATED_BODY()
 
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Mapping")
-	TMap<FIngredientBehavior, TSubclassOf<AInteractable>> BehaviorToInteractableMap;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Mapping")
+	TMap<FRecipe, FRecipeResult> BehaviorToInteractableMap;
 
 	UFUNCTION(BlueprintCallable, Category = "Mapping")
-	TSubclassOf<AInteractable> GetInteractableClassByBehavior(const FGameplayTagContainer& InTags) const
-	{
-		FIngredientBehavior Behavior;
-		Behavior.Tags = InTags;
-        
-		if (TSubclassOf<AInteractable> const* FoundClass = BehaviorToInteractableMap.Find(Behavior))
-		{
-			return *FoundClass;
-		}
-		return nullptr;
-	}
+	const FRecipeResult& LookupInteractableClassByTagContainer(const FGameplayTagContainer& InTags) const;
 };

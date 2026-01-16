@@ -2,6 +2,7 @@
 
 #include "OrderCounter.h"
 
+#include "InteractableData.h"
 #include "GameState/FrogGameState.h"
 
 AOrderCounter::AOrderCounter()
@@ -39,7 +40,7 @@ void AOrderCounter::HandleInteractableAdded(AInteractable* Interactable)
 	
 	if (GameState.IsValid())
 	{
-		GameState->ServerAddScore(10);
+		GameState->ServerAddMoney(Interactable->GetData()->GetSellPrice());;
 	}
     
 	TryRemoveFromInventory(Interactable);

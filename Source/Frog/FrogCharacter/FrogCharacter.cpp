@@ -127,33 +127,22 @@ void AFrogCharacter::Interact() {
     AInteractable* OtherInteractable = CurrentInteractable.Get();
     if (!IsValid(OtherInteractable))
     {
-        if (GEngine)
-        {
-            GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("Interact: CurrentInteractable is invalid"));
-        }
+        UE_LOG(LogTemp, Log, TEXT("[%f] Interact: CurrentInteractable is invalid"), GetWorld()->GetTimeSeconds());
         return;
     }
     
     AInteractable* OtherOffer = CurrentInteractable->GetOfferedInteractable();
     if (!IsValid(OtherOffer))
     {
-        if (GEngine)
-        {
-            const FString DebugMessage = FString::Printf(TEXT("Interact: OtherOffer is invalid for %s"), *OtherInteractable->GetName());
-            GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, DebugMessage);
-        }
+        UE_LOG(LogTemp, Log, TEXT("[%f] Interact: OtherOffer is invalid for %s"), GetWorld()->GetTimeSeconds(), *OtherInteractable->GetName());
         return;
     }
     
     // If holding an item
     if (HeldInteractable.IsValid())
     {
-        if (GEngine)
-        {
-            const FString DebugMessage = FString::Printf(TEXT("Interact: Holding item %s, attempting to add %s to it"), 
-                *HeldInteractable->GetName(), *OtherOffer->GetName());
-            GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, DebugMessage);
-        }
+        UE_LOG(LogTemp, Log, TEXT("[%f] Interact: Holding item %s, attempting to add %s to it"), 
+            GetWorld()->GetTimeSeconds(), *HeldInteractable->GetName(), *OtherOffer->GetName());
         
         // Try adding Other's Offer to Held Item
         const bool SuccessfulAdd = HeldInteractable->TryAddToInventory(OtherOffer);
@@ -162,21 +151,15 @@ void AFrogCharacter::Interact() {
             // Remove from source's inventory
             OtherInteractable->TryRemoveFromInventory(OtherOffer);
             
-            if (GEngine)
-            {
-                GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, TEXT("Interact: Successfully added other's offer to held item"));
-            }
+            UE_LOG(LogTemp, Log, TEXT("[%f] Interact: Successfully added other's offer to held item"), GetWorld()->GetTimeSeconds());
         }
         else
         {
-            if (GEngine)
-            {
-                GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Orange, TEXT("Interact: Failed to add to held item, trying reverse add"));
-            }
+            UE_LOG(LogTemp, Log, TEXT("[%f] Interact: Failed to add to held item, trying reverse add"), GetWorld()->GetTimeSeconds());
             
             // Try adding Held Item's Offer to Other
             AInteractable* HeldOffer = HeldInteractable->GetOfferedInteractable();
-        	bool OfferingItself = HeldInteractable->GetOfferedInteractable() == HeldInteractable.Get();
+            bool OfferingItself = HeldInteractable->GetOfferedInteractable() == HeldInteractable.Get();
             if (OtherInteractable->TryAddToInventory(HeldOffer))
             {
                 // Remove from held item's inventory
@@ -185,36 +168,23 @@ void AFrogCharacter::Interact() {
                 // Clear HeldInteractable pointer if giving the entire item away
                 if (!HeldInteractable.IsValid() or OfferingItself)
                 {
-                    if (GEngine)
-                    {
-                        GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, TEXT("Interact: Successfully added held item's offer to other, clearing held item"));
-                    }
+                    UE_LOG(LogTemp, Log, TEXT("[%f] Interact: Successfully added held item's offer to other, clearing held item"), GetWorld()->GetTimeSeconds());
                     HeldInteractable = nullptr;
                 }
                 else
                 {
-                    if (GEngine)
-                    {
-                        GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, TEXT("Interact: Successfully added held item's offer to other"));
-                    }
+                    UE_LOG(LogTemp, Log, TEXT("[%f] Interact: Successfully added held item's offer to other"), GetWorld()->GetTimeSeconds());
                 }
             }
             else
             {
-                if (GEngine)
-                {
-                    GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("Interact: Failed to add held item's offer to other"));
-                }
+                UE_LOG(LogTemp, Log, TEXT("[%f] Interact: Failed to add held item's offer to other"), GetWorld()->GetTimeSeconds());
             }
         }
     }
     else // If not holding an item
     {
-        if (GEngine)
-        {
-            const FString DebugMessage = FString::Printf(TEXT("Interact: Not holding item, attempting to add %s to player"), *OtherOffer->GetName());
-            GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Cyan, DebugMessage);
-        }
+        UE_LOG(LogTemp, Log, TEXT("[%f] Interact: Not holding item, attempting to add %s to player"), GetWorld()->GetTimeSeconds(), *OtherOffer->GetName());
         
         // Try adding Other's Offer to Player
         const bool SuccessfulAdd = TryAddInteractableToPlayer(OtherOffer);
@@ -223,34 +193,21 @@ void AFrogCharacter::Interact() {
             // Remove from source's inventory
             OtherInteractable->TryRemoveFromInventory(OtherOffer);
             
-            if (GEngine)
-            {
-                GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, TEXT("Interact: Successfully added other's offer to player"));
-            }
+            UE_LOG(LogTemp, Log, TEXT("[%f] Interact: Successfully added other's offer to player"), GetWorld()->GetTimeSeconds());
         }
         else
         {
-            if (GEngine)
-            {
-                const FString DebugMessage = FString::Printf(TEXT("Interact: Failed to add offer, trying to add %s directly to player"), *OtherInteractable->GetName());
-                GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Orange, DebugMessage);
-            }
+            UE_LOG(LogTemp, Log, TEXT("[%f] Interact: Failed to add offer, trying to add %s directly to player"), GetWorld()->GetTimeSeconds(), *OtherInteractable->GetName());
             
             // Try adding Other to Player
             const bool DirectAddSuccess = TryAddInteractableToPlayer(OtherInteractable);
             if (DirectAddSuccess)
             {
-                if (GEngine)
-                {
-                    GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, TEXT("Interact: Successfully added interactable directly to player"));
-                }
+                UE_LOG(LogTemp, Log, TEXT("[%f] Interact: Successfully added interactable directly to player"), GetWorld()->GetTimeSeconds());
             }
             else
             {
-                if (GEngine)
-                {
-                    GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("Interact: Failed to add interactable directly to player"));
-                }
+                UE_LOG(LogTemp, Log, TEXT("[%f] Interact: Failed to add interactable directly to player"), GetWorld()->GetTimeSeconds());
             }
         }
     }
@@ -258,68 +215,44 @@ void AFrogCharacter::Interact() {
 
 bool AFrogCharacter::TryAddInteractableToPlayer(AInteractable* InteractableToAdd)
 {
-	if (!IsValid(InteractableToAdd))
-	{
-		if (GEngine)
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, 
-				TEXT("Player: InteractableToAdd is not valid"));
-		}
-		return false;
-	}
+    if (!IsValid(InteractableToAdd))
+    {
+        UE_LOG(LogTemp, Log, TEXT("[%f] Player: InteractableToAdd is not valid"), GetWorld()->GetTimeSeconds());
+        return false;
+    }
     
-	if (!IsValid(InteractableToAdd->GetData()))
-	{
-		if (GEngine)
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, 
-				TEXT("Player: InteractableToAdd has no valid Data"));
-		}
-		return false;
-	}
+    if (!IsValid(InteractableToAdd->GetData()))
+    {
+        UE_LOG(LogTemp, Log, TEXT("[%f] Player: InteractableToAdd has no valid Data"), GetWorld()->GetTimeSeconds());
+        return false;
+    }
     
-	if (!InteractableToAdd->GetData()->GetIsMoveable())
-	{
-		if (GEngine)
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Orange, 
-				TEXT("Player: Interactable is not moveable"));
-		}
-		return false;
-	}
+    if (!InteractableToAdd->GetData()->GetIsMoveable())
+    {
+        UE_LOG(LogTemp, Log, TEXT("[%f] Player: Interactable is not moveable"), GetWorld()->GetTimeSeconds());
+        return false;
+    }
 
-	if (HeldInteractable.IsValid())
-	{
-		if (GEngine)
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Orange, 
-				TEXT("Player: Already holding an item"));
-		}
-		return false;
-	}
-	
-	if (InteractableToAdd->HasMatchingInteractableTag(AcceptedTags))
-	{
-		const FAttachmentTransformRules Rules(EAttachmentRule::SnapToTarget, false);
-		HeldInteractable = InteractableToAdd;
-		InteractableToAdd->DisableInteractable();
-		InteractableToAdd->AttachToComponent(InteractableAttachPoint, Rules);
+    if (HeldInteractable.IsValid())
+    {
+        UE_LOG(LogTemp, Log, TEXT("[%f] Player: Already holding an item"), GetWorld()->GetTimeSeconds());
+        return false;
+    }
+    
+    if (InteractableToAdd->HasMatchingInteractableTag(AcceptedTags))
+    {
+        const FAttachmentTransformRules Rules(EAttachmentRule::SnapToTarget, false);
+        HeldInteractable = InteractableToAdd;
+        InteractableToAdd->DisableInteractable();
+        InteractableToAdd->AttachToComponent(InteractableAttachPoint, Rules);
        
-		if (GEngine)
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, 
-			   TEXT("Player: Successfully picked up interactable"));
-		}
-		return true;
-	}
+        UE_LOG(LogTemp, Log, TEXT("[%f] Player: Successfully picked up interactable"), GetWorld()->GetTimeSeconds());
+        return true;
+    }
     
-	if (GEngine)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Orange, 
-			TEXT("Player: Interactable tags not compatible with player"));
-	}
+    UE_LOG(LogTemp, Log, TEXT("[%f] Player: Interactable tags not compatible with player"), GetWorld()->GetTimeSeconds());
 
-	return false;
+    return false;
 }
 
 void AFrogCharacter::SetupAbilities()

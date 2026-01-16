@@ -9,10 +9,10 @@ void UFrogHUD::NativeConstruct()
 
     if (FrogGameState.IsValid())
     {
-        OnScoreChanged(FrogGameState->GetScore());
+        OnScoreChanged(FrogGameState->GetMoney());
         OnPhaseChanged(FrogGameState->GetCurrentPhase());
         
-        FrogGameState->OnScoreChanged.AddUObject(this, &UFrogHUD::OnScoreChanged);
+        FrogGameState->OnMoneyChanged.AddUObject(this, &UFrogHUD::OnScoreChanged);
         FrogGameState->OnPhaseChanged.AddUObject(this, &UFrogHUD::OnPhaseChanged);
         
         if (GetWorld())
@@ -41,7 +41,7 @@ void UFrogHUD::NativeDestruct()
     // Clean up delegates
     if (FrogGameState.IsValid())
     {
-        FrogGameState->OnScoreChanged.RemoveAll(this);
+        FrogGameState->OnMoneyChanged.RemoveAll(this);
         FrogGameState->OnPhaseChanged.RemoveAll(this);
     }
 }
