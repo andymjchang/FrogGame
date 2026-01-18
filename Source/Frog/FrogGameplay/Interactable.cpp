@@ -45,6 +45,11 @@ void AInteractable::DisableInteractable()
 	if (IsValid(InteractHitBox)) InteractHitBox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
+void AInteractable::ClearInventory()
+{
+	Inventory.Empty();
+}
+
 bool AInteractable::HasMatchingInteractableTag(const FGameplayTagContainer& AcceptedTags) const
 {
 	if (AcceptedTags.IsEmpty()) return false;
@@ -65,22 +70,46 @@ bool AInteractable::HasMatchingInteractableTag(const FGameplayTagContainer& Acce
 bool AInteractable::TryAddToInventory(AInteractable* InteractableToAdd)
 {
 	if (!IsValid(Data) || !IsValid(InteractableToAdd)) return false;
-	if (!InteractableToAdd->HasMatchingInteractableTag(Data->GetAcceptedTags())) return false;
 	if (GetInventorySize() >= Data->GetMaxCapacity()) return false;
+	if (!InteractableToAdd->HasMatchingInteractableTag(Data->GetAcceptedTags())) return false;
 	
 	Inventory.Add(InteractableToAdd);
-	
-	// Inventory Widget
-	if (UInventoryWidget* InventoryWidget = Cast<UInventoryWidget>(InventoryWidgetComponent->GetWidget()))
-	{
-		InventoryWidget->UpdateInventoryWidget(Inventory);
-	}
 	// Attachment
 	InteractableToAdd->DisableInteractable();
 	const FAttachmentTransformRules Rules(EAttachmentRule::SnapToTarget, false);
 	InteractableToAdd->AttachToComponent(AttachPoint, Rules); 
-
+	
+	UpdateInventoryWidget();
 	OnAddedToInventory.Broadcast(InteractableToAdd);
+	
+	return true;
+}
+
+bool AInteractable::TryAddContainerToInventory(AInteractable* ContainerToAdd)
+{
+	if (!IsValid(ContainerToAdd)) return false;
+	if (ContainerToAdd->GetInventorySize() <= 0) return false;
+	if (GetInventorySize() + ContainerToAdd->GetInventorySize() > Data->GetMaxCapacity()) return false;
+	
+	const TArray<AInteractable*>& InInventory = ContainerToAdd->GetInventory();
+	// Check if all ingredients are valid
+	for (AInteractable* InventoryIndex : InInventory)
+	{
+		if (!InventoryIndex->HasMatchingInteractableTag(Data->GetAcceptedTags()))
+		{
+			return false;
+		}
+	}
+	
+	// Add to inventory (Iterating Backwards)
+	for (int32 i = InInventory.Num() - 1; i >= 0; --i)
+	{
+		TryAddToInventory(InInventory[i]);
+	}
+	
+	ContainerToAdd->ClearInventory();
+	ContainerToAdd->UpdateInventoryWidget();
+	UpdateInventoryWidget();
 	
 	return true;
 }
@@ -91,29 +120,33 @@ bool AInteractable::TryRemoveFromInventory(AInteractable* InteractableToRemove)
 	
 	if (Inventory.Remove(InteractableToRemove) > 0)
 	{
-		// Update offered interactable
-		if (Inventory.Num() > 0)
-		{
-			// Offer the last item in inventory
-			OfferedInteractable = Inventory.Last();
-		}
-		else
-		{
-			// Inventory is empty, offer self
-			OfferedInteractable = this;
-		}
-        
-		// Update widget if needed
-		if (UInventoryWidget* InventoryWidget = Cast<UInventoryWidget>(InventoryWidgetComponent->GetWidget()))
-		{
-			InventoryWidget->UpdateInventoryWidget(Inventory);
-		}
-        
+		// // Update offered interactable
+		// if (Inventory.Num() > 0)
+		// {
+		// 	// Offer the last item in inventory
+		// 	OfferedInteractable = Inventory.Last();
+		// }
+		// else
+		// {
+		// 	// Inventory is empty, offer self
+		// 	OfferedInteractable = this;
+		// }
+		OfferedInteractable = this;
+		
+		UpdateInventoryWidget();
 		OnRemovedFromInventory.Broadcast(InteractableToRemove);
 		
 		return true;
 	}
 	return false;
+}
+
+void AInteractable::UpdateInventoryWidget()
+{
+	if (UInventoryWidget* InventoryWidget = Cast<UInventoryWidget>(InventoryWidgetComponent->GetWidget()))
+	{
+		InventoryWidget->UpdateInventoryWidget(Inventory);
+	}
 }
 
 void AInteractable::PostInitializeComponents()

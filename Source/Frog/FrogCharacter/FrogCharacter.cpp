@@ -141,12 +141,10 @@ void AFrogCharacter::Interact() {
     // If holding an item
     if (HeldInteractable.IsValid())
     {
-        UE_LOG(LogTemp, Log, TEXT("[%f] Interact: Holding item %s, attempting to add %s to it"), 
-            GetWorld()->GetTimeSeconds(), *HeldInteractable->GetName(), *OtherOffer->GetName());
+        UE_LOG(LogTemp, Log, TEXT("[%f] Interact: Holding item %s, attempting to add %s to it"), GetWorld()->GetTimeSeconds(), *HeldInteractable->GetName(), *OtherOffer->GetName());
         
-        // Try adding Other's Offer to Held Item
-        const bool SuccessfulAdd = HeldInteractable->TryAddToInventory(OtherOffer);
-        if (SuccessfulAdd)
+        // Try adding Other to Held Item
+        if (HeldInteractable->TryAddToInventory(OtherOffer))
         {
             // Remove from source's inventory
             OtherInteractable->TryRemoveFromInventory(OtherOffer);
@@ -157,28 +155,23 @@ void AFrogCharacter::Interact() {
         {
             UE_LOG(LogTemp, Log, TEXT("[%f] Interact: Failed to add to held item, trying reverse add"), GetWorld()->GetTimeSeconds());
             
-            // Try adding Held Item's Offer to Other
-            AInteractable* HeldOffer = HeldInteractable->GetOfferedInteractable();
-            bool OfferingItself = HeldInteractable->GetOfferedInteractable() == HeldInteractable.Get();
-            if (OtherInteractable->TryAddToInventory(HeldOffer))
+            // Try adding Held Item to Other
+            if (OtherOffer->TryAddToInventory(HeldInteractable.Get()))
             {
-                // Remove from held item's inventory
-                HeldInteractable->TryRemoveFromInventory(HeldOffer);
-                
-                // Clear HeldInteractable pointer if giving the entire item away
-                if (!HeldInteractable.IsValid() or OfferingItself)
-                {
-                    UE_LOG(LogTemp, Log, TEXT("[%f] Interact: Successfully added held item's offer to other, clearing held item"), GetWorld()->GetTimeSeconds());
-                    HeldInteractable = nullptr;
-                }
-                else
-                {
-                    UE_LOG(LogTemp, Log, TEXT("[%f] Interact: Successfully added held item's offer to other"), GetWorld()->GetTimeSeconds());
-                }
+            	UE_LOG(LogTemp, Log, TEXT("[%f] Interact: Successfully added held item to other, clearing held item"), GetWorld()->GetTimeSeconds());
+            	HeldInteractable = nullptr;
             }
-            else
+            else if (HeldInteractable.Get()->GetIsContainer())
             {
-                UE_LOG(LogTemp, Log, TEXT("[%f] Interact: Failed to add held item's offer to other"), GetWorld()->GetTimeSeconds());
+            	UE_LOG(LogTemp, Log, TEXT("[%f] Interact: Failed to add held item to other, try adding as container"), GetWorld()->GetTimeSeconds());
+            	if (OtherOffer->TryAddContainerToInventory(HeldInteractable.Get()))
+            	{
+            		UE_LOG(LogTemp, Log, TEXT("[%f] Interact: Successfully added container contents to other"), GetWorld()->GetTimeSeconds());
+            	}
+            	else
+            	{
+            		UE_LOG(LogTemp, Log, TEXT("[%f] Interact: Failed to add held item as a container"), GetWorld()->GetTimeSeconds());
+            	}
             }
         }
     }

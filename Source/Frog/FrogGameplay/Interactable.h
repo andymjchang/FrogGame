@@ -32,10 +32,16 @@ public:
 	FOnInventoryItemChanged OnAddedToInventory;
 	
 	void EnableInteractable();
-	void DisableInteractable();
+	void DisableInteractable(); // TODO: check if enable/disable are redundant since items are always on a counter, inside container, or inside station
+	void ClearInventory();
+	
 	bool HasMatchingInteractableTag(const FGameplayTagContainer& AcceptedTags) const;
 	bool TryAddToInventory(AInteractable* InteractableToAdd);
+	bool TryAddContainerToInventory(AInteractable* ContainerToAdd);
 	bool TryRemoveFromInventory(AInteractable* InteractableToRemove);
+	
+protected:
+	void UpdateInventoryWidget();
 
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
@@ -61,7 +67,9 @@ protected:
 	
 public:
 	FORCEINLINE UInteractableData* GetData() const { return Data; }
+	FORCEINLINE const TArray<TObjectPtr<AInteractable>>& GetInventory() const { return Inventory; }
 	FORCEINLINE int GetInventorySize() const { return Inventory.Num(); }
 	FORCEINLINE AInteractable* GetOfferedInteractable() const { return OfferedInteractable.Get(); };
+	FORCEINLINE bool GetIsContainer() const { return Inventory.Num() > 0; }
 
 };

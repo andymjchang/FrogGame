@@ -1,4 +1,5 @@
 ﻿// Fill out your copyright notice in the Description page of Project Settings.
+// THIS CLASS IS NOT USED
 
 #pragma once
 

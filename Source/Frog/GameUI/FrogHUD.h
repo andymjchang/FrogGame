@@ -1,13 +1,13 @@
 ﻿#pragma once
 
 #include "CoreMinimal.h"
-#include "Blueprint/UserWidget.h"
+#include "CommonActivatableWidget.h"
 #include "Components/TextBlock.h"
 #include "GameState/FrogGameState.h" 
 #include "FrogHUD.generated.h"
 
 UCLASS()
-class FROG_API UFrogHUD : public UUserWidget
+class FROG_API UFrogHUD : public UCommonActivatableWidget
 {
 	GENERATED_BODY()
 
