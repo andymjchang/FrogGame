@@ -35,7 +35,7 @@ protected:
 	UPROPERTY()
 	TSoftObjectPtr<UStationProgressBar> ProgressBarWidget;
 	
-	void HandleInteractableAdded(AInteractable* InteractableToAdd);
+	virtual void HandleInteractableAdded(AInteractable* InteractableToAdd);
 	
 protected:
 	virtual void BeginPlay() override;
@@ -45,9 +45,7 @@ protected:
 	void OnProcessingComplete();
 
 	FGameplayTagContainer GatherAllTags() const;
-
-
-private:
+	
 	bool bIsProcessing = false;
 	double ProcessStartTime = 0.0f;
 	double ProcessEndTime = 0.0f;

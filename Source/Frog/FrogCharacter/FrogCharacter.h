@@ -66,6 +66,9 @@ public: /* Public Functions */
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
 	void Interact();
+
+	void Work();
+	void StopWork();
 public: /* Public Members */
 
 protected: /* Protected Functions */
@@ -138,6 +141,8 @@ protected: /* Members */
 	// HitBoxes
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
 	TObjectPtr<USphereComponent> InteractHitbox;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
+	TObjectPtr<USphereComponent> WorkHitbox;
 
 	// GamePlay Interactions
 	TArray<TWeakObjectPtr<AInteractable>> OverlappingInteractables;

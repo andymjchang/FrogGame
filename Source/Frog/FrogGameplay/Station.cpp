@@ -22,6 +22,10 @@ AStation::AStation()
     ProgressBarWidgetComponent->SetDrawSize(FIntPoint(100, 20));
 }
 
+void AStation::HandleInteractableAdded(AInteractable* InteractableToAdd)
+{
+}
+
 void AStation::BeginPlay()
 {
     Super::BeginPlay();
@@ -67,22 +71,6 @@ void AStation::Tick(float DeltaTime)
         {
             bIsProcessing = false;
             OnProcessingComplete();
-        }
-    }
-}
-
-void AStation::HandleInteractableAdded(AInteractable* InteractableToAdd)
-{
-    // Don't autostart if the added item is the finished item
-    if (OfferedInteractable == this)
-    {
-        bIsProcessing = true;
-        ProcessStartTime = GetWorld()->GetTimeSeconds();
-        ProcessEndTime = ProcessStartTime + ProcessingDuration;
-
-        if (ProgressBarWidgetComponent)
-        {
-            ProgressBarWidgetComponent->SetVisibility(true);
         }
     }
 }
