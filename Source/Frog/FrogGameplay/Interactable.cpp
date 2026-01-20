@@ -20,7 +20,7 @@ AInteractable::AInteractable()
 	// Interact Hitbox
 	InteractHitBox = CreateDefaultSubobject<UBoxComponent>(TEXT("InteractHitBox"));
 	InteractHitBox->SetupAttachment(RootComponent);
-	InteractHitBox->SetCollisionProfileName(TEXT("ItemHitBox"));
+	InteractHitBox->SetCollisionProfileName(TEXT("InteractListen"));
 	InteractHitBox->InitBoxExtent(FVector(128.f, 128.f, 128.f));
 	InteractHitBox->SetRelativeLocation(FVector(0.0f, 0.0f, 128.0f));
 	

@@ -67,13 +67,13 @@ AFrogCharacter::AFrogCharacter(const FObjectInitializer& ObjectInitializer)
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 	FollowCamera->bUsePawnControlRotation = false;
 	
-	// // Player hitbox
-	// Hitbox = CreateDefaultSubobject<USphereComponent>(TEXT("HitboxComponent"));
-	// Hitbox->SetCollisionProfileName(TEXT("PlayerHitbox"));
-	// Hitbox->SetupAttachment(RootComponent);
+	// // Player hitboxs
 	InteractHitbox =  CreateDefaultSubobject<USphereComponent>(TEXT("InteractHitbox"));
-	InteractHitbox->SetCollisionProfileName(TEXT("PickupItems"));
+	InteractHitbox->SetCollisionProfileName(TEXT("Interact"));
 	InteractHitbox->SetupAttachment(RootComponent);
+	WorkHitbox =  CreateDefaultSubobject<USphereComponent>(TEXT("WorkHitbox"));
+	WorkHitbox->SetCollisionProfileName(TEXT("Work"));
+	WorkHitbox->SetupAttachment(RootComponent);
 
 	// Setup Grapple
 	// Tongue = CreateDefaultSubobject<UFrogTongue>(TEXT("TongueComponent"));

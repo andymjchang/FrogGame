@@ -8,7 +8,7 @@ AWorkStation::AWorkStation()
 {
     WorkHitBox = CreateDefaultSubobject<UBoxComponent>(TEXT("WorkHitBox"));
     WorkHitBox->SetupAttachment(RootComponent);
-    WorkHitBox->SetCollisionProfileName(TEXT("ItemHitBox"));
+    WorkHitBox->SetCollisionProfileName(TEXT("WorkListen"));
     WorkHitBox->InitBoxExtent(FVector(128.f, 128.f, 128.f));
     WorkHitBox->SetRelativeLocation(FVector(0.0f, 0.0f, 128.0f));
 }
