@@ -105,12 +105,6 @@ void AFrogCharacter::PostInitializeComponents()
 void AFrogCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-
-	// Setup Widgets
-	if (APlayerController* PC = GetController<APlayerController>())
-	{
-		
-	}
 	
 	if (HasAuthority()) SetupAbilities();
 
