@@ -41,8 +41,6 @@ protected:
 
 
 public: 
-    // --- Core API ---
-
     /** Creates a room at the specified index if valid. Returns true if successful. */
     UFUNCTION(BlueprintCallable, Category = "Room Logic")
     bool CreateRoom(FHexIndex Index, URoomDefinition* Definition, ARoomActor* RoomActor);

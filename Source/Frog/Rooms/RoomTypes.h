@@ -30,6 +30,7 @@ enum class ERoomInputDirection : uint8
 
 /**
  * Directions for 8-way connectivity + Verticality
+ * Clockwise order starting from North
  */
 UENUM(BlueprintType)
 enum class ERoomDirection : uint8

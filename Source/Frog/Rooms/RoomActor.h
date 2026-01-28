@@ -7,7 +7,6 @@
 #include "RoomTypes.h"
 #include "RoomActor.generated.h"
 
-
 UCLASS()
 class FROG_API ARoomActor : public AActor
 {
@@ -15,16 +14,39 @@ class FROG_API ARoomActor : public AActor
 
 public:
 	ARoomActor();
-
-protected:
-	virtual void BeginPlay() override;
-
-public:
-	virtual void Tick(float DeltaTime) override;
-
-	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+	
 	void SetWallArray(const TArray<bool>& InputArray);
-
-	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void SetDoorArray(const TArray<EDoorTypes>& InputArray);
+	
+protected: // Components
+	UPROPERTY(EditDefaultsOnly)
+	TArray<UStaticMeshComponent*> WallMeshes;
+	
+	UPROPERTY(EditDefaultsOnly)
+	TObjectPtr<UStaticMeshComponent> FloorMesh;
+
+protected: // Loading assets
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Room Visuals")
+	TObjectPtr<UStaticMesh> WallMesh;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Room Visuals")
+	TObjectPtr<UStaticMesh> WallDoorMesh;
+		
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Room Visuals")
+	TObjectPtr<UStaticMesh> WallTallMesh;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Room Visuals")
+	TObjectPtr<UStaticMesh> WallDoorTallMesh;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Room Visuals")
+	TObjectPtr<UStaticMesh> BlockedDoorMesh;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Room Visuals")
+	TObjectPtr<UMaterialInterface> WallMaterial;
+	
+private:
+	float WallMidpointLength = 833.5f;
+	
+private:
+	void CreateWallComponents();
 };
