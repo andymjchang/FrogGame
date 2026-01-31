@@ -35,12 +35,12 @@ enum class ERoomInputDirection : uint8
 UENUM(BlueprintType)
 enum class ERoomDirection : uint8
 {
-    North       UMETA(DisplayName = "North (0, -1)"),
-    NorthEast   UMETA(DisplayName = "North East (+1, -1)"),
-    SouthEast   UMETA(DisplayName = "South East (+1, 0)"),
-    South       UMETA(DisplayName = "South (0, +1)"),
-    SouthWest   UMETA(DisplayName = "South West (-1, +1)"),
-    NorthWest   UMETA(DisplayName = "North West (-1, 0)"),
+    North       UMETA(DisplayName = "North (-1, 0)"),
+    NorthEast   UMETA(DisplayName = "North East (-1, +1)"),
+    SouthEast   UMETA(DisplayName = "South East (0, +1)"),
+    South       UMETA(DisplayName = "South (+1, 0)"),
+    SouthWest   UMETA(DisplayName = "South West (+1, -1)"),
+    NorthWest   UMETA(DisplayName = "North West (0, -1)"),
     Up          UMETA(DisplayName = "Up (Z+1)"),
     Down        UMETA(DisplayName = "Down (Z-1)")
 };

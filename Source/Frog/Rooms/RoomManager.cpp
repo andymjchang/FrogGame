@@ -48,29 +48,52 @@ bool ARoomManager::HasRoomAt(const FHexIndex Index) const
     return RoomMap.Contains(Index);
 }
 
+bool ARoomManager::CheckAdjacency(const FHexIndex Origin, const ERoomDirection Direction) const
+{
+    const FHexIndex NeighborIndex = GetNeighborIndex(Origin, Direction);
+    return RoomMap.Contains(NeighborIndex);
+}
+
 FHexIndex ARoomManager::GetNeighborIndex(const FHexIndex Origin, const ERoomDirection Direction)
 {
     FHexIndex Next = Origin;
-
+    UE_LOG(LogTemp, Log, TEXT("move direction: %d"), Direction);
     switch (Direction)
     {
-        case ERoomDirection::North:      Next.R -= 1; break;             // (0, -1)
-        case ERoomDirection::NorthEast:  Next.Q += 1; Next.R -= 1; break;// (+1, -1)
-        case ERoomDirection::SouthEast:  Next.Q += 1; break;             // (+1, 0)
-        case ERoomDirection::South:      Next.R += 1; break;             // (0, +1)
-        case ERoomDirection::SouthWest:  Next.Q -= 1; Next.R += 1; break;// (-1, +1)
-        case ERoomDirection::NorthWest:  Next.Q -= 1; break;             // (-1, 0)
+        case ERoomDirection::North:      Next.Q += 1; break;
+        case ERoomDirection::NorthEast:  Next.R += 1; break;
+        case ERoomDirection::SouthEast:  Next.Q -=1; Next.R += 1; break;
+        case ERoomDirection::South:      Next.Q -= 1; break;
+        case ERoomDirection::SouthWest:  Next.R -= 1; break;
+        case ERoomDirection::NorthWest:  Next.Q += 1; Next.R -= 1; break;
         case ERoomDirection::Up:         Next.FloorIndex += 1; break;
         case ERoomDirection::Down:       Next.FloorIndex -= 1; break;
     }
 
     return Next;
+    
 }
 
-bool ARoomManager::CheckAdjacency(const FHexIndex Origin, const ERoomDirection Direction) const
+ERoomDirection ARoomManager::ToRoomDirection(const ERoomInputDirection InputDir) const
 {
-    const FHexIndex NeighborIndex = GetNeighborIndex(Origin, Direction);
-    return RoomMap.Contains(NeighborIndex);
+    switch (InputDir)
+    {
+        case ERoomInputDirection::North: return ERoomDirection::North;
+        case ERoomInputDirection::South: return ERoomDirection::South;
+        case ERoomInputDirection::Up:    return ERoomDirection::Up;
+        case ERoomInputDirection::Down:  return ERoomDirection::Down;
+            
+        // Logic for mapping 4-way input to 6-way hexes
+        // If in the center column move up diagonal, if not move down diagonal
+        case ERoomInputDirection::West:
+            return (CurrentIndex.R == 0) ? ERoomDirection::NorthWest : ERoomDirection::SouthWest; 
+                
+        case ERoomInputDirection::East:
+            return (CurrentIndex.R == 0) ? ERoomDirection::NorthEast : ERoomDirection::SouthEast;
+    
+        default:
+            return ERoomDirection::North;
+    }
 }
 
 bool ARoomManager::TryMoveDirection(const FHexIndex Origin, const ERoomDirection Direction, FHexIndex& OutIndex) const
@@ -85,20 +108,20 @@ bool ARoomManager::TryMoveDirection(const FHexIndex Origin, const ERoomDirection
     
     // If we hit a wall going NW, try SW. If NE, try SE.
     ERoomDirection FallbackDir = Direction;
-    bool bHasFallback = false;
+    bool bPickedFallback = false;
 
     if (Direction == ERoomDirection::NorthWest)
     {
         FallbackDir = ERoomDirection::SouthWest;
-        bHasFallback = true;
+        bPickedFallback = true;
     }
     else if (Direction == ERoomDirection::NorthEast)
     {
         FallbackDir = ERoomDirection::SouthEast;
-        bHasFallback = true;
+        bPickedFallback = true;
     }
 
-    if (bHasFallback)
+    if (bPickedFallback)
     {
         Attempt = GetNeighborIndex(Origin, FallbackDir);
         if (IsIndexValid(Attempt))
@@ -265,28 +288,6 @@ bool ARoomManager::MoveSelector(const ERoomInputDirection InputDir)
     }
     
     return false;
-}
-
-ERoomDirection ARoomManager::ToRoomDirection(const ERoomInputDirection InputDir) const
-{
-    switch (InputDir)
-    {
-        case ERoomInputDirection::South: return ERoomDirection::South;
-        case ERoomInputDirection::Up:    return ERoomDirection::Up;
-        case ERoomInputDirection::Down:  return ERoomDirection::Down;
-        
-        // Logic for mapping 4-way input to 6-way hexes
-        // If in the center column move up diagonal, if not move down diagonal
-        case ERoomInputDirection::West:
-            return (CurrentIndex.Q == 0) ? ERoomDirection::NorthWest : ERoomDirection::SouthWest;
-            
-        case ERoomInputDirection::East:
-            return (CurrentIndex.Q == 0) ? ERoomDirection::NorthEast : ERoomDirection::SouthEast;
-
-        case ERoomInputDirection::North:
-        default:
-            return ERoomDirection::North;
-    }
 }
 
 int32 ARoomManager::GetMaxOccupiedFloor() const
