@@ -1,8 +1,9 @@
 ﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 #include "WorkStation.h"
+
+#include "ProgressTrackingComponent.h"
 #include "Components/BoxComponent.h"
-#include "GameUI/Interactables/InteractableWidgetComponent.h"
 
 AWorkStation::AWorkStation()
 {
@@ -24,55 +25,19 @@ void AWorkStation::BeginPlay()
     }
 }
 
-void AWorkStation::Tick(float DeltaTime)
-{
-    Super::Tick(DeltaTime);
-
-    if (bIsProcessing && !bIsBeingWorked)
-    {
-        ProcessStartTime += DeltaTime;
-        ProcessEndTime += DeltaTime;
-    }
-}
-
 void AWorkStation::HandleInteractableAdded(AInteractable* InteractableToAdd)
 {
     UE_LOG(LogTemp, Log, TEXT("[%f] WorkStation: Item added, manual interaction required."), GetWorld()->GetTimeSeconds());
 }
 
-void AWorkStation::StartWorking()
-{
-    if (!bIsProcessing && Inventory.Num() > 0)
-    {
-        bIsProcessing = true;
-        ProcessStartTime = GetWorld()->GetTimeSeconds();
-        ProcessEndTime = ProcessStartTime + ProcessingDuration;
-
-        if (ProgressBarWidgetComponent)
-        {
-            ProgressBarWidgetComponent->SetVisibility(true);
-        }
-
-        UE_LOG(LogTemp, Log, TEXT("[%f] WorkStation: Started working."), GetWorld()->GetTimeSeconds());
-    }
-
-    bIsBeingWorked = true;
-}
-
-void AWorkStation::StopWorking()
-{
-    bIsBeingWorked = false;
-    UE_LOG(LogTemp, Log, TEXT("[%f] WorkStation: Stopped working."), GetWorld()->GetTimeSeconds());
-}
-
 void AWorkStation::OnWorkHitBoxBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
     UE_LOG(LogTemp, Log, TEXT("HITBOX HIT FOR WORK"));
-    StartWorking();
+    ProgressTrackingComponent->StartProgress();
 }
 
 void AWorkStation::OnWorkHitBoxEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
     UE_LOG(LogTemp, Log, TEXT("HITBOX HIT FOR WORK STOPPED"));
-    StopWorking();
+    ProgressTrackingComponent->StopProgress();
 }

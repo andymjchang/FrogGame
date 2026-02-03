@@ -17,13 +17,6 @@ void AConsumer::BeginPlay()
 	AttachPoint->SetVisibility(false, true);
 }
 
-void AConsumer::EndPlay(const EEndPlayReason::Type EndPlayReason)
-{
-	OnAddedToInventory.RemoveAll(this);
-
-	Super::EndPlay(EndPlayReason);
-}
-
 void AConsumer::HandleInteractableAdded(AInteractable* Interactable)
 {
 	if (!IsValid(Interactable)) return ;

@@ -18,13 +18,9 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
-	virtual void Tick(float DeltaTime) override;
 	virtual void HandleInteractableAdded(AInteractable* InteractableToAdd) override;
 
 public:
-	void StartWorking();
-	void StopWorking();
-
 	UFUNCTION()
 	void OnWorkHitBoxBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
     

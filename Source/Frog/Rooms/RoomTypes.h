@@ -12,9 +12,9 @@ static constexpr int NUM_ROOM_DIRECTIONS = 6;
 UENUM(BlueprintType)
 enum class EDoorTypes : uint8
 {
-    Door,
-    Blocked,
-    None
+    None,
+    Locked,
+    Blocked
 };
 
 UENUM(BlueprintType)
@@ -112,7 +112,7 @@ struct FRoomNode
     TArray<EDoorTypes> DoorArray;
 
     UPROPERTY(SaveGame, BlueprintReadOnly, Category = "Room")
-    TArray<bool> WallArray;
+    TArray<bool> TallWallArray;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Room")
     URoomDefinition* RoomDefinition = nullptr;
@@ -130,6 +130,6 @@ struct FRoomNode
     void InitializeDefaults()
     {
         DoorArray.Init(EDoorTypes::None, 6); 
-        WallArray.Init(false, 6); 
+        TallWallArray.Init(false, 6); 
     }
 };

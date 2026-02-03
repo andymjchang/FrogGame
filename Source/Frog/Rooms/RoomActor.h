@@ -7,6 +7,8 @@
 #include "RoomTypes.h"
 #include "RoomActor.generated.h"
 
+class UDoorComponent;
+
 UCLASS()
 class FROG_API ARoomActor : public AActor
 {
@@ -15,16 +17,14 @@ class FROG_API ARoomActor : public AActor
 public:
 	ARoomActor();
 	
-	void SetWallArray(const TArray<bool>& InputArray);
+	void SetTallWallArray(const TArray<bool>& InputArray);
 	void SetDoorArray(const TArray<EDoorTypes>& InputArray);
-	
-protected: // Components
-	UPROPERTY(EditDefaultsOnly)
-	TArray<UStaticMeshComponent*> WallMeshes;
-	
-	UPROPERTY(EditDefaultsOnly)
-	TObjectPtr<UStaticMeshComponent> FloorMesh;
+	void SetMeshes();
 
+protected: // Data
+	TArray<bool> TallWallArray;
+	TArray<EDoorTypes> DoorArray;
+	
 protected: // Loading assets
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Room Visuals")
 	TObjectPtr<UStaticMesh> WallMesh;
@@ -44,9 +44,20 @@ protected: // Loading assets
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Room Visuals")
 	TObjectPtr<UMaterialInterface> WallMaterial;
 	
-private:
-	float WallMidpointLength = 833.5f;
+protected: // Components
+	UPROPERTY(EditDefaultsOnly)
+	TArray<UStaticMeshComponent*> WallMeshArray;
+	
+	UPROPERTY(EditDefaultsOnly)
+	TArray<USceneComponent*> DoorNodeArray;
+	
+	UPROPERTY(EditDefaultsOnly)
+	TObjectPtr<UStaticMeshComponent> FloorMesh;
 	
 private:
-	void CreateWallComponents();
+	static constexpr float WallMidpointLength = 833.5f;
+	static constexpr float FloorHeight = 10.f;
+	
+private:
+	void InitializeComponentsAroundHexagon();
 };

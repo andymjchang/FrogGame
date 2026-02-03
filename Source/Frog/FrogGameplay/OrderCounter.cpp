@@ -27,13 +27,6 @@ void AOrderCounter::BeginPlay()
 	}
 }
 
-void AOrderCounter::EndPlay(const EEndPlayReason::Type EndPlayReason)
-{
-	OnAddedToInventory.RemoveAll(this);
-
-	Super::EndPlay(EndPlayReason);
-}
-
 void AOrderCounter::HandleInteractableAdded(AInteractable* Interactable)
 {
 	if (!IsValid(Interactable)) return;

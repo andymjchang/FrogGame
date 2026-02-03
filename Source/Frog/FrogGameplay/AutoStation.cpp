@@ -2,26 +2,13 @@
 
 
 #include "AutoStation.h"
-#include "GameUI/Interactables/InteractableWidgetComponent.h"
+
+#include "ProgressTrackingComponent.h"
 
 // Sets default values
 AAutoStation::AAutoStation()
 {
-	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
-}
-
-// Called when the game starts or when spawned
-void AAutoStation::BeginPlay()
-{
-	Super::BeginPlay();
-	
-}
-
-// Called every frame
-void AAutoStation::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
+	PrimaryActorTick.bCanEverTick = false;
 }
 
 void AAutoStation::HandleInteractableAdded(AInteractable* InteractableToAdd)
@@ -31,14 +18,9 @@ void AAutoStation::HandleInteractableAdded(AInteractable* InteractableToAdd)
 	// Don't autostart if the added item is the finished item
 	if (OfferedInteractable == this)
 	{
-		bIsProcessing = true;
-		ProcessStartTime = GetWorld()->GetTimeSeconds();
-		ProcessEndTime = ProcessStartTime + ProcessingDuration;
-
-		if (ProgressBarWidgetComponent)
-		{
-			ProgressBarWidgetComponent->SetVisibility(true);
-		}
+		ProgressTrackingComponent->SetProgressStartTime(GetWorld()->GetTimeSeconds());
+		ProgressTrackingComponent->SetProgressDuration(ProcessingDuration);
+		ProgressTrackingComponent->StartProgress();
 	}
 }
 

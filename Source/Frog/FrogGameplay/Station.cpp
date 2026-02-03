@@ -2,6 +2,7 @@
 
 #include "Station.h"
 #include "InteractableData.h"
+#include "ProgressTrackingComponent.h"
 #include "GameState/FrogGameState.h"
 #include "TimerManager.h"
 #include "Components/PrimitiveComponent.h"
@@ -12,10 +13,13 @@
 
 AStation::AStation()
 {
-    PrimaryActorTick.bCanEverTick = true;
+    PrimaryActorTick.bCanEverTick = false;
 
-    // Inventory Widget
-    ProgressBarWidgetComponent = CreateDefaultSubobject<UInteractableWidgetComponent>(TEXT("UProgressBarWidgetComponent"));
+    // Progress Tracking Component
+    ProgressTrackingComponent = CreateDefaultSubobject<UProgressTrackingComponent>(TEXT("ProgressTrackingComponent"));
+    
+    // Progress Bar Widget
+    ProgressBarWidgetComponent = CreateDefaultSubobject<UInteractableWidgetComponent>(TEXT("ProgressBarWidgetComponent"));
     ProgressBarWidgetComponent->SetupAttachment(RootComponent);
     ProgressBarWidgetComponent->SetRelativeLocation(FVector(0.0f, 0.0f, -600.0f));
     ProgressBarWidgetComponent->SetWidgetSpace(EWidgetSpace::Screen);
@@ -32,45 +36,13 @@ void AStation::BeginPlay()
     
     OnAddedToInventory.AddUObject(this, &AStation::HandleInteractableAdded);
     
-    if (ProgressBarWidgetComponent)
+    if (IsValid(ProgressBarWidgetComponent))
     {
-        ProgressBarWidgetComponent->SetVisibility(false);
-        ProgressBarWidget = Cast<UStationProgressBar>(ProgressBarWidgetComponent->GetWidget());
-    }
-}
-
-void AStation::EndPlay(const EEndPlayReason::Type EndPlayReason)
-{
-    OnAddedToInventory.RemoveAll(this);
-
-    Super::EndPlay(EndPlayReason);
-}
-
-void AStation::Tick(float DeltaTime)
-{
-    Super::Tick(DeltaTime);
-
-    if (bIsProcessing)
-    {
-        double CurrentTime = GetWorld()->GetTimeSeconds();
-
-        if (ProgressBarWidgetComponent)
+        ProgressTrackingComponent->OnCompletion.AddUObject(this, &AStation::OnProcessingComplete);
+        
+        if (UStationProgressBar* ProgressBarWidget = Cast<UStationProgressBar>(ProgressBarWidgetComponent->GetWidget()))
         {
-            float Percentage = 0.0f;
-            if (ProcessEndTime > ProcessStartTime)
-            {
-                Percentage = FMath::Clamp((float)((CurrentTime - ProcessStartTime) / (ProcessEndTime - ProcessStartTime)), 0.0f, 1.0f);
-            }
-            if (ProgressBarWidget.IsValid())
-            {
-                ProgressBarWidget->SetProgressPercent(Percentage);
-            }
-        }
-
-        if (CurrentTime >= ProcessEndTime)
-        {
-            bIsProcessing = false;
-            OnProcessingComplete();
+            if (IsValid(ProgressTrackingComponent)) ProgressTrackingComponent->SetProgressWidget(ProgressBarWidget);
         }
     }
 }
@@ -105,11 +77,6 @@ void AStation::OnProcessingComplete()
         return;
     }
     
-    if (ProgressBarWidgetComponent)
-    {
-        ProgressBarWidgetComponent->SetVisibility(false);
-    }
-    
     FGameplayTagContainer AllTags = GatherAllTags();
     
     TSubclassOf<AInteractable> ResultClass = GameState->GetRecipeResultClass(AllTags);
@@ -123,7 +90,7 @@ void AStation::OnProcessingComplete()
                 Item->Destroy();
             }
         }
-        Inventory.Empty();
+        ClearInventory();
         
         FActorSpawnParameters SpawnParams;
         SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
@@ -140,5 +107,10 @@ void AStation::OnProcessingComplete()
             OfferedInteractable = SpawnedResult;
             TryAddToInventory(SpawnedResult);
         }
+    }
+    else
+    {
+        OfferedInteractable = this;
+        ClearInventory();
     }
 }

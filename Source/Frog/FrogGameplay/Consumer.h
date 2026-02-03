@@ -16,7 +16,6 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
-	void EndPlay(EEndPlayReason::Type EndPlayReason);
 
 	void HandleInteractableAdded(AInteractable* Interactable);
 

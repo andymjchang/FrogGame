@@ -48,6 +48,7 @@ void AInteractable::DisableInteractable()
 void AInteractable::ClearInventory()
 {
 	Inventory.Empty();
+	UpdateInventoryWidget();
 }
 
 bool AInteractable::HasMatchingInteractableTag(const FGameplayTagContainer& AcceptedTags) const
@@ -108,7 +109,6 @@ bool AInteractable::TryAddContainerToInventory(AInteractable* ContainerToAdd)
 	}
 	
 	ContainerToAdd->ClearInventory();
-	ContainerToAdd->UpdateInventoryWidget();
 	UpdateInventoryWidget();
 	
 	return true;
@@ -164,5 +164,13 @@ void AInteractable::BeginPlay()
 	Super::BeginPlay();
 	
 	OfferedInteractable = this;
+}
+
+void AInteractable::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	OnAddedToInventory.RemoveAll(this);
+	OnRemovedFromInventory.RemoveAll(this);
+
+	Super::EndPlay(EndPlayReason);
 }
 

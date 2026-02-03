@@ -36,10 +36,6 @@ protected:
     UPROPERTY(EditDefaultsOnly, Category = "Room Config")
     int MaxHexRadius = 1;
 
-    UPROPERTY(EditAnywhere, Category = "Room Config")
-    URoomDefinition* CurrentRoomDefinition;
-
-
 public: 
     /** Creates a room at the specified index if valid. Returns true if successful. */
     UFUNCTION(BlueprintCallable, Category = "Room Logic")
