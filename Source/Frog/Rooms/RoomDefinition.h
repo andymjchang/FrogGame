@@ -17,9 +17,12 @@ class FROG_API URoomDefinition : public UDataAsset
 public:
 	URoomDefinition();
 	
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	UPROPERTY(EditDefaultsOnly)
 	FGameplayTagContainer RoomTags;
 	
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Room Visuals", meta = (EditFixedSize))
+	UPROPERTY(EditDefaultsOnly, meta = (EditFixedSize))
 	TArray<EDoorTypes> DoorArray;
+	
+	UPROPERTY(EditDefaultsOnly)
+	TObjectPtr<UStaticMesh> WallMesh;
 };

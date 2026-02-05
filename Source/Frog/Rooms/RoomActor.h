@@ -7,6 +7,7 @@
 #include "RoomTypes.h"
 #include "RoomActor.generated.h"
 
+class ADoor;
 class UDoorComponent;
 
 UCLASS()
@@ -16,7 +17,8 @@ class FROG_API ARoomActor : public AActor
 
 public:
 	ARoomActor();
-	
+	virtual void OnConstruction(const FTransform& Transform) override;
+
 	void SetTallWallArray(const TArray<bool>& InputArray);
 	void SetDoorArray(const TArray<EDoorTypes>& InputArray);
 	void SetMeshes();
@@ -26,22 +28,28 @@ protected: // Data
 	TArray<EDoorTypes> DoorArray;
 	
 protected: // Loading assets
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Room Visuals")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "User Settings")
+	TObjectPtr<URoomDefinition> RoomDefinition;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "User Settings")
+	TObjectPtr<UStaticMesh> FloorMesh;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "User Settings")
 	TObjectPtr<UStaticMesh> WallMesh;
 	
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Room Visuals")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "User Settings")
 	TObjectPtr<UStaticMesh> WallDoorMesh;
 		
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Room Visuals")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "User Settings")
 	TObjectPtr<UStaticMesh> WallTallMesh;
 	
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Room Visuals")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "User Settings")
 	TObjectPtr<UStaticMesh> WallDoorTallMesh;
 	
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Room Visuals")
-	TObjectPtr<UStaticMesh> BlockedDoorMesh;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "User Settings")
+	TSubclassOf<ADoor> DoorBlueprint;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Room Visuals")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "User Settings")
 	TObjectPtr<UMaterialInterface> WallMaterial;
 	
 protected: // Components
@@ -49,10 +57,10 @@ protected: // Components
 	TArray<UStaticMeshComponent*> WallMeshArray;
 	
 	UPROPERTY(EditDefaultsOnly)
-	TArray<USceneComponent*> DoorNodeArray;
+	TArray<UChildActorComponent*> DoorActorArray;
 	
 	UPROPERTY(EditDefaultsOnly)
-	TObjectPtr<UStaticMeshComponent> FloorMesh;
+	TObjectPtr<UStaticMeshComponent> Floor;
 	
 private:
 	static constexpr float WallMidpointLength = 833.5f;

@@ -3,6 +3,9 @@
 
 #include "RoomActor.h"
 
+#include "Door.h"
+#include "RoomDefinition.h"
+
 ARoomActor::ARoomActor()
 {
 	PrimaryActorTick.bCanEverTick = false;
@@ -12,15 +15,54 @@ ARoomActor::ARoomActor()
 	SetRootComponent(Root);
 
 	// Floor component
-	FloorMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName("FloorMesh"));
-	FloorMesh->SetupAttachment(RootComponent);
-
+	Floor = CreateDefaultSubobject<UStaticMeshComponent>(FName("Floor"));
+	Floor->SetupAttachment(RootComponent);
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> FloorAsset(TEXT("/Game/Rooms/SM_Floor"));
+	if (FloorAsset.Succeeded())
+	{
+		Floor->SetStaticMesh(FloorAsset.Object);
+	}
+	
 	TallWallArray.Init(false, NUM_ROOM_DIRECTIONS);
 	DoorArray.Init(EDoorTypes::None, NUM_ROOM_DIRECTIONS);
 	
 	InitializeComponentsAroundHexagon();
 }
 
+void ARoomActor::OnConstruction(const FTransform& Transform)
+{
+	Super::OnConstruction(Transform);
+    
+	if (!IsValid(RoomDefinition)) return;
+	if (!DoorBlueprint) return;
+
+	const int32 IterateCount = FMath::Min(DoorActorArray.Num(), RoomDefinition->DoorArray.Num());
+	for (int32 i = 0; i < IterateCount; i++)
+	{
+		if (UChildActorComponent* DoorComp = DoorActorArray[i])
+		{
+			if (RoomDefinition->DoorArray[i] == EDoorTypes::Locked)
+			{
+				DoorComp->SetChildActorClass(DoorBlueprint);
+			}
+			else
+			{
+				DoorComp->SetChildActorClass(nullptr);
+			}
+		}
+		if (UStaticMeshComponent* WallComponent = WallMeshArray[i])
+		{
+			if (RoomDefinition->DoorArray[i] == EDoorTypes::Locked)
+			{
+				WallComponent->SetStaticMesh(WallDoorMesh);
+			}
+			else
+			{
+				WallComponent->SetStaticMesh(WallMesh);
+			}
+		}
+	}
+}
 void ARoomActor::SetTallWallArray(const TArray<bool>& InputArray)
 {
 	TallWallArray = InputArray;
@@ -35,11 +77,15 @@ void ARoomActor::SetMeshes()
 {
 	for (int32 i = 0; i < 6; i++)
 	{
-		if (TallWallArray[i] == true)
+		if (UStaticMeshComponent* Wall = WallMeshArray[i])
 		{
-			if (UStaticMeshComponent* Wall = WallMeshArray[i])
+			if (TallWallArray[i] == true)
 			{
 				Wall->SetStaticMesh(WallTallMesh);	
+			}
+			else
+			{
+				Wall->SetStaticMesh(WallMesh);
 			}
 		}
 	}
@@ -48,16 +94,14 @@ void ARoomActor::SetMeshes()
 void ARoomActor::InitializeComponentsAroundHexagon()
 {
 	WallMeshArray.Reserve(NUM_ROOM_DIRECTIONS);
-	DoorNodeArray.Reserve(NUM_ROOM_DIRECTIONS);
-	
-	for (int32 i = 0; i < NUM_ROOM_DIRECTIONS; i++)
+	DoorActorArray.Reserve(NUM_ROOM_DIRECTIONS);
+    
+	for (int32 i = NUM_ROOM_DIRECTIONS - 1; i >= 0; i--)
 	{
-		// Create Wall Static mesh //
-		FString ComponentName = FString::Printf(TEXT("WallMesh%d"), i + 1);
+		FString ComponentName = FString::Printf(TEXT("WallMesh%d"), i);
 		UStaticMeshComponent* NewWall = CreateDefaultSubobject<UStaticMeshComponent>(*ComponentName);
 		NewWall->SetupAttachment(RootComponent);
         
-		// 60 degrees in radians = PI / 3
 		float Angle = i * (PI / 3.0f); 
 
 		FVector HexLocation;
@@ -69,19 +113,24 @@ void ARoomActor::InitializeComponentsAroundHexagon()
 		FRotator HexRotation = FRotator(0.0f, i * 60.f, 0.0f);
 		NewWall->SetRelativeRotation(HexRotation);
 
-		WallMeshArray.Add(NewWall);
-		
-		// Create Door Node //
-		FString NodeName = FString::Printf(TEXT("DoorNode%d"), i + 1);
-		USceneComponent* NewDoor = CreateDefaultSubobject<USceneComponent>(*NodeName);
+		static ConstructorHelpers::FObjectFinder<UStaticMesh> WallAsset(TEXT("/Game/Rooms/SM_Wall"));
+		if (WallAsset.Succeeded())
+		{
+			NewWall->SetStaticMesh(WallAsset.Object);
+		}
+       
+		WallMeshArray.Insert(NewWall, 0);
+       
+		FString NodeName = FString::Printf(TEXT("DoorNode%d"), i);
+		UChildActorComponent* NewDoor = CreateDefaultSubobject<UChildActorComponent>(*NodeName);
 		NewDoor->SetupAttachment(RootComponent);
-		
+       
 		FVector DoorLocation = HexLocation;
 		DoorLocation.Z = FloorHeight;
 		NewDoor->SetRelativeLocation(DoorLocation);
 		NewDoor->SetRelativeRotation(HexRotation);
-		
-		DoorNodeArray.Add(NewDoor);
+       
+		DoorActorArray.Insert(NewDoor, 0);
 	}
 }
 
