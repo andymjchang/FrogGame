@@ -4,9 +4,9 @@
 #include "Door.h"
 
 #include "Components/BoxComponent.h"
-#include "Components/ProgressBar.h"
 #include "FrogGameplay/ProgressTrackingComponent.h"
-
+#include "GameState/FrogGameState.h"
+#include "GameUI/Interactables/InteractableWidgetComponent.h" 
 
 ADoor::ADoor()
 {
@@ -26,12 +26,67 @@ ADoor::ADoor()
 	// Progress Tracker
 	ProgressTracker = CreateDefaultSubobject<UProgressTrackingComponent>(TEXT("ProgressTrackingComponent"));
 	
+	// Progress Widget Component
+	ProgressWidgetComponent = CreateDefaultSubobject<UInteractableWidgetComponent>(TEXT("ProgressBarWidgetComponent"));
+	ProgressWidgetComponent->SetupAttachment(RootComponent);
+	ProgressWidgetComponent->SetRelativeLocation(FVector(0.0f, 0.0f, -600.0f));
+	ProgressWidgetComponent->SetDrawSize(FIntPoint(50, 20));
+}
+
+void ADoor::BeginPlay()
+{
+	Super::BeginPlay();
+	
+	if (IsValid(Hitbox))
+	{
+		Hitbox->OnComponentBeginOverlap.AddDynamic(this, &ADoor::OnOverlapBegin);
+		Hitbox->OnComponentEndOverlap.AddDynamic(this, &ADoor::OnOverlapEnd);
+	}
+	
+	if (IsValid(ProgressTracker) && IsValid(ProgressWidgetComponent))
+	{
+		ProgressTracker->OnCompletion.BindDynamic(this, &ADoor::HandleProgressComplete);
+		ProgressTracker->SetProgressWidget(ProgressWidgetComponent->GetWidget());
+	}
+}
+
+void ADoor::ServerAttemptPurchase()
+{
+	if (!HasAuthority()) return;
+	
+	AFrogGameState* GameState = GetWorld()->GetGameState<AFrogGameState>();
+	if (!IsValid(GameState)) return;
+	
+	if (BuyPrice <= GameState->GetMoney())
+	{
+		OnProgressComplete.Execute();
+	}
+}
+
+void ADoor::HandleProgressComplete()
+{
+	AFrogGameState* GameState = GetWorld()->GetGameState<AFrogGameState>();
+	if (!IsValid(GameState)) return;
+	
+	ServerAttemptPurchase();
+}
+
+void ADoor::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
+	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	ProgressTracker->StartProgress();
+}
+
+void ADoor::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
+	int32 OtherBodyIndex)
+{
+	ProgressTracker->StopProgress();
 }
 
 void ADoor::SetActive(const bool bIsTrue)
 {
 	if (!IsValid(Hitbox)) return;
-	
+
 	if (bIsTrue)
 	{
 		Hitbox->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
@@ -41,3 +96,4 @@ void ADoor::SetActive(const bool bIsTrue)
 		Hitbox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
 }
+

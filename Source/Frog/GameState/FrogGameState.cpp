@@ -1,4 +1,5 @@
 ﻿#include "FrogGameState.h"
+
 #include "Net/UnrealNetwork.h"
 
 AFrogGameState::AFrogGameState()
@@ -76,11 +77,21 @@ void AFrogGameState::TriggerNightPhase()
     OnRep_PhaseEndTime();
 }
 
-void AFrogGameState::ServerAddMoney(int32 Amount)
+void AFrogGameState::ServerAddMoney(const int32 Amount)
 {
     if (!HasAuthority()) return;
-
+    if (Amount <= 0) return;
+    
     Money += Amount;
+    OnRep_Money();
+}
+
+void AFrogGameState::ServerTrySubtractMoney(const int32 Amount)
+{
+    if (!HasAuthority()) return;
+    if (Amount > Money) return;
+    
+    Money -= Amount;
     OnRep_Money();
 }
 

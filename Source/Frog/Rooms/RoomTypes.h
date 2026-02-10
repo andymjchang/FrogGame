@@ -45,6 +45,9 @@ enum class ERoomDirection : uint8
     Down        UMETA(DisplayName = "Down (Z-1)")
 };
 
+static constexpr ERoomDirection LowerDirs[] = {ERoomDirection::SouthWest, ERoomDirection::South, ERoomDirection::SouthEast};
+static constexpr ERoomDirection UpperDirs[] = {ERoomDirection::NorthWest, ERoomDirection::North, ERoomDirection::NorthEast};
+
 /**
  * The unique coordinate identifier for a room slot.
  * Axial Coordinates (Q, R) + Floor Index (Z).
@@ -109,10 +112,10 @@ struct FRoomNode
     TObjectPtr<ARoomActor> RoomActor;
     
     UPROPERTY(SaveGame, BlueprintReadOnly, Category = "Room")
-    TArray<EDoorTypes> DoorArray;
+    TArray<EDoorTypes> DoorTypeArray;
 
     UPROPERTY(SaveGame, BlueprintReadOnly, Category = "Room")
-    TArray<bool> TallWallArray;
+    TArray<bool> WallTypeArray;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Room")
     URoomDefinition* RoomDefinition = nullptr;
@@ -129,7 +132,7 @@ struct FRoomNode
     
     void InitializeDefaults()
     {
-        DoorArray.Init(EDoorTypes::None, 6); 
-        TallWallArray.Init(false, 6); 
+        DoorTypeArray.Init(EDoorTypes::None, 6); 
+        WallTypeArray.Init(false, 6); 
     }
 };

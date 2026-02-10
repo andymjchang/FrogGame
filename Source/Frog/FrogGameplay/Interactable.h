@@ -12,7 +12,7 @@ class UInteractableWidgetComponent;
 class UInteractableData;
 class UBoxComponent;
 
-DECLARE_MULTICAST_DELEGATE_OneParam(FOnInventoryItemChanged, AInteractable*);
+DECLARE_DYNAMIC_DELEGATE_OneParam(FOnInventoryItemChanged, class AInteractable*, Item);
 
 UCLASS()
 class FROG_API AInteractable : public AActor
@@ -28,10 +28,6 @@ protected:
 	virtual void EndPlay(EEndPlayReason::Type EndPlayReason) override;
 
 public:
-	// Delegate 
-	FOnInventoryItemChanged OnRemovedFromInventory;
-	FOnInventoryItemChanged OnAddedToInventory;
-	
 	void EnableInteractable();
 	void DisableInteractable(); // TODO: check if enable/disable are redundant since items are always on a counter, inside container, or inside station
 	void ClearInventory();
@@ -41,6 +37,9 @@ public:
 	bool TryAddContainerToInventory(AInteractable* ContainerToAdd);
 	bool TryRemoveFromInventory(AInteractable* InteractableToRemove);
 	
+	// Delegates
+	FOnInventoryItemChanged OnRemovedFromInventory;
+	FOnInventoryItemChanged OnAddedToInventory;
 protected:
 	void UpdateInventoryWidget();
 

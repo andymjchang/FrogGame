@@ -12,8 +12,8 @@ void UFrogHUD::NativeConstruct()
         OnScoreChanged(FrogGameState->GetMoney());
         OnPhaseChanged(FrogGameState->GetCurrentPhase());
         
-        FrogGameState->OnMoneyChanged.AddUObject(this, &UFrogHUD::OnScoreChanged);
-        FrogGameState->OnPhaseChanged.AddUObject(this, &UFrogHUD::OnPhaseChanged);
+        FrogGameState->OnMoneyChanged.AddDynamic(this, &UFrogHUD::OnScoreChanged);
+        FrogGameState->OnPhaseChanged.AddDynamic(this, &UFrogHUD::OnPhaseChanged);
         
         if (GetWorld())
         {
@@ -36,13 +36,6 @@ void UFrogHUD::NativeDestruct()
     if (GetWorld())
     {
         GetWorld()->GetTimerManager().ClearTimer(TimerHandle_UIUpdate);
-    }
-
-    // Clean up delegates
-    if (FrogGameState.IsValid())
-    {
-        FrogGameState->OnMoneyChanged.RemoveAll(this);
-        FrogGameState->OnPhaseChanged.RemoveAll(this);
     }
 }
 

@@ -10,7 +10,7 @@ class UStationProgressBar;
 class UInteractableWidgetComponent;
 
 static constexpr int NUM_PLAYERS = 4;
-DECLARE_MULTICAST_DELEGATE(FOnCompletion);
+DECLARE_DYNAMIC_DELEGATE(FOnCompletion);
 
 UENUM(BlueprintType)
 enum class EProgressMethod : uint8
@@ -35,7 +35,7 @@ public: // Public Functions
 	UProgressTrackingComponent();
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	
-	void SetProgressWidget(UStationProgressBar* InProgressBarWidget);
+	void SetProgressWidget(UUserWidget* InProgressBarWidget);
 	
 	void SetProgressDuration(float InDuration);
 	void SetProgressStartTime(float InStartTime);
@@ -67,6 +67,7 @@ public: // Public Members
 	
 protected: // Protected Functions
 	virtual void BeginPlay() override;
+	
 	void CompleteProgress();
 	void SetWidgetVisibility(bool Value);
 

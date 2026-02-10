@@ -13,7 +13,7 @@ void AConsumer::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	OnAddedToInventory.AddUObject(this, &AConsumer::HandleInteractableAdded);
+	OnAddedToInventory.BindDynamic(this, &AConsumer::HandleInteractableAdded);
 	AttachPoint->SetVisibility(false, true);
 }
 

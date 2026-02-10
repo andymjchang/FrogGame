@@ -12,14 +12,12 @@ void ASpawner::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	OnRemovedFromInventory.AddUObject(this, &ASpawner::HandleInteractableRemoved);
+	OnRemovedFromInventory.BindDynamic(this, &ASpawner::HandleInteractableRemoved);
 	SpawnAndReplenish();
 }
 
 void ASpawner::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
-	OnAddedToInventory.RemoveAll(this);
-
 	Super::EndPlay(EndPlayReason);
 }
 

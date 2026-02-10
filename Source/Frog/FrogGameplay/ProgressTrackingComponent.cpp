@@ -41,10 +41,13 @@ void UProgressTrackingComponent::TickComponent(float DeltaTime, ELevelTick TickT
 	}
 }
 
-void UProgressTrackingComponent::SetProgressWidget(UStationProgressBar* InProgressBarWidget)
+void UProgressTrackingComponent::SetProgressWidget(UUserWidget* InProgressBarWidget)
 {
-	ProgressBarWidget = InProgressBarWidget;
-	SetWidgetVisibility(false);
+	if (UStationProgressBar* ProgressWidget = Cast<UStationProgressBar>(InProgressBarWidget))
+	{
+		ProgressBarWidget = ProgressWidget;
+		SetWidgetVisibility(false);
+	}
 }
 
 void UProgressTrackingComponent::SetProgressDuration(const float InDuration)
@@ -105,7 +108,7 @@ void UProgressTrackingComponent::CompleteProgress()
 		}
 	}
 	
-	OnCompletion.Broadcast();
+	OnCompletion.ExecuteIfBound();
 }
 
 void UProgressTrackingComponent::SetWidgetVisibility(const bool Value)

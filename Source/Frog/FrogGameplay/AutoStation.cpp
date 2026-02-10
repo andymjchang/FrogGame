@@ -18,9 +18,9 @@ void AAutoStation::HandleInteractableAdded(AInteractable* InteractableToAdd)
 	// Don't autostart if the added item is the finished item
 	if (OfferedInteractable == this)
 	{
-		ProgressTrackingComponent->SetProgressStartTime(GetWorld()->GetTimeSeconds());
-		ProgressTrackingComponent->SetProgressDuration(ProcessingDuration);
-		ProgressTrackingComponent->StartProgress();
+		ProgressTracker->SetProgressStartTime(GetWorld()->GetTimeSeconds());
+		ProgressTracker->SetProgressDuration(ProcessingDuration);
+		ProgressTracker->StartProgress();
 	}
 }
 

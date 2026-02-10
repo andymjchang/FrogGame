@@ -25,21 +25,25 @@ public:
 	AStation();
 
 protected:
+	virtual void BeginPlay() override;
+	
+	UFUNCTION()
+	virtual void HandleInteractableAdded(AInteractable* InteractableToAdd);
+
+	UFUNCTION()
+	virtual void HandleProcessingComplete();
+
+	FGameplayTagContainer GatherAllTags() const;
+	
+protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Station")
 	float ProcessingDuration = 3.0f;
 	
-	virtual void HandleInteractableAdded(AInteractable* InteractableToAdd);
-	virtual void BeginPlay() override;
-
-	UFUNCTION()
-	virtual void OnProcessingComplete();
-
-	FGameplayTagContainer GatherAllTags() const;
-
 protected:
 	UPROPERTY(EditDefaultsOnly)
-	TObjectPtr<UProgressTrackingComponent> ProgressTrackingComponent;
+	TObjectPtr<UProgressTrackingComponent> ProgressTracker;
 	
 	UPROPERTY(EditDefaultsOnly)
-	TObjectPtr<UInteractableWidgetComponent> ProgressBarWidgetComponent;
+	TObjectPtr<UInteractableWidgetComponent> ProgressWidgetComponent;
+	
 };

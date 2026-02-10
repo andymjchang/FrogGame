@@ -18,14 +18,14 @@ class FROG_API ARoomActor : public AActor
 public:
 	ARoomActor();
 	virtual void OnConstruction(const FTransform& Transform) override;
-
-	void SetTallWallArray(const TArray<bool>& InputArray);
-	void SetDoorArray(const TArray<EDoorTypes>& InputArray);
-	void SetMeshes();
+	
+	void SetDoorTypeArray(const TArray<EDoorTypes>& InArray);
+	void SetWallTypeArray(const TArray<bool>& InArray);
+	void RegenerateMeshes();
 
 protected: // Data
-	TArray<bool> TallWallArray;
-	TArray<EDoorTypes> DoorArray;
+	TArray<bool> WallTypeArray;
+	TArray<EDoorTypes> DoorTypeArray;
 	
 protected: // Loading assets
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "User Settings")
@@ -54,10 +54,10 @@ protected: // Loading assets
 	
 protected: // Components
 	UPROPERTY(EditDefaultsOnly)
-	TArray<UStaticMeshComponent*> WallMeshArray;
+	TArray<UStaticMeshComponent*> WallArray;
 	
 	UPROPERTY(EditDefaultsOnly)
-	TArray<UChildActorComponent*> DoorActorArray;
+	TArray<UChildActorComponent*> DoorArray;
 	
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<UStaticMeshComponent> Floor;

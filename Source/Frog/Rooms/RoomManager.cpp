@@ -139,9 +139,6 @@ void ARoomManager::CalculateWallHeights(FHexIndex RoomIndex)
     FRoomNode* RoomNode = RoomMap.Find(RoomIndex);
     if (!RoomNode) return;
     
-    static constexpr ERoomDirection LowerDirs[] = {ERoomDirection::SouthWest, ERoomDirection::South, ERoomDirection::SouthEast};
-    static constexpr ERoomDirection UpperDirs[] = {ERoomDirection::NorthWest, ERoomDirection::North, ERoomDirection::NorthEast};
-    
     // Lower directions
     for (ERoomDirection Direction : LowerDirs)
     {
@@ -149,25 +146,26 @@ void ARoomManager::CalculateWallHeights(FHexIndex RoomIndex)
         FRoomNode* AdjacentNode = RoomMap.Find(NeighborIndex);
         const int32 DirIndex = static_cast<int32>(Direction);
         
-        if (AdjacentNode && RoomNode->TallWallArray.IsValidIndex(DirIndex))
+        if (AdjacentNode && RoomNode->WallTypeArray.IsValidIndex(DirIndex))
         {
             // Update Neighbor Room 
             const int OppositeDir = static_cast<int>(GetOppositeDirection(Direction));
-            if (AdjacentNode->TallWallArray.IsValidIndex(OppositeDir))
+            if (AdjacentNode->WallTypeArray.IsValidIndex(OppositeDir))
             {
-                AdjacentNode->TallWallArray[OppositeDir] = false;
+                AdjacentNode->WallTypeArray[OppositeDir] = false;
 
                 // If directly above another room
                 if (OppositeDir == static_cast<int32>(ERoomDirection::North))
                 {
-                    AdjacentNode->TallWallArray[static_cast<int32>(ERoomDirection::North)] = false;
-                    AdjacentNode->TallWallArray[static_cast<int32>(ERoomDirection::NorthWest)] = false;
-                    AdjacentNode->TallWallArray[static_cast<int32>(ERoomDirection::NorthEast)] = false;
+                    AdjacentNode->WallTypeArray[static_cast<int32>(ERoomDirection::North)] = false;
+                    AdjacentNode->WallTypeArray[static_cast<int32>(ERoomDirection::NorthWest)] = false;
+                    AdjacentNode->WallTypeArray[static_cast<int32>(ERoomDirection::NorthEast)] = false;
                 }
 
                 if (IsValid(AdjacentNode->RoomActor)) 
                 {
-                    AdjacentNode->RoomActor->SetTallWallArray(AdjacentNode->TallWallArray);
+                    AdjacentNode->RoomActor->SetWallTypeArray(AdjacentNode->WallTypeArray);
+                    AdjacentNode->RoomActor->RegenerateMeshes();
                 }
             }
         }
@@ -180,14 +178,14 @@ void ARoomManager::CalculateWallHeights(FHexIndex RoomIndex)
         const int32 DirIndex = static_cast<int32>(Direction);
         
         // If there is a room above, no walls can be tall
-        if (!RoomMap.Contains(NeighborIndex) && RoomNode->TallWallArray.IsValidIndex(DirIndex) && !CheckAdjacency(RoomIndex, ERoomDirection::North))
+        if (!RoomMap.Contains(NeighborIndex) && RoomNode->WallTypeArray.IsValidIndex(DirIndex) && !CheckAdjacency(RoomIndex, ERoomDirection::North))
         {
-            RoomNode->TallWallArray[DirIndex] = true;
+            RoomNode->WallTypeArray[DirIndex] = true;
         }
     }
     if (IsValid(RoomNode->RoomActor)) 
     {
-        RoomNode->RoomActor->SetTallWallArray(RoomNode->TallWallArray);
+        RoomNode->RoomActor->SetWallTypeArray(RoomNode->WallTypeArray);
     }
 }
 
@@ -196,15 +194,15 @@ void ARoomManager::CalculateDoorTypes(FHexIndex RoomIndex)
     FRoomNode* RoomNode = RoomMap.Find(RoomIndex);
     if (!RoomNode) return;
 
-    RoomNode->DoorArray = RoomNode->RoomDefinition->DoorArray;
-    TArray<EDoorTypes>& DoorTypes = RoomNode->DoorArray;
+    RoomNode->DoorTypeArray = RoomNode->RoomDefinition->DoorArray;
+    TArray<EDoorTypes>& DoorTypes = RoomNode->DoorTypeArray;
     
     for (int i = 0; i < NUM_ROOM_DIRECTIONS; i++)
     {
         const ERoomDirection Direction = static_cast<ERoomDirection>(i);
         FHexIndex NeighborIndex = GetNeighborIndex(RoomIndex, Direction);
         FRoomNode* AdjacentNode = RoomMap.Find(NeighborIndex);
-        if (DoorTypes[i] == EDoorTypes::Locked || DoorTypes[i] == EDoorTypes::Blocked)
+        if (DoorTypes[i] != EDoorTypes::None)
         {
             if (CheckAdjacency(RoomIndex, Direction))
             {
@@ -212,10 +210,10 @@ void ARoomManager::CalculateDoorTypes(FHexIndex RoomIndex)
                 if (AdjacentNode)
                 {
                     const int OppositeDir = static_cast<int>(GetOppositeDirection(Direction));
-                    AdjacentNode->DoorArray[OppositeDir] = EDoorTypes::Locked;
+                    AdjacentNode->DoorTypeArray[OppositeDir] = EDoorTypes::Locked;
                     if (IsValid(AdjacentNode->RoomActor)) 
                     {
-                        AdjacentNode->RoomActor->SetDoorArray(AdjacentNode->DoorArray);
+                        AdjacentNode->RoomActor->SetDoorTypeArray(AdjacentNode->DoorTypeArray);
                     }
                 }
             }
@@ -228,7 +226,7 @@ void ARoomManager::CalculateDoorTypes(FHexIndex RoomIndex)
 
     if (IsValid(RoomNode->RoomActor)) 
     {
-        RoomNode->RoomActor->SetDoorArray(RoomNode->DoorArray);
+        RoomNode->RoomActor->SetDoorTypeArray(RoomNode->DoorTypeArray);
     }
 }
 

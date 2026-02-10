@@ -14,7 +14,7 @@ void AOrderCounter::BeginPlay()
 {
 	Super::BeginPlay();
     
-	OnAddedToInventory.AddUObject(this, &AOrderCounter::HandleInteractableAdded);
+	OnAddedToInventory.BindDynamic(this, &AOrderCounter::HandleInteractableAdded);
 	
 	if (IsValid(AttachPoint))
 	{

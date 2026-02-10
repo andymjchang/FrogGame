@@ -15,9 +15,9 @@ enum class EFrogGamePhase : uint8
 };
 
 // Delegates
-DECLARE_MULTICAST_DELEGATE_OneParam(FOnMoneyChanged, int32);
-DECLARE_MULTICAST_DELEGATE_OneParam(FOnPhaseChanged, EFrogGamePhase);
-DECLARE_MULTICAST_DELEGATE_OneParam(FOnPhaseEndTimeUpdated, float);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnMoneyChanged, int32, NewAmount);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPhaseChanged, EFrogGamePhase, NewPhase);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPhaseEndTimeUpdated, float, NewTime);
 
 UCLASS()
 class FROG_API AFrogGameState : public AGameStateBase
@@ -36,15 +36,16 @@ public:
     FOnPhaseEndTimeUpdated OnPhaseEndTimeUpdated;
      
     // Server only functions
-    void ServerAddMoney(int32 Amount);
+    void ServerAddMoney(const int32 Amount);
+    void ServerTrySubtractMoney(const int32 Amount);
     
     // Client functions
     TSubclassOf<AInteractable> GetRecipeResultClass(const FGameplayTagContainer& InteractableTags) const;
     UInteractableData* GetRecipeResultData(const FGameplayTagContainer& InteractableTags) const;
     float GetTimeRemaining() const;
     
-    FORCEINLINE int GetMoney() const { return Money; }
-    FORCEINLINE int GetPhaseEndTime() const { return PhaseEndTime; }
+    FORCEINLINE int32 GetMoney() const { return Money; }
+    FORCEINLINE int32 GetPhaseEndTime() const { return PhaseEndTime; }
     FORCEINLINE EFrogGamePhase GetCurrentPhase() const { return CurrentPhase; }
     
 protected:  

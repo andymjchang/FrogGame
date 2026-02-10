@@ -9,21 +9,19 @@
 #include "Components/WidgetComponent.h"
 #include "FrogCharacter/FrogCharacter.h"
 #include "GameUI/Interactables/InteractableWidgetComponent.h"
-#include "GameUI/Interactables/StationProgressBar.h"
 
 AStation::AStation()
 {
     PrimaryActorTick.bCanEverTick = false;
 
     // Progress Tracking Component
-    ProgressTrackingComponent = CreateDefaultSubobject<UProgressTrackingComponent>(TEXT("ProgressTrackingComponent"));
+    ProgressTracker = CreateDefaultSubobject<UProgressTrackingComponent>(TEXT("ProgressTrackingComponent"));
     
     // Progress Bar Widget
-    ProgressBarWidgetComponent = CreateDefaultSubobject<UInteractableWidgetComponent>(TEXT("ProgressBarWidgetComponent"));
-    ProgressBarWidgetComponent->SetupAttachment(RootComponent);
-    ProgressBarWidgetComponent->SetRelativeLocation(FVector(0.0f, 0.0f, -600.0f));
-    ProgressBarWidgetComponent->SetWidgetSpace(EWidgetSpace::Screen);
-    ProgressBarWidgetComponent->SetDrawSize(FIntPoint(100, 20));
+    ProgressWidgetComponent = CreateDefaultSubobject<UInteractableWidgetComponent>(TEXT("ProgressBarWidgetComponent"));
+    ProgressWidgetComponent->SetupAttachment(RootComponent);
+    ProgressWidgetComponent->SetRelativeLocation(FVector(0.0f, 0.0f, -600.0f));
+    ProgressWidgetComponent->SetDrawSize(FIntPoint(100, 20));
 }
 
 void AStation::HandleInteractableAdded(AInteractable* InteractableToAdd)
@@ -34,16 +32,12 @@ void AStation::BeginPlay()
 {
     Super::BeginPlay();
     
-    OnAddedToInventory.AddUObject(this, &AStation::HandleInteractableAdded);
+    OnAddedToInventory.BindDynamic(this, &AStation::HandleInteractableAdded);
     
-    if (IsValid(ProgressBarWidgetComponent))
+    if (IsValid(ProgressWidgetComponent) && IsValid(ProgressTracker))
     {
-        ProgressTrackingComponent->OnCompletion.AddUObject(this, &AStation::OnProcessingComplete);
-        
-        if (UStationProgressBar* ProgressBarWidget = Cast<UStationProgressBar>(ProgressBarWidgetComponent->GetWidget()))
-        {
-            if (IsValid(ProgressTrackingComponent)) ProgressTrackingComponent->SetProgressWidget(ProgressBarWidget);
-        }
+        ProgressTracker->OnCompletion.BindDynamic(this, &AStation::HandleProcessingComplete);
+        ProgressTracker->SetProgressWidget(ProgressWidgetComponent->GetWidget());
     }
 }
 
@@ -67,21 +61,19 @@ FGameplayTagContainer AStation::GatherAllTags() const
     return AllTags;
 }
 
-void AStation::OnProcessingComplete()
+void AStation::HandleProcessingComplete()
 {
     UE_LOG(LogTemp, Log, TEXT("[%f] Station: Processing complete!"), GetWorld()->GetTimeSeconds());
-    
-    AFrogGameState* GameState = GetWorld()->GetGameState<AFrogGameState>();
+
+    const AFrogGameState* GameState = GetWorld()->GetGameState<AFrogGameState>();
     if (!IsValid(GameState))
     {
         return;
     }
-    
-    FGameplayTagContainer AllTags = GatherAllTags();
-    
-    TSubclassOf<AInteractable> ResultClass = GameState->GetRecipeResultClass(AllTags);
-    
-    if (ResultClass)
+
+    const FGameplayTagContainer AllTags = GatherAllTags();
+
+    if (const TSubclassOf<AInteractable> ResultClass = GameState->GetRecipeResultClass(AllTags))
     {
         for (AInteractable* Item : Inventory)
         {

@@ -81,7 +81,7 @@ bool AInteractable::TryAddToInventory(AInteractable* InteractableToAdd)
 	InteractableToAdd->AttachToComponent(AttachPoint, Rules); 
 	
 	UpdateInventoryWidget();
-	OnAddedToInventory.Broadcast(InteractableToAdd);
+	OnAddedToInventory.ExecuteIfBound(InteractableToAdd);
 	
 	return true;
 }
@@ -134,7 +134,7 @@ bool AInteractable::TryRemoveFromInventory(AInteractable* InteractableToRemove)
 		OfferedInteractable = this;
 		
 		UpdateInventoryWidget();
-		OnRemovedFromInventory.Broadcast(InteractableToRemove);
+		OnRemovedFromInventory.ExecuteIfBound(InteractableToRemove);
 		
 		return true;
 	}
@@ -168,9 +168,6 @@ void AInteractable::BeginPlay()
 
 void AInteractable::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
-	OnAddedToInventory.RemoveAll(this);
-	OnRemovedFromInventory.RemoveAll(this);
-
 	Super::EndPlay(EndPlayReason);
 }
 

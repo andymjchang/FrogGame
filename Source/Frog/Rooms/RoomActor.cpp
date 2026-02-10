@@ -23,8 +23,8 @@ ARoomActor::ARoomActor()
 		Floor->SetStaticMesh(FloorAsset.Object);
 	}
 	
-	TallWallArray.Init(false, NUM_ROOM_DIRECTIONS);
-	DoorArray.Init(EDoorTypes::None, NUM_ROOM_DIRECTIONS);
+	WallTypeArray.Init(false, NUM_ROOM_DIRECTIONS);
+	DoorTypeArray.Init(EDoorTypes::None, NUM_ROOM_DIRECTIONS);
 	
 	InitializeComponentsAroundHexagon();
 }
@@ -33,59 +33,61 @@ void ARoomActor::OnConstruction(const FTransform& Transform)
 {
 	Super::OnConstruction(Transform);
     
-	if (!IsValid(RoomDefinition)) return;
-	if (!DoorBlueprint) return;
-
-	const int32 IterateCount = FMath::Min(DoorActorArray.Num(), RoomDefinition->DoorArray.Num());
-	for (int32 i = 0; i < IterateCount; i++)
+	if (IsValid(RoomDefinition))
 	{
-		if (UChildActorComponent* DoorComp = DoorActorArray[i])
-		{
-			if (RoomDefinition->DoorArray[i] == EDoorTypes::Locked)
-			{
-				DoorComp->SetChildActorClass(DoorBlueprint);
-			}
-			else
-			{
-				DoorComp->SetChildActorClass(nullptr);
-			}
-		}
-		if (UStaticMeshComponent* WallComponent = WallMeshArray[i])
-		{
-			if (RoomDefinition->DoorArray[i] == EDoorTypes::Locked)
-			{
-				WallComponent->SetStaticMesh(WallDoorMesh);
-			}
-			else
-			{
-				WallComponent->SetStaticMesh(WallMesh);
-			}
-		}
+		SetDoorTypeArray(RoomDefinition->DoorArray);
+		RegenerateMeshes();
 	}
 }
-void ARoomActor::SetTallWallArray(const TArray<bool>& InputArray)
+
+void ARoomActor::SetDoorTypeArray(const TArray<EDoorTypes>& InArray)
 {
-	TallWallArray = InputArray;
+	DoorTypeArray = InArray;
 }
 
-void ARoomActor::SetDoorArray(const TArray<EDoorTypes>& InputArray)
+void ARoomActor::SetWallTypeArray(const TArray<bool>& InArray)
 {
-	DoorArray = InputArray;
+	WallTypeArray = InArray;
 }
 
-void ARoomActor::SetMeshes()
+void ARoomActor::RegenerateMeshes()
 {
-	for (int32 i = 0; i < 6; i++)
+	if (DoorTypeArray.Num() != DoorArray.Num()) return;
+	if (WallTypeArray.Num() != WallArray.Num()) return;
+	if (!DoorBlueprint) return;
+
+	for (int i = 0; i < DoorArray.Num(); i++)
 	{
-		if (UStaticMeshComponent* Wall = WallMeshArray[i])
+		const bool bHasDoor = (DoorTypeArray[i] != EDoorTypes::None);
+		const bool bIsTallWall = WallTypeArray[i];
+
+		// Create or destroy door object
+		if (UChildActorComponent* CurrentDoor = DoorArray[i])
 		{
-			if (TallWallArray[i] == true)
+			TSubclassOf<AActor> TargetClass = bHasDoor ? DoorBlueprint : nullptr;
+			if (CurrentDoor->GetChildActorClass() != TargetClass)
 			{
-				Wall->SetStaticMesh(WallTallMesh);	
+				CurrentDoor->SetChildActorClass(TargetClass);
+			}
+		}
+
+		// Set correct wall mesh
+		if (UStaticMeshComponent* WallComponent = WallArray[i])
+		{
+			UStaticMesh* TargetMesh = nullptr;
+
+			if (bIsTallWall)
+			{
+				TargetMesh = bHasDoor ? WallDoorTallMesh : WallTallMesh;
 			}
 			else
 			{
-				Wall->SetStaticMesh(WallMesh);
+				TargetMesh = bHasDoor ? WallDoorMesh : WallMesh;
+			}
+
+			if (WallComponent->GetStaticMesh() != TargetMesh)
+			{
+				WallComponent->SetStaticMesh(TargetMesh);
 			}
 		}
 	}
@@ -93,9 +95,6 @@ void ARoomActor::SetMeshes()
 
 void ARoomActor::InitializeComponentsAroundHexagon()
 {
-	WallMeshArray.Reserve(NUM_ROOM_DIRECTIONS);
-	DoorActorArray.Reserve(NUM_ROOM_DIRECTIONS);
-    
 	for (int32 i = NUM_ROOM_DIRECTIONS - 1; i >= 0; i--)
 	{
 		FString ComponentName = FString::Printf(TEXT("WallMesh%d"), i);
@@ -119,7 +118,7 @@ void ARoomActor::InitializeComponentsAroundHexagon()
 			NewWall->SetStaticMesh(WallAsset.Object);
 		}
        
-		WallMeshArray.Insert(NewWall, 0);
+		WallArray.Insert(NewWall, 0);
        
 		FString NodeName = FString::Printf(TEXT("DoorNode%d"), i);
 		UChildActorComponent* NewDoor = CreateDefaultSubobject<UChildActorComponent>(*NodeName);
@@ -130,7 +129,7 @@ void ARoomActor::InitializeComponentsAroundHexagon()
 		NewDoor->SetRelativeLocation(DoorLocation);
 		NewDoor->SetRelativeRotation(HexRotation);
        
-		DoorActorArray.Insert(NewDoor, 0);
+		DoorArray.Insert(NewDoor, 0);
 	}
 }
 
