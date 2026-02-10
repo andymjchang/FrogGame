@@ -5,7 +5,7 @@
 #include "IngredientMap.h"
 #include "FrogGameState.generated.h"
 
-class AInteractable;
+class AItem;
 
 UENUM(BlueprintType)
 enum class EFrogGamePhase : uint8
@@ -40,8 +40,8 @@ public:
     void ServerTrySubtractMoney(const int32 Amount);
     
     // Client functions
-    TSubclassOf<AInteractable> GetRecipeResultClass(const FGameplayTagContainer& InteractableTags) const;
-    UInteractableData* GetRecipeResultData(const FGameplayTagContainer& InteractableTags) const;
+    TSubclassOf<AItem> GetRecipeResultClass(const FGameplayTagContainer& InteractableTags) const;
+    UItemData* GetRecipeResultData(const FGameplayTagContainer& InteractableTags) const;
     float GetTimeRemaining() const;
     
     FORCEINLINE int32 GetMoney() const { return Money; }
@@ -49,7 +49,7 @@ public:
     FORCEINLINE EFrogGamePhase GetCurrentPhase() const { return CurrentPhase; }
     
 protected:  
-    UPROPERTY()
+    UPROPERTY(EditDefaultsOnly)
     TObjectPtr<UIngredientMap> IngredientMap;
 
     // Replicated variables

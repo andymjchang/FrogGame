@@ -1,28 +1,15 @@
 ﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Interactable.h"
+#include "Item.h"
 
-#include "InteractableData.h"
-#include "Components/BoxComponent.h"
+#include "ItemData.h"
 #include "GameUI/Interactables/InteractableWidgetComponent.h"
 #include "GameUI/Interactables/InventoryWidget.h"
 
-AInteractable::AInteractable()
+AItem::AItem()
 {
-	PrimaryActorTick.bCanEverTick = true;
-	bReplicates = true;
-
-	// Root Component
-	RootSceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootSceneComponent"));
-	SetRootComponent(RootSceneComponent);
-	
-	// Interact Hitbox
-	InteractHitBox = CreateDefaultSubobject<UBoxComponent>(TEXT("InteractHitBox"));
-	InteractHitBox->SetupAttachment(RootComponent);
-	InteractHitBox->SetCollisionProfileName(TEXT("InteractListen"));
-	InteractHitBox->InitBoxExtent(FVector(128.f, 128.f, 128.f));
-	InteractHitBox->SetRelativeLocation(FVector(0.0f, 0.0f, 128.0f));
+	PrimaryActorTick.bCanEverTick = false;
 	
 	// Inventory Widget
 	InventoryWidgetComponent = CreateDefaultSubobject<UInteractableWidgetComponent>(TEXT("InventoryWidgetComponent"));
@@ -35,23 +22,13 @@ AInteractable::AInteractable()
 	AttachPoint->SetupAttachment(RootComponent);
 }
 
-void AInteractable::EnableInteractable()
-{
-	if (IsValid(InteractHitBox)) InteractHitBox->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
-}
-
-void AInteractable::DisableInteractable()
-{
-	if (IsValid(InteractHitBox)) InteractHitBox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-}
-
-void AInteractable::ClearInventory()
+void AItem::ClearInventory()
 {
 	Inventory.Empty();
 	UpdateInventoryWidget();
 }
 
-bool AInteractable::HasMatchingInteractableTag(const FGameplayTagContainer& AcceptedTags) const
+bool AItem::HasMatchingInteractableTag(const FGameplayTagContainer& AcceptedTags) const
 {
 	if (AcceptedTags.IsEmpty()) return false;
 	if (!IsValid(Data)) return false;
@@ -68,7 +45,7 @@ bool AInteractable::HasMatchingInteractableTag(const FGameplayTagContainer& Acce
 	return false;
 }
 
-bool AInteractable::TryAddToInventory(AInteractable* InteractableToAdd)
+bool AItem::TryAddToInventory(AItem* InteractableToAdd)
 {
 	if (!IsValid(Data) || !IsValid(InteractableToAdd)) return false;
 	if (GetInventorySize() >= Data->GetMaxCapacity()) return false;
@@ -86,15 +63,15 @@ bool AInteractable::TryAddToInventory(AInteractable* InteractableToAdd)
 	return true;
 }
 
-bool AInteractable::TryAddContainerToInventory(AInteractable* ContainerToAdd)
+bool AItem::TryAddContainerToInventory(AItem* ContainerToAdd)
 {
 	if (!IsValid(ContainerToAdd)) return false;
 	if (ContainerToAdd->GetInventorySize() <= 0) return false;
 	if (GetInventorySize() + ContainerToAdd->GetInventorySize() > Data->GetMaxCapacity()) return false;
 	
-	const TArray<AInteractable*>& InInventory = ContainerToAdd->GetInventory();
+	const TArray<AItem*>& InInventory = ContainerToAdd->GetInventory();
 	// Check if all ingredients are valid
-	for (AInteractable* InventoryIndex : InInventory)
+	for (AItem* InventoryIndex : InInventory)
 	{
 		if (!InventoryIndex->HasMatchingInteractableTag(Data->GetAcceptedTags()))
 		{
@@ -114,7 +91,7 @@ bool AInteractable::TryAddContainerToInventory(AInteractable* ContainerToAdd)
 	return true;
 }
 
-bool AInteractable::TryRemoveFromInventory(AInteractable* InteractableToRemove)
+bool AItem::TryRemoveFromInventory(AItem* InteractableToRemove)
 {
 	if (!IsValid(InteractableToRemove)) return false;
 	
@@ -141,7 +118,7 @@ bool AInteractable::TryRemoveFromInventory(AInteractable* InteractableToRemove)
 	return false;
 }
 
-void AInteractable::UpdateInventoryWidget()
+void AItem::UpdateInventoryWidget()
 {
 	if (UInventoryWidget* InventoryWidget = Cast<UInventoryWidget>(InventoryWidgetComponent->GetWidget()))
 	{
@@ -149,7 +126,7 @@ void AInteractable::UpdateInventoryWidget()
 	}
 }
 
-void AInteractable::PostInitializeComponents()
+void AItem::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
 	
@@ -159,14 +136,14 @@ void AInteractable::PostInitializeComponents()
 	}
 }
 
-void AInteractable::BeginPlay()
+void AItem::BeginPlay()
 {
 	Super::BeginPlay();
 	
 	OfferedInteractable = this;
 }
 
-void AInteractable::EndPlay(const EEndPlayReason::Type EndPlayReason)
+void AItem::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	Super::EndPlay(EndPlayReason);
 }

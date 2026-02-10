@@ -17,8 +17,8 @@
 #include "GAS/FrogAbilitySystem.h"
 #include "NametagWidgetComponent.h"
 #include "Components/SphereComponent.h"
-#include "FrogGameplay/Interactable.h"
-#include "FrogGameplay/InteractableData.h"
+#include "FrogGameplay/Item.h"
+#include "FrogGameplay/ItemData.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AFrogCharacter
@@ -118,14 +118,14 @@ UAbilitySystemComponent* AFrogCharacter::GetAbilitySystemComponent() const
 }
 
 void AFrogCharacter::Interact() {
-    AInteractable* OtherInteractable = CurrentInteractable.Get();
+    AItem* OtherInteractable = CurrentInteractable.Get();
     if (!IsValid(OtherInteractable))
     {
         UE_LOG(LogTemp, Log, TEXT("[%f] Interact: CurrentInteractable is invalid"), GetWorld()->GetTimeSeconds());
         return;
     }
     
-    AInteractable* OtherOffer = CurrentInteractable->GetOfferedInteractable();
+    AItem* OtherOffer = CurrentInteractable->GetOfferedInteractable();
     if (!IsValid(OtherOffer))
     {
         UE_LOG(LogTemp, Log, TEXT("[%f] Interact: OtherOffer is invalid for %s"), GetWorld()->GetTimeSeconds(), *OtherInteractable->GetName());
@@ -173,8 +173,7 @@ void AFrogCharacter::Interact() {
         UE_LOG(LogTemp, Log, TEXT("[%f] Interact: Not holding item, attempting to add %s to player"), GetWorld()->GetTimeSeconds(), *OtherOffer->GetName());
         
         // Try adding Other's Offer to Player
-        const bool SuccessfulAdd = TryAddInteractableToPlayer(OtherOffer);
-        if (SuccessfulAdd)
+        if (TryAddInteractableToPlayer(OtherOffer))
         {
             // Remove from source's inventory
             OtherInteractable->TryRemoveFromInventory(OtherOffer);
@@ -186,8 +185,7 @@ void AFrogCharacter::Interact() {
             UE_LOG(LogTemp, Log, TEXT("[%f] Interact: Failed to add offer, trying to add %s directly to player"), GetWorld()->GetTimeSeconds(), *OtherInteractable->GetName());
             
             // Try adding Other to Player
-            const bool DirectAddSuccess = TryAddInteractableToPlayer(OtherInteractable);
-            if (DirectAddSuccess)
+            if (TryAddInteractableToPlayer(OtherInteractable))
             {
                 UE_LOG(LogTemp, Log, TEXT("[%f] Interact: Successfully added interactable directly to player"), GetWorld()->GetTimeSeconds());
             }
@@ -209,7 +207,7 @@ void AFrogCharacter::StopWork()
 	WorkHitbox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
-bool AFrogCharacter::TryAddInteractableToPlayer(AInteractable* InteractableToAdd)
+bool AFrogCharacter::TryAddInteractableToPlayer(AItem* InteractableToAdd)
 {
     if (!IsValid(InteractableToAdd))
     {
@@ -302,7 +300,7 @@ void AFrogCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 void AFrogCharacter::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (AInteractable* Interactable = Cast<AInteractable>(OtherActor))
+	if (AItem* Interactable = Cast<AItem>(OtherActor))
 	{
 		OverlappingInteractables.Add(Interactable);
 		UpdateClosestInteractable();
@@ -315,7 +313,7 @@ void AFrogCharacter::UpdateClosestInteractable()
 
 	float BestDistanceSq = MAX_FLT;
 
-	for (TWeakObjectPtr<AInteractable> I : OverlappingInteractables)
+	for (TWeakObjectPtr<AItem> I : OverlappingInteractables)
 	{
 		if (!I.IsValid()) continue;
 
@@ -337,7 +335,7 @@ void AFrogCharacter::UpdateClosestInteractable()
 void AFrogCharacter::OnOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
                                   UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	if (AInteractable* Interactable = Cast<AInteractable>(OtherActor))
+	if (AItem* Interactable = Cast<AItem>(OtherActor))
 	{
 		OverlappingInteractables.Remove(Interactable);
 		UpdateClosestInteractable();

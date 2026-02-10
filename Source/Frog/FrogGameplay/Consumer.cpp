@@ -17,7 +17,7 @@ void AConsumer::BeginPlay()
 	AttachPoint->SetVisibility(false, true);
 }
 
-void AConsumer::HandleInteractableAdded(AInteractable* Interactable)
+void AConsumer::HandleInteractableAdded(AItem* Interactable)
 {
 	if (!IsValid(Interactable)) return ;
 	

@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Station.h"
-#include "InteractableData.h"
+#include "ItemData.h"
 #include "ProgressTrackingComponent.h"
 #include "GameState/FrogGameState.h"
 #include "TimerManager.h"
@@ -24,7 +24,7 @@ AStation::AStation()
     ProgressWidgetComponent->SetDrawSize(FIntPoint(100, 20));
 }
 
-void AStation::HandleInteractableAdded(AInteractable* InteractableToAdd)
+void AStation::HandleInteractableAdded(AItem* InteractableToAdd)
 {
 }
 
@@ -32,7 +32,7 @@ void AStation::BeginPlay()
 {
     Super::BeginPlay();
     
-    OnAddedToInventory.BindDynamic(this, &AStation::HandleInteractableAdded);
+OnAddedToInventory.BindDynamic(this, &AStation::HandleInteractableAdded);
     
     if (IsValid(ProgressWidgetComponent) && IsValid(ProgressTracker))
     {
@@ -50,7 +50,7 @@ FGameplayTagContainer AStation::GatherAllTags() const
         AllTags.AppendTags(Data->GetOwnedTags());
     }
     
-    for (AInteractable* Item : Inventory)
+    for (AItem* Item : Inventory)
     {
         if (IsValid(Item) && IsValid(Item->GetData()))
         {
@@ -73,9 +73,9 @@ void AStation::HandleProcessingComplete()
 
     const FGameplayTagContainer AllTags = GatherAllTags();
 
-    if (const TSubclassOf<AInteractable> ResultClass = GameState->GetRecipeResultClass(AllTags))
+    if (const TSubclassOf<AItem> ResultClass = GameState->GetRecipeResultClass(AllTags))
     {
-        for (AInteractable* Item : Inventory)
+        for (AItem* Item : Inventory)
         {
             if (IsValid(Item))
             {
@@ -87,7 +87,7 @@ void AStation::HandleProcessingComplete()
         FActorSpawnParameters SpawnParams;
         SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
         
-        AInteractable* SpawnedResult = GetWorld()->SpawnActor<AInteractable>(
+        AItem* SpawnedResult = GetWorld()->SpawnActor<AItem>(
             ResultClass,
             GetActorLocation() + FVector(0, 0, 100), 
             FRotator::ZeroRotator,

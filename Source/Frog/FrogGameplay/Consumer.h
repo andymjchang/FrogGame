@@ -3,11 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Interactable.h"
+#include "Item.h"
 #include "Consumer.generated.h"
 
 UCLASS()
-class FROG_API AConsumer : public AInteractable
+class FROG_API AConsumer : public AItem
 {
 	GENERATED_BODY()
 
@@ -18,6 +18,6 @@ protected:
 	virtual void BeginPlay() override;
 
 	UFUNCTION()
-	void HandleInteractableAdded(AInteractable* Interactable);
+	void HandleInteractableAdded(AItem* Interactable);
 
 };

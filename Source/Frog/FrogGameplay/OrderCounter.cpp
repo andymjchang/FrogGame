@@ -2,7 +2,7 @@
 
 #include "OrderCounter.h"
 
-#include "InteractableData.h"
+#include "ItemData.h"
 #include "GameState/FrogGameState.h"
 
 AOrderCounter::AOrderCounter()
@@ -27,7 +27,7 @@ void AOrderCounter::BeginPlay()
 	}
 }
 
-void AOrderCounter::HandleInteractableAdded(AInteractable* Interactable)
+void AOrderCounter::HandleInteractableAdded(AItem* Interactable)
 {
 	if (!IsValid(Interactable)) return;
 	

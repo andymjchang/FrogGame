@@ -4,20 +4,19 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Interactable.h"
+#include "Item.h"
 #include "GameplayTagContainer.h"
 #include "Station.generated.h"
 
 class UProgressTrackingComponent;
 class UStationProgressBar;
-class UInteractableData;
-class AItem;
+class UItemData;
 class AFrogCharacter;
 class UBoxComponent;
 class UPrimitiveComponent;
 
 UCLASS()
-class FROG_API AStation : public AInteractable
+class FROG_API AStation : public AItem
 {
 	GENERATED_BODY()
     
@@ -28,7 +27,7 @@ protected:
 	virtual void BeginPlay() override;
 	
 	UFUNCTION()
-	virtual void HandleInteractableAdded(AInteractable* InteractableToAdd);
+	virtual void HandleInteractableAdded(AItem* InteractableToAdd);
 
 	UFUNCTION()
 	virtual void HandleProcessingComplete();
