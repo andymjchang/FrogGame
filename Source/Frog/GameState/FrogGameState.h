@@ -3,8 +3,10 @@
 #include "CoreMinimal.h"
 #include "GameFramework/GameStateBase.h"
 #include "IngredientMap.h"
+#include "Rooms/RoomManager.h"
 #include "FrogGameState.generated.h"
 
+class ARoomManager;
 class AItem;
 
 UENUM(BlueprintType)
@@ -47,6 +49,8 @@ public:
     FORCEINLINE int32 GetMoney() const { return Money; }
     FORCEINLINE int32 GetPhaseEndTime() const { return PhaseEndTime; }
     FORCEINLINE EFrogGamePhase GetCurrentPhase() const { return CurrentPhase; }
+    FORCEINLINE ARoomManager* GetRoomManager() { return RoomManager.Get(); }
+    FORCEINLINE void SetRoomManager(ARoomManager* InRoomManager) { RoomManager = InRoomManager; }
     
 protected:  
     UPROPERTY(EditDefaultsOnly)
@@ -61,6 +65,9 @@ protected:
 
     UPROPERTY(ReplicatedUsing = OnRep_PhaseEndTime)
     float PhaseEndTime;
+
+    UPROPERTY()
+    TWeakObjectPtr<ARoomManager> RoomManager;
     
 protected:
     // Server only functions

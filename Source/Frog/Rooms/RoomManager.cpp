@@ -1,6 +1,7 @@
 ﻿#include "RoomManager.h"
 #include "RoomActor.h"
 #include "RoomDefinition.h"
+#include "GameState/FrogGameState.h"
 
 ARoomManager::ARoomManager()
 {
@@ -10,6 +11,15 @@ ARoomManager::ARoomManager()
 void ARoomManager::BeginPlay()
 {
     Super::BeginPlay();
+
+    // Register with the Game State
+    if (const UWorld* World = GetWorld())
+    {
+        if (AFrogGameState* GameState = World->GetGameState<AFrogGameState>())
+        {
+            GameState->SetRoomManager(this);
+        }
+    }
 }
 
 bool ARoomManager::CreateRoom(const FHexIndex Index, URoomDefinition* Definition, ARoomActor* RoomActor)
@@ -165,7 +175,7 @@ void ARoomManager::CalculateWallHeights(FHexIndex RoomIndex)
                 if (IsValid(AdjacentNode->RoomActor)) 
                 {
                     AdjacentNode->RoomActor->SetWallTypeArray(AdjacentNode->WallTypeArray);
-                    AdjacentNode->RoomActor->RegenerateMeshes();
+                    AdjacentNode->RoomActor->RegenerateRoom();
                 }
             }
         }
@@ -197,7 +207,7 @@ void ARoomManager::CalculateDoorTypes(FHexIndex RoomIndex)
     RoomNode->DoorTypeArray = RoomNode->RoomDefinition->DoorArray;
     TArray<EDoorTypes>& DoorTypes = RoomNode->DoorTypeArray;
     
-    for (int i = 0; i < NUM_ROOM_DIRECTIONS; i++)
+    for (int i = 0; i < NUM_ROOM_SIDES; i++)
     {
         const ERoomDirection Direction = static_cast<ERoomDirection>(i);
         FHexIndex NeighborIndex = GetNeighborIndex(RoomIndex, Direction);
@@ -309,5 +319,5 @@ ERoomDirection ARoomManager::GetOppositeDirection(const ERoomDirection InputDir)
     const int EnumIndex = static_cast<int>(InputDir);
     if (InputDir == ERoomDirection::Down) return ERoomDirection::Up;
     if (InputDir == ERoomDirection::Up) return ERoomDirection::Down;
-    return static_cast<ERoomDirection>((EnumIndex + NUM_ROOM_DIRECTIONS / 2) % NUM_ROOM_DIRECTIONS);
+    return static_cast<ERoomDirection>((EnumIndex + NUM_ROOM_SIDES / 2) % NUM_ROOM_SIDES);
 }

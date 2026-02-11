@@ -1,13 +1,12 @@
 ﻿#pragma once
 
 #include "CoreMinimal.h"
-#include "Engine/DataAsset.h"
 #include "RoomTypes.generated.h"
 
 class URoomDefinition;
 class ARoomActor;
 
-static constexpr int NUM_ROOM_DIRECTIONS = 6;
+static constexpr int NUM_ROOM_SIDES = 6;
 
 UENUM(BlueprintType)
 enum class EDoorTypes : uint8

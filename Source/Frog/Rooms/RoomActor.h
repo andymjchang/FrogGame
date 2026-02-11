@@ -21,7 +21,11 @@ public:
 	
 	void SetDoorTypeArray(const TArray<EDoorTypes>& InArray);
 	void SetWallTypeArray(const TArray<bool>& InArray);
-	void RegenerateMeshes();
+	void RegenerateRoom();
+
+protected:
+	UFUNCTION()
+	void HandleDoorProgressComplete(ERoomDirection FacingDirection);
 
 protected: // Data
 	TArray<bool> WallTypeArray;

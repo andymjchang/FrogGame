@@ -59,7 +59,7 @@ void ADoor::ServerAttemptPurchase()
 	
 	if (BuyPrice <= GameState->GetMoney())
 	{
-		OnProgressComplete.Execute();
+		OnProgressComplete.Execute(FacingDirection);
 	}
 }
 

@@ -23,8 +23,8 @@ ARoomActor::ARoomActor()
 		Floor->SetStaticMesh(FloorAsset.Object);
 	}
 	
-	WallTypeArray.Init(false, NUM_ROOM_DIRECTIONS);
-	DoorTypeArray.Init(EDoorTypes::None, NUM_ROOM_DIRECTIONS);
+	WallTypeArray.Init(false, NUM_ROOM_SIDES);
+	DoorTypeArray.Init(EDoorTypes::None, NUM_ROOM_SIDES);
 	
 	InitializeComponentsAroundHexagon();
 }
@@ -36,7 +36,7 @@ void ARoomActor::OnConstruction(const FTransform& Transform)
 	if (IsValid(RoomDefinition))
 	{
 		SetDoorTypeArray(RoomDefinition->DoorArray);
-		RegenerateMeshes();
+		RegenerateRoom();
 	}
 }
 
@@ -50,7 +50,7 @@ void ARoomActor::SetWallTypeArray(const TArray<bool>& InArray)
 	WallTypeArray = InArray;
 }
 
-void ARoomActor::RegenerateMeshes()
+void ARoomActor::RegenerateRoom()
 {
 	if (DoorTypeArray.Num() != DoorArray.Num()) return;
 	if (WallTypeArray.Num() != WallArray.Num()) return;
@@ -62,12 +62,26 @@ void ARoomActor::RegenerateMeshes()
 		const bool bIsTallWall = WallTypeArray[i];
 
 		// Create or destroy door object
-		if (UChildActorComponent* CurrentDoor = DoorArray[i])
+		if (UChildActorComponent* DoorComponent = DoorArray[i])
 		{
 			TSubclassOf<AActor> TargetClass = bHasDoor ? DoorBlueprint : nullptr;
-			if (CurrentDoor->GetChildActorClass() != TargetClass)
+			if (DoorComponent->GetChildActorClass() != TargetClass)
 			{
-				CurrentDoor->SetChildActorClass(TargetClass);
+				// Disconnect old delegate
+				if (ADoor* DoorActor = Cast<ADoor>(DoorComponent->GetChildActor()); IsValid(DoorActor))
+				{
+					DoorActor->OnProgressComplete.Unbind();
+				}
+
+				DoorComponent->SetChildActorClass(TargetClass);
+
+				// Setup new door
+				if (ADoor* DoorActor = Cast<ADoor>(DoorComponent->GetChildActor()); IsValid(DoorActor))
+				{
+					DoorActor->OnProgressComplete.BindDynamic(this, &ARoomActor::HandleDoorProgressComplete);
+					DoorActor->SetFacingDirection(static_cast<ERoomDirection>(i));
+				}
+	
 			}
 		}
 
@@ -93,9 +107,14 @@ void ARoomActor::RegenerateMeshes()
 	}
 }
 
+void ARoomActor::HandleDoorProgressComplete(ERoomDirection FacingDirection)
+{
+	// TODO: query room manager to add a room in the direction
+}
+
 void ARoomActor::InitializeComponentsAroundHexagon()
 {
-	for (int32 i = NUM_ROOM_DIRECTIONS - 1; i >= 0; i--)
+	for (int32 i = NUM_ROOM_SIDES - 1; i >= 0; i--)
 	{
 		FString ComponentName = FString::Printf(TEXT("WallMesh%d"), i);
 		UStaticMeshComponent* NewWall = CreateDefaultSubobject<UStaticMeshComponent>(*ComponentName);

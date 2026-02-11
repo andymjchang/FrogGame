@@ -10,7 +10,7 @@ enum class ERoomDirection : uint8;
 class UInteractableWidgetComponent;
 class UProgressTrackingComponent;
 
-DECLARE_DYNAMIC_DELEGATE(FOnProgressComplete);
+DECLARE_DYNAMIC_DELEGATE_OneParam(FOnProgressComplete, ERoomDirection, FacingDirection);
 
 class UBoxComponent;
 
@@ -23,6 +23,8 @@ public:
 	ADoor();
 
 	void SetActive(bool bIsTrue);
+
+	FORCEINLINE void SetFacingDirection(const ERoomDirection InDirection) { FacingDirection = InDirection; }
 	
 	// Delegates
 	FOnProgressComplete OnProgressComplete;
@@ -53,7 +55,7 @@ protected:
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<UInteractableWidgetComponent> ProgressWidgetComponent;
 	
-	int32 BuyPrice = 1;
+	int32 BuyPrice = 0;
 	
 	ERoomDirection FacingDirection;
 };
