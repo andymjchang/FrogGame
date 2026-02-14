@@ -9,7 +9,7 @@
 #include "GAS/FrogAbilitySystem.h"
 #include "AbilitySystemInterface.h"
 #include "GAS/FrogAttributeSet.h"
-#include "FrogGameplay/Item.h"
+#include "FrogGameplay/Container.h"
 #include "FrogCharacter.generated.h"
 
 class UBoxComponent;
@@ -91,7 +91,7 @@ protected: /* Protected Functions */
 
 	void Move(const FInputActionValue& Value);
 	//Gameplay functions
-	bool TryAddInteractableToPlayer(AItem* InteractableToAdd);
+	bool TryAddInteractableToPlayer(AContainer* InteractableToAdd);
 
 protected: /* Members */
 	// Components
@@ -145,11 +145,11 @@ protected: /* Members */
 	TObjectPtr<USphereComponent> WorkHitbox;
 
 	// GamePlay Interactions
-	TArray<TWeakObjectPtr<AItem>> OverlappingInteractables;
-	TWeakObjectPtr<AItem> CurrentInteractable;
+	TArray<TWeakObjectPtr<AContainer>> OverlappingInteractables;
+	TWeakObjectPtr<AContainer> CurrentInteractable;
 	
 	UPROPERTY(BlueprintReadWrite)
-	TWeakObjectPtr<AItem> HeldInteractable;
+	TWeakObjectPtr<AContainer> HeldInteractable;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) // Change this back later
 	TObjectPtr<USceneComponent> InteractableAttachPoint;

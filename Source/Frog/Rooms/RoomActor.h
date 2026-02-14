@@ -10,6 +10,8 @@
 class ADoor;
 class UDoorComponent;
 
+DECLARE_DYNAMIC_DELEGATE_TwoParams(FOnRequestNewRoom, FHexIndex, HexIndex, ERoomDirection, FacingDirection);
+
 UCLASS()
 class FROG_API ARoomActor : public AActor
 {
@@ -23,13 +25,21 @@ public:
 	void SetWallTypeArray(const TArray<bool>& InArray);
 	void RegenerateRoom();
 
+	FORCEINLINE void SetHexIndex(const FHexIndex InHexIndex) { HexIndex = InHexIndex; }
+	
+	// Delegates
+	FOnRequestNewRoom OnRequestNewRoom;
+
 protected:
 	UFUNCTION()
 	void HandleDoorProgressComplete(ERoomDirection FacingDirection);
-
+	
+	void InitializeComponentsAroundHexagon();
+	
 protected: // Data
 	TArray<bool> WallTypeArray;
 	TArray<EDoorTypes> DoorTypeArray;
+	FHexIndex HexIndex;
 	
 protected: // Loading assets
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "User Settings")
@@ -55,7 +65,7 @@ protected: // Loading assets
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "User Settings")
 	TObjectPtr<UMaterialInterface> WallMaterial;
-	
+
 protected: // Components
 	UPROPERTY(EditDefaultsOnly)
 	TArray<UStaticMeshComponent*> WallArray;
@@ -69,7 +79,4 @@ protected: // Components
 private:
 	static constexpr float WallMidpointLength = 833.5f;
 	static constexpr float FloorHeight = 10.f;
-	
-private:
-	void InitializeComponentsAroundHexagon();
 };

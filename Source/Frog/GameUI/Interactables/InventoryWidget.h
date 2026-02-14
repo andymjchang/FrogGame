@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "CommonUserWidget.h"
-#include "FrogGameplay/Item.h"
+#include "FrogGameplay/Container.h"
 #include "InventoryWidget.generated.h"
 
 class UInventoryElementWidget;
@@ -22,7 +22,7 @@ public:
 	virtual void NativeOnInitialized() override;
 	
 public:
-	void UpdateInventoryWidget(const TArray<AItem*>& Inventory);
+	void UpdateInventoryWidget(const TArray<AContainer*>& Inventory);
 
 protected:
 	UPROPERTY(meta = (BindWidget))

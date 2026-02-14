@@ -3,11 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Item.h"
+#include "Container.h"
 #include "Spawner.generated.h"
 
 UCLASS()
-class FROG_API ASpawner : public AItem
+class FROG_API ASpawner : public AContainer
 {
 	GENERATED_BODY()
 
@@ -19,11 +19,11 @@ protected:
 	virtual void EndPlay(EEndPlayReason::Type EndPlayReason) override;
 
 	UFUNCTION()
-	void HandleInteractableRemoved(AItem* AddedInteractable);
+	void HandleInteractableRemoved(AContainer* AddedInteractable);
 
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
-	TSubclassOf<AItem> InteractableClassToSpawn;
+	TSubclassOf<AContainer> InteractableClassToSpawn;
 
 private:
 	void SpawnAndReplenish();

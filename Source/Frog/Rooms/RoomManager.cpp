@@ -1,7 +1,6 @@
 ﻿#include "RoomManager.h"
 #include "RoomActor.h"
 #include "RoomDefinition.h"
-#include "GameState/FrogGameState.h"
 
 ARoomManager::ARoomManager()
 {
@@ -13,13 +12,13 @@ void ARoomManager::BeginPlay()
     Super::BeginPlay();
 
     // Register with the Game State
-    if (const UWorld* World = GetWorld())
-    {
-        if (AFrogGameState* GameState = World->GetGameState<AFrogGameState>())
-        {
-            GameState->SetRoomManager(this);
-        }
-    }
+    // if (const UWorld* World = GetWorld())
+    // {
+    //     if (AFrogGameState* GameState = World->GetGameState<AFrogGameState>())
+    //     {
+    //         GameState->SetRoomManager(this);
+    //     }
+    // }
 }
 
 bool ARoomManager::CreateRoom(const FHexIndex Index, URoomDefinition* Definition, ARoomActor* RoomActor)
@@ -37,10 +36,21 @@ bool ARoomManager::CreateRoom(const FHexIndex Index, URoomDefinition* Definition
     CalculateWallHeights(Index);
     CalculateDoorTypes(Index);
 
+    RoomActor->OnRequestNewRoom.BindDynamic(this, &ARoomManager::HandleOnRequestNewRoom);
+
     // Update the floor count cache
     FloorRoomCounts.FindOrAdd(Index.FloorIndex)++;
 
     return true;
+}
+
+void ARoomManager::HandleOnRequestNewRoom(FHexIndex HexIndex, ERoomDirection FacingDirection)
+{
+    FHexIndex SpawnIndex = GetNeighborIndex(HexIndex, FacingDirection);
+    if (!IsIndexValid(SpawnIndex)) return;
+    if (RoomMap.Contains(SpawnIndex)) return;
+
+    // TODO: Trigger room selection UI
 }
 
 bool ARoomManager::GetRoom(const FHexIndex Index, FRoomNode& OutRoom)
@@ -144,7 +154,7 @@ bool ARoomManager::TryMoveDirection(const FHexIndex Origin, const ERoomDirection
     return false;
 }
 
-void ARoomManager::CalculateWallHeights(FHexIndex RoomIndex)
+void ARoomManager::CalculateWallHeights(const FHexIndex RoomIndex)
 {
     FRoomNode* RoomNode = RoomMap.Find(RoomIndex);
     if (!RoomNode) return;
@@ -199,7 +209,7 @@ void ARoomManager::CalculateWallHeights(FHexIndex RoomIndex)
     }
 }
 
-void ARoomManager::CalculateDoorTypes(FHexIndex RoomIndex)
+void ARoomManager::CalculateDoorTypes(const FHexIndex RoomIndex)
 {
     FRoomNode* RoomNode = RoomMap.Find(RoomIndex);
     if (!RoomNode) return;
@@ -240,7 +250,7 @@ void ARoomManager::CalculateDoorTypes(FHexIndex RoomIndex)
     }
 }
 
-bool ARoomManager::FindNextSpotInDirection(FHexIndex Origin, ERoomDirection Direction, FHexIndex& OutResult, bool& bHitExistingRoom)
+bool ARoomManager::FindNextSpotInDirection(const FHexIndex Origin, const ERoomDirection Direction, FHexIndex& OutResult, bool& bHitExistingRoom)
 {
     if (TryMoveDirection(Origin, Direction, OutResult))
     {
@@ -263,7 +273,7 @@ FVector ARoomManager::GetRelativeLocationFromHex(const FHexIndex Index) const
     return FVector(x, y, z);
 }
 
-bool ARoomManager::IsIndexValid(const FHexIndex& Index) const
+bool ARoomManager::IsIndexValid(const FHexIndex Index) const
 {
     // Axial distance formula: (abs(q) + abs(q+r) + abs(r)) / 2
     const int32 Distance = (FMath::Abs(Index.Q) + FMath::Abs(Index.Q + Index.R) + FMath::Abs(Index.R)) / 2;

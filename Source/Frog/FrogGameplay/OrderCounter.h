@@ -3,13 +3,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Item.h"
+#include "Container.h"
 #include "OrderCounter.generated.h"
 
 class AFrogGameState;
 
 UCLASS()
-class FROG_API AOrderCounter : public AItem
+class FROG_API AOrderCounter : public AContainer
 {
 	GENERATED_BODY()
 
@@ -20,7 +20,7 @@ protected:
 	virtual void BeginPlay() override;
 	
 	UFUNCTION()
-	void HandleInteractableAdded(AItem* Interactable);
+	void HandleInteractableAdded(AContainer* Interactable);
 	
 protected:
 	TWeakObjectPtr<AFrogGameState> GameState;

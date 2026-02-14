@@ -24,7 +24,7 @@ AStation::AStation()
     ProgressWidgetComponent->SetDrawSize(FIntPoint(100, 20));
 }
 
-void AStation::HandleInteractableAdded(AItem* InteractableToAdd)
+void AStation::HandleInteractableAdded(AContainer* InteractableToAdd)
 {
 }
 
@@ -50,7 +50,7 @@ FGameplayTagContainer AStation::GatherAllTags() const
         AllTags.AppendTags(Data->GetOwnedTags());
     }
     
-    for (AItem* Item : Inventory)
+    for (AContainer* Item : Inventory)
     {
         if (IsValid(Item) && IsValid(Item->GetData()))
         {
@@ -73,9 +73,9 @@ void AStation::HandleProcessingComplete()
 
     const FGameplayTagContainer AllTags = GatherAllTags();
 
-    if (const TSubclassOf<AItem> ResultClass = GameState->GetRecipeResultClass(AllTags))
+    if (const TSubclassOf<AContainer> ResultClass = GameState->GetRecipeResultClass(AllTags))
     {
-        for (AItem* Item : Inventory)
+        for (AContainer* Item : Inventory)
         {
             if (IsValid(Item))
             {
@@ -87,7 +87,7 @@ void AStation::HandleProcessingComplete()
         FActorSpawnParameters SpawnParams;
         SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
         
-        AItem* SpawnedResult = GetWorld()->SpawnActor<AItem>(
+        AContainer* SpawnedResult = GetWorld()->SpawnActor<AContainer>(
             ResultClass,
             GetActorLocation() + FVector(0, 0, 100), 
             FRotator::ZeroRotator,

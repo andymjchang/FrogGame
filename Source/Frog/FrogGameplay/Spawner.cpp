@@ -21,7 +21,7 @@ void ASpawner::EndPlay(const EEndPlayReason::Type EndPlayReason)
 	Super::EndPlay(EndPlayReason);
 }
 
-void ASpawner::HandleInteractableRemoved(AItem* AddedInteractable)
+void ASpawner::HandleInteractableRemoved(AContainer* AddedInteractable)
 {
 	// Could add support for timed respawns
 	SpawnAndReplenish();
@@ -38,7 +38,7 @@ void ASpawner::SpawnAndReplenish()
 	SpawnParams.Owner = this;
 	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 
-	AItem* NewItem = World->SpawnActor<AItem>(
+	AContainer* NewItem = World->SpawnActor<AContainer>(
 		InteractableClassToSpawn, 
 		AttachPoint->GetComponentTransform(), 
 		SpawnParams

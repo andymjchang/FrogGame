@@ -6,7 +6,7 @@
 #include "InventoryElementWidget.h"
 #include "Components/HorizontalBox.h"
 
-void UInventoryWidget::UpdateInventoryWidget(const TArray<AItem*>& Inventory)
+void UInventoryWidget::UpdateInventoryWidget(const TArray<AContainer*>& Inventory)
 { 
 	for (int32 i = 0; i < InventoryElements.Num(); i++)
 	{

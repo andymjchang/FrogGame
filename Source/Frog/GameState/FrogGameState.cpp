@@ -21,7 +21,7 @@ void AFrogGameState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLi
     DOREPLIFETIME(AFrogGameState, PhaseEndTime);
 }
 
-TSubclassOf<AItem> AFrogGameState::GetRecipeResultClass(
+TSubclassOf<AContainer> AFrogGameState::GetRecipeResultClass(
     const FGameplayTagContainer& InteractableTags) const
 {
     if (IngredientMap)

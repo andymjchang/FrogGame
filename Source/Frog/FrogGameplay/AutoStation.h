@@ -16,6 +16,6 @@ public:
 	AAutoStation();
 
 protected:
-	virtual void HandleInteractableAdded(AItem* InteractableToAdd) override;
+	virtual void HandleInteractableAdded(AContainer* InteractableToAdd) override;
 
 };

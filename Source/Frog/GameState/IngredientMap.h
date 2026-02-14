@@ -8,7 +8,7 @@
 
 class UItemData;
 // Forward declaration
-class AItem;
+class AContainer;
 
 // Wrapper struct that serves as the map key
 USTRUCT(BlueprintType)
@@ -43,7 +43,7 @@ struct FRecipeResult
 	GENERATED_BODY()
     
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
-	TSubclassOf<AItem> InteractableClass;
+	TSubclassOf<AContainer> InteractableClass;
     
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	UItemData* InteractableData;

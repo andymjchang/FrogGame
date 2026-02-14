@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Item.h"
+#include "Container.h"
 #include "GameplayTagContainer.h"
 #include "Station.generated.h"
 
@@ -16,7 +16,7 @@ class UBoxComponent;
 class UPrimitiveComponent;
 
 UCLASS()
-class FROG_API AStation : public AItem
+class FROG_API AStation : public AContainer
 {
 	GENERATED_BODY()
     
@@ -27,7 +27,7 @@ protected:
 	virtual void BeginPlay() override;
 	
 	UFUNCTION()
-	virtual void HandleInteractableAdded(AItem* InteractableToAdd);
+	virtual void HandleInteractableAdded(AContainer* InteractableToAdd);
 
 	UFUNCTION()
 	virtual void HandleProcessingComplete();

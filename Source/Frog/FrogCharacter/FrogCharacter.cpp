@@ -17,7 +17,7 @@
 #include "GAS/FrogAbilitySystem.h"
 #include "NametagWidgetComponent.h"
 #include "Components/SphereComponent.h"
-#include "FrogGameplay/Item.h"
+#include "FrogGameplay/Container.h"
 #include "FrogGameplay/ItemData.h"
 
 //////////////////////////////////////////////////////////////////////////
@@ -118,14 +118,14 @@ UAbilitySystemComponent* AFrogCharacter::GetAbilitySystemComponent() const
 }
 
 void AFrogCharacter::Interact() {
-    AItem* OtherInteractable = CurrentInteractable.Get();
+    AContainer* OtherInteractable = CurrentInteractable.Get();
     if (!IsValid(OtherInteractable))
     {
         UE_LOG(LogTemp, Log, TEXT("[%f] Interact: CurrentInteractable is invalid"), GetWorld()->GetTimeSeconds());
         return;
     }
     
-    AItem* OtherOffer = CurrentInteractable->GetOfferedInteractable();
+    AContainer* OtherOffer = CurrentInteractable->GetOfferedInteractable();
     if (!IsValid(OtherOffer))
     {
         UE_LOG(LogTemp, Log, TEXT("[%f] Interact: OtherOffer is invalid for %s"), GetWorld()->GetTimeSeconds(), *OtherInteractable->GetName());
@@ -207,7 +207,7 @@ void AFrogCharacter::StopWork()
 	WorkHitbox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
-bool AFrogCharacter::TryAddInteractableToPlayer(AItem* InteractableToAdd)
+bool AFrogCharacter::TryAddInteractableToPlayer(AContainer* InteractableToAdd)
 {
     if (!IsValid(InteractableToAdd))
     {
@@ -300,7 +300,7 @@ void AFrogCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 void AFrogCharacter::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (AItem* Interactable = Cast<AItem>(OtherActor))
+	if (AContainer* Interactable = Cast<AContainer>(OtherActor))
 	{
 		OverlappingInteractables.Add(Interactable);
 		UpdateClosestInteractable();
@@ -313,7 +313,7 @@ void AFrogCharacter::UpdateClosestInteractable()
 
 	float BestDistanceSq = MAX_FLT;
 
-	for (TWeakObjectPtr<AItem> I : OverlappingInteractables)
+	for (TWeakObjectPtr<AContainer> I : OverlappingInteractables)
 	{
 		if (!I.IsValid()) continue;
 
@@ -335,7 +335,7 @@ void AFrogCharacter::UpdateClosestInteractable()
 void AFrogCharacter::OnOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
                                   UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	if (AItem* Interactable = Cast<AItem>(OtherActor))
+	if (AContainer* Interactable = Cast<AContainer>(OtherActor))
 	{
 		OverlappingInteractables.Remove(Interactable);
 		UpdateClosestInteractable();

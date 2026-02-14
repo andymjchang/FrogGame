@@ -7,7 +7,7 @@
 #include "FrogGameState.generated.h"
 
 class ARoomManager;
-class AItem;
+class AContainer;
 
 UENUM(BlueprintType)
 enum class EFrogGamePhase : uint8
@@ -42,20 +42,20 @@ public:
     void ServerTrySubtractMoney(const int32 Amount);
     
     // Client functions
-    TSubclassOf<AItem> GetRecipeResultClass(const FGameplayTagContainer& InteractableTags) const;
+    TSubclassOf<AContainer> GetRecipeResultClass(const FGameplayTagContainer& InteractableTags) const;
     UItemData* GetRecipeResultData(const FGameplayTagContainer& InteractableTags) const;
     float GetTimeRemaining() const;
     
     FORCEINLINE int32 GetMoney() const { return Money; }
     FORCEINLINE int32 GetPhaseEndTime() const { return PhaseEndTime; }
     FORCEINLINE EFrogGamePhase GetCurrentPhase() const { return CurrentPhase; }
-    FORCEINLINE ARoomManager* GetRoomManager() { return RoomManager.Get(); }
-    FORCEINLINE void SetRoomManager(ARoomManager* InRoomManager) { RoomManager = InRoomManager; }
+    // FORCEINLINE ARoomManager* GetRoomManager() { return RoomManager.Get(); }
+    // FORCEINLINE void SetRoomManager(ARoomManager* InRoomManager) { RoomManager = InRoomManager; }
     
 protected:  
     UPROPERTY(EditDefaultsOnly)
     TObjectPtr<UIngredientMap> IngredientMap;
-
+    
     // Replicated variables
     UPROPERTY(ReplicatedUsing = OnRep_Money)
     int32 Money = 0;
@@ -66,8 +66,8 @@ protected:
     UPROPERTY(ReplicatedUsing = OnRep_PhaseEndTime)
     float PhaseEndTime;
 
-    UPROPERTY()
-    TWeakObjectPtr<ARoomManager> RoomManager;
+    // UPROPERTY()
+    // TWeakObjectPtr<ARoomManager> RoomManager;
     
 protected:
     // Server only functions

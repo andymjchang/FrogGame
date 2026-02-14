@@ -109,7 +109,7 @@ void ARoomActor::RegenerateRoom()
 
 void ARoomActor::HandleDoorProgressComplete(ERoomDirection FacingDirection)
 {
-	// TODO: query room manager to add a room in the direction
+	OnRequestNewRoom.ExecuteIfBound(HexIndex, FacingDirection);
 }
 
 void ARoomActor::InitializeComponentsAroundHexagon()

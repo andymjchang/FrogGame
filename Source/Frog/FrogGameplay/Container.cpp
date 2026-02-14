@@ -1,13 +1,13 @@
 ﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Item.h"
+#include "Container.h"
 
 #include "ItemData.h"
 #include "GameUI/Interactables/InteractableWidgetComponent.h"
 #include "GameUI/Interactables/InventoryWidget.h"
 
-AItem::AItem()
+AContainer::AContainer()
 {
 	PrimaryActorTick.bCanEverTick = false;
 	
@@ -22,13 +22,13 @@ AItem::AItem()
 	AttachPoint->SetupAttachment(RootComponent);
 }
 
-void AItem::ClearInventory()
+void AContainer::ClearInventory()
 {
 	Inventory.Empty();
 	UpdateInventoryWidget();
 }
 
-bool AItem::HasMatchingInteractableTag(const FGameplayTagContainer& AcceptedTags) const
+bool AContainer::HasMatchingInteractableTag(const FGameplayTagContainer& AcceptedTags) const
 {
 	if (AcceptedTags.IsEmpty()) return false;
 	if (!IsValid(Data)) return false;
@@ -45,7 +45,7 @@ bool AItem::HasMatchingInteractableTag(const FGameplayTagContainer& AcceptedTags
 	return false;
 }
 
-bool AItem::TryAddToInventory(AItem* InteractableToAdd)
+bool AContainer::TryAddToInventory(AContainer* InteractableToAdd)
 {
 	if (!IsValid(Data) || !IsValid(InteractableToAdd)) return false;
 	if (GetInventorySize() >= Data->GetMaxCapacity()) return false;
@@ -63,15 +63,15 @@ bool AItem::TryAddToInventory(AItem* InteractableToAdd)
 	return true;
 }
 
-bool AItem::TryAddContainerToInventory(AItem* ContainerToAdd)
+bool AContainer::TryAddContainerToInventory(AContainer* ContainerToAdd)
 {
 	if (!IsValid(ContainerToAdd)) return false;
 	if (ContainerToAdd->GetInventorySize() <= 0) return false;
 	if (GetInventorySize() + ContainerToAdd->GetInventorySize() > Data->GetMaxCapacity()) return false;
 	
-	const TArray<AItem*>& InInventory = ContainerToAdd->GetInventory();
+	const TArray<AContainer*>& InInventory = ContainerToAdd->GetInventory();
 	// Check if all ingredients are valid
-	for (AItem* InventoryIndex : InInventory)
+	for (AContainer* InventoryIndex : InInventory)
 	{
 		if (!InventoryIndex->HasMatchingInteractableTag(Data->GetAcceptedTags()))
 		{
@@ -91,7 +91,7 @@ bool AItem::TryAddContainerToInventory(AItem* ContainerToAdd)
 	return true;
 }
 
-bool AItem::TryRemoveFromInventory(AItem* InteractableToRemove)
+bool AContainer::TryRemoveFromInventory(AContainer* InteractableToRemove)
 {
 	if (!IsValid(InteractableToRemove)) return false;
 	
@@ -118,7 +118,7 @@ bool AItem::TryRemoveFromInventory(AItem* InteractableToRemove)
 	return false;
 }
 
-void AItem::UpdateInventoryWidget()
+void AContainer::UpdateInventoryWidget()
 {
 	if (UInventoryWidget* InventoryWidget = Cast<UInventoryWidget>(InventoryWidgetComponent->GetWidget()))
 	{
@@ -126,7 +126,7 @@ void AItem::UpdateInventoryWidget()
 	}
 }
 
-void AItem::PostInitializeComponents()
+void AContainer::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
 	
@@ -136,14 +136,14 @@ void AItem::PostInitializeComponents()
 	}
 }
 
-void AItem::BeginPlay()
+void AContainer::BeginPlay()
 {
 	Super::BeginPlay();
 	
 	OfferedInteractable = this;
 }
 
-void AItem::EndPlay(const EEndPlayReason::Type EndPlayReason)
+void AContainer::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	Super::EndPlay(EndPlayReason);
 }
