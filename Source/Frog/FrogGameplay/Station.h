@@ -27,7 +27,7 @@ protected:
 	virtual void BeginPlay() override;
 	
 	UFUNCTION()
-	virtual void HandleInteractableAdded(AContainer* InteractableToAdd);
+	virtual void HandleInteractableAdded(AInteractable* InteractableToAdd);
 
 	UFUNCTION()
 	virtual void HandleProcessingComplete();

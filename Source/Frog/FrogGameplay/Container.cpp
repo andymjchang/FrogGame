@@ -3,6 +3,7 @@
 
 #include "Container.h"
 
+#include "Frog.h"
 #include "ItemData.h"
 #include "GameUI/Interactables/InteractableWidgetComponent.h"
 #include "GameUI/Interactables/InventoryWidget.h"
@@ -28,24 +29,7 @@ void AContainer::ClearInventory()
 	UpdateInventoryWidget();
 }
 
-bool AContainer::HasMatchingInteractableTag(const FGameplayTagContainer& AcceptedTags) const
-{
-	if (AcceptedTags.IsEmpty()) return false;
-	if (!IsValid(Data)) return false;
-
-	const FGameplayTagContainer& OwnedTags = Data->GetOwnedTags();
-	for (const FGameplayTag& OwnedTag : OwnedTags)
-	{
-		if (OwnedTag.MatchesAny(AcceptedTags))
-		{
-			return true;
-		}
-	}
-
-	return false;
-}
-
-bool AContainer::TryAddToInventory(AContainer* InteractableToAdd)
+bool AContainer::TryAddToInventory(AInteractable* InteractableToAdd)
 {
 	if (!IsValid(Data) || !IsValid(InteractableToAdd)) return false;
 	if (GetInventorySize() >= Data->GetMaxCapacity()) return false;
@@ -63,15 +47,15 @@ bool AContainer::TryAddToInventory(AContainer* InteractableToAdd)
 	return true;
 }
 
-bool AContainer::TryAddContainerToInventory(AContainer* ContainerToAdd)
+bool AContainer::TryAddContainerContentsToInventory(AContainer* ContainerToAdd)
 {
 	if (!IsValid(ContainerToAdd)) return false;
 	if (ContainerToAdd->GetInventorySize() <= 0) return false;
 	if (GetInventorySize() + ContainerToAdd->GetInventorySize() > Data->GetMaxCapacity()) return false;
 	
-	const TArray<AContainer*>& InInventory = ContainerToAdd->GetInventory();
+	const TArray<AInteractable*>& InInventory = ContainerToAdd->GetInventory();
 	// Check if all ingredients are valid
-	for (AContainer* InventoryIndex : InInventory)
+	for (const AInteractable* InventoryIndex : InInventory)
 	{
 		if (!InventoryIndex->HasMatchingInteractableTag(Data->GetAcceptedTags()))
 		{
@@ -91,7 +75,7 @@ bool AContainer::TryAddContainerToInventory(AContainer* ContainerToAdd)
 	return true;
 }
 
-bool AContainer::TryRemoveFromInventory(AContainer* InteractableToRemove)
+bool AContainer::TryRemoveFromInventory(AInteractable* InteractableToRemove)
 {
 	if (!IsValid(InteractableToRemove)) return false;
 	
@@ -112,7 +96,6 @@ bool AContainer::TryRemoveFromInventory(AContainer* InteractableToRemove)
 		
 		UpdateInventoryWidget();
 		OnRemovedFromInventory.ExecuteIfBound(InteractableToRemove);
-		
 		return true;
 	}
 	return false;
@@ -134,17 +117,5 @@ void AContainer::PostInitializeComponents()
 	{
 		Inventory.Reserve(Data->GetMaxCapacity());
 	}
-}
-
-void AContainer::BeginPlay()
-{
-	Super::BeginPlay();
-	
-	OfferedInteractable = this;
-}
-
-void AContainer::EndPlay(const EEndPlayReason::Type EndPlayReason)
-{
-	Super::EndPlay(EndPlayReason);
 }
 

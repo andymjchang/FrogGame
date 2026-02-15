@@ -3,11 +3,10 @@
 #include "CoreMinimal.h"
 #include "GameFramework/GameStateBase.h"
 #include "IngredientMap.h"
-#include "Rooms/RoomManager.h"
+#include "FrogGameplay/Interactable.h"
 #include "FrogGameState.generated.h"
 
 class ARoomManager;
-class AContainer;
 
 UENUM(BlueprintType)
 enum class EFrogGamePhase : uint8
@@ -42,7 +41,7 @@ public:
     void ServerTrySubtractMoney(const int32 Amount);
     
     // Client functions
-    TSubclassOf<AContainer> GetRecipeResultClass(const FGameplayTagContainer& InteractableTags) const;
+    TSubclassOf<AInteractable> GetRecipeResultClass(const FGameplayTagContainer& InteractableTags) const;
     UItemData* GetRecipeResultData(const FGameplayTagContainer& InteractableTags) const;
     float GetTimeRemaining() const;
     

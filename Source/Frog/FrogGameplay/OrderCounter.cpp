@@ -27,7 +27,7 @@ void AOrderCounter::BeginPlay()
 	}
 }
 
-void AOrderCounter::HandleInteractableAdded(AContainer* Interactable)
+void AOrderCounter::HandleInteractableAdded(AInteractable* Interactable)
 {
 	if (!IsValid(Interactable)) return;
 	

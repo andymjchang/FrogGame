@@ -19,7 +19,7 @@ public:
 protected:
 	virtual void BeginPlay() override;
 	
-	virtual void HandleInteractableAdded(AContainer* InteractableToAdd) override;
+	virtual void HandleInteractableAdded(AInteractable* InteractableToAdd) override;
 
 public:
 	UFUNCTION()

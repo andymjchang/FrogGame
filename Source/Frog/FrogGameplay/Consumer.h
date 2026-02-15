@@ -18,6 +18,6 @@ protected:
 	virtual void BeginPlay() override;
 
 	UFUNCTION()
-	void HandleInteractableAdded(AContainer* Interactable);
+	void HandleInteractableAdded(AInteractable* Interactable);
 
 };

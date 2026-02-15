@@ -6,17 +6,32 @@
 #include "InventoryElementWidget.h"
 #include "Components/HorizontalBox.h"
 
-void UInventoryWidget::UpdateInventoryWidget(const TArray<AContainer*>& Inventory)
+void UInventoryWidget::UpdateInventoryWidget(const TArray<AInteractable*>& Inventory)
 { 
 	for (int32 i = 0; i < InventoryElements.Num(); i++)
 	{
-		
 		if (!IsValid(InventoryElements[i])) continue;
 
 		if (Inventory.IsValidIndex(i) && IsValid(Inventory[i]))
 		{
 			InventoryElements[i]->SetElement(Inventory[i]->GetData());
-			
+		}
+		else
+		{
+			InventoryElements[i]->DisableElement();
+		}
+	}
+}
+
+void UInventoryWidget::UpdateInventoryWidget(const AInteractable* InventoryItem)
+{
+	for (int32 i = 0; i < InventoryElements.Num(); i++)
+	{
+		if (!IsValid(InventoryElements[i])) continue;
+
+		if (i == 0 && IsValid(InventoryItem))
+		{
+			InventoryElements[i]->SetElement(InventoryItem->GetData());
 		}
 		else
 		{

@@ -17,14 +17,14 @@ AStation::AStation()
     // Progress Tracking Component
     ProgressTracker = CreateDefaultSubobject<UProgressTrackingComponent>(TEXT("ProgressTrackingComponent"));
     
-    // Progress Bar Widget
+    // Progress Bar Widget Component
     ProgressWidgetComponent = CreateDefaultSubobject<UInteractableWidgetComponent>(TEXT("ProgressBarWidgetComponent"));
     ProgressWidgetComponent->SetupAttachment(RootComponent);
     ProgressWidgetComponent->SetRelativeLocation(FVector(0.0f, 0.0f, -600.0f));
     ProgressWidgetComponent->SetDrawSize(FIntPoint(100, 20));
 }
 
-void AStation::HandleInteractableAdded(AContainer* InteractableToAdd)
+void AStation::HandleInteractableAdded(AInteractable* InteractableToAdd)
 {
 }
 
@@ -32,7 +32,7 @@ void AStation::BeginPlay()
 {
     Super::BeginPlay();
     
-OnAddedToInventory.BindDynamic(this, &AStation::HandleInteractableAdded);
+    OnAddedToInventory.BindDynamic(this, &AStation::HandleInteractableAdded);
     
     if (IsValid(ProgressWidgetComponent) && IsValid(ProgressTracker))
     {
@@ -50,7 +50,7 @@ FGameplayTagContainer AStation::GatherAllTags() const
         AllTags.AppendTags(Data->GetOwnedTags());
     }
     
-    for (AContainer* Item : Inventory)
+    for (AInteractable* Item : Inventory)
     {
         if (IsValid(Item) && IsValid(Item->GetData()))
         {
@@ -73,9 +73,9 @@ void AStation::HandleProcessingComplete()
 
     const FGameplayTagContainer AllTags = GatherAllTags();
 
-    if (const TSubclassOf<AContainer> ResultClass = GameState->GetRecipeResultClass(AllTags))
+    if (const TSubclassOf<AInteractable> ResultClass = GameState->GetRecipeResultClass(AllTags))
     {
-        for (AContainer* Item : Inventory)
+        for (AInteractable* Item : Inventory)
         {
             if (IsValid(Item))
             {
@@ -87,7 +87,7 @@ void AStation::HandleProcessingComplete()
         FActorSpawnParameters SpawnParams;
         SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
         
-        AContainer* SpawnedResult = GetWorld()->SpawnActor<AContainer>(
+        AInteractable* SpawnedResult = GetWorld()->SpawnActor<AInteractable>(
             ResultClass,
             GetActorLocation() + FVector(0, 0, 100), 
             FRotator::ZeroRotator,

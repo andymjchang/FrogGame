@@ -1,6 +1,8 @@
 ﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Spawner.h"
+
+#include "Frog.h"
 #include "Engine/World.h"
 
 ASpawner::ASpawner()
@@ -16,12 +18,7 @@ void ASpawner::BeginPlay()
 	SpawnAndReplenish();
 }
 
-void ASpawner::EndPlay(const EEndPlayReason::Type EndPlayReason)
-{
-	Super::EndPlay(EndPlayReason);
-}
-
-void ASpawner::HandleInteractableRemoved(AContainer* AddedInteractable)
+void ASpawner::HandleInteractableRemoved(AInteractable* RemovedInteractable)
 {
 	// Could add support for timed respawns
 	SpawnAndReplenish();
@@ -38,7 +35,7 @@ void ASpawner::SpawnAndReplenish()
 	SpawnParams.Owner = this;
 	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 
-	AContainer* NewItem = World->SpawnActor<AContainer>(
+	AInteractable* NewItem = World->SpawnActor<AInteractable>(
 		InteractableClassToSpawn, 
 		AttachPoint->GetComponentTransform(), 
 		SpawnParams

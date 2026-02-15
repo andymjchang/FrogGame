@@ -10,6 +10,7 @@
 #include "GameFramework/Controller.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "Frog.h"
 #include "InputActionValue.h"
 #include "FrogMovementComponent.h"
 #include "GAS/AbilitySet.h"
@@ -20,15 +21,10 @@
 #include "FrogGameplay/Container.h"
 #include "FrogGameplay/ItemData.h"
 
-//////////////////////////////////////////////////////////////////////////
-// AFrogCharacter
-
 AFrogCharacter::AFrogCharacter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer.SetDefaultSubobjectClass<UFrogMovementComponent>(CharacterMovementComponentName))
 {
 	PrimaryActorTick.bCanEverTick = true;
-	
-	// Networking
 	bReplicates = true;
 	
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 42.0f);
@@ -75,19 +71,13 @@ AFrogCharacter::AFrogCharacter(const FObjectInitializer& ObjectInitializer)
 	WorkHitbox->SetCollisionProfileName(TEXT("Work"));
 	WorkHitbox->SetupAttachment(RootComponent);
 
-	// Setup Grapple
-	// Tongue = CreateDefaultSubobject<UFrogTongue>(TEXT("TongueComponent"));
-	// Tongue->SetupAttachment(GetRootComponent());
-
-	// Frog Ability System
-	AbilitySystemComponent = CreateDefaultSubobject<UFrogAbilitySystem>(TEXT("AbilitySystem"));
-	AttributeSet = CreateDefaultSubobject<UFrogAttributeSet>(TEXT("AttributeSet"));
-	
 	// World space nametag
 	NametagWidgetComponent = CreateDefaultSubobject<UNametagWidgetComponent>(TEXT("NametagWidgetComponent"));
 	NametagWidgetComponent->SetupAttachment(RootComponent);
 
-	// Held Interactable Attach Point
+	// Inventory Child Actor
+	// ContainerComponent = CreateDefaultSubobject<UChildActorComponent>(TEXT("ContainerComponent"));
+	
 	InteractableAttachPoint = CreateDefaultSubobject<USceneComponent>(TEXT("InteractableAttachPoint"));
 	InteractableAttachPoint->SetupAttachment(GetMesh());
 }
@@ -118,82 +108,61 @@ UAbilitySystemComponent* AFrogCharacter::GetAbilitySystemComponent() const
 }
 
 void AFrogCharacter::Interact() {
-    AContainer* OtherInteractable = CurrentInteractable.Get();
-    if (!IsValid(OtherInteractable))
+	AInteractable* OtherInteractable = ClosestInteractable.Get();
+	if (!IsValid(OtherInteractable)) return;
+	
+	AInteractable* OtherOffer = OtherInteractable->GetOfferedInteractable();
+	if (!IsValid(OtherOffer)) return;
+	AContainer* OtherContainer = Cast<AContainer>(OtherInteractable);
+	AContainer* OtherOfferAsContainer = Cast<AContainer>(OtherOffer);
+	
+	AContainer* HeldContainer = Cast<AContainer>(HeldInteractable.Get());
+	if (IsValid(HeldContainer))
+	{
+		FLOG(TEXT("Try operations as container..."));
+		if (HeldContainer->TryAddToInventory(OtherOffer))
+		{
+			if (IsValid(OtherContainer))
+			{
+				OtherContainer->TryRemoveFromInventory(OtherOffer);
+				return;
+			}
+		}
+		
+		if (IsValid(OtherOfferAsContainer))
+		{
+			if (OtherOfferAsContainer->TryAddContainerContentsToInventory(HeldContainer))
+			{
+				return;
+			}
+		}
+	}
+
+	if (HeldInteractable.IsValid())
     {
-        UE_LOG(LogTemp, Log, TEXT("[%f] Interact: CurrentInteractable is invalid"), GetWorld()->GetTimeSeconds());
-        return;
+		FLOG(TEXT("Trying operations as item..."));
+    	if (IsValid(OtherOfferAsContainer))
+    	{
+    		if (OtherContainer->TryAddToInventory(HeldInteractable.Get()))
+    		{
+    			HeldInteractable = nullptr;
+    		}
+    	}
     }
-    
-    AContainer* OtherOffer = CurrentInteractable->GetOfferedInteractable();
-    if (!IsValid(OtherOffer))
+    else 
     {
-        UE_LOG(LogTemp, Log, TEXT("[%f] Interact: OtherOffer is invalid for %s"), GetWorld()->GetTimeSeconds(), *OtherInteractable->GetName());
-        return;
-    }
-    
-    // If holding an item
-    if (HeldInteractable.IsValid())
-    {
-    	UE_LOG(LogTemp, Log, TEXT("[%f] Interact: Holding item %s, attempting to add %s to it"), GetWorld()->GetTimeSeconds(), *HeldInteractable->GetName(), *OtherOffer->GetName());
-    	
-        // Try adding Other to Held Item
-        if (HeldInteractable->TryAddToInventory(OtherOffer))
-        {
-            // Remove from source's inventory
-            OtherInteractable->TryRemoveFromInventory(OtherOffer);
-            
-            UE_LOG(LogTemp, Log, TEXT("[%f] Interact: Successfully added other's offer to held item"), GetWorld()->GetTimeSeconds());
-        }
-        else
-        {
-            UE_LOG(LogTemp, Log, TEXT("[%f] Interact: Failed to add to held item, trying reverse add"), GetWorld()->GetTimeSeconds());
-        	
-        	if (OtherOffer->TryAddToInventory(HeldInteractable.Get()))
-            {
-            	UE_LOG(LogTemp, Log, TEXT("[%f] Interact: Successfully added held item to other, clearing held item"), GetWorld()->GetTimeSeconds());
-            	HeldInteractable = nullptr;
-            }
-        	else if (HeldInteractable.Get()->GetIsContainer())
-            {
-            	UE_LOG(LogTemp, Log, TEXT("[%f] Interact: Failed to add held item to other, try adding as container"), GetWorld()->GetTimeSeconds());
-            	if (OtherOffer->TryAddContainerToInventory(HeldInteractable.Get()))
-            	{
-            		UE_LOG(LogTemp, Log, TEXT("[%f] Interact: Successfully added container contents to other"), GetWorld()->GetTimeSeconds());
-            	}
-            	else
-            	{
-            		UE_LOG(LogTemp, Log, TEXT("[%f] Interact: Failed to add held item as a container"), GetWorld()->GetTimeSeconds());
-            	}
-            }
-        }
-    }
-    else // If not holding an item
-    {
-        UE_LOG(LogTemp, Log, TEXT("[%f] Interact: Not holding item, attempting to add %s to player"), GetWorld()->GetTimeSeconds(), *OtherOffer->GetName());
-        
-        // Try adding Other's Offer to Player
+		FLOG(TEXT("Player is not holding an item or container"));
         if (TryAddInteractableToPlayer(OtherOffer))
         {
-            // Remove from source's inventory
-            OtherInteractable->TryRemoveFromInventory(OtherOffer);
-            
-            UE_LOG(LogTemp, Log, TEXT("[%f] Interact: Successfully added other's offer to player"), GetWorld()->GetTimeSeconds());
-        }
-        else
-        {
-            UE_LOG(LogTemp, Log, TEXT("[%f] Interact: Failed to add offer, trying to add %s directly to player"), GetWorld()->GetTimeSeconds(), *OtherInteractable->GetName());
-            
-            // Try adding Other to Player
-            if (TryAddInteractableToPlayer(OtherInteractable))
+            if (IsValid(OtherContainer))
             {
-                UE_LOG(LogTemp, Log, TEXT("[%f] Interact: Successfully added interactable directly to player"), GetWorld()->GetTimeSeconds());
-            }
-            else
-            {
-                UE_LOG(LogTemp, Log, TEXT("[%f] Interact: Failed to add interactable directly to player"), GetWorld()->GetTimeSeconds());
+               OtherContainer->TryRemoveFromInventory(OtherOffer);
             }
         }
+        // else
+        // {
+        // 	TryAddInteractableToPlayer(OtherInteractable);
+        // }
     }
 }
 
@@ -207,7 +176,7 @@ void AFrogCharacter::StopWork()
 	WorkHitbox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
-bool AFrogCharacter::TryAddInteractableToPlayer(AContainer* InteractableToAdd)
+bool AFrogCharacter::TryAddInteractableToPlayer(AInteractable* InteractableToAdd)
 {
     if (!IsValid(InteractableToAdd))
     {
@@ -300,20 +269,30 @@ void AFrogCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 void AFrogCharacter::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (AContainer* Interactable = Cast<AContainer>(OtherActor))
+	if (AInteractable* Interactable = Cast<AInteractable>(OtherActor))
 	{
-		OverlappingInteractables.Add(Interactable);
+		OverlappingInteractableArray.Add(Interactable);
+		UpdateClosestInteractable();
+	}
+}
+
+void AFrogCharacter::OnOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+								  UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+	if (AInteractable* Interactable = Cast<AInteractable>(OtherActor))
+	{
+		OverlappingInteractableArray.Remove(Interactable);
 		UpdateClosestInteractable();
 	}
 }
 
 void AFrogCharacter::UpdateClosestInteractable()
 {
-	CurrentInteractable = nullptr;
+	ClosestInteractable = nullptr;
 
 	float BestDistanceSq = MAX_FLT;
 
-	for (TWeakObjectPtr<AContainer> I : OverlappingInteractables)
+	for (TWeakObjectPtr<AInteractable> I : OverlappingInteractableArray)
 	{
 		if (!I.IsValid()) continue;
 
@@ -321,7 +300,7 @@ void AFrogCharacter::UpdateClosestInteractable()
 		if (DistSq < BestDistanceSq)
 		{
 			BestDistanceSq = DistSq;
-			CurrentInteractable = I;
+			ClosestInteractable = I;
 		}
 	}
 
@@ -332,21 +311,11 @@ void AFrogCharacter::UpdateClosestInteractable()
 	// }
 }
 
-void AFrogCharacter::OnOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-                                  UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
-{
-	if (AContainer* Interactable = Cast<AContainer>(OtherActor))
-	{
-		OverlappingInteractables.Remove(Interactable);
-		UpdateClosestInteractable();
-	}
-}
-
 void AFrogCharacter::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 
-	if (OverlappingInteractables.Num() > 1)
+	if (OverlappingInteractableArray.Num() > 1)
 	{
 		UpdateClosestInteractable();
 	}

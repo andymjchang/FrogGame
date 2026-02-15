@@ -16,14 +16,13 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
-	virtual void EndPlay(EEndPlayReason::Type EndPlayReason) override;
 
 	UFUNCTION()
-	void HandleInteractableRemoved(AContainer* AddedInteractable);
+	void HandleInteractableRemoved(AInteractable* RemovedInteractable);
 
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
-	TSubclassOf<AContainer> InteractableClassToSpawn;
+	TSubclassOf<AInteractable> InteractableClassToSpawn;
 
 private:
 	void SpawnAndReplenish();

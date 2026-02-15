@@ -3,15 +3,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameplayTagContainer.h"
 #include "Interactable.h"
 #include "GameFramework/Actor.h"
 #include "Container.generated.h"
 
-class AContainer;
 class UInteractableWidgetComponent;
 
-DECLARE_DYNAMIC_DELEGATE_OneParam(FOnInventoryItemChanged, class AContainer*, Item);
+DECLARE_DYNAMIC_DELEGATE_OneParam(FOnInventoryItemChanged, class AInteractable*, Item);
 
 UCLASS()
 class FROG_API AContainer : public AInteractable
@@ -21,18 +19,13 @@ class FROG_API AContainer : public AInteractable
 public:
 	AContainer();
 	virtual void PostInitializeComponents() override;
-	
-protected:
-	virtual void BeginPlay() override;
-	virtual void EndPlay(EEndPlayReason::Type EndPlayReason) override;
 
 public:
 	void ClearInventory();
 	
-	bool HasMatchingInteractableTag(const FGameplayTagContainer& AcceptedTags) const;
-	bool TryAddToInventory(AContainer* InteractableToAdd);
-	bool TryAddContainerToInventory(AContainer* ContainerToAdd);
-	bool TryRemoveFromInventory(AContainer* InteractableToRemove);
+	bool TryAddToInventory(AInteractable* InteractableToAdd);
+	bool TryAddContainerContentsToInventory(AContainer* ContainerToAdd);
+	bool TryRemoveFromInventory(AInteractable* InteractableToRemove);
 	
 	// Delegates
 	FOnInventoryItemChanged OnRemovedFromInventory;
@@ -41,11 +34,8 @@ protected:
 	void UpdateInventoryWidget();
 
 protected:
-	UPROPERTY(BlueprintReadOnly)
-	TObjectPtr<AContainer> OfferedInteractable;
-	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	TArray<TObjectPtr<AContainer>> Inventory;
+	TArray<TObjectPtr<AInteractable>> Inventory;
 	
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<UInteractableWidgetComponent> InventoryWidgetComponent;
@@ -54,9 +44,6 @@ protected:
 	TObjectPtr<USceneComponent> AttachPoint;
 	
 public:
-	FORCEINLINE const TArray<TObjectPtr<AContainer>>& GetInventory() const { return Inventory; }
+	FORCEINLINE const TArray<TObjectPtr<AInteractable>>& GetInventory() const { return Inventory; }
 	FORCEINLINE int GetInventorySize() const { return Inventory.Num(); }
-	FORCEINLINE AContainer* GetOfferedInteractable() const { return OfferedInteractable.Get(); };
-	FORCEINLINE bool GetIsContainer() const { return Inventory.Num() > 0; }
-
 };

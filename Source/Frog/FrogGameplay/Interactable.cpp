@@ -3,6 +3,8 @@
 
 #include "Interactable.h"
 
+#include "GameplayTagContainer.h"
+#include "ItemData.h"
 #include "Components/BoxComponent.h"
 
 AInteractable::AInteractable()
@@ -24,6 +26,31 @@ AInteractable::AInteractable()
 	// Static Mesh Component
 	InteractableMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("InteractableMesh"));
 	InteractableMesh->SetupAttachment(RootComponent);
+}
+
+void AInteractable::BeginPlay()
+{
+	Super::BeginPlay();
+
+	OfferedInteractable = this;
+}
+
+
+bool AInteractable::HasMatchingInteractableTag(const FGameplayTagContainer& AcceptedTags) const
+{
+	if (AcceptedTags.IsEmpty()) return false;
+	if (!IsValid(Data)) return false;
+
+	const FGameplayTagContainer& OwnedTags = Data->GetOwnedTags();
+	for (const FGameplayTag& OwnedTag : OwnedTags)
+	{
+		if (OwnedTag.MatchesAny(AcceptedTags))
+		{
+			return true;
+		}
+	}
+
+	return false;
 }
 
 void AInteractable::Interact()

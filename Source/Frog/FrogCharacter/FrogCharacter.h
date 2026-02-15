@@ -66,10 +66,8 @@ public: /* Public Functions */
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
 	void Interact();
-
 	void Work();
 	void StopWork();
-public: /* Public Members */
 
 protected: /* Protected Functions */
 	virtual void PostInitializeComponents() override;
@@ -77,21 +75,26 @@ protected: /* Protected Functions */
 	virtual void Tick(float DeltaSeconds) override;
 	virtual void NotifyControllerChanged() override;
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
+
+	void UpdateClosestInteractable();
+	
 	UFUNCTION()
 	void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 						int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
-	void UpdateClosestInteractable();
+	
 	UFUNCTION()
 	void OnOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 					  int32 OtherBodyIndex);
+	
 	// GAS
 	void AbilityInputBindingPressedHandler(EAbilityInputID AbilityInputID);
 	void AbilityInputBindingReleasedHandler(EAbilityInputID AbilityInputID);
 	void SetupAbilities();
 
 	void Move(const FInputActionValue& Value);
-	//Gameplay functions
-	bool TryAddInteractableToPlayer(AContainer* InteractableToAdd);
+	
+	// Gameplay functions
+	bool TryAddInteractableToPlayer(AInteractable* InteractableToAdd);
 
 protected: /* Members */
 	// Components
@@ -145,14 +148,20 @@ protected: /* Members */
 	TObjectPtr<USphereComponent> WorkHitbox;
 
 	// GamePlay Interactions
-	TArray<TWeakObjectPtr<AContainer>> OverlappingInteractables;
-	TWeakObjectPtr<AContainer> CurrentInteractable;
+	TArray<TWeakObjectPtr<AInteractable>> OverlappingInteractableArray;
+	TWeakObjectPtr<AInteractable> ClosestInteractable;
 	
 	UPROPERTY(BlueprintReadWrite)
-	TWeakObjectPtr<AContainer> HeldInteractable;
-
+	TWeakObjectPtr<AInteractable> HeldInteractable;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) // Change this back later
 	TObjectPtr<USceneComponent> InteractableAttachPoint;
+	
+	// UPROPERTY(EditDefaultsOnly)
+	// TObjectPtr<UChildActorComponent> ContainerComponent;
+	//
+	// UPROPERTY(EditDefaultsOnly)
+	// TObjectPtr<AContainer> InventoryContainer;
 	
 	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
 	FGameplayTagContainer AcceptedTags;
