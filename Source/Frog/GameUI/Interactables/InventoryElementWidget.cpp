@@ -4,9 +4,9 @@
 #include "InventoryElementWidget.h"
 
 #include "Components/Image.h"
-#include "FrogGameplay/ItemData.h"
+#include "FrogGameplay/InteractableData.h"
 
-void UInventoryElementWidget::SetElement(const UItemData* Data)
+void UInventoryElementWidget::SetElement(const UInteractableData* Data)
 {
 	if (!IsValid(Data) || !IsValid(Icon)) return;
 	

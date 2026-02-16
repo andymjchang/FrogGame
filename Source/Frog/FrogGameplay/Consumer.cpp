@@ -3,6 +3,8 @@
 
 #include "Consumer.h"
 
+#include "ContainerComponent.h"
+
 
 AConsumer::AConsumer()
 {
@@ -13,14 +15,25 @@ void AConsumer::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	OnAddedToInventory.BindDynamic(this, &AConsumer::HandleInteractableAdded);
-	AttachPoint->SetVisibility(false, true);
+	USceneComponent* AttachPoint = ContainerComponent->GetAttachPoint();
+	if (IsValid(AttachPoint))
+	{
+		AttachPoint->SetVisibility(false, true);
+	}
 }
 
-void AConsumer::HandleInteractableAdded(AInteractable* Interactable)
+void AConsumer::HandleAddedToInventory(AInteractable* Interactable)
 {
-	if (!IsValid(Interactable)) return ;
+	Super::HandleAddedToInventory(Interactable);
+	if (!IsValid(Interactable)) return;
 	
-	TryRemoveFromInventory(Interactable);
+	USceneComponent* AttachPoint = ContainerComponent->GetAttachPoint();
+	if (IsValid(AttachPoint))
+	{
+		AttachPoint->SetVisibility(false, true);
+	}
+	
+	ContainerComponent->TryRemoveFromInventory(Interactable);
+	
 	Interactable->Destroy();
 }

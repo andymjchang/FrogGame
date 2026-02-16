@@ -7,7 +7,7 @@
 #include "GameFramework/Actor.h"
 #include "Interactable.generated.h"
 
-class UItemData;
+class UInteractableData;
 class UBoxComponent;
 
 UCLASS()
@@ -34,7 +34,7 @@ protected:
 	
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
-	TObjectPtr<UItemData> Data;
+	TObjectPtr<UInteractableData> Data;
 	
 	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
 	TObjectPtr<UMaterialInterface> OverlayMaterial;
@@ -53,6 +53,6 @@ protected:
 	TObjectPtr<UStaticMeshComponent> InteractableMesh;
 
 public:
-	FORCEINLINE UItemData* GetData() const { return Data; }
+	FORCEINLINE UInteractableData* GetData() const { return Data; }
 	FORCEINLINE AInteractable* GetOfferedInteractable() const { return OfferedInteractable.Get(); };
 };

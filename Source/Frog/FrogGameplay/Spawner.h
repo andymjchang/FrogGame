@@ -16,10 +16,8 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
-
-	UFUNCTION()
-	void HandleInteractableRemoved(AInteractable* RemovedInteractable);
-
+	virtual void HandleRemovedFromInventory(AInteractable* Interactable) override;
+	
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
 	TSubclassOf<AInteractable> InteractableClassToSpawn;

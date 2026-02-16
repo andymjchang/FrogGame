@@ -4,7 +4,7 @@
 #include "Interactable.h"
 
 #include "GameplayTagContainer.h"
-#include "ItemData.h"
+#include "InteractableData.h"
 #include "Components/BoxComponent.h"
 
 AInteractable::AInteractable()

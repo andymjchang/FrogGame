@@ -19,7 +19,9 @@
 #include "NametagWidgetComponent.h"
 #include "Components/SphereComponent.h"
 #include "FrogGameplay/Container.h"
-#include "FrogGameplay/ItemData.h"
+#include "FrogGameplay/ContainerComponent.h"
+#include "FrogGameplay/Interactable.h"
+#include "FrogGameplay/InteractableData.h"
 
 AFrogCharacter::AFrogCharacter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer.SetDefaultSubobjectClass<UFrogMovementComponent>(CharacterMovementComponentName))
@@ -107,63 +109,70 @@ UAbilitySystemComponent* AFrogCharacter::GetAbilitySystemComponent() const
 	return AbilitySystemComponent;
 }
 
-void AFrogCharacter::Interact() {
+void AFrogCharacter::Interact()
+{
 	AInteractable* OtherInteractable = ClosestInteractable.Get();
 	if (!IsValid(OtherInteractable)) return;
-	
 	AInteractable* OtherOffer = OtherInteractable->GetOfferedInteractable();
 	if (!IsValid(OtherOffer)) return;
-	AContainer* OtherContainer = Cast<AContainer>(OtherInteractable);
-	AContainer* OtherOfferAsContainer = Cast<AContainer>(OtherOffer);
-	
-	AContainer* HeldContainer = Cast<AContainer>(HeldInteractable.Get());
-	if (IsValid(HeldContainer))
+
+	UContainerComponent* OtherContainerComp = nullptr;
+	if (AContainer* OtherContainer = Cast<AContainer>(OtherInteractable))
 	{
-		FLOG(TEXT("Try operations as container..."));
-		if (HeldContainer->TryAddToInventory(OtherOffer))
-		{
-			if (IsValid(OtherContainer))
-			{
-				OtherContainer->TryRemoveFromInventory(OtherOffer);
-				return;
-			}
-		}
+		OtherContainerComp = OtherContainer->GetContainerComponent();
+	}
+	UContainerComponent* OtherOfferAsContainerComp = nullptr;
+	if (AContainer* OtherOfferAsContainer = Cast<AContainer>(OtherOffer))
+	{
+		OtherOfferAsContainerComp = OtherOfferAsContainer->GetContainerComponent();
+	}
+
+	if (OtherOfferAsContainerComp && GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Yellow,
+			FString::Printf(TEXT("Current Interaction Target: %s"), *OtherOfferAsContainerComp->GetName()));
+	}
+	
+	if (AContainer* HeldContainer = Cast<AContainer>(HeldInteractable.Get()))
+	{
+		FLOG(TEXT("Try interact as container..."));
 		
-		if (IsValid(OtherOfferAsContainer))
+		UContainerComponent* HeldContainerComp = HeldContainer->GetContainerComponent();
+		if (IsValid(HeldContainerComp))
 		{
-			if (OtherOfferAsContainer->TryAddContainerContentsToInventory(HeldContainer))
+			if (IsValid(OtherContainerComp) && HeldContainerComp->TryAddToInventory(OtherOffer))
 			{
-				return;
+				OtherContainerComp->TryRemoveFromInventory(OtherOffer);
+			}
+			else if (IsValid(OtherOfferAsContainerComp))
+			{
+				OtherOfferAsContainerComp->TryAddContainerContentsToInventory(HeldContainer);
 			}
 		}
 	}
-
-	if (HeldInteractable.IsValid())
-    {
-		FLOG(TEXT("Trying operations as item..."));
-    	if (IsValid(OtherOfferAsContainer))
-    	{
-    		if (OtherContainer->TryAddToInventory(HeldInteractable.Get()))
-    		{
-    			HeldInteractable = nullptr;
-    		}
-    	}
-    }
-    else 
-    {
-		FLOG(TEXT("Player is not holding an item or container"));
-        if (TryAddInteractableToPlayer(OtherOffer))
-        {
-            if (IsValid(OtherContainer))
-            {
-               OtherContainer->TryRemoveFromInventory(OtherOffer);
-            }
-        }
-        // else
-        // {
-        // 	TryAddInteractableToPlayer(OtherInteractable);
-        // }
-    }
+	else if (HeldInteractable.IsValid())
+	{
+		FLOG(TEXT("Trying interact as item..."));
+		if (IsValid(OtherOfferAsContainerComp) )
+		{
+		}
+		if (IsValid(OtherOfferAsContainerComp) && OtherOfferAsContainerComp->TryAddToInventory(HeldInteractable.Get()))
+		{
+			HeldInteractable = nullptr;
+		}
+	}
+	else 
+	{
+		FLOG(TEXT("Trying interact as player"));
+       
+		if (TryAddInteractableToPlayer(OtherOffer))
+		{
+			if (IsValid(OtherContainerComp))
+			{
+				OtherContainerComp->TryRemoveFromInventory(OtherOffer);
+			}
+		}
+	}
 }
 
 void AFrogCharacter::Work()
@@ -304,11 +313,7 @@ void AFrogCharacter::UpdateClosestInteractable()
 		}
 	}
 
-	// if (CurrentInteractable.IsValid() && GEngine)
-	// {
-	// 	GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Yellow,
-	// 		FString::Printf(TEXT("Current Interaction Target: %s"), *CurrentInteractable->GetName()));
-	// }
+
 }
 
 void AFrogCharacter::Tick(float DeltaSeconds)

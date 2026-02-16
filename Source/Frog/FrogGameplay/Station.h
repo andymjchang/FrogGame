@@ -10,7 +10,7 @@
 
 class UProgressTrackingComponent;
 class UStationProgressBar;
-class UItemData;
+class UInteractableData;
 class AFrogCharacter;
 class UBoxComponent;
 class UPrimitiveComponent;

@@ -42,7 +42,7 @@ public:
     
     // Client functions
     TSubclassOf<AInteractable> GetRecipeResultClass(const FGameplayTagContainer& InteractableTags) const;
-    UItemData* GetRecipeResultData(const FGameplayTagContainer& InteractableTags) const;
+    UInteractableData* GetRecipeResultData(const FGameplayTagContainer& InteractableTags) const;
     float GetTimeRemaining() const;
     
     FORCEINLINE int32 GetMoney() const { return Money; }

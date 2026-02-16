@@ -32,7 +32,7 @@ TSubclassOf<AInteractable> AFrogGameState::GetRecipeResultClass(
     return nullptr;
 }
 
-UItemData* AFrogGameState::GetRecipeResultData(const FGameplayTagContainer& InteractableTags) const
+UInteractableData* AFrogGameState::GetRecipeResultData(const FGameplayTagContainer& InteractableTags) const
 {
     if (IngredientMap)
     {

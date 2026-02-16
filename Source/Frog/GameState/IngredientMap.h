@@ -7,7 +7,7 @@
 #include "IngredientMap.generated.h"
 
 class AInteractable;
-class UItemData;
+class UInteractableData;
 
 // Wrapper struct that serves as the map key
 USTRUCT(BlueprintType)
@@ -45,7 +45,7 @@ struct FRecipeResult
 	TSubclassOf<AInteractable> InteractableClass;
     
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
-	UItemData* InteractableData;
+	UInteractableData* InteractableData;
 
 	FRecipeResult()
 		: InteractableClass(nullptr)

@@ -1,13 +1,14 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Station.h"
-#include "ItemData.h"
+
+#include "ContainerComponent.h"
+#include "InteractableData.h"
 #include "ProgressTrackingComponent.h"
 #include "GameState/FrogGameState.h"
 #include "TimerManager.h"
 #include "Components/PrimitiveComponent.h"
 #include "Components/WidgetComponent.h"
-#include "FrogCharacter/FrogCharacter.h"
 #include "GameUI/Interactables/InteractableWidgetComponent.h"
 
 AStation::AStation()
@@ -32,8 +33,6 @@ void AStation::BeginPlay()
 {
     Super::BeginPlay();
     
-    OnAddedToInventory.BindDynamic(this, &AStation::HandleInteractableAdded);
-    
     if (IsValid(ProgressWidgetComponent) && IsValid(ProgressTracker))
     {
         ProgressTracker->OnCompletion.BindDynamic(this, &AStation::HandleProcessingComplete);
@@ -50,7 +49,7 @@ FGameplayTagContainer AStation::GatherAllTags() const
         AllTags.AppendTags(Data->GetOwnedTags());
     }
     
-    for (AInteractable* Item : Inventory)
+    for (AInteractable* Item : ContainerComponent->GetInventory())
     {
         if (IsValid(Item) && IsValid(Item->GetData()))
         {
@@ -75,14 +74,14 @@ void AStation::HandleProcessingComplete()
 
     if (const TSubclassOf<AInteractable> ResultClass = GameState->GetRecipeResultClass(AllTags))
     {
-        for (AInteractable* Item : Inventory)
+        for (AInteractable* Item : ContainerComponent->GetInventory())
         {
             if (IsValid(Item))
             {
                 Item->Destroy();
             }
         }
-        ClearInventory();
+        ContainerComponent->ClearInventory();
         
         FActorSpawnParameters SpawnParams;
         SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
@@ -97,12 +96,12 @@ void AStation::HandleProcessingComplete()
         if (IsValid(SpawnedResult))
         {
             OfferedInteractable = SpawnedResult;
-            TryAddToInventory(SpawnedResult);
+            ContainerComponent->TryAddToInventory(SpawnedResult);
         }
     }
     else
     {
         OfferedInteractable = this;
-        ClearInventory();
+        ContainerComponent->ClearInventory();
     }
 }

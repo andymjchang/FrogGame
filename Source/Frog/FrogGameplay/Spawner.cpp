@@ -2,6 +2,7 @@
 
 #include "Spawner.h"
 
+#include "ContainerComponent.h"
 #include "Frog.h"
 #include "Engine/World.h"
 
@@ -14,22 +15,24 @@ void ASpawner::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	OnRemovedFromInventory.BindDynamic(this, &ASpawner::HandleInteractableRemoved);
 	SpawnAndReplenish();
 }
 
-void ASpawner::HandleInteractableRemoved(AInteractable* RemovedInteractable)
+void ASpawner::HandleRemovedFromInventory(AInteractable* Interactable)
 {
-	// Could add support for timed respawns
+	Super::HandleRemovedFromInventory(Interactable);
 	SpawnAndReplenish();
 }
 
 void ASpawner::SpawnAndReplenish()
 {
-	if (!IsValid(InteractableClassToSpawn)) return;
-
 	UWorld* World = GetWorld();
 	if (!World) return;
+	
+	if (!IsValid(InteractableClassToSpawn)) return;
+	if (!IsValid(ContainerComponent)) return;
+	USceneComponent* AttachPoint = ContainerComponent->GetAttachPoint();
+	if (!IsValid(AttachPoint)) return;
 	
 	FActorSpawnParameters SpawnParams;
 	SpawnParams.Owner = this;
@@ -37,14 +40,15 @@ void ASpawner::SpawnAndReplenish()
 
 	AInteractable* NewItem = World->SpawnActor<AInteractable>(
 		InteractableClassToSpawn, 
-		AttachPoint->GetComponentTransform(), 
+		AttachPoint->GetComponentTransform(),
+		// FTransform::Identity,
 		SpawnParams
 	);
 
 	if (NewItem)
 	{
 		NewItem->AttachToComponent(AttachPoint, FAttachmentTransformRules::SnapToTargetIncludingScale);
-		TryAddToInventory(NewItem);
+		ContainerComponent->TryAddToInventory(NewItem);
 		OfferedInteractable = NewItem;
 	}
 }

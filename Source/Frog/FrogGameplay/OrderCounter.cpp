@@ -2,7 +2,8 @@
 
 #include "OrderCounter.h"
 
-#include "ItemData.h"
+#include "ContainerComponent.h"
+#include "InteractableData.h"
 #include "GameState/FrogGameState.h"
 
 AOrderCounter::AOrderCounter()
@@ -13,9 +14,8 @@ AOrderCounter::AOrderCounter()
 void AOrderCounter::BeginPlay()
 {
 	Super::BeginPlay();
-    
-	OnAddedToInventory.BindDynamic(this, &AOrderCounter::HandleInteractableAdded);
-	
+
+	USceneComponent* AttachPoint = ContainerComponent->GetAttachPoint();
 	if (IsValid(AttachPoint))
 	{
 		AttachPoint->SetVisibility(false, true);
@@ -27,8 +27,9 @@ void AOrderCounter::BeginPlay()
 	}
 }
 
-void AOrderCounter::HandleInteractableAdded(AInteractable* Interactable)
+void AOrderCounter::HandleRemovedFromInventory(AInteractable* Interactable)
 {
+	Super::HandleRemovedFromInventory(Interactable);
 	if (!IsValid(Interactable)) return;
 	
 	if (GameState.IsValid())
@@ -36,6 +37,6 @@ void AOrderCounter::HandleInteractableAdded(AInteractable* Interactable)
 		GameState->ServerAddMoney(Interactable->GetData()->GetSellPrice());;
 	}
     
-	TryRemoveFromInventory(Interactable);
+	ContainerComponent->TryRemoveFromInventory(Interactable);
 	Interactable->Destroy();
 }
