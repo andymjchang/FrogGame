@@ -41,7 +41,6 @@ void ASpawner::SpawnAndReplenish()
 	AInteractable* NewItem = World->SpawnActor<AInteractable>(
 		InteractableClassToSpawn, 
 		AttachPoint->GetComponentTransform(),
-		// FTransform::Identity,
 		SpawnParams
 	);
 

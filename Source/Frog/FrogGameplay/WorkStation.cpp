@@ -25,7 +25,7 @@ void AWorkStation::BeginPlay()
     }
 }
 
-void AWorkStation::HandleInteractableAdded(AInteractable* InteractableToAdd)
+void AWorkStation::HandleAddedToInventory(AInteractable* InteractableToAdd)
 {
     UE_LOG(LogTemp, Log, TEXT("[%f] WorkStation: Item added, manual interaction required."), GetWorld()->GetTimeSeconds());
 }

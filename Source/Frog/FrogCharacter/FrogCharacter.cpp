@@ -133,32 +133,30 @@ void AFrogCharacter::Interact()
 			FString::Printf(TEXT("Current Interaction Target: %s"), *OtherOfferAsContainerComp->GetName()));
 	}
 	
-	if (AContainer* HeldContainer = Cast<AContainer>(HeldInteractable.Get()))
-	{
-		FLOG(TEXT("Try interact as container..."));
-		
-		UContainerComponent* HeldContainerComp = HeldContainer->GetContainerComponent();
-		if (IsValid(HeldContainerComp))
-		{
-			if (IsValid(OtherContainerComp) && HeldContainerComp->TryAddToInventory(OtherOffer))
-			{
-				OtherContainerComp->TryRemoveFromInventory(OtherOffer);
-			}
-			else if (IsValid(OtherOfferAsContainerComp))
-			{
-				OtherOfferAsContainerComp->TryAddContainerContentsToInventory(HeldContainer);
-			}
-		}
-	}
-	else if (HeldInteractable.IsValid())
+	if (HeldInteractable.IsValid())
 	{
 		FLOG(TEXT("Trying interact as item..."));
-		if (IsValid(OtherOfferAsContainerComp) )
-		{
-		}
+
 		if (IsValid(OtherOfferAsContainerComp) && OtherOfferAsContainerComp->TryAddToInventory(HeldInteractable.Get()))
 		{
 			HeldInteractable = nullptr;
+		}
+		else if (AContainer* HeldContainer = Cast<AContainer>(HeldInteractable.Get()))
+		{
+			FLOG(TEXT("Try interact as container..."));
+			
+			UContainerComponent* HeldContainerComp = HeldContainer->GetContainerComponent();
+			if (IsValid(HeldContainerComp))
+			{
+				if (IsValid(OtherContainerComp) && HeldContainerComp->TryAddToInventory(OtherOffer))
+				{
+					OtherContainerComp->TryRemoveFromInventory(OtherOffer);
+				}
+				else if (IsValid(OtherOfferAsContainerComp))
+				{
+					OtherOfferAsContainerComp->TryAddContainerContentsToInventory(HeldContainer);
+				}
+			}
 		}
 	}
 	else 

@@ -25,10 +25,6 @@ AStation::AStation()
     ProgressWidgetComponent->SetDrawSize(FIntPoint(100, 20));
 }
 
-void AStation::HandleInteractableAdded(AInteractable* InteractableToAdd)
-{
-}
-
 void AStation::BeginPlay()
 {
     Super::BeginPlay();

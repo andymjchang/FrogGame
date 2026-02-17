@@ -25,9 +25,6 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
-	
-	UFUNCTION()
-	virtual void HandleInteractableAdded(AInteractable* InteractableToAdd);
 
 	UFUNCTION()
 	virtual void HandleProcessingComplete();

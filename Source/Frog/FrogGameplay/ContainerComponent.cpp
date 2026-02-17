@@ -29,6 +29,53 @@ void UContainerComponent::BeginPlay()
     }
 }
 
+void UContainerComponent::OnRegister()
+{
+	Super::OnRegister();
+
+	if (HasAnyFlags(RF_ClassDefaultObject | RF_ArchetypeObject))
+	{
+		return;
+	}
+
+	if (AttachPoint)
+	{
+		// Force the attachment to the current instance to avoid Template Mismatch
+		// This fixes the case where the cloned component still points to the template parent
+		AttachPoint->SetupAttachment(this);
+		
+		if (!AttachPoint->IsRegistered())
+		{
+			AttachPoint->RegisterComponent();
+		}
+	}
+
+	if (InventoryWidgetComponent)
+	{
+		InventoryWidgetComponent->SetupAttachment(this);
+		
+		if (!InventoryWidgetComponent->IsRegistered())
+		{
+			InventoryWidgetComponent->RegisterComponent();
+		}
+	}
+}
+
+void UContainerComponent::OnUnregister()
+{
+	if (AttachPoint && AttachPoint->IsRegistered())
+	{
+		AttachPoint->UnregisterComponent();
+	}
+
+	if (InventoryWidgetComponent && InventoryWidgetComponent->IsRegistered())
+	{
+		InventoryWidgetComponent->UnregisterComponent();
+	}
+
+	Super::OnUnregister();
+}
+
 void UContainerComponent::ClearInventory()
 {
     Inventory.Empty();

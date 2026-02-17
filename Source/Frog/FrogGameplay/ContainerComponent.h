@@ -36,16 +36,18 @@ public:
 	FORCEINLINE USceneComponent* GetAttachPoint() const { return AttachPoint; }
 	
 protected:
+	virtual void OnRegister() override;
+	virtual void OnUnregister() override;
 	void UpdateInventoryWidget();
 
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TArray<TObjectPtr<AInteractable>> Inventory;
 	
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<UInteractableWidgetComponent> InventoryWidgetComponent;
 	
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<USceneComponent> AttachPoint;
 	
 	UPROPERTY()

@@ -1,17 +1,17 @@
 ﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Consumer.h"
+#include "TrashCan.h"
 
 #include "ContainerComponent.h"
 
 
-AConsumer::AConsumer()
+ATrashCan::ATrashCan()
 {
 	PrimaryActorTick.bCanEverTick = false;
 }
 
-void AConsumer::BeginPlay()
+void ATrashCan::BeginPlay()
 {
 	Super::BeginPlay();
 	
@@ -22,7 +22,7 @@ void AConsumer::BeginPlay()
 	}
 }
 
-void AConsumer::HandleAddedToInventory(AInteractable* Interactable)
+void ATrashCan::HandleAddedToInventory(AInteractable* Interactable)
 {
 	Super::HandleAddedToInventory(Interactable);
 	if (!IsValid(Interactable)) return;

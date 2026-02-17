@@ -27,7 +27,7 @@ void AOrderCounter::BeginPlay()
 	}
 }
 
-void AOrderCounter::HandleRemovedFromInventory(AInteractable* Interactable)
+void AOrderCounter::HandleAddedToInventory(AInteractable* Interactable)
 {
 	Super::HandleRemovedFromInventory(Interactable);
 	if (!IsValid(Interactable)) return;

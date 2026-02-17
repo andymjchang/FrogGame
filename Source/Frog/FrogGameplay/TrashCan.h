@@ -4,15 +4,15 @@
 
 #include "CoreMinimal.h"
 #include "Container.h"
-#include "Consumer.generated.h"
+#include "TrashCan.generated.h"
 
 UCLASS()
-class FROG_API AConsumer : public AContainer
+class FROG_API ATrashCan : public AContainer
 {
 	GENERATED_BODY()
 
 public:
-	AConsumer();
+	ATrashCan();
 
 protected:
 	virtual void BeginPlay() override;

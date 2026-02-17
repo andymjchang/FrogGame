@@ -18,7 +18,7 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
-	virtual void HandleRemovedFromInventory(AInteractable* Interactable) override;
+	virtual void HandleAddedToInventory(AInteractable* Interactable) override;
 	
 protected:
 	TWeakObjectPtr<AFrogGameState> GameState;

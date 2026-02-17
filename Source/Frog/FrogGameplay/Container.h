@@ -28,6 +28,6 @@ protected:
 	virtual void HandleAddedToInventory(AInteractable* Interactable);
 	
 protected:
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Container")
 	TObjectPtr<UContainerComponent> ContainerComponent;
 };
