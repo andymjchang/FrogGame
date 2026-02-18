@@ -21,23 +21,19 @@ void UInventoryWidget::UpdateInventoryWidget(const TArray<AInteractable*>& Inven
 			InventoryElements[i]->DisableElement();
 		}
 	}
-}
-
-void UInventoryWidget::UpdateInventoryWidget(const AInteractable* InventoryItem)
-{
-	for (int32 i = 0; i < InventoryElements.Num(); i++)
+	
+	if (IsValid(BottomRowHBox))
 	{
-		if (!IsValid(InventoryElements[i])) continue;
-
-		if (i == 0 && IsValid(InventoryItem))
-		{
-			InventoryElements[i]->SetElement(InventoryItem->GetData());
-		}
+		if (InventoryElements[2]->GetVisibility() == ESlateVisibility::Collapsed)
+        {
+        	BottomRowHBox->SetVisibility(ESlateVisibility::Collapsed);
+        }
 		else
 		{
-			InventoryElements[i]->DisableElement();
+			BottomRowHBox->SetVisibility(ESlateVisibility::HitTestInvisible);
 		}
 	}
+	
 }
 
 void UInventoryWidget::NativeOnInitialized()

@@ -23,7 +23,6 @@ public:
 	
 public:
 	void UpdateInventoryWidget(const TArray<AInteractable*>& Inventory);
-	void UpdateInventoryWidget(const AInteractable* InventoryItem);
 
 protected:
 	UPROPERTY(meta = (BindWidget))
