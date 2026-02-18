@@ -3,6 +3,7 @@
 #include "OrderCounter.h"
 
 #include "ContainerComponent.h"
+#include "Frog.h"
 #include "InteractableData.h"
 #include "GameState/FrogGameState.h"
 

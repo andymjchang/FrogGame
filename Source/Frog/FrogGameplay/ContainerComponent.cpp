@@ -140,13 +140,14 @@ bool UContainerComponent::TryAddContainerContentsToInventory(AContainer* Contain
 
 bool UContainerComponent::TryRemoveFromInventory(AInteractable* InteractableToRemove)
 {
-    if (!IsValid(InteractableToRemove)) return false;
-	
     if (Inventory.Remove(InteractableToRemove) > 0)
     {
-       UpdateInventoryWidget();
-       OnRemovedFromInventory.ExecuteIfBound(InteractableToRemove);
-       return true;
+		UpdateInventoryWidget();
+    	if (IsValid(InteractableToRemove))
+    	{
+    		OnRemovedFromInventory.ExecuteIfBound(InteractableToRemove);
+    	}
+		return true;
     }
 
     return false;

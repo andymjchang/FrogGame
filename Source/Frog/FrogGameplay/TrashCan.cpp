@@ -27,13 +27,6 @@ void ATrashCan::HandleAddedToInventory(AInteractable* Interactable)
 	Super::HandleAddedToInventory(Interactable);
 	if (!IsValid(Interactable)) return;
 	
-	USceneComponent* AttachPoint = ContainerComponent->GetAttachPoint();
-	if (IsValid(AttachPoint))
-	{
-		AttachPoint->SetVisibility(false, true);
-	}
-	
 	ContainerComponent->TryRemoveFromInventory(Interactable);
-	
 	Interactable->Destroy();
 }

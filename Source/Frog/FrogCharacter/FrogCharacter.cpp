@@ -139,7 +139,7 @@ void AFrogCharacter::Interact()
 	if (IsValid(OtherOfferAsContainerComp) && IsValid(GEngine))
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Yellow,
-			FString::Printf(TEXT("Current Interaction Target: %s"), *OtherOfferAsContainerComp->GetName()));
+			FString::Printf(TEXT("Current Interaction Target: %s"), *OtherInteractable->GetName()));
 	}
 
 	AInteractable* HeldInteractable = ContainerComponent->GetFirstItem();

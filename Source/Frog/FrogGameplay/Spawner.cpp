@@ -44,7 +44,7 @@ void ASpawner::SpawnAndReplenish()
 		SpawnParams
 	);
 
-	if (NewItem)
+	if (IsValid(NewItem))
 	{
 		NewItem->AttachToComponent(AttachPoint, FAttachmentTransformRules::SnapToTargetIncludingScale);
 		ContainerComponent->TryAddToInventory(NewItem);
