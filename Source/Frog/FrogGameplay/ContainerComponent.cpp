@@ -24,6 +24,15 @@ void UContainerComponent::Initialize(UInteractableData* InData)
 	Data = InData;
 }
 
+void UContainerComponent::SetShowInventoryWidget(bool bShow)
+{
+	bShowInventoryWidget = bShow;
+	if (IsValid(InventoryWidgetComponent))
+	{
+		InventoryWidgetComponent->SetVisibility(bShow);
+	}
+}
+
 void UContainerComponent::OnRegister()
 {
 	Super::OnRegister();
@@ -33,7 +42,7 @@ void UContainerComponent::OnRegister()
 		return;
 	}
 
-	if (AttachPoint)
+	if (IsValid(AttachPoint))
 	{
 		// Force the attachment to the current instance to avoid Template Mismatch
 		// This fixes the case where the cloned component still points to the template parent
@@ -45,7 +54,7 @@ void UContainerComponent::OnRegister()
 		}
 	}
 
-	if (InventoryWidgetComponent)
+	if (IsValid(InventoryWidgetComponent))
 	{
 		InventoryWidgetComponent->SetupAttachment(this);
 		
@@ -53,17 +62,19 @@ void UContainerComponent::OnRegister()
 		{
 			InventoryWidgetComponent->RegisterComponent();
 		}
+
+		InventoryWidgetComponent->SetVisibility(bShowInventoryWidget);
 	}
 }
 
 void UContainerComponent::OnUnregister()
 {
-	if (AttachPoint && AttachPoint->IsRegistered())
+	if (IsValid(AttachPoint) && AttachPoint->IsRegistered())
 	{
 		AttachPoint->UnregisterComponent();
 	}
 
-	if (InventoryWidgetComponent && InventoryWidgetComponent->IsRegistered())
+	if (IsValid(InventoryWidgetComponent) && InventoryWidgetComponent->IsRegistered())
 	{
 		InventoryWidgetComponent->UnregisterComponent();
 	}
@@ -80,7 +91,7 @@ void UContainerComponent::ClearInventory()
 bool UContainerComponent::TryAddToInventory(AInteractable* InteractableToAdd)
 {
     if (!Data.IsValid() || !IsValid(InteractableToAdd)) return false;
-    if (GetInventorySize() >= Data->GetMaxCapacity()) return false;
+    if (IsFull()) return false;
     if (!InteractableToAdd->HasMatchingInteractableTag(Data->GetAcceptedTags())) return false;
     
     Inventory.Add(InteractableToAdd);
@@ -97,53 +108,57 @@ bool UContainerComponent::TryAddToInventory(AInteractable* InteractableToAdd)
 
 bool UContainerComponent::TryAddContainerContentsToInventory(AContainer* ContainerToAdd)
 {
-    if (!IsValid(ContainerToAdd)) return false;
-    if (!Data.IsValid()) return false;
+	if (!IsValid(ContainerToAdd)) return false;
+	if (!Data.IsValid()) return false;
 
-    UContainerComponent* OtherContainer = ContainerToAdd->GetContainerComponent();
-    if (!IsValid(OtherContainer)) return false;
+	UContainerComponent* ContainerCompToAdd = ContainerToAdd->GetContainerComponent();
+	if (!IsValid(ContainerCompToAdd)) return false;
     
-    if (OtherContainer->GetInventorySize() <= 0) return false;
-    if (GetInventorySize() + OtherContainer->GetInventorySize() > Data->GetMaxCapacity()) return false;
+	if (ContainerCompToAdd->IsEmpty()) return false;
+	if (GetInventorySize() + ContainerCompToAdd->GetInventorySize() > Data->GetMaxCapacity()) return false;
     
-    const TArray<AInteractable*>& InInventory = OtherContainer->GetInventory();
-
-    for (const AInteractable* InventoryIndex : InInventory)
-    {
-       if (!InventoryIndex->HasMatchingInteractableTag(Data->GetAcceptedTags()))
-       {
-          return false;
-       }
-    }
+	const TArray<TObjectPtr<AInteractable>>& InInventory = ContainerCompToAdd->GetInventory();
+	// All contents of the source must be compatible, no partial transfer
+	for (const TObjectPtr<AInteractable>& InventoryItem : InInventory)
+	{
+		if (IsValid(InventoryItem) && !InventoryItem->HasMatchingInteractableTag(Data->GetAcceptedTags()))
+		{
+			return false;
+		}
+	}
     
-    for (int32 i = InInventory.Num() - 1; i >= 0; --i)
-    {
-       TryAddToInventory(InInventory[i]);
-    }
+	for (int32 i = InInventory.Num() - 1; i >= 0; --i)
+	{
+		TryAddToInventory(InInventory[i].Get());
+	}
     
-    OtherContainer->ClearInventory();
-    UpdateInventoryWidget();
+	ContainerCompToAdd->ClearInventory();
+	UpdateInventoryWidget();
     
-    return true;
+	return true;
 }
 
 bool UContainerComponent::TryRemoveFromInventory(AInteractable* InteractableToRemove)
 {
     if (!IsValid(InteractableToRemove)) return false;
-    
+	
     if (Inventory.Remove(InteractableToRemove) > 0)
     {
        UpdateInventoryWidget();
        OnRemovedFromInventory.ExecuteIfBound(InteractableToRemove);
        return true;
     }
+
     return false;
 }
 
 void UContainerComponent::UpdateInventoryWidget()
 {
-    if (UInventoryWidget* InventoryWidget = Cast<UInventoryWidget>(InventoryWidgetComponent->GetWidget()))
+    if (IsValid(InventoryWidgetComponent) && IsValid(InventoryWidgetComponent->GetWidget()))
     {
-       InventoryWidget->UpdateInventoryWidget(Inventory);
+	    if (UInventoryWidget* InventoryWidget = Cast<UInventoryWidget>(InventoryWidgetComponent->GetWidget()))
+	    {
+		    InventoryWidget->UpdateInventoryWidget(Inventory);
+	    }
     }
 }

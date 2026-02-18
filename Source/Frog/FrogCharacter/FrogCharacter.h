@@ -17,6 +17,8 @@ class USphereComponent;
 class UNametagWidgetComponent;
 class UWidgetComponent;
 class UAbilitySet;
+class UContainerComponent;
+class UInteractableData;
 enum class EAbilityInputID : uint8;
 struct FInputActionValue;
 class USpringArmComponent;
@@ -92,9 +94,6 @@ protected: /* Protected Functions */
 	void SetupAbilities();
 
 	void Move(const FInputActionValue& Value);
-	
-	// Gameplay functions
-	bool TryAddInteractableToPlayer(AInteractable* InteractableToAdd);
 
 protected: /* Members */
 	// Components
@@ -106,11 +105,10 @@ protected: /* Members */
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<UNametagWidgetComponent> NametagWidgetComponent;
-	
-	// Movement
-	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
-	float WalkSpeed;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	TObjectPtr<UContainerComponent> ContainerComponent;
+	
 	// Gameplay Ability System
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "GAS")
 	TObjectPtr<UFrogAbilitySystem> AbilitySystemComponent;
@@ -151,24 +149,11 @@ protected: /* Members */
 	TArray<TWeakObjectPtr<AInteractable>> OverlappingInteractableArray;
 	TWeakObjectPtr<AInteractable> ClosestInteractable;
 	
-	UPROPERTY(BlueprintReadWrite)
-	TWeakObjectPtr<AInteractable> HeldInteractable;
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) // Change this back later
-	TObjectPtr<USceneComponent> InteractableAttachPoint;
-	
-	// UPROPERTY(EditDefaultsOnly)
-	// TObjectPtr<UChildActorComponent> ContainerComponent;
-	//
-	// UPROPERTY(EditDefaultsOnly)
-	// TObjectPtr<AContainer> InventoryContainer;
-	
 	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
-	FGameplayTagContainer AcceptedTags;
+	TObjectPtr<UInteractableData> ContainerData;
 
 public: /* Public Getters/Setters */
 	FORCEINLINE USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	FORCEINLINE UCameraComponent* GetFollowCamera() const { return FollowCamera; }
-	FORCEINLINE float GetWalkSpeed() const { return WalkSpeed; }
 };
 

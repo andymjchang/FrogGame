@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Container.h"
+#include "InteractableData.h"
 #include "Components/SceneComponent.h"
 #include "ContainerComponent.generated.h"
 
@@ -27,10 +28,15 @@ public:
 	bool TryAddContainerContentsToInventory(AContainer* ContainerToAdd);
 	bool TryRemoveFromInventory(AInteractable* InteractableToRemove);
 
+	void SetShowInventoryWidget(bool bShow);
+
 	// Delegates
 	FOnInventoryItemChanged OnRemovedFromInventory;
 	FOnInventoryItemChanged OnAddedToInventory;
 
+	FORCEINLINE bool IsEmpty() const { return Inventory.Num() <= 0; }
+	FORCEINLINE bool IsFull() const { return Data.IsValid() ? Inventory.Num() >= Data->GetMaxCapacity() : true; }
+	FORCEINLINE AInteractable* GetFirstItem() const { return Inventory.Num() > 0 ? Inventory[0].Get() : nullptr; }
 	FORCEINLINE const TArray<TObjectPtr<AInteractable>>& GetInventory() const { return Inventory; }
 	FORCEINLINE int GetInventorySize() const { return Inventory.Num(); }
 	FORCEINLINE USceneComponent* GetAttachPoint() const { return AttachPoint; }
@@ -41,6 +47,9 @@ protected:
 	void UpdateInventoryWidget();
 
 protected:
+	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
+	bool bShowInventoryWidget = true;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TArray<TObjectPtr<AInteractable>> Inventory;
 	

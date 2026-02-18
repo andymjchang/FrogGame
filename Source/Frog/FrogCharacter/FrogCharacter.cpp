@@ -21,7 +21,6 @@
 #include "FrogGameplay/Container.h"
 #include "FrogGameplay/ContainerComponent.h"
 #include "FrogGameplay/Interactable.h"
-#include "FrogGameplay/InteractableData.h"
 
 AFrogCharacter::AFrogCharacter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer.SetDefaultSubobjectClass<UFrogMovementComponent>(CharacterMovementComponentName))
@@ -77,11 +76,10 @@ AFrogCharacter::AFrogCharacter(const FObjectInitializer& ObjectInitializer)
 	NametagWidgetComponent = CreateDefaultSubobject<UNametagWidgetComponent>(TEXT("NametagWidgetComponent"));
 	NametagWidgetComponent->SetupAttachment(RootComponent);
 
-	// Inventory Child Actor
-	// ContainerComponent = CreateDefaultSubobject<UChildActorComponent>(TEXT("ContainerComponent"));
-	
-	InteractableAttachPoint = CreateDefaultSubobject<USceneComponent>(TEXT("InteractableAttachPoint"));
-	InteractableAttachPoint->SetupAttachment(GetMesh());
+	// Inventory
+	ContainerComponent = CreateDefaultSubobject<UContainerComponent>(TEXT("ContainerComponent"));
+	ContainerComponent->SetupAttachment(GetMesh());
+	ContainerComponent->SetShowInventoryWidget(false);
 }
 
 void AFrogCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -102,6 +100,11 @@ void AFrogCharacter::BeginPlay()
 
 	InteractHitbox->OnComponentBeginOverlap.AddDynamic(this, &AFrogCharacter::OnOverlapBegin);
 	InteractHitbox->OnComponentEndOverlap.AddDynamic(this, &AFrogCharacter::OnOverlapEnd);
+
+	if (IsValid(ContainerComponent))
+	{
+		ContainerComponent->Initialize(ContainerData);
+	}
 }
 
 UAbilitySystemComponent* AFrogCharacter::GetAbilitySystemComponent() const
@@ -111,6 +114,8 @@ UAbilitySystemComponent* AFrogCharacter::GetAbilitySystemComponent() const
 
 void AFrogCharacter::Interact()
 {
+	if (!IsValid(ContainerComponent)) return;
+
 	AInteractable* OtherInteractable = ClosestInteractable.Get();
 	if (!IsValid(OtherInteractable)) return;
 	AInteractable* OtherOffer = OtherInteractable->GetOfferedInteractable();
@@ -127,21 +132,22 @@ void AFrogCharacter::Interact()
 		OtherOfferAsContainerComp = OtherOfferAsContainer->GetContainerComponent();
 	}
 
-	if (OtherOfferAsContainerComp && GEngine)
+	if (IsValid(OtherOfferAsContainerComp) && IsValid(GEngine))
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Yellow,
 			FString::Printf(TEXT("Current Interaction Target: %s"), *OtherOfferAsContainerComp->GetName()));
 	}
-	
-	if (HeldInteractable.IsValid())
+
+	AInteractable* HeldInteractable = ContainerComponent->GetFirstItem();
+	if (IsValid(HeldInteractable))
 	{
 		FLOG(TEXT("Trying interact as item..."));
 
-		if (IsValid(OtherOfferAsContainerComp) && OtherOfferAsContainerComp->TryAddToInventory(HeldInteractable.Get()))
+		if (IsValid(OtherOfferAsContainerComp) && OtherOfferAsContainerComp->TryAddToInventory(HeldInteractable))
 		{
-			HeldInteractable = nullptr;
+			ContainerComponent->TryRemoveFromInventory(HeldInteractable);
 		}
-		else if (AContainer* HeldContainer = Cast<AContainer>(HeldInteractable.Get()))
+		else if (AContainer* HeldContainer = Cast<AContainer>(HeldInteractable))
 		{
 			FLOG(TEXT("Try interact as container..."));
 			
@@ -163,7 +169,7 @@ void AFrogCharacter::Interact()
 	{
 		FLOG(TEXT("Trying interact as player"));
        
-		if (TryAddInteractableToPlayer(OtherOffer))
+		if (ContainerComponent->TryAddToInventory(OtherOffer))
 		{
 			if (IsValid(OtherContainerComp))
 			{
@@ -181,48 +187,6 @@ void AFrogCharacter::Work()
 void AFrogCharacter::StopWork()
 {
 	WorkHitbox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-}
-
-bool AFrogCharacter::TryAddInteractableToPlayer(AInteractable* InteractableToAdd)
-{
-    if (!IsValid(InteractableToAdd))
-    {
-        UE_LOG(LogTemp, Log, TEXT("[%f] Player: InteractableToAdd is not valid"), GetWorld()->GetTimeSeconds());
-        return false;
-    }
-    
-    if (!IsValid(InteractableToAdd->GetData()))
-    {
-        UE_LOG(LogTemp, Log, TEXT("[%f] Player: InteractableToAdd has no valid Data"), GetWorld()->GetTimeSeconds());
-        return false;
-    }
-    
-    if (!InteractableToAdd->GetData()->GetIsMoveable())
-    {
-        UE_LOG(LogTemp, Log, TEXT("[%f] Player: Interactable is not moveable"), GetWorld()->GetTimeSeconds());
-        return false;
-    }
-
-    if (HeldInteractable.IsValid())
-    {
-        UE_LOG(LogTemp, Log, TEXT("[%f] Player: Already holding an item"), GetWorld()->GetTimeSeconds());
-        return false;
-    }
-    
-    if (InteractableToAdd->HasMatchingInteractableTag(AcceptedTags))
-    {
-        const FAttachmentTransformRules Rules(EAttachmentRule::SnapToTarget, false);
-        HeldInteractable = InteractableToAdd;
-        InteractableToAdd->DisableInteractable();
-        InteractableToAdd->AttachToComponent(InteractableAttachPoint, Rules);
-       
-        UE_LOG(LogTemp, Log, TEXT("[%f] Player: Successfully picked up interactable"), GetWorld()->GetTimeSeconds());
-        return true;
-    }
-    
-    UE_LOG(LogTemp, Log, TEXT("[%f] Player: Interactable tags not compatible with player"), GetWorld()->GetTimeSeconds());
-
-    return false;
 }
 
 void AFrogCharacter::SetupAbilities()
