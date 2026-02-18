@@ -88,12 +88,19 @@ void UContainerComponent::ClearInventory()
     UpdateInventoryWidget();
 }
 
+void UContainerComponent::RemoveNullsFromInventory()
+{
+	Inventory.Remove(nullptr);
+}
+
 bool UContainerComponent::TryAddToInventory(AInteractable* InteractableToAdd)
 {
     if (!Data.IsValid() || !IsValid(InteractableToAdd)) return false;
     if (IsFull()) return false;
     if (!InteractableToAdd->HasMatchingInteractableTag(Data->GetAcceptedTags())) return false;
-    
+	
+	RemoveNullsFromInventory();
+	
     Inventory.Add(InteractableToAdd);
 
     InteractableToAdd->DisableInteractable();
@@ -113,7 +120,10 @@ bool UContainerComponent::TryAddContainerContentsToInventory(AContainer* Contain
 
 	UContainerComponent* ContainerCompToAdd = ContainerToAdd->GetContainerComponent();
 	if (!IsValid(ContainerCompToAdd)) return false;
-    
+	
+    RemoveNullsFromInventory();
+	ContainerCompToAdd->RemoveNullsFromInventory();
+	
 	if (ContainerCompToAdd->IsEmpty()) return false;
 	if (GetInventorySize() + ContainerCompToAdd->GetInventorySize() > Data->GetMaxCapacity()) return false;
     

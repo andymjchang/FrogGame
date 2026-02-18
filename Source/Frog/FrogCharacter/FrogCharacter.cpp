@@ -136,11 +136,11 @@ void AFrogCharacter::Interact()
 		OtherOfferAsContainerComp = OtherOfferAsContainer->GetContainerComponent();
 	}
 
-	if (IsValid(OtherOfferAsContainerComp) && IsValid(GEngine))
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Yellow,
-			FString::Printf(TEXT("Current Interaction Target: %s"), *OtherInteractable->GetName()));
-	}
+	// if (IsValid(OtherOfferAsContainerComp) && IsValid(GEngine))
+	// {
+	// 	GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Yellow,
+	// 		FString::Printf(TEXT("Current Interaction Target: %s"), *OtherInteractable->GetName()));
+	// }
 
 	AInteractable* HeldInteractable = ContainerComponent->GetFirstItem();
 	if (IsValid(HeldInteractable))

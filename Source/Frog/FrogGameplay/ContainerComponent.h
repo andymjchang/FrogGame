@@ -24,6 +24,7 @@ public:
 	void Initialize(UInteractableData* InData);
 
 	void ClearInventory();
+	void RemoveNullsFromInventory();
 	bool TryAddToInventory(AInteractable* InteractableToAdd);
 	bool TryAddContainerContentsToInventory(AContainer* ContainerToAdd);
 	bool TryRemoveFromInventory(AInteractable* InteractableToRemove);
