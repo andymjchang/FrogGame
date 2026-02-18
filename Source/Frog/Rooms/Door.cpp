@@ -39,8 +39,8 @@ void ADoor::BeginPlay()
 	
 	if (IsValid(Hitbox))
 	{
-		Hitbox->OnComponentBeginOverlap.AddDynamic(this, &ADoor::OnOverlapBegin);
-		Hitbox->OnComponentEndOverlap.AddDynamic(this, &ADoor::OnOverlapEnd);
+		Hitbox->OnComponentBeginOverlap.AddDynamic(this, &ADoor::HandleHitboxOverlapBegin);
+		Hitbox->OnComponentEndOverlap.AddDynamic(this, &ADoor::HandleHitboxEndOverlap);
 	}
 	
 	if (IsValid(ProgressTracker) && IsValid(ProgressWidgetComponent))
@@ -71,13 +71,13 @@ void ADoor::HandleProgressComplete()
 	ServerAttemptPurchase();
 }
 
-void ADoor::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
+void ADoor::HandleHitboxOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	ProgressTracker->StartProgress();
 }
 
-void ADoor::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
+void ADoor::HandleHitboxEndOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 	int32 OtherBodyIndex)
 {
 	ProgressTracker->StopProgress();

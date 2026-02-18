@@ -20,8 +20,8 @@ void AWorkStation::BeginPlay()
     
     if (IsValid(WorkHitBox))
     {
-        WorkHitBox->OnComponentBeginOverlap.AddDynamic(this, &AWorkStation::OnWorkHitBoxBeginOverlap);
-        WorkHitBox->OnComponentEndOverlap.AddDynamic(this, &AWorkStation::OnWorkHitBoxEndOverlap);
+        WorkHitBox->OnComponentBeginOverlap.AddDynamic(this, &AWorkStation::HandleWorkHitBoxBeginOverlap);
+        WorkHitBox->OnComponentEndOverlap.AddDynamic(this, &AWorkStation::HandleWorkHitBoxEndOverlap);
     }
 }
 
@@ -30,13 +30,13 @@ void AWorkStation::HandleAddedToInventory(AInteractable* InteractableToAdd)
     UE_LOG(LogTemp, Log, TEXT("[%f] WorkStation: Item added, manual interaction required."), GetWorld()->GetTimeSeconds());
 }
 
-void AWorkStation::OnWorkHitBoxBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+void AWorkStation::HandleWorkHitBoxBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
     UE_LOG(LogTemp, Log, TEXT("HITBOX HIT FOR WORK"));
     ProgressTracker->StartProgress();
 }
 
-void AWorkStation::OnWorkHitBoxEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+void AWorkStation::HandleWorkHitBoxEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
     UE_LOG(LogTemp, Log, TEXT("HITBOX HIT FOR WORK STOPPED"));
     ProgressTracker->StopProgress();

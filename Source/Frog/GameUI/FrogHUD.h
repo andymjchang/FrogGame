@@ -30,9 +30,9 @@ public:
 protected:
 	// Delegate functions
 	UFUNCTION()
-	void OnScoreChanged(int32 NewScore);
+	void HandleScoreChanged(int32 NewScore);
 	UFUNCTION()
-	void OnPhaseChanged(EFrogGamePhase NewPhase);
+	void HandlePhaseChanged(EFrogGamePhase NewPhase);
 
 	void UpdateCountdownDisplay();
 };

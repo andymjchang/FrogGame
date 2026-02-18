@@ -78,7 +78,11 @@ protected: /* Protected Functions */
 	virtual void NotifyControllerChanged() override;
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
+	void Move(const FInputActionValue& Value);
 	void UpdateClosestInteractable();
+	
+	UFUNCTION()
+	void HandleAddedToInventory(class AInteractable* Item);
 	
 	UFUNCTION()
 	void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
@@ -92,8 +96,6 @@ protected: /* Protected Functions */
 	void AbilityInputBindingPressedHandler(EAbilityInputID AbilityInputID);
 	void AbilityInputBindingReleasedHandler(EAbilityInputID AbilityInputID);
 	void SetupAbilities();
-
-	void Move(const FInputActionValue& Value);
 
 protected: /* Members */
 	// Components

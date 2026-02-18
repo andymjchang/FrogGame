@@ -98,12 +98,16 @@ void AFrogCharacter::BeginPlay()
 	
 	if (HasAuthority()) SetupAbilities();
 
-	InteractHitbox->OnComponentBeginOverlap.AddDynamic(this, &AFrogCharacter::OnOverlapBegin);
-	InteractHitbox->OnComponentEndOverlap.AddDynamic(this, &AFrogCharacter::OnOverlapEnd);
+	if (IsValid(InteractHitbox))
+	{
+		InteractHitbox->OnComponentBeginOverlap.AddDynamic(this, &AFrogCharacter::OnOverlapBegin);
+		InteractHitbox->OnComponentEndOverlap.AddDynamic(this, &AFrogCharacter::OnOverlapEnd);
+	}
 
 	if (IsValid(ContainerComponent))
 	{
 		ContainerComponent->Initialize(ContainerData);
+		ContainerComponent->OnAddedToInventory.BindDynamic(this, &AFrogCharacter::HandleAddedToInventory);
 	}
 }
 
@@ -274,8 +278,12 @@ void AFrogCharacter::UpdateClosestInteractable()
 			ClosestInteractable = I;
 		}
 	}
+}
 
-
+void AFrogCharacter::HandleAddedToInventory(class AInteractable* Item)
+{
+	const bool ShowInventory = (IsValid(Item) && !Cast<AContainer>(Item));
+	ContainerComponent->SetShowInventoryWidget(ShowInventory);
 }
 
 void AFrogCharacter::Tick(float DeltaSeconds)

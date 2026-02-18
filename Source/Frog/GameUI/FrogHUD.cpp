@@ -9,11 +9,11 @@ void UFrogHUD::NativeConstruct()
 
     if (FrogGameState.IsValid())
     {
-        OnScoreChanged(FrogGameState->GetMoney());
-        OnPhaseChanged(FrogGameState->GetCurrentPhase());
+        HandleScoreChanged(FrogGameState->GetMoney());
+        HandlePhaseChanged(FrogGameState->GetCurrentPhase());
         
-        FrogGameState->OnMoneyChanged.AddDynamic(this, &UFrogHUD::OnScoreChanged);
-        FrogGameState->OnPhaseChanged.AddDynamic(this, &UFrogHUD::OnPhaseChanged);
+        FrogGameState->OnMoneyChanged.AddDynamic(this, &UFrogHUD::HandleScoreChanged);
+        FrogGameState->OnPhaseChanged.AddDynamic(this, &UFrogHUD::HandlePhaseChanged);
         
         if (GetWorld())
         {
@@ -39,7 +39,7 @@ void UFrogHUD::NativeDestruct()
     }
 }
 
-void UFrogHUD::OnScoreChanged(int32 NewScore)
+void UFrogHUD::HandleScoreChanged(int32 NewScore)
 {
     if (!IsValid(ScoreText)) return;
     
@@ -47,7 +47,7 @@ void UFrogHUD::OnScoreChanged(int32 NewScore)
     
 }
 
-void UFrogHUD::OnPhaseChanged(EFrogGamePhase NewPhase)
+void UFrogHUD::HandlePhaseChanged(EFrogGamePhase NewPhase)
 {
     if (!IsValid(DayTimerText)) return;
     
