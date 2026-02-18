@@ -19,14 +19,9 @@ UContainerComponent::UContainerComponent()
     InventoryWidgetComponent->SetDrawSize(FIntPoint(100, 100));
 }
 
-void UContainerComponent::BeginPlay()
+void UContainerComponent::Initialize(UInteractableData* InData)
 {
-    Super::BeginPlay();
-
-    if (const AInteractable* OwningInteractable = Cast<AInteractable>(GetOwner()))
-    {
-        Data = OwningInteractable->GetData();
-    }
+	Data = InData;
 }
 
 void UContainerComponent::OnRegister()

@@ -20,7 +20,7 @@ class FROG_API UContainerComponent : public USceneComponent
 
 public:
 	UContainerComponent();
-	virtual void BeginPlay() override;
+	void Initialize(UInteractableData* InData);
 
 	void ClearInventory();
 	bool TryAddToInventory(AInteractable* InteractableToAdd);

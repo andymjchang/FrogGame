@@ -21,6 +21,7 @@ void AContainer::BeginPlay()
 	{
 		ContainerComponent->OnAddedToInventory.BindDynamic(this, &AContainer::HandleAddedToInventory);
 		ContainerComponent->OnRemovedFromInventory.BindDynamic(this, &AContainer::HandleRemovedFromInventory);
+		ContainerComponent->Initialize(Data);
 	}
 }
 
