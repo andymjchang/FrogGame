@@ -16,23 +16,10 @@ class FROG_API AWorkStation : public AStation
 public:
 	AWorkStation();
 
-protected:
-	virtual void BeginPlay() override;
-	
-	virtual void HandleAddedToInventory(AInteractable* InteractableToAdd) override;
-
-public:
-	UFUNCTION()
-	void HandleWorkHitBoxBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
-    
-	UFUNCTION()
-	void HandleWorkHitBoxEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+	virtual void StartWork() override;
+	void virtual StopWork() override;
+	virtual void StopHighlight() override;
 
 protected:
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	TObjectPtr<UBoxComponent> WorkHitBox;
-
-	float ProcessingDuration = 3.0f;
-    
 	bool bIsBeingWorked = false;
 };

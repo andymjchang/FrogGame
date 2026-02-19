@@ -67,8 +67,9 @@ public: /* Public Functions */
 	/// Ability System Interface
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
-	void Interact();
-	void Work();
+	void StartInteract();
+	void StopInteract();
+	void StartWork();
 	void StopWork();
 
 protected: /* Protected Functions */

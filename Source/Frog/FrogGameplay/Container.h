@@ -23,9 +23,9 @@ public:
 	
 protected:
 	UFUNCTION()
-	virtual void HandleRemovedFromInventory(AInteractable* Interactable);
+    virtual void HandleAddedToInventory(AInteractable* Interactable);
 	UFUNCTION()
-	virtual void HandleAddedToInventory(AInteractable* Interactable);
+	virtual void HandleRemovedFromInventory(AInteractable* Interactable);
 	
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Container")

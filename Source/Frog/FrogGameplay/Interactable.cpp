@@ -28,6 +28,22 @@ AInteractable::AInteractable()
 	InteractableMesh->SetupAttachment(RootComponent);
 }
 
+void AInteractable::StartInteract()
+{
+}
+
+void AInteractable::StopInteract()
+{
+}
+
+void AInteractable::StartWork()
+{
+}
+
+void AInteractable::StopWork()
+{
+}
+
 void AInteractable::BeginPlay()
 {
 	Super::BeginPlay();
@@ -51,10 +67,6 @@ bool AInteractable::HasMatchingInteractableTag(const FGameplayTagContainer& Acce
 	}
 
 	return false;
-}
-
-void AInteractable::Interact()
-{
 }
 
 void AInteractable::StartHighlight()

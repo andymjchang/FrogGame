@@ -19,13 +19,15 @@ public:
 	AInteractable();
 	
 public:
+	virtual void StartInteract();
+	virtual void StopInteract();
+	virtual void StartWork();
+	virtual void StopWork();
+	virtual void StartHighlight();
+	virtual void StopHighlight();
+	
 	bool HasMatchingInteractableTag(const FGameplayTagContainer& AcceptedTags) const;
 
-	virtual void Interact();
-
-	void StartHighlight();
-	void StopHighlight();
-	
 	void EnableInteractable();
 	void DisableInteractable();
 	

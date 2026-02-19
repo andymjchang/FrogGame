@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "FrogGameplay/Interactable.h"
 #include "GameFramework/Actor.h"
 #include "Door.generated.h"
 
@@ -15,7 +16,7 @@ DECLARE_DYNAMIC_DELEGATE_OneParam(FOnProgressComplete, ERoomDirection, FacingDir
 class UBoxComponent;
 
 UCLASS()
-class FROG_API ADoor : public AActor
+class FROG_API ADoor : public AInteractable
 {
 	GENERATED_BODY()
 
@@ -32,23 +33,15 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
+	virtual void StartInteract() override;
+	virtual void StopInteract() override;
+	
 	void ServerAttemptPurchase();
 	
 	UFUNCTION()
 	void HandleProgressComplete();
-	
-	UFUNCTION()
-	void HandleHitboxOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
-	                    int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
-
-	UFUNCTION()
-	void HandleHitboxEndOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
-	                  int32 OtherBodyIndex);
 
 protected:
-	UPROPERTY(EditDefaultsOnly)
-	TObjectPtr<UBoxComponent> Hitbox;
-	
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<UProgressTrackingComponent> ProgressTracker;
 	

@@ -115,15 +115,17 @@ UAbilitySystemComponent* AFrogCharacter::GetAbilitySystemComponent() const
 	return AbilitySystemComponent;
 }
 
-void AFrogCharacter::Interact()
+void AFrogCharacter::StartInteract()
 {
-	if (!IsValid(ContainerComponent)) return;
-
 	AInteractable* OtherInteractable = ClosestInteractable.Get();
 	if (!IsValid(OtherInteractable)) return;
 	AInteractable* OtherOffer = OtherInteractable->GetOfferedInteractable();
 	if (!IsValid(OtherOffer)) return;
+	
+	OtherInteractable->StartInteract();
 
+	if (!IsValid(ContainerComponent)) return;
+	
 	UContainerComponent* OtherContainerComp = nullptr;
 	if (AContainer* OtherContainer = Cast<AContainer>(OtherInteractable))
 	{
@@ -182,14 +184,30 @@ void AFrogCharacter::Interact()
 	}
 }
 
-void AFrogCharacter::Work()
+void AFrogCharacter::StopInteract()
 {
-	WorkHitbox->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+	AInteractable* OtherInteractable = ClosestInteractable.Get();
+	if (!IsValid(OtherInteractable)) return;
+	AInteractable* OtherOffer = OtherInteractable->GetOfferedInteractable();
+	if (!IsValid(OtherOffer)) return;
+	
+	OtherInteractable->StopInteract();	
+}
+
+void AFrogCharacter::StartWork()
+{
+	AInteractable* OtherInteractable = ClosestInteractable.Get();
+	if (!IsValid(OtherInteractable)) return;
+	
+	OtherInteractable->StartWork();
 }
 
 void AFrogCharacter::StopWork()
 {
-	WorkHitbox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	AInteractable* OtherInteractable = ClosestInteractable.Get();
+	if (!IsValid(OtherInteractable)) return;
+	
+	OtherInteractable->StopWork();
 }
 
 void AFrogCharacter::SetupAbilities()
@@ -243,9 +261,11 @@ void AFrogCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 void AFrogCharacter::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (AInteractable* Interactable = Cast<AInteractable>(OtherActor))
+	AInteractable* Interactable = Cast<AInteractable>(OtherActor);
+	if (IsValid(Interactable))
 	{
 		OverlappingInteractableArray.Add(Interactable);
+		Interactable->StartHighlight();
 		UpdateClosestInteractable();
 	}
 }
@@ -253,9 +273,11 @@ void AFrogCharacter::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AA
 void AFrogCharacter::OnOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 								  UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	if (AInteractable* Interactable = Cast<AInteractable>(OtherActor))
+	AInteractable* Interactable = Cast<AInteractable>(OtherActor);
+	if (IsValid(Interactable))
 	{
 		OverlappingInteractableArray.Remove(Interactable);
+		Interactable->StopHighlight();
 		UpdateClosestInteractable();
 	}
 }

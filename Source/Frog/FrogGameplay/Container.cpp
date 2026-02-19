@@ -25,17 +25,15 @@ void AContainer::BeginPlay()
 	}
 }
 
-void AContainer::HandleRemovedFromInventory(AInteractable* Interactable)
-{
-	OfferedInteractable = this;
-}
-
 void AContainer::HandleAddedToInventory(AInteractable* Interactable)
 {
 
 }
 
-
+void AContainer::HandleRemovedFromInventory(AInteractable* Interactable)
+{
+	OfferedInteractable = this;
+}
 
 
 

@@ -17,7 +17,7 @@ void UFA_Work::ActivateAbility(FGameplayAbilitySpecHandle Handle, const FGamepla
 	
 	if (AFrogCharacter* Frog = Cast<AFrogCharacter>(ActorInfo->AvatarActor.Get()))
 	{
-		Frog->Work();
+		Frog->StartWork();
 	}
 }
 

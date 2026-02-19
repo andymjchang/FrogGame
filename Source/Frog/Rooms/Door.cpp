@@ -11,17 +11,13 @@
 ADoor::ADoor()
 {
 	PrimaryActorTick.bCanEverTick = false;
-
-	// Root Component
-	USceneComponent* DefaultRoot = CreateDefaultSubobject<USceneComponent>(TEXT("DefaultRoot"));
-	RootComponent = DefaultRoot;
-
+	
 	// Hitbox
-	Hitbox = CreateDefaultSubobject<UBoxComponent>(TEXT("Hitbox"));
-	Hitbox->SetupAttachment(RootComponent);
-	Hitbox->SetBoxExtent(FVector(64.f, 256.f, 128.f));
-	Hitbox->SetRelativeLocation(FVector(0.0f, 0.0f, 128.0f));
-	Hitbox->SetCollisionProfileName(TEXT("InteractListen"));
+	InteractHitBox = CreateDefaultSubobject<UBoxComponent>(TEXT("Hitbox"));
+	InteractHitBox->SetupAttachment(RootComponent);
+	InteractHitBox->SetBoxExtent(FVector(64.f, 256.f, 128.f));
+	InteractHitBox->SetRelativeLocation(FVector(0.0f, 0.0f, 128.0f));
+	InteractHitBox->SetCollisionProfileName(TEXT("InteractListen"));
 	
 	// Progress Tracker
 	ProgressTracker = CreateDefaultSubobject<UProgressTrackingComponent>(TEXT("ProgressTrackingComponent"));
@@ -37,11 +33,11 @@ void ADoor::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	if (IsValid(Hitbox))
-	{
-		Hitbox->OnComponentBeginOverlap.AddDynamic(this, &ADoor::HandleHitboxOverlapBegin);
-		Hitbox->OnComponentEndOverlap.AddDynamic(this, &ADoor::HandleHitboxEndOverlap);
-	}
+	// if (IsValid(InteractHitBox))
+	// {
+	// 	InteractHitBox->OnComponentBeginOverlap.AddDynamic(this, &ADoor::HandleHitboxOverlapBegin);
+	// 	InteractHitBox->OnComponentEndOverlap.AddDynamic(this, &ADoor::HandleHitboxEndOverlap);
+	// }
 	
 	if (IsValid(ProgressTracker) && IsValid(ProgressWidgetComponent))
 	{
@@ -71,29 +67,27 @@ void ADoor::HandleProgressComplete()
 	ServerAttemptPurchase();
 }
 
-void ADoor::HandleHitboxOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
-	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+void ADoor::StartInteract()
 {
 	ProgressTracker->StartProgress();
 }
 
-void ADoor::HandleHitboxEndOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
-	int32 OtherBodyIndex)
+void ADoor::StopInteract()
 {
 	ProgressTracker->StopProgress();
 }
 
 void ADoor::SetActive(const bool bIsTrue)
 {
-	if (!IsValid(Hitbox)) return;
+	if (!IsValid(InteractHitBox)) return;
 
 	if (bIsTrue)
 	{
-		Hitbox->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+		InteractHitBox->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 	}
 	else
 	{
-		Hitbox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		InteractHitBox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
 }
 
