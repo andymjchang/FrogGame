@@ -79,7 +79,6 @@ AFrogCharacter::AFrogCharacter(const FObjectInitializer& ObjectInitializer)
 	// Inventory
 	ContainerComponent = CreateDefaultSubobject<UContainerComponent>(TEXT("ContainerComponent"));
 	ContainerComponent->SetupAttachment(GetMesh());
-	ContainerComponent->SetShowInventoryWidget(false);
 }
 
 void AFrogCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const

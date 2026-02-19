@@ -3,12 +3,12 @@
 #include "Spawner.h"
 
 #include "ContainerComponent.h"
-#include "Frog.h"
 #include "Engine/World.h"
 
 ASpawner::ASpawner()
 {
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
+	ContainerComponent->SetShowInventoryWidget(false);
 }
 
 void ASpawner::BeginPlay()

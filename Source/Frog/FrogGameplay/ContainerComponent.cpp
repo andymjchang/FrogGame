@@ -24,9 +24,8 @@ void UContainerComponent::Initialize(UInteractableData* InData)
 	Data = InData;
 }
 
-void UContainerComponent::SetShowInventoryWidget(bool bShow)
+void UContainerComponent::SetShowInventoryWidget(const bool bShow)
 {
-	bShowInventoryWidget = bShow;
 	if (IsValid(InventoryWidgetComponent))
 	{
 		InventoryWidgetComponent->SetVisibility(bShow);
