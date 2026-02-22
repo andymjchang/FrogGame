@@ -3,7 +3,7 @@
 #include "Station.h"
 
 #include "ContainerComponent.h"
-#include "InteractableData.h"
+#include "ItemData.h"
 #include "ProgressTrackingComponent.h"
 #include "GameState/FrogGameState.h"
 #include "TimerManager.h"
@@ -45,7 +45,7 @@ FGameplayTagContainer AStation::GatherAllTags() const
         AllTags.AppendTags(Data->GetOwnedTags());
     }
     
-    for (AInteractable* Item : ContainerComponent->GetInventory())
+    for (AItem* Item : ContainerComponent->GetInventory())
     {
         if (IsValid(Item) && IsValid(Item->GetData()))
         {
@@ -68,9 +68,9 @@ void AStation::HandleProcessingComplete()
 
     const FGameplayTagContainer AllTags = GatherAllTags();
 
-    if (const TSubclassOf<AInteractable> ResultClass = GameState->GetRecipeResultClass(AllTags))
+    if (const TSubclassOf<AItem> ResultClass = GameState->GetRecipeResultClass(AllTags))
     {
-        for (AInteractable* Item : ContainerComponent->GetInventory())
+        for (AItem* Item : ContainerComponent->GetInventory())
         {
             if (IsValid(Item))
             {
@@ -82,7 +82,7 @@ void AStation::HandleProcessingComplete()
         FActorSpawnParameters SpawnParams;
         SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
         
-        AInteractable* SpawnedResult = GetWorld()->SpawnActor<AInteractable>(
+        AItem* SpawnedResult = GetWorld()->SpawnActor<AItem>(
             ResultClass,
             GetActorLocation() + FVector(0, 0, 100), 
             FRotator::ZeroRotator,

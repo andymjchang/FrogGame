@@ -18,7 +18,7 @@ class UNametagWidgetComponent;
 class UWidgetComponent;
 class UAbilitySet;
 class UContainerComponent;
-class UInteractableData;
+class UItemData;
 enum class EAbilityInputID : uint8;
 struct FInputActionValue;
 class USpringArmComponent;
@@ -83,7 +83,7 @@ protected: /* Protected Functions */
 	void UpdateClosestInteractable();
 	
 	UFUNCTION()
-	void HandleAddedToInventory(class AInteractable* Item);
+	void HandleAddedToInventory(class AItem* Item);
 	
 	UFUNCTION()
 	void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
@@ -149,11 +149,11 @@ protected: /* Members */
 	TObjectPtr<USphereComponent> WorkHitbox;
 
 	// GamePlay Interactions
-	TArray<TWeakObjectPtr<AInteractable>> OverlappingInteractableArray;
-	TWeakObjectPtr<AInteractable> ClosestInteractable;
+	TArray<TWeakInterfacePtr<IInteractableInterface>> OverlappingInteractableArray;
+	TWeakInterfacePtr<IInteractableInterface> ClosestInteractable;
 	
 	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
-	TObjectPtr<UInteractableData> ContainerData;
+	TObjectPtr<UItemData> ContainerData;
 
 public: /* Public Getters/Setters */
 	FORCEINLINE USpringArmComponent* GetCameraBoom() const { return CameraBoom; }

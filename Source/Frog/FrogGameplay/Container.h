@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Interactable.h"
+#include "Item.h"
 #include "GameFramework/Actor.h"
 #include "Container.generated.h"
 
@@ -11,7 +11,7 @@ class UContainerComponent;
 class UInteractableWidgetComponent;
 
 UCLASS()
-class FROG_API AContainer : public AInteractable
+class FROG_API AContainer : public AItem
 {
 	GENERATED_BODY()
 
@@ -23,9 +23,9 @@ public:
 	
 protected:
 	UFUNCTION()
-    virtual void HandleAddedToInventory(AInteractable* Interactable);
+    virtual void HandleAddedToInventory(AItem* Interactable);
 	UFUNCTION()
-	virtual void HandleRemovedFromInventory(AInteractable* Interactable);
+	virtual void HandleRemovedFromInventory(AItem* Interactable);
 	
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Container")

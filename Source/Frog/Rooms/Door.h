@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "FrogGameplay/Interactable.h"
+#include "FrogGameplay/Item.h"
 #include "GameFramework/Actor.h"
 #include "Door.generated.h"
 
@@ -16,7 +16,7 @@ DECLARE_DYNAMIC_DELEGATE_OneParam(FOnProgressComplete, ERoomDirection, FacingDir
 class UBoxComponent;
 
 UCLASS()
-class FROG_API ADoor : public AInteractable
+class FROG_API ADoor : public AItem
 {
 	GENERATED_BODY()
 

@@ -4,7 +4,7 @@
 
 #include "ContainerComponent.h"
 #include "Frog.h"
-#include "InteractableData.h"
+#include "ItemData.h"
 #include "GameState/FrogGameState.h"
 
 AOrderCounter::AOrderCounter()
@@ -28,7 +28,7 @@ void AOrderCounter::BeginPlay()
 	}
 }
 
-void AOrderCounter::HandleAddedToInventory(AInteractable* Interactable)
+void AOrderCounter::HandleAddedToInventory(AItem* Interactable)
 {
 	Super::HandleRemovedFromInventory(Interactable);
 	if (!IsValid(Interactable)) return;

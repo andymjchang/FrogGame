@@ -10,7 +10,7 @@
 
 class UProgressTrackingComponent;
 class UStationProgressBar;
-class UInteractableData;
+class UItemData;
 class AFrogCharacter;
 class UBoxComponent;
 class UPrimitiveComponent;
@@ -22,7 +22,7 @@ class FROG_API AStation : public AContainer
     
 public:
 	AStation();
-
+	
 protected:
 	virtual void BeginPlay() override;
 

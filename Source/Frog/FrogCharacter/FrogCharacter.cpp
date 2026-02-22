@@ -20,7 +20,8 @@
 #include "Components/SphereComponent.h"
 #include "FrogGameplay/Container.h"
 #include "FrogGameplay/ContainerComponent.h"
-#include "FrogGameplay/Interactable.h"
+#include "FrogGameplay/Item.h"
+#include "FrogGameplay/WorkStation.h"
 
 AFrogCharacter::AFrogCharacter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer.SetDefaultSubobjectClass<UFrogMovementComponent>(CharacterMovementComponentName))
@@ -117,17 +118,19 @@ UAbilitySystemComponent* AFrogCharacter::GetAbilitySystemComponent() const
 
 void AFrogCharacter::StartInteract()
 {
-	AInteractable* OtherInteractable = ClosestInteractable.Get();
-	if (!IsValid(OtherInteractable)) return;
-	AInteractable* OtherOffer = OtherInteractable->GetOfferedInteractable();
+	if (!ClosestInteractable.IsValid()) return;
+	
+	ClosestInteractable->StartInteract();
+	
+	AItem* OtherItem = Cast<AItem>(ClosestInteractable.Get());
+	if (!IsValid(OtherItem)) return;
+	AItem* OtherOffer = OtherItem->GetOfferedInteractable();
 	if (!IsValid(OtherOffer)) return;
 	
-	OtherInteractable->StartInteract();
-
 	if (!IsValid(ContainerComponent)) return;
 	
 	UContainerComponent* OtherContainerComp = nullptr;
-	if (AContainer* OtherContainer = Cast<AContainer>(OtherInteractable))
+	if (AContainer* OtherContainer = Cast<AContainer>(OtherItem))
 	{
 		OtherContainerComp = OtherContainer->GetContainerComponent();
 	}
@@ -143,7 +146,7 @@ void AFrogCharacter::StartInteract()
 	// 		FString::Printf(TEXT("Current Interaction Target: %s"), *OtherInteractable->GetName()));
 	// }
 
-	AInteractable* HeldInteractable = ContainerComponent->GetFirstItem();
+	AItem* HeldInteractable = ContainerComponent->GetFirstItem();
 	if (IsValid(HeldInteractable))
 	{
 		FLOG(TEXT("Trying interact as item..."));
@@ -186,28 +189,26 @@ void AFrogCharacter::StartInteract()
 
 void AFrogCharacter::StopInteract()
 {
-	AInteractable* OtherInteractable = ClosestInteractable.Get();
-	if (!IsValid(OtherInteractable)) return;
-	AInteractable* OtherOffer = OtherInteractable->GetOfferedInteractable();
-	if (!IsValid(OtherOffer)) return;
+	IInteractableInterface* OtherInteractable = ClosestInteractable.Get();
+	if (!OtherInteractable) return;
 	
 	OtherInteractable->StopInteract();	
 }
 
 void AFrogCharacter::StartWork()
 {
-	AInteractable* OtherInteractable = ClosestInteractable.Get();
-	if (!IsValid(OtherInteractable)) return;
+	AWorkStation* OtherStation = Cast<AWorkStation>(GetOwner());
+	if (!IsValid(OtherStation)) return;
 	
-	OtherInteractable->StartWork();
+	OtherStation->StartWork();
 }
 
 void AFrogCharacter::StopWork()
 {
-	AInteractable* OtherInteractable = ClosestInteractable.Get();
-	if (!IsValid(OtherInteractable)) return;
+	AWorkStation* OtherStation = Cast<AWorkStation>(GetOwner());
+	if (!IsValid(OtherStation)) return;
 	
-	OtherInteractable->StopWork();
+	OtherStation->StopWork();
 }
 
 void AFrogCharacter::SetupAbilities()
@@ -261,11 +262,11 @@ void AFrogCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 void AFrogCharacter::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	AInteractable* Interactable = Cast<AInteractable>(OtherActor);
-	if (IsValid(Interactable))
+	if (IInteractableInterface* Interactable = Cast<IInteractableInterface>(OtherActor))
 	{
 		OverlappingInteractableArray.Add(Interactable);
 		Interactable->StartHighlight();
+		// TODO: Start/Stop highlight is in the wrong spot
 		UpdateClosestInteractable();
 	}
 }
@@ -273,8 +274,7 @@ void AFrogCharacter::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AA
 void AFrogCharacter::OnOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 								  UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	AInteractable* Interactable = Cast<AInteractable>(OtherActor);
-	if (IsValid(Interactable))
+	if (IInteractableInterface* Interactable = Cast<IInteractableInterface>(OtherActor))
 	{
 		OverlappingInteractableArray.Remove(Interactable);
 		Interactable->StopHighlight();
@@ -288,20 +288,20 @@ void AFrogCharacter::UpdateClosestInteractable()
 
 	float BestDistanceSq = MAX_FLT;
 
-	for (TWeakObjectPtr<AInteractable> I : OverlappingInteractableArray)
+	for (TWeakInterfacePtr Interactable : OverlappingInteractableArray)
 	{
-		if (!I.IsValid()) continue;
-
-		float DistSq = FVector::DistSquared(I->GetActorLocation(), GetActorLocation());
+		if (!Interactable.IsValid()) continue;
+		
+		float DistSq = FVector::DistSquared(Interactable->GetInteractableLocation(), GetActorLocation());
 		if (DistSq < BestDistanceSq)
 		{
 			BestDistanceSq = DistSq;
-			ClosestInteractable = I;
+			ClosestInteractable = Interactable;
 		}
 	}
 }
 
-void AFrogCharacter::HandleAddedToInventory(class AInteractable* Item)
+void AFrogCharacter::HandleAddedToInventory(class AItem* Item)
 {
 	const bool ShowInventory = (IsValid(Item) && !Cast<AContainer>(Item));
 	ContainerComponent->SetShowInventoryWidget(ShowInventory);

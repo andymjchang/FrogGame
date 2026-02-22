@@ -4,15 +4,15 @@
 
 #include "CoreMinimal.h"
 #include "Container.h"
-#include "InteractableData.h"
+#include "ItemData.h"
 #include "Components/SceneComponent.h"
 #include "ContainerComponent.generated.h"
 
-DECLARE_DYNAMIC_DELEGATE_OneParam(FOnInventoryItemChanged, class AInteractable*, Item);
+DECLARE_DYNAMIC_DELEGATE_OneParam(FOnInventoryItemChanged, class AItem*, Item);
 
 class UInteractableWidgetComponent;
 class AContainer;
-class AInteractable;
+class AItem;
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class FROG_API UContainerComponent : public USceneComponent
@@ -21,13 +21,13 @@ class FROG_API UContainerComponent : public USceneComponent
 
 public:
 	UContainerComponent();
-	void Initialize(UInteractableData* InData);
+	void Initialize(UItemData* InData);
 
 	void ClearInventory();
 	void RemoveNullsFromInventory();
-	bool TryAddToInventory(AInteractable* InteractableToAdd);
+	bool TryAddToInventory(AItem* InteractableToAdd);
 	bool TryAddContainerContentsToInventory(AContainer* ContainerToAdd);
-	bool TryRemoveFromInventory(AInteractable* InteractableToRemove);
+	bool TryRemoveFromInventory(AItem* InteractableToRemove);
 
 	void SetShowInventoryWidget(bool bShow);
 
@@ -37,8 +37,8 @@ public:
 
 	FORCEINLINE bool IsEmpty() const { return Inventory.Num() <= 0; }
 	FORCEINLINE bool IsFull() const { return Data.IsValid() ? Inventory.Num() >= Data->GetMaxCapacity() : true; }
-	FORCEINLINE AInteractable* GetFirstItem() const { return Inventory.Num() > 0 ? Inventory[0].Get() : nullptr; }
-	FORCEINLINE const TArray<TObjectPtr<AInteractable>>& GetInventory() const { return Inventory; }
+	FORCEINLINE AItem* GetFirstItem() const { return Inventory.Num() > 0 ? Inventory[0].Get() : nullptr; }
+	FORCEINLINE const TArray<TObjectPtr<AItem>>& GetInventory() const { return Inventory; }
 	FORCEINLINE int GetInventorySize() const { return Inventory.Num(); }
 	FORCEINLINE USceneComponent* GetAttachPoint() const { return AttachPoint; }
 	
@@ -52,7 +52,7 @@ protected:
 	bool bShowInventoryWidget = true;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	TArray<TObjectPtr<AInteractable>> Inventory;
+	TArray<TObjectPtr<AItem>> Inventory;
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<UInteractableWidgetComponent> InventoryWidgetComponent;
@@ -61,5 +61,5 @@ protected:
 	TObjectPtr<USceneComponent> AttachPoint;
 	
 	UPROPERTY()
-	TWeakObjectPtr<UInteractableData> Data;
+	TWeakObjectPtr<UItemData> Data;
 };

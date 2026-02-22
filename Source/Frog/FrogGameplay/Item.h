@@ -4,27 +4,26 @@
 
 #include "CoreMinimal.h"
 #include "GameplayTagContainer.h"
+#include "InteractableInterface.h"
 #include "GameFramework/Actor.h"
-#include "Interactable.generated.h"
+#include "Item.generated.h"
 
-class UInteractableData;
+class UItemData;
 class UBoxComponent;
 
 UCLASS()
-class FROG_API AInteractable : public AActor
+class FROG_API AItem : public AActor, public IInteractableInterface
 {
 	GENERATED_BODY()
 
 public:
-	AInteractable();
+	AItem();
 	
-public:
-	virtual void StartInteract();
-	virtual void StopInteract();
-	virtual void StartWork();
-	virtual void StopWork();
-	virtual void StartHighlight();
-	virtual void StopHighlight();
+	virtual void StartInteract() override;
+	virtual void StopInteract() override;
+	virtual void StartHighlight() override;
+	virtual void StopHighlight() override;
+	virtual FVector GetInteractableLocation() override;
 	
 	bool HasMatchingInteractableTag(const FGameplayTagContainer& AcceptedTags) const;
 
@@ -36,13 +35,13 @@ protected:
 	
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
-	TObjectPtr<UInteractableData> Data;
+	TObjectPtr<UItemData> Data;
 	
 	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
 	TObjectPtr<UMaterialInterface> OverlayMaterial;
 
 	UPROPERTY(BlueprintReadOnly)
-	TObjectPtr<AInteractable> OfferedInteractable;
+	TObjectPtr<AItem> OfferedInteractable;
 	
 protected:
 	UPROPERTY(EditDefaultsOnly)
@@ -55,6 +54,6 @@ protected:
 	TObjectPtr<UStaticMeshComponent> InteractableMesh;
 
 public:
-	FORCEINLINE UInteractableData* GetData() const { return Data; }
-	FORCEINLINE AInteractable* GetOfferedInteractable() const { return OfferedInteractable.Get(); };
+	FORCEINLINE UItemData* GetData() const { return Data; }
+	FORCEINLINE AItem* GetOfferedInteractable() const { return OfferedInteractable.Get(); };
 };

@@ -11,7 +11,7 @@ AAutoStation::AAutoStation()
 	PrimaryActorTick.bCanEverTick = false;
 }
 
-void AAutoStation::HandleAddedToInventory(AInteractable* InteractableToAdd)
+void AAutoStation::HandleAddedToInventory(AItem* InteractableToAdd)
 {
 	UE_LOG(LogTemp, Log, TEXT("[%f] _____AutoStation_____"), GetWorld()->GetTimeSeconds());
 

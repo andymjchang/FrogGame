@@ -6,8 +6,8 @@
 #include "GameplayTagContainer.h"
 #include "IngredientMap.generated.h"
 
-class AInteractable;
-class UInteractableData;
+class AItem;
+class UItemData;
 
 // Wrapper struct that serves as the map key
 USTRUCT(BlueprintType)
@@ -42,14 +42,14 @@ struct FRecipeResult
 	GENERATED_BODY()
     
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
-	TSubclassOf<AInteractable> InteractableClass;
+	TSubclassOf<AItem> ItemClass;
     
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
-	UInteractableData* InteractableData;
+	UItemData* ItemData;
 
 	FRecipeResult()
-		: InteractableClass(nullptr)
-		, InteractableData(nullptr)
+		: ItemClass(nullptr)
+		, ItemData(nullptr)
 	{}
 };
 

@@ -16,11 +16,11 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
-	virtual void HandleRemovedFromInventory(AInteractable* Interactable) override;
+	virtual void HandleRemovedFromInventory(AItem* Interactable) override;
 	
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
-	TSubclassOf<AInteractable> InteractableClassToSpawn;
+	TSubclassOf<AItem> InteractableClassToSpawn;
 
 private:
 	void SpawnAndReplenish();

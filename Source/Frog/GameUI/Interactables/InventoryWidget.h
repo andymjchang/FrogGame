@@ -22,7 +22,7 @@ public:
 	virtual void NativeOnInitialized() override;
 	
 public:
-	void UpdateInventoryWidget(const TArray<AInteractable*>& Inventory);
+	void UpdateInventoryWidget(const TArray<AItem*>& Inventory);
 
 protected:
 	UPROPERTY(meta = (BindWidget))

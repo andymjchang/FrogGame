@@ -18,7 +18,7 @@ void ASpawner::BeginPlay()
 	SpawnAndReplenish();
 }
 
-void ASpawner::HandleRemovedFromInventory(AInteractable* Interactable)
+void ASpawner::HandleRemovedFromInventory(AItem* Interactable)
 {
 	Super::HandleRemovedFromInventory(Interactable);
 	SpawnAndReplenish();
@@ -38,7 +38,7 @@ void ASpawner::SpawnAndReplenish()
 	SpawnParams.Owner = this;
 	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 
-	AInteractable* NewItem = World->SpawnActor<AInteractable>(
+	AItem* NewItem = World->SpawnActor<AItem>(
 		InteractableClassToSpawn, 
 		AttachPoint->GetComponentTransform(),
 		SpawnParams

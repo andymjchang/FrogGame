@@ -3,7 +3,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/GameStateBase.h"
 #include "IngredientMap.h"
-#include "FrogGameplay/Interactable.h"
+#include "FrogGameplay/Item.h"
 #include "FrogGameState.generated.h"
 
 class ARoomManager;
@@ -41,8 +41,8 @@ public:
     void ServerTrySubtractMoney(const int32 Amount);
     
     // Client functions
-    TSubclassOf<AInteractable> GetRecipeResultClass(const FGameplayTagContainer& InteractableTags) const;
-    UInteractableData* GetRecipeResultData(const FGameplayTagContainer& InteractableTags) const;
+    TSubclassOf<AItem> GetRecipeResultClass(const FGameplayTagContainer& InteractableTags) const;
+    UItemData* GetRecipeResultData(const FGameplayTagContainer& InteractableTags) const;
     float GetTimeRemaining() const;
     
     FORCEINLINE int32 GetMoney() const { return Money; }

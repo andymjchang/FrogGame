@@ -22,7 +22,7 @@ void ATrashCan::BeginPlay()
 	}
 }
 
-void ATrashCan::HandleAddedToInventory(AInteractable* Interactable)
+void ATrashCan::HandleAddedToInventory(AItem* Interactable)
 {
 	Super::HandleAddedToInventory(Interactable);
 	if (!IsValid(Interactable)) return;

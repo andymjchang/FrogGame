@@ -16,6 +16,6 @@ public:
 	AAutoStation();
 
 protected:
-	virtual void HandleAddedToInventory(AInteractable* InteractableToAdd) override;
+	virtual void HandleAddedToInventory(AItem* InteractableToAdd) override;
 
 };

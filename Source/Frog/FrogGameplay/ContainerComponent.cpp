@@ -1,8 +1,8 @@
 #include "ContainerComponent.h"
 
 #include "Frog.h"
-#include "Interactable.h"
-#include "InteractableData.h"
+#include "Item.h"
+#include "ItemData.h"
 #include "GameUI/Interactables/InteractableWidgetComponent.h"
 #include "GameUI/Interactables/InventoryWidget.h"
 
@@ -19,7 +19,7 @@ UContainerComponent::UContainerComponent()
     InventoryWidgetComponent->SetDrawSize(FIntPoint(100, 100));
 }
 
-void UContainerComponent::Initialize(UInteractableData* InData)
+void UContainerComponent::Initialize(UItemData* InData)
 {
 	Data = InData;
 }
@@ -92,7 +92,7 @@ void UContainerComponent::RemoveNullsFromInventory()
 	Inventory.Remove(nullptr);
 }
 
-bool UContainerComponent::TryAddToInventory(AInteractable* InteractableToAdd)
+bool UContainerComponent::TryAddToInventory(AItem* InteractableToAdd)
 {
     if (!Data.IsValid() || !IsValid(InteractableToAdd)) return false;
     if (IsFull()) return false;
@@ -126,9 +126,9 @@ bool UContainerComponent::TryAddContainerContentsToInventory(AContainer* Contain
 	if (ContainerCompToAdd->IsEmpty()) return false;
 	if (GetInventorySize() + ContainerCompToAdd->GetInventorySize() > Data->GetMaxCapacity()) return false;
     
-	const TArray<TObjectPtr<AInteractable>>& InInventory = ContainerCompToAdd->GetInventory();
+	const TArray<TObjectPtr<AItem>>& InInventory = ContainerCompToAdd->GetInventory();
 	// All contents of the source must be compatible, no partial transfer
-	for (const TObjectPtr<AInteractable>& InventoryItem : InInventory)
+	for (const TObjectPtr<AItem>& InventoryItem : InInventory)
 	{
 		if (IsValid(InventoryItem) && !InventoryItem->HasMatchingInteractableTag(Data->GetAcceptedTags()))
 		{
@@ -147,7 +147,7 @@ bool UContainerComponent::TryAddContainerContentsToInventory(AContainer* Contain
 	return true;
 }
 
-bool UContainerComponent::TryRemoveFromInventory(AInteractable* InteractableToRemove)
+bool UContainerComponent::TryRemoveFromInventory(AItem* InteractableToRemove)
 {
     if (Inventory.Remove(InteractableToRemove) > 0)
     {

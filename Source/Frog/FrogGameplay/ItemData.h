@@ -5,14 +5,14 @@
 #include "CoreMinimal.h"
 #include "GameplayTagContainer.h"
 #include "Engine/DataAsset.h"
-#include "InteractableData.generated.h"
+#include "ItemData.generated.h"
 
 // TODO: Identity which data assets are needed before starting a day and pre load
 /**
  * 
  */
 UCLASS()
-class FROG_API UInteractableData : public UPrimaryDataAsset
+class FROG_API UItemData : public UPrimaryDataAsset
 {
 	GENERATED_BODY()
 	

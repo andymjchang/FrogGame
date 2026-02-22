@@ -1,6 +1,6 @@
 ﻿#include "FrogGameState.h"
 
-#include "FrogGameplay/Interactable.h"
+#include "FrogGameplay/Item.h"
 #include "Net/UnrealNetwork.h"
 
 AFrogGameState::AFrogGameState()
@@ -22,21 +22,21 @@ void AFrogGameState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLi
     DOREPLIFETIME(AFrogGameState, PhaseEndTime);
 }
 
-TSubclassOf<AInteractable> AFrogGameState::GetRecipeResultClass(
+TSubclassOf<AItem> AFrogGameState::GetRecipeResultClass(
     const FGameplayTagContainer& InteractableTags) const
 {
     if (IngredientMap)
     {
-        return IngredientMap->LookupInteractableClassByTagContainer(InteractableTags).InteractableClass;
+        return IngredientMap->LookupInteractableClassByTagContainer(InteractableTags).ItemClass;
     }
     return nullptr;
 }
 
-UInteractableData* AFrogGameState::GetRecipeResultData(const FGameplayTagContainer& InteractableTags) const
+UItemData* AFrogGameState::GetRecipeResultData(const FGameplayTagContainer& InteractableTags) const
 {
     if (IngredientMap)
     {
-        return IngredientMap->LookupInteractableClassByTagContainer(InteractableTags).InteractableData;
+        return IngredientMap->LookupInteractableClassByTagContainer(InteractableTags).ItemData;
     }
     return nullptr;
 }

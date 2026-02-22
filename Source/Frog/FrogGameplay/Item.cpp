@@ -1,13 +1,13 @@
 ﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Interactable.h"
+#include "Item.h"
 
 #include "GameplayTagContainer.h"
-#include "InteractableData.h"
+#include "ItemData.h"
 #include "Components/BoxComponent.h"
 
-AInteractable::AInteractable()
+AItem::AItem()
 {
 	PrimaryActorTick.bCanEverTick = false;
 	bReplicates = true;
@@ -28,31 +28,7 @@ AInteractable::AInteractable()
 	InteractableMesh->SetupAttachment(RootComponent);
 }
 
-void AInteractable::StartInteract()
-{
-}
-
-void AInteractable::StopInteract()
-{
-}
-
-void AInteractable::StartWork()
-{
-}
-
-void AInteractable::StopWork()
-{
-}
-
-void AInteractable::BeginPlay()
-{
-	Super::BeginPlay();
-
-	OfferedInteractable = this;
-}
-
-
-bool AInteractable::HasMatchingInteractableTag(const FGameplayTagContainer& AcceptedTags) const
+bool AItem::HasMatchingInteractableTag(const FGameplayTagContainer& AcceptedTags) const
 {
 	if (AcceptedTags.IsEmpty()) return false;
 	if (!IsValid(Data)) return false;
@@ -69,7 +45,15 @@ bool AInteractable::HasMatchingInteractableTag(const FGameplayTagContainer& Acce
 	return false;
 }
 
-void AInteractable::StartHighlight()
+void AItem::StartInteract()
+{
+}
+
+void AItem::StopInteract()
+{
+}
+
+void AItem::StartHighlight()
 {
 	if (IsValid(InteractableMesh) && IsValid(OverlayMaterial))
 	{
@@ -77,7 +61,7 @@ void AInteractable::StartHighlight()
 	}
 }
 
-void AInteractable::StopHighlight()
+void AItem::StopHighlight()
 {
 	if (IsValid(InteractableMesh))
 	{
@@ -85,12 +69,24 @@ void AInteractable::StopHighlight()
 	}
 }
 
-void AInteractable::EnableInteractable()
+FVector AItem::GetInteractableLocation()
+{
+	return RootSceneComponent->GetComponentLocation();
+}
+
+void AItem::BeginPlay()
+{
+	Super::BeginPlay();
+
+	OfferedInteractable = this;
+}
+
+void AItem::EnableInteractable()
 {
 	if (IsValid(InteractHitBox)) InteractHitBox->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 }
 
-void AInteractable::DisableInteractable()
+void AItem::DisableInteractable()
 {
 	if (IsValid(InteractHitBox)) InteractHitBox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }

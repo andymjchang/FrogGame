@@ -7,7 +7,7 @@
 #include "InventoryElementWidget.generated.h"
 
 class UImage;
-class UInteractableData;
+class UItemData;
 /**
  * 
  */
@@ -17,7 +17,7 @@ class FROG_API UInventoryElementWidget : public UCommonUserWidget
 	GENERATED_BODY()
 	
 public:
-	void SetElement(const UInteractableData* Data);
+	void SetElement(const UItemData* Data);
 	void DisableElement();
 
 protected:

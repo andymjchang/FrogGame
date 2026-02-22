@@ -16,8 +16,8 @@ class FROG_API AWorkStation : public AStation
 public:
 	AWorkStation();
 
-	virtual void StartWork() override;
-	void virtual StopWork() override;
+	virtual void StartWork();
+	void virtual StopWork();
 	virtual void StopHighlight() override;
 
 protected:
