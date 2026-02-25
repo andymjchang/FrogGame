@@ -15,11 +15,10 @@ AOrderCounter::AOrderCounter()
 void AOrderCounter::BeginPlay()
 {
 	Super::BeginPlay();
-
-	USceneComponent* AttachPoint = ContainerComponent->GetAttachPoint();
-	if (IsValid(AttachPoint))
+	
+	if (IsValid(ContainerComponent))
 	{
-		AttachPoint->SetVisibility(false, true);
+		ContainerComponent->SetVisibility(false, true);
 	}
 	
 	if (const UWorld* World = GetWorld())

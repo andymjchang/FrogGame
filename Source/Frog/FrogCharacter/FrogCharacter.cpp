@@ -22,6 +22,7 @@
 #include "FrogGameplay/ContainerComponent.h"
 #include "FrogGameplay/Item.h"
 #include "FrogGameplay/WorkStation.h"
+#include "GameUI/Interactables/InteractableWidgetComponent.h"
 
 AFrogCharacter::AFrogCharacter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer.SetDefaultSubobjectClass<UFrogMovementComponent>(CharacterMovementComponentName))
@@ -79,7 +80,13 @@ AFrogCharacter::AFrogCharacter(const FObjectInitializer& ObjectInitializer)
 
 	// Inventory
 	ContainerComponent = CreateDefaultSubobject<UContainerComponent>(TEXT("ContainerComponent"));
-	ContainerComponent->SetupAttachment(GetMesh());
+	ContainerComponent->SetupAttachment(RootComponent);
+	
+	// Inventory Widget
+	InventoryWidgetComponent = CreateDefaultSubobject<UInteractableWidgetComponent>(TEXT("InventoryWidgetComponent"));
+	InventoryWidgetComponent->SetupAttachment(RootComponent);
+	InventoryWidgetComponent->SetRelativeLocation(FVector(0.f, 0.0f, 600.0f));
+	InventoryWidgetComponent->SetDrawSize(FIntPoint(100, 100));
 }
 
 void AFrogCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -106,7 +113,7 @@ void AFrogCharacter::BeginPlay()
 
 	if (IsValid(ContainerComponent))
 	{
-		ContainerComponent->Initialize(ContainerData);
+		ContainerComponent->Initialize(PlayerItemData, InventoryWidgetComponent);
 		ContainerComponent->OnAddedToInventory.BindDynamic(this, &AFrogCharacter::HandleAddedToInventory);
 	}
 }

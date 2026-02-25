@@ -13,8 +13,7 @@ AItem::AItem()
 	bReplicates = true;
 	
 	// Root Component
-	RootSceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootSceneComponent"));
-	SetRootComponent(RootSceneComponent);
+	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootSceneComponent"));
 	
 	// Interact Hitbox
 	InteractHitBox = CreateDefaultSubobject<UBoxComponent>(TEXT("InteractHitBox"));
@@ -71,7 +70,7 @@ void AItem::StopHighlight()
 
 FVector AItem::GetInteractableLocation()
 {
-	return RootSceneComponent->GetComponentLocation();
+	return GetRootComponent()->GetComponentLocation();
 }
 
 void AItem::BeginPlay()

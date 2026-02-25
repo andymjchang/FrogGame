@@ -1,6 +1,5 @@
 #include "ContainerComponent.h"
 
-#include "Frog.h"
 #include "Item.h"
 #include "ItemData.h"
 #include "GameUI/Interactables/InteractableWidgetComponent.h"
@@ -8,77 +7,21 @@
 
 UContainerComponent::UContainerComponent()
 {
-    PrimaryComponentTick.bCanEverTick = true;
-    
-    AttachPoint = CreateDefaultSubobject<USceneComponent>(TEXT("AttachPoint"));
-    AttachPoint->SetupAttachment(this);
-    
-    InventoryWidgetComponent = CreateDefaultSubobject<UInteractableWidgetComponent>(TEXT("InventoryWidgetComponent"));
-    InventoryWidgetComponent->SetupAttachment(this);
-    InventoryWidgetComponent->SetRelativeLocation(FVector(0.0f, 0.0f, 600.0f));
-    InventoryWidgetComponent->SetDrawSize(FIntPoint(100, 100));
+    PrimaryComponentTick.bCanEverTick = false;
 }
 
-void UContainerComponent::Initialize(UItemData* InData)
+void UContainerComponent::Initialize(UItemData* InData, UInteractableWidgetComponent* InWidgetComponent)
 {
 	Data = InData;
+	InventoryWidgetComponent = InWidgetComponent;
 }
 
 void UContainerComponent::SetShowInventoryWidget(const bool bShow)
 {
-	if (IsValid(InventoryWidgetComponent))
+	if (InventoryWidgetComponent.IsValid())
 	{
 		InventoryWidgetComponent->SetVisibility(bShow);
 	}
-}
-
-void UContainerComponent::OnRegister()
-{
-	Super::OnRegister();
-
-	if (HasAnyFlags(RF_ClassDefaultObject | RF_ArchetypeObject))
-	{
-		return;
-	}
-
-	if (IsValid(AttachPoint))
-	{
-		// Force the attachment to the current instance to avoid Template Mismatch
-		// This fixes the case where the cloned component still points to the template parent
-		AttachPoint->SetupAttachment(this);
-		
-		if (!AttachPoint->IsRegistered())
-		{
-			AttachPoint->RegisterComponent();
-		}
-	}
-
-	if (IsValid(InventoryWidgetComponent))
-	{
-		InventoryWidgetComponent->SetupAttachment(this);
-		
-		if (!InventoryWidgetComponent->IsRegistered())
-		{
-			InventoryWidgetComponent->RegisterComponent();
-		}
-
-		InventoryWidgetComponent->SetVisibility(bShowInventoryWidget);
-	}
-}
-
-void UContainerComponent::OnUnregister()
-{
-	if (IsValid(AttachPoint) && AttachPoint->IsRegistered())
-	{
-		AttachPoint->UnregisterComponent();
-	}
-
-	if (IsValid(InventoryWidgetComponent) && InventoryWidgetComponent->IsRegistered())
-	{
-		InventoryWidgetComponent->UnregisterComponent();
-	}
-
-	Super::OnUnregister();
 }
 
 void UContainerComponent::ClearInventory()
@@ -104,7 +47,7 @@ bool UContainerComponent::TryAddToInventory(AItem* InteractableToAdd)
 
     InteractableToAdd->DisableInteractable();
     const FAttachmentTransformRules Rules(EAttachmentRule::SnapToTarget, false);
-    InteractableToAdd->AttachToComponent(AttachPoint, Rules); 
+    InteractableToAdd->AttachToComponent(this, Rules); 
     
     UpdateInventoryWidget();
     OnAddedToInventory.ExecuteIfBound(InteractableToAdd);
@@ -164,7 +107,8 @@ bool UContainerComponent::TryRemoveFromInventory(AItem* InteractableToRemove)
 
 void UContainerComponent::UpdateInventoryWidget()
 {
-    if (IsValid(InventoryWidgetComponent) && IsValid(InventoryWidgetComponent->GetWidget()))
+	
+    if (InventoryWidgetComponent.IsValid() && IsValid(InventoryWidgetComponent->GetWidget()))
     {
 	    if (UInventoryWidget* InventoryWidget = Cast<UInventoryWidget>(InventoryWidgetComponent->GetWidget()))
 	    {

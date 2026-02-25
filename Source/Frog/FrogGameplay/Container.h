@@ -30,4 +30,7 @@ protected:
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Container")
 	TObjectPtr<UContainerComponent> ContainerComponent;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	TObjectPtr<UInteractableWidgetComponent> InventoryWidgetComponent;
 };

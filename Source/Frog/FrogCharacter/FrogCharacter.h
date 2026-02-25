@@ -153,8 +153,11 @@ protected: /* Members */
 	TWeakInterfacePtr<IInteractableInterface> ClosestInteractable;
 	
 	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
-	TObjectPtr<UItemData> ContainerData;
+	TObjectPtr<UItemData> PlayerItemData;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	TObjectPtr<UInteractableWidgetComponent> InventoryWidgetComponent;	
+	
 public: /* Public Getters/Setters */
 	FORCEINLINE USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	FORCEINLINE UCameraComponent* GetFollowCamera() const { return FollowCamera; }

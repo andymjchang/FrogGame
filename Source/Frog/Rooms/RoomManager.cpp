@@ -1,6 +1,7 @@
 ﻿#include "RoomManager.h"
 #include "RoomActor.h"
 #include "RoomDefinition.h"
+#include "GameState/FrogGameState.h"
 
 ARoomManager::ARoomManager()
 {
@@ -44,13 +45,22 @@ bool ARoomManager::CreateRoom(const FHexIndex Index, URoomDefinition* Definition
     return true;
 }
 
-void ARoomManager::HandleOnRequestNewRoom(FHexIndex HexIndex, ERoomDirection FacingDirection)
+void ARoomManager::HandleOnRequestNewRoom(FHexIndex HexIndex, ERoomDirection FacingDirection, int32 UnlockPrice)
 {
     FHexIndex SpawnIndex = GetNeighborIndex(HexIndex, FacingDirection);
     if (!IsIndexValid(SpawnIndex)) return;
     if (RoomMap.Contains(SpawnIndex)) return;
 
     // TODO: Trigger room selection UI
+
+    if (!HasAuthority()) return;
+
+    AFrogGameState* GameState = GetWorld()->GetGameState<AFrogGameState>();
+    if (!IsValid(GameState)) return;
+
+    if (UnlockPrice <= GameState->GetMoney())
+    {
+    }
 }
 
 bool ARoomManager::GetRoom(const FHexIndex Index, FRoomNode& OutRoom)

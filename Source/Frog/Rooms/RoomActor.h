@@ -8,9 +8,8 @@
 #include "RoomActor.generated.h"
 
 class ADoor;
-class UDoorComponent;
 
-DECLARE_DYNAMIC_DELEGATE_TwoParams(FOnRequestNewRoom, FHexIndex, HexIndex, ERoomDirection, FacingDirection);
+DECLARE_DYNAMIC_DELEGATE_ThreeParams(FOnRequestNewRoom, FHexIndex, HexIndex, ERoomDirection, FacingDirection, int32, UnlockPrice);
 
 UCLASS()
 class FROG_API ARoomActor : public AActor
@@ -32,7 +31,7 @@ public:
 
 protected:
 	UFUNCTION()
-	void HandleDoorProgressComplete(ERoomDirection FacingDirection);
+	void HandleDoorProgressComplete(ERoomDirection FacingDirection, int32 UnlockPrice);
 	
 	void InitializeComponentsAroundHexagon();
 	
@@ -68,10 +67,10 @@ protected: // Loading assets
 
 protected: // Components
 	UPROPERTY(EditDefaultsOnly)
-	TArray<UStaticMeshComponent*> WallArray;
+	TArray<TObjectPtr<UStaticMeshComponent>> WallArray;
 	
 	UPROPERTY(EditDefaultsOnly)
-	TArray<UChildActorComponent*> DoorArray;
+	TArray<TObjectPtr<UChildActorComponent>> DoorArray;
 	
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<UStaticMeshComponent> Floor;

@@ -11,13 +11,18 @@
 ADoor::ADoor()
 {
 	PrimaryActorTick.bCanEverTick = false;
+	bReplicates = true;
+	
+	// Root Component
+	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootSceneComponent"));
+	SetRootComponent(RootComponent);
 	
 	// Hitbox
-	InteractHitBox = CreateDefaultSubobject<UBoxComponent>(TEXT("Hitbox"));
-	InteractHitBox->SetupAttachment(RootComponent);
-	InteractHitBox->SetBoxExtent(FVector(64.f, 256.f, 128.f));
-	InteractHitBox->SetRelativeLocation(FVector(0.0f, 0.0f, 128.0f));
-	InteractHitBox->SetCollisionProfileName(TEXT("InteractListen"));
+	InteractHitbox = CreateDefaultSubobject<UBoxComponent>(TEXT("Hitbox"));
+	InteractHitbox->SetupAttachment(RootComponent);
+	InteractHitbox->SetBoxExtent(FVector(64.f, 256.f, 128.f));
+	InteractHitbox->SetRelativeLocation(FVector(0.0f, 0.0f, 128.0f));
+	InteractHitbox->SetCollisionProfileName(TEXT("InteractListen"));
 	
 	// Progress Tracker
 	ProgressTracker = CreateDefaultSubobject<UProgressTrackingComponent>(TEXT("ProgressTrackingComponent"));
@@ -33,29 +38,10 @@ void ADoor::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	// if (IsValid(InteractHitBox))
-	// {
-	// 	InteractHitBox->OnComponentBeginOverlap.AddDynamic(this, &ADoor::HandleHitboxOverlapBegin);
-	// 	InteractHitBox->OnComponentEndOverlap.AddDynamic(this, &ADoor::HandleHitboxEndOverlap);
-	// }
-	
 	if (IsValid(ProgressTracker) && IsValid(ProgressWidgetComponent))
 	{
 		ProgressTracker->OnCompletion.BindDynamic(this, &ADoor::HandleProgressComplete);
 		ProgressTracker->SetProgressWidget(ProgressWidgetComponent->GetWidget());
-	}
-}
-
-void ADoor::ServerAttemptPurchase()
-{
-	if (!HasAuthority()) return;
-	
-	AFrogGameState* GameState = GetWorld()->GetGameState<AFrogGameState>();
-	if (!IsValid(GameState)) return;
-	
-	if (BuyPrice <= GameState->GetMoney())
-	{
-		OnProgressComplete.ExecuteIfBound(FacingDirection);
 	}
 }
 
@@ -64,7 +50,7 @@ void ADoor::HandleProgressComplete()
 	AFrogGameState* GameState = GetWorld()->GetGameState<AFrogGameState>();
 	if (!IsValid(GameState)) return;
 	
-	ServerAttemptPurchase();
+	OnProgressComplete.ExecuteIfBound(FacingDirection, UnlockPrice);
 }
 
 void ADoor::StartInteract()
@@ -77,17 +63,30 @@ void ADoor::StopInteract()
 	ProgressTracker->StopProgress();
 }
 
-void ADoor::SetActive(const bool bIsTrue)
+void ADoor::StartHighlight()
 {
-	if (!IsValid(InteractHitBox)) return;
+}
 
-	if (bIsTrue)
+void ADoor::StopHighlight()
+{
+}
+
+FVector ADoor::GetInteractableLocation()
+{
+	return GetRootComponent()->GetComponentLocation();
+}
+
+void ADoor::SetHitboxActiveState(const bool bIsHitboxActive)
+{
+	if (!IsValid(InteractHitbox)) return;
+
+	if (bIsHitboxActive)
 	{
-		InteractHitBox->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+		InteractHitbox->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 	}
 	else
 	{
-		InteractHitBox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		InteractHitbox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
 }
 

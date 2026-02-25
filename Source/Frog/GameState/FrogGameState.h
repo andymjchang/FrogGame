@@ -6,6 +6,7 @@
 #include "FrogGameplay/Item.h"
 #include "FrogGameState.generated.h"
 
+enum class ERoomDirection : uint8;
 class ARoomManager;
 
 UENUM(BlueprintType)
@@ -39,6 +40,8 @@ public:
     // Server only functions
     void ServerAddMoney(const int32 Amount);
     void ServerTrySubtractMoney(const int32 Amount);
+    // TODO: complete this
+    void ServerTryUnlockDoor(ERoomDirection FacingDirection);
     
     // Client functions
     TSubclassOf<AItem> GetRecipeResultClass(const FGameplayTagContainer& InteractableTags) const;

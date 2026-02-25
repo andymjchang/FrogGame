@@ -40,7 +40,7 @@ protected:
     bool IsIndexValid(const FHexIndex Index) const;
         
     UFUNCTION()
-    void HandleOnRequestNewRoom(FHexIndex HexIndex, ERoomDirection FacingDirection);
+    void HandleOnRequestNewRoom(FHexIndex HexIndex, ERoomDirection FacingDirection, int32 UnlockPrice);
     
     ERoomDirection ToRoomDirection(ERoomInputDirection InputDir) const;
     int32 GetMaxOccupiedFloor() const;

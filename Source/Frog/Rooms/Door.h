@@ -11,19 +11,19 @@ enum class ERoomDirection : uint8;
 class UInteractableWidgetComponent;
 class UProgressTrackingComponent;
 
-DECLARE_DYNAMIC_DELEGATE_OneParam(FOnProgressComplete, ERoomDirection, FacingDirection);
+DECLARE_DYNAMIC_DELEGATE_TwoParams(FOnProgressComplete, ERoomDirection, FacingDirection, int32, UnlockPrice);
 
 class UBoxComponent;
 
 UCLASS()
-class FROG_API ADoor : public AItem
+class FROG_API ADoor : public AActor, public IInteractableInterface
 {
 	GENERATED_BODY()
 
 public:
 	ADoor();
 
-	void SetActive(bool bIsTrue);
+	void SetHitboxActiveState(bool bIsHitboxActive);
 
 	FORCEINLINE void SetFacingDirection(const ERoomDirection InDirection) { FacingDirection = InDirection; }
 	
@@ -35,20 +35,24 @@ protected:
 
 	virtual void StartInteract() override;
 	virtual void StopInteract() override;
-	
-	void ServerAttemptPurchase();
+	virtual void StartHighlight() override;
+	virtual void StopHighlight() override;
+	virtual FVector GetInteractableLocation() override;
 	
 	UFUNCTION()
 	void HandleProgressComplete();
 
 protected:
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr<UBoxComponent> InteractHitbox;
+	
+	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UProgressTrackingComponent> ProgressTracker;
 	
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UInteractableWidgetComponent> ProgressWidgetComponent;
 	
-	int32 BuyPrice = 0;
+	int32 UnlockPrice = 0;
 	
 	ERoomDirection FacingDirection;
 };

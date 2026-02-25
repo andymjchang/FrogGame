@@ -21,7 +21,7 @@ class FROG_API UContainerComponent : public USceneComponent
 
 public:
 	UContainerComponent();
-	void Initialize(UItemData* InData);
+	void Initialize(UItemData* InData, UInteractableWidgetComponent* InWidgetComponent);
 
 	void ClearInventory();
 	void RemoveNullsFromInventory();
@@ -40,11 +40,8 @@ public:
 	FORCEINLINE AItem* GetFirstItem() const { return Inventory.Num() > 0 ? Inventory[0].Get() : nullptr; }
 	FORCEINLINE const TArray<TObjectPtr<AItem>>& GetInventory() const { return Inventory; }
 	FORCEINLINE int GetInventorySize() const { return Inventory.Num(); }
-	FORCEINLINE USceneComponent* GetAttachPoint() const { return AttachPoint; }
 	
 protected:
-	virtual void OnRegister() override;
-	virtual void OnUnregister() override;
 	void UpdateInventoryWidget();
 
 protected:
@@ -54,12 +51,6 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TArray<TObjectPtr<AItem>> Inventory;
 	
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	TObjectPtr<UInteractableWidgetComponent> InventoryWidgetComponent;
-	
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	TObjectPtr<USceneComponent> AttachPoint;
-	
-	UPROPERTY()
+	TWeakObjectPtr<UInteractableWidgetComponent> InventoryWidgetComponent;
 	TWeakObjectPtr<UItemData> Data;
 };

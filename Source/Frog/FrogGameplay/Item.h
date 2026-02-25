@@ -45,9 +45,6 @@ protected:
 	
 protected:
 	UPROPERTY(EditDefaultsOnly)
-	TObjectPtr<USceneComponent> RootSceneComponent;
-	
-	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<UBoxComponent> InteractHitBox;
 	
 	UPROPERTY(EditDefaultsOnly)

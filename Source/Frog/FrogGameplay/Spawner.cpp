@@ -31,8 +31,6 @@ void ASpawner::SpawnAndReplenish()
 	
 	if (!IsValid(InteractableClassToSpawn)) return;
 	if (!IsValid(ContainerComponent)) return;
-	USceneComponent* AttachPoint = ContainerComponent->GetAttachPoint();
-	if (!IsValid(AttachPoint)) return;
 	
 	FActorSpawnParameters SpawnParams;
 	SpawnParams.Owner = this;
@@ -40,13 +38,13 @@ void ASpawner::SpawnAndReplenish()
 
 	AItem* NewItem = World->SpawnActor<AItem>(
 		InteractableClassToSpawn, 
-		AttachPoint->GetComponentTransform(),
+		ContainerComponent->GetComponentTransform(),
 		SpawnParams
 	);
 
 	if (IsValid(NewItem))
 	{
-		NewItem->AttachToComponent(AttachPoint, FAttachmentTransformRules::SnapToTargetIncludingScale);
+		NewItem->AttachToComponent(ContainerComponent, FAttachmentTransformRules::SnapToTargetIncludingScale);
 		ContainerComponent->TryAddToInventory(NewItem);
 		OfferedInteractable = NewItem;
 	}

@@ -4,6 +4,7 @@
 #include "Container.h"
 
 #include "ContainerComponent.h"
+#include "GameUI/Interactables/InteractableWidgetComponent.h"
 
 AContainer::AContainer()
 {
@@ -11,6 +12,11 @@ AContainer::AContainer()
 	
 	ContainerComponent = CreateDefaultSubobject<UContainerComponent>(TEXT("ContainerComponent"));
 	ContainerComponent->SetupAttachment(GetRootComponent());
+	
+	InventoryWidgetComponent = CreateDefaultSubobject<UInteractableWidgetComponent>(TEXT("InventoryWidgetComponent"));
+	InventoryWidgetComponent->SetupAttachment(RootComponent);
+	InventoryWidgetComponent->SetRelativeLocation(FVector(0.f, 0.0f, 600.0f));
+	InventoryWidgetComponent->SetDrawSize(FIntPoint(100, 100));
 }
 
 void AContainer::BeginPlay()
@@ -21,7 +27,7 @@ void AContainer::BeginPlay()
 	{
 		ContainerComponent->OnAddedToInventory.BindDynamic(this, &AContainer::HandleAddedToInventory);
 		ContainerComponent->OnRemovedFromInventory.BindDynamic(this, &AContainer::HandleRemovedFromInventory);
-		ContainerComponent->Initialize(Data);
+		ContainerComponent->Initialize(Data, InventoryWidgetComponent);
 	}
 }
 

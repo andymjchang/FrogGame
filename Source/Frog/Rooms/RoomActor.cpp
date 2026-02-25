@@ -64,7 +64,7 @@ void ARoomActor::RegenerateRoom()
 		// Create or destroy door object
 		if (UChildActorComponent* DoorComponent = DoorArray[i])
 		{
-			TSubclassOf<AActor> TargetClass = bHasDoor ? DoorBlueprint : nullptr;
+			TSubclassOf<AActor> TargetClass{!bHasDoor ? nullptr : DoorBlueprint};
 			if (DoorComponent->GetChildActorClass() != TargetClass)
 			{
 				// Disconnect old delegate
@@ -107,9 +107,9 @@ void ARoomActor::RegenerateRoom()
 	}
 }
 
-void ARoomActor::HandleDoorProgressComplete(ERoomDirection FacingDirection)
+void ARoomActor::HandleDoorProgressComplete(ERoomDirection FacingDirection, int32 UnlockPrice)
 {
-	OnRequestNewRoom.ExecuteIfBound(HexIndex, FacingDirection);
+	OnRequestNewRoom.ExecuteIfBound(HexIndex, FacingDirection, UnlockPrice);
 }
 
 void ARoomActor::InitializeComponentsAroundHexagon()

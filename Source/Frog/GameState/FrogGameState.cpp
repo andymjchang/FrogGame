@@ -22,6 +22,16 @@ void AFrogGameState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLi
     DOREPLIFETIME(AFrogGameState, PhaseEndTime);
 }
 
+void AFrogGameState::ServerTryUnlockDoor(ERoomDirection FacingDirection)
+{
+    if (!HasAuthority()) return;
+	
+    AFrogGameState* GameState = GetWorld()->GetGameState<AFrogGameState>();
+    if (!IsValid(GameState)) return;
+	
+   // TODO:  
+}
+
 TSubclassOf<AItem> AFrogGameState::GetRecipeResultClass(
     const FGameplayTagContainer& InteractableTags) const
 {

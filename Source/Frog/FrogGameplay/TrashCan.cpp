@@ -15,10 +15,9 @@ void ATrashCan::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	USceneComponent* AttachPoint = ContainerComponent->GetAttachPoint();
-	if (IsValid(AttachPoint))
+	if (IsValid(ContainerComponent))
 	{
-		AttachPoint->SetVisibility(false, true);
+		ContainerComponent->SetVisibility(false, true);
 	}
 }
 
