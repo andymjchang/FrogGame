@@ -21,8 +21,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	FORCEINLINE UUserBaseWidget* GetFrogBaseWidget() const { return FrogBaseWidget; }
 
+protected:
 	virtual void BeginPlay() override;
-
+	
 protected:
 	// HUD
 	UPROPERTY(EditDefaultsOnly, Category="HUD")

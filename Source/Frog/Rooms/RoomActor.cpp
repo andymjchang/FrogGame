@@ -56,11 +56,13 @@ void ARoomActor::RegenerateRoom()
 	if (WallTypeArray.Num() != WallArray.Num()) return;
 	if (!DoorBlueprint) return;
 
+	
 	for (int i = 0; i < DoorArray.Num(); i++)
 	{
 		const bool bHasDoor = (DoorTypeArray[i] != EDoorTypes::None);
 		const bool bIsTallWall = WallTypeArray[i];
 
+#if WITH_EDITOR
 		// Create or destroy door object
 		if (UChildActorComponent* DoorComponent = DoorArray[i])
 		{
@@ -81,9 +83,9 @@ void ARoomActor::RegenerateRoom()
 					DoorActor->OnProgressComplete.BindDynamic(this, &ARoomActor::HandleDoorProgressComplete);
 					DoorActor->SetFacingDirection(static_cast<ERoomDirection>(i));
 				}
-	
 			}
 		}
+#endif
 
 		// Set correct wall mesh
 		if (UStaticMeshComponent* WallComponent = WallArray[i])

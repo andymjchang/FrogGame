@@ -17,11 +17,12 @@ class FROG_API AContainer : public AItem
 
 public:
 	AContainer();
-	virtual void BeginPlay() override;
 
 	FORCEINLINE UContainerComponent* GetContainerComponent() { return ContainerComponent; }
 	
 protected:
+	virtual void BeginPlay() override;
+	
 	UFUNCTION()
     virtual void HandleAddedToInventory(AItem* Interactable);
 	UFUNCTION()

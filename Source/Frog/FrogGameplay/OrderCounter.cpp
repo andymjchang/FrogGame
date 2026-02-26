@@ -10,6 +10,7 @@
 AOrderCounter::AOrderCounter()
 {
 	PrimaryActorTick.bCanEverTick = false;
+	ContainerComponent->SetShowInventoryWidget(false);
 }
 
 void AOrderCounter::BeginPlay()

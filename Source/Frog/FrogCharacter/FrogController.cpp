@@ -6,9 +6,14 @@
 
 void AFrogController::BeginPlay()
 {
-	if (BaseWidgetClass)
+	Super::BeginPlay();
+
+	if (IsLocalController() && BaseWidgetClass)
 	{
 		FrogBaseWidget = CreateWidget<UUserBaseWidget>(this, BaseWidgetClass);
-		if (FrogBaseWidget) FrogBaseWidget->AddToViewport();
+		if (FrogBaseWidget)
+		{
+			FrogBaseWidget->AddToViewport();
+		}
 	}
 }
