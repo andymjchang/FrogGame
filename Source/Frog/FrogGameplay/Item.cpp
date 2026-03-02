@@ -11,6 +11,7 @@ AItem::AItem()
 {
 	PrimaryActorTick.bCanEverTick = false;
 	bReplicates = true;
+	// AActor::SetReplicateMovement(true);
 	
 	// Root Component
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootSceneComponent"));

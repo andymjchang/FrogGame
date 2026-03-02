@@ -8,7 +8,6 @@
 ASpawner::ASpawner()
 {
 	PrimaryActorTick.bCanEverTick = false;
-	ContainerComponent->SetShowInventoryWidget(false);
 }
 
 void ASpawner::BeginPlay()
