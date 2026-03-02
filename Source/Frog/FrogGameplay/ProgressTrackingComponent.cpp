@@ -138,6 +138,16 @@ void UProgressTrackingComponent::AddProgressByPercentage(float pct)
 	}
 }
 
+void UProgressTrackingComponent::ResetProgress()
+{
+	if (!GetOwner()->HasAuthority()) return;
+	
+	PassiveProgress = 0.0f;
+	bIsProcessing = false;
+	
+	SetWidgetVisibility(false);
+}
+
 void UProgressTrackingComponent::StopProgress()
 {
 	if (!GetOwner()->HasAuthority()) return;

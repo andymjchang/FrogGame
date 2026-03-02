@@ -12,7 +12,7 @@ AWorkStation::AWorkStation()
 
 void AWorkStation::StartWork()
 {
-    if (HasAuthority())
+    if (HasAuthority() && OfferedInteractable == this)
     {
         ProgressTracker->StartProgress();
     }

@@ -28,6 +28,7 @@ protected:
 
 	UFUNCTION()
 	virtual void HandleProcessingComplete();
+	virtual void HandleRemovedFromInventory(AItem* Interactable) override;
 
 	FGameplayTagContainer GatherAllTags() const;
 	

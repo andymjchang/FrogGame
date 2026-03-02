@@ -17,7 +17,7 @@ public:
 	AWorkStation();
 
 	virtual void StartWork();
-	void virtual StopWork();
+	virtual void StopWork();
 	virtual void StopHighlight() override;
 
 protected:

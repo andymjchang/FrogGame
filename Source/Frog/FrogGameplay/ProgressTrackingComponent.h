@@ -46,6 +46,7 @@ public: // Public Functions
 	void StartProgress();
 	void AddProgress();
 	void AddProgressByPercentage(float pct);
+	void ResetProgress();
 	void StopProgress();
 
 public: // Public Members

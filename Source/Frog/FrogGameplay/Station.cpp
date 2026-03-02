@@ -3,8 +3,10 @@
 #include "Station.h"
 
 #include "ContainerComponent.h"
+#include "Frog.h"
 #include "ItemData.h"
 #include "ProgressTrackingComponent.h"
+#include "ShaderPrintParameters.h"
 #include "GameState/FrogGameState.h"
 #include "TimerManager.h"
 #include "Components/PrimitiveComponent.h"
@@ -94,5 +96,17 @@ void AStation::HandleProcessingComplete()
     {
         OfferedInteractable = this;
         ContainerComponent->ClearInventory();
+    }
+}
+
+void AStation::HandleRemovedFromInventory(AItem* Interactable)
+{
+    Super::HandleRemovedFromInventory(Interactable);
+
+    FLOG(TEXT("REMOVED"));
+
+    if (IsValid(ProgressTracker))
+    {
+        ProgressTracker->ResetProgress();
     }
 }
