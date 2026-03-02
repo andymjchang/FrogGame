@@ -31,6 +31,16 @@ void AContainer::BeginPlay()
 	}
 }
 
+void AContainer::Destroyed()
+{
+	if (HasAuthority() && IsValid(ContainerComponent))
+	{
+		ContainerComponent->ClearInventory();
+	}
+
+	Super::Destroyed();
+}
+
 void AContainer::HandleAddedToInventory(AItem* Interactable)
 {
 

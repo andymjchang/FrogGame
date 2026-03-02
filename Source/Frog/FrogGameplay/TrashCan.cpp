@@ -25,6 +25,7 @@ void ATrashCan::BeginPlay()
 void ATrashCan::HandleAddedToInventory(AItem* Interactable)
 {
 	Super::HandleAddedToInventory(Interactable);
+	if (!HasAuthority()) return;
 	if (!IsValid(Interactable)) return;
 	
 	ContainerComponent->TryRemoveFromInventory(Interactable);

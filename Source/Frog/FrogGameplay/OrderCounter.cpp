@@ -30,7 +30,7 @@ void AOrderCounter::BeginPlay()
 
 void AOrderCounter::HandleAddedToInventory(AItem* Interactable)
 {
-	Super::HandleRemovedFromInventory(Interactable);
+	Super::HandleAddedToInventory(Interactable);
 	if (!IsValid(Interactable)) return;
 	
 	if (GameState.IsValid())
@@ -38,6 +38,5 @@ void AOrderCounter::HandleAddedToInventory(AItem* Interactable)
 		GameState->ServerAddMoney(Interactable->GetData()->GetSellPrice());;
 	}
     
-	ContainerComponent->TryRemoveFromInventory(Interactable);
-	Interactable->Destroy();
+	ContainerComponent->ClearInventory();
 }

@@ -103,8 +103,6 @@ void AFrogCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	if (HasAuthority()) SetupAbilities();
-
 	if (IsValid(InteractHitbox))
 	{
 		InteractHitbox->OnComponentBeginOverlap.AddDynamic(this, &AFrogCharacter::OnOverlapBegin);
@@ -123,8 +121,43 @@ UAbilitySystemComponent* AFrogCharacter::GetAbilitySystemComponent() const
 	return AbilitySystemComponent;
 }
 
+void AFrogCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+
+	if (IsValid(AbilitySystemComponent))
+	{
+		AbilitySystemComponent->InitAbilityActorInfo(this, this);
+		SetupAbilities();
+	}
+}
+
+void AFrogCharacter::OnRep_PlayerState()
+{
+	Super::OnRep_PlayerState();
+
+	if (IsValid(AbilitySystemComponent))
+	{
+		AbilitySystemComponent->InitAbilityActorInfo(this, this);
+	}
+}
+
 void AFrogCharacter::StartInteract()
 {
+	if (HasAuthority())
+	{
+		Server_StartInteract_Implementation();
+	}
+	else
+	{
+		Server_StartInteract();
+	}
+}
+
+void AFrogCharacter::Server_StartInteract_Implementation()
+{
+	UpdateClosestInteractable();
+	
 	if (!ClosestInteractable.IsValid()) return;
 	
 	ClosestInteractable->StartInteract();
@@ -146,12 +179,6 @@ void AFrogCharacter::StartInteract()
 	{
 		OtherOfferAsContainerComp = OtherOfferAsContainer->GetContainerComponent();
 	}
-
-	// if (IsValid(OtherOfferAsContainerComp) && IsValid(GEngine))
-	// {
-	// 	GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Yellow,
-	// 		FString::Printf(TEXT("Current Interaction Target: %s"), *OtherInteractable->GetName()));
-	// }
 
 	AItem* HeldInteractable = ContainerComponent->GetFirstItem();
 	if (IsValid(HeldInteractable))
@@ -196,15 +223,40 @@ void AFrogCharacter::StartInteract()
 
 void AFrogCharacter::StopInteract()
 {
+	if (HasAuthority())
+	{
+		Server_StopInteract_Implementation();
+	}
+	else
+	{
+		Server_StopInteract();
+	}
+}
+
+void AFrogCharacter::Server_StopInteract_Implementation()
+{
 	IInteractableInterface* OtherInteractable = ClosestInteractable.Get();
 	if (!OtherInteractable) return;
 	
-	OtherInteractable->StopInteract();	
+	OtherInteractable->StopInteract();
 }
 
 void AFrogCharacter::StartWork()
 {
-	AWorkStation* OtherStation = Cast<AWorkStation>(GetOwner());
+	if (HasAuthority())
+	{
+		Server_StartWork_Implementation();
+	}
+	else
+	{
+		Server_StartWork();
+	}
+}
+
+void AFrogCharacter::Server_StartWork_Implementation()
+{
+	if (!ClosestInteractable.IsValid()) return;
+	AWorkStation* OtherStation = Cast<AWorkStation>(ClosestInteractable.Get());
 	if (!IsValid(OtherStation)) return;
 	
 	OtherStation->StartWork();
@@ -212,7 +264,20 @@ void AFrogCharacter::StartWork()
 
 void AFrogCharacter::StopWork()
 {
-	AWorkStation* OtherStation = Cast<AWorkStation>(GetOwner());
+	if (HasAuthority())
+	{
+		Server_StopWork_Implementation();
+	}
+	else
+	{
+		Server_StopWork();
+	}
+}
+
+void AFrogCharacter::Server_StopWork_Implementation()
+{
+	if (!ClosestInteractable.IsValid()) return;
+	AWorkStation* OtherStation = Cast<AWorkStation>(ClosestInteractable.Get());
 	if (!IsValid(OtherStation)) return;
 	
 	OtherStation->StopWork();

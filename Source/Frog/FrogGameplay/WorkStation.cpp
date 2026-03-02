@@ -12,17 +12,26 @@ AWorkStation::AWorkStation()
 
 void AWorkStation::StartWork()
 {
-    ProgressTracker->StartProgress();
+    if (HasAuthority())
+    {
+        ProgressTracker->StartProgress();
+    }
 }
 
 void AWorkStation::StopWork()
 {
-    ProgressTracker->StopProgress();
+    if (HasAuthority())
+    {
+        ProgressTracker->StopProgress();
+    }
 }
 
 void AWorkStation::StopHighlight()
 {
     Super::StopHighlight();
     
-    ProgressTracker->StopProgress();
+    if (HasAuthority())
+    {
+        ProgressTracker->StopProgress();
+    }
 }

@@ -34,7 +34,8 @@ class FROG_API UProgressTrackingComponent : public UActorComponent
 public: // Public Functions
 	UProgressTrackingComponent();
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-	
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
 	void SetProgressWidget(UUserWidget* InProgressBarWidget);
 	
 	void SetProgressDuration(float InDuration);
@@ -71,9 +72,16 @@ protected: // Protected Functions
 	void CompleteProgress();
 	void SetWidgetVisibility(bool Value);
 
+	UFUNCTION()
+	void OnRep_IsProcessing();
+
 protected: // Protected Members
+	UPROPERTY(ReplicatedUsing = OnRep_IsProcessing)
 	bool bIsProcessing;
+
+	UPROPERTY(Replicated)
 	float StartTime;
+
 	TArray<float> PlayerContributions;
 	float PassiveProgress;
 	

@@ -22,6 +22,7 @@ class FROG_API UContainerComponent : public USceneComponent
 public:
 	UContainerComponent();
 	void Initialize(UItemData* InData, UInteractableWidgetComponent* InWidgetComponent);
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 	void ClearInventory();
 	void RemoveNullsFromInventory();
@@ -44,11 +45,14 @@ public:
 protected:
 	void UpdateInventoryWidget();
 
+	UFUNCTION()
+	void OnRep_Inventory();
+
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
 	bool bShowInventoryWidget = true;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, ReplicatedUsing = OnRep_Inventory)
 	TArray<TObjectPtr<AItem>> Inventory;
 	
 	TWeakObjectPtr<UInteractableWidgetComponent> InventoryWidgetComponent;

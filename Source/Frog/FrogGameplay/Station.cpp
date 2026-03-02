@@ -58,6 +58,8 @@ FGameplayTagContainer AStation::GatherAllTags() const
 
 void AStation::HandleProcessingComplete()
 {
+    if (!HasAuthority()) return;
+    
     UE_LOG(LogTemp, Log, TEXT("[%f] Station: Processing complete!"), GetWorld()->GetTimeSeconds());
 
     const AFrogGameState* GameState = GetWorld()->GetGameState<AFrogGameState>();
@@ -70,13 +72,6 @@ void AStation::HandleProcessingComplete()
 
     if (const TSubclassOf<AItem> ResultClass = GameState->GetRecipeResultClass(AllTags))
     {
-        for (AItem* Item : ContainerComponent->GetInventory())
-        {
-            if (IsValid(Item))
-            {
-                Item->Destroy();
-            }
-        }
         ContainerComponent->ClearInventory();
         
         FActorSpawnParameters SpawnParams;

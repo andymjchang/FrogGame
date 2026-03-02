@@ -4,10 +4,19 @@
 #include "ItemData.h"
 #include "GameUI/Interactables/InteractableWidgetComponent.h"
 #include "GameUI/Interactables/InventoryWidget.h"
+#include "Net/UnrealNetwork.h"
 
 UContainerComponent::UContainerComponent()
 {
     PrimaryComponentTick.bCanEverTick = false;
+	SetIsReplicatedByDefault(true);
+}
+
+void UContainerComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME(UContainerComponent, Inventory);
 }
 
 void UContainerComponent::Initialize(UItemData* InData, UInteractableWidgetComponent* InWidgetComponent)
@@ -24,19 +33,35 @@ void UContainerComponent::SetShowInventoryWidget(const bool bShow)
 	}
 }
 
+void UContainerComponent::OnRep_Inventory()
+{
+	UpdateInventoryWidget();
+}
+
 void UContainerComponent::ClearInventory()
 {
+	if (!GetOwner()->HasAuthority()) return;
+	
+	for (const TObjectPtr<AItem>& Item : Inventory)
+	{
+		if (IsValid(Item))
+		{
+			Item->Destroy();
+		}
+	}
     Inventory.Empty();
     UpdateInventoryWidget();
 }
 
 void UContainerComponent::RemoveNullsFromInventory()
 {
+	if (!GetOwner()->HasAuthority()) return;
 	Inventory.Remove(nullptr);
 }
 
 bool UContainerComponent::TryAddToInventory(AItem* InteractableToAdd)
 {
+	if (!GetOwner()->HasAuthority()) return false;
     if (!Data.IsValid() || !IsValid(InteractableToAdd)) return false;
     if (IsFull()) return false;
     if (!InteractableToAdd->HasMatchingInteractableTag(Data->GetAcceptedTags())) return false;
@@ -57,6 +82,7 @@ bool UContainerComponent::TryAddToInventory(AItem* InteractableToAdd)
 
 bool UContainerComponent::TryAddContainerContentsToInventory(AContainer* ContainerToAdd)
 {
+	if (!GetOwner()->HasAuthority()) return false;
 	if (!IsValid(ContainerToAdd)) return false;
 	if (!Data.IsValid()) return false;
 
@@ -92,6 +118,7 @@ bool UContainerComponent::TryAddContainerContentsToInventory(AContainer* Contain
 
 bool UContainerComponent::TryRemoveFromInventory(AItem* InteractableToRemove)
 {
+	if (!GetOwner()->HasAuthority()) return false;
     if (Inventory.Remove(InteractableToRemove) > 0)
     {
 		UpdateInventoryWidget();

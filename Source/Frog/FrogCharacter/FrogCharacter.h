@@ -79,6 +79,23 @@ protected: /* Protected Functions */
 	virtual void NotifyControllerChanged() override;
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
+	// GAS Initialization
+	virtual void PossessedBy(AController* NewController) override;
+	virtual void OnRep_PlayerState() override;
+
+	// Server RPCs
+	UFUNCTION(Server, Reliable)
+	void Server_StartInteract();
+	
+	UFUNCTION(Server, Reliable)
+	void Server_StopInteract();
+
+	UFUNCTION(Server, Reliable)
+	void Server_StartWork();
+
+	UFUNCTION(Server, Reliable)
+	void Server_StopWork();
+
 	void Move(const FInputActionValue& Value);
 	void UpdateClosestInteractable();
 	

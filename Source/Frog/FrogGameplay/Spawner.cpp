@@ -15,13 +15,19 @@ void ASpawner::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	SpawnAndReplenish();
+	if (HasAuthority())
+	{
+		SpawnAndReplenish();
+	}
 }
 
 void ASpawner::HandleRemovedFromInventory(AItem* Interactable)
 {
 	Super::HandleRemovedFromInventory(Interactable);
-	SpawnAndReplenish();
+	if (HasAuthority())
+	{
+		SpawnAndReplenish();
+	}
 }
 
 void ASpawner::SpawnAndReplenish()
