@@ -3,6 +3,7 @@
 
 #include "ProgressTrackingComponent.h"
 
+#include "Frog.h"
 #include "GameUI/Interactables/StationProgressBar.h"
 #include "Net/UnrealNetwork.h"
 
@@ -111,6 +112,30 @@ void UProgressTrackingComponent::StartProgress()
 void UProgressTrackingComponent::AddProgress()
 {
 	
+}
+
+void UProgressTrackingComponent::AddProgressByPercentage(float pct)
+{
+	if (!GetOwner()->HasAuthority()) return;
+	if (ProgressMethod != EProgressMethod::Active) return;
+
+	const float ProgressToAdd = pct * TargetDuration/100.0f;
+	PassiveProgress += ProgressToAdd;
+
+	const float ProgressPercent = GetProgressFraction();
+
+	if (ProgressBarWidget.IsValid())
+	{
+		ProgressBarWidget->SetProgressPercent(ProgressPercent);
+	}
+
+	if (ProgressPercent >= 1.0f)
+	{
+		CompleteProgress();
+	}else
+	{
+		SetWidgetVisibility(true);
+	}
 }
 
 void UProgressTrackingComponent::StopProgress()
