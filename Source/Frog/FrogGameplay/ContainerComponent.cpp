@@ -86,12 +86,9 @@ bool UContainerComponent::TryAddToInventory(AItem* InteractableToAdd)
 
     InteractableToAdd->DisableInteractable();
     
-	USceneComponent* AttachComponent = Mesh.IsValid() ? Mesh.Get() : GetOwner()->GetRootComponent();
-	if (!IsValid(AttachComponent)) return false;
-	
     const FAttachmentTransformRules Rules(EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,
                                           EAttachmentRule::KeepWorld, false);
-    InteractableToAdd->AttachToComponent(AttachComponent, Rules, FName("AttachPoint")); 
+    InteractableToAdd->AttachToComponent(this, Rules); 
 	InteractableToAdd->SetReplicateMovement(false);
     
     OnRep_Inventory();

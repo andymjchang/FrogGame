@@ -15,6 +15,11 @@ void AOrderCounter::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	if (IsValid(ContainerComponent))
+	{
+		ContainerComponent->SetVisibility(false, true);
+	}
+	
 	if (const UWorld* World = GetWorld())
 	{
 		GameState = World->GetGameState<AFrogGameState>();
