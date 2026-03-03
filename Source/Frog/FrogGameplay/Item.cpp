@@ -11,7 +11,7 @@ AItem::AItem()
 {
 	PrimaryActorTick.bCanEverTick = false;
 	bReplicates = true;
-	// AActor::SetReplicateMovement(true);
+	AActor::SetReplicateMovement(true);
 	
 	// Root Component
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootSceneComponent"));
@@ -26,6 +26,7 @@ AItem::AItem()
 	// Static Mesh Component
 	InteractableMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("InteractableMesh"));
 	InteractableMesh->SetupAttachment(RootComponent);
+	InteractableMesh->SetCollisionProfileName(TEXT("NoCollision"));
 }
 
 bool AItem::HasMatchingInteractableTag(const FGameplayTagContainer& AcceptedTags) const

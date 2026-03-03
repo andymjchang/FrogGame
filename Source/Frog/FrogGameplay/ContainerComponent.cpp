@@ -19,10 +19,11 @@ void UContainerComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& 
 	DOREPLIFETIME(UContainerComponent, Inventory);
 }
 
-void UContainerComponent::Initialize(UItemData* InData, UInteractableWidgetComponent* InWidgetComponent)
+void UContainerComponent::Initialize(UItemData* InData, UInteractableWidgetComponent* InWidgetComponent, UMeshComponent* InMesh)
 {
 	Data = InData;
 	InventoryWidgetComponent = InWidgetComponent;
+	Mesh = InMesh;
 }
 
 void UContainerComponent::SetShowInventoryWidget(const bool bShow)
@@ -36,6 +37,19 @@ void UContainerComponent::SetShowInventoryWidget(const bool bShow)
 void UContainerComponent::OnRep_Inventory()
 {
 	UpdateInventoryWidget();
+	//
+	// USceneComponent* AttachComponent = Mesh.IsValid() ? Mesh.Get() : GetOwner()->GetRootComponent();
+	// if (!IsValid(AttachComponent)) return;
+	//
+	// for (const TObjectPtr<AItem>& Item : Inventory)
+	// {
+	// 	if (IsValid(Item))
+	// 	{
+	// 		const FAttachmentTransformRules Rules(EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,
+	// 		                                      EAttachmentRule::KeepWorld, false);
+	// 		Item->AttachToComponent(AttachComponent, Rules, FName("AttachPoint"));
+	// 	}
+	// }
 }
 
 void UContainerComponent::ClearInventory()
@@ -61,6 +75,7 @@ void UContainerComponent::RemoveNullsFromInventory()
 
 bool UContainerComponent::TryAddToInventory(AItem* InteractableToAdd)
 {
+	if (!IsValid(GetOwner())) return false;
 	if (!GetOwner()->HasAuthority()) return false;
     if (!Data.IsValid() || !IsValid(InteractableToAdd)) return false;
     if (IsFull()) return false;
@@ -71,8 +86,14 @@ bool UContainerComponent::TryAddToInventory(AItem* InteractableToAdd)
     Inventory.Add(InteractableToAdd);
 
     InteractableToAdd->DisableInteractable();
-    const FAttachmentTransformRules Rules(EAttachmentRule::SnapToTarget, false);
-    InteractableToAdd->AttachToComponent(this, Rules); 
+    
+	USceneComponent* AttachComponent = Mesh.IsValid() ? Mesh.Get() : GetOwner()->GetRootComponent();
+	if (!IsValid(AttachComponent)) return false;
+	
+    const FAttachmentTransformRules Rules(EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,
+                                          EAttachmentRule::KeepWorld, false);
+    InteractableToAdd->AttachToComponent(AttachComponent, Rules, FName("AttachPoint")); 
+	InteractableToAdd->SetReplicateMovement(false);
     
     UpdateInventoryWidget();
     OnAddedToInventory.ExecuteIfBound(InteractableToAdd);
@@ -134,7 +155,6 @@ bool UContainerComponent::TryRemoveFromInventory(AItem* InteractableToRemove)
 
 void UContainerComponent::UpdateInventoryWidget()
 {
-	
     if (InventoryWidgetComponent.IsValid() && IsValid(InventoryWidgetComponent->GetWidget()))
     {
 	    if (UInventoryWidget* InventoryWidget = Cast<UInventoryWidget>(InventoryWidgetComponent->GetWidget()))

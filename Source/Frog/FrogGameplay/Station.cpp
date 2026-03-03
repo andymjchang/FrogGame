@@ -25,6 +25,9 @@ AStation::AStation()
     ProgressWidgetComponent->SetupAttachment(RootComponent);
     ProgressWidgetComponent->SetRelativeLocation(FVector(0.0f, 0.0f, -600.0f));
     ProgressWidgetComponent->SetDrawSize(FIntPoint(100, 20));
+    
+    // Interactable Mesh 
+    InteractableMesh->SetCollisionProfileName(TEXT("BlockAllDynamic"));
 }
 
 void AStation::BeginPlay()

@@ -13,6 +13,7 @@ DECLARE_DYNAMIC_DELEGATE_OneParam(FOnInventoryItemChanged, class AItem*, Item);
 class UInteractableWidgetComponent;
 class AContainer;
 class AItem;
+class UMeshComponent;
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class FROG_API UContainerComponent : public USceneComponent
@@ -21,7 +22,7 @@ class FROG_API UContainerComponent : public USceneComponent
 
 public:
 	UContainerComponent();
-	void Initialize(UItemData* InData, UInteractableWidgetComponent* InWidgetComponent);
+	void Initialize(UItemData* InData, UInteractableWidgetComponent* InWidgetComponent, UMeshComponent* InMesh);
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 	void ClearInventory();
@@ -57,4 +58,5 @@ protected:
 	
 	TWeakObjectPtr<UInteractableWidgetComponent> InventoryWidgetComponent;
 	TWeakObjectPtr<UItemData> Data;
+	TWeakObjectPtr<UMeshComponent> Mesh;
 };

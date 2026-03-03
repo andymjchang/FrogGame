@@ -38,8 +38,6 @@ AFrogCharacter::AFrogCharacter(const FObjectInitializer& ObjectInitializer)
 	bUseControllerRotationRoll = false;
 	GetCharacterMovement()->bOrientRotationToMovement = true; 	
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 1800.0f, 0.0f); 
-	GetCharacterMovement()->bIgnoreClientMovementErrorChecksAndCorrection = true;
-	GetCharacterMovement()->bServerAcceptClientAuthoritativePosition = true;
 	GetCharacterMovement()->JumpZVelocity = 700.f;
 	GetCharacterMovement()->AirControl = 0.35f;
 	GetCharacterMovement()->MaxWalkSpeed = 600.f;
@@ -76,15 +74,15 @@ AFrogCharacter::AFrogCharacter(const FObjectInitializer& ObjectInitializer)
 
 	// World space nametag
 	NametagWidgetComponent = CreateDefaultSubobject<UNametagWidgetComponent>(TEXT("NametagWidgetComponent"));
-	NametagWidgetComponent->SetupAttachment(RootComponent);
+	NametagWidgetComponent->SetupAttachment(GetMesh());
 
 	// Inventory
 	ContainerComponent = CreateDefaultSubobject<UContainerComponent>(TEXT("ContainerComponent"));
-	ContainerComponent->SetupAttachment(RootComponent);
+	ContainerComponent->SetupAttachment(GetMesh());
 	
 	// Inventory Widget
 	InventoryWidgetComponent = CreateDefaultSubobject<UInteractableWidgetComponent>(TEXT("InventoryWidgetComponent"));
-	InventoryWidgetComponent->SetupAttachment(RootComponent);
+	InventoryWidgetComponent->SetupAttachment(GetMesh());
 	InventoryWidgetComponent->SetRelativeLocation(FVector(0.f, 0.0f, 600.0f));
 	InventoryWidgetComponent->SetDrawSize(FIntPoint(100, 100));
 }
@@ -111,7 +109,7 @@ void AFrogCharacter::BeginPlay()
 
 	if (IsValid(ContainerComponent))
 	{
-		ContainerComponent->Initialize(PlayerItemData, InventoryWidgetComponent);
+		ContainerComponent->Initialize(PlayerItemData, InventoryWidgetComponent, GetMesh());
 		ContainerComponent->OnAddedToInventory.BindDynamic(this, &AFrogCharacter::HandleAddedToInventory);
 	}
 }
