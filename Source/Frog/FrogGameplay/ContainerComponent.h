@@ -49,9 +49,12 @@ protected:
 	UFUNCTION()
 	void OnRep_Inventory();
 
+	UFUNCTION()
+	void OnRep_IsInventoryWidgetVisible();
+
 protected:
-	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
-	bool bShowInventoryWidget = true;
+	UPROPERTY(Transient, ReplicatedUsing = OnRep_IsInventoryWidgetVisible)
+	bool bIsInventoryWidgetVisible = false;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, ReplicatedUsing = OnRep_Inventory)
 	TArray<TObjectPtr<AItem>> Inventory;

@@ -9,7 +9,6 @@
 ATrashCan::ATrashCan()
 {
 	PrimaryActorTick.bCanEverTick = false;
-	ContainerComponent->SetShowInventoryWidget(false);
 }
 
 void ATrashCan::BeginPlay()

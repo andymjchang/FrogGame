@@ -17,6 +17,7 @@ void UContainerComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& 
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
 	DOREPLIFETIME(UContainerComponent, Inventory);
+	DOREPLIFETIME(UContainerComponent, bIsInventoryWidgetVisible);
 }
 
 void UContainerComponent::Initialize(UItemData* InData, UInteractableWidgetComponent* InWidgetComponent, UMeshComponent* InMesh)
@@ -28,9 +29,20 @@ void UContainerComponent::Initialize(UItemData* InData, UInteractableWidgetCompo
 
 void UContainerComponent::SetShowInventoryWidget(const bool bShow)
 {
+	if (!GetOwner()->HasAuthority()) return;
+
+	if (bIsInventoryWidgetVisible != bShow)
+	{
+		bIsInventoryWidgetVisible = bShow;
+		OnRep_IsInventoryWidgetVisible();
+	}
+}
+
+void UContainerComponent::OnRep_IsInventoryWidgetVisible()
+{
 	if (InventoryWidgetComponent.IsValid())
 	{
-		InventoryWidgetComponent->SetVisibility(bShow);
+		InventoryWidgetComponent->SetVisibility(bIsInventoryWidgetVisible);
 	}
 }
 

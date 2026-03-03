@@ -3,24 +3,17 @@
 #include "OrderCounter.h"
 
 #include "ContainerComponent.h"
-#include "Frog.h"
 #include "ItemData.h"
 #include "GameState/FrogGameState.h"
 
 AOrderCounter::AOrderCounter()
 {
 	PrimaryActorTick.bCanEverTick = false;
-	ContainerComponent->SetShowInventoryWidget(false);
 }
 
 void AOrderCounter::BeginPlay()
 {
 	Super::BeginPlay();
-	
-	if (IsValid(ContainerComponent))
-	{
-		ContainerComponent->SetVisibility(false, true);
-	}
 	
 	if (const UWorld* World = GetWorld())
 	{
