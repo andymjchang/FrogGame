@@ -37,19 +37,6 @@ void UContainerComponent::SetShowInventoryWidget(const bool bShow)
 void UContainerComponent::OnRep_Inventory()
 {
 	UpdateInventoryWidget();
-	//
-	// USceneComponent* AttachComponent = Mesh.IsValid() ? Mesh.Get() : GetOwner()->GetRootComponent();
-	// if (!IsValid(AttachComponent)) return;
-	//
-	// for (const TObjectPtr<AItem>& Item : Inventory)
-	// {
-	// 	if (IsValid(Item))
-	// 	{
-	// 		const FAttachmentTransformRules Rules(EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,
-	// 		                                      EAttachmentRule::KeepWorld, false);
-	// 		Item->AttachToComponent(AttachComponent, Rules, FName("AttachPoint"));
-	// 	}
-	// }
 }
 
 void UContainerComponent::ClearInventory()
@@ -64,7 +51,7 @@ void UContainerComponent::ClearInventory()
 		}
 	}
     Inventory.Empty();
-    UpdateInventoryWidget();
+    OnRep_Inventory();
 }
 
 void UContainerComponent::RemoveNullsFromInventory()
@@ -95,7 +82,7 @@ bool UContainerComponent::TryAddToInventory(AItem* InteractableToAdd)
     InteractableToAdd->AttachToComponent(AttachComponent, Rules, FName("AttachPoint")); 
 	InteractableToAdd->SetReplicateMovement(false);
     
-    UpdateInventoryWidget();
+    OnRep_Inventory();
     OnAddedToInventory.ExecuteIfBound(InteractableToAdd);
     
     return true;
@@ -132,7 +119,7 @@ bool UContainerComponent::TryAddContainerContentsToInventory(AContainer* Contain
 	}
     
 	ContainerCompToAdd->ClearInventory();
-	UpdateInventoryWidget();
+	OnRep_Inventory();
     
 	return true;
 }
@@ -140,17 +127,11 @@ bool UContainerComponent::TryAddContainerContentsToInventory(AContainer* Contain
 bool UContainerComponent::TryRemoveFromInventory(AItem* InteractableToRemove)
 {
 	if (!GetOwner()->HasAuthority()) return false;
-    if (Inventory.Remove(InteractableToRemove) > 0)
-    {
-		UpdateInventoryWidget();
-    	if (IsValid(InteractableToRemove))
-    	{
-    		OnRemovedFromInventory.ExecuteIfBound(InteractableToRemove);
-    	}
-		return true;
-    }
-
-    return false;
+    if (Inventory.Remove(InteractableToRemove) <= 0) return false;
+	
+	OnRep_Inventory();
+    OnRemovedFromInventory.ExecuteIfBound(InteractableToRemove);
+	return true;
 }
 
 void UContainerComponent::UpdateInventoryWidget()
