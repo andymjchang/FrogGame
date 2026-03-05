@@ -3,7 +3,7 @@
 
 #include "ProgressTrackingComponent.h"
 
-#include "Frog.h"
+#include "GameFramework/GameStateBase.h"
 #include "GameUI/Interactables/StationProgressBar.h"
 #include "Net/UnrealNetwork.h"
 
@@ -23,6 +23,7 @@ void UProgressTrackingComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProp
 
 	DOREPLIFETIME(UProgressTrackingComponent, bIsProcessing);
 	DOREPLIFETIME(UProgressTrackingComponent, StartTime);
+	DOREPLIFETIME(UProgressTrackingComponent, TargetDuration);
 }
 
 void UProgressTrackingComponent::BeginPlay()
@@ -84,8 +85,12 @@ float UProgressTrackingComponent::GetProgressFraction() const
 	if (ProgressMethod == EProgressMethod::Passive && bIsProcessing && !GetOwner()->HasAuthority())
 	{
 		// Client estimation
-		float Elapsed = GetWorld()->GetTimeSeconds() - StartTime;
-		return FMath::Clamp(Elapsed / TargetDuration, 0.0f, 1.0f);
+		if (AGameStateBase* GameState = GetWorld()->GetGameState())
+		{
+			const float ServerTime = GameState->GetServerWorldTimeSeconds();
+			const float ElapsedTime = ServerTime - StartTime;
+			return FMath::Clamp(ElapsedTime / TargetDuration, 0.0f, 1.0f);
+		}
 	}
 
 	float CurrentProgress = PassiveProgress;
@@ -105,8 +110,13 @@ void UProgressTrackingComponent::StartProgress()
 	if (!GetOwner()->HasAuthority()) return;
 
 	bIsProcessing = true;
-	StartTime = GetWorld()->GetTimeSeconds();
-	SetWidgetVisibility(true);
+	OnRep_IsProcessing();
+	
+	if (AGameStateBase* GameState = GetWorld()->GetGameState())
+	{
+		const float ServerTime = GameState->GetServerWorldTimeSeconds();
+		StartTime = ServerTime;
+	}
 }
 
 void UProgressTrackingComponent::AddProgress()
@@ -114,12 +124,13 @@ void UProgressTrackingComponent::AddProgress()
 	
 }
 
-void UProgressTrackingComponent::AddProgressByPercentage(float pct)
+// TODO: Change to flat amount if process time is based on number / type of ingredients
+void UProgressTrackingComponent::AddProgressByPercentage(float Percentage)
 {
 	if (!GetOwner()->HasAuthority()) return;
 	if (ProgressMethod != EProgressMethod::Active) return;
 
-	const float ProgressToAdd = pct * TargetDuration/100.0f;
+	const float ProgressToAdd = Percentage * TargetDuration / 100.0f;
 	PassiveProgress += ProgressToAdd;
 
 	const float ProgressPercent = GetProgressFraction();
@@ -132,9 +143,6 @@ void UProgressTrackingComponent::AddProgressByPercentage(float pct)
 	if (ProgressPercent >= 1.0f)
 	{
 		CompleteProgress();
-	}else
-	{
-		SetWidgetVisibility(true);
 	}
 }
 
@@ -144,8 +152,7 @@ void UProgressTrackingComponent::ResetProgress()
 	
 	PassiveProgress = 0.0f;
 	bIsProcessing = false;
-	
-	SetWidgetVisibility(false);
+	OnRep_IsProcessing();
 }
 
 void UProgressTrackingComponent::StopProgress()
@@ -153,18 +160,12 @@ void UProgressTrackingComponent::StopProgress()
 	if (!GetOwner()->HasAuthority()) return;
 
 	bIsProcessing = false;
-	if (GetProgressFraction() <= 0.0f)
-	{
-		SetWidgetVisibility(false);
-	}
+	OnRep_IsProcessing();
 }
 
 void UProgressTrackingComponent::CompleteProgress()
 {
 	if (!GetOwner()->HasAuthority()) return;
-
-	bIsProcessing = false;
-	SetWidgetVisibility(false);
 	
 	PassiveProgress = 0.0f;
 	if (ProgressScope == EProgressScope::Individual)
@@ -174,15 +175,18 @@ void UProgressTrackingComponent::CompleteProgress()
 			Val = 0.0f;
 		}
 	}
+
+	bIsProcessing = false;
+	OnRep_IsProcessing();
 	
 	OnCompletion.ExecuteIfBound();
 }
 
-void UProgressTrackingComponent::SetWidgetVisibility(const bool Value)
+void UProgressTrackingComponent::SetWidgetVisibility(const bool IsVisible)
 {
 	if (!ProgressBarWidget.IsValid()) return;
 	
-	if (Value == true)
+	if (IsVisible == true)
 	{
 		ProgressBarWidget->SetVisibility(ESlateVisibility::Visible);	
 	} 

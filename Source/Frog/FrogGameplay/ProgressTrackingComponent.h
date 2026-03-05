@@ -45,34 +45,18 @@ public: // Public Functions
 	
 	void StartProgress();
 	void AddProgress();
-	void AddProgressByPercentage(float pct);
+	void AddProgressByPercentage(float Percentage);
 	void ResetProgress();
 	void StopProgress();
 
-public: // Public Members
-	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
-	EProgressMethod ProgressMethod = EProgressMethod::Passive;
-
-	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
-	EProgressScope ProgressScope = EProgressScope::Shared;
-	
-	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
-	bool bIsDecayEnabled;
-	
-	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
-	float TargetDuration = 1.0f;
-	
 	// Delegates
 	FOnCompletion OnCompletion;
-
-	// UPROPERTY(EditDefaultsOnly, Category = "User Settings")
-	// float DecayRate = 0.0f;
 	
 protected: // Protected Functions
 	virtual void BeginPlay() override;
 	
 	void CompleteProgress();
-	void SetWidgetVisibility(bool Value);
+	void SetWidgetVisibility(bool IsVisible);
 
 	UFUNCTION()
 	void OnRep_IsProcessing();
@@ -87,7 +71,22 @@ protected: // Protected Members
 	TArray<float> PlayerContributions;
 	float PassiveProgress;
 	
+	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
+	EProgressMethod ProgressMethod = EProgressMethod::Passive;
+
+	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
+	EProgressScope ProgressScope = EProgressScope::Shared;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
+	bool bIsDecayEnabled;
+	
+	UPROPERTY(Replicated, EditDefaultsOnly, Category = "User Settings")
+	float TargetDuration = 1.0f;	
+
+	// UPROPERTY(EditDefaultsOnly, Category = "User Settings")
+	// float DecayRate = 0.0f;	
+	
 protected: // Protected Components
-	TSoftObjectPtr<UStationProgressBar> ProgressBarWidget;
+	TWeakObjectPtr<UStationProgressBar> ProgressBarWidget;
 
 };

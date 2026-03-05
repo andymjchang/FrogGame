@@ -31,11 +31,7 @@ protected:
 	virtual void HandleRemovedFromInventory(AItem* Interactable) override;
 
 	FGameplayTagContainer GatherAllTags() const;
-	
-protected:
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Station")
-	float ProcessingDuration = 3.0f;
-	
+
 protected:
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<UProgressTrackingComponent> ProgressTracker;

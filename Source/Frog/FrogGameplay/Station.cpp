@@ -106,8 +106,6 @@ void AStation::HandleRemovedFromInventory(AItem* Interactable)
 {
     Super::HandleRemovedFromInventory(Interactable);
 
-    FLOG(TEXT("REMOVED"));
-
     if (IsValid(ProgressTracker))
     {
         ProgressTracker->ResetProgress();

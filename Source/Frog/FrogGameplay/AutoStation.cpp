@@ -11,6 +11,8 @@ AAutoStation::AAutoStation()
 	PrimaryActorTick.bCanEverTick = false;
 }
 
+// TODO: Either make processing duration dynamic based on ingredients / inventory size
+// or set duration in CDO 
 void AAutoStation::HandleAddedToInventory(AItem* InteractableToAdd)
 {
 	UE_LOG(LogTemp, Log, TEXT("[%f] _____AutoStation_____"), GetWorld()->GetTimeSeconds());
@@ -19,7 +21,6 @@ void AAutoStation::HandleAddedToInventory(AItem* InteractableToAdd)
 	if (OfferedInteractable == this)
 	{
 		ProgressTracker->SetProgressStartTime(GetWorld()->GetTimeSeconds());
-		ProgressTracker->SetProgressDuration(ProcessingDuration);
 		ProgressTracker->StartProgress();
 	}
 }
