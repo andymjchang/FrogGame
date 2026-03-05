@@ -3,10 +3,8 @@
 #include "Station.h"
 
 #include "ContainerComponent.h"
-#include "Frog.h"
 #include "ItemData.h"
 #include "ProgressTrackingComponent.h"
-#include "ShaderPrintParameters.h"
 #include "GameState/FrogGameState.h"
 #include "TimerManager.h"
 #include "Components/PrimitiveComponent.h"
@@ -37,7 +35,7 @@ void AStation::BeginPlay()
     if (IsValid(ProgressWidgetComponent) && IsValid(ProgressTracker))
     {
         ProgressTracker->OnCompletion.BindDynamic(this, &AStation::HandleProcessingComplete);
-        ProgressTracker->SetProgressWidget(ProgressWidgetComponent->GetWidget());
+        ProgressTracker->SetProgressWidgetReference(ProgressWidgetComponent->GetWidget());
     }
 }
 

@@ -41,7 +41,7 @@ void ADoor::BeginPlay()
 	if (IsValid(ProgressTracker) && IsValid(ProgressWidgetComponent))
 	{
 		ProgressTracker->OnCompletion.BindDynamic(this, &ADoor::HandleProgressComplete);
-		ProgressTracker->SetProgressWidget(ProgressWidgetComponent->GetWidget());
+		ProgressTracker->SetProgressWidgetReference(ProgressWidgetComponent->GetWidget());
 	}
 }
 

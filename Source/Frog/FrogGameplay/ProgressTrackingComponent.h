@@ -36,7 +36,7 @@ public: // Public Functions
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
-	void SetProgressWidget(UUserWidget* InProgressBarWidget);
+	void SetProgressWidgetReference(UUserWidget* InProgressBarWidget);
 	
 	void SetProgressDuration(float InDuration);
 	void SetProgressStartTime(float InStartTime);

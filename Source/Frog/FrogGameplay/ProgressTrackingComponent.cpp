@@ -11,9 +11,11 @@
 UProgressTrackingComponent::UProgressTrackingComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
+	PrimaryComponentTick.TickInterval = 0.2f;
 	SetIsReplicatedByDefault(true);
 	
-	PlayerContributions.Reserve(NUM_PLAYERS);
+	// PlayerContributions.Reserve(NUM_PLAYERS);
+	PlayerContributions.Init(0.f, NUM_PLAYERS);
 }
 
 
@@ -61,12 +63,13 @@ void UProgressTrackingComponent::OnRep_IsProcessing()
 	SetWidgetVisibility(bIsProcessing || GetProgressFraction() > 0.0f);
 }
 
-void UProgressTrackingComponent::SetProgressWidget(UUserWidget* InProgressBarWidget)
+void UProgressTrackingComponent::SetProgressWidgetReference(UUserWidget* InProgressBarWidget)
 {
 	if (UStationProgressBar* ProgressWidget = Cast<UStationProgressBar>(InProgressBarWidget))
 	{
 		ProgressBarWidget = ProgressWidget;
 		SetWidgetVisibility(false);
+		ProgressBarWidget->SetProgressPercent(0.f);
 	}
 }
 
