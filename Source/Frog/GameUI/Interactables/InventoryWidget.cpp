@@ -5,6 +5,7 @@
 
 #include "InventoryElementWidget.h"
 #include "Components/HorizontalBox.h"
+#include "FrogGameplay/Core/Item.h"
 
 void UInventoryWidget::UpdateInventoryWidget(const TArray<AItem*>& Inventory)
 { 

@@ -2,13 +2,15 @@
 
 #include "OrderCounter.h"
 
-#include "ContainerComponent.h"
-#include "ItemData.h"
+#include "FrogGameplay/Core/ContainerComponent.h"
 #include "GameState/FrogGameState.h"
 
 AOrderCounter::AOrderCounter()
 {
 	PrimaryActorTick.bCanEverTick = false;
+	
+	// Interactable Mesh 
+	InteractableMesh->SetCollisionProfileName(TEXT("BlockAllDynamic"));
 }
 
 void AOrderCounter::BeginPlay()

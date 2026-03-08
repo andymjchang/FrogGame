@@ -4,7 +4,7 @@
 #include "InventoryElementWidget.h"
 
 #include "Components/Image.h"
-#include "FrogGameplay/ItemData.h"
+#include "FrogGameplay/Core/ItemData.h"
 
 void UInventoryElementWidget::SetElement(const UItemData* Data)
 {

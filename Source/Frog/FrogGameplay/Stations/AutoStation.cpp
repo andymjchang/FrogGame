@@ -3,7 +3,7 @@
 
 #include "AutoStation.h"
 
-#include "ProgressTrackingComponent.h"
+#include "FrogGameplay/Core/ProgressTrackingComponent.h"
 
 // Sets default values
 AAutoStation::AAutoStation()

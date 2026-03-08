@@ -18,10 +18,9 @@
 #include "GAS/FrogAbilitySystem.h"
 #include "NametagWidgetComponent.h"
 #include "Components/SphereComponent.h"
-#include "FrogGameplay/Container.h"
-#include "FrogGameplay/ContainerComponent.h"
-#include "FrogGameplay/Item.h"
-#include "FrogGameplay/WorkStation.h"
+#include "FrogGameplay/Core/Container.h"
+#include "FrogGameplay/Core/ContainerComponent.h"
+#include "FrogGameplay/Stations/WorkStation.h"
 #include "GameUI/Interactables/InteractableWidgetComponent.h"
 
 AFrogCharacter::AFrogCharacter(const FObjectInitializer& ObjectInitializer)

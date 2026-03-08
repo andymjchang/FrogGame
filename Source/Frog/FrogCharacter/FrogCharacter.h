@@ -9,9 +9,10 @@
 #include "GAS/FrogAbilitySystem.h"
 #include "AbilitySystemInterface.h"
 #include "GAS/FrogAttributeSet.h"
-#include "FrogGameplay/Container.h"
 #include "FrogCharacter.generated.h"
 
+class UInteractableWidgetComponent;
+class IInteractableInterface;
 class UBoxComponent;
 class USphereComponent;
 class UNametagWidgetComponent;

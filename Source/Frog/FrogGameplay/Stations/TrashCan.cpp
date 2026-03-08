@@ -3,12 +3,15 @@
 
 #include "TrashCan.h"
 
-#include "ContainerComponent.h"
+#include "FrogGameplay/Core/ContainerComponent.h"
 
 
 ATrashCan::ATrashCan()
 {
 	PrimaryActorTick.bCanEverTick = false;
+	
+	// Interactable Mesh 
+	InteractableMesh->SetCollisionProfileName(TEXT("BlockAllDynamic"));
 }
 
 void ATrashCan::BeginPlay()

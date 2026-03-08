@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Station.h"
+#include "FrogGameplay/Core/Station.h"
 #include "AutoStation.generated.h"
 
 UCLASS()

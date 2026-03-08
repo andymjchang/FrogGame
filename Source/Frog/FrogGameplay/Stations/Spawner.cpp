@@ -2,12 +2,15 @@
 
 #include "Spawner.h"
 
-#include "ContainerComponent.h"
 #include "Engine/World.h"
+#include "FrogGameplay/Core/ContainerComponent.h"
 
 ASpawner::ASpawner()
 {
 	PrimaryActorTick.bCanEverTick = false;
+	
+	// Interactable Mesh 
+	InteractableMesh->SetCollisionProfileName(TEXT("BlockAllDynamic"));
 }
 
 void ASpawner::BeginPlay()

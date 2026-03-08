@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "FrogGameplay/Item.h"
+#include "FrogGameplay/Core/InteractableInterface.h"
 #include "GameFramework/Actor.h"
 #include "Door.generated.h"
 

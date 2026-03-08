@@ -3,7 +3,6 @@
 #include "CoreMinimal.h"
 #include "GameFramework/GameStateBase.h"
 #include "IngredientMap.h"
-#include "FrogGameplay/Item.h"
 #include "FrogGameState.generated.h"
 
 enum class ERoomDirection : uint8;

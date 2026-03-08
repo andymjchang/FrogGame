@@ -4,7 +4,7 @@
 #include "Door.h"
 
 #include "Components/BoxComponent.h"
-#include "FrogGameplay/ProgressTrackingComponent.h"
+#include "FrogGameplay/Core/ProgressTrackingComponent.h"
 #include "GameState/FrogGameState.h"
 #include "GameUI/Interactables/InteractableWidgetComponent.h" 
 

@@ -4,9 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "CommonUserWidget.h"
-#include "FrogGameplay/Container.h"
 #include "InventoryWidget.generated.h"
 
+class AItem;
 class UInventoryElementWidget;
 class UHorizontalBox;
 

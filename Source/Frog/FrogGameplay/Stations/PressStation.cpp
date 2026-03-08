@@ -3,8 +3,8 @@
 
 #include "PressStation.h"
 
-#include "Frog.h"
-#include "FrogGameplay/ProgressTrackingComponent.h"
+#include "FrogGameplay/Core/ProgressTrackingComponent.h"
+
 
 APressStation::APressStation()
 {

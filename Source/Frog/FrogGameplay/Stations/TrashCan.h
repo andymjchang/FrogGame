@@ -3,23 +3,18 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Container.h"
-#include "OrderCounter.generated.h"
-
-class AFrogGameState;
+#include "FrogGameplay/Core/Container.h"
+#include "TrashCan.generated.h"
 
 UCLASS()
-class FROG_API AOrderCounter : public AContainer
+class FROG_API ATrashCan : public AContainer
 {
 	GENERATED_BODY()
 
 public:
-	AOrderCounter();
+	ATrashCan();
 
 protected:
 	virtual void BeginPlay() override;
 	virtual void HandleAddedToInventory(AItem* Interactable) override;
-	
-protected:
-	TWeakObjectPtr<AFrogGameState> GameState;
 };

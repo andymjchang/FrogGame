@@ -2,8 +2,8 @@
 
 #include "WorkStation.h"
 
-#include "ProgressTrackingComponent.h"
 #include "Components/BoxComponent.h"
+#include "FrogGameplay/Core/ProgressTrackingComponent.h"
 
 AWorkStation::AWorkStation()
 {
