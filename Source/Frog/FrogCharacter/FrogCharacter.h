@@ -117,10 +117,10 @@ protected: /* Protected Functions */
 	void SetupAbilities();
 
 protected: /* Members */
-	UPROPERTY(EditAnywhere, Category = "User Settings")
+	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
 	TObjectPtr<UAbilitySet> AbilitySet;
 	
-	UPROPERTY(EditAnywhere, Category = "User Settings")
+	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
 	TSubclassOf<UGameplayEffect> DefaultAttributes;
 	
 	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
@@ -148,35 +148,31 @@ protected: // Components
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<UInteractableWidgetComponent> InventoryWidgetComponent;	
+
+	// HitBoxes
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	TObjectPtr<USphereComponent> InteractHitbox;
 	
 	// Gameplay Ability System
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "GAS")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Gameplay Ability System")
 	TObjectPtr<UFrogAbilitySystem> AbilitySystemComponent;
 	
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GAS")
-	TArray<TSubclassOf<UGameplayAbility>> DefaultAbilities;
-	
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GAS")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Gameplay Ability System")
 	TObjectPtr<UFrogAttributeSet> AttributeSet;
 	
-protected: // Input
-	// Mapping Context
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
-	TObjectPtr<UInputMappingContext> DefaultMappingContext;
-	
-	UPROPERTY(EditDefaultsOnly, Category = "Input")
+	UPROPERTY(EditDefaultsOnly, Category = "Gameplay Ability System")
 	FAbilityInputBindings AbilityInputBindings;
 	
 	UPROPERTY(Transient)
 	TArray<FGameplayAbilitySpecHandle> InitialAbilitySpecHandles;
+	
+protected: // Input
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
+	TObjectPtr<UInputMappingContext> DefaultMappingContext;
 
 	// Input Actions
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
 	TObjectPtr<UInputAction> MoveAction;
-
-	// HitBoxes
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
-	TObjectPtr<USphereComponent> InteractHitbox;
 
 public: /* Getters/Setters */
 	FORCEINLINE USpringArmComponent* GetCameraBoom() const { return CameraBoom; }

@@ -67,9 +67,6 @@ AFrogCharacter::AFrogCharacter(const FObjectInitializer& ObjectInitializer)
 	InteractHitbox =  CreateDefaultSubobject<USphereComponent>(TEXT("InteractHitbox"));
 	InteractHitbox->SetCollisionProfileName(TEXT("Interact"));
 	InteractHitbox->SetupAttachment(RootComponent);
-	// WorkHitbox =  CreateDefaultSubobject<USphereComponent>(TEXT("WorkHitbox"));
-	// WorkHitbox->SetCollisionProfileName(TEXT("Work"));
-	// WorkHitbox->SetupAttachment(RootComponent);
 
 	// World space nametag
 	NametagWidgetComponent = CreateDefaultSubobject<UNametagWidgetComponent>(TEXT("NametagWidgetComponent"));
@@ -351,8 +348,8 @@ void AFrogCharacter::OnOverlapEnd(UPrimitiveComponent* OverlappedComponent, AAct
 
 void AFrogCharacter::UpdateClosestInteractable()
 {
+	IInteractableInterface* OldClosest = ClosestInteractable.Get();
 	ClosestInteractable = nullptr;
-	if (OverlappingInteractableArray.Num() <= 0) return;
 	
 	float BestDistanceSq = MAX_FLT;
 	for (TWeakInterfacePtr Interactable : OverlappingInteractableArray)
@@ -366,8 +363,19 @@ void AFrogCharacter::UpdateClosestInteractable()
 			ClosestInteractable = Interactable;
 		}
 	}
-	
-	ClosestInteractable->StartHighlight(HighlightMaterial);
+
+	if (OldClosest != ClosestInteractable.Get())
+	{
+		if (OldClosest)
+		{
+			OldClosest->StopHighlight();
+		}
+
+		if (ClosestInteractable.IsValid())
+		{
+			ClosestInteractable->StartHighlight(HighlightMaterial);
+		}
+	}
 }
 
 void AFrogCharacter::HandleAddedToInventory(class AItem* Item)
