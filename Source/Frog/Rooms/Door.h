@@ -26,6 +26,7 @@ public:
 	void SetHitboxActiveState(bool bIsHitboxActive);
 
 	FORCEINLINE void SetFacingDirection(const ERoomDirection InDirection) { FacingDirection = InDirection; }
+	FORCEINLINE virtual UMeshComponent* GetInteractableMesh() override { return InteractableMesh; }		
 	
 	// Delegates
 	FOnProgressComplete OnProgressComplete;
@@ -35,14 +36,17 @@ protected:
 
 	virtual void StartInteract() override;
 	virtual void StopInteract() override;
-	virtual void StartHighlight(UMaterialInterface* HighlightMaterial) override;
-	virtual void StopHighlight() override;
+	// virtual void StartHighlight(UMaterialInterface* HighlightMaterial) override;
+	// virtual void StopHighlight() override;
 	virtual FVector GetInteractableLocation() override;
 	
 	UFUNCTION()
 	void HandleProgressComplete();
 
 protected:
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr<UStaticMeshComponent> InteractableMesh;
+	
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UBoxComponent> InteractHitbox;
 	

@@ -54,21 +54,21 @@ void AItem::StopInteract()
 {
 }
 
-void AItem::StartHighlight(UMaterialInterface* InHighlightMaterial)
-{
-	if (IsValid(InteractableMesh) && IsValid(InHighlightMaterial) && InteractableMesh->GetOverlayMaterial() == nullptr)
-	{
-		InteractableMesh->SetOverlayMaterial(InHighlightMaterial);
-	}
-}
-
-void AItem::StopHighlight()
-{
-	if (IsValid(InteractableMesh))
-	{
-		InteractableMesh->SetOverlayMaterial(nullptr);
-	}
-}
+// void AItem::StartHighlight(UMaterialInterface* InHighlightMaterial)
+// {
+// 	if (IsValid(InteractableMesh) && IsValid(InHighlightMaterial) && InteractableMesh->GetOverlayMaterial() == nullptr)
+// 	{
+// 		InteractableMesh->SetOverlayMaterial(InHighlightMaterial);
+// 	}
+// }
+//
+// void AItem::StopHighlight()
+// {
+// 	if (IsValid(InteractableMesh))
+// 	{
+// 		InteractableMesh->SetOverlayMaterial(nullptr);
+// 	}
+// }
 
 FVector AItem::GetInteractableLocation()
 {

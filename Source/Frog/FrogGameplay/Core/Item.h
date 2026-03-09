@@ -21,8 +21,8 @@ public:
 	
 	virtual void StartInteract() override;
 	virtual void StopInteract() override;
-	virtual void StartHighlight(UMaterialInterface* InHighlightMaterial) override;
-	virtual void StopHighlight() override;
+	// virtual void StartHighlight(UMaterialInterface* InHighlightMaterial) override;
+	// virtual void StopHighlight() override;
 	virtual FVector GetInteractableLocation() override;
 	
 	bool HasMatchingInteractableTag(const FGameplayTagContainer& AcceptedTags) const;
@@ -37,17 +37,18 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
 	TObjectPtr<UItemData> Data;
 
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(Transient)
 	TObjectPtr<AItem> OfferedInteractable;
 	
 protected:
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UBoxComponent> InteractHitBox;
 	
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UStaticMeshComponent> InteractableMesh;
 
 public:
 	FORCEINLINE UItemData* GetData() const { return Data; }
-	FORCEINLINE AItem* GetOfferedInteractable() const { return OfferedInteractable.Get(); };
+	FORCEINLINE AItem* GetOfferedInteractable() const { return OfferedInteractable.Get(); }
+	FORCEINLINE virtual UStaticMeshComponent* GetInteractableMesh() override { return InteractableMesh.Get(); }
 };

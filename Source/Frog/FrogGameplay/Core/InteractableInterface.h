@@ -23,9 +23,10 @@ public:
 	virtual void StartInteract() = 0;
 	virtual void StopInteract() = 0;
 
-	virtual void StartHighlight(UMaterialInterface* HighlightMaterial) = 0;
-	virtual void StopHighlight() = 0;
+	virtual void StartHighlight(UMaterialInterface* InHighlightMaterial);
+	virtual void StopHighlight();
 	
 	virtual FVector GetInteractableLocation() = 0;
+	virtual UMeshComponent* GetInteractableMesh() = 0;
 };
 

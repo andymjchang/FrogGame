@@ -24,6 +24,11 @@ ADoor::ADoor()
 	InteractHitbox->SetRelativeLocation(FVector(0.0f, 0.0f, 128.0f));
 	InteractHitbox->SetCollisionProfileName(TEXT("InteractListen"));
 	
+	// Static Mesh Component
+	InteractableMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("InteractableMesh"));
+	InteractableMesh->SetupAttachment(RootComponent);
+	InteractableMesh->SetCollisionProfileName(TEXT("BlockAllDynamic"));	
+	
 	// Progress Tracker
 	ProgressTracker = CreateDefaultSubobject<UProgressTrackingComponent>(TEXT("ProgressTrackingComponent"));
 	
@@ -63,13 +68,13 @@ void ADoor::StopInteract()
 	ProgressTracker->StopProgress();
 }
 
-void ADoor::StartHighlight(UMaterialInterface* HighlightMaterial)
-{
-}
-
-void ADoor::StopHighlight()
-{
-}
+// void ADoor::StartHighlight(UMaterialInterface* HighlightMaterial)
+// {
+// }
+//
+// void ADoor::StopHighlight()
+// {
+// }
 
 FVector ADoor::GetInteractableLocation()
 {
