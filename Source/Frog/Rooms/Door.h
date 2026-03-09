@@ -35,7 +35,7 @@ protected:
 
 	virtual void StartInteract() override;
 	virtual void StopInteract() override;
-	virtual void StartHighlight() override;
+	virtual void StartHighlight(UMaterialInterface* HighlightMaterial) override;
 	virtual void StopHighlight() override;
 	virtual FVector GetInteractableLocation() override;
 	

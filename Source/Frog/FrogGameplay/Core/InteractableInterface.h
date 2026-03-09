@@ -23,7 +23,7 @@ public:
 	virtual void StartInteract() = 0;
 	virtual void StopInteract() = 0;
 
-	virtual void StartHighlight() = 0;
+	virtual void StartHighlight(UMaterialInterface* HighlightMaterial) = 0;
 	virtual void StopHighlight() = 0;
 	
 	virtual FVector GetInteractableLocation() = 0;

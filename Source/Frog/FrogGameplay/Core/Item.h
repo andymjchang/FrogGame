@@ -21,7 +21,7 @@ public:
 	
 	virtual void StartInteract() override;
 	virtual void StopInteract() override;
-	virtual void StartHighlight() override;
+	virtual void StartHighlight(UMaterialInterface* InHighlightMaterial) override;
 	virtual void StopHighlight() override;
 	virtual FVector GetInteractableLocation() override;
 	
@@ -36,9 +36,6 @@ protected:
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
 	TObjectPtr<UItemData> Data;
-	
-	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
-	TObjectPtr<UMaterialInterface> OverlayMaterial;
 
 	UPROPERTY(BlueprintReadOnly)
 	TObjectPtr<AItem> OfferedInteractable;

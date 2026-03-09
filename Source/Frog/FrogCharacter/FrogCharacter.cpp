@@ -67,9 +67,9 @@ AFrogCharacter::AFrogCharacter(const FObjectInitializer& ObjectInitializer)
 	InteractHitbox =  CreateDefaultSubobject<USphereComponent>(TEXT("InteractHitbox"));
 	InteractHitbox->SetCollisionProfileName(TEXT("Interact"));
 	InteractHitbox->SetupAttachment(RootComponent);
-	WorkHitbox =  CreateDefaultSubobject<USphereComponent>(TEXT("WorkHitbox"));
-	WorkHitbox->SetCollisionProfileName(TEXT("Work"));
-	WorkHitbox->SetupAttachment(RootComponent);
+	// WorkHitbox =  CreateDefaultSubobject<USphereComponent>(TEXT("WorkHitbox"));
+	// WorkHitbox->SetCollisionProfileName(TEXT("Work"));
+	// WorkHitbox->SetupAttachment(RootComponent);
 
 	// World space nametag
 	NametagWidgetComponent = CreateDefaultSubobject<UNametagWidgetComponent>(TEXT("NametagWidgetComponent"));
@@ -334,8 +334,6 @@ void AFrogCharacter::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AA
 	if (IInteractableInterface* Interactable = Cast<IInteractableInterface>(OtherActor))
 	{
 		OverlappingInteractableArray.Add(Interactable);
-		Interactable->StartHighlight();
-		// TODO: Start/Stop highlight is in the wrong spot
 		UpdateClosestInteractable();
 	}
 }
@@ -354,9 +352,9 @@ void AFrogCharacter::OnOverlapEnd(UPrimitiveComponent* OverlappedComponent, AAct
 void AFrogCharacter::UpdateClosestInteractable()
 {
 	ClosestInteractable = nullptr;
-
+	if (OverlappingInteractableArray.Num() <= 0) return;
+	
 	float BestDistanceSq = MAX_FLT;
-
 	for (TWeakInterfacePtr Interactable : OverlappingInteractableArray)
 	{
 		if (!Interactable.IsValid()) continue;
@@ -368,6 +366,8 @@ void AFrogCharacter::UpdateClosestInteractable()
 			ClosestInteractable = Interactable;
 		}
 	}
+	
+	ClosestInteractable->StartHighlight(HighlightMaterial);
 }
 
 void AFrogCharacter::HandleAddedToInventory(class AItem* Item)

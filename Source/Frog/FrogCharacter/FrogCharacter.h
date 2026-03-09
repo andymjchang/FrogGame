@@ -117,7 +117,23 @@ protected: /* Protected Functions */
 	void SetupAbilities();
 
 protected: /* Members */
-	// Components
+	UPROPERTY(EditAnywhere, Category = "User Settings")
+	TObjectPtr<UAbilitySet> AbilitySet;
+	
+	UPROPERTY(EditAnywhere, Category = "User Settings")
+	TSubclassOf<UGameplayEffect> DefaultAttributes;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
+	TObjectPtr<UMaterialInterface> HighlightMaterial;	
+		
+	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
+	TObjectPtr<UItemData> PlayerItemData;
+	
+	// GamePlay Interactions
+	TArray<TWeakInterfacePtr<IInteractableInterface>> OverlappingInteractableArray;
+	TWeakInterfacePtr<IInteractableInterface> ClosestInteractable;
+	
+protected: // Components
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<USpringArmComponent> CameraBoom;
 	
@@ -129,25 +145,23 @@ protected: /* Members */
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<UContainerComponent> ContainerComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	TObjectPtr<UInteractableWidgetComponent> InventoryWidgetComponent;	
 	
 	// Gameplay Ability System
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "GAS")
 	TObjectPtr<UFrogAbilitySystem> AbilitySystemComponent;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GAS")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GAS")
 	TArray<TSubclassOf<UGameplayAbility>> DefaultAbilities;
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GAS")
 	TObjectPtr<UFrogAttributeSet> AttributeSet;
 	
-	UPROPERTY(EditAnywhere, Category = "GAS")
-	TObjectPtr<UAbilitySet> AbilitySet;
-	
-	UPROPERTY(EditAnywhere, Category = "GAS")
-	TSubclassOf<UGameplayEffect> DefaultAttributes;
-	
+protected: // Input
 	// Mapping Context
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
 	TObjectPtr<UInputMappingContext> DefaultMappingContext;
 	
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
@@ -157,26 +171,14 @@ protected: /* Members */
 	TArray<FGameplayAbilitySpecHandle> InitialAbilitySpecHandles;
 
 	// Input Actions
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
 	TObjectPtr<UInputAction> MoveAction;
 
 	// HitBoxes
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
 	TObjectPtr<USphereComponent> InteractHitbox;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
-	TObjectPtr<USphereComponent> WorkHitbox;
 
-	// GamePlay Interactions
-	TArray<TWeakInterfacePtr<IInteractableInterface>> OverlappingInteractableArray;
-	TWeakInterfacePtr<IInteractableInterface> ClosestInteractable;
-	
-	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
-	TObjectPtr<UItemData> PlayerItemData;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	TObjectPtr<UInteractableWidgetComponent> InventoryWidgetComponent;	
-	
-public: /* Public Getters/Setters */
+public: /* Getters/Setters */
 	FORCEINLINE USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	FORCEINLINE UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 };

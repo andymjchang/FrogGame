@@ -63,7 +63,7 @@ void ADoor::StopInteract()
 	ProgressTracker->StopProgress();
 }
 
-void ADoor::StartHighlight()
+void ADoor::StartHighlight(UMaterialInterface* HighlightMaterial)
 {
 }
 

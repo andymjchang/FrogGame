@@ -54,11 +54,11 @@ void AItem::StopInteract()
 {
 }
 
-void AItem::StartHighlight()
+void AItem::StartHighlight(UMaterialInterface* InHighlightMaterial)
 {
-	if (IsValid(InteractableMesh) && IsValid(OverlayMaterial))
+	if (IsValid(InteractableMesh) && IsValid(InHighlightMaterial) && InteractableMesh->GetOverlayMaterial() == nullptr)
 	{
-		InteractableMesh->SetOverlayMaterial(OverlayMaterial);
+		InteractableMesh->SetOverlayMaterial(InHighlightMaterial);
 	}
 }
 
