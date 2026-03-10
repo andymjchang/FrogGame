@@ -68,15 +68,7 @@ void ADoor::StopInteract()
 	ProgressTracker->StopProgress();
 }
 
-// void ADoor::StartHighlight(UMaterialInterface* HighlightMaterial)
-// {
-// }
-//
-// void ADoor::StopHighlight()
-// {
-// }
-
-FVector ADoor::GetInteractableLocation()
+FVector ADoor::GetInteractableLocation() const
 {
 	return GetRootComponent()->GetComponentLocation();
 }

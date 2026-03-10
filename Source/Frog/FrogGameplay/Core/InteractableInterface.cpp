@@ -3,6 +3,14 @@
 
 #include "InteractableInterface.h"
 
+void IInteractableInterface::StartInteract()
+{
+}
+
+void IInteractableInterface::StopInteract()
+{
+}
+
 void IInteractableInterface::StartHighlight(UMaterialInterface* InHighlightMaterial)
 {
 	UMeshComponent* Mesh = GetInteractableMesh();

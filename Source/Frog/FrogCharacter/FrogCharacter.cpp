@@ -106,7 +106,7 @@ void AFrogCharacter::BeginPlay()
 	if (IsValid(ContainerComponent))
 	{
 		ContainerComponent->Initialize(PlayerItemData, InventoryWidgetComponent, GetMesh());
-		ContainerComponent->OnAddedToInventory.BindDynamic(this, &AFrogCharacter::HandleAddedToInventory);
+		ContainerComponent->OnAddedToInventory.AddDynamic(this, &AFrogCharacter::HandleAddedToInventory);
 	}
 }
 
@@ -138,12 +138,25 @@ void AFrogCharacter::OnRep_PlayerState()
 
 void AFrogCharacter::StartInteract()
 {
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("StartInteract called."));
+	}
+
 	if (HasAuthority())
 	{
+		if (GEngine)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Authority present: Executing implementation."));
+		}
 		Server_StartInteract_Implementation();
 	}
 	else
 	{
+		if (GEngine)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("No Authority: Calling Server RPC."));
+		}
 		Server_StartInteract();
 	}
 }
@@ -341,7 +354,10 @@ void AFrogCharacter::OnOverlapEnd(UPrimitiveComponent* OverlappedComponent, AAct
 	if (IInteractableInterface* Interactable = Cast<IInteractableInterface>(OtherActor))
 	{
 		OverlappingInteractableArray.Remove(Interactable);
-		Interactable->StopHighlight();
+		if (IsLocallyControlled())
+		{
+			Interactable->StopHighlight();
+		}
 		UpdateClosestInteractable();
 	}
 }
@@ -368,12 +384,26 @@ void AFrogCharacter::UpdateClosestInteractable()
 	{
 		if (OldClosest)
 		{
-			OldClosest->StopHighlight();
+			if (HasAuthority())
+			{
+				if (AWorkStation* WorkStation = Cast<AWorkStation>(OldClosest))
+				{
+					WorkStation->StopWork();
+				}
+			}
+
+			if (IsLocallyControlled())
+			{
+				OldClosest->StopHighlight();
+			}
 		}
 
 		if (ClosestInteractable.IsValid())
 		{
-			ClosestInteractable->StartHighlight(HighlightMaterial);
+			if (IsLocallyControlled())
+			{
+				ClosestInteractable->StartHighlight(HighlightMaterial);
+			}
 		}
 	}
 }

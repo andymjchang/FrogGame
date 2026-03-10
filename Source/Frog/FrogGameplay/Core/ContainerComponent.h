@@ -8,7 +8,7 @@
 #include "Components/SceneComponent.h"
 #include "ContainerComponent.generated.h"
 
-DECLARE_DYNAMIC_DELEGATE_OneParam(FOnInventoryItemChanged, class AItem*, Item);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInventoryItemChanged, class AItem*, Item);
 
 class UInteractableWidgetComponent;
 class AContainer;

@@ -18,12 +18,7 @@ class FROG_API AItem : public AActor, public IInteractableInterface
 
 public:
 	AItem();
-	
-	virtual void StartInteract() override;
-	virtual void StopInteract() override;
-	// virtual void StartHighlight(UMaterialInterface* InHighlightMaterial) override;
-	// virtual void StopHighlight() override;
-	virtual FVector GetInteractableLocation() override;
+	virtual FVector GetInteractableLocation() const override;
 	
 	bool HasMatchingInteractableTag(const FGameplayTagContainer& AcceptedTags) const;
 
@@ -50,5 +45,5 @@ protected:
 public:
 	FORCEINLINE UItemData* GetData() const { return Data; }
 	FORCEINLINE AItem* GetOfferedInteractable() const { return OfferedInteractable.Get(); }
-	FORCEINLINE virtual UStaticMeshComponent* GetInteractableMesh() override { return InteractableMesh.Get(); }
+	FORCEINLINE virtual UStaticMeshComponent* GetInteractableMesh() const override { return InteractableMesh.Get(); }
 };

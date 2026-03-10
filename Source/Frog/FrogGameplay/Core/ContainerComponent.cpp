@@ -89,10 +89,9 @@ bool UContainerComponent::TryAddToInventory(AItem* InteractableToAdd)
     const FAttachmentTransformRules Rules(EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,
                                           EAttachmentRule::KeepWorld, false);
     InteractableToAdd->AttachToComponent(this, Rules); 
-	InteractableToAdd->SetReplicateMovement(false);
     
     OnRep_Inventory();
-    OnAddedToInventory.ExecuteIfBound(InteractableToAdd);
+	OnAddedToInventory.Broadcast(InteractableToAdd);
     
     return true;
 }
@@ -139,7 +138,8 @@ bool UContainerComponent::TryRemoveFromInventory(AItem* InteractableToRemove)
     if (Inventory.Remove(InteractableToRemove) <= 0) return false;
 	
 	OnRep_Inventory();
-    OnRemovedFromInventory.ExecuteIfBound(InteractableToRemove);
+	OnAddedToInventory.Broadcast(InteractableToRemove);
+	
 	return true;
 }
 

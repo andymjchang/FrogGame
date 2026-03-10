@@ -25,8 +25,8 @@ void AContainer::BeginPlay()
 
 	if (IsValid(ContainerComponent))
 	{
-		ContainerComponent->OnAddedToInventory.BindDynamic(this, &AContainer::HandleAddedToInventory);
-		ContainerComponent->OnRemovedFromInventory.BindDynamic(this, &AContainer::HandleRemovedFromInventory);
+		ContainerComponent->OnAddedToInventory.AddDynamic(this, &AContainer::HandleAddedToInventory);
+		ContainerComponent->OnRemovedFromInventory.AddDynamic(this, &AContainer::HandleRemovedFromInventory);
 		ContainerComponent->Initialize(Data, InventoryWidgetComponent, InteractableMesh.Get());
 	}
 }

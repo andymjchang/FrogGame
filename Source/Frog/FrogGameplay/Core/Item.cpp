@@ -11,7 +11,6 @@ AItem::AItem()
 {
 	PrimaryActorTick.bCanEverTick = false;
 	bReplicates = true;
-	AActor::SetReplicateMovement(true);
 	
 	// Root Component
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootSceneComponent"));
@@ -46,31 +45,7 @@ bool AItem::HasMatchingInteractableTag(const FGameplayTagContainer& AcceptedTags
 	return false;
 }
 
-void AItem::StartInteract()
-{
-}
-
-void AItem::StopInteract()
-{
-}
-
-// void AItem::StartHighlight(UMaterialInterface* InHighlightMaterial)
-// {
-// 	if (IsValid(InteractableMesh) && IsValid(InHighlightMaterial) && InteractableMesh->GetOverlayMaterial() == nullptr)
-// 	{
-// 		InteractableMesh->SetOverlayMaterial(InHighlightMaterial);
-// 	}
-// }
-//
-// void AItem::StopHighlight()
-// {
-// 	if (IsValid(InteractableMesh))
-// 	{
-// 		InteractableMesh->SetOverlayMaterial(nullptr);
-// 	}
-// }
-
-FVector AItem::GetInteractableLocation()
+FVector AItem::GetInteractableLocation() const
 {
 	return GetRootComponent()->GetComponentLocation();
 }

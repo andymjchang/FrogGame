@@ -20,13 +20,13 @@ class FROG_API IInteractableInterface
 	GENERATED_BODY()
 
 public:
-	virtual void StartInteract() = 0;
-	virtual void StopInteract() = 0;
+	virtual void StartInteract();
+	virtual void StopInteract();
 
 	virtual void StartHighlight(UMaterialInterface* InHighlightMaterial);
 	virtual void StopHighlight();
 	
-	virtual FVector GetInteractableLocation() = 0;
-	virtual UMeshComponent* GetInteractableMesh() = 0;
+	virtual FVector GetInteractableLocation() const = 0;
+	virtual UMeshComponent* GetInteractableMesh() const = 0;
 };
 

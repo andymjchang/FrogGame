@@ -29,9 +29,4 @@ void AWorkStation::StopWork()
 void AWorkStation::StopHighlight()
 {
     Super::StopHighlight();
-    
-    if (HasAuthority())
-    {
-        ProgressTracker->StopProgress();
-    }
 }
