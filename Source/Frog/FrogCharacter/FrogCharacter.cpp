@@ -140,31 +140,8 @@ void AFrogCharacter::OnRep_PlayerState()
 
 void AFrogCharacter::StartInteract()
 {
-	if (GEngine)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("StartInteract called."));
-	}
+	if (!HasAuthority()) return;
 
-	if (HasAuthority())
-	{
-		if (GEngine)
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Authority present: Executing implementation."));
-		}
-		Server_StartInteract_Implementation();
-	}
-	else
-	{
-		if (GEngine)
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("No Authority: Calling Server RPC."));
-		}
-		Server_StartInteract();
-	}
-}
-
-void AFrogCharacter::Server_StartInteract_Implementation()
-{
 	UpdateClosestInteractable();
 	
 	if (!ClosestInteractable.IsValid()) return;
@@ -232,18 +209,8 @@ void AFrogCharacter::Server_StartInteract_Implementation()
 
 void AFrogCharacter::StopInteract()
 {
-	if (HasAuthority())
-	{
-		Server_StopInteract_Implementation();
-	}
-	else
-	{
-		Server_StopInteract();
-	}
-}
+	if (!HasAuthority()) return;
 
-void AFrogCharacter::Server_StopInteract_Implementation()
-{
 	IInteractableInterface* OtherInteractable = ClosestInteractable.Get();
 	if (!OtherInteractable) return;
 	
@@ -252,18 +219,8 @@ void AFrogCharacter::Server_StopInteract_Implementation()
 
 void AFrogCharacter::StartWork()
 {
-	if (HasAuthority())
-	{
-		Server_StartWork_Implementation();
-	}
-	else
-	{
-		Server_StartWork();
-	}
-}
+	if (!HasAuthority()) return;
 
-void AFrogCharacter::Server_StartWork_Implementation()
-{
 	if (!ClosestInteractable.IsValid()) return;
 	AWorkStation* OtherStation = Cast<AWorkStation>(ClosestInteractable.Get());
 	if (!IsValid(OtherStation)) return;
@@ -273,18 +230,8 @@ void AFrogCharacter::Server_StartWork_Implementation()
 
 void AFrogCharacter::StopWork()
 {
-	if (HasAuthority())
-	{
-		Server_StopWork_Implementation();
-	}
-	else
-	{
-		Server_StopWork();
-	}
-}
+	if (!HasAuthority()) return;
 
-void AFrogCharacter::Server_StopWork_Implementation()
-{
 	if (!ClosestInteractable.IsValid()) return;
 	AWorkStation* OtherStation = Cast<AWorkStation>(ClosestInteractable.Get());
 	if (!IsValid(OtherStation)) return;
