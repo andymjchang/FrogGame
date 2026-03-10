@@ -126,6 +126,7 @@ bool UContainerComponent::TryAddContainerContentsToInventory(AContainer* SourceC
 		}
 	}
     
+	// Iterate backwards because removing
 	for (int32 i = InInventory.Num() - 1; i >= 0; --i)
 	{
 		TryAddToInventory(InInventory[i].Get(), SourceContainerComp);

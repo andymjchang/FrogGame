@@ -11,7 +11,6 @@
 UProgressTrackingComponent::UProgressTrackingComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
-	PrimaryComponentTick.TickInterval = 0.2f;
 	SetIsReplicatedByDefault(true);
 	
 	// PlayerContributions.Reserve(NUM_PLAYERS);
