@@ -8,12 +8,12 @@
 #include "Components/SceneComponent.h"
 #include "ContainerComponent.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInventoryItemChanged, class AItem*, Item);
-
 class UInteractableWidgetComponent;
 class AContainer;
 class AItem;
 class UMeshComponent;
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInventoryItemChanged, AItem*, Item);
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class FROG_API UContainerComponent : public USceneComponent
@@ -27,8 +27,8 @@ public:
 
 	void ClearInventory();
 	void RemoveNullsFromInventory();
-	bool TryAddToInventory(AItem* InteractableToAdd);
-	bool TryAddContainerContentsToInventory(AContainer* ContainerToAdd);
+	bool TryAddToInventory(AItem* InteractableToAdd, UContainerComponent* SourceContainerComp = nullptr);
+	bool TryAddContainerContentsToInventory(AContainer* SourceContainer);
 	bool TryRemoveFromInventory(AItem* InteractableToRemove);
 
 	void SetShowInventoryWidget(bool bShow);
@@ -54,7 +54,7 @@ protected:
 
 protected:
 	UPROPERTY(Transient, ReplicatedUsing = OnRep_IsInventoryWidgetVisible)
-	bool bIsInventoryWidgetVisible = false;
+	bool bIsInventoryWidgetVisible = true;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, ReplicatedUsing = OnRep_Inventory)
 	TArray<TObjectPtr<AItem>> Inventory;

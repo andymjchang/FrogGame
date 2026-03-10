@@ -72,7 +72,7 @@ void UContainerComponent::RemoveNullsFromInventory()
 	Inventory.Remove(nullptr);
 }
 
-bool UContainerComponent::TryAddToInventory(AItem* InteractableToAdd)
+bool UContainerComponent::TryAddToInventory(AItem* InteractableToAdd, UContainerComponent* SourceContainerComp)
 {
 	if (!IsValid(GetOwner())) return false;
 	if (!GetOwner()->HasAuthority()) return false;
@@ -83,6 +83,11 @@ bool UContainerComponent::TryAddToInventory(AItem* InteractableToAdd)
 	RemoveNullsFromInventory();
 	
     Inventory.Add(InteractableToAdd);
+	
+	if (IsValid(SourceContainerComp))
+	{
+		SourceContainerComp->TryRemoveFromInventory(InteractableToAdd);
+	}
 
     InteractableToAdd->DisableInteractable();
     
@@ -96,22 +101,22 @@ bool UContainerComponent::TryAddToInventory(AItem* InteractableToAdd)
     return true;
 }
 
-bool UContainerComponent::TryAddContainerContentsToInventory(AContainer* ContainerToAdd)
+bool UContainerComponent::TryAddContainerContentsToInventory(AContainer* SourceContainer)
 {
 	if (!GetOwner()->HasAuthority()) return false;
-	if (!IsValid(ContainerToAdd)) return false;
+	if (!IsValid(SourceContainer)) return false;
 	if (!Data.IsValid()) return false;
 
-	UContainerComponent* ContainerCompToAdd = ContainerToAdd->GetContainerComponent();
-	if (!IsValid(ContainerCompToAdd)) return false;
+	UContainerComponent* SourceContainerComp = SourceContainer->GetContainerComponent();
+	if (!IsValid(SourceContainerComp)) return false;
 	
     RemoveNullsFromInventory();
-	ContainerCompToAdd->RemoveNullsFromInventory();
+	SourceContainerComp->RemoveNullsFromInventory();
 	
-	if (ContainerCompToAdd->IsEmpty()) return false;
-	if (GetInventorySize() + ContainerCompToAdd->GetInventorySize() > Data->GetMaxCapacity()) return false;
+	if (SourceContainerComp->IsEmpty()) return false;
+	if (GetInventorySize() + SourceContainerComp->GetInventorySize() > Data->GetMaxCapacity()) return false;
     
-	const TArray<TObjectPtr<AItem>>& InInventory = ContainerCompToAdd->GetInventory();
+	const TArray<TObjectPtr<AItem>>& InInventory = SourceContainerComp->GetInventory();
 	// All contents of the source must be compatible, no partial transfer
 	for (const TObjectPtr<AItem>& InventoryItem : InInventory)
 	{
@@ -123,11 +128,8 @@ bool UContainerComponent::TryAddContainerContentsToInventory(AContainer* Contain
     
 	for (int32 i = InInventory.Num() - 1; i >= 0; --i)
 	{
-		TryAddToInventory(InInventory[i].Get());
+		TryAddToInventory(InInventory[i].Get(), SourceContainerComp);
 	}
-    
-	ContainerCompToAdd->ClearInventory();
-	OnRep_Inventory();
     
 	return true;
 }
@@ -138,7 +140,7 @@ bool UContainerComponent::TryRemoveFromInventory(AItem* InteractableToRemove)
     if (Inventory.Remove(InteractableToRemove) <= 0) return false;
 	
 	OnRep_Inventory();
-	OnAddedToInventory.Broadcast(InteractableToRemove);
+	OnRemovedFromInventory.Broadcast(InteractableToRemove);
 	
 	return true;
 }

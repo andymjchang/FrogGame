@@ -108,6 +108,8 @@ void AFrogCharacter::BeginPlay()
 		ContainerComponent->Initialize(PlayerItemData, InventoryWidgetComponent, GetMesh());
 		ContainerComponent->OnAddedToInventory.AddDynamic(this, &AFrogCharacter::HandleAddedToInventory);
 	}
+	
+	if (IsValid(ContainerComponent)) ContainerComponent->SetShowInventoryWidget(false);
 }
 
 UAbilitySystemComponent* AFrogCharacter::GetAbilitySystemComponent() const
@@ -192,24 +194,31 @@ void AFrogCharacter::Server_StartInteract_Implementation()
 	{
 		FLOG(TEXT("Trying interact as item..."));
 
-		if (IsValid(OtherOfferAsContainerComp) && OtherOfferAsContainerComp->TryAddToInventory(HeldInteractable))
+		if (IsValid(OtherOfferAsContainerComp))
 		{
-			ContainerComponent->TryRemoveFromInventory(HeldInteractable);
+			if (OtherOfferAsContainerComp->TryAddToInventory(HeldInteractable, ContainerComponent))
+			{
+				return;
+			}
 		}
-		else if (AContainer* HeldContainer = Cast<AContainer>(HeldInteractable))
+		
+		if (AContainer* HeldContainer = Cast<AContainer>(HeldInteractable))
 		{
 			FLOG(TEXT("Try interact as container..."));
 			
 			UContainerComponent* HeldContainerComp = HeldContainer->GetContainerComponent();
 			if (IsValid(HeldContainerComp))
 			{
-				if (IsValid(OtherContainerComp) && HeldContainerComp->TryAddToInventory(OtherOffer))
+				// Put other offer in player's held container
+				if (IsValid(OtherContainerComp) && HeldContainerComp->TryAddToInventory(OtherOffer, OtherContainerComp))
 				{
-					OtherContainerComp->TryRemoveFromInventory(OtherOffer);
+					return;
 				}
-				else if (IsValid(OtherOfferAsContainerComp))
+				
+				// Put other offer's container contents into player's held container
+				if (IsValid(OtherOfferAsContainerComp) && OtherOfferAsContainerComp->TryAddContainerContentsToInventory(HeldContainer))
 				{
-					OtherOfferAsContainerComp->TryAddContainerContentsToInventory(HeldContainer);
+					return;
 				}
 			}
 		}
@@ -217,14 +226,7 @@ void AFrogCharacter::Server_StartInteract_Implementation()
 	else 
 	{
 		FLOG(TEXT("Trying interact as player"));
-       
-		if (ContainerComponent->TryAddToInventory(OtherOffer))
-		{
-			if (IsValid(OtherContainerComp))
-			{
-				OtherContainerComp->TryRemoveFromInventory(OtherOffer);
-			}
-		}
+		ContainerComponent->TryAddToInventory(OtherOffer, OtherContainerComp);
 	}
 }
 
@@ -410,8 +412,12 @@ void AFrogCharacter::UpdateClosestInteractable()
 
 void AFrogCharacter::HandleAddedToInventory(class AItem* Item)
 {
-	const bool ShowInventory = (IsValid(Item) && !Cast<AContainer>(Item));
-	ContainerComponent->SetShowInventoryWidget(ShowInventory);
+	// Set inventory visibility
+	if (IsValid(ContainerComponent))
+	{
+		const bool IsContainer = IsValid(Cast<AContainer>(Item));
+		ContainerComponent->SetShowInventoryWidget(!IsContainer);
+	}
 }
 
 void AFrogCharacter::Tick(float DeltaSeconds)
