@@ -13,10 +13,7 @@ void AFrogGameMode::PostLogin(APlayerController* NewPlayer)
 	AFrogGameState* FrogGameState = GetGameState<AFrogGameState>();
 	if (FrogGameState && NewPlayer && NewPlayer->PlayerState)
 	{
-		const FUniqueNetIdRepl UniqueId = NewPlayer->PlayerState->GetUniqueId();
-		if (UniqueId.IsValid()) 
-		{
-			FrogGameState->AddNewPlayer(UniqueId);
-		}
+		const int32 PlayerId = NewPlayer->PlayerState->GetPlayerId();
+		FrogGameState->AddNewPlayer(PlayerId);
 	}
 }

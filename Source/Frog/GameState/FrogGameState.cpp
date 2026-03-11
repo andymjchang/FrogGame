@@ -22,18 +22,18 @@ void AFrogGameState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLi
     DOREPLIFETIME(AFrogGameState, PhaseEndTime);
 }
 
-void AFrogGameState::AddNewPlayer(const FUniqueNetIdRepl& UniqueId)
+void AFrogGameState::AddNewPlayer(int32 PlayerId)
 {
-    if (UniqueId.IsValid() && !PlayerIndexMap.Contains(UniqueId))
+    if (PlayerId != INDEX_NONE && !PlayerIndexMap.Contains(PlayerId))
     {
-        PlayerIndexMap.Add(UniqueId, NextPlayerIndex);
+        PlayerIndexMap.Add(PlayerId, NextPlayerIndex);
         NextPlayerIndex++;
     }
 }
 
-int32 AFrogGameState::GetPlayerIndex(const FUniqueNetIdRepl& UniqueId) const
+int32 AFrogGameState::GetPlayerIndex(int32 PlayerId) const
 {
-    if (const int32* FoundIndex = PlayerIndexMap.Find(UniqueId))
+    if (const int32* FoundIndex = PlayerIndexMap.Find(PlayerId))
     {
         return *FoundIndex;
     }
@@ -45,11 +45,7 @@ int32 AFrogGameState::GetPlayerIndex(const APlayerState* PlayerState) const
 {
     if (IsValid(PlayerState))
     {
-        const FUniqueNetIdRepl& UniqueID = PlayerState->GetUniqueId();
-        if (UniqueID.IsValid())
-        {
-            return GetPlayerIndex(UniqueID);
-        }
+        return GetPlayerIndex(PlayerState->GetPlayerId());
     }
     
     return INDEX_NONE;

@@ -32,8 +32,8 @@ public:
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
     
     // Player ID
-    void AddNewPlayer(const FUniqueNetIdRepl& UniqueId);
-    int32 GetPlayerIndex(const FUniqueNetIdRepl& UniqueId) const;
+    void AddNewPlayer(int32 PlayerId);
+    int32 GetPlayerIndex(int32 PlayerId) const;
     int32 GetPlayerIndex(const APlayerState* PlayerState) const;
 
     // Delegates
@@ -85,7 +85,7 @@ protected:
     float PhaseEndTime;
     
     UPROPERTY()
-    TMap<FUniqueNetIdRepl, int32> PlayerIndexMap;
+    TMap<int32, int32> PlayerIndexMap;
     int32 NextPlayerIndex = 0;
 
     // UPROPERTY()
