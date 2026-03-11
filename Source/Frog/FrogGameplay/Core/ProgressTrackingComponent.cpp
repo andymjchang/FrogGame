@@ -24,7 +24,7 @@ void UProgressTrackingComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProp
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
-	DOREPLIFETIME(UProgressTrackingComponent, bIsProcessing);
+	// DOREPLIFETIME(UProgressTrackingComponent, bIsProcessing);
 	DOREPLIFETIME(UProgressTrackingComponent, TargetDuration);
 	DOREPLIFETIME(UProgressTrackingComponent, ProgressPerPlayerSeconds);
 }
@@ -55,7 +55,6 @@ void UProgressTrackingComponent::TickComponent(float DeltaTime, ELevelTick TickT
 
 void UProgressTrackingComponent::OnRep_IsProcessing()
 {
-	SetWidgetVisibility(bIsProcessing || GetProgressFraction() > 0.0f);
 	SetWidgetProgress();
 }
 
@@ -93,7 +92,7 @@ float UProgressTrackingComponent::GetProgressFraction() const
 	// }
 
 	float CurrentProgress = 0;
-	if (ProgressScope == EProgressScope::Shared)
+	if (ProgressScope == EProgressScope::Individual)
 	{
 		for (const float Progress : ProgressPerPlayerSeconds)
 		{
@@ -113,7 +112,7 @@ void UProgressTrackingComponent::StartProgress()
 	if (!GetOwner()->HasAuthority()) return;
 
 	bIsProcessing = true;
-	OnRep_IsProcessing();
+	// OnRep_IsProcessing();
 }
 
 void UProgressTrackingComponent::AddProgressFlat()
@@ -142,7 +141,7 @@ void UProgressTrackingComponent::AddProgressPercentage(float Percentage, const A
 	
 	if (ProgressScope == EProgressScope::Shared)
 	{
-		ProgressPerPlayerSeconds[SHARED_PROGRESS_INDEX] += ProgressToAdd;	
+		ProgressPerPlayerSeconds[SHARED_PROGRESS_INDEX] += ProgressToAdd;
 	}
 	
 	OnRep_ProgressPerPlayerSeconds();
@@ -158,8 +157,10 @@ void UProgressTrackingComponent::ResetProgress()
 	if (!GetOwner()->HasAuthority()) return;
 	
 	ProgressPerPlayerSeconds.Init(0.f, NUM_PLAYERS);
+	OnRep_ProgressPerPlayerSeconds();
+	
 	bIsProcessing = false;
-	OnRep_IsProcessing();
+	// OnRep_IsProcessing();
 }
 
 // TODO: track all player's working status independently so it doesn't stop a player is still processing while another stops
@@ -168,7 +169,7 @@ void UProgressTrackingComponent::StopProgress()
 	if (!GetOwner()->HasAuthority()) return;
 
 	bIsProcessing = false;
-	OnRep_IsProcessing();
+	// OnRep_IsProcessing();
 }
 
 void UProgressTrackingComponent::CompleteProgress()
@@ -176,9 +177,10 @@ void UProgressTrackingComponent::CompleteProgress()
 	if (!GetOwner()->HasAuthority()) return;
 	
 	ProgressPerPlayerSeconds.Init(0.f, NUM_PLAYERS);
-
+	OnRep_ProgressPerPlayerSeconds();
+	
 	bIsProcessing = false;
-	OnRep_IsProcessing();
+	// OnRep_IsProcessing();
 	
 	OnCompletion.ExecuteIfBound();
 }
@@ -189,7 +191,7 @@ void UProgressTrackingComponent::SetWidgetVisibility(const bool IsVisible)
 	
 	if (IsVisible == true)
 	{
-		ProgressBarWidget->SetVisibility(ESlateVisibility::Visible);	
+		ProgressBarWidget->SetVisibility(ESlateVisibility::Visible);
 	} 
 	else
 	{
@@ -199,6 +201,7 @@ void UProgressTrackingComponent::SetWidgetVisibility(const bool IsVisible)
 
 void UProgressTrackingComponent::SetWidgetProgress()
 {
+	SetWidgetVisibility(GetProgressFraction() > 0.0f);
 	if (ProgressBarWidget.IsValid())
 	{
 		ProgressBarWidget->SetProgressPercent(GetProgressFraction());

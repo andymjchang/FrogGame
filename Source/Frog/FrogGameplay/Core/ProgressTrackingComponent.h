@@ -67,7 +67,7 @@ protected: // Protected Functions
 	void OnRep_ProgressPerPlayerSeconds();
 
 protected: // Protected Members
-	UPROPERTY(ReplicatedUsing = OnRep_IsProcessing)
+	// UPROPERTY(ReplicatedUsing = OnRep_IsProcessing)
 	bool bIsProcessing;
 
 	UPROPERTY(ReplicatedUsing = OnRep_ProgressPerPlayerSeconds)

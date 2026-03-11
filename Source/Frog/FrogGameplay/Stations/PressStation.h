@@ -12,16 +12,10 @@ class FROG_API APressStation : public AWorkStation
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this actor's properties
 	APressStation();
 	virtual void StartWork(APlayerState* PlayerState) override;
 
 protected:
-	//pct added to the progress per press
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GamePlay")
 	float PctAddedPerPress = 10.0f;
-	// Called when the game starts or when spawned
-
-public:
-	// Called every frame
 };
