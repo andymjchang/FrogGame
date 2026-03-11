@@ -14,7 +14,7 @@
 AStation::AStation()
 {
     PrimaryActorTick.bCanEverTick = false;
-    SetNetUpdateFrequency(10.f);
+    SetNetUpdateFrequency(5.f);
     
     // Progress Tracking Component
     ProgressTracker = CreateDefaultSubobject<UProgressTrackingComponent>(TEXT("ProgressTrackingComponent"));

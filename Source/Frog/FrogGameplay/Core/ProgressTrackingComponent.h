@@ -9,7 +9,8 @@
 class UStationProgressBar;
 class UInteractableWidgetComponent;
 
-static constexpr int NUM_PLAYERS = 4;
+static constexpr int32 NUM_PLAYERS = 4;
+static constexpr int32 SHARED_PROGRESS_INDEX = 0;
 DECLARE_DYNAMIC_DELEGATE(FOnCompletion);
 
 UENUM(BlueprintType)
@@ -37,39 +38,40 @@ public: // Public Functions
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 	void SetProgressWidgetReference(UUserWidget* InProgressBarWidget);
+	void StartProgress();
+	void StopProgress();
+	void ResetProgress();
 	
 	void SetProgressDuration(float InDuration);
-	void SetProgressStartTime(float InStartTime);
-	
-	float GetProgressFraction() const;
-	
-	void StartProgress();
-	void AddProgress();
-	void AddProgressByPercentage(float Percentage);
-	void ResetProgress();
-	void StopProgress();
 
+	void AddProgressFlat();
+	void AddProgressPercentage(float Percentage, const APlayerState* PlayerState);
+	
 	// Delegates
 	FOnCompletion OnCompletion;
 	
 protected: // Protected Functions
 	virtual void BeginPlay() override;
 	
+	float GetProgressFraction() const;
 	void CompleteProgress();
+	
 	void SetWidgetVisibility(bool IsVisible);
+	void SetWidgetProgress();
 
+	// On Rep Functions
 	UFUNCTION()
 	void OnRep_IsProcessing();
+	
+	UFUNCTION()
+	void OnRep_ProgressPerPlayerSeconds();
 
 protected: // Protected Members
 	UPROPERTY(ReplicatedUsing = OnRep_IsProcessing)
 	bool bIsProcessing;
 
-	UPROPERTY(Replicated)
-	float StartTime;
-
-	TArray<float> PlayerContributions;
-	float PassiveProgress;
+	UPROPERTY(ReplicatedUsing = OnRep_ProgressPerPlayerSeconds)
+	TArray<float> ProgressPerPlayerSeconds;
 	
 	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
 	EProgressMethod ProgressMethod = EProgressMethod::Passive;

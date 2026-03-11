@@ -138,14 +138,13 @@ void AFrogCharacter::OnRep_PlayerState()
 	}
 }
 
-void AFrogCharacter::StartInteract()
+void AFrogCharacter::PlayerStartInteract()
 {
 	if (!HasAuthority()) return;
 
 	UpdateClosestInteractable();
 	
 	if (!ClosestInteractable.IsValid()) return;
-	
 	ClosestInteractable->StartInteract();
 	
 	AItem* OtherItem = Cast<AItem>(ClosestInteractable.Get());
@@ -169,12 +168,12 @@ void AFrogCharacter::StartInteract()
 	AItem* HeldInteractable = ContainerComponent->GetFirstItem();
 	if (IsValid(HeldInteractable))
 	{
-		FLOG(TEXT("Trying interact as item..."));
 
 		if (IsValid(OtherOfferAsContainerComp))
 		{
 			if (OtherOfferAsContainerComp->TryAddToInventory(HeldInteractable, ContainerComponent))
 			{
+		FLOG(TEXT("Trying interact as item..."));
 				return;
 			}
 		}
@@ -207,7 +206,7 @@ void AFrogCharacter::StartInteract()
 	}
 }
 
-void AFrogCharacter::StopInteract()
+void AFrogCharacter::PlayerStopInteract()
 {
 	if (!HasAuthority()) return;
 
@@ -217,7 +216,7 @@ void AFrogCharacter::StopInteract()
 	OtherInteractable->StopInteract();
 }
 
-void AFrogCharacter::StartWork()
+void AFrogCharacter::PlayerStartWork()
 {
 	if (!HasAuthority()) return;
 
@@ -225,10 +224,10 @@ void AFrogCharacter::StartWork()
 	AWorkStation* OtherStation = Cast<AWorkStation>(ClosestInteractable.Get());
 	if (!IsValid(OtherStation)) return;
 	
-	OtherStation->StartWork();
+	OtherStation->StartWork(GetPlayerState());
 }
 
-void AFrogCharacter::StopWork()
+void AFrogCharacter::PlayerStopWork()
 {
 	if (!HasAuthority()) return;
 
@@ -236,7 +235,7 @@ void AFrogCharacter::StopWork()
 	AWorkStation* OtherStation = Cast<AWorkStation>(ClosestInteractable.Get());
 	if (!IsValid(OtherStation)) return;
 	
-	OtherStation->StopWork();
+	OtherStation->StopWork(GetPlayerState());
 }
 
 void AFrogCharacter::SetupAbilities()
@@ -321,7 +320,7 @@ void AFrogCharacter::UpdateClosestInteractable()
 	{
 		if (!Interactable.IsValid()) continue;
 		
-		float DistSq = FVector::DistSquared(Interactable->GetInteractableLocation(), GetActorLocation());
+		float DistSq = FVector::DistSquared(Interactable->GetInteractableLocation(), InteractHitbox->GetComponentLocation());
 		if (DistSq < BestDistanceSq)
 		{
 			BestDistanceSq = DistSq;
@@ -337,7 +336,7 @@ void AFrogCharacter::UpdateClosestInteractable()
 			{
 				if (AWorkStation* WorkStation = Cast<AWorkStation>(OldClosest))
 				{
-					WorkStation->StopWork();
+					WorkStation->StopWork(GetPlayerState());
 				}
 			}
 

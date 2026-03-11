@@ -60,11 +60,13 @@ void ADoor::HandleProgressComplete()
 
 void ADoor::StartInteract()
 {
+	IInteractableInterface::StartInteract();
 	ProgressTracker->StartProgress();
 }
 
 void ADoor::StopInteract()
 {
+	IInteractableInterface::StopInteract();
 	ProgressTracker->StopProgress();
 }
 

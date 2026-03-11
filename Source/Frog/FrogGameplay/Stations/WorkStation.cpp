@@ -2,6 +2,7 @@
 
 #include "WorkStation.h"
 
+#include "Frog.h"
 #include "Components/BoxComponent.h"
 #include "FrogGameplay/Core/ProgressTrackingComponent.h"
 
@@ -10,7 +11,7 @@ AWorkStation::AWorkStation()
 
 }
 
-void AWorkStation::StartWork()
+void AWorkStation::StartWork(APlayerState* PlayerState)
 {
     if (HasAuthority() && OfferedInteractable == this)
     {
@@ -18,15 +19,10 @@ void AWorkStation::StartWork()
     }
 }
 
-void AWorkStation::StopWork()
+void AWorkStation::StopWork(APlayerState* PlayerState)
 {
     if (HasAuthority())
     {
         ProgressTracker->StopProgress();
     }
-}
-
-void AWorkStation::StopHighlight()
-{
-    Super::StopHighlight();
 }

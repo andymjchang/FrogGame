@@ -89,7 +89,7 @@ bool UContainerComponent::TryAddToInventory(AItem* InteractableToAdd, UContainer
 		SourceContainerComp->TryRemoveFromInventory(InteractableToAdd);
 	}
 
-    InteractableToAdd->DisableInteractable();
+    InteractableToAdd->DisableHitbox();
     
     const FAttachmentTransformRules Rules(EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,
                                           EAttachmentRule::KeepWorld, false);

@@ -1,5 +1,6 @@
 ﻿#include "FrogGameState.h"
 
+#include "GameFramework/PlayerState.h"
 #include "Net/UnrealNetwork.h"
 
 AFrogGameState::AFrogGameState()
@@ -19,6 +20,39 @@ void AFrogGameState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLi
     DOREPLIFETIME(AFrogGameState, Money);
     DOREPLIFETIME(AFrogGameState, CurrentPhase);
     DOREPLIFETIME(AFrogGameState, PhaseEndTime);
+}
+
+void AFrogGameState::AddNewPlayer(const FUniqueNetIdRepl& UniqueId)
+{
+    if (UniqueId.IsValid() && !PlayerIndexMap.Contains(UniqueId))
+    {
+        PlayerIndexMap.Add(UniqueId, NextPlayerIndex);
+        NextPlayerIndex++;
+    }
+}
+
+int32 AFrogGameState::GetPlayerIndex(const FUniqueNetIdRepl& UniqueId) const
+{
+    if (const int32* FoundIndex = PlayerIndexMap.Find(UniqueId))
+    {
+        return *FoundIndex;
+    }
+    
+    return INDEX_NONE;
+}
+
+int32 AFrogGameState::GetPlayerIndex(const APlayerState* PlayerState) const
+{
+    if (IsValid(PlayerState))
+    {
+        const FUniqueNetIdRepl& UniqueID = PlayerState->GetUniqueId();
+        if (UniqueID.IsValid())
+        {
+            return GetPlayerIndex(UniqueID);
+        }
+    }
+    
+    return INDEX_NONE;
 }
 
 void AFrogGameState::ServerTryUnlockDoor(ERoomDirection FacingDirection)

@@ -3,7 +3,9 @@
 
 #include "ProgressTrackingComponent.h"
 
+#include "Frog.h"
 #include "GameFramework/GameStateBase.h"
+#include "GameState/FrogGameState.h"
 #include "GameUI/Interactables/StationProgressBar.h"
 #include "Net/UnrealNetwork.h"
 
@@ -11,10 +13,10 @@
 UProgressTrackingComponent::UProgressTrackingComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
+	PrimaryComponentTick.TickInterval = 0.2f;
 	SetIsReplicatedByDefault(true);
 	
-	// PlayerContributions.Reserve(NUM_PLAYERS);
-	PlayerContributions.Init(0.f, NUM_PLAYERS);
+	ProgressPerPlayerSeconds.Init(0.f, NUM_PLAYERS);
 }
 
 
@@ -23,8 +25,8 @@ void UProgressTrackingComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProp
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
 	DOREPLIFETIME(UProgressTrackingComponent, bIsProcessing);
-	DOREPLIFETIME(UProgressTrackingComponent, StartTime);
 	DOREPLIFETIME(UProgressTrackingComponent, TargetDuration);
+	DOREPLIFETIME(UProgressTrackingComponent, ProgressPerPlayerSeconds);
 }
 
 void UProgressTrackingComponent::BeginPlay()
@@ -37,22 +39,16 @@ void UProgressTrackingComponent::TickComponent(float DeltaTime, ELevelTick TickT
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	if (ProgressMethod == EProgressMethod::Passive && bIsProcessing)
+	const AActor* Owner = GetOwner();
+	if (!IsValid(Owner)) return;
+
+	if (Owner->HasAuthority() && bIsProcessing && ProgressMethod == EProgressMethod::Passive)
 	{
-		if (GetOwner()->HasAuthority())
+		ProgressPerPlayerSeconds[SHARED_PROGRESS_INDEX] += DeltaTime;
+		OnRep_ProgressPerPlayerSeconds();
+		if (GetProgressFraction() >= 1.0f)
 		{
-			PassiveProgress += DeltaTime;
-			if (GetProgressFraction() >= 1.0f)
-			{
-				CompleteProgress();
-			}
-		}
-		
-		// Update UI on both server and client
-		const float ProgressPercent = GetProgressFraction();
-		if (ProgressBarWidget.IsValid())
-		{
-			ProgressBarWidget->SetProgressPercent(ProgressPercent);
+			CompleteProgress();
 		}
 	}
 }
@@ -60,6 +56,12 @@ void UProgressTrackingComponent::TickComponent(float DeltaTime, ELevelTick TickT
 void UProgressTrackingComponent::OnRep_IsProcessing()
 {
 	SetWidgetVisibility(bIsProcessing || GetProgressFraction() > 0.0f);
+	SetWidgetProgress();
+}
+
+void UProgressTrackingComponent::OnRep_ProgressPerPlayerSeconds()
+{
+	SetWidgetProgress();
 }
 
 void UProgressTrackingComponent::SetProgressWidgetReference(UUserWidget* InProgressBarWidget)
@@ -77,31 +79,30 @@ void UProgressTrackingComponent::SetProgressDuration(const float InDuration)
 	TargetDuration = InDuration;
 }
 
-void UProgressTrackingComponent::SetProgressStartTime(const float InStartTime)
-{
-	StartTime = InStartTime;
-}
-
 float UProgressTrackingComponent::GetProgressFraction() const
 {
-	if (ProgressMethod == EProgressMethod::Passive && bIsProcessing && !GetOwner()->HasAuthority())
-	{
-		// Client estimation
-		if (AGameStateBase* GameState = GetWorld()->GetGameState())
-		{
-			const float ServerTime = GameState->GetServerWorldTimeSeconds();
-			const float ElapsedTime = ServerTime - StartTime;
-			return FMath::Clamp(ElapsedTime / TargetDuration, 0.0f, 1.0f);
-		}
-	}
+	// if (ProgressMethod == EProgressMethod::Passive && bIsProcessing && !GetOwner()->HasAuthority())
+	// {
+	// 	// Client estimation
+	// 	if (AGameStateBase* GameState = GetWorld()->GetGameState())
+	// 	{
+	// 		const float ServerTime = GameState->GetServerWorldTimeSeconds();
+	// 		const float ElapsedTime = ServerTime - StartTime;
+	// 		return FMath::Clamp(ElapsedTime / TargetDuration, 0.0f, 1.0f);
+	// 	}
+	// }
 
-	float CurrentProgress = PassiveProgress;
-	if (ProgressScope == EProgressScope::Individual)
+	float CurrentProgress = 0;
+	if (ProgressScope == EProgressScope::Shared)
 	{
-		for (const float Progress : PlayerContributions)
+		for (const float Progress : ProgressPerPlayerSeconds)
 		{
 			CurrentProgress += Progress;
 		}
+	}
+	else
+	{
+		CurrentProgress = ProgressPerPlayerSeconds[SHARED_PROGRESS_INDEX];
 	}
 
 	return FMath::Clamp(CurrentProgress / TargetDuration, 0.0f, 1.0f);
@@ -113,36 +114,40 @@ void UProgressTrackingComponent::StartProgress()
 
 	bIsProcessing = true;
 	OnRep_IsProcessing();
-	
-	if (AGameStateBase* GameState = GetWorld()->GetGameState())
-	{
-		const float ServerTime = GameState->GetServerWorldTimeSeconds();
-		StartTime = ServerTime;
-	}
 }
 
-void UProgressTrackingComponent::AddProgress()
+void UProgressTrackingComponent::AddProgressFlat()
 {
 	
 }
 
 // TODO: Change to flat amount if process time is based on number / type of ingredients
-void UProgressTrackingComponent::AddProgressByPercentage(float Percentage)
+void UProgressTrackingComponent::AddProgressPercentage(float Percentage, const APlayerState* PlayerState)
 {
 	if (!GetOwner()->HasAuthority()) return;
-	if (ProgressMethod != EProgressMethod::Active) return;
 
 	const float ProgressToAdd = Percentage * TargetDuration / 100.0f;
-	PassiveProgress += ProgressToAdd;
-
-	const float ProgressPercent = GetProgressFraction();
-
-	if (ProgressBarWidget.IsValid())
+	
+	if (ProgressScope == EProgressScope::Individual)
 	{
-		ProgressBarWidget->SetProgressPercent(ProgressPercent);
+		if (AFrogGameState* GameState = Cast<AFrogGameState>(GetWorld()->GetGameState()))
+		{
+			const int32 PlayerIndex = GameState->GetPlayerIndex(PlayerState);
+			if (ProgressPerPlayerSeconds.IsValidIndex(PlayerIndex))
+			{
+				ProgressPerPlayerSeconds[PlayerIndex] += ProgressToAdd;
+			}
+		}
 	}
+	
+	if (ProgressScope == EProgressScope::Shared)
+	{
+		ProgressPerPlayerSeconds[SHARED_PROGRESS_INDEX] += ProgressToAdd;	
+	}
+	
+	OnRep_ProgressPerPlayerSeconds();
 
-	if (ProgressPercent >= 1.0f)
+	if (GetProgressFraction() >= 1.0f)
 	{
 		CompleteProgress();
 	}
@@ -152,11 +157,12 @@ void UProgressTrackingComponent::ResetProgress()
 {
 	if (!GetOwner()->HasAuthority()) return;
 	
-	PassiveProgress = 0.0f;
+	ProgressPerPlayerSeconds.Init(0.f, NUM_PLAYERS);
 	bIsProcessing = false;
 	OnRep_IsProcessing();
 }
 
+// TODO: track all player's working status independently so it doesn't stop a player is still processing while another stops
 void UProgressTrackingComponent::StopProgress()
 {
 	if (!GetOwner()->HasAuthority()) return;
@@ -169,14 +175,7 @@ void UProgressTrackingComponent::CompleteProgress()
 {
 	if (!GetOwner()->HasAuthority()) return;
 	
-	PassiveProgress = 0.0f;
-	if (ProgressScope == EProgressScope::Individual)
-	{
-		for (float& Val : PlayerContributions)
-		{
-			Val = 0.0f;
-		}
-	}
+	ProgressPerPlayerSeconds.Init(0.f, NUM_PLAYERS);
 
 	bIsProcessing = false;
 	OnRep_IsProcessing();
@@ -196,5 +195,13 @@ void UProgressTrackingComponent::SetWidgetVisibility(const bool IsVisible)
 	{
 		ProgressBarWidget->SetVisibility(ESlateVisibility::Hidden);
 	} 
+}
+
+void UProgressTrackingComponent::SetWidgetProgress()
+{
+	if (ProgressBarWidget.IsValid())
+	{
+		ProgressBarWidget->SetProgressPercent(GetProgressFraction());
+	}	
 }
 

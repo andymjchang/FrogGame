@@ -31,6 +31,11 @@ public:
     virtual void Tick(float DeltaSeconds) override;
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
     
+    // Player ID
+    void AddNewPlayer(const FUniqueNetIdRepl& UniqueId);
+    int32 GetPlayerIndex(const FUniqueNetIdRepl& UniqueId) const;
+    int32 GetPlayerIndex(const APlayerState* PlayerState) const;
+
     // Delegates
     FOnMoneyChanged OnMoneyChanged;
     FOnPhaseChanged OnPhaseChanged;
@@ -39,7 +44,6 @@ public:
     // Server only functions
     void ServerAddMoney(const int32 Amount);
     void ServerTrySubtractMoney(const int32 Amount);
-    // TODO: complete this
     void ServerTryUnlockDoor(ERoomDirection FacingDirection);
     
     // Client functions
@@ -52,6 +56,19 @@ public:
     FORCEINLINE EFrogGamePhase GetCurrentPhase() const { return CurrentPhase; }
     // FORCEINLINE ARoomManager* GetRoomManager() { return RoomManager.Get(); }
     // FORCEINLINE void SetRoomManager(ARoomManager* InRoomManager) { RoomManager = InRoomManager; }
+    
+protected:
+    // Server only functions
+    void TriggerDayPhase(float DayDuration);
+    void TriggerNightPhase();
+
+    // OnRep functions
+    UFUNCTION()
+    void OnRep_Money();
+    UFUNCTION()
+    void OnRep_CurrentPhase();
+    UFUNCTION()
+    void OnRep_PhaseEndTime();    
     
 protected:  
     UPROPERTY(EditDefaultsOnly)
@@ -66,20 +83,11 @@ protected:
 
     UPROPERTY(ReplicatedUsing = OnRep_PhaseEndTime)
     float PhaseEndTime;
+    
+    UPROPERTY()
+    TMap<FUniqueNetIdRepl, int32> PlayerIndexMap;
+    int32 NextPlayerIndex = 0;
 
     // UPROPERTY()
     // TWeakObjectPtr<ARoomManager> RoomManager;
-    
-protected:
-    // Server only functions
-    void TriggerDayPhase(float DayDuration);
-    void TriggerNightPhase();
-
-    // OnRep functions
-    UFUNCTION()
-    void OnRep_Money();
-    UFUNCTION()
-    void OnRep_CurrentPhase();
-    UFUNCTION()
-    void OnRep_PhaseEndTime();
 };

@@ -31,4 +31,6 @@ protected:
 	
 	UPROPERTY()
 	TObjectPtr<UUserBaseWidget> FrogBaseWidget;
+	
+	
 };

@@ -19,7 +19,7 @@ void UFA_Interact::ActivateAbility(FGameplayAbilitySpecHandle Handle, const FGam
 	
 	if (AFrogCharacter* Frog = Cast<AFrogCharacter>(ActorInfo->AvatarActor.Get()))
 	{
-		Frog->StartInteract();
+		Frog->PlayerStartInteract();
 	}
 }
 
@@ -30,7 +30,7 @@ void UFA_Interact::InputReleased(FGameplayAbilitySpecHandle Handle, const FGamep
 	
 	if (AFrogCharacter* Frog = Cast<AFrogCharacter>(ActorInfo->AvatarActor.Get()))
 	{
-		Frog->StopInteract();
+		Frog->PlayerStopInteract();
 	}
 	
 	EndAbility(CurrentSpecHandle, CurrentActorInfo, CurrentActivationInfo, true, false);

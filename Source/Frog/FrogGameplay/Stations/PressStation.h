@@ -14,7 +14,7 @@ class FROG_API APressStation : public AWorkStation
 public:
 	// Sets default values for this actor's properties
 	APressStation();
-	virtual void StartWork() override;
+	virtual void StartWork(APlayerState* PlayerState) override;
 
 protected:
 	//pct added to the progress per press

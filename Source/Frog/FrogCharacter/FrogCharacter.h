@@ -68,10 +68,10 @@ public: /* Public Functions */
 	/// Ability System Interface
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
-	void StartInteract();
-	void StopInteract();
-	void StartWork();
-	void StopWork();
+	void PlayerStartInteract();
+	void PlayerStopInteract();
+	void PlayerStartWork();
+	void PlayerStopWork();
 
 protected: /* Protected Functions */
 	virtual void PostInitializeComponents() override;

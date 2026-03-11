@@ -17,7 +17,7 @@ void UFA_Work::ActivateAbility(FGameplayAbilitySpecHandle Handle, const FGamepla
 	
 	if (AFrogCharacter* Frog = Cast<AFrogCharacter>(ActorInfo->AvatarActor.Get()))
 	{
-		Frog->StartWork();
+		Frog->PlayerStartWork();
 	}
 }
 
@@ -28,7 +28,7 @@ void UFA_Work::InputReleased(FGameplayAbilitySpecHandle Handle, const FGameplayA
 
 	if (AFrogCharacter* Frog = Cast<AFrogCharacter>(ActorInfo->AvatarActor.Get()))
 	{
-		Frog->StopWork();
+		Frog->PlayerStopWork();
 	}
 
 	EndAbility(CurrentSpecHandle, CurrentActorInfo, CurrentActivationInfo, true, false);

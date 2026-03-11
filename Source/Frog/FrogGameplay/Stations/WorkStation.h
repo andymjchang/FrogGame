@@ -16,9 +16,8 @@ class FROG_API AWorkStation : public AStation
 public:
 	AWorkStation();
 
-	virtual void StartWork();
-	virtual void StopWork();
-	virtual void StopHighlight() override;
+	virtual void StartWork(APlayerState* PlayerState);
+	virtual void StopWork(APlayerState* PlayerState);
 
 protected:
 	bool bIsBeingWorked = false;

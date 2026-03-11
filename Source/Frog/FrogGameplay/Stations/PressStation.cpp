@@ -11,11 +11,11 @@ APressStation::APressStation()
 
 }
 
-void APressStation::StartWork()
+void APressStation::StartWork(APlayerState* PlayerState)
 {
 	//FLOG(TEXT("APressStation::StartWork - Adding %.2f%% progress. Current progress: %.2f%%"), 10.0, ProgressTracker->GetProgressFraction() * 100.0f);
-	if (HasAuthority())
+	if (HasAuthority() && OfferedInteractable == this)
 	{
-		ProgressTracker->AddProgressByPercentage(PctAddedPerPress);
+		ProgressTracker->AddProgressPercentage(PctAddedPerPress, PlayerState);
 	}
 }

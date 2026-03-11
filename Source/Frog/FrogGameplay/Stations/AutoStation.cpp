@@ -20,7 +20,6 @@ void AAutoStation::HandleAddedToInventory(AItem* InteractableToAdd)
 	// Don't autostart if the added item is the finished item
 	if (OfferedInteractable == this)
 	{
-		ProgressTracker->SetProgressStartTime(GetWorld()->GetTimeSeconds());
 		ProgressTracker->StartProgress();
 	}
 }
