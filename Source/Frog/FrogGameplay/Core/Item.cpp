@@ -3,14 +3,17 @@
 
 #include "Item.h"
 
+#include "Frog.h"
 #include "GameplayTagContainer.h"
 #include "ItemData.h"
 #include "Components/BoxComponent.h"
+#include "Net/UnrealNetwork.h"
 
 AItem::AItem()
 {
 	PrimaryActorTick.bCanEverTick = false;
 	bReplicates = true;
+	// NetDormancy = DORM_Initial;
 	
 	// Root Component
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootSceneComponent"));
@@ -21,11 +24,19 @@ AItem::AItem()
 	InteractHitBox->SetCollisionProfileName(TEXT("InteractListen"));
 	InteractHitBox->InitBoxExtent(FVector(128.f, 128.f, 128.f));
 	InteractHitBox->SetRelativeLocation(FVector(0.0f, 0.0f, 128.0f));
+	InteractHitBox->SetIsReplicated(true);
 	
 	// Static Mesh Component
 	InteractableMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("InteractableMesh"));
 	InteractableMesh->SetupAttachment(RootComponent);
 	InteractableMesh->SetCollisionProfileName(TEXT("NoCollision"));
+}
+
+void AItem::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+	
+	DOREPLIFETIME(AItem, bIsHitboxEnabled);
 }
 
 bool AItem::HasMatchingInteractableTag(const FGameplayTagContainer& AcceptedTags) const
@@ -57,12 +68,38 @@ void AItem::BeginPlay()
 	OfferedInteractable = this;
 }
 
-void AItem::EnableInteractable()
+void AItem::OnRep_bIsHitboxEnabled()
 {
-	if (IsValid(InteractHitBox)) InteractHitBox->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+	if (IsValid(InteractHitBox))
+	{
+		// FLOG(TEXT("ID: %d bIsHitboxEnabled: %d"), GetWorld()->GetNetMode(), bIsHitboxEnabled);
+		if (bIsHitboxEnabled)
+		{
+			InteractHitBox->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+		}
+		else
+		{
+			InteractHitBox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		}
+	}
 }
 
-void AItem::DisableInteractable()
+void AItem::StartInteract()
 {
-	if (IsValid(InteractHitBox)) InteractHitBox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+}
+
+// void AItem::EnableInteractable()
+// {
+// 	FlushNetDormancy();
+// 	// NetDormancy = DORM_Awake;
+// }
+
+void AItem::DisableHitbox()
+{
+	if (!HasAuthority()) return;
+	
+	bIsHitboxEnabled = false;
+	OnRep_bIsHitboxEnabled();
+	// ForceNetUpdate();
+	// NetDormancy = DORM_DormantAll;
 }

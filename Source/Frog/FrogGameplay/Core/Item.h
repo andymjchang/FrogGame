@@ -18,16 +18,17 @@ class FROG_API AItem : public AActor, public IInteractableInterface
 
 public:
 	AItem();
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+	
 	virtual FVector GetInteractableLocation() const override;
+	virtual void StartInteract() override;
 	
 	bool HasMatchingInteractableTag(const FGameplayTagContainer& AcceptedTags) const;
-
-	void EnableInteractable();
-	void DisableInteractable();
+	void DisableHitbox();
 	
 protected:
 	virtual void BeginPlay() override;
-	
+
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
 	TObjectPtr<UItemData> Data;
@@ -35,13 +36,19 @@ protected:
 	UPROPERTY(Transient)
 	TObjectPtr<AItem> OfferedInteractable;
 	
-protected:
+	UPROPERTY(ReplicatedUsing = OnRep_bIsHitboxEnabled)
+	bool bIsHitboxEnabled = true;
+
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UBoxComponent> InteractHitBox;
 	
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UStaticMeshComponent> InteractableMesh;
-
+	
+protected:
+	UFUNCTION()
+	void OnRep_bIsHitboxEnabled();
+	
 public:
 	FORCEINLINE UItemData* GetData() const { return Data; }
 	FORCEINLINE AItem* GetOfferedInteractable() const { return OfferedInteractable.Get(); }
