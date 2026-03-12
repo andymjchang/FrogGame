@@ -2,7 +2,16 @@
 
 
 #include "FA_Work.h"
+
+#include "Abilities/Tasks/AbilityTask_WaitInputRelease.h"
 #include "FrogCharacter/FrogCharacter.h"
+#include "FrogGameplay/Stations/WorkStation.h"
+
+UFA_Work::UFA_Work()
+{
+	ReplicationPolicy = EGameplayAbilityReplicationPolicy::ReplicateYes;
+	InstancingPolicy = EGameplayAbilityInstancingPolicy::InstancedPerActor;
+}
 
 void UFA_Work::ActivateAbility(FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo,
                                FGameplayAbilityActivationInfo ActivationInfo, const FGameplayEventData* TriggerEventData)
@@ -17,18 +26,31 @@ void UFA_Work::ActivateAbility(FGameplayAbilitySpecHandle Handle, const FGamepla
 	
 	if (AFrogCharacter* Frog = Cast<AFrogCharacter>(ActorInfo->AvatarActor.Get()))
 	{
-		Frog->PlayerStartWork();
+		if (AWorkStation* WorkStation = Cast<AWorkStation>(Frog->GetClosestInteractable()))
+		{
+			if (HasAuthority(&ActivationInfo))
+			{
+				WorkStation->StartWork(Frog->GetPlayerState());
+			}
+		}
 	}
+
+	UAbilityTask_WaitInputRelease* WaitInputReleaseTask = UAbilityTask_WaitInputRelease::WaitInputRelease(this);
+	WaitInputReleaseTask->OnRelease.AddDynamic(this, &UFA_Work::HandleInputReleased);
+	WaitInputReleaseTask->ReadyForActivation();
 }
 
-void UFA_Work::InputReleased(FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo,
-								 FGameplayAbilityActivationInfo ActivationInfo)
+void UFA_Work::HandleInputReleased(float TimeHeld)
 {
-	Super::InputReleased(Handle, ActorInfo, ActivationInfo);
-
-	if (AFrogCharacter* Frog = Cast<AFrogCharacter>(ActorInfo->AvatarActor.Get()))
+	if (AFrogCharacter* Frog = Cast<AFrogCharacter>(GetAvatarActorFromActorInfo()))
 	{
-		Frog->PlayerStopWork();
+		if (AWorkStation* WorkStation = Cast<AWorkStation>(Frog->GetClosestInteractable()))
+		{
+			if (HasAuthority(&CurrentActivationInfo))
+			{
+				WorkStation->StopWork(Frog->GetPlayerState());
+			}
+		}
 	}
 
 	EndAbility(CurrentSpecHandle, CurrentActorInfo, CurrentActivationInfo, true, false);

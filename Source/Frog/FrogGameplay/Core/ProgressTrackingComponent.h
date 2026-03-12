@@ -38,8 +38,8 @@ public: // Public Functions
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 	void SetProgressWidgetReference(UUserWidget* InProgressBarWidget);
-	void StartProgress();
-	void StopProgress();
+	void StartProgressPassive();
+	void StopProgressPassive();
 	void ResetProgress();
 	
 	void SetProgressDuration(float InDuration);

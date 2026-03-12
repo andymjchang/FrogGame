@@ -112,11 +112,6 @@ void AFrogCharacter::BeginPlay()
 	if (IsValid(ContainerComponent)) ContainerComponent->SetShowInventoryWidget(false);
 }
 
-UAbilitySystemComponent* AFrogCharacter::GetAbilitySystemComponent() const
-{
-	return AbilitySystemComponent;
-}
-
 void AFrogCharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
@@ -136,106 +131,6 @@ void AFrogCharacter::OnRep_PlayerState()
 	{
 		AbilitySystemComponent->InitAbilityActorInfo(this, this);
 	}
-}
-
-void AFrogCharacter::PlayerStartInteract()
-{
-	if (!HasAuthority()) return;
-
-	UpdateClosestInteractable();
-	
-	if (!ClosestInteractable.IsValid()) return;
-	ClosestInteractable->StartInteract();
-	
-	AItem* OtherItem = Cast<AItem>(ClosestInteractable.Get());
-	if (!IsValid(OtherItem)) return;
-	AItem* OtherOffer = OtherItem->GetOfferedInteractable();
-	if (!IsValid(OtherOffer)) return;
-	
-	if (!IsValid(ContainerComponent)) return;
-	
-	UContainerComponent* OtherContainerComp = nullptr;
-	if (AContainer* OtherContainer = Cast<AContainer>(OtherItem))
-	{
-		OtherContainerComp = OtherContainer->GetContainerComponent();
-	}
-	UContainerComponent* OtherOfferAsContainerComp = nullptr;
-	if (AContainer* OtherOfferAsContainer = Cast<AContainer>(OtherOffer))
-	{
-		OtherOfferAsContainerComp = OtherOfferAsContainer->GetContainerComponent();
-	}
-
-	AItem* HeldInteractable = ContainerComponent->GetFirstItem();
-	if (IsValid(HeldInteractable))
-	{
-
-		if (IsValid(OtherOfferAsContainerComp))
-		{
-			if (OtherOfferAsContainerComp->TryAddToInventory(HeldInteractable, ContainerComponent))
-			{
-		FLOG(TEXT("Trying interact as item..."));
-				return;
-			}
-		}
-		
-		if (AContainer* HeldContainer = Cast<AContainer>(HeldInteractable))
-		{
-			FLOG(TEXT("Try interact as container..."));
-			
-			UContainerComponent* HeldContainerComp = HeldContainer->GetContainerComponent();
-			if (IsValid(HeldContainerComp))
-			{
-				// Put other offer in player's held container
-				if (IsValid(OtherContainerComp) && HeldContainerComp->TryAddToInventory(OtherOffer, OtherContainerComp))
-				{
-					return;
-				}
-				
-				// Put other offer's container contents into player's held container
-				if (IsValid(OtherOfferAsContainerComp) && OtherOfferAsContainerComp->TryAddContainerContentsToInventory(HeldContainer))
-				{
-					return;
-				}
-			}
-		}
-	}
-	else 
-	{
-		FLOG(TEXT("Trying interact as player"));
-		ContainerComponent->TryAddToInventory(OtherOffer, OtherContainerComp);
-	}
-}
-
-void AFrogCharacter::PlayerStopInteract()
-{
-	if (!HasAuthority()) return;
-
-	IInteractableInterface* OtherInteractable = ClosestInteractable.Get();
-	if (!OtherInteractable) return;
-	
-	OtherInteractable->StopInteract();
-}
-
-void AFrogCharacter::PlayerStartWork()
-{
-	if (!HasAuthority()) return;
-
-	if (!ClosestInteractable.IsValid()) return;
-	AWorkStation* OtherStation = Cast<AWorkStation>(ClosestInteractable.Get());
-	if (!IsValid(OtherStation)) return;
-	
-	OtherStation->StartWork(GetPlayerState());
-}
-
-void AFrogCharacter::PlayerStopWork()
-{
-	if (!HasAuthority()) return;
-
-	if (!ClosestInteractable.IsValid()) return;
-	AWorkStation* OtherStation = Cast<AWorkStation>(ClosestInteractable.Get());
-	if (!IsValid(OtherStation)) return;
-	
-	OtherStation->StopWork(GetPlayerState());
 }
 
 void AFrogCharacter::SetupAbilities()
@@ -336,7 +231,7 @@ void AFrogCharacter::UpdateClosestInteractable()
 			{
 				if (AWorkStation* WorkStation = Cast<AWorkStation>(OldClosest))
 				{
-					WorkStation->StopWork(GetPlayerState());
+					// WorkStation->StopWork(GetPlayerState());
 				}
 			}
 

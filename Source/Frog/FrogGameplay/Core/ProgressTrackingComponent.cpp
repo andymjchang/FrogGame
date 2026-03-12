@@ -13,7 +13,7 @@
 UProgressTrackingComponent::UProgressTrackingComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
-	PrimaryComponentTick.TickInterval = 0.2f;
+	PrimaryComponentTick.TickInterval = 0.1f;
 	SetIsReplicatedByDefault(true);
 	
 	ProgressPerPlayerSeconds.Init(0.f, NUM_PLAYERS);
@@ -107,7 +107,7 @@ float UProgressTrackingComponent::GetProgressFraction() const
 	return FMath::Clamp(CurrentProgress / TargetDuration, 0.0f, 1.0f);
 }
 
-void UProgressTrackingComponent::StartProgress()
+void UProgressTrackingComponent::StartProgressPassive()
 {
 	if (!GetOwner()->HasAuthority()) return;
 
@@ -164,7 +164,7 @@ void UProgressTrackingComponent::ResetProgress()
 }
 
 // TODO: track all player's working status independently so it doesn't stop a player is still processing while another stops
-void UProgressTrackingComponent::StopProgress()
+void UProgressTrackingComponent::StopProgressPassive()
 {
 	if (!GetOwner()->HasAuthority()) return;
 

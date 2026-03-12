@@ -61,13 +61,13 @@ void ADoor::HandleProgressComplete()
 void ADoor::StartInteract()
 {
 	IInteractableInterface::StartInteract();
-	ProgressTracker->StartProgress();
+	ProgressTracker->StartProgressPassive();
 }
 
 void ADoor::StopInteract()
 {
 	IInteractableInterface::StopInteract();
-	ProgressTracker->StopProgress();
+	ProgressTracker->StopProgressPassive();
 }
 
 FVector ADoor::GetInteractableLocation() const

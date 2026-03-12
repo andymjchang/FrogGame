@@ -15,7 +15,7 @@ void AWorkStation::StartWork(APlayerState* PlayerState)
 {
     if (HasAuthority() && OfferedInteractable == this)
     {
-        ProgressTracker->StartProgress();
+        ProgressTracker->StartProgressPassive();
     }
 }
 
@@ -23,6 +23,12 @@ void AWorkStation::StopWork(APlayerState* PlayerState)
 {
     if (HasAuthority())
     {
-        ProgressTracker->StopProgress();
+        FLOG(TEXT("stop"));
+        ProgressTracker->StopProgressPassive();
     }
+}
+
+void AWorkStation::StopHighlight()
+{
+   
 }

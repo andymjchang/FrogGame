@@ -15,8 +15,11 @@ class FROG_API UFA_Work : public UGameplayAbility
 	GENERATED_BODY()
 
 public:
+    UFA_Work();
 	virtual void ActivateAbility(FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo,
 									 FGameplayAbilityActivationInfo ActivationInfo, const FGameplayEventData* TriggerEventData) override;
-	virtual void InputReleased(FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo,
-							   FGameplayAbilityActivationInfo ActivationInfo) override;
+
+protected:
+	UFUNCTION()
+	void HandleInputReleased(float TimeHeld);
 };

@@ -65,13 +65,12 @@ public: /* Public Functions */
 	explicit AFrogCharacter(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
-	/// Ability System Interface
-	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
-
-	void PlayerStartInteract();
-	void PlayerStopInteract();
-	void PlayerStartWork();
-	void PlayerStopWork();
+public: /* Getters/Setters */
+	FORCEINLINE virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override { return AbilitySystemComponent; };
+	FORCEINLINE USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
+	FORCEINLINE UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+	FORCEINLINE IInteractableInterface* GetClosestInteractable() const { return ClosestInteractable.Get(); }
+	FORCEINLINE UContainerComponent* GetContainerComponent() const { return ContainerComponent; }
 
 protected: /* Protected Functions */
 	virtual void PostInitializeComponents() override;
@@ -161,8 +160,6 @@ protected: // Input
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
 	TObjectPtr<UInputAction> MoveAction;
 
-public: /* Getters/Setters */
-	FORCEINLINE USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
-	FORCEINLINE UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+
 };
 
