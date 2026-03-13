@@ -35,7 +35,7 @@ void UFA_Interact::ActivateAbility(FGameplayAbilitySpecHandle Handle, const FGam
     if (ClosestInteractable && HasAuthority(&ActivationInfo))
     {
         ClosestInteractable->StartInteract();
-        Interact(Frog, ClosestInteractable);
+        PickupInteractable(Frog, Cast<AItem>(ClosestInteractable));
     }
 
     UAbilityTask_WaitInputRelease* WaitInputReleaseTask = UAbilityTask_WaitInputRelease::WaitInputRelease(this);
@@ -43,27 +43,22 @@ void UFA_Interact::ActivateAbility(FGameplayAbilitySpecHandle Handle, const FGam
     WaitInputReleaseTask->ReadyForActivation();
 }
 
-void UFA_Interact::Interact(const AFrogCharacter* Frog, IInteractableInterface* Interactable)
+void UFA_Interact::PickupInteractable(const AFrogCharacter* Frog, AItem* Item)
 {
-    AItem* OtherItem = Cast<AItem>(Interactable);
-    if (!IsValid(OtherItem)) return;
+    if (!IsValid(Item)) return;
 
-    AItem* OtherOffer = OtherItem->GetOfferedInteractable();
+    AItem* OtherItem = Item->GetOfferedInteractable();
     UContainerComponent* PlayerContainer = Frog->GetContainerComponent();
-    
-    if (!IsValid(OtherOffer) || !IsValid(PlayerContainer))
-    {
-        return;
-    }
+    if (!IsValid(OtherItem) || !IsValid(PlayerContainer)) return;
 
     UContainerComponent* OtherContainerComp = nullptr;
-    if (AContainer* OtherContainer = Cast<AContainer>(OtherItem))
+    if (AContainer* OtherContainer = Cast<AContainer>(Item))
     {
         OtherContainerComp = OtherContainer->GetContainerComponent();
     }
     
     UContainerComponent* OtherOfferAsContainerComp = nullptr;
-    if (AContainer* OtherOfferAsContainer = Cast<AContainer>(OtherOffer))
+    if (AContainer* OtherOfferAsContainer = Cast<AContainer>(OtherItem))
     {
         OtherOfferAsContainerComp = OtherOfferAsContainer->GetContainerComponent();
     }
@@ -83,22 +78,37 @@ void UFA_Interact::Interact(const AFrogCharacter* Frog, IInteractableInterface* 
         UContainerComponent* HeldContainerComp = HeldContainer->GetContainerComponent();
         if (IsValid(HeldContainerComp))
         {
-            if (IsValid(OtherContainerComp) && HeldContainerComp->TryAddToInventory(OtherOffer, OtherContainerComp))
+            // Other Offer as Container <- Player Container Contents 
+            if (IsValid(OtherOfferAsContainerComp) && OtherOfferAsContainerComp->TryAddContainerContentsToInventory(HeldContainerComp))
             {
                 return;
             }
             
-            if (IsValid(OtherOfferAsContainerComp) && OtherOfferAsContainerComp->TryAddContainerContentsToInventory(HeldContainer))
+            // Player Container <- Other Offer as Container's Contents
+            if (IsValid(OtherOfferAsContainerComp) && HeldContainerComp->TryAddContainerContentsToInventory(OtherOfferAsContainerComp))
             {
                 return;
             }
+            
+            // Player Container <- Other Container's Contents
+            if (IsValid(OtherContainerComp) && HeldContainerComp->TryAddToInventory(OtherItem, OtherContainerComp))
+            {
+                return;
+            }
+            
+            // Player container <- Item (not in a container)
+            // Not currently supporting picking up loose items (on the ground)
+            // if (HeldContainerComp->TryAddToInventory(HeldContainer))
+            // {
+            //     return;
+            // }
         }
     }
     
     if (!IsValid(HeldInteractable))
     {
         FLOG(TEXT("Trying interact as player"));
-        PlayerContainer->TryAddToInventory(OtherOffer, OtherContainerComp);
+        PlayerContainer->TryAddToInventory(OtherItem, OtherContainerComp);
         return;
     }
 }

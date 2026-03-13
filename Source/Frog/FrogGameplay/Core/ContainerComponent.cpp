@@ -101,13 +101,12 @@ bool UContainerComponent::TryAddToInventory(AItem* InteractableToAdd, UContainer
     return true;
 }
 
-bool UContainerComponent::TryAddContainerContentsToInventory(AContainer* SourceContainer)
+bool UContainerComponent::TryAddContainerContentsToInventory(UContainerComponent* SourceContainerComp)
 {
 	if (!GetOwner()->HasAuthority()) return false;
-	if (!IsValid(SourceContainer)) return false;
+	if (!IsValid(SourceContainerComp)) return false;
 	if (!Data.IsValid()) return false;
 
-	UContainerComponent* SourceContainerComp = SourceContainer->GetContainerComponent();
 	if (!IsValid(SourceContainerComp)) return false;
 	
     RemoveNullsFromInventory();

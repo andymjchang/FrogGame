@@ -17,7 +17,7 @@ public:
 	UFA_Interact();
 	virtual void ActivateAbility(FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo,
 	                             FGameplayAbilityActivationInfo ActivationInfo, const FGameplayEventData* TriggerEventData) override;
-	void Interact(const AFrogCharacter* Frog, IInteractableInterface* Interactable);
+	void PickupInteractable(const AFrogCharacter* Frog, AItem* Item);
 
 protected:
 	UFUNCTION()

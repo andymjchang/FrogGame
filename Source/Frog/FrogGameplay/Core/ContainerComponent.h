@@ -28,7 +28,7 @@ public:
 	void ClearInventory();
 	void RemoveNullsFromInventory();
 	bool TryAddToInventory(AItem* InteractableToAdd, UContainerComponent* SourceContainerComp = nullptr);
-	bool TryAddContainerContentsToInventory(AContainer* SourceContainer);
+	bool TryAddContainerContentsToInventory(UContainerComponent* SourceContainerComp);
 	bool TryRemoveFromInventory(AItem* InteractableToRemove);
 
 	void SetShowInventoryWidget(bool bShow);
