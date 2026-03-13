@@ -66,12 +66,18 @@ protected: // Protected Functions
 	UFUNCTION()
 	void OnRep_ProgressPerPlayerSeconds();
 
+	UFUNCTION()
+	void OnRep_SharedProgressSeconds();
+
 protected: // Protected Members
 	// UPROPERTY(ReplicatedUsing = OnRep_IsProcessing)
 	bool bIsProcessing;
 
 	UPROPERTY(ReplicatedUsing = OnRep_ProgressPerPlayerSeconds)
-	TArray<float> ProgressPerPlayerSeconds;
+	float ProgressPerPlayerSeconds[NUM_PLAYERS];
+
+	UPROPERTY(ReplicatedUsing = OnRep_SharedProgressSeconds)
+	float SharedProgressSeconds;
 	
 	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
 	EProgressMethod ProgressMethod = EProgressMethod::Passive;

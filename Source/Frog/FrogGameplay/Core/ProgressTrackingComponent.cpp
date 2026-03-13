@@ -16,7 +16,11 @@ UProgressTrackingComponent::UProgressTrackingComponent()
 	PrimaryComponentTick.TickInterval = 0.1f;
 	SetIsReplicatedByDefault(true);
 	
-	ProgressPerPlayerSeconds.Init(0.f, NUM_PLAYERS);
+	for (int32 i = 0; i < NUM_PLAYERS; ++i)
+	{
+		ProgressPerPlayerSeconds[i] = 0.f;
+	}
+	SharedProgressSeconds = 0.f;
 }
 
 
@@ -27,6 +31,7 @@ void UProgressTrackingComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProp
 	// DOREPLIFETIME(UProgressTrackingComponent, bIsProcessing);
 	DOREPLIFETIME(UProgressTrackingComponent, TargetDuration);
 	DOREPLIFETIME(UProgressTrackingComponent, ProgressPerPlayerSeconds);
+	DOREPLIFETIME(UProgressTrackingComponent, SharedProgressSeconds);
 }
 
 void UProgressTrackingComponent::BeginPlay()
@@ -44,8 +49,8 @@ void UProgressTrackingComponent::TickComponent(float DeltaTime, ELevelTick TickT
 
 	if (Owner->HasAuthority() && bIsProcessing && ProgressMethod == EProgressMethod::Passive)
 	{
-		ProgressPerPlayerSeconds[SHARED_PROGRESS_INDEX] += DeltaTime;
-		OnRep_ProgressPerPlayerSeconds();
+		SharedProgressSeconds += DeltaTime;
+		OnRep_SharedProgressSeconds();
 		if (GetProgressFraction() >= 1.0f)
 		{
 			CompleteProgress();
@@ -59,6 +64,11 @@ void UProgressTrackingComponent::OnRep_IsProcessing()
 }
 
 void UProgressTrackingComponent::OnRep_ProgressPerPlayerSeconds()
+{
+	SetWidgetProgress();
+}
+
+void UProgressTrackingComponent::OnRep_SharedProgressSeconds()
 {
 	SetWidgetProgress();
 }
@@ -94,14 +104,14 @@ float UProgressTrackingComponent::GetProgressFraction() const
 	float CurrentProgress = 0;
 	if (ProgressScope == EProgressScope::Individual)
 	{
-		for (const float Progress : ProgressPerPlayerSeconds)
+		for (int32 i = 0; i < NUM_PLAYERS; ++i)
 		{
-			CurrentProgress += Progress;
+			CurrentProgress += ProgressPerPlayerSeconds[i];
 		}
 	}
 	else
 	{
-		CurrentProgress = ProgressPerPlayerSeconds[SHARED_PROGRESS_INDEX];
+		CurrentProgress = SharedProgressSeconds;
 	}
 
 	return FMath::Clamp(CurrentProgress / TargetDuration, 0.0f, 1.0f);
@@ -132,19 +142,19 @@ void UProgressTrackingComponent::AddProgressPercentage(float Percentage, const A
 		if (AFrogGameState* GameState = Cast<AFrogGameState>(GetWorld()->GetGameState()))
 		{
 			const int32 PlayerIndex = GameState->GetPlayerIndex(PlayerState);
-			if (ProgressPerPlayerSeconds.IsValidIndex(PlayerIndex))
+			if (PlayerIndex >= 0 && PlayerIndex < NUM_PLAYERS)
 			{
 				ProgressPerPlayerSeconds[PlayerIndex] += ProgressToAdd;
 			}
 		}
+		OnRep_ProgressPerPlayerSeconds();
 	}
 	
 	if (ProgressScope == EProgressScope::Shared)
 	{
-		ProgressPerPlayerSeconds[SHARED_PROGRESS_INDEX] += ProgressToAdd;
+		SharedProgressSeconds += ProgressToAdd;
+		OnRep_SharedProgressSeconds();
 	}
-	
-	OnRep_ProgressPerPlayerSeconds();
 
 	if (GetProgressFraction() >= 1.0f)
 	{
@@ -156,8 +166,13 @@ void UProgressTrackingComponent::ResetProgress()
 {
 	if (!GetOwner()->HasAuthority()) return;
 	
-	ProgressPerPlayerSeconds.Init(0.f, NUM_PLAYERS);
+	for (int32 i = 0; i < NUM_PLAYERS; ++i)
+	{
+		ProgressPerPlayerSeconds[i] = 0.f;
+	}
+	SharedProgressSeconds = 0.f;
 	OnRep_ProgressPerPlayerSeconds();
+	OnRep_SharedProgressSeconds();
 	
 	bIsProcessing = false;
 	// OnRep_IsProcessing();
@@ -176,12 +191,7 @@ void UProgressTrackingComponent::CompleteProgress()
 {
 	if (!GetOwner()->HasAuthority()) return;
 	
-	ProgressPerPlayerSeconds.Init(0.f, NUM_PLAYERS);
-	OnRep_ProgressPerPlayerSeconds();
-	
-	bIsProcessing = false;
-	// OnRep_IsProcessing();
-	
+	ResetProgress();		
 	OnCompletion.ExecuteIfBound();
 }
 
