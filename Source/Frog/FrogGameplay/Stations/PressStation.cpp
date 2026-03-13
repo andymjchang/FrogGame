@@ -3,6 +3,7 @@
 
 #include "PressStation.h"
 
+#include "FrogGameplay/Core/ContainerComponent.h"
 #include "FrogGameplay/Core/ProgressTrackingComponent.h"
 
 
@@ -14,7 +15,7 @@ APressStation::APressStation()
 void APressStation::StartWork(APlayerState* PlayerState)
 {
 	//FLOG(TEXT("APressStation::StartWork - Adding %.2f%% progress. Current progress: %.2f%%"), 10.0, ProgressTracker->GetProgressFraction() * 100.0f);
-	if (HasAuthority() && OfferedInteractable == this)
+	if (HasAuthority() && OfferedInteractable == this && !ContainerComponent->IsEmpty())
 	{
 		ProgressTracker->AddProgressPercentage(PctAddedPerPress, PlayerState);
 	}

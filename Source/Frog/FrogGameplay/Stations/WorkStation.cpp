@@ -13,7 +13,7 @@ AWorkStation::AWorkStation()
 
 void AWorkStation::StartWork(APlayerState* PlayerState)
 {
-    if (HasAuthority() && OfferedInteractable == this)
+    if (HasAuthority() && OfferedInteractable == this && !ContainerComponent->IsEmpty())
     {
         ContainerComponent->SetAllowRemove(false);
         ProgressTracker->StartProgressPassive();
