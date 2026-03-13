@@ -20,6 +20,4 @@ public:
 	virtual void StopWork(APlayerState* PlayerState);
 	virtual void StopHighlight() override;
 
-protected:
-	bool bIsBeingWorked = false;
 };

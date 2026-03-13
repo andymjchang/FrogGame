@@ -42,6 +42,10 @@ public:
 	FORCEINLINE AItem* GetFirstItem() const { return Inventory.Num() > 0 ? Inventory[0].Get() : nullptr; }
 	FORCEINLINE const TArray<TObjectPtr<AItem>>& GetInventory() const { return Inventory; }
 	FORCEINLINE int GetInventorySize() const { return Inventory.Num(); }
+	FORCEINLINE bool GetAllowAdd() const { return bAllowAdd; }
+	FORCEINLINE void SetAllowAdd(const bool InAllowAdd) { bAllowAdd = InAllowAdd; }
+	FORCEINLINE bool GetAllowRemove() const { return bAllowRemove; }
+	FORCEINLINE void SetAllowRemove(const bool InAllowRemove) { bAllowRemove = InAllowRemove; }
 	
 protected:
 	void UpdateInventoryWidget();
@@ -55,6 +59,12 @@ protected:
 protected:
 	UPROPERTY(Transient, ReplicatedUsing = OnRep_IsInventoryWidgetVisible)
 	bool bIsInventoryWidgetVisible = true;
+	
+	UPROPERTY(Transient, Replicated)
+	bool bAllowAdd = true;
+	
+	UPROPERTY( Replicated)
+	bool bAllowRemove = true;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, ReplicatedUsing = OnRep_Inventory)
 	TArray<TObjectPtr<AItem>> Inventory;

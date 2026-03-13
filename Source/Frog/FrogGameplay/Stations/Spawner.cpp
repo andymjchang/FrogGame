@@ -39,6 +39,7 @@ void ASpawner::SpawnAndReplenish()
 	
 	if (!IsValid(InteractableClassToSpawn)) return;
 	if (!IsValid(ContainerComponent)) return;
+	if (!ContainerComponent->GetAllowAdd()) return;
 	
 	FActorSpawnParameters SpawnParams;
 	SpawnParams.Owner = this;

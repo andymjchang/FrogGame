@@ -47,9 +47,9 @@ void UFA_Interact::PickupInteractable(const AFrogCharacter* Frog, AItem* Item)
 {
     if (!IsValid(Item)) return;
 
-    AItem* OtherItem = Item->GetOfferedInteractable();
+    AItem* OtherOffer = Item->GetOfferedInteractable();
     UContainerComponent* PlayerContainer = Frog->GetContainerComponent();
-    if (!IsValid(OtherItem) || !IsValid(PlayerContainer)) return;
+    if (!IsValid(OtherOffer) || !IsValid(PlayerContainer)) return;
 
     UContainerComponent* OtherContainerComp = nullptr;
     if (AContainer* OtherContainer = Cast<AContainer>(Item))
@@ -58,7 +58,7 @@ void UFA_Interact::PickupInteractable(const AFrogCharacter* Frog, AItem* Item)
     }
     
     UContainerComponent* OtherOfferAsContainerComp = nullptr;
-    if (AContainer* OtherOfferAsContainer = Cast<AContainer>(OtherItem))
+    if (AContainer* OtherOfferAsContainer = Cast<AContainer>(OtherOffer))
     {
         OtherOfferAsContainerComp = OtherOfferAsContainer->GetContainerComponent();
     }
@@ -90,8 +90,8 @@ void UFA_Interact::PickupInteractable(const AFrogCharacter* Frog, AItem* Item)
                 return;
             }
             
-            // Player Container <- Other Container's Contents
-            if (IsValid(OtherContainerComp) && HeldContainerComp->TryAddToInventory(OtherItem, OtherContainerComp))
+            // Player Container <- Other Container's Offer (Item)
+            if (IsValid(OtherContainerComp) && HeldContainerComp->TryAddToInventory(OtherOffer, OtherContainerComp))
             {
                 return;
             }
@@ -108,7 +108,7 @@ void UFA_Interact::PickupInteractable(const AFrogCharacter* Frog, AItem* Item)
     if (!IsValid(HeldInteractable))
     {
         FLOG(TEXT("Trying interact as player"));
-        PlayerContainer->TryAddToInventory(OtherItem, OtherContainerComp);
+        PlayerContainer->TryAddToInventory(OtherOffer, OtherContainerComp);
         return;
     }
 }

@@ -3,6 +3,8 @@
 
 #include "AutoStation.h"
 
+#include "Frog.h"
+#include "FrogGameplay/Core/ContainerComponent.h"
 #include "FrogGameplay/Core/ProgressTrackingComponent.h"
 
 // Sets default values
@@ -15,11 +17,11 @@ AAutoStation::AAutoStation()
 // or set duration in CDO 
 void AAutoStation::HandleAddedToInventory(AItem* InteractableToAdd)
 {
-	UE_LOG(LogTemp, Log, TEXT("[%f] _____AutoStation_____"), GetWorld()->GetTimeSeconds());
-
 	// Don't autostart if the added item is the finished item
 	if (OfferedInteractable == this)
 	{
+		ContainerComponent->SetAllowRemove(false);
+		FLOG(TEXT("asd;flkj"))
 		ProgressTracker->StartProgressPassive();
 	}
 }

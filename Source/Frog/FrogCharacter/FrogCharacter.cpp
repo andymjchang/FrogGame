@@ -229,9 +229,10 @@ void AFrogCharacter::UpdateClosestInteractable()
 		{
 			if (HasAuthority())
 			{
+				OldClosest->StopInteract();
 				if (AWorkStation* WorkStation = Cast<AWorkStation>(OldClosest))
 				{
-					// WorkStation->StopWork(GetPlayerState());
+					WorkStation->StopWork(GetPlayerState());
 				}
 			}
 
@@ -241,12 +242,9 @@ void AFrogCharacter::UpdateClosestInteractable()
 			}
 		}
 
-		if (ClosestInteractable.IsValid())
+		if (ClosestInteractable.IsValid() && IsLocallyControlled())
 		{
-			if (IsLocallyControlled())
-			{
-				ClosestInteractable->StartHighlight(HighlightMaterial);
-			}
+			ClosestInteractable->StartHighlight(HighlightMaterial);
 		}
 	}
 }

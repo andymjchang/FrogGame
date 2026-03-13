@@ -64,16 +64,14 @@ void AStation::HandleProcessingComplete()
 {
     if (!HasAuthority()) return;
     
-    UE_LOG(LogTemp, Log, TEXT("[%f] Station: Processing complete!"), GetWorld()->GetTimeSeconds());
+    // UE_LOG(LogTemp, Log, TEXT("[%f] Station: Processing complete!"), GetWorld()->GetTimeSeconds());
 
     const AFrogGameState* GameState = GetWorld()->GetGameState<AFrogGameState>();
-    if (!IsValid(GameState))
-    {
-        return;
-    }
+    if (!IsValid(GameState)) return;
+    
+    ContainerComponent->SetAllowRemove(true);
 
     const FGameplayTagContainer AllTags = GatherAllTags();
-
     if (const TSubclassOf<AItem> ResultClass = GameState->GetRecipeResultClass(AllTags))
     {
         ContainerComponent->ClearInventory();
@@ -83,7 +81,7 @@ void AStation::HandleProcessingComplete()
         
         AItem* SpawnedResult = GetWorld()->SpawnActor<AItem>(
             ResultClass,
-            GetActorLocation() + FVector(0, 0, 100), 
+            GetActorLocation(),
             FRotator::ZeroRotator,
             SpawnParams
         );

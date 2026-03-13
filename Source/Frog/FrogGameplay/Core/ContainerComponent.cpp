@@ -1,5 +1,6 @@
 #include "ContainerComponent.h"
 
+#include "Frog.h"
 #include "Item.h"
 #include "ItemData.h"
 #include "GameUI/Interactables/InteractableWidgetComponent.h"
@@ -18,6 +19,8 @@ void UContainerComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& 
 
 	DOREPLIFETIME(UContainerComponent, Inventory);
 	DOREPLIFETIME(UContainerComponent, bIsInventoryWidgetVisible);
+	DOREPLIFETIME(UContainerComponent, bAllowAdd);
+	DOREPLIFETIME(UContainerComponent, bAllowRemove);
 }
 
 void UContainerComponent::Initialize(UItemData* InData, UInteractableWidgetComponent* InWidgetComponent, UMeshComponent* InMesh)
@@ -77,17 +80,17 @@ bool UContainerComponent::TryAddToInventory(AItem* InteractableToAdd, UContainer
 	if (!IsValid(GetOwner())) return false;
 	if (!GetOwner()->HasAuthority()) return false;
     if (!Data.IsValid() || !IsValid(InteractableToAdd)) return false;
-    if (IsFull()) return false;
+	if (IsFull() || !bAllowAdd) return false;
     if (!InteractableToAdd->HasMatchingInteractableTag(Data->GetAcceptedTags())) return false;
 	
 	RemoveNullsFromInventory();
 	
-    Inventory.Add(InteractableToAdd);
-	
 	if (IsValid(SourceContainerComp))
 	{
+		if (!SourceContainerComp->GetAllowRemove()) return false;
 		SourceContainerComp->TryRemoveFromInventory(InteractableToAdd);
 	}
+    Inventory.Add(InteractableToAdd);
 
     InteractableToAdd->DisableHitbox();
     
@@ -104,11 +107,9 @@ bool UContainerComponent::TryAddToInventory(AItem* InteractableToAdd, UContainer
 bool UContainerComponent::TryAddContainerContentsToInventory(UContainerComponent* SourceContainerComp)
 {
 	if (!GetOwner()->HasAuthority()) return false;
-	if (!IsValid(SourceContainerComp)) return false;
-	if (!Data.IsValid()) return false;
+	if (!Data.IsValid() || !IsValid(SourceContainerComp)) return false;
+	if (IsFull() || !bAllowAdd || !SourceContainerComp->GetAllowRemove()) return false;
 
-	if (!IsValid(SourceContainerComp)) return false;
-	
     RemoveNullsFromInventory();
 	SourceContainerComp->RemoveNullsFromInventory();
 	
@@ -137,6 +138,7 @@ bool UContainerComponent::TryAddContainerContentsToInventory(UContainerComponent
 bool UContainerComponent::TryRemoveFromInventory(AItem* InteractableToRemove)
 {
 	if (!GetOwner()->HasAuthority()) return false;
+	if (!bAllowRemove) return false;
     if (Inventory.Remove(InteractableToRemove) <= 0) return false;
 	
 	OnRep_Inventory();
