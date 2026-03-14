@@ -27,8 +27,3 @@ void AWorkStation::StopWork(APlayerState* PlayerState)
         ProgressTracker->StopProgressPassive();
     }
 }
-
-void AWorkStation::StopHighlight()
-{
-   
-}
