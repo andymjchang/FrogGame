@@ -34,6 +34,8 @@ void ASpawner::HandleRemovedFromInventory(AItem* Interactable)
 
 void ASpawner::SpawnAndReplenish()
 {
+	if (!HasAuthority()) return;
+	
 	UWorld* World = GetWorld();
 	if (!World) return;
 	

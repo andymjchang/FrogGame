@@ -108,7 +108,14 @@ void UFA_Interact::PickupInteractable(const AFrogCharacter* Frog, AItem* Item)
     if (!IsValid(HeldInteractable))
     {
         FLOG(TEXT("Trying interact as player"));
-        PlayerContainer->TryAddToInventory(OtherOffer, OtherContainerComp);
+        // Player inventory <- Other Offer (Item)
+        if (PlayerContainer->TryAddToInventory(OtherOffer, OtherContainerComp))
+        {
+            return;
+        }
+        
+        // Player inventory <- Other Offer (Container)'s Contents
+        PlayerContainer->TryAddContainerContentsToInventory(OtherContainerComp);
         return;
     }
 }
