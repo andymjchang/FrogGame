@@ -24,7 +24,9 @@ public:
 	virtual void StartInteract() override;
 	
 	bool HasMatchingInteractableTag(const FGameplayTagContainer& AcceptedTags) const;
+	void EnableHitbox();
 	void DisableHitbox();
+	void SetItemDormancy(bool bDormant);
 	
 protected:
 	virtual void BeginPlay() override;

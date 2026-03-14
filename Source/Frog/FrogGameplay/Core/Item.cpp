@@ -13,7 +13,7 @@ AItem::AItem()
 {
 	PrimaryActorTick.bCanEverTick = false;
 	bReplicates = true;
-	// NetDormancy = DORM_Initial;
+	NetDormancy = DORM_DormantAll;
 	
 	// Root Component
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootSceneComponent"));
@@ -88,18 +88,35 @@ void AItem::StartInteract()
 {
 }
 
-// void AItem::EnableInteractable()
-// {
-// 	FlushNetDormancy();
-// 	// NetDormancy = DORM_Awake;
-// }
-
 void AItem::DisableHitbox()
 {
 	if (!HasAuthority()) return;
 	
 	bIsHitboxEnabled = false;
 	OnRep_bIsHitboxEnabled();
-	// ForceNetUpdate();
-	// NetDormancy = DORM_DormantAll;
+}
+
+void AItem::EnableHitbox()
+{
+	if (!HasAuthority()) return;
+
+	bIsHitboxEnabled = true;
+	OnRep_bIsHitboxEnabled();
+	SetItemDormancy(false);
+}
+
+void AItem::SetItemDormancy(const bool bDormant)
+{
+	if (!HasAuthority()) return;
+
+	if (bDormant)
+	{
+		NetDormancy = DORM_DormantAll;
+		ForceNetUpdate();
+	}
+	else
+	{
+		NetDormancy = DORM_Awake;
+		ForceNetUpdate();
+	}
 }

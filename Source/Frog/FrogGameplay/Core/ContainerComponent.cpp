@@ -58,6 +58,11 @@ void UContainerComponent::ClearInventory()
 {
 	if (!GetOwner()->HasAuthority()) return;
 	
+	if (GetAttachParentActor())
+	{
+		GetAttachParentActor()->ForceNetUpdate();	
+	}
+	
 	for (const TObjectPtr<AItem>& Item : Inventory)
 	{
 		if (IsValid(Item))
@@ -83,6 +88,12 @@ bool UContainerComponent::TryAddToInventory(AItem* InteractableToAdd, UContainer
 	if (IsFull() || !bAllowAdd) return false;
     if (!InteractableToAdd->HasMatchingInteractableTag(Data->GetAcceptedTags())) return false;
 	
+	if (GetAttachParentActor())
+	{
+		GetAttachParentActor()->ForceNetUpdate();	
+	}
+	
+    InteractableToAdd->SetItemDormancy(true);
 	RemoveNullsFromInventory();
 	
 	if (IsValid(SourceContainerComp))
@@ -97,6 +108,7 @@ bool UContainerComponent::TryAddToInventory(AItem* InteractableToAdd, UContainer
     const FAttachmentTransformRules Rules(EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,
                                           EAttachmentRule::KeepWorld, false);
     InteractableToAdd->AttachToComponent(this, Rules); 
+
     
     OnRep_Inventory();
 	OnAddedToInventory.Broadcast(InteractableToAdd);
@@ -139,7 +151,15 @@ bool UContainerComponent::TryRemoveFromInventory(AItem* InteractableToRemove)
 {
 	if (!GetOwner()->HasAuthority()) return false;
 	if (!bAllowRemove) return false;
+	
+	if (GetAttachParentActor())
+	{
+		GetAttachParentActor()->ForceNetUpdate();	
+	}
+	
     if (Inventory.Remove(InteractableToRemove) <= 0) return false;
+	
+	// InteractableToRemove->EnableHitbox();
 	
 	OnRep_Inventory();
 	OnRemovedFromInventory.Broadcast(InteractableToRemove);
