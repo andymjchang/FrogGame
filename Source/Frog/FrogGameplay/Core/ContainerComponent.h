@@ -57,13 +57,13 @@ protected:
 	void OnRep_IsInventoryWidgetVisible();
 
 protected:
-	UPROPERTY(Transient, ReplicatedUsing = OnRep_IsInventoryWidgetVisible)
+	UPROPERTY(ReplicatedUsing = OnRep_IsInventoryWidgetVisible)
 	bool bIsInventoryWidgetVisible = true;
 	
 	UPROPERTY(Transient, Replicated)
 	bool bAllowAdd = true;
 	
-	UPROPERTY( Replicated)
+	UPROPERTY(Replicated)
 	bool bAllowRemove = true;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, ReplicatedUsing = OnRep_Inventory)

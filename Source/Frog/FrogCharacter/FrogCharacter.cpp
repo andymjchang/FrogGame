@@ -249,8 +249,10 @@ void AFrogCharacter::UpdateClosestInteractable()
 	}
 }
 
-void AFrogCharacter::HandleAddedToInventory(class AItem* Item)
+void AFrogCharacter::HandleAddedToInventory(AItem* Item)
 {
+	if (!HasAuthority()) return;
+	
 	// Set inventory visibility
 	if (IsValid(ContainerComponent))
 	{

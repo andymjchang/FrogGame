@@ -32,19 +32,17 @@ void UContainerComponent::Initialize(UItemData* InData, UInteractableWidgetCompo
 
 void UContainerComponent::SetShowInventoryWidget(const bool bShow)
 {
-	if (!GetOwner()->HasAuthority()) return;
-
-	if (bIsInventoryWidgetVisible != bShow)
-	{
-		bIsInventoryWidgetVisible = bShow;
-		OnRep_IsInventoryWidgetVisible();
-	}
+	// if (!GetOwner()->HasAuthority()) return;
+	bIsInventoryWidgetVisible = bShow;
+	OnRep_IsInventoryWidgetVisible();
 }
 
 void UContainerComponent::OnRep_IsInventoryWidgetVisible()
 {
+	
 	if (InventoryWidgetComponent.IsValid())
 	{
+	FLOG(TEXT("On Rep inventory widget: %d"), bIsInventoryWidgetVisible);
 		InventoryWidgetComponent->SetVisibility(bIsInventoryWidgetVisible);
 	}
 }
