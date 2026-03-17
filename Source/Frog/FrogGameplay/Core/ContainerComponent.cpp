@@ -39,10 +39,8 @@ void UContainerComponent::SetShowInventoryWidget(const bool bShow)
 
 void UContainerComponent::OnRep_IsInventoryWidgetVisible()
 {
-	
 	if (InventoryWidgetComponent.IsValid())
 	{
-	FLOG(TEXT("On Rep inventory widget: %d"), bIsInventoryWidgetVisible);
 		InventoryWidgetComponent->SetVisibility(bIsInventoryWidgetVisible);
 	}
 }
