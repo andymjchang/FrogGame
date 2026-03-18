@@ -33,6 +33,8 @@ void AOrderCounter::HandleAddedToInventory(AItem* Interactable)
 	Super::HandleAddedToInventory(Interactable);
 	if (!IsValid(Interactable)) return;
 	
+	// TODO: either check contents of bottle, or completed recipe has to turn bottle into a new object. probably former
+	
 	if (GameState.IsValid())
 	{
 		GameState->ServerAddMoney(Interactable->GetData()->GetSellPrice());;
