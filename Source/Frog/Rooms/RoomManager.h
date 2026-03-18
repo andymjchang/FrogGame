@@ -81,6 +81,7 @@ protected:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Room Data")
     FHexIndex CurrentIndex;
 
+    // Accounts for overlapping walls
     UPROPERTY(EditDefaultsOnly, Category = "Room Config")
     float HexSize = 962.75f;
 

@@ -22,8 +22,8 @@ AItem::AItem()
 	InteractHitBox = CreateDefaultSubobject<UBoxComponent>(TEXT("InteractHitBox"));
 	InteractHitBox->SetupAttachment(RootComponent);
 	InteractHitBox->SetCollisionProfileName(TEXT("InteractListen"));
-	InteractHitBox->InitBoxExtent(FVector(128.f, 128.f, 128.f));
-	InteractHitBox->SetRelativeLocation(FVector(0.0f, 0.0f, 128.0f));
+	InteractHitBox->InitBoxExtent(FVector(100.f, 100.f, 100.f));
+	InteractHitBox->SetRelativeLocation(FVector(0.0f, 0.0f, 100.0f));
 	InteractHitBox->SetIsReplicated(true);
 	
 	// Static Mesh Component

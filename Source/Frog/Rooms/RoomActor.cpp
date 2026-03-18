@@ -63,28 +63,28 @@ void ARoomActor::RegenerateRoom()
 		const bool bIsTallWall = WallTypeArray[i];
 
 #if WITH_EDITOR
-		// Create or destroy door object
-		if (UChildActorComponent* DoorComponent = DoorArray[i])
-		{
-			TSubclassOf<AActor> TargetClass{!bHasDoor ? nullptr : DoorBlueprint};
-			if (DoorComponent->GetChildActorClass() != TargetClass)
-			{
-				// Disconnect old delegate
-				if (ADoor* DoorActor = Cast<ADoor>(DoorComponent->GetChildActor()); IsValid(DoorActor))
-				{
-					DoorActor->OnProgressComplete.Unbind();
-				}
-
-				DoorComponent->SetChildActorClass(TargetClass);
-
-				// Setup new door
-				if (ADoor* DoorActor = Cast<ADoor>(DoorComponent->GetChildActor()); IsValid(DoorActor))
-				{
-					DoorActor->OnProgressComplete.BindDynamic(this, &ARoomActor::HandleDoorProgressComplete);
-					DoorActor->SetFacingDirection(static_cast<ERoomDirection>(i));
-				}
-			}
-		}
+		// // Create or destroy door object
+		// if (UChildActorComponent* DoorComponent = DoorArray[i])
+		// {
+		// 	TSubclassOf<AActor> TargetClass{!bHasDoor ? nullptr : DoorBlueprint};
+		// 	if (DoorComponent->GetChildActorClass() != TargetClass)
+		// 	{
+		// 		// Disconnect old delegate
+		// 		if (ADoor* DoorActor = Cast<ADoor>(DoorComponent->GetChildActor()); IsValid(DoorActor))
+		// 		{
+		// 			DoorActor->OnProgressComplete.Unbind();
+		// 		}
+		//
+		// 		DoorComponent->SetChildActorClass(TargetClass);
+		//
+		// 		// Setup new door
+		// 		if (ADoor* DoorActor = Cast<ADoor>(DoorComponent->GetChildActor()); IsValid(DoorActor))
+		// 		{
+		// 			DoorActor->OnProgressComplete.BindDynamic(this, &ARoomActor::HandleDoorProgressComplete);
+		// 			DoorActor->SetFacingDirection(static_cast<ERoomDirection>(i));
+		// 		}
+		// 	}
+		// }
 #endif
 
 		// Set correct wall mesh

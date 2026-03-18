@@ -214,8 +214,24 @@ void AFrogCharacter::UpdateClosestInteractable()
 	for (TWeakInterfacePtr Interactable : OverlappingInteractableArray)
 	{
 		if (!Interactable.IsValid()) continue;
-		
-		float DistSq = FVector::DistSquared(Interactable->GetInteractableLocation(), InteractHitbox->GetComponentLocation());
+    
+		float DistSq = MAX_FLT;
+
+		if (AActor* InteractableActor = Cast<AActor>(Interactable.GetObject()))
+		{
+			FVector Origin, Extent;
+			// 'true' ensures we only get bounds for components that have collision enabled
+			InteractableActor->GetActorBounds(true, Origin, Extent); 
+			FBox ActorBounds = FBox::BuildAABB(Origin, Extent);
+        
+			DistSq = ActorBounds.ComputeSquaredDistanceToPoint(InteractHitbox->GetComponentLocation());
+		}
+		else
+		{
+			// Fallback just in case the interactable isn't an Actor
+			DistSq = FVector::DistSquared(Interactable->GetInteractableLocation(), InteractHitbox->GetComponentLocation());
+		}
+
 		if (DistSq < BestDistanceSq)
 		{
 			BestDistanceSq = DistSq;
