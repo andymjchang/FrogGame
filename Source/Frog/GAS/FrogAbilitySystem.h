@@ -11,7 +11,8 @@ enum class EAbilityInputID : uint8
 {
 	None = 0 UMETA(Hidden),
 	Interact = 1,
-	Work = 2
+	Work = 2,
+	Dash = 3
 };
 /**
  * 
