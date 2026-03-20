@@ -34,8 +34,10 @@ void UDash::ActivateAbility(const FGameplayAbilitySpecHandle Handle, const FGame
 		DashDuration,
 		false,
 		DashStrengthOverTime,
+		// ERootMotionFinishVelocityMode::MaintainLastRootMotionVelocity,
 		ERootMotionFinishVelocityMode::SetVelocity,
 		FVector::ZeroVector,
+		// 1500.0f,
 		0.0f,
 		false
 	);
