@@ -29,7 +29,7 @@ AFrogCharacter::AFrogCharacter(const FObjectInitializer& ObjectInitializer)
 	PrimaryActorTick.bCanEverTick = true;
 	bReplicates = true;
 	
-	GetCapsuleComponent()->InitCapsuleSize(42.f, 42.0f);
+	GetCapsuleComponent()->InitCapsuleSize(150.0f, 150.0f);
 
 	// Character Movement
 	bUseControllerRotationPitch = false;
