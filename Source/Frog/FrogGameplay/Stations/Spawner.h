@@ -21,6 +21,12 @@ protected:
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
 	TSubclassOf<AItem> InteractableClassToSpawn;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
+	float ReplenishDelay = 3.f;
+	
+protected:
+	FTimerHandle ReplenishTimerHandle;
 
 private:
 	void SpawnAndReplenish();
