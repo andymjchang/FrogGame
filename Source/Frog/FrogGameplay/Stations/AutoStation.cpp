@@ -15,7 +15,7 @@ AAutoStation::AAutoStation()
 
 // TODO: Either make processing duration dynamic based on ingredients / inventory size
 // or set duration in CDO 
-void AAutoStation::HandleAddedToInventory(AItem* InteractableToAdd)
+void AAutoStation::HandleAddedToInventory(const TScriptInterface<IItemInterface>& InteractableToAdd)
 {
 	// Don't autostart if the added item is the finished item
 	if (OfferedInteractable == this)

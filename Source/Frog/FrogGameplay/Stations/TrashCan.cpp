@@ -24,12 +24,14 @@ void ATrashCan::BeginPlay()
 	}
 }
 
-void ATrashCan::HandleAddedToInventory(AItem* Interactable)
+void ATrashCan::HandleAddedToInventory(const TScriptInterface<IItemInterface>& Interactable)
 {
 	Super::HandleAddedToInventory(Interactable);
 	if (!HasAuthority()) return;
-	if (!IsValid(Interactable)) return;
+	
+	AActor* InteractableActor = Cast<AActor>(Interactable.GetObject());
+	if (!IsValid(InteractableActor)) return;
 	
 	ContainerComponent->TryRemoveFromInventory(Interactable);
-	Interactable->Destroy();
+	InteractableActor->Destroy();
 }

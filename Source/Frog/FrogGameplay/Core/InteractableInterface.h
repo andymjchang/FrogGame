@@ -6,6 +6,9 @@
 #include "UObject/Interface.h"
 #include "InteractableInterface.generated.h"
 
+struct FGameplayTagContainer;
+class UItemData;
+
 UINTERFACE()
 class UInteractableInterface : public UInterface
 {

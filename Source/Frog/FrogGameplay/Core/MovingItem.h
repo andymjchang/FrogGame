@@ -3,22 +3,22 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameplayTagContainer.h"
 #include "InteractableInterface.h"
 #include "ItemInterface.h"
-#include "GameFramework/Actor.h"
-#include "Item.generated.h"
+#include "GameFramework/Pawn.h"
+#include "MovingItem.generated.h"
 
-class UItemData;
 class UBoxComponent;
+class AItem;
+class UItemData;
 
 UCLASS()
-class FROG_API AItem : public AActor, public IInteractableInterface, public IItemInterface
+class FROG_API AMovingItem : public APawn, public IInteractableInterface, public IItemInterface
 {
 	GENERATED_BODY()
 
 public:
-	AItem();
+	AMovingItem();
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	
 	virtual FVector GetInteractableLocation() const override;
@@ -26,8 +26,6 @@ public:
 
 	virtual void EnableHitbox() override;
 	virtual void DisableHitbox() override;
-	
-	void SetItemDormancy(bool bDormant);
 	
 protected:
 	virtual void BeginPlay() override;
@@ -55,5 +53,5 @@ protected:
 public:
 	virtual UItemData* GetData() const override { return Data; }
 	virtual TScriptInterface<IItemInterface> GetOfferedInteractable() const override { return OfferedInteractable; }
-	virtual UStaticMeshComponent* GetInteractableMesh() const override { return InteractableMesh; }
+	virtual UStaticMeshComponent* GetInteractableMesh() const override { return InteractableMesh.Get(); }
 };

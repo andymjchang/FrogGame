@@ -3,6 +3,9 @@
 
 #include "InteractableInterface.h"
 
+#include "GameplayTagContainer.h"
+#include "ItemData.h"
+
 void IInteractableInterface::StartInteract()
 {
 }
@@ -28,3 +31,5 @@ void IInteractableInterface::StopHighlight()
 		Mesh->SetOverlayMaterial(nullptr);
 	}
 }
+
+

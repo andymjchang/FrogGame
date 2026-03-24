@@ -28,7 +28,7 @@ protected:
 
 	UFUNCTION()
 	virtual void HandleProcessingComplete();
-	virtual void HandleRemovedFromInventory(AItem* Interactable) override;
+	virtual void HandleRemovedFromInventory(const TScriptInterface<IItemInterface>& Interactable) override;
 
 	FGameplayTagContainer GatherAllTags() const;
 

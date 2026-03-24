@@ -16,5 +16,5 @@ public:
 	ACounter();
 	
 protected:
-	virtual void HandleAddedToInventory(AItem* Interactable) override;
+	virtual void HandleAddedToInventory(const TScriptInterface<IItemInterface>& Interactable) override;
 };

@@ -41,8 +41,8 @@ struct FRecipeResult
 {
 	GENERATED_BODY()
     
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
-	TSubclassOf<AItem> ItemClass;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, meta = (MustImplement = "/Script/Frog.ItemInterface"))
+	TSubclassOf<AActor> ItemClass;
     
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	UItemData* ItemData;

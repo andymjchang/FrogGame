@@ -7,13 +7,13 @@
 #include "Components/HorizontalBox.h"
 #include "FrogGameplay/Core/Item.h"
 
-void UInventoryWidget::UpdateInventoryWidget(const TArray<AItem*>& Inventory)
+void UInventoryWidget::UpdateInventoryWidget(const TArray<TScriptInterface<IItemInterface>>& Inventory)
 { 
 	for (int32 i = 0; i < InventoryElements.Num(); i++)
 	{
 		if (!IsValid(InventoryElements[i])) continue;
 
-		if (Inventory.IsValidIndex(i) && IsValid(Inventory[i]))
+		if (Inventory.IsValidIndex(i) && Inventory[i])
 		{
 			InventoryElements[i]->SetElement(Inventory[i]->GetData());
 		}

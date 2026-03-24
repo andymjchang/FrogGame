@@ -12,8 +12,9 @@ class UInteractableWidgetComponent;
 class AContainer;
 class AItem;
 class UMeshComponent;
+class IItemInterface;
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInventoryItemChanged, AItem*, Item);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInventoryItemChanged, const TScriptInterface<IItemInterface>&, Item);
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class FROG_API UContainerComponent : public USceneComponent
@@ -27,9 +28,9 @@ public:
 
 	void ClearInventory();
 	void RemoveNullsFromInventory();
-	bool TryAddToInventory(AItem* InteractableToAdd, UContainerComponent* SourceContainerComp = nullptr);
+	bool TryAddToInventory(const TScriptInterface<IItemInterface>& InteractableToAdd, UContainerComponent* SourceContainerComp = nullptr);
 	bool TryAddContainerContentsToInventory(UContainerComponent* SourceContainerComp);
-	bool TryRemoveFromInventory(AItem* InteractableToRemove);
+	bool TryRemoveFromInventory(TScriptInterface<IItemInterface> InteractableToRemove);
 
 	void SetShowInventoryWidget(bool bShow);
 
@@ -37,15 +38,15 @@ public:
 	FOnInventoryItemChanged OnRemovedFromInventory;
 	FOnInventoryItemChanged OnAddedToInventory;
 
-	FORCEINLINE bool IsEmpty() const { return Inventory.Num() <= 0; }
-	FORCEINLINE bool IsFull() const { return Data.IsValid() ? Inventory.Num() >= Data->GetMaxCapacity() : true; }
-	FORCEINLINE AItem* GetFirstItem() const { return Inventory.Num() > 0 ? Inventory[0].Get() : nullptr; }
-	FORCEINLINE const TArray<TObjectPtr<AItem>>& GetInventory() const { return Inventory; }
-	FORCEINLINE int GetInventorySize() const { return Inventory.Num(); }
-	FORCEINLINE bool GetAllowAdd() const { return bAllowAdd; }
-	FORCEINLINE void SetAllowAdd(const bool InAllowAdd) { bAllowAdd = InAllowAdd; }
-	FORCEINLINE bool GetAllowRemove() const { return bAllowRemove; }
-	FORCEINLINE void SetAllowRemove(const bool InAllowRemove) { bAllowRemove = InAllowRemove; }
+	bool IsEmpty() const { return Inventory.Num() <= 0; }
+	bool IsFull() const { return Data.IsValid() ? Inventory.Num() >= Data->GetMaxCapacity() : true; }
+	TScriptInterface<IItemInterface> GetFirstItem() const { return Inventory.Num() > 0 ? Inventory[0] : nullptr; }
+	TArray<TScriptInterface<IItemInterface>> GetInventory() const { return Inventory; }
+	int GetInventorySize() const { return Inventory.Num(); }
+	bool GetAllowAdd() const { return bAllowAdd; }
+	void SetAllowAdd(const bool InAllowAdd) { bAllowAdd = InAllowAdd; }
+	bool GetAllowRemove() const { return bAllowRemove; }
+	void SetAllowRemove(const bool InAllowRemove) { bAllowRemove = InAllowRemove; }
 	
 protected:
 	void UpdateInventoryWidget();
@@ -66,8 +67,8 @@ protected:
 	UPROPERTY(Replicated)
 	bool bAllowRemove = true;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, ReplicatedUsing = OnRep_Inventory)
-	TArray<TObjectPtr<AItem>> Inventory;
+	UPROPERTY(ReplicatedUsing = OnRep_Inventory)
+	TArray<TScriptInterface<IItemInterface>> Inventory;
 	
 	TWeakObjectPtr<UInteractableWidgetComponent> InventoryWidgetComponent;
 	TWeakObjectPtr<UItemData> Data;

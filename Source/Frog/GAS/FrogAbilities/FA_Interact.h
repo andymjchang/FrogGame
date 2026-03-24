@@ -4,9 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "Abilities/GameplayAbility.h"
-#include "FrogCharacter/FrogCharacter.h"
-#include "FrogGameplay/Core/InteractableInterface.h"
 #include "FA_Interact.generated.h"
+
+class AFrogCharacter;
+class IItemInterface;
 
 UCLASS()
 class FROG_API UFA_Interact : public UGameplayAbility
@@ -17,7 +18,7 @@ public:
 	UFA_Interact();
 	virtual void ActivateAbility(FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo,
 	                             FGameplayAbilityActivationInfo ActivationInfo, const FGameplayEventData* TriggerEventData) override;
-	void PickupInteractable(const AFrogCharacter* Frog, AItem* Item);
+	void PickupInteractable(const AFrogCharacter* Frog, IItemInterface* Item);
 
 protected:
 	UFUNCTION()

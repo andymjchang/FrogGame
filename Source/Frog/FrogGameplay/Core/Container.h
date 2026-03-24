@@ -18,16 +18,17 @@ class FROG_API AContainer : public AItem
 public:
 	AContainer();
 
-	FORCEINLINE UContainerComponent* GetContainerComponent() { return ContainerComponent; }
+	UContainerComponent* GetContainerComponent() { return ContainerComponent; }
+	TScriptInterface<IItemInterface> SpawnAndAddToInventory(TSubclassOf<AActor> ClassToSpawn);
 	
 protected:
 	virtual void BeginPlay() override;
 	virtual void Destroyed() override;
 	
 	UFUNCTION()
-    virtual void HandleAddedToInventory(AItem* Interactable);
+    virtual void HandleAddedToInventory(const TScriptInterface<IItemInterface>& Interactable);
 	UFUNCTION()
-	virtual void HandleRemovedFromInventory(AItem* Interactable);
+	virtual void HandleRemovedFromInventory(const TScriptInterface<IItemInterface>& Interactable);
 	
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Container")

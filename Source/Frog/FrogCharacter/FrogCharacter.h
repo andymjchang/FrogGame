@@ -11,6 +11,7 @@
 #include "GAS/FrogAttributeSet.h"
 #include "FrogCharacter.generated.h"
 
+class IItemInterface;
 class UInteractableWidgetComponent;
 class IInteractableInterface;
 class UBoxComponent;
@@ -87,7 +88,7 @@ protected: /* Protected Functions */
 	void UpdateClosestInteractable();
 	
 	UFUNCTION()
-	void HandleAddedToInventory(class AItem* Item);
+	void HandleAddedToInventory(const TScriptInterface<IItemInterface>& Item);
 	
 	UFUNCTION()
 	void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,

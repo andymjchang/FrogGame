@@ -265,14 +265,14 @@ void AFrogCharacter::UpdateClosestInteractable()
 	}
 }
 
-void AFrogCharacter::HandleAddedToInventory(AItem* Item)
+void AFrogCharacter::HandleAddedToInventory(const TScriptInterface<IItemInterface>& Item)
 {
 	if (!HasAuthority()) return;
 	
 	// Set inventory visibility
-	if (IsValid(ContainerComponent))
+	if (IsValid(ContainerComponent) && Item.GetObject())
 	{
-		const bool IsContainer = IsValid(Cast<AContainer>(Item));
+		const bool IsContainer = Item.GetObject()->IsA(AContainer::StaticClass());
 		ContainerComponent->SetShowInventoryWidget(!IsContainer);
 	}
 }

@@ -22,7 +22,7 @@ void ASpawner::BeginPlay()
 	}
 }
 
-void ASpawner::HandleRemovedFromInventory(AItem* Interactable)
+void ASpawner::HandleRemovedFromInventory(const TScriptInterface<IItemInterface>& Interactable)
 {
 	Super::HandleRemovedFromInventory(Interactable);
     
@@ -43,29 +43,12 @@ void ASpawner::HandleRemovedFromInventory(AItem* Interactable)
 
 void ASpawner::SpawnAndReplenish()
 {
-	if (!HasAuthority()) return;
-    
-	UWorld* World = GetWorld();
-	if (!World) return;
-    
-	if (!IsValid(InteractableClassToSpawn)) return;
-	if (!IsValid(ContainerComponent)) return;
-	if (!ContainerComponent->GetAllowAdd()) return;
-    
-	FActorSpawnParameters SpawnParams;
-	SpawnParams.Owner = this;
-	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
-
-	AItem* NewItem = World->SpawnActor<AItem>(
-	   InteractableClassToSpawn, 
-	   ContainerComponent->GetComponentTransform(),
-	   SpawnParams
-	);
-
-	if (IsValid(NewItem))
+	if (const TScriptInterface<IItemInterface> NewItem = SpawnAndAddToInventory(InteractableClassToSpawn))
 	{
-		NewItem->AttachToComponent(ContainerComponent, FAttachmentTransformRules::SnapToTargetIncludingScale);
-		ContainerComponent->TryAddToInventory(NewItem);
 		OfferedInteractable = NewItem;
+	}
+	else
+	{
+		OfferedInteractable = this;
 	}
 }

@@ -10,11 +10,11 @@ ACounter::ACounter()
 	InteractableMesh->SetCollisionProfileName(TEXT("BlockAllDynamic"));
 }
 
-void ACounter::HandleAddedToInventory(AItem* Interactable)
+void ACounter::HandleAddedToInventory(const TScriptInterface<IItemInterface>& Interactable)
 {
 	Super::HandleAddedToInventory(Interactable);
 	if (!HasAuthority()) return;
-	if (!IsValid(Interactable)) return;
+	if (!IsValid(Interactable.GetObject())) return;
 	
 	OfferedInteractable = Interactable;
 }

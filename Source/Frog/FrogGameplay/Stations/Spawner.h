@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "FrogGameplay/Core/Container.h"
+#include "FrogGameplay/Core/ItemInterface.h"
 #include "Spawner.generated.h"
 
 UCLASS()
@@ -16,11 +17,11 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
-	virtual void HandleRemovedFromInventory(AItem* Interactable) override;
+	virtual void HandleRemovedFromInventory(const TScriptInterface<IItemInterface>& Interactable) override;
 	
 protected:
-	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
-	TSubclassOf<AItem> InteractableClassToSpawn;
+	UPROPERTY(EditDefaultsOnly, Category = "User Settings", meta = (MustImplement = "/Script/Frog.ItemInterface"))
+	TSubclassOf<AActor> InteractableClassToSpawn;
 	
 	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
 	float ReplenishDelay = 3.f;

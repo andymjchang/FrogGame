@@ -28,10 +28,10 @@ void AOrderCounter::BeginPlay()
 	}
 }
 
-void AOrderCounter::HandleAddedToInventory(AItem* Interactable)
+void AOrderCounter::HandleAddedToInventory(const TScriptInterface<IItemInterface>& Interactable)
 {
 	Super::HandleAddedToInventory(Interactable);
-	if (!IsValid(Interactable)) return;
+	if (!IsValid(Interactable.GetObject())) return;
 	
 	// TODO: either check contents of bottle, or completed recipe has to turn bottle into a new object. probably former
 	

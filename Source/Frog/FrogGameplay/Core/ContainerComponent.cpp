@@ -1,7 +1,5 @@
 #include "ContainerComponent.h"
 
-#include "Frog.h"
-#include "Item.h"
 #include "ItemData.h"
 #include "GameUI/Interactables/InteractableWidgetComponent.h"
 #include "GameUI/Interactables/InventoryWidget.h"
@@ -59,11 +57,12 @@ void UContainerComponent::ClearInventory()
 		GetAttachParentActor()->ForceNetUpdate();	
 	}
 	
-	for (const TObjectPtr<AItem>& Item : Inventory)
+	for (const TScriptInterface Item : Inventory)
 	{
-		if (IsValid(Item))
+		AActor* ItemActor = Cast<AActor>(Item.GetObject());
+		if (IsValid(ItemActor))
 		{
-			Item->Destroy();
+			ItemActor->Destroy();
 		}
 	}
     Inventory.Empty();
@@ -76,11 +75,15 @@ void UContainerComponent::RemoveNullsFromInventory()
 	Inventory.Remove(nullptr);
 }
 
-bool UContainerComponent::TryAddToInventory(AItem* InteractableToAdd, UContainerComponent* SourceContainerComp)
+bool UContainerComponent::TryAddToInventory(const TScriptInterface<IItemInterface>& InteractableToAdd, UContainerComponent* SourceContainerComp)
 {
 	if (!IsValid(GetOwner())) return false;
 	if (!GetOwner()->HasAuthority()) return false;
-    if (!Data.IsValid() || !IsValid(InteractableToAdd)) return false;
+    if (!Data.IsValid() || !InteractableToAdd) return false;
+
+	AActor* ItemActor = Cast<AActor>(InteractableToAdd.GetObject());
+	if (!IsValid(ItemActor)) return false;
+	
 	if (IsFull() || !bAllowAdd) return false;
     if (!InteractableToAdd->HasMatchingInteractableTag(Data->GetAcceptedTags())) return false;
 	
@@ -89,7 +92,7 @@ bool UContainerComponent::TryAddToInventory(AItem* InteractableToAdd, UContainer
 		GetAttachParentActor()->ForceNetUpdate();	
 	}
 	
-    InteractableToAdd->SetItemDormancy(true);
+    // InteractableToAdd->SetItemDormancy(true);
 	RemoveNullsFromInventory();
 	
 	if (IsValid(SourceContainerComp))
@@ -103,7 +106,7 @@ bool UContainerComponent::TryAddToInventory(AItem* InteractableToAdd, UContainer
     
     const FAttachmentTransformRules Rules(EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,
                                           EAttachmentRule::KeepWorld, false);
-    InteractableToAdd->AttachToComponent(this, Rules); 
+    ItemActor->AttachToComponent(this, Rules); 
 
     
     OnRep_Inventory();
@@ -124,11 +127,11 @@ bool UContainerComponent::TryAddContainerContentsToInventory(UContainerComponent
 	if (SourceContainerComp->IsEmpty()) return false;
 	if (GetInventorySize() + SourceContainerComp->GetInventorySize() > Data->GetMaxCapacity()) return false;
     
-	const TArray<TObjectPtr<AItem>>& InInventory = SourceContainerComp->GetInventory();
+	const TArray<TScriptInterface<IItemInterface>>& InInventory = SourceContainerComp->GetInventory();
 	// All contents of the source must be compatible, no partial transfer
-	for (const TObjectPtr<AItem>& InventoryItem : InInventory)
+	for (const TScriptInterface InventoryItem : InInventory)
 	{
-		if (IsValid(InventoryItem) && !InventoryItem->HasMatchingInteractableTag(Data->GetAcceptedTags()))
+		if (!InventoryItem && !InventoryItem->HasMatchingInteractableTag(Data->GetAcceptedTags()))
 		{
 			return false;
 		}
@@ -137,13 +140,13 @@ bool UContainerComponent::TryAddContainerContentsToInventory(UContainerComponent
 	// Iterate backwards because removing
 	for (int32 i = InInventory.Num() - 1; i >= 0; --i)
 	{
-		TryAddToInventory(InInventory[i].Get(), SourceContainerComp);
+		TryAddToInventory(InInventory[i], SourceContainerComp);
 	}
     
 	return true;
 }
 
-bool UContainerComponent::TryRemoveFromInventory(AItem* InteractableToRemove)
+bool UContainerComponent::TryRemoveFromInventory(const TScriptInterface<IItemInterface> InteractableToRemove)
 {
 	if (!GetOwner()->HasAuthority()) return false;
 	if (!bAllowRemove) return false;

@@ -50,9 +50,9 @@ FGameplayTagContainer AStation::GatherAllTags() const
         AllTags.AppendTags(Data->GetOwnedTags());
     }
     
-    for (AItem* Item : ContainerComponent->GetInventory())
+    for (const TScriptInterface Item : ContainerComponent->GetInventory())
     {
-        if (IsValid(Item) && IsValid(Item->GetData()))
+        if (Item && IsValid(Item->GetData()))
         {
             AllTags.AppendTags(Item->GetData()->GetOwnedTags());
         }
@@ -65,42 +65,27 @@ void AStation::HandleProcessingComplete()
 {
     if (!HasAuthority()) return;
     
-    // UE_LOG(LogTemp, Log, TEXT("[%f] Station: Processing complete!"), GetWorld()->GetTimeSeconds());
-
     const AFrogGameState* GameState = GetWorld()->GetGameState<AFrogGameState>();
     if (!IsValid(GameState)) return;
     
     ContainerComponent->SetAllowRemove(true);
-
+    ContainerComponent->ClearInventory();
+    
     const FGameplayTagContainer AllTags = GatherAllTags();
-    if (const TSubclassOf<AItem> ResultClass = GameState->GetRecipeResultClass(AllTags))
+    if (const TSubclassOf<AActor> ResultClass = GameState->GetRecipeResultClass(AllTags))
     {
-        ContainerComponent->ClearInventory();
-        
-        FActorSpawnParameters SpawnParams;
-        SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
-        
-        AItem* SpawnedResult = GetWorld()->SpawnActor<AItem>(
-            ResultClass,
-            GetActorLocation(),
-            FRotator::ZeroRotator,
-            SpawnParams
-        );
-        
-        if (IsValid(SpawnedResult))
+        if (const TScriptInterface<IItemInterface> NewItem = SpawnAndAddToInventory(ResultClass))
         {
-            OfferedInteractable = SpawnedResult;
-            ContainerComponent->TryAddToInventory(SpawnedResult);
+            OfferedInteractable = NewItem;
         }
     }
     else
     {
         OfferedInteractable = this;
-        ContainerComponent->ClearInventory();
     }
 }
 
-void AStation::HandleRemovedFromInventory(AItem* Interactable)
+void AStation::HandleRemovedFromInventory(const TScriptInterface<IItemInterface>& Interactable)
 {
     Super::HandleRemovedFromInventory(Interactable);
 

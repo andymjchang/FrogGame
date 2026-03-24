@@ -18,7 +18,7 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
-	virtual void HandleAddedToInventory(AItem* Interactable) override;
+	virtual void HandleAddedToInventory(const TScriptInterface<IItemInterface>& Interactable) override;
 	
 protected:
 	TWeakObjectPtr<AFrogGameState> GameState;

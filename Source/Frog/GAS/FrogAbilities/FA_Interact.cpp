@@ -35,7 +35,7 @@ void UFA_Interact::ActivateAbility(FGameplayAbilitySpecHandle Handle, const FGam
     if (ClosestInteractable && HasAuthority(&ActivationInfo))
     {
         ClosestInteractable->StartInteract();
-        PickupInteractable(Frog, Cast<AItem>(ClosestInteractable));
+        PickupInteractable(Frog, Cast<IItemInterface>(ClosestInteractable));
     }
 
     UAbilityTask_WaitInputRelease* WaitInputReleaseTask = UAbilityTask_WaitInputRelease::WaitInputRelease(this);
@@ -43,13 +43,13 @@ void UFA_Interact::ActivateAbility(FGameplayAbilitySpecHandle Handle, const FGam
     WaitInputReleaseTask->ReadyForActivation();
 }
 
-void UFA_Interact::PickupInteractable(const AFrogCharacter* Frog, AItem* Item)
+void UFA_Interact::PickupInteractable(const AFrogCharacter* Frog, IItemInterface* Item)
 {
-    if (!IsValid(Item)) return;
+    if (!Item) return;
 
-    AItem* OtherOffer = Item->GetOfferedInteractable();
+    const TScriptInterface<IItemInterface> OtherOffer = Item->GetOfferedInteractable();
     UContainerComponent* PlayerContainer = Frog->GetContainerComponent();
-    if (!IsValid(OtherOffer) || !IsValid(PlayerContainer)) return;
+    if (!OtherOffer || !IsValid(PlayerContainer)) return;
 
     UContainerComponent* OtherContainerComp = nullptr;
     if (AContainer* OtherContainer = Cast<AContainer>(Item))
@@ -58,19 +58,19 @@ void UFA_Interact::PickupInteractable(const AFrogCharacter* Frog, AItem* Item)
     }
     
     UContainerComponent* OtherOfferAsContainerComp = nullptr;
-    if (AContainer* OtherOfferAsContainer = Cast<AContainer>(OtherOffer))
+    if (AContainer* OtherOfferAsContainer = Cast<AContainer>(OtherOffer.GetObject()))
     {
         OtherOfferAsContainerComp = OtherOfferAsContainer->GetContainerComponent();
     }
 
-    AItem* HeldInteractable = PlayerContainer->GetFirstItem();
+    TScriptInterface<IItemInterface> HeldInteractable = PlayerContainer->GetFirstItem();
     if (IsValid(OtherOfferAsContainerComp) && OtherOfferAsContainerComp->TryAddToInventory(HeldInteractable, PlayerContainer))
     {
         FLOG(TEXT("Trying interact as item..."));
         return;
     }        
     
-    AContainer* HeldContainer = Cast<AContainer>(HeldInteractable);
+    AContainer* HeldContainer = Cast<AContainer>(HeldInteractable.GetObject());
     if (IsValid(HeldContainer))
     {
         FLOG(TEXT("Try interact as container..."));
@@ -105,7 +105,7 @@ void UFA_Interact::PickupInteractable(const AFrogCharacter* Frog, AItem* Item)
         }
     }
     
-    if (!IsValid(HeldInteractable))
+    if (!HeldInteractable)
     {
         FLOG(TEXT("Trying interact as player"));
         // Player inventory <- Other Offer (Item)

@@ -16,6 +16,6 @@ public:
 	AAutoStation();
 
 protected:
-	virtual void HandleAddedToInventory(AItem* InteractableToAdd) override;
+	virtual void HandleAddedToInventory(const TScriptInterface<IItemInterface>& InteractableToAdd) override;
 
 };

@@ -22,9 +22,8 @@ AItem::AItem()
 	InteractHitBox = CreateDefaultSubobject<UBoxComponent>(TEXT("InteractHitBox"));
 	InteractHitBox->SetupAttachment(RootComponent);
 	InteractHitBox->SetCollisionProfileName(TEXT("InteractListen"));
-	InteractHitBox->InitBoxExtent(FVector(100.f, 100.f, 100.f));
-	InteractHitBox->SetRelativeLocation(FVector(0.0f, 0.0f, 100.0f));
-	InteractHitBox->SetIsReplicated(true);
+	InteractHitBox->InitBoxExtent(FVector(150.f, 150.f, 150.f));
+	InteractHitBox->SetRelativeLocation(FVector(0.0f, 0.0f, 150.0f));
 	
 	// Static Mesh Component
 	InteractableMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("InteractableMesh"));
@@ -37,23 +36,6 @@ void AItem::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimePro
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 	
 	DOREPLIFETIME(AItem, bIsHitboxEnabled);
-}
-
-bool AItem::HasMatchingInteractableTag(const FGameplayTagContainer& AcceptedTags) const
-{
-	if (AcceptedTags.IsEmpty()) return false;
-	if (!IsValid(Data)) return false;
-
-	const FGameplayTagContainer& OwnedTags = Data->GetOwnedTags();
-	for (const FGameplayTag& OwnedTag : OwnedTags)
-	{
-		if (OwnedTag.MatchesAny(AcceptedTags))
-		{
-			return true;
-		}
-	}
-
-	return false;
 }
 
 FVector AItem::GetInteractableLocation() const

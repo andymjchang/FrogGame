@@ -47,7 +47,7 @@ public:
     void ServerTryUnlockDoor(ERoomDirection FacingDirection);
     
     // Client functions
-    TSubclassOf<AItem> GetRecipeResultClass(const FGameplayTagContainer& InteractableTags) const;
+    TSubclassOf<AActor> GetRecipeResultClass(const FGameplayTagContainer& InteractableTags) const;
     UItemData* GetRecipeResultData(const FGameplayTagContainer& InteractableTags) const;
     float GetTimeRemaining() const;
     

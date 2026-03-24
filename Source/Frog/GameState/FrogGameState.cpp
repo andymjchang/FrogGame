@@ -61,7 +61,7 @@ void AFrogGameState::ServerTryUnlockDoor(ERoomDirection FacingDirection)
    // TODO:  
 }
 
-TSubclassOf<AItem> AFrogGameState::GetRecipeResultClass(
+TSubclassOf<AActor> AFrogGameState::GetRecipeResultClass(
     const FGameplayTagContainer& InteractableTags) const
 {
     if (IngredientMap)
