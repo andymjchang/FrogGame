@@ -21,6 +21,11 @@ AMovingItem::AMovingItem()
 	InteractHitBox->InitBoxExtent(FVector(150.f, 150.f, 150.f));
 	InteractHitBox->SetRelativeLocation(FVector(0.0f, 0.0f, 150.0f));
 	InteractHitBox->SetIsReplicated(true);
+	
+	// Static Mesh Component
+	InteractableMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("InteractableMesh"));
+	InteractableMesh->SetupAttachment(RootComponent);
+	InteractableMesh->SetCollisionProfileName(TEXT("NoCollision"));
 }
 
 void AMovingItem::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
