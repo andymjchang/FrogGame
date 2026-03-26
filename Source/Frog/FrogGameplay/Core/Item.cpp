@@ -50,6 +50,23 @@ void AItem::BeginPlay()
 	OfferedInteractable = this;
 }
 
+void AItem::EnableHitbox()
+{
+	if (!HasAuthority()) return;
+
+	bIsHitboxEnabled = true;
+	OnRep_bIsHitboxEnabled();
+	SetItemDormancy(false);
+}
+
+void AItem::DisableHitbox()
+{
+	if (!HasAuthority()) return;
+	
+	bIsHitboxEnabled = false;
+	OnRep_bIsHitboxEnabled();
+}
+
 void AItem::OnRep_bIsHitboxEnabled()
 {
 	if (IsValid(InteractHitBox))
@@ -64,27 +81,6 @@ void AItem::OnRep_bIsHitboxEnabled()
 			InteractHitBox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 		}
 	}
-}
-
-void AItem::StartInteract()
-{
-}
-
-void AItem::DisableHitbox()
-{
-	if (!HasAuthority()) return;
-	
-	bIsHitboxEnabled = false;
-	OnRep_bIsHitboxEnabled();
-}
-
-void AItem::EnableHitbox()
-{
-	if (!HasAuthority()) return;
-
-	bIsHitboxEnabled = true;
-	OnRep_bIsHitboxEnabled();
-	SetItemDormancy(false);
 }
 
 void AItem::SetItemDormancy(const bool bDormant)

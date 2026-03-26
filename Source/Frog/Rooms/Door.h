@@ -25,8 +25,8 @@ public:
 
 	void SetHitboxActiveState(bool bIsHitboxActive);
 
-	FORCEINLINE void SetFacingDirection(const ERoomDirection InDirection) { FacingDirection = InDirection; }
-	FORCEINLINE virtual UMeshComponent* GetInteractableMesh() const override { return InteractableMesh; }		
+	void SetFacingDirection(const ERoomDirection InDirection) { FacingDirection = InDirection; }
+	virtual UMeshComponent* GetInteractableMesh() const override { return InteractableMesh; }		
 	
 	// Delegates
 	FOnProgressComplete OnProgressComplete;

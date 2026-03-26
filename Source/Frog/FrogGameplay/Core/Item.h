@@ -22,8 +22,6 @@ public:
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	
 	virtual FVector GetInteractableLocation() const override;
-	virtual void StartInteract() override;
-
 	virtual void EnableHitbox() override;
 	virtual void DisableHitbox() override;
 	
@@ -55,5 +53,5 @@ protected:
 public:
 	virtual UItemData* GetData() const override { return Data; }
 	virtual TScriptInterface<IItemInterface> GetOfferedInteractable() const override { return OfferedInteractable; }
-	virtual UStaticMeshComponent* GetInteractableMesh() const override { return InteractableMesh; }
+	virtual UMeshComponent* GetInteractableMesh() const override { return InteractableMesh; }
 };

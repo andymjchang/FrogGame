@@ -44,7 +44,7 @@ protected:
 	TObjectPtr<UBoxComponent> InteractHitBox;
 	
 	UPROPERTY(VisibleAnywhere)
-	TObjectPtr<UStaticMeshComponent> InteractableMesh;
+	TObjectPtr<USkeletalMeshComponent> InteractableMesh;
 	
 protected:
 	UFUNCTION()
@@ -53,5 +53,5 @@ protected:
 public:
 	virtual UItemData* GetData() const override { return Data; }
 	virtual TScriptInterface<IItemInterface> GetOfferedInteractable() const override { return OfferedInteractable; }
-	virtual UStaticMeshComponent* GetInteractableMesh() const override { return InteractableMesh.Get(); }
+	virtual UMeshComponent* GetInteractableMesh() const override { return InteractableMesh.Get(); }
 };
