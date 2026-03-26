@@ -1,5 +1,6 @@
 ﻿#include "FrogGameState.h"
 
+#include "Frog.h"
 #include "GameFramework/PlayerState.h"
 #include "Net/UnrealNetwork.h"
 
@@ -61,8 +62,7 @@ void AFrogGameState::ServerTryUnlockDoor(ERoomDirection FacingDirection)
    // TODO:  
 }
 
-TSubclassOf<AActor> AFrogGameState::GetRecipeResultClass(
-    const FGameplayTagContainer& InteractableTags) const
+TSubclassOf<AActor> AFrogGameState::GetRecipeResultClass(const FGameplayTagContainer& InteractableTags) const
 {
     if (IngredientMap)
     {

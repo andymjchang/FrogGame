@@ -3,6 +3,7 @@
 #include "Station.h"
 
 #include "ContainerComponent.h"
+#include "Frog.h"
 #include "ItemData.h"
 #include "ProgressTrackingComponent.h"
 #include "GameState/FrogGameState.h"
@@ -68,10 +69,12 @@ void AStation::HandleProcessingComplete()
     const AFrogGameState* GameState = GetWorld()->GetGameState<AFrogGameState>();
     if (!IsValid(GameState)) return;
     
+    const FGameplayTagContainer AllTags = GatherAllTags();
+    // FLOG(TEXT("%s"), *AllTags.ToString());
+    
     ContainerComponent->SetAllowRemove(true);
     ContainerComponent->ClearInventory();
     
-    const FGameplayTagContainer AllTags = GatherAllTags();
     if (const TSubclassOf<AActor> ResultClass = GameState->GetRecipeResultClass(AllTags))
     {
         if (const TScriptInterface<IItemInterface> NewItem = SpawnAndAddToInventory(ResultClass))
