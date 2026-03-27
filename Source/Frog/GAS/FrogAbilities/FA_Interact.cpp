@@ -50,7 +50,7 @@ void UFA_Interact::PickupInteractable(const AFrogCharacter* Frog, IItemInterface
     const TScriptInterface<IItemInterface> OtherOffer = Item->GetOfferedInteractable();
     UContainerComponent* PlayerContainer = Frog->GetContainerComponent();
     if (!OtherOffer || !IsValid(PlayerContainer)) return;
-
+    FLOG(TEXT("Interacting with: %s"), *OtherOffer.GetObject()->GetName());
     UContainerComponent* OtherContainerComp = nullptr;
     if (AContainer* OtherContainer = Cast<AContainer>(Item))
     {

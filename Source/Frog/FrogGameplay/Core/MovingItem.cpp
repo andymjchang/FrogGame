@@ -9,7 +9,7 @@
 
 AMovingItem::AMovingItem()
 {
-	PrimaryActorTick.bCanEverTick = false;
+	PrimaryActorTick.bCanEverTick = true;
 	bReplicates = true;
 	
 	// Root Component

@@ -43,7 +43,7 @@ protected:
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UBoxComponent> InteractHitBox;
 	
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	TObjectPtr<USkeletalMeshComponent> InteractableMesh;
 	
 protected:
