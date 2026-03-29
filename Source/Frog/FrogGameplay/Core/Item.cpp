@@ -3,6 +3,7 @@
 
 #include "Item.h"
 
+
 #include "Components/BoxComponent.h"
 #include "Net/UnrealNetwork.h"
 
@@ -10,7 +11,7 @@ AItem::AItem()
 {
 	PrimaryActorTick.bCanEverTick = false;
 	bReplicates = true;
-	NetDormancy = DORM_DormantAll;
+	// NetDormancy = DORM_DormantAll;
 	
 	// Root Component
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootSceneComponent"));
@@ -53,7 +54,7 @@ void AItem::EnableHitbox()
 
 	bIsHitboxEnabled = true;
 	OnRep_bIsHitboxEnabled();
-	SetItemDormancy(false);
+	// SetItemDormancy(false);
 }
 
 void AItem::DisableHitbox()

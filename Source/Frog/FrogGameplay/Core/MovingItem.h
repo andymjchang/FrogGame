@@ -46,7 +46,7 @@ protected:
 	UPROPERTY(ReplicatedUsing = OnRep_bIsHitboxEnabled)
 	bool bIsHitboxEnabled = true;
 
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<UBoxComponent> InteractHitBox;
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)

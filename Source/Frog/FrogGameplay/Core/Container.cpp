@@ -27,7 +27,7 @@ TScriptInterface<IItemInterface> AContainer::SpawnAndAddToInventory(const TSubcl
 	if (!World) return nullptr;
     
 	if (!IsValid(ClassToSpawn) || !IsValid(ContainerComponent)) return nullptr;
-	if (!ContainerComponent->GetAllowAdd()) return nullptr;
+	if (!ContainerComponent->GetAllowAdd() || ContainerComponent->IsFull()) return nullptr;
 	
 	FActorSpawnParameters SpawnParams;
 	SpawnParams.Owner = this;
