@@ -3,9 +3,6 @@
 
 #include "Item.h"
 
-#include "Frog.h"
-#include "GameplayTagContainer.h"
-#include "ItemData.h"
 #include "Components/BoxComponent.h"
 #include "Net/UnrealNetwork.h"
 

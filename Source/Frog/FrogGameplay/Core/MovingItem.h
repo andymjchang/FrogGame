@@ -27,10 +27,16 @@ public:
 	virtual void EnableHitbox() override;
 	virtual void DisableHitbox() override;
 	
+	virtual UItemData* GetData() const override { return Data; }
+	virtual TScriptInterface<IItemInterface> GetOfferedInteractable() const override { return OfferedInteractable; }
+	virtual UMeshComponent* GetInteractableMesh() const override { return InteractableMesh.Get(); }
 protected:
 	virtual void BeginPlay() override;
 
 protected:
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr<USceneComponent> RootSceneComponent;
+	
 	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
 	TObjectPtr<UItemData> Data;
 
@@ -49,9 +55,4 @@ protected:
 protected:
 	UFUNCTION()
 	void OnRep_bIsHitboxEnabled();
-	
-public:
-	virtual UItemData* GetData() const override { return Data; }
-	virtual TScriptInterface<IItemInterface> GetOfferedInteractable() const override { return OfferedInteractable; }
-	virtual UMeshComponent* GetInteractableMesh() const override { return InteractableMesh.Get(); }
 };
