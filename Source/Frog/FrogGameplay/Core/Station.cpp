@@ -8,6 +8,7 @@
 #include "ProgressTrackingComponent.h"
 #include "GameState/FrogGameState.h"
 #include "TimerManager.h"
+#include "Components/BoxComponent.h"
 #include "Components/PrimitiveComponent.h"
 #include "Components/WidgetComponent.h"
 #include "GameUI/Interactables/InteractableWidgetComponent.h"
@@ -29,6 +30,10 @@ AStation::AStation()
     
     // Interactable Mesh 
     InteractableMesh->SetCollisionProfileName(TEXT("BlockAllDynamic"));
+    
+    // Interact Hitbox
+    InteractHitBox->InitBoxExtent(FVector(300.f, 300.f, 150.f));
+    InteractHitBox->SetRelativeLocation(FVector(0.0f, 0.0f, 150.0f));
 }
 
 void AStation::BeginPlay()

@@ -4,6 +4,7 @@
 #include "MovingItem.h"
 
 #include "Components/BoxComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "Net/UnrealNetwork.h"
 
 
@@ -22,12 +23,18 @@ AMovingItem::AMovingItem()
 	InteractHitBox->SetCollisionProfileName(TEXT("InteractListen"));
 	InteractHitBox->InitBoxExtent(FVector(150.f, 150.f, 150.f));
 	InteractHitBox->SetRelativeLocation(FVector(0.0f, 0.0f, 150.0f));
-	InteractHitBox->SetIsReplicated(true);
 	
 	// Skeletal Mesh Component
 	InteractableMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("InteractableSkeletalMesh"));
 	InteractableMesh->SetupAttachment(RootComponent);
 	InteractableMesh->SetCollisionProfileName(TEXT("NoCollision"));
+	
+	// Capsule Collision
+	CollisionComponent = CreateDefaultSubobject<UCapsuleComponent>(TEXT("CollisionComponent"));
+	CollisionComponent->SetupAttachment(RootComponent);
+	CollisionComponent->SetCollisionProfileName(TEXT("Pawn"));
+	CollisionComponent->InitCapsuleSize(75.f, 150.f);
+	CollisionComponent->SetRelativeLocation(FVector(0.0f, 0.0f, 150.0f));
 }
 
 void AMovingItem::BeginPlay()
@@ -71,16 +78,18 @@ void AMovingItem::DisableHitbox()
 
 void AMovingItem::OnRep_bIsHitboxEnabled()
 {
-	if (IsValid(InteractHitBox))
+	if (IsValid(InteractHitBox) && IsValid(CollisionComponent))
 	{
 		// FLOG(TEXT("ID: %d bIsHitboxEnabled: %d"), GetWorld()->GetNetMode(), bIsHitboxEnabled);
 		if (bIsHitboxEnabled)
 		{
 			InteractHitBox->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+			CollisionComponent->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 		}
 		else
 		{
 			InteractHitBox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+			CollisionComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 		}
 	}
 }

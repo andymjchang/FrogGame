@@ -8,6 +8,7 @@
 #include "GameFramework/Pawn.h"
 #include "MovingItem.generated.h"
 
+class UCapsuleComponent;
 class UBoxComponent;
 class AItem;
 class UItemData;
@@ -30,9 +31,13 @@ public:
 	virtual UItemData* GetData() const override { return Data; }
 	virtual TScriptInterface<IItemInterface> GetOfferedInteractable() const override { return OfferedInteractable; }
 	virtual UMeshComponent* GetInteractableMesh() const override { return InteractableMesh.Get(); }
+	
 protected:
 	virtual void BeginPlay() override;
 
+	UFUNCTION()
+	void OnRep_bIsHitboxEnabled();
+	
 protected:
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<USceneComponent> RootSceneComponent;
@@ -49,10 +54,9 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<UBoxComponent> InteractHitBox;
 	
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<USkeletalMeshComponent> InteractableMesh;
 	
-protected:
-	UFUNCTION()
-	void OnRep_bIsHitboxEnabled();
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	TObjectPtr<UCapsuleComponent> CollisionComponent;
 };
