@@ -21,7 +21,6 @@ AItem::AItem()
 	InteractHitBox->SetupAttachment(RootComponent);
 	InteractHitBox->SetCollisionProfileName(TEXT("InteractListen"));
 	InteractHitBox->InitBoxExtent(FVector(150.f, 150.f, 150.f));
-	InteractHitBox->SetRelativeLocation(FVector(0.0f, 0.0f, 150.0f));
 	
 	// Static Mesh Component
 	InteractableMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("InteractableMesh"));

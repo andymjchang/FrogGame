@@ -31,4 +31,6 @@ public:
 	
 	virtual void EnableHitbox() = 0;
 	virtual	void DisableHitbox() = 0;
+	
+	virtual void EventAddedToAnotherInventory();
 };

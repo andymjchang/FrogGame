@@ -5,16 +5,17 @@
 #include "CoreMinimal.h"
 #include "InteractableInterface.h"
 #include "ItemInterface.h"
-#include "GameFramework/Pawn.h"
+#include "GameFramework/Character.h"
 #include "MovingItem.generated.h"
 
+struct FGameplayTag;
 class UCapsuleComponent;
 class UBoxComponent;
 class AItem;
 class UItemData;
 
 UCLASS()
-class FROG_API AMovingItem : public APawn, public IInteractableInterface, public IItemInterface
+class FROG_API AMovingItem : public ACharacter, public IInteractableInterface, public IItemInterface
 {
 	GENERATED_BODY()
 
@@ -30,18 +31,18 @@ public:
 	
 	virtual UItemData* GetData() const override { return Data; }
 	virtual TScriptInterface<IItemInterface> GetOfferedInteractable() const override { return OfferedInteractable; }
-	virtual UMeshComponent* GetInteractableMesh() const override { return InteractableMesh.Get(); }
+	virtual UMeshComponent* GetInteractableMesh() const override { return GetMesh(); }
+	
+	UFUNCTION(NetMulticast, Reliable)
+	virtual void EventAddedToAnotherInventory() override;
 	
 protected:
 	virtual void BeginPlay() override;
-
+	
 	UFUNCTION()
 	void OnRep_bIsHitboxEnabled();
 	
 protected:
-	UPROPERTY(VisibleAnywhere)
-	TObjectPtr<USceneComponent> RootSceneComponent;
-	
 	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
 	TObjectPtr<UItemData> Data;
 
@@ -53,10 +54,7 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<UBoxComponent> InteractHitBox;
-	
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	TObjectPtr<USkeletalMeshComponent> InteractableMesh;
-	
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<UCapsuleComponent> CollisionComponent;
 };

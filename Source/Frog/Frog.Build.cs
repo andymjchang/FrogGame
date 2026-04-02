@@ -6,6 +6,7 @@ public class Frog : ModuleRules
 {
 	public Frog(ReadOnlyTargetRules Target) : base(Target)
 	{
+		PrivateDependencyModuleNames.AddRange(new string[] { "GameplayStateTreeModule" });
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 		
 		PublicIncludePaths.AddRange(

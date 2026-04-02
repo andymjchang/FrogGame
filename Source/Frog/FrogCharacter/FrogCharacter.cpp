@@ -79,7 +79,6 @@ AFrogCharacter::AFrogCharacter(const FObjectInitializer& ObjectInitializer)
 	// Inventory Widget
 	InventoryWidgetComponent = CreateDefaultSubobject<UInteractableWidgetComponent>(TEXT("InventoryWidgetComponent"));
 	InventoryWidgetComponent->SetupAttachment(GetMesh());
-	InventoryWidgetComponent->SetRelativeLocation(FVector(0.f, 0.0f, 600.0f));
 	InventoryWidgetComponent->SetDrawSize(FIntPoint(100, 100));
 }
 
@@ -267,14 +266,14 @@ void AFrogCharacter::UpdateClosestInteractable()
 
 void AFrogCharacter::HandleAddedToInventory(const TScriptInterface<IItemInterface>& Item)
 {
-	if (!HasAuthority()) return;
-	
-	// Set inventory visibility
-	if (IsValid(ContainerComponent) && Item.GetObject())
-	{
-		const bool IsContainer = Item.GetObject()->IsA(AContainer::StaticClass());
-		ContainerComponent->SetShowInventoryWidget(!IsContainer);
-	}
+	// if (!HasAuthority()) return;
+	//
+	// // Set inventory visibility
+	// if (IsValid(ContainerComponent) && Item.GetObject())
+	// {
+	// 	const bool IsContainer = Item.GetObject()->IsA(AContainer::StaticClass());
+	// 	ContainerComponent->SetShowInventoryWidget(!IsContainer);
+	// }
 }
 
 void AFrogCharacter::Tick(float DeltaSeconds)

@@ -4,6 +4,7 @@
 #include "Engine/World.h"
 #include "TimerManager.h"
 #include "FrogGameplay/Core/ContainerComponent.h"
+#include "FrogGameplay/Core/MovingItem.h"
 
 ASpawner::ASpawner()
 {
@@ -43,9 +44,12 @@ void ASpawner::HandleRemovedFromInventory(const TScriptInterface<IItemInterface>
 
 void ASpawner::SpawnAndReplenish()
 {
-	if (const TScriptInterface<IItemInterface> NewItem = SpawnAndAddToInventory(InteractableClassToSpawn))
+	if (const TScriptInterface<IItemInterface> NewItem = SpawnItem(InteractableClassToSpawn))
 	{
-		OfferedInteractable = NewItem;
+		if (!NewItem.GetObject()->IsA(AMovingItem::StaticClass()) && ContainerComponent->TryAddToInventory(NewItem))
+		{
+			OfferedInteractable = NewItem;
+		}
 	}
 	else
 	{

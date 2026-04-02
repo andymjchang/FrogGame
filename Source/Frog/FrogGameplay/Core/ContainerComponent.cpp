@@ -1,6 +1,7 @@
 #include "ContainerComponent.h"
 
 #include "ItemData.h"
+#include "MovingItem.h"
 #include "GameUI/Interactables/InteractableWidgetComponent.h"
 #include "GameUI/Interactables/InventoryWidget.h"
 #include "Net/UnrealNetwork.h"
@@ -102,7 +103,14 @@ bool UContainerComponent::TryAddToInventory(const TScriptInterface<IItemInterfac
 	}
     Inventory.Add(InteractableToAdd);
 
+	const bool IsContainer = InteractableToAdd.GetObject()->IsA(AContainer::StaticClass());
+	SetShowInventoryWidget(!IsContainer);
+	
     InteractableToAdd->DisableHitbox();
+	if (AMovingItem* MovingInteractable = Cast<AMovingItem>(InteractableToAdd.GetObject()))
+	{
+		MovingInteractable->EventAddedToAnotherInventory();
+	}
     
     const FAttachmentTransformRules Rules(EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,
                                           EAttachmentRule::KeepWorld, false);

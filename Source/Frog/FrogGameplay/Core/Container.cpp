@@ -4,6 +4,7 @@
 #include "Container.h"
 
 #include "ContainerComponent.h"
+#include "Frog.h"
 #include "GameUI/Interactables/InteractableWidgetComponent.h"
 
 AContainer::AContainer()
@@ -15,11 +16,10 @@ AContainer::AContainer()
 	
 	InventoryWidgetComponent = CreateDefaultSubobject<UInteractableWidgetComponent>(TEXT("InventoryWidgetComponent"));
 	InventoryWidgetComponent->SetupAttachment(RootComponent);
-	InventoryWidgetComponent->SetRelativeLocation(FVector(0.f, 0.0f, 600.0f));
 	InventoryWidgetComponent->SetDrawSize(FIntPoint(100, 100));
 }
 
-TScriptInterface<IItemInterface> AContainer::SpawnAndAddToInventory(const TSubclassOf<AActor> ClassToSpawn)
+TScriptInterface<IItemInterface> AContainer::SpawnItem(const TSubclassOf<AActor> ClassToSpawn)
 {
 	if (!HasAuthority()) return nullptr;
 
@@ -27,28 +27,15 @@ TScriptInterface<IItemInterface> AContainer::SpawnAndAddToInventory(const TSubcl
 	if (!World) return nullptr;
     
 	if (!IsValid(ClassToSpawn) || !IsValid(ContainerComponent)) return nullptr;
-	if (!ContainerComponent->GetAllowAdd() || ContainerComponent->IsFull()) return nullptr;
 	
 	FActorSpawnParameters SpawnParams;
 	SpawnParams.Owner = this;
-	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
 
-	AActor* NewActor = World->SpawnActor<AActor>(
-	   ClassToSpawn, 
-	   ContainerComponent->GetComponentTransform(),
-	   SpawnParams
-	);
-
-	// if (NewActor->Implements<IItemInterface>())
-	if (TScriptInterface<IItemInterface>(NewActor))
+	if (AActor* NewActor = World->SpawnActor<AActor>(ClassToSpawn, ContainerComponent->GetComponentTransform(), SpawnParams))
 	{
-		NewActor->AttachToComponent(ContainerComponent, FAttachmentTransformRules::SnapToTargetIncludingScale);
-		if (ContainerComponent->TryAddToInventory(NewActor))
-		{
-			// OfferedInteractable = NewActor;
-			return NewActor;
-		}
-	}	
+		return NewActor;
+	}
 	
 	return nullptr;
 }

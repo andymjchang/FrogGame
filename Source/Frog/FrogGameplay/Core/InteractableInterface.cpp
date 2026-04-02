@@ -3,6 +3,7 @@
 
 #include "InteractableInterface.h"
 
+#include "Frog.h"
 #include "GameplayTagContainer.h"
 #include "ItemData.h"
 

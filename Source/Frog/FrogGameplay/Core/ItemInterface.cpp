@@ -24,3 +24,7 @@ bool IItemInterface::HasMatchingInteractableTag(const FGameplayTagContainer& Acc
 
 	return false;
 }
+
+void IItemInterface::EventAddedToAnotherInventory()
+{
+}

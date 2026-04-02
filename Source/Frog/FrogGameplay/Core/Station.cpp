@@ -25,7 +25,6 @@ AStation::AStation()
     // Progress Bar Widget Component
     ProgressWidgetComponent = CreateDefaultSubobject<UInteractableWidgetComponent>(TEXT("ProgressBarWidgetComponent"));
     ProgressWidgetComponent->SetupAttachment(RootComponent);
-    ProgressWidgetComponent->SetRelativeLocation(FVector(0.0f, 0.0f, -600.0f));
     ProgressWidgetComponent->SetDrawSize(FIntPoint(100, 20));
     
     // Interactable Mesh 
@@ -33,7 +32,6 @@ AStation::AStation()
     
     // Interact Hitbox
     InteractHitBox->InitBoxExtent(FVector(300.f, 300.f, 150.f));
-    InteractHitBox->SetRelativeLocation(FVector(0.0f, 0.0f, 150.0f));
 }
 
 void AStation::BeginPlay()
@@ -82,9 +80,12 @@ void AStation::HandleProcessingComplete()
     
     if (const TSubclassOf<AActor> ResultClass = GameState->GetRecipeResultClass(AllTags))
     {
-        if (const TScriptInterface<IItemInterface> NewItem = SpawnAndAddToInventory(ResultClass))
+        if (const TScriptInterface<IItemInterface> NewItem = SpawnItem(ResultClass))
         {
-            OfferedInteractable = NewItem;
+            if (ContainerComponent->TryAddToInventory(NewItem))
+            {
+                OfferedInteractable = NewItem;
+            }
         }
     }
     else
