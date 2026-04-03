@@ -18,10 +18,12 @@ public:
 	AMovingItemSpawner();
 
 protected:
+	virtual void BeginPlay() override;
+	
 	void SpawnMovingItem();
 	
 	UFUNCTION()
-	void StartSpawnTimer();
+	void StartSpawnTimer(AActor* DestroyedActor);
 
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "User Settings")

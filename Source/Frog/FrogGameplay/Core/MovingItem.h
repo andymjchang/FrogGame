@@ -14,8 +14,6 @@ class UBoxComponent;
 class AItem;
 class UItemData;
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnAddedToAnotherInventory);
-
 UCLASS()
 class FROG_API AMovingItem : public ACharacter, public IInteractableInterface, public IItemInterface
 {
@@ -36,15 +34,11 @@ public:
 	virtual UItemData* GetData() const override { return Data; }
 	virtual TScriptInterface<IItemInterface> GetOfferedInteractable() const override { return OfferedInteractable; }
 	virtual void EventAddedToAnotherInventory() override;
-	
-	// Delegates
-	FOnAddedToAnotherInventory OnAddedToAnotherInventory;
-	
+
 	UFUNCTION(NetMulticast, Reliable)
 	void HandleAddedToAnotherInventory();
 	
 protected:
-	virtual void PostInitializeComponents() override;
 	virtual void BeginPlay() override;
 	
 	UFUNCTION()

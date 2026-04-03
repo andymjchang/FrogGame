@@ -3,7 +3,6 @@
 
 #include "MovingItem.h"
 
-#include "GameplayTagContainer.h"
 #include "AI/FrogAIController.h"
 #include "Components/BoxComponent.h"
 #include "Components/CapsuleComponent.h"
@@ -52,13 +51,6 @@ void AMovingItem::HandleAddedToAnotherInventory_Implementation()
 	CollisionComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
-void AMovingItem::PostInitializeComponents()
-{
-	Super::PostInitializeComponents();
-	
-	OnAddedToAnotherInventory.AddDynamic(this, &AMovingItem::HandleAddedToAnotherInventory);
-}
-
 void AMovingItem::BeginPlay()
 {
 	Super::BeginPlay();
@@ -101,7 +93,7 @@ void AMovingItem::DisableHitbox()
 void AMovingItem::EventAddedToAnotherInventory()
 {
 	IItemInterface::EventAddedToAnotherInventory();
-	OnAddedToAnotherInventory.Broadcast();
+	HandleAddedToAnotherInventory();
 }
 
 void AMovingItem::OnRep_bIsHitboxEnabled()

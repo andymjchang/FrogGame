@@ -12,6 +12,13 @@ AMovingItemSpawner::AMovingItemSpawner()
 	PrimaryActorTick.bCanEverTick = false;
 }
 
+void AMovingItemSpawner::BeginPlay()
+{
+	Super::BeginPlay();
+	
+	SpawnMovingItem();
+}
+
 void AMovingItemSpawner::SpawnMovingItem()
 {
 	if (!HasAuthority()) return;
@@ -20,12 +27,12 @@ void AMovingItemSpawner::SpawnMovingItem()
 	{
 		if (AMovingItem* NewMovingItem = Cast<AMovingItem>(NewItem.GetObject()))
 		{
-			NewMovingItem->OnAddedToAnotherInventory.AddDynamic(this, &AMovingItemSpawner::StartSpawnTimer);
+			NewMovingItem->OnDestroyed.AddDynamic(this, &AMovingItemSpawner::StartSpawnTimer);
 		}
 	}
 }
 
-void AMovingItemSpawner::StartSpawnTimer()
+void AMovingItemSpawner::StartSpawnTimer(AActor* DestroyedActor)
 {
 	if (!HasAuthority()) return;
 	
