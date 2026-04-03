@@ -90,11 +90,6 @@ void AFrogCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLi
 void AFrogCharacter::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
-}
-
-void AFrogCharacter::BeginPlay()
-{
-	Super::BeginPlay();
 	
 	if (IsValid(InteractHitbox))
 	{
@@ -109,6 +104,11 @@ void AFrogCharacter::BeginPlay()
 	}
 	
 	if (IsValid(ContainerComponent)) ContainerComponent->SetShowInventoryWidget(false);
+}
+
+void AFrogCharacter::BeginPlay()
+{
+	Super::BeginPlay();
 }
 
 void AFrogCharacter::PossessedBy(AController* NewController)

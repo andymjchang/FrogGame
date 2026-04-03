@@ -44,15 +44,16 @@ void ASpawner::HandleRemovedFromInventory(const TScriptInterface<IItemInterface>
 
 void ASpawner::SpawnAndReplenish()
 {
-	if (const TScriptInterface<IItemInterface> NewItem = SpawnItem(InteractableClassToSpawn))
+	OfferedInteractable = this;
+	
+	if (IsValid(ContainerComponent))
 	{
-		if (!NewItem.GetObject()->IsA(AMovingItem::StaticClass()) && ContainerComponent->TryAddToInventory(NewItem))
+		if (const TScriptInterface<IItemInterface> NewItem = SpawnItem(InteractableClassToSpawn, ContainerComponent->GetComponentTransform()))
 		{
-			OfferedInteractable = NewItem;
+			if (ContainerComponent->TryAddToInventory(NewItem))
+            {
+            	OfferedInteractable = NewItem;
+            }
 		}
-	}
-	else
-	{
-		OfferedInteractable = this;
 	}
 }

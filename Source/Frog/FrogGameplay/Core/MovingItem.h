@@ -14,6 +14,8 @@ class UBoxComponent;
 class AItem;
 class UItemData;
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnAddedToAnotherInventory);
+
 UCLASS()
 class FROG_API AMovingItem : public ACharacter, public IInteractableInterface, public IItemInterface
 {
@@ -23,20 +25,26 @@ public:
 	AMovingItem();
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	
+	// Interactable Interface
 	virtual FVector GetInteractableLocation() const override;
 	virtual void StartInteract() override;
+	virtual UMeshComponent* GetInteractableMesh() const override { return GetMesh(); }
 
+	// Item Interface
 	virtual void EnableHitbox() override;
 	virtual void DisableHitbox() override;
-	
 	virtual UItemData* GetData() const override { return Data; }
 	virtual TScriptInterface<IItemInterface> GetOfferedInteractable() const override { return OfferedInteractable; }
-	virtual UMeshComponent* GetInteractableMesh() const override { return GetMesh(); }
-	
-	UFUNCTION(NetMulticast, Reliable)
 	virtual void EventAddedToAnotherInventory() override;
 	
+	// Delegates
+	FOnAddedToAnotherInventory OnAddedToAnotherInventory;
+	
+	UFUNCTION(NetMulticast, Reliable)
+	void HandleAddedToAnotherInventory();
+	
 protected:
+	virtual void PostInitializeComponents() override;
 	virtual void BeginPlay() override;
 	
 	UFUNCTION()

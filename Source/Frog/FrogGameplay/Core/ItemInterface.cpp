@@ -27,4 +27,5 @@ bool IItemInterface::HasMatchingInteractableTag(const FGameplayTagContainer& Acc
 
 void IItemInterface::EventAddedToAnotherInventory()
 {
+	DisableHitbox();
 }

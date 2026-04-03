@@ -26,9 +26,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
 	float ReplenishDelay = 3.f;
 	
+	void SpawnAndReplenish();
+	
 protected:
 	FTimerHandle ReplenishTimerHandle;
 
-private:
-	void SpawnAndReplenish();
 };

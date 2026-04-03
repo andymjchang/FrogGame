@@ -26,10 +26,15 @@ public:
 	virtual void DisableHitbox() override;
 	
 	void SetItemDormancy(bool bDormant);
-	
+
 protected:
 	virtual void BeginPlay() override;
 
+	TScriptInterface<IItemInterface> SpawnItem(TSubclassOf<AActor> ClassToSpawn, const FTransform& SpawnTransform);
+	
+	UFUNCTION()
+	void OnRep_bIsHitboxEnabled();
+	
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
 	TObjectPtr<UItemData> Data;
@@ -45,11 +50,7 @@ protected:
 	
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UStaticMeshComponent> InteractableMesh;
-	
-protected:
-	UFUNCTION()
-	void OnRep_bIsHitboxEnabled();
-	
+
 public:
 	virtual UItemData* GetData() const override { return Data; }
 	virtual TScriptInterface<IItemInterface> GetOfferedInteractable() const override { return OfferedInteractable; }

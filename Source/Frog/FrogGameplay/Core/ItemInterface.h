@@ -9,6 +9,7 @@
 struct FGameplayTagContainer;
 class IInteractableInterface;
 class UItemData;
+
 // This class does not need to be modified.
 UINTERFACE()
 class UItemInterface : public UInterface
@@ -34,3 +35,4 @@ public:
 	
 	virtual void EventAddedToAnotherInventory();
 };
+

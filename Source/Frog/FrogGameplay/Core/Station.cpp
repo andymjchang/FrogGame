@@ -80,7 +80,7 @@ void AStation::HandleProcessingComplete()
     
     if (const TSubclassOf<AActor> ResultClass = GameState->GetRecipeResultClass(AllTags))
     {
-        if (const TScriptInterface<IItemInterface> NewItem = SpawnItem(ResultClass))
+        if (const TScriptInterface<IItemInterface> NewItem = SpawnItem(ResultClass, ContainerComponent->GetComponentTransform()))
         {
             if (ContainerComponent->TryAddToInventory(NewItem))
             {

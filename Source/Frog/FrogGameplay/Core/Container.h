@@ -19,7 +19,6 @@ public:
 	AContainer();
 
 	UContainerComponent* GetContainerComponent() { return ContainerComponent; }
-	TScriptInterface<IItemInterface> SpawnItem(TSubclassOf<AActor> ClassToSpawn);
 	
 protected:
 	virtual void BeginPlay() override;

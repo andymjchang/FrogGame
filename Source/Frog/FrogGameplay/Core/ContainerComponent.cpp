@@ -106,11 +106,7 @@ bool UContainerComponent::TryAddToInventory(const TScriptInterface<IItemInterfac
 	const bool IsContainer = InteractableToAdd.GetObject()->IsA(AContainer::StaticClass());
 	SetShowInventoryWidget(!IsContainer);
 	
-    InteractableToAdd->DisableHitbox();
-	if (AMovingItem* MovingInteractable = Cast<AMovingItem>(InteractableToAdd.GetObject()))
-	{
-		MovingInteractable->EventAddedToAnotherInventory();
-	}
+	InteractableToAdd->EventAddedToAnotherInventory();
     
     const FAttachmentTransformRules Rules(EAttachmentRule::SnapToTarget, EAttachmentRule::SnapToTarget,
                                           EAttachmentRule::KeepWorld, false);

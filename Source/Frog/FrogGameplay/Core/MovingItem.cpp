@@ -32,6 +32,33 @@ AMovingItem::AMovingItem()
 	GetMesh()->SetCollisionProfileName(TEXT("NoCollision"));
 }
 
+void AMovingItem::HandleAddedToAnotherInventory_Implementation()
+{
+	if (HasAuthority())
+	{
+		if (AFrogAIController* AIController = Cast<AFrogAIController>(GetController()))
+		{
+			if (UStateTreeAIComponent* StateTree = AIController->GetStateTree())
+			{
+				StateTree->StopLogic(FString(""));
+			}
+			AIController->StopMovement();
+		}
+	}
+	
+	GetCharacterMovement()->StopMovementImmediately();
+	GetCharacterMovement()->DisableMovement();
+	GetMesh()->Stop();
+	CollisionComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+}
+
+void AMovingItem::PostInitializeComponents()
+{
+	Super::PostInitializeComponents();
+	
+	OnAddedToAnotherInventory.AddDynamic(this, &AMovingItem::HandleAddedToAnotherInventory);
+}
+
 void AMovingItem::BeginPlay()
 {
 	Super::BeginPlay();
@@ -53,7 +80,6 @@ FVector AMovingItem::GetInteractableLocation() const
 void AMovingItem::StartInteract()
 {
 	IInteractableInterface::StartInteract();
-	EventAddedToAnotherInventory();
 }
 
 void AMovingItem::EnableHitbox()
@@ -72,24 +98,10 @@ void AMovingItem::DisableHitbox()
 	OnRep_bIsHitboxEnabled();
 }
 
-void AMovingItem::EventAddedToAnotherInventory_Implementation()
+void AMovingItem::EventAddedToAnotherInventory()
 {
-	if (HasAuthority())
-	{
-		if (AFrogAIController* AIController = Cast<AFrogAIController>(GetController()))
-		{
-			if (UStateTreeAIComponent* StateTree = AIController->GetStateTree())
-			{
-				StateTree->StopLogic(FString(""));
-			}
-			AIController->StopMovement();
-		}
-	}
-	
-	GetCharacterMovement()->StopMovementImmediately();
-	GetCharacterMovement()->DisableMovement();
-	GetMesh()->Stop();
-	CollisionComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	IItemInterface::EventAddedToAnotherInventory();
+	OnAddedToAnotherInventory.Broadcast();
 }
 
 void AMovingItem::OnRep_bIsHitboxEnabled()

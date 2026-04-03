@@ -19,27 +19,6 @@ AContainer::AContainer()
 	InventoryWidgetComponent->SetDrawSize(FIntPoint(100, 100));
 }
 
-TScriptInterface<IItemInterface> AContainer::SpawnItem(const TSubclassOf<AActor> ClassToSpawn)
-{
-	if (!HasAuthority()) return nullptr;
-
-	UWorld* World = GetWorld();
-	if (!World) return nullptr;
-    
-	if (!IsValid(ClassToSpawn) || !IsValid(ContainerComponent)) return nullptr;
-	
-	FActorSpawnParameters SpawnParams;
-	SpawnParams.Owner = this;
-	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
-
-	if (AActor* NewActor = World->SpawnActor<AActor>(ClassToSpawn, ContainerComponent->GetComponentTransform(), SpawnParams))
-	{
-		return NewActor;
-	}
-	
-	return nullptr;
-}
-
 void AContainer::BeginPlay()
 {
 	Super::BeginPlay();

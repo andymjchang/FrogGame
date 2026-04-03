@@ -95,3 +95,24 @@ void AItem::SetItemDormancy(const bool bDormant)
 		ForceNetUpdate();
 	}
 }
+
+TScriptInterface<IItemInterface> AItem::SpawnItem(const TSubclassOf<AActor> ClassToSpawn, const FTransform& SpawnTransform)
+{
+	if (!HasAuthority()) return nullptr;
+
+	UWorld* World = GetWorld();
+	if (!World) return nullptr;
+    
+	if (!IsValid(ClassToSpawn)) return nullptr;
+	
+	FActorSpawnParameters SpawnParams;
+	SpawnParams.Owner = this;
+	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+
+	if (AActor* NewActor = World->SpawnActor<AActor>(ClassToSpawn, SpawnTransform, SpawnParams))
+	{
+		return NewActor;
+	}
+	
+	return nullptr;
+}
