@@ -31,26 +31,6 @@ AMovingItem::AMovingItem()
 	GetMesh()->SetCollisionProfileName(TEXT("NoCollision"));
 }
 
-void AMovingItem::HandleAddedToAnotherInventory_Implementation()
-{
-	if (HasAuthority())
-	{
-		if (AFrogAIController* AIController = Cast<AFrogAIController>(GetController()))
-		{
-			if (UStateTreeAIComponent* StateTree = AIController->GetStateTree())
-			{
-				StateTree->StopLogic(FString(""));
-			}
-			AIController->StopMovement();
-		}
-	}
-	
-	GetCharacterMovement()->StopMovementImmediately();
-	GetCharacterMovement()->DisableMovement();
-	GetMesh()->Stop();
-	CollisionComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-}
-
 void AMovingItem::BeginPlay()
 {
 	Super::BeginPlay();
@@ -111,6 +91,41 @@ void AMovingItem::OnRep_bIsHitboxEnabled()
 			InteractHitBox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 			// CollisionComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 		}
+	}
+}
+
+void AMovingItem::HandleAddedToAnotherInventory_Implementation()
+{
+	if (HasAuthority())
+	{
+		if (AFrogAIController* AIController = Cast<AFrogAIController>(GetController()))
+		{
+			if (UStateTreeAIComponent* StateTree = AIController->GetStateTree())
+			{
+				StateTree->StopLogic(FString(""));
+			}
+			AIController->StopMovement();
+		}
+	}
+	
+	GetCharacterMovement()->StopMovementImmediately();
+	GetCharacterMovement()->DisableMovement();
+	GetMesh()->Stop();
+	CollisionComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+}
+
+void AMovingItem::PlayAnimation_Implementation(bool bShouldPlay)
+{
+	USkeletalMeshComponent* SkeletalMesh = GetMesh();
+	if (!IsValid(SkeletalMesh)) return;
+	
+	if (bShouldPlay)
+	{
+		SkeletalMesh->Play(true);	
+	}
+	else
+	{
+		SkeletalMesh->Stop();
 	}
 }
 

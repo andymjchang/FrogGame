@@ -34,15 +34,18 @@ public:
 	virtual UItemData* GetData() const override { return Data; }
 	virtual TScriptInterface<IItemInterface> GetOfferedInteractable() const override { return OfferedInteractable; }
 	virtual void EventAddedToAnotherInventory() override;
-
-	UFUNCTION(NetMulticast, Reliable)
-	void HandleAddedToAnotherInventory();
 	
 protected:
 	virtual void BeginPlay() override;
 	
 	UFUNCTION()
 	void OnRep_bIsHitboxEnabled();
+
+	UFUNCTION(NetMulticast, Reliable)
+	void HandleAddedToAnotherInventory();
+	
+	UFUNCTION(NetMulticast, Reliable, BlueprintCallable)
+	void PlayAnimation(bool bShouldPlay);
 	
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "User Settings")
