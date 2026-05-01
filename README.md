@@ -1,6 +1,6 @@
 ![Gameplay Demonstration](./Screen%20Recording%202026-04-01%20231422.gif)
-## WIP Unreal Engine 5 Project
-A networked multiplayer 3D roguelite
+## Frog Game
+WIP networked multiplayer 3D game in Unreal Engine 5
 
 ## Technical Specifications
 - Unreal Engine 5.7
