@@ -1,7 +1,50 @@
+// This is used as an example source code file.
+// This component is used for all actors that can hold items in the game.
+// The definitions of some other classes are pasted here to provide additional context.
+/*
+class FROG_API IItemInterface
+{
+	GENERATED_BODY()
+
+public:
+	virtual UItemData* GetData() const = 0;
+	virtual TScriptInterface<IItemInterface> GetOfferedInteractable() const = 0;
+	
+	virtual bool HasMatchingInteractableTag(const FGameplayTagContainer& AcceptedTags) const;
+	
+	virtual void EnableHitbox() = 0;
+	virtual	void DisableHitbox() = 0;
+	
+	virtual void EventAddedToAnotherInventory();
+}; 
+
+bool IItemInterface::HasMatchingInteractableTag(const FGameplayTagContainer& AcceptedTags) const
+{
+	if (AcceptedTags.IsEmpty()) return false;
+	
+	UItemData* Data = GetData();
+	if (!IsValid(Data)) return false;
+
+	for (const FGameplayTag& OwnedTag : Data->GetOwnedTags())
+	{
+		if (OwnedTag.MatchesAny(AcceptedTags))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+void IItemInterface::EventAddedToAnotherInventory()
+{
+	DisableHitbox();
+}
+
+ */
 #include "ContainerComponent.h"
 
 #include "ItemData.h"
-#include "MovingItem.h"
 #include "GameUI/Interactables/InteractableWidgetComponent.h"
 #include "GameUI/Interactables/InventoryWidget.h"
 #include "Net/UnrealNetwork.h"
@@ -31,7 +74,7 @@ void UContainerComponent::Initialize(UItemData* InData, UInteractableWidgetCompo
 
 void UContainerComponent::SetShowInventoryWidget(const bool bShow)
 {
-	// if (!GetOwner()->HasAuthority()) return;
+	if (!GetOwner()->HasAuthority()) return;
 	bIsInventoryWidgetVisible = bShow;
 	OnRep_IsInventoryWidgetVisible();
 }
@@ -76,7 +119,8 @@ void UContainerComponent::RemoveNullsFromInventory()
 	Inventory.Remove(nullptr);
 }
 
-bool UContainerComponent::TryAddToInventory(const TScriptInterface<IItemInterface>& InteractableToAdd, UContainerComponent* SourceContainerComp)
+bool UContainerComponent::TryAddToInventory(const TScriptInterface<IItemInterface>& InteractableToAdd,
+                                            UContainerComponent* SourceContainerComp, bool bRemoveFromSource)
 {
 	if (!IsValid(GetOwner())) return false;
 	if (!GetOwner()->HasAuthority()) return false;
@@ -93,7 +137,6 @@ bool UContainerComponent::TryAddToInventory(const TScriptInterface<IItemInterfac
 		GetAttachParentActor()->ForceNetUpdate();	
 	}
 	
-    // InteractableToAdd->SetItemDormancy(true);
 	RemoveNullsFromInventory();
 	
 	if (IsValid(SourceContainerComp))
@@ -141,11 +184,12 @@ bool UContainerComponent::TryAddContainerContentsToInventory(UContainerComponent
 		}
 	}
     
-	// Iterate backwards because removing
-	for (int32 i = InInventory.Num() - 1; i >= 0; --i)
+	for (int32 i = 0; i < InInventory.Num(); i++)
 	{
-		TryAddToInventory(InInventory[i], SourceContainerComp);
+		TryAddToInventory(InInventory[i], SourceContainerComp, false);
 	}
+	// Remove manually all at once 
+	SourceContainerComp->ClearInventory();
     
 	return true;
 }
@@ -161,8 +205,6 @@ bool UContainerComponent::TryRemoveFromInventory(const TScriptInterface<IItemInt
 	}
 	
     if (Inventory.Remove(InteractableToRemove) <= 0) return false;
-	
-	// InteractableToRemove->EnableHitbox();
 	
 	OnRep_Inventory();
 	OnRemovedFromInventory.Broadcast(InteractableToRemove);

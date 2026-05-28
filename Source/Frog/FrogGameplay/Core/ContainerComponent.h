@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -28,7 +26,8 @@ public:
 
 	void ClearInventory();
 	void RemoveNullsFromInventory();
-	bool TryAddToInventory(const TScriptInterface<IItemInterface>& InteractableToAdd, UContainerComponent* SourceContainerComp = nullptr);
+	bool TryAddToInventory(const TScriptInterface<IItemInterface>& InteractableToAdd, UContainerComponent* SourceContainerComp = nullptr, bool
+	                       bRemoveFromSource = true);
 	bool TryAddContainerContentsToInventory(UContainerComponent* SourceContainerComp);
 	bool TryRemoveFromInventory(TScriptInterface<IItemInterface> InteractableToRemove);
 
